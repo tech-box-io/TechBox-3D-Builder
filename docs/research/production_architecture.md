@@ -31,6 +31,11 @@ independent review of that build (four reviewers, each finding verified) led to:
 its release record byte for byte; the CAD's body and file names taken out of the published model; content-based version stamps;
 per-guide history; the slash fix added at publish rather than in the shared player; and the finding, told to Lee, that the
 published model gives away the exact shapes of the laser-cut parts. See CLAUDE.md "Publishing: the website" and "Part guides".
+Later the same day (Lee): the site is `https://models.tech-box.io` and the LMS `https://edu.tech-box.io`; a landing page lists
+the kits and a page per kit its guides, header and footer copied from the LMS (`tools/site_pages.py`); only the LMS may frame a
+guide and nothing may frame the site's own pages (X-Frame-Options: DENY everywhere, a per-guide CSP frame-ancestors, written into
+render.yaml); the wood is roughened by 0.05 - 0.1 mm in every model (`"roughen_mm"` in materials.json, `build_model.py`); the RCC's
+title is "Remote Controlled Car (RCC)".
 Not built yet: Part guides (section 4, adapted to the decisions above), the heavy-job lock, the daily link check.
 
 ## The short version

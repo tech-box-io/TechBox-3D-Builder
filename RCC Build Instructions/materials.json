@@ -107,6 +107,7 @@
       "match": "^L[1-7]$",
       "color": "wood",
       "simplify_mm": 0,
+      "roughen_mm": 0.1,
       "engraving": "ink"
     },
     {
@@ -513,7 +514,8 @@
       "2026-10-13 (MRA): on a servo lead brown goes on G and the signal wire on S. The RCC CAD agrees: both plugged leads end yellow on S, red on V, brown on G (docs/research/rcc/cad_study.md 3.3).",
       "2026-10-14 (Lee, MRA): the I/O module carries its silkscreen (pin names, G V S legends, POWER, RESET, the capacitor's and the regulator's print), from Lee's photos of the real board, placed from the CAD's pin positions: decals.json, named by \"decals\" here. The RCC's decals.json also carries the two TechBox boards' print and L1's FRONT.",
       "2026-10-14 (Lee, MRA third round): the I/O module's board is the same navy as the Nano's (#000f41, pcb_navy); the house blue looked off beside the darker Nano.",
-      "2026-10-15 (Lee, drawing of L1): L1 is etched FRONT at the front-left corner and L1 at the front-right, reading upright from behind the car (flat, wheel end away). The CAD's L1 code is in that corner but upside down, so it is turned half round in place (move_engraving); FRONT is not in the CAD and is drawn as a decal (decals.json)."
+      "2026-10-15 (Lee, drawing of L1): L1 is etched FRONT at the front-left corner and L1 at the front-right, reading upright from behind the car (flat, wheel end away). The CAD's L1 code is in that corner but upside down, so it is turned half round in place (move_engraving); FRONT is not in the CAD and is drawn as a decal (decals.json).",
+      "2026-10-16 (Lee): the wood plates are roughened (\"roughen_mm\": 0.1 on the wood rule): build_model.py shifts every corner of a plate's outline, slots, holes and engraving by 0.05-0.1 mm in the plate's own plane, the same on every build, so that a cutting file traced from the published model comes out slightly wrong and its tabs and slots do not fit. Thickness, flat faces and square edges are kept; the CAD, the guide's collision tests and the steps are unchanged."
     ],
     "adjusted": [
       "L1's engraved code (NAUO1) is turned half round on its face, in place, so that it reads upright from behind the car as in Lee's drawing (docs/research/rcc/cad_study.md 2.5): its pocket is filled in and the code drawn there instead (build_model.move_engraving)."

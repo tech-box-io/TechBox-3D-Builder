@@ -1,4 +1,4 @@
-RCC Build Instructions (Radio Controlled Car, Full Build: controller, electronics test, chassis, wiring and power)
+RCC Build Instructions (Remote Controlled Car, Full Build: controller, electronics test, chassis, wiring and power)
 
 FIRST DRAFT, 15 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP), TechBox's published Cadasio guide
 for the kit (instructions.online/?id=19075-rcc_remote_controlled_car) and Lee's photos and L1 drawing, in the same format as the
@@ -72,7 +72,7 @@ QUESTIONS FOR LEE (also on the steps as Review notes)
 14. Lead lengths: how long is the FS90R's lead, and the battery clip's lead?
 15. Section cards with your two photos (the controller's and the adapter's pin names) before Steps 3 and 8?
 16. Should the Completed View show the controller with its USB cable in (as drafted and as published)?
-17. The kit's name: "Radio Controlled Car (RCC)" as you wrote it (as drafted), or "Remote Controlled Car (RCC)" as the published guide has it?
+17. (Answered 16 Oct 2026: the title is "Remote Controlled Car (RCC)".)
 18. Which way round do L3, L4, L5 (nearly symmetric) and L6 / L7 go? If it matters, the captions can say "code facing the front"
     or "code facing out", as on the MRA. And which face of the real L4 carries its code (the CAD's faces L5)?
 

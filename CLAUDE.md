@@ -117,16 +117,23 @@ than the kit's `steps.json`.) Checkpoints are for review; learners get the websi
 
 ## Publishing: the website
 
-Learners open the guides on TechBox's website (a Render static site, embedded in TechBox's own LMS by iframe), one fixed
-address per guide: `https://<domain>/<guide>/`, the names in `guides.json` (Lee's: `mini-robot-arm-full-build`,
-`mini-robot-arm-part-1` ..., `remote-controlled-car-full-build`, `remote-controlled-car-part-1` ...,
-`remote-controlled-car-deconstruction`). An address in the LMS must never change.
+Learners open the guides on TechBox's website, `https://models.tech-box.io` (a Render static site; TechBox's own LMS,
+`https://edu.tech-box.io`, embeds a guide by iframe). One fixed address per guide: `https://models.tech-box.io/<guide>/`, the
+names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part-1` ..., `remote-controlled-car-full-build`,
+`remote-controlled-car-part-1` ..., `remote-controlled-car-deconstruction`). An address in the LMS must never change.
+The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
+16 Oct 2026): the landing page `/` shows each kit that has a guide on the site (its Full Build's picture), `/kits/<kit>/`
+shows that kit's guides (Full Build, Part 1 ..., Deconstruction), and a guide's card opens the guide. Nothing is offered for
+download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View: in the player, after the guide is
+final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900), and
+publish copies it into the release (it warns when a guide has none, or one older than the model).
 
     python3 tools/publish.py <guide> --note "what changed"   # freeze the guide as its next release and put it in site/<guide>/
     python3 tools/check_site.py                              # site/ is exactly the releases on record (Render runs this before each deploy)
     /usr/bin/python3 tools/serve.py site                     # the site as Render serves it: http://localhost:8797/<guide>/
     python3 tools/publish.py <guide> --restore r3            # put an earlier release back (a roll-back); --take-down removes the guide
     python3 tools/publish.py --list                          # which release each guide has on the website
+    python3 tools/site_pages.py                              # the landing and kit pages again (publish does this by itself)
     /usr/bin/python3 tools/serve.py releases                 # every earlier release, on this computer only: http://localhost:8798/<guide>/r<N>/
 
 - **Only the current release is on the website** (Lee, 16 Oct 2026). `site/` holds one copy per guide; every release ever
@@ -138,11 +145,12 @@ address per guide: `https://<domain>/<guide>/`, the names in `guides.json` (Lee'
   `text_key`), the kit's `model.glb` (without the CAD's own body and file names; the part ids stay, as the player needs them),
   the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`, `materials.json`, wire paths, `decals.json`
   (the printing travels inside the model as shapes) or research.
-- **What the model gives away** (told to Lee, 16 Oct 2026): a 3D guide has to send the part shapes to the browser, and for the
-  laser-cut wood the mesh holds each plate's exact outline, slots and holes; anyone who opens a guide can save it and trace
-  cutting files from it, and a static site cannot prevent that (a gated server would only raise the bar; one physical kit gives
-  the same shapes). Only the STEP and editable CAD stay private. Coarsening or jittering the published wood is possible if Lee
-  asks; it is not done.
+- **What the model gives away** (told to Lee, 16 Oct 2026): a 3D guide has to send the part shapes to the browser; anyone who
+  opens a guide can save the model. Only the STEP and editable CAD stay private. So the laser-cut wood is **roughened** in every
+  model (Lee, 16 Oct 2026): `materials.json` `"roughen_mm": 0.1` on the wood rule makes `build_model.py` move each vertex of a
+  plate's outline 0.05 - 0.1 mm within the plate's plane (the same for both faces, so the plate stays a straight-sided slab;
+  deterministic), so a traced cutting file comes out slightly wrong and its tabs and slots do not fit. Invisible in the guide.
+  The collision tests and cameras use the exact CAD, not the model, so they are unaffected.
 - **The order:** commit the checked sources; publish; look at it (`serve.py site`, and `_runthrough()` on `/<guide>/`); run
   `check_site.py`; commit `site/` and `releases/`. Then, **only on Lee's word**, put it live: `git push origin main:live` (Render
   deploys the branch `live`; `main` can be pushed at any time as a backup). If Lee declines, `--restore` the previous release
@@ -156,11 +164,19 @@ address per guide: `https://<domain>/<guide>/`, the names in `guides.json` (Lee'
   be deleted in Render's dashboard. Once the LMS's address is known, render.yaml's `frame-ancestors` line lets only the LMS
   embed the guides (a new LMS host must be added there first).
 - **The embed** (one guide per LMS page, the address with its closing slash, no `?step=`):
-  `<iframe src="https://<domain>/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"
+  `<iframe src="https://models.tech-box.io/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"
   style="width:100%;height:min(80vh,720px);min-height:420px;border:0"></iframe>`. If the LMS ever adds a `sandbox`, it needs
-  `allow-scripts allow-same-origin`.
-- A new guide gets an entry in `guides.json` (its kit, its steps file, and `script` if it is not made by `guide.py`) before its
-  first publish. The site's own pages: `site/index.html` (a blank page), `404.html`, `robots.txt`.
+  `allow-scripts allow-same-origin`. Only the LMS may frame a guide, and nothing may frame the site's own pages, so an embed
+  can only ever show the one guide it names: render.yaml sends `X-Frame-Options: DENY` on every path and, for each guide, a
+  `Content-Security-Policy: frame-ancestors <embed_origins>` on `/<guide>` and `/<guide>/*` (written by site_pages.py from
+  `guides.json` between its "guide framing" lines; browsers obey the CSP over X-Frame-Options). Never put a CSP rule on `/*`:
+  when two rules with the same header name match one path, Render sends one at random (check_site.py checks all this). As a
+  second guard, each guide's index.html (added by publish.py) and each site page (site_pages.py) shows only a link when framed
+  by anything else. The Render Blueprint must be linked to the branch `live`, so header changes ship with the guides.
+- A new guide gets an entry in `guides.json` (its kit, its steps file, its card label, and `script` if it is not made by
+  `guide.py`) before its first publish; a new kit an entry under `kits` (name, code, folder). The site's own files:
+  `site/index.html`, `kits/<kit>/index.html`, `404.html` (made by site_pages.py), `robots.txt`, `assets/` (the style sheet, made
+  by site_pages.py, and the TechBox wordmark copied from the LMS).
 
 ## Part guides (chapters)
 
@@ -226,7 +242,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
         logo.webp                                                 the title-page logo
         steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
         _v1/                                                      the first prototype's files, for reference
-    RCC Build Instructions/    the second kit, the Radio Controlled Car (first draft, 15 Oct 2026): the same layout as the MRA's
+    RCC Build Instructions/    the second kit, the Remote Controlled Car (first draft, 15 Oct 2026): the same layout as the MRA's
                                (guide.py, materials.json, rcc.glb from RCC_Assembly_v1.STEP, colour-atlas-rcc.json, wire-paths.json,
                                silkscreen.py -> decals.json, nano-car.glb = the controller's Nano model for the car's seat,
                                usb-a-end.glb). Research: docs/research/rcc/.

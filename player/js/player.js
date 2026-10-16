@@ -673,9 +673,9 @@ function renderPartsThumb(i) {
   const img = grid.children[i] && grid.children[i].querySelector('img');
   if (img) img.src = thumbs[i];
 }
-function renderThumb(i) {
-  const view = views[i], W = 480, H = 300;
-  if (view.parts) return renderPartsThumb(i);
+function renderThumb(i, size) {               // (size [w, h]: a picture of that size, returned and not kept: the website's card picture)
+  const view = views[i], W = size ? size[0] : 480, H = size ? size[1] : 300;
+  if (view.parts && !size) return renderPartsThumb(i);
   let turn = null;
   const {canvas, camera: cam} = stage.snapshot(W, H, {setup: c => {
     const before = {q: stage.world.quaternion.clone(), position: stage.world.position.clone()}, picked = stage.highlighted();
@@ -697,6 +697,7 @@ function renderThumb(i) {
     ctx.fillStyle = '#111'; ctx.font = `600 ${list ? 13 : 22}px Arial, Helvetica, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; wrapText(ctx, text, W / 2, H / 2, W - 40, list ? 16 : 28);
   }
   else if (view.kind === 'hover') { projWorld = turn; drawCalloutsOn(ctx, view, cam, W, H); projWorld = null; }   // (uses the same label switch as the main view)
+  if (size) return canvas;
   thumbs[i] = canvas.toDataURL('image/webp', 0.82);
   const img = grid.children[i] && grid.children[i].querySelector('img');
   if (img) img.src = thumbs[i];

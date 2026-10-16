@@ -1,11 +1,11 @@
 {
  "meta": {
-  "title": "Radio Controlled Car (RCC)",
+  "title": "Remote Controlled Car (RCC)",
   "part": "Full Build",
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
   "logo": "logo.webp"
  },
- "model": "model.glb?v=1792119489",
+ "model": "model.glb?v=1792180152",
  "fov": 45.0,
  "frame_padding": 1.08,
  "names": {
@@ -26898,6 +26898,7 @@
    "wires": {},
    "carry": {},
    "caption": "Begin the controller with the controller board, printed side down. Press the left guard onto the half of the board with the L-JS socket.",
+   "text_key": "T2B263B47",
    "review": "How do the guards go on? The CAD has each as a tray under one half of the board (here pressed on with the board face down); your photo shows four rim pieces. And should they go on first, as here? Names to confirm: Controller Board, Left / Right Controller Guard, Nano Board, Radio Module, Joystick, USB Cable, Nano I/O Module, Adapter Board, Wheel Motor, Wheel, 9V Battery, Battery Clip.",
    "moving": [
     "NAUO24"
@@ -26950,6 +26951,7 @@
    "wires": {},
    "carry": {},
    "caption": "Begin the controller with the controller board, printed side down. Press the left guard onto the half of the board with the L-JS socket.",
+   "text_key": "T2B263B47",
    "review": "How do the guards go on? The CAD has each as a tray under one half of the board (here pressed on with the board face down); your photo shows four rim pieces. And should they go on first, as here? Names to confirm: Controller Board, Left / Right Controller Guard, Nano Board, Radio Module, Joystick, USB Cable, Nano I/O Module, Adapter Board, Wheel Motor, Wheel, 9V Battery, Battery Clip.",
    "moving": [
     "NAUO24"
@@ -27047,6 +27049,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the right guard onto the other half.",
+   "text_key": "TFAC014AD",
    "review": null,
    "moving": [
     "NAUO25"
@@ -27100,6 +27103,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the right guard onto the other half.",
+   "text_key": "TFAC014AD",
    "review": null,
    "moving": [
     "NAUO25"
@@ -27242,6 +27246,7 @@
    "wires": {},
    "carry": {},
    "caption": "Turn the controller over. Press a Nano Board into H1 and H2, its USB socket at the end of the board marked USB.",
+   "text_key": "TEF1D374F",
    "review": "A section card before this step with your photo of the controller board, its pin names boxed in red? (The player has text-only cards so far.)",
    "moving": [
     "NAUO27"
@@ -27285,6 +27290,7 @@
    "wires": {},
    "carry": {},
    "caption": "Turn the controller over. Press a Nano Board into H1 and H2, its USB socket at the end of the board marked USB.",
+   "text_key": "TEF1D374F",
    "review": "A section card before this step with your photo of the controller board, its pin names boxed in red? (The player has text-only cards so far.)",
    "moving": [
     "NAUO27"
@@ -27383,6 +27389,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press a radio module into the socket marked NRF24L01, so that the module lies over the board, away from the USB end.",
+   "text_key": "TE8E9A332",
    "review": null,
    "moving": [
     "NAUO11"
@@ -27427,6 +27434,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press a radio module into the socket marked NRF24L01, so that the module lies over the board, away from the USB end.",
+   "text_key": "TE8E9A332",
    "review": null,
    "moving": [
     "NAUO11"
@@ -27526,6 +27534,7 @@
    "wires": {},
    "carry": {},
    "caption": "Set the left joystick into its pocket, then push it towards L-JS until its pins are all the way into the socket.",
+   "text_key": "TE2FB15ED",
    "review": "In the CAD the joystick's board overlaps the controller board at the end away from its socket (the cut-out is 31.6 mm, the joystick 34 mm): by 4 mm when it is in, 11 mm while it is set down short of its socket here, and its underside sits 2.8 mm into the guard's floor. How does the joystick really sit? And do its pins go into the top row of L-JS (as in the CAD)? If so, a caution here would say so.",
    "moving": [
     "NAUO12"
@@ -27576,6 +27585,7 @@
    "wires": {},
    "carry": {},
    "caption": "Set the left joystick into its pocket, then push it towards L-JS until its pins are all the way into the socket.",
+   "text_key": "TE2FB15ED",
    "review": "In the CAD the joystick's board overlaps the controller board at the end away from its socket (the cut-out is 31.6 mm, the joystick 34 mm): by 4 mm when it is in, 11 mm while it is set down short of its socket here, and its underside sits 2.8 mm into the guard's floor. How does the joystick really sit? And do its pins go into the top row of L-JS (as in the CAD)? If so, a caution here would say so.",
    "moving": [
     "NAUO12"
@@ -27681,6 +27691,7 @@
    "wires": {},
    "carry": {},
    "caption": "Set the right joystick into its pocket, then push it towards R-JS until its pins are all the way into the socket.",
+   "text_key": "T57C35E4F",
    "review": null,
    "moving": [
     "NAUO13"
@@ -27732,6 +27743,7 @@
    "wires": {},
    "carry": {},
    "caption": "Set the right joystick into its pocket, then push it towards R-JS until its pins are all the way into the socket.",
+   "text_key": "T57C35E4F",
    "review": null,
    "moving": [
     "NAUO13"
@@ -27856,6 +27868,7 @@
    "carry": {},
    "cut": true,
    "caption": "Begin the car's electronics with the I/O module. Press the other Nano Board into it, its USB socket at the same end as the power socket.",
+   "text_key": "T623C6DCE",
    "review": "The published guide shows this Nano Board the other way round (USB socket towards the front); the CAD and the MRA have it at the power socket's end, as here. And the CAD's Nano Board here is a plainer model, so the controller's Nano Board is shown instead. Colours to confirm (materials.json _notes.unconfirmed): the wheel motors' blue (as published, or black?), the radio boards black or green, the wheels, the plug housings, silver or gold pins, the white boards; and is this I/O module the MRA's board (its printing is carried over)?",
    "moving": [
     "NANO_CAR"
@@ -27897,6 +27910,7 @@
    "wires": {},
    "carry": {},
    "caption": "Begin the car's electronics with the I/O module. Press the other Nano Board into it, its USB socket at the same end as the power socket.",
+   "text_key": "T623C6DCE",
    "review": "The published guide shows this Nano Board the other way round (USB socket towards the front); the CAD and the MRA have it at the power socket's end, as here. And the CAD's Nano Board here is a plainer model, so the controller's Nano Board is shown instead. Colours to confirm (materials.json _notes.unconfirmed): the wheel motors' blue (as published, or black?), the radio boards black or green, the wheels, the plug housings, silver or gold pins, the white boards; and is this I/O module the MRA's board (its printing is carried over)?",
    "moving": [
     "NANO_CAR"
@@ -27983,6 +27997,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the adapter board onto the I/O module, its sockets over the pins along the side, with U3 at the end away from the power socket.",
+   "text_key": "T6518B80D",
    "review": "A section card before this step with your photo of the adapter board (U1 / LWh, U2 / RWh, U3, S V G)?",
    "moving": [
     "NAUO26"
@@ -28025,6 +28040,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the adapter board onto the I/O module, its sockets over the pins along the side, with U3 at the end away from the power socket.",
+   "text_key": "T6518B80D",
    "review": "A section card before this step with your photo of the adapter board (U1 / LWh, U2 / RWh, U3, S V G)?",
    "moving": [
     "NAUO26"
@@ -28122,6 +28138,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the other radio module into U3, so that it sticks out past the end of the I/O module.",
+   "text_key": "T6EB10D3E",
    "review": null,
    "moving": [
     "NAUO10"
@@ -28165,6 +28182,7 @@
    "wires": {},
    "carry": {},
    "caption": "Press the other radio module into U3, so that it sticks out past the end of the I/O module.",
+   "text_key": "T6EB10D3E",
    "review": null,
    "moving": [
     "NAUO10"
@@ -28315,6 +28333,7 @@
     }
    ],
    "caption": "Press a wheel onto the shaft of the left wheel motor.",
+   "text_key": "T25C1793F",
    "review": "Wheels on for the test, as in the published guide (the student sees them turn), or pressed on at the end of the build?",
    "moving": [],
    "path": [
@@ -28422,6 +28441,7 @@
     }
    },
    "caption": "Press a wheel onto the shaft of the left wheel motor.",
+   "text_key": "T25C1793F",
    "review": "Wheels on for the test, as in the published guide (the student sees them turn), or pressed on at the end of the build?",
    "moving": [],
    "path": [
@@ -28633,6 +28653,7 @@
     }
    ],
    "caption": "Press the other wheel onto the right wheel motor.",
+   "text_key": "T4323EB33",
    "review": null,
    "moving": [],
    "path": [
@@ -28803,6 +28824,7 @@
     }
    },
    "caption": "Press the other wheel onto the right wheel motor.",
+   "text_key": "T4323EB33",
    "review": null,
    "moving": [],
    "path": [
@@ -28996,6 +29018,7 @@
     }
    },
    "caption": "Plug the left wheel motor into LWh for the test. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "T53260BD9",
    "review": "The CAD and the published guide draw the signal wire yellow (the MRA's captions say orange): which is it on the kit's FS90R? And how long is the lead? The CAD's two poses of each lead differ (71 mm loose, 110 / 165 mm plugged); both are drawn 115 mm here.",
    "moving": [],
    "path": [
@@ -29172,6 +29195,7 @@
     ]
    },
    "caption": "Plug the left wheel motor into LWh for the test. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "T53260BD9",
    "review": "The CAD and the published guide draw the signal wire yellow (the MRA's captions say orange): which is it on the kit's FS90R? And how long is the lead? The CAD's two poses of each lead differ (71 mm loose, 110 / 165 mm plugged); both are drawn 115 mm here.",
    "moving": [],
    "path": [
@@ -29340,6 +29364,7 @@
     }
    },
    "caption": "Plug the right wheel motor into RWh for the test. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "T0BD77217",
    "review": null,
    "moving": [],
    "path": [
@@ -29489,6 +29514,7 @@
     ]
    },
    "caption": "Plug the right wheel motor into RWh for the test. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "T0BD77217",
    "review": null,
    "moving": [],
    "path": [
@@ -29676,6 +29702,7 @@
     }
    ],
    "caption": "Snap the battery clip onto the 9V battery.",
+   "text_key": "T63D53BE6",
    "review": "Power for the test: the 9V battery for the car, as here, and USB for the controller? Or USB for both (two cables)? The Testing Checklist below assumes the battery. And how long is the battery clip's lead? The CAD's is about 30 mm (drawn longer here on the bench).",
    "moving": [],
    "path": [
@@ -29822,6 +29849,7 @@
     }
    },
    "caption": "Snap the battery clip onto the 9V battery.",
+   "text_key": "T63D53BE6",
    "review": "Power for the test: the 9V battery for the car, as here, and USB for the controller? Or USB for both (two cables)? The Testing Checklist below assumes the battery. And how long is the battery clip's lead? The CAD's is about 30 mm (drawn longer here on the bench).",
    "moving": [],
    "path": [
@@ -29994,6 +30022,7 @@
     }
    },
    "caption": "Plug the battery clip's barrel plug into the power socket on the I/O module.",
+   "text_key": "TB4B86A36",
    "review": null,
    "moving": [
     "NAUO29"
@@ -30142,6 +30171,7 @@
     }
    },
    "caption": "Plug the battery clip's barrel plug into the power socket on the I/O module.",
+   "text_key": "TB4B86A36",
    "review": null,
    "moving": [
     "NAUO29"
@@ -30331,6 +30361,7 @@
     }
    },
    "caption": "Connect the USB cable to the controller's Nano Board.",
+   "text_key": "T5E105961",
    "review": "Should the Completed View show the controller with its USB cable in, as the published guide does (and as the last step here does)?",
    "moving": [
     "NAUO16"
@@ -30484,6 +30515,7 @@
     }
    },
    "caption": "Connect the USB cable to the controller's Nano Board.",
+   "text_key": "T5E105961",
    "review": "Should the Completed View show the controller with its USB cable in, as the published guide does (and as the last step here does)?",
    "moving": [
     "NAUO16"
@@ -30518,6 +30550,7 @@
    "name": "Step 17",
    "kind": "card",
    "caption": "Testing Checklist\nGo through the following checklist to make sure you have tested each part of your RCC:\n\u2022  The controller was powered on by connecting a Mini-USB cable to its Nano.\n\u2022  The car was powered on by plugging in the 9V battery.\n\u2022  Pushing the left joystick forward made the left wheel turn.\n\u2022  Pushing the right joystick forward made the right wheel turn.\n\u2022  Each wheel stopped when its joystick was released.\n\u2022  The battery was unplugged and the Mini-USB cable disconnected after testing.",
+   "text_key": "TAF7B8F1D",
    "review": "A placeholder: TechBox's RCC Testing Checklist is needed word for word, as for the MRA. Which joystick drives which wheel? Does the FS90R's stop trim need setting during the test?",
    "visible": [
     "NAUO23",
@@ -30648,6 +30681,7 @@
     }
    },
    "caption": "Unplug both wheel motors from the adapter board.",
+   "text_key": "T2E62A973",
    "review": null,
    "moving": [],
    "path": [
@@ -30767,6 +30801,7 @@
     }
    },
    "caption": "Unplug both wheel motors from the adapter board.",
+   "text_key": "T2E62A973",
    "review": null,
    "moving": [],
    "path": [
@@ -30874,6 +30909,7 @@
    "carry": {},
    "cut": true,
    "caption": "Begin the car with L1, engraved side down. Hook the end of L2 over the notch at the flat end of L1, then swing L2 down so its tabs go into the slots in L1.",
+   "text_key": "TAC8ED759",
    "review": "One step with the hook-and-swing (as here), or two (hook it on, then swing it down)? And L1: FRONT and L1 are etched as in your drawing, on the top face (the CAD's L1 read upside down; FRONT is new).",
    "moving": [
     "NAUO2"
@@ -30980,6 +31016,7 @@
    "wires": {},
    "carry": {},
    "caption": "Begin the car with L1, engraved side down. Hook the end of L2 over the notch at the flat end of L1, then swing L2 down so its tabs go into the slots in L1.",
+   "text_key": "TAC8ED759",
    "review": "One step with the hook-and-swing (as here), or two (hook it on, then swing it down)? And L1: FRONT and L1 are etched as in your drawing, on the top face (the CAD's L1 read upside down; FRONT is new).",
    "moving": [
     "NAUO2"
@@ -31131,6 +31168,7 @@
    "wires": {},
    "carry": {},
    "caption": "Push L3 onto L2 so its two tabs go into the short slots in L1.",
+   "text_key": "T26F0D320",
    "review": null,
    "moving": [
     "NAUO3"
@@ -31184,6 +31222,7 @@
    "wires": {},
    "carry": {},
    "caption": "Push L3 onto L2 so its two tabs go into the short slots in L1.",
+   "text_key": "T26F0D320",
    "review": null,
    "moving": [
     "NAUO3"
@@ -31337,6 +31376,7 @@
    },
    "cut": true,
    "caption": "Push the right wheel motor into one end of L5, its mounting tab through the slot, its wheel outwards and its wire pointing away from L5.",
+   "text_key": "T8E3F5B6C",
    "review": null,
    "moving": [
     "NAUO17"
@@ -31439,6 +31479,7 @@
     }
    },
    "caption": "Push the right wheel motor into one end of L5, its mounting tab through the slot, its wheel outwards and its wire pointing away from L5.",
+   "text_key": "T8E3F5B6C",
    "review": null,
    "moving": [
     "NAUO17"
@@ -31630,6 +31671,7 @@
     }
    },
    "caption": "Push the left wheel motor into the other end of L5 the same way.",
+   "text_key": "TC4585A87",
    "review": null,
    "moving": [
     "NAUO18"
@@ -31790,6 +31832,7 @@
     }
    },
    "caption": "Push the left wheel motor into the other end of L5 the same way.",
+   "text_key": "TC4585A87",
    "review": null,
    "moving": [
     "NAUO18"
@@ -31994,6 +32037,7 @@
     }
    },
    "caption": "Pass each motor's plug through the hole at its end of L4, then slide L4 along the wires onto the motors.",
+   "text_key": "TB3EDF8F6",
    "review": "One step (as here, the published guide's plug-to-hole cue in words), or a step for each plug through L4 and then L4?",
    "moving": [
     "NAUO4"
@@ -32155,6 +32199,7 @@
     }
    },
    "caption": "Pass each motor's plug through the hole at its end of L4, then slide L4 along the wires onto the motors.",
+   "text_key": "TB3EDF8F6",
    "review": "One step (as here, the published guide's plug-to-hole cue in words), or a step for each plug through L4 and then L4?",
    "moving": [
     "NAUO4"
@@ -32391,6 +32436,7 @@
     }
    },
    "caption": "Turn the car the right way up. Lower L4 and L5, with the motors, onto L1: their tabs go into the slots in L1 and over L2, and each motor's wire into the notch behind it.",
+   "text_key": "TA8EF4F87",
    "review": null,
    "moving": [
     "NAUO5",
@@ -32557,6 +32603,7 @@
     }
    },
    "caption": "Turn the car the right way up. Lower L4 and L5, with the motors, onto L1: their tabs go into the slots in L1 and over L2, and each motor's wire into the notch behind it.",
+   "text_key": "TA8EF4F87",
    "review": null,
    "moving": [
     "NAUO5",
@@ -32809,6 +32856,7 @@
     }
    },
    "caption": "Slide the I/O module, with everything on it, into the grooves in L5 and L4 from the front of the car, until it stops against L2.",
+   "text_key": "TC8016E93",
    "review": null,
    "moving": [
     "NAUO23"
@@ -33015,6 +33063,7 @@
     }
    },
    "caption": "Slide the I/O module, with everything on it, into the grooves in L5 and L4 from the front of the car, until it stops against L2.",
+   "text_key": "TC8016E93",
    "review": null,
    "moving": [
     "NAUO23"
@@ -33253,6 +33302,7 @@
     }
    },
    "caption": "Turn the car over. Slide L7 in from the front, through the slots in L5 and L4, on the left wheel's side of L2.",
+   "text_key": "TB64D2158",
    "review": "L7 and L6 go on after the I/O module, as in the published guide: their heads hold it in. They slide in under L1, so the car is shown turned over for them. Their codes are on the parts under L1: in the finished car they show only from below.",
    "moving": [
     "NAUO7"
@@ -33471,6 +33521,7 @@
     }
    },
    "caption": "Turn the car over. Slide L7 in from the front, through the slots in L5 and L4, on the left wheel's side of L2.",
+   "text_key": "TB64D2158",
    "review": "L7 and L6 go on after the I/O module, as in the published guide: their heads hold it in. They slide in under L1, so the car is shown turned over for them. Their codes are on the parts under L1: in the finished car they show only from below.",
    "moving": [
     "NAUO7"
@@ -33721,6 +33772,7 @@
     }
    },
    "caption": "Slide L6 in the same way, on the right wheel's side of L2.",
+   "text_key": "T4B96744D",
    "review": null,
    "moving": [
     "NAUO6"
@@ -33940,6 +33992,7 @@
     }
    },
    "caption": "Slide L6 in the same way, on the right wheel's side of L2.",
+   "text_key": "T4B96744D",
    "review": null,
    "moving": [
     "NAUO6"
@@ -34161,6 +34214,7 @@
     }
    },
    "caption": "Turn the car the right way up. Reconnect the left wheel motor to LWh. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "TD2C67513",
    "review": null,
    "moving": [
     "NAUO20"
@@ -34396,6 +34450,7 @@
     ]
    },
    "caption": "Turn the car the right way up. Reconnect the left wheel motor to LWh. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "TD2C67513",
    "review": null,
    "moving": [
     "NAUO20"
@@ -34622,6 +34677,7 @@
     }
    },
    "caption": "Reconnect the right wheel motor to RWh. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "TA382C68A",
    "review": null,
    "moving": [
     "NAUO19"
@@ -34817,6 +34873,7 @@
     ]
    },
    "caption": "Reconnect the right wheel motor to RWh. Remember brown to G, red to V, and yellow to S.",
+   "text_key": "TA382C68A",
    "review": null,
    "moving": [
     "NAUO19"
@@ -35075,6 +35132,7 @@
     }
    },
    "caption": "Push the 9V battery, clip at the top, down through the square hole in L1 into L3.",
+   "text_key": "T53293A21",
    "review": null,
    "moving": [
     "NAUO14"
@@ -35236,6 +35294,7 @@
     }
    },
    "caption": "Push the 9V battery, clip at the top, down through the square hole in L1 into L3.",
+   "text_key": "T53293A21",
    "review": null,
    "moving": [
     "NAUO14"
@@ -35415,6 +35474,7 @@
     }
    },
    "caption": "Plug the battery clip's barrel plug into the power socket on the I/O module.",
+   "text_key": "T89BEB5B2",
    "review": "Plugged in at the end, as here (the CAD has it in), or left out with a caution (\"plug it in to drive, unplug it when you stop\")?",
    "moving": [
     "NAUO29"
@@ -35568,6 +35628,7 @@
     }
    },
    "caption": "Plug the battery clip's barrel plug into the power socket on the I/O module.",
+   "text_key": "T89BEB5B2",
    "review": "Plugged in at the end, as here (the CAD has it in), or left out with a caution (\"plug it in to drive, unplug it when you stop\")?",
    "moving": [
     "NAUO29"
@@ -35762,6 +35823,7 @@
     }
    },
    "caption": "Connect the USB cable to the controller's Nano Board.",
+   "text_key": "T82603BD9",
    "review": null,
    "moving": [
     "NAUO16"
@@ -35920,6 +35982,7 @@
     }
    },
    "caption": "Connect the USB cable to the controller's Nano Board.",
+   "text_key": "T82603BD9",
    "review": null,
    "moving": [
     "NAUO16"

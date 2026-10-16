@@ -46,7 +46,31 @@ window._runthrough = () => {
 //   _dev.show('Step 12')          go to that view as if "next" had been pressed on the one before, and finish the animation
 //   _dev.show('Step 12c', 0.5)    the same, stopped part of the way through the animation (0..1)
 //   _dev.look('NAUO45', [1, 0.6, 0.4], 2)   then put the camera on one part: direction to look from, and how wide (1 = tight)
+//   await _dev.card()             the guide's picture for its card on the website: its Completed View, 1440 x 900, saved through
+//                                 tools/serve.py into the kit's cards/<steps file>.webp (publish.py copies it into the release)
 window._dev = {
+  async card() {
+    const P = window._player, i = P.views.findIndex(v => v.kind === 'end'), W = 1440, H = 900;
+    const big = P.renderThumb(i, [2 * W, 2 * H]);              // (drawn large, then cut to the model with a margin, so every card is filled)
+    const d = big.getContext('2d').getImageData(0, 0, big.width, big.height).data;
+    let x0 = big.width, y0 = big.height, x1 = 0, y1 = 0;
+    for (let y = 0; y < big.height; y++) for (let x = 0; x < big.width; x++) {
+      const k = 4 * (y * big.width + x);
+      if (d[k] < 245 || d[k + 1] < 245 || d[k + 2] < 245) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    }
+    let w = (x1 - x0) * 1.12, h = (y1 - y0) * 1.12;              // (a 6% margin all round, then widened or heightened to the card's shape)
+    if (w / h < W / H) w = h * W / H; else h = w * H / W;
+    const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H); ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(big, cx - w / 2, cy - h / 2, w, h, 0, 0, W, H);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.9));
+    const steps = (new URLSearchParams(location.search).get('steps') || 'steps.json').replace(/\.json$/, '');
+    const r = await fetch(`/__save/cards/${steps}.webp`, {method: 'POST', body: blob});
+    if (!r.ok) throw new Error(`saving the card picture failed: ${r.status}`);
+    return `cards/${steps}.webp (${Math.round(blob.size / 1024)} kB)`;
+  },
   freeze() { window.requestAnimationFrame = () => 0; },
   show(name, k) {
     const P = window._player, i = P.views.findIndex(v => v.name === name);

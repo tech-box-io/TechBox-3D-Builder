@@ -2,10 +2,10 @@
  "summary": {
   "source": "mra.glb",
   "source_bytes": 41802208,
-  "model_bytes": 2125532,
+  "model_bytes": 2135080,
   "triangles_in": 1176532,
-  "triangles_out": 284058,
-  "edge_segments": 100207,
+  "triangles_out": 284050,
+  "edge_segments": 100201,
   "meshes": 92,
   "parts_kept": 108,
   "parts_in_source": 115,
@@ -62,7 +62,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B2",
@@ -75,7 +75,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B4",
@@ -88,7 +88,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B5",
@@ -101,7 +101,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B6",
@@ -114,7 +114,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B8",
@@ -127,7 +127,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B9",
@@ -140,7 +140,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_B10",
@@ -153,7 +153,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R1",
@@ -166,7 +166,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R2",
@@ -179,33 +179,33 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R3v2",
    "used_by": 1,
    "solids": 1,
    "tris_in": 2515,
-   "tris_out": 2507,
-   "edge_segments": 935,
+   "tris_out": 2505,
+   "edge_segments": 933,
    "colours": [
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R4v2",
    "used_by": 1,
    "solids": 1,
    "tris_in": 2080,
-   "tris_out": 2074,
-   "edge_segments": 934,
+   "tris_out": 2070,
+   "edge_segments": 932,
    "colours": [
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R5",
@@ -218,7 +218,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R6",
@@ -231,7 +231,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R7",
@@ -244,7 +244,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_R8",
@@ -257,7 +257,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A1",
@@ -270,7 +270,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A2",
@@ -283,7 +283,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A2_Supplement",
@@ -296,7 +296,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A3",
@@ -309,7 +309,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A4",
@@ -322,7 +322,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A5",
@@ -335,7 +335,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm (2 sliver corners eased)"
   },
   {
    "mesh": "ARA_A6",
@@ -348,7 +348,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A7",
@@ -361,7 +361,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm (1 sliver corners eased)"
   },
   {
    "mesh": "ARA_A8",
@@ -374,7 +374,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A9",
@@ -387,7 +387,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm (1 sliver corners eased)"
   },
   {
    "mesh": "ARA_A10",
@@ -400,7 +400,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A11",
@@ -413,7 +413,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_A12",
@@ -426,7 +426,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C1",
@@ -439,7 +439,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C2",
@@ -452,7 +452,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C3",
@@ -465,7 +465,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C4",
@@ -478,7 +478,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C5",
@@ -491,7 +491,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C6",
@@ -504,7 +504,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C7",
@@ -517,20 +517,20 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C8",
    "used_by": 1,
    "solids": 1,
    "tris_in": 2183,
-   "tris_out": 2175,
-   "edge_segments": 923,
+   "tris_out": 2173,
+   "edge_segments": 921,
    "colours": [
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "ARA_C9",
@@ -543,7 +543,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "TB_TopBot",
@@ -556,7 +556,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "TB_CenterLatches",
@@ -569,7 +569,7 @@
     "ink",
     "wood"
    ],
-   "note": ""
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "MG90S",

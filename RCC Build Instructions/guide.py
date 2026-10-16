@@ -1,4 +1,4 @@
-"""Radio Controlled Car (RCC), full build: the controller, the car's electronics tried on the bench with the controller, then
+"""Remote Controlled Car (RCC), full build: the controller, the car's electronics tried on the bench with the controller, then
 the car. The build, in order.
 
 Run from the project root:   python "RCC Build Instructions/guide.py"
@@ -94,7 +94,8 @@ CODES = {L1: ([0, 1, 0], [766.26, 908.97, 1394.03]), L2: ([0, 0, -1], [677.40, 8
          L4: ([1, 0, 0], [716.12, 896.98, 1361.41]), L5: ([1, 0, 0], [742.47, 896.94, 1361.42]), L6: ([0, 0, 1], [766.74, 902.04, 1355.48]),
          L7: ([0, 0, -1], [767.15, 902.08, 1321.48])}
 
-g = Guide(HERE, title='Radio Controlled Car (RCC)', part='Full Build', names=NAMES, part_views=PART_VIEWS, part_of=PART_OF, unlisted=UNLISTED, source='rcc.glb',
+g = Guide(HERE, title='Remote Controlled Car (RCC)',   # ("Remote": Lee, 16 Oct 2026)
+          part='Full Build', names=NAMES, part_views=PART_VIEWS, part_of=PART_OF, unlisted=UNLISTED, source='rcc.glb',
           codes=CODES, hero_azimuth=135,                            # the finished car from the front, on its left (the controller's) side, above
           parts_list=parts_list,
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')

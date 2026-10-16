@@ -12,6 +12,8 @@ What it does, per mesh:
     disconnected solids (a Nano board is one mesh in the STEP export but ~270 solids);
   * simplifies the triangles to a tolerance in millimetres (purchased parts such as screws, servos
     and cables carry far more detail than a student can see);
+  * roughens laser-cut plates ("roughen_mm"): their edges shifted a fraction of a millimetre in the
+    plate's plane, so that no cutting file can be traced from the published model;
   * extracts the outline (crease) edges once, here, so the player never has to compute them;
   * quantizes and meshopt-compresses the result.
 Identical meshes (the CAD export repeats a screw's geometry for every screw) are processed and stored once.
@@ -28,6 +30,7 @@ import numpy as np
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 from scipy.spatial import cKDTree
+from scipy.special import ndtr
 
 import ctypes
 
@@ -287,6 +290,67 @@ def move_engraving(V, N, F, Vp, Fp, face_colour, delta, turn, ink, lift_mm=0.05)
     V, N = np.vstack([V, decal_v]), np.vstack([N, decal_n])
     F = np.vstack([F, first + np.arange(len(decal_v)).reshape(-1, 3)])
     return V, N, F, np.concatenate([face_colour, np.array([ink] * int(floor.sum()), dtype=object)])
+
+
+def roughen(V, F, amount_mm, name, wavelength_mm=12.0, n_waves=16):
+    """Shift a laser-cut plate's edges by about amount_mm in its own plane, so that a cutting file traced from the model comes
+    out slightly wrong (its tabs and slots do not fit) while the part looks just the same.
+
+    The plate's thickness runs along one axis of the mesh's own frame (as engraved_faces assumes), and nothing moves along it.
+    Vertices that share a place in the plate's plane (its two faces, the top and bottom of every wall) move together, so the
+    faces stay flat and parallel and the walls square to them. Each place moves between half and all of amount_mm, in a
+    direction that wanders over the plate: two sums of random waves about wavelength_mm long, seeded by the mesh's name, so
+    every build gives the same model. The two sides of a slot or a tab move independently (its width comes out up to about
+    2 x amount_mm wrong), while neighbouring points along a curve move nearly alike, so holes stay smooth, the walls turn by
+    half a degree on average (they keep their normals) and hardly any crease line comes or goes. (Moving each vertex its own
+    random way turns sliver triangles over and draws stray lines across the faces.)
+    Returns V, how many corners had to be eased (below) and how many faces are still turned over (should be none).
+    """
+    axis = int(np.argmin(np.ptp(V, axis=0)))           # across the plate
+    across = [k for k in range(3) if k != axis]
+    fn, ok = face_normals(V, F)
+    area = np.linalg.norm(np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]]), axis=1)
+    flat = ok & (np.abs(fn[:, axis]) > 0.999)           # faces across the thickness: the plate's two faces, engraving floors
+    if area[flat].sum() < 0.5 * area.sum():
+        raise SystemExit(f'{name}: "roughen_mm" is for a flat plate whose thickness runs along an axis of its own frame')
+    # the places in the plate's plane (vertices within a micron of each other are one place, and end up at one position)
+    P = V[:, across]
+    pairs = cKDTree(P).query_pairs(1e-3, output_type='ndarray').reshape(-1, 2)
+    n, place = connected_components(coo_matrix((np.ones(len(pairs), dtype=np.int8), (pairs[:, 0], pairs[:, 1])), shape=(len(P), len(P))), directed=False)
+    centre = np.zeros((n, 2))
+    np.add.at(centre, place, P)
+    centre /= np.bincount(place, minlength=n)[:, None]
+
+    def waves(salt):
+        """A smooth random field over the plate, its values spread like a standard normal's."""
+        h = np.array([np.frombuffer(hashlib.sha256(f'{name}/{salt}/{k}'.encode()).digest()[:12], dtype='<u4') for k in range(n_waves)]) / 2.0 ** 32
+        heading = 2 * np.pi * h[:, 0]
+        k = (2 * np.pi / wavelength_mm) * (0.6 + 0.8 * h[:, 1])
+        wave = k[:, None] * np.stack([np.cos(heading), np.sin(heading)], axis=1)
+        return np.sqrt(2.0 / n_waves) * np.cos(centre @ wave.T + 2 * np.pi * h[:, 2]).sum(axis=1)
+    heading = 2 * np.pi * ndtr(waves('heading'))         # ndtr (the normal distribution function) spreads both evenly over their range
+    move = amount_mm * (0.5 + 0.5 * ndtr(waves('distance')))[:, None] * np.stack([np.cos(heading), np.sin(heading)], axis=1)
+
+    # A sliver on a face can still turn over, its middle corner carried across its long side (a few per kit): that corner then
+    # moves as the long side does beside it, which keeps the sliver the right way up.
+    sound = (place[F[:, 0]] != place[F[:, 1]]) & (place[F[:, 1]] != place[F[:, 2]]) & (place[F[:, 0]] != place[F[:, 2]])
+    side = np.stack([np.linalg.norm(centre[place[F[:, (j + 1) % 3]]] - centre[place[F[:, (j + 2) % 3]]], axis=1) for j in range(3)], axis=1)
+    middle = np.argmax(side, axis=1)                     # the corner opposite the longest side
+    eased = set()
+    for _ in range(100):
+        out = V.copy()
+        out[:, across] = (centre + move)[place]
+        fn_out, ok_out = face_normals(out, F)
+        over = np.flatnonzero(flat & sound & (~ok_out | (fn_out[:, axis] * fn[:, axis] <= 0)))
+        if not len(over):
+            break
+        for f in over:
+            c, a, b = (place[F[f, (middle[f] + j) % 3]] for j in range(3))
+            ab = centre[b] - centre[a]
+            t = np.clip((centre[c] - centre[a]) @ ab / (ab @ ab), 0.0, 1.0)
+            move[c] = (1 - t) * move[a] + t * move[b]
+            eased.add(int(c))
+    return out, len(eased), len(over)
 
 
 def compact(F, *attrs):
@@ -842,6 +906,14 @@ def build(kit_dir, keep='guide'):
         if 'atlas' in rule:                           # print on a face (a servo's label)
             for colour, faces in flat_marks(V, F, mats.atlas(rule['atlas'])).items():
                 face_colour[faces] = rule.get('atlas_colours', {}).get(colour, colour)
+        # "roughen_mm": a laser-cut plate's edges, slots, holes and engraving shifted by about that much in its plane (see
+        # roughen), so that no cutting file can be traced from the published model. After the engraving is moved and before the
+        # crease lines are drawn, so the lines follow the moved faces.
+        if rule.get('roughen_mm'):
+            V, eased, left = roughen(V, F, rule['roughen_mm'], mesh['name'])
+            note = (note + '; ' if note else '') + f"edges roughened by up to {rule['roughen_mm']} mm" + (f' ({eased} sliver corners eased)' if eased else '')
+            if left:
+                print(f"  WARNING {mesh['name']}: {left} faces turned over by roughen_mm")
 
         # quantization grid for this mesh (shared by its triangles and edges)
         lo = V.min(0)

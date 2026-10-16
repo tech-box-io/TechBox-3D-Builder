@@ -13,7 +13,7 @@ file with site/404.html, and folders are not listed.
 Caching is switched off, so an edit always shows up on reload. For a kit, the part-image and thumbnail tools can save what they
 render back into the folder:
 
-    POST /__save/parts/R1.png      body = the file
+    POST /__save/parts/R1.png      body = the file     (also thumbs/, and cards/: the guide's picture for the website)
 
 Saving only works for requests from this computer, only inside the kit's generated-output folders, and only for image and JSON
 files.
@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PLAYER = ROOT / 'player'                     # the one copy of the player
 PLAYER_NAMES = ('player.html', 'parts.html', 'js', 'vendor')
-SAVE_DIRS = ('parts', 'thumbs')
+SAVE_DIRS = ('parts', 'thumbs', 'cards')
 SAVE_TYPES = ('.png', '.webp', '.jpg', '.json', '.csv')
 MAX_BYTES = 20 * 1024 * 1024
 PORTS = {'site': 8797, 'releases': 8798, 'kit': 8791}

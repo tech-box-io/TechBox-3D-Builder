@@ -103,6 +103,7 @@
       "match": "^(ARA|TB)_",
       "color": "wood",
       "simplify_mm": 0,
+      "roughen_mm": 0.1,
       "engraving": "ink"
     },
     {
@@ -258,7 +259,8 @@
       "2026-10-14 (Lee): the Elbow, Shoulder and Claw Motors carry a round sticker, about 0.25 in (6.35 mm; drawn 7 mm), on both wide faces, in the middle of the part of the face that shows (not under R7 / R8): black on the Elbow Motor, white on the Shoulder Motor (TechBox's Testing Checklist; corrected the same day), blue on the Claw Motor. The Base Motor has none.",
       "2026-10-14 (Lee): the I/O module's silkscreen (pin names, G V S legends, POWER, RESET, the capacitor's and the regulator's print), from Lee's photos of the real board, placed from the CAD's pin positions: decals.json, written by silkscreen.py and named by \"decals\" here; build_model.py puts it in model.glb as data and the player draws it.",
       "2026-10-14 (Lee, third round): the Elbow Motor's dot is just off black, #181818 (palette sticker_off_black); the grey tried before (#5a5a5a) was too grey. Motor labels name the dot: 'Elbow Motor (Black Dot)', 'Shoulder Motor (White Dot)', 'Claw Motor (Blue Dot)'.",
-      "2026-10-14 (Lee, third round): the I/O module's board is the same navy as the Nano's (#000f41, pcb_navy, as TechBox's own Cadasio project has it); the house blue looked off beside the darker Nano."
+      "2026-10-14 (Lee, third round): the I/O module's board is the same navy as the Nano's (#000f41, pcb_navy, as TechBox's own Cadasio project has it); the house blue looked off beside the darker Nano.",
+      "2026-10-16 (Lee): the wood plates are roughened (\"roughen_mm\": 0.1 on the wood rule): build_model.py shifts every corner of a plate's outline, slots, holes and engraving by 0.05-0.1 mm in the plate's own plane, the same on every build, so that a cutting file traced from the published model comes out slightly wrong and its tabs and slots do not fit. Thickness, flat faces and square edges are kept; the CAD, the guide's collision tests and the steps are unchanged."
     ],
     "adjusted": [
       "NAUO46 (the base motor's double horn) is drawn 1.8 mm lower than in the CAD, where its arms sit inside B2. On the real kit the arms lie in B1's horn-shaped cut-out and B2 slides over them. Fix the CAD and remove this.",

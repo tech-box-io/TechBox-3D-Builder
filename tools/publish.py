@@ -7,8 +7,8 @@
     (add --to <folder> for a practice run that writes there instead of releases/ and site/)
 
 How it fits together:
-- The kit folder is where a guide is written and checked (guide.py -> steps.json, model.glb, parts/). The player is the one copy
-  in player/.
+- The kit folder is where a guide is written and checked (guide.py -> steps.json, model.glb, parts/, and cards/<steps>.webp, the
+  picture for its card on the website, made in the player with _dev.card()). The player is the one copy in player/.
 - A release is a frozen copy of exactly the files a learner's browser needs: the player (player.html becomes index.html), the
   guide's steps (as steps.json, with the Review notes and other authoring data taken out), the kit's model (with the CAD's own
   part, body and file names taken out), the logo and the part pictures its Parts List shows. Nothing else: no CAD, no guide.py,
@@ -17,7 +17,10 @@ How it fits together:
   tools/serve.py releases shows them on this computer only.
 - site/<guide>/ is the one copy the website serves (Render publishes site/ only): always the release published or restored last.
   The address never changes, so an LMS embed of https://<domain>/<guide>/ always shows the current version, and earlier versions
-  cannot be reached from the web. tools/check_site.py (Render's build command) compares it with its release record.
+  cannot be reached from the web. tools/check_site.py (Render's build command) compares it with its release record. After every
+  change the website's own pages (the landing page, a page per kit) are made again from what is on the site (tools/site_pages.py).
+- A guide may be shown inside a frame only by the sites in guides.json "embed_origins" (TechBox's LMS): render.yaml's headers say
+  so, and the published index.html carries a second guard. The website's own pages may not be framed at all.
 - What the model gives away: a 3D guide has to send the part shapes to the browser, and for laser-cut wood the mesh holds each
   plate's exact outline, slots and holes; anyone with the address can save it. Only STEP and editable CAD stay private.
 - The order: commit the checked sources, publish, look (python3 tools/serve.py site 8797 -> http://localhost:8797/<guide>/),
@@ -36,7 +39,11 @@ import re
 import shutil
 import struct
 import subprocess
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import site_pages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAYER = ROOT / 'player'
@@ -48,12 +55,35 @@ PLAYER_FILES = ['js/core.js', 'js/player.js']                       # (not parts
 AUTHORING_KEYS = ('review', 'text_key')                              # per view: Review notes for TechBox; the step-text spreadsheet's key
 FRESH_IMPORT = "import('./js/player.js?v=' + Date.now());"          # player.html's "a fresh copy on every load", for authoring
 ICON = '<link rel="icon" href="data:,">'
+GUARD = """<script>
+// Only TechBox's LMS may show this guide inside a frame: the server's Content-Security-Policy frame-ancestors is the real check,
+// this is a second guard. It refuses only a definite foreign origin ("null", no referrer or our own: the header decides).
+(function () {
+  if (window.top === window.self) return;
+  var allowed = ORIGINS, bad = false, ao = location.ancestorOrigins;
+  var local = function (o) { return /^https?:\\/\\/(localhost|127\\.0\\.0\\.1)(:\\d+)?$/.test(o); };
+  if (ao && ao.length) {
+    for (var i = 0; i < ao.length; i++) if (ao[i] !== 'null' && allowed.indexOf(ao[i]) < 0 && !local(ao[i])) bad = true;
+  } else if (document.referrer) {
+    try { var o = new URL(document.referrer).origin; if (o !== location.origin && allowed.indexOf(o) < 0 && !local(o)) bad = true; } catch (e) {}
+  }
+  if (!bad) return;
+  window.techboxFrameRefused = true;
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function () {
+    var p = document.createElement('p'), a = document.createElement('a');
+    a.href = location.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Open this build guide in a new tab';
+    p.style.cssText = 'font:16px system-ui,sans-serif;padding:16px'; p.appendChild(a);
+    document.body.replaceChildren(p); document.documentElement.style.visibility = '';
+  });
+})();
+</script>"""
 SLASH_FIX = """<script>
 // On the website a guide is the folder /<guide>/ and this page is its index.html: opened without the closing slash, the browser
 // would look for the guide's files one folder up, so add the slash before anything loads.
 if (!/(\\/|\\.html?)$/i.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);
 </script>"""
-TOP_PAGES = ('index.html', '404.html', 'robots.txt')                 # the site's own pages (site/), copied into a practice site
+TOP_PAGES = ('robots.txt',)                                          # (copied into a practice site; site_pages.py makes the others)
 MODEL_GENERATOR = 'TechBox build_model.py'
 MODEL_LIMIT = 15_000_000                                             # bytes: a published model is a few MB; the raw CAD is tens
 
@@ -69,11 +99,23 @@ def write_atomic(path, text):
     os.replace(tmp, path)
 
 
+def spec():
+    return json.load(open(ROOT / 'guides.json'))
+
+
 def registry():
-    guides = json.load(open(ROOT / 'guides.json'))['guides']
-    for name in guides:
+    """The guides in guides.json, each with its kit folder ("folder"), checked."""
+    s = spec()
+    kits, guides = s['kits'], s['guides']
+    for name in list(kits) + list(guides):
         if not NAME.match(name):
             raise SystemExit(f'guides.json: "{name}" is not a web-address name (lower-case words joined by hyphens)')
+    for name, g in guides.items():
+        if g.get('kit') not in kits:
+            raise SystemExit(f'guides.json: guide "{name}" names kit "{g.get("kit")}", which is not under "kits"')
+        if name in kits or name in ('kits', 'assets'):
+            raise SystemExit(f'guides.json: "{name}" would clash with a page of the website')
+        g['folder'] = kits[g['kit']]['folder']
     return guides
 
 
@@ -207,7 +249,7 @@ def verify_release(folder):
 
 
 def build_release(name, entry, note):
-    kit = ROOT / entry['kit']
+    kit = ROOT / entry['folder']
     steps_file = inside(kit, entry['steps'])
     steps = json.load(open(steps_file))
     files = needed_files(steps)
@@ -229,6 +271,11 @@ def build_release(name, entry, note):
     script = kit / entry.get('script', 'guide.py')
     if script.exists() and steps_file.stat().st_mtime < script.stat().st_mtime:
         warnings.append(f'{entry["steps"]} is older than {script.name}: has it been run since its last edit?')
+    card = kit / 'cards' / (Path(entry['steps']).stem + '.webp')
+    if not card.is_file():
+        warnings.append(f'no card picture ({card.relative_to(ROOT)}): the website shows "No picture yet"; make one in the player with _dev.card()')
+    elif card.stat().st_mtime < model.stat().st_mtime:
+        warnings.append(f'the card picture is older than the model: make it again with _dev.card() if the model changed')
     reviews = sum(1 for v in steps['views'] if v.get('review'))
     if reviews:
         warnings.append(f'{reviews} view(s) carry Review notes; they are left out of the published copy (still in the kit)')
@@ -242,7 +289,9 @@ def build_release(name, entry, note):
         raise SystemExit(f'{final} exists already: a release is never overwritten')
     tmp.mkdir(parents=True)
     player_v = sha256(b''.join((PLAYER / f).read_bytes() for f in PLAYER_FILES))[:12]
-    (tmp / 'index.html').write_text(page.replace(FRESH_IMPORT, f"import('./js/player.js?v={player_v}');").replace(ICON, ICON + '\n' + SLASH_FIX))
+    guard = GUARD.replace('ORIGINS', json.dumps(spec().get('embed_origins', [])))
+    (tmp / 'index.html').write_text(page.replace(FRESH_IMPORT, f"if (!window.techboxFrameRefused) import('./js/player.js?v={player_v}');")
+                                    .replace(ICON, ICON + '\n' + SLASH_FIX + '\n' + guard))
     for f in PLAYER_FILES:
         (tmp / f).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(PLAYER / f, tmp / f)
@@ -250,6 +299,8 @@ def build_release(name, entry, note):
     for f in files[1:]:
         (tmp / f).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(inside(kit, f), tmp / f)
+    if card.is_file():
+        shutil.copy2(card, tmp / 'card.webp')
     (tmp / files[0]).parent.mkdir(parents=True, exist_ok=True)
     published_model(model, tmp / files[0], steps)
     model_v = sha256(tmp / files[0])[:12]
@@ -257,7 +308,7 @@ def build_release(name, entry, note):
     (tmp / 'steps.json').write_text(json.dumps(out, separators=(',', ':'), ensure_ascii=False))
     content = dict(out, meta={k: v for k, v in out['meta'].items() if k != 'release'})
     record = dict(guide=name, release=release, published=datetime.datetime.now().isoformat(timespec='seconds'), note=note,
-                  kit=entry['kit'], steps=entry['steps'], title=steps['meta'].get('title'), part=steps['meta'].get('part'),
+                  kit=entry['folder'], steps=entry['steps'], title=steps['meta'].get('title'), part=steps['meta'].get('part'),
                   views=len(steps['views']), source=git_source(kit),
                   steps_content=sha256(json.dumps(content, sort_keys=True).encode('utf-8')),
                   files={p.relative_to(tmp).as_posix(): sha256(p) for p in sorted(tmp.rglob('*')) if p.is_file()})
@@ -331,7 +382,7 @@ def main():
             now = on_site(name)
             odd = '' if now == logged else f'   (the history says {logged or "not on the website"})'
             print(f'{name:40s} on the website: {now or "-":5s} releases: {", ".join(f"r{n}" for n in releases_of(name)) or "none"}   '
-                  f'({entry["kit"]}/{entry["steps"]}){odd}')
+                  f'({entry["folder"]}/{entry["steps"]}){odd}')
         return
     name = args.guide
     if name not in guides:
@@ -352,6 +403,7 @@ def main():
             shutil.rmtree(SITE / name, ignore_errors=True)
             h['log'].append(dict(when=when, action='taken down', was=was, note=args.note))
             save_history(name, h)
+            site_pages.build(SITE)
             print(f'{name}: taken off the website (site/{name}/ removed; commit and push to make it so). Releases kept: '
                   f'{", ".join(f"r{n}" for n in releases_of(name)) or "none"}')
             return
@@ -362,6 +414,7 @@ def main():
             put_on_site(name, src)
             h['log'].append(dict(when=when, action='restored', release=args.restore, was=was, note=args.note))
             save_history(name, h)
+            site_pages.build(SITE)
             print(f'{name}: {args.restore} is back in site/{name}/. Look: {site_cmd} -> http://localhost:8797/{name}/ ; then commit and push.')
             return
         if not args.note:
@@ -376,6 +429,7 @@ def main():
             raise
         h['log'].append(dict(when=when, action='published', release=record['release'], note=args.note, source=record['source']))
         save_history(name, h)
+        site_pages.build(SITE)
     size = sum((final / f).stat().st_size for f in record['files'])
     print(f'{name}: {record["release"]} published to site/{name}/ ({len(record["files"])} files, {size / 1e6:.1f} MB; {record["views"]} views)')
     for line in report:
