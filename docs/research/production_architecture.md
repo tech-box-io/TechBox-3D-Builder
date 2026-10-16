@@ -26,7 +26,11 @@ These replace the parts of the plan below that disagree with them:
 - **The authoring folder is the git repository** (data in `.git.nosync`, out of iCloud), not a separate site repository.
 
 Built on 16 Oct 2026: one player (`player/`), `tools/serve.py` lending it to the kits, `tools/publish.py`, `tools/check_site.py`,
-`guides.json`, `render.yaml`, `site/` (no guide published yet), git. See CLAUDE.md "Publishing: the website" and "Part guides".
+`guides.json`, `render.yaml` (Render deploys the branch `live`; `main` is a backup), `site/` (no guide published yet), git. An
+independent review of that build (four reviewers, each finding verified) led to: `check_site.py` requiring each guide to match
+its release record byte for byte; the CAD's body and file names taken out of the published model; content-based version stamps;
+per-guide history; the slash fix added at publish rather than in the shared player; and the finding, told to Lee, that the
+published model gives away the exact shapes of the laser-cut parts. See CLAUDE.md "Publishing: the website" and "Part guides".
 Not built yet: Part guides (section 4, adapted to the decisions above), the heavy-job lock, the daily link check.
 
 ## The short version

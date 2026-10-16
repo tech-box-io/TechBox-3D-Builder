@@ -19,7 +19,7 @@ HOW TO USE
 - Rest the pointer on a part (or a wire) to see its name. Click it to pick it out: it turns orange and its name stays up until the next click or step.
 - The grid button (or "View all steps" in the step list) shows a picture of every step. Click one to jump to it.
 - Review notes (yellow) are switched off for this guide now that it is past review (guide.py, review_notes=False); add ?review=1 to the address to see any that are left.
-- Hold Option (Alt) and click a spot on a part to note where it is: the step, the part and the spot's position are listed at the bottom right and copied to the clipboard. Paste that into a message to say exactly where a lead line should start or end. (Only when the player is opened directly, not when it is embedded in another page.)
+- Hold Option (Alt) and click a spot on a part to note where it is: the step, the part and the spot's position are listed at the bottom right and copied to the clipboard. Paste that into a message to say exactly where a lead line should start or end. (Only when the player is opened directly, not when it is embedded in another page.) (On this computer and in checkpoint files only; never on the website, unless ?pick=1 is added.)
 - The round-arrow button at the top right, beside full screen, puts the camera back to the step's own view after turning or zooming it (Lee, 16 Oct 2026).
 - Pointing at or clicking a joystick names it Left Joystick or Right Joystick, as its labels do (the parts list counts them as 2 Joysticks).
 - In the step list, each Parts List page is pictured as the page itself, small (on trial, Lee 16 Oct 2026). The wood parts' bands in the parts list are blue-grey, so the wood stands out (they were orange).
@@ -61,7 +61,7 @@ What the browser loads:
   steps.json                    the steps (generated)
   model.glb                     the 3D model for the web (generated: a few MB instead of 42 MB; only the parts this guide shows)
   logo.webp                     the title-page logo
-  parts.html, parts/            part images
+  parts/                        part images (made by ../player/parts.html, served at parts.html)
 What they are generated from:
   mra.glb                       the 3D model converted from the STEP export (full detail)
   guide.py                      the build, in order: which part goes on next, the caption, any hand-set motion, the wires

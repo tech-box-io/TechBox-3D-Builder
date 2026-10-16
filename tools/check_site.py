@@ -3,96 +3,208 @@ deploy and the previous one stays live. Run it yourself too before committing a 
 
     python3 tools/check_site.py            (or: python3 tools/check_site.py <a site folder>, e.g. a practice publish's)
 
-It makes sure that site/ holds only the published guides named in guides.json, each a complete copy (the player, its steps, the
-model, the logo and the part pictures its Parts List shows), and nothing that should stay in this folder: no CAD, no guide.py or
-colours file, no Review notes, no authoring tools. Only the standard library.
+Each guide in site/ must be exactly the release it says it is (steps.json meta.release): the same files, byte for byte, as
+that release's record (releases/<guide>/r<N>/release.json, made by tools/publish.py). Nothing else may be in site/ but the
+site's own pages and the guides named in guides.json: no hidden files, no links, no CAD, no Review notes, no authoring tools.
+Only the standard library; Python 3.8 or newer.
 """
+import hashlib
 import json
+import os
+import re
+import struct
+import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'
-TOP_FILES = {'index.html', 'robots.txt', '404.html'}
-REQUIRED = ['index.html', 'js/player.js', 'js/core.js', 'vendor/three/three.module.min.js', 'steps.json']
-ALLOWED = {'.html', '.js', '.json', '.glb', '.png', '.webp', '.svg', '.txt'}
-FORBIDDEN_NAMES = {'guide.py', 'materials.json', 'wire-paths.json', 'decals.json', 'engraved-codes.json', 'model.report.json',
-                   'parts.json', 'parts.csv', 'release.json', 'parts.html', 'parts.js', 'runthrough.js', 'player.html', 'history.json'}
-FORBIDDEN_IN_NAME = ('colour-atlas', '.step', '.stp', '.command', 'silkscreen', '.py')
+TOP_FILES = ('index.html', '404.html', 'robots.txt')
+IGNORED = ('.DS_Store',)                     # (Finder's; never committed, so never deployed)
+MODEL_GENERATOR = 'TechBox build_model.py'
+MODEL_LIMIT = 15_000_000
+IMPORT = re.compile(r"""(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+)(['"])([^'"]+)\1""")
 
 
-def check():
+def sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def walk(folder):
+    """Every file under folder (relative paths), and the problems: links, hidden names."""
+    files, problems = [], []
+    for here, dirs, names in os.walk(folder, followlinks=False):
+        for d in list(dirs):
+            p = Path(here) / d
+            if p.is_symlink():
+                problems.append(f'{p.relative_to(folder)}/: a link')
+                dirs.remove(d)
+            elif d.startswith('.'):
+                problems.append(f'{p.relative_to(folder)}/: a hidden folder')
+                dirs.remove(d)
+        for n in names:
+            p = Path(here) / n
+            if n in IGNORED:
+                continue
+            if p.is_symlink():
+                problems.append(f'{p.relative_to(folder)}: a link')
+            elif n.startswith('.'):
+                problems.append(f'{p.relative_to(folder)}: a hidden file')
+            else:
+                files.append(p.relative_to(folder).as_posix())
+    return sorted(files), problems
+
+
+def check_model(path):
+    raw = Path(path).read_bytes()
+    if raw[:4] != b'glTF' or len(raw) < 20:
+        return ['not a binary glTF file']
+    n, _ = struct.unpack('<II', raw[12:20])
+    doc = json.loads(raw[20:20 + n])
+    out = []
+    if doc.get('asset', {}).get('generator') != MODEL_GENERATOR:
+        out.append(f'not a guide model made by {MODEL_GENERATOR}')
+    if 'EXT_meshopt_compression' not in doc.get('extensionsUsed', []):
+        out.append('not meshopt-compressed')
+    if len(raw) > MODEL_LIMIT:
+        out.append(f'{len(raw) / 1e6:.1f} MB, too big for a guide model')
+    if any('name' in m for m in doc.get('meshes', [])) and not doc.get('asset', {}).get('copyright'):
+        out.append('still carries the CAD\'s names (not a published copy)')
+    return out
+
+
+def check_imports(folder, files):
+    """Every module the player loads is in the folder (a new player module left out of a release would break it)."""
+    out = []
+    page = (folder / 'index.html').read_text()
+    m = re.search(r'<script type="importmap">(.*?)</script>', page, re.S)
+    imports = json.loads(m.group(1))['imports'] if m else {}
+    for src, text in [('index.html', page)] + [(f, (folder / f).read_text()) for f in files if f.endswith('.js')]:
+        for _, spec in IMPORT.findall(text):
+            spec = spec.split('?')[0]
+            if spec in imports:
+                target = imports[spec]
+            elif any(spec.startswith(k) for k in imports if k.endswith('/')):
+                k = next(k for k in imports if k.endswith('/') and spec.startswith(k))
+                target = imports[k] + spec[len(k):]
+            elif spec.startswith('.'):
+                target = os.path.normpath(os.path.join(os.path.dirname(src), spec))
+            else:
+                continue
+            target = os.path.normpath(target[2:] if target.startswith('./') else target)
+            if target not in files:
+                out.append(f'{src} loads {spec}, which is not in the folder')
+    return out
+
+
+def check_guide(name, folder, releases):
+    errors = []
+    files, problems = walk(folder)
+    errors += problems
+    try:
+        steps = json.load(open(folder / 'steps.json'))
+    except (OSError, ValueError) as e:
+        return errors + [f'steps.json does not read: {e}']
+    meta = steps.get('meta', {})
+    release = meta.get('release')
+    if meta.get('guide') != name:
+        errors.append(f'steps.json says it is "{meta.get("guide")}", not {name}')
+    record_path = releases / name / str(release) / 'release.json'
+    if not release or not record_path.is_file():
+        return errors + [f'no release record for {release} ({record_path.relative_to(releases.parent)}): only tools/publish.py may write site/']
+    record = json.load(open(record_path))
+    expected = set(record['files'])
+    for f in sorted(expected - set(files)):
+        errors.append(f'{f} is missing (the release has it)')
+    for f in sorted(set(files) - expected):
+        errors.append(f'{f} is not part of {release}')
+    for f in sorted(expected & set(files)):
+        if sha256(folder / f) != record['files'][f]:
+            errors.append(f'{f} differs from {release} as published')
+    if meta.get('review_notes') is not False:
+        errors.append('steps.json: meta.review_notes should be false (not a published copy)')
+    for k, view in enumerate(steps.get('views', [])):
+        bad = [key for key in ('review', 'text_key') if key in view]
+        if bad:
+            errors.append(f'steps.json view {k} ({view.get("name")}) still has {", ".join(bad)}')
+            break
+    named = [steps.get('model', '').split('?')[0], meta.get('logo')] + [item.get('picture') for v in steps.get('views', []) for g in v.get('parts', []) for item in g.get('items', [])]
+    for f in sorted({n for n in named if n}):
+        if Path(f).is_absolute() or '..' in Path(f).parts or f not in files:      # (exact names: a case slip passes on a Mac, not on Render)
+            errors.append(f'steps.json names {f}, which is not in the folder')
+    model = steps.get('model', '').split('?')[0]
+    if model in files:
+        errors += [f'{model}: {p}' for p in check_model(folder / model)]
+    if 'index.html' in files:
+        page = (folder / 'index.html').read_text()
+        if "import('./js/player.js?v=' + Date.now())" in page:
+            errors.append('index.html is the authoring copy of the player, not a published one')
+        errors += check_imports(folder, files)
+    return errors
+
+
+def check_git_case(site, name, files):
+    """What git will deploy must have the same names, letter case included (macOS ignores case; Render does not)."""
+    try:
+        tracked = subprocess.run(['git', 'ls-files', '--', str(site / name)], cwd=site, capture_output=True, text=True, check=True).stdout.split('\n')
+    except (OSError, subprocess.CalledProcessError):
+        return []
+    prefix = (site / name).resolve()
+    names = set(files)
+    lower = {f.lower(): f for f in files}
+    out = []
+    for t in filter(None, tracked):
+        rel = (Path(site).resolve().parent / t).resolve()
+        try:
+            rel = rel.relative_to(prefix).as_posix()
+        except ValueError:
+            continue
+        if rel not in names and rel.lower() in lower:
+            out.append(f'git tracks {rel} but the file is {lower[rel.lower()]}: run git mv -f "{t}" with the new name')
+    return out
+
+
+def check(site=SITE):
     errors, total = [], 0
-    if not SITE.is_dir():
-        return [f'{SITE} is missing'], 0
+    if not site.is_dir():
+        return [f'{site} is missing'], 0
+    releases = site.parent / 'releases'
     guides = json.load(open(ROOT / 'guides.json'))['guides']
-    for p in sorted(SITE.iterdir()):
-        if p.name.startswith('.'):
+    for f in TOP_FILES:
+        if not (site / f).is_file():
+            errors.append(f'site/{f} is missing')
+    for p in sorted(site.iterdir()):
+        if p.name in IGNORED:
+            continue
+        if p.is_symlink():
+            errors.append(f'site/{p.name}: a link')
+        elif p.name.startswith('.'):
             errors.append(f'site/{p.name}: hidden files and unfinished copies must not be published')
         elif p.is_file() and p.name not in TOP_FILES:
             errors.append(f'site/{p.name}: not a file the site needs at its top level')
         elif p.is_dir() and p.name not in guides:
             errors.append(f'site/{p.name}/: not a guide in guides.json')
     for name in guides:
-        folder = SITE / name
-        if not folder.exists():
-            continue                                                     # (not published, or taken down)
-        files = [p for p in folder.rglob('*') if p.is_file()]
-        total += sum(p.stat().st_size for p in files)
-        for f in REQUIRED:
-            if not (folder / f).is_file():
-                errors.append(f'{name}: {f} is missing')
-        for p in files:
-            rel = p.relative_to(folder).as_posix()
-            lower = p.name.lower()
-            if p.name.startswith('.'):
-                errors.append(f'{name}: {rel}: hidden file')
-            elif lower in FORBIDDEN_NAMES or any(s in lower for s in FORBIDDEN_IN_NAME):
-                errors.append(f'{name}: {rel}: an authoring file, never published')
-            elif p.suffix.lower() not in ALLOWED and p.name != 'LICENSE':
-                errors.append(f'{name}: {rel}: not a file type the player uses')
-            elif p.stat().st_size < 200 and p.read_bytes().startswith(b'version https://git-lfs'):
-                errors.append(f'{name}: {rel}: a Git LFS pointer, not the file itself')
-        steps_path = folder / 'steps.json'
-        if not steps_path.is_file():
-            continue
+        folder = site / name
+        if not folder.is_dir() or folder.is_symlink():
+            continue                                                     # (not published, or taken down; a link is reported above)
         try:
-            steps = json.load(open(steps_path))
-        except ValueError as e:
-            errors.append(f'{name}: steps.json does not read: {e}')
-            continue
-        page = (folder / 'index.html').read_text() if (folder / 'index.html').is_file() else ''
-        if 'Date.now()' in page or "js/player.js?v=" not in page:
-            errors.append(f'{name}: index.html is not a published copy of the player (made by tools/publish.py)')
-        if steps.get('meta', {}).get('review_notes') is not False:
-            errors.append(f'{name}: steps.json is not a published copy (meta.review_notes should be false)')
-        for k, view in enumerate(steps.get('views', [])):
-            for key in ('review', 'text_key'):
-                if key in view:
-                    errors.append(f'{name}: steps.json view {k} ({view.get("name")}) still has "{key}"')
-                    break
-        model = folder / steps.get('model', '').split('?')[0]
-        if not model.is_file():
-            errors.append(f'{name}: the model {model.name} named in steps.json is missing')
-        elif model.read_bytes()[:4] != b'glTF':
-            errors.append(f'{name}: {model.name} is not a binary glTF file')
-        glbs = [p.relative_to(folder).as_posix() for p in files if p.suffix.lower() == '.glb']
-        if glbs != [model.relative_to(folder).as_posix()] and model.is_file():
-            errors.append(f'{name}: .glb files other than the model: {", ".join(g for g in glbs if g != model.name)}')
-        wanted = [steps.get('meta', {}).get('logo')] + [item['picture'] for view in steps.get('views', []) for group in view.get('parts', []) for item in group['items']]
-        for f in {w for w in wanted if w}:
-            if not (folder / f).is_file():
-                errors.append(f'{name}: {f} (named in steps.json) is missing')
+            found = check_guide(name, folder, releases)
+            files, _ = walk(folder)
+            found += check_git_case(site, name, files)
+            total += sum((folder / f).stat().st_size for f in files)
+        except Exception as e:                                           # (a damaged file is a failed check, with its reason)
+            found = [f'could not be checked: {type(e).__name__}: {e}']
+        errors += [f'{name}: {e}' for e in found]
     return errors, total
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        SITE = Path(sys.argv[1]).resolve()
-    errors, total = check()
+    site = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else SITE
+    errors, total = check(site)
     for e in errors:
         print('ERROR: ' + e)
-    published = [p.name for p in SITE.iterdir() if p.is_dir() and not p.name.startswith('.')] if SITE.is_dir() else []
-    print(f'site/: {len(published)} guide(s) ({", ".join(published) or "none"}), {total / 1e6:.1f} MB; '
+    published = sorted(p.name for p in site.iterdir() if p.is_dir() and not p.name.startswith('.')) if site.is_dir() else []
+    print(f'{site.name}/: {len(published)} guide(s) ({", ".join(published) or "none"}), {total / 1e6:.1f} MB; '
           f'{"OK" if not errors else f"{len(errors)} problem(s)"}')
     sys.exit(1 if errors else 0)

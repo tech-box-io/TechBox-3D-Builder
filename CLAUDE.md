@@ -123,26 +123,44 @@ address per guide: `https://<domain>/<guide>/`, the names in `guides.json` (Lee'
 `remote-controlled-car-deconstruction`). An address in the LMS must never change.
 
     python3 tools/publish.py <guide> --note "what changed"   # freeze the guide as its next release and put it in site/<guide>/
-    python3 tools/check_site.py                              # site/ holds only what may go out (Render runs this before each deploy)
-    /usr/bin/python3 tools/serve.py site 8797                # look at the site as Render will serve it: http://localhost:8797/<guide>/
-    python3 tools/publish.py <guide> --restore r3            # put an earlier release back (a roll-back); --take-down removes it
+    python3 tools/check_site.py                              # site/ is exactly the releases on record (Render runs this before each deploy)
+    /usr/bin/python3 tools/serve.py site                     # the site as Render serves it: http://localhost:8797/<guide>/
+    python3 tools/publish.py <guide> --restore r3            # put an earlier release back (a roll-back); --take-down removes the guide
     python3 tools/publish.py --list                          # which release each guide has on the website
-    /usr/bin/python3 tools/serve.py releases 8798            # every earlier release, on this computer only: /<guide>/r<N>/
+    /usr/bin/python3 tools/serve.py releases                 # every earlier release, on this computer only: http://localhost:8798/<guide>/r<N>/
 
 - **Only the current release is on the website** (Lee, 16 Oct 2026). `site/` holds one copy per guide; every release ever
   published is kept in `releases/<guide>/r<N>/` with its record (`release.json`: when, Lee's reason, the source's git commit,
-  every file's checksum) and `releases/history.json`, in git but never uploaded (Render serves `site/` only).
-- **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (with the Review notes and
-  `text_key` taken out), the kit's `model.glb`, the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`,
-  `materials.json`, wire paths, decals or research. The model itself is a simplified, coloured mesh; anyone who opens a guide
-  can save it (any 3D viewer in a browser works that way), but no STEP or editable CAD ever leaves this folder.
-- **Going live is a commit and push of `site/`**, and happens only on Lee's word: publish, check, show Lee the local preview,
-  then commit and push when Lee says so (Render deploys on push). Commit the sources with it, so the release records a clean
-  commit. Every file is served with `Cache-Control: no-cache` (render.yaml): browsers re-check each file when a guide opens, so
-  a release reaches the next learner who opens it and there is never a cache to clear.
-- A new guide gets an entry in `guides.json` (its kit and its steps file) before its first publish.
-- `render.yaml` is the site's configuration. Once the LMS's address is known, its `frame-ancestors` line lets only the LMS
-  embed the guides. The site's own pages: `site/index.html` (a blank page), `404.html`, `robots.txt` (no search engines).
+  every file's checksum) and `releases/<guide>/history.json`, in git but never uploaded (Render serves `site/` only).
+  `check_site.py` requires each `site/<guide>/` to be byte for byte the release its `steps.json` names, so only `publish.py`
+  can change what goes out.
+- **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (without Review notes or
+  `text_key`), the kit's `model.glb` (without the CAD's own body and file names; the part ids stay, as the player needs them),
+  the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`, `materials.json`, wire paths, `decals.json`
+  (the printing travels inside the model as shapes) or research.
+- **What the model gives away** (told to Lee, 16 Oct 2026): a 3D guide has to send the part shapes to the browser, and for the
+  laser-cut wood the mesh holds each plate's exact outline, slots and holes; anyone who opens a guide can save it and trace
+  cutting files from it, and a static site cannot prevent that (a gated server would only raise the bar; one physical kit gives
+  the same shapes). Only the STEP and editable CAD stay private. Coarsening or jittering the published wood is possible if Lee
+  asks; it is not done.
+- **The order:** commit the checked sources; publish; look at it (`serve.py site`, and `_runthrough()` on `/<guide>/`); run
+  `check_site.py`; commit `site/` and `releases/`. Then, **only on Lee's word**, put it live: `git push origin main:live` (Render
+  deploys the branch `live`; `main` can be pushed at any time as a backup). If Lee declines, `--restore` the previous release
+  (or `--take-down`) before committing. Push outside lesson hours: a learner who has a guide open during a deploy could get a
+  mix of old and new files.
+- **Caching:** every file is served `Cache-Control: no-cache` (render.yaml): browsers re-check each file when a guide opens
+  (an unchanged file costs a short "not modified" answer), so a release reaches the next learner who opens the guide and there
+  is never a cache to clear. Render needs no routine upkeep: deploys follow the push, the HTTPS certificate renews itself.
+- **On Render:** the GitHub repository must be private, with Render's GitHub App limited to it. Do not use Render's Rollback
+  button (it switches automatic deploys off): roll back with `--restore` and push. A header deleted from render.yaml must also
+  be deleted in Render's dashboard. Once the LMS's address is known, render.yaml's `frame-ancestors` line lets only the LMS
+  embed the guides (a new LMS host must be added there first).
+- **The embed** (one guide per LMS page, the address with its closing slash, no `?step=`):
+  `<iframe src="https://<domain>/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"
+  style="width:100%;height:min(80vh,720px);min-height:420px;border:0"></iframe>`. If the LMS ever adds a `sandbox`, it needs
+  `allow-scripts allow-same-origin`.
+- A new guide gets an entry in `guides.json` (its kit, its steps file, and `script` if it is not made by `guide.py`) before its
+  first publish. The site's own pages: `site/index.html` (a blank page), `404.html`, `robots.txt`.
 
 ## Part guides (chapters)
 
@@ -156,6 +174,8 @@ Not built yet (planned: `docs/research/production_architecture.md` section 4, wi
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
 - A guide that is not a cut of the Full Build (the RCC deconstruction) has its own steps file and must never shrink the kit's
   shared model.
+- A published Part guide would carry the kit's whole model (every part, later chapters' too) unless `publish.py` prunes the
+  model to the parts that guide shows; to be decided when Part guides are built.
 
 ## Checking a change
 
@@ -179,8 +199,8 @@ Every change to a guide is checked in the browser before it is reported as done.
 4. `tools/build_model.py` prints a warning if one conductor changes colour between two cable pieces.
 5. Commit the change (sources and generated files) once it is checked; this folder is a git repository (below).
 
-A published copy is checked the same way: `serve.py site 8797`, open `/<guide>/`, run the same check (the server lends it the
-check script, which is never published).
+A published copy is checked the same way: `serve.py site`, open `http://localhost:8797/<guide>/`, run the same check (the
+server lends it the check script, which is never published).
 
 The preview launcher cannot read the Desktop folder, so start `tools/serve.py` from the shell (in the
 background) rather than through `.claude/launch.json`, which only attaches to it.
@@ -268,8 +288,9 @@ kit folder takes its place the next time `guide.py` runs.
 
 This folder is a git repository (branch `main`). Its data is in `.git.nosync` (`.git` is a pointer file to it), which keeps
 it out of iCloud sync, as the `.nosync` suffix does for the Python environment; until a remote is added the history is on this
-Mac only. Kept out of git (`.gitignore`): the build videos, `share/`, the source STEP files (checksums in `cad-sources.sha256`),
-`thumbs/`, environments. Commit each checked change; pushing publishes whatever is in `site/`, so push only on Lee's word.
+Mac only. Kept out of git (`.gitignore`): the build videos, `share/`, the source CAD files (STEP and the like; checksums in
+`cad-sources.sha256`), kits' `thumbs/`, environments. Commit each checked change. The remote (when Lee adds one) must be a
+private GitHub repository; pushing `main` is a backup, pushing to `live` publishes (above).
 
 ## This computer
 

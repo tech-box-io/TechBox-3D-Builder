@@ -1,12 +1,14 @@
 """Local server, for this computer only.
 
     python tools/serve.py "<kit folder>" [port]    a kit while it is being written: http://localhost:<port>/player.html
-    python tools/serve.py site [port]              the published site, as Render serves it: http://localhost:<port>/<guide>/
-    python tools/serve.py releases [port]          every release ever published (never uploaded): http://localhost:<port>/<guide>/r3/
+    python tools/serve.py site [port]              the published site, as Render serves it: http://localhost:8797/<guide>/
+    python tools/serve.py releases [port]          every release ever published (never uploaded): http://localhost:8798/<guide>/r3/
 
-A kit folder holds only its content (steps.json, model.glb, parts/, logo); the player (player.html, parts.html, js/, vendor/)
-comes from the one copy in player/, as if it were in the kit folder. The site and the releases hold their own frozen copy of
-the player; only the check script (js/runthrough.js, never published) is lent to them from player/.
+A kit folder (one with a guide.py) holds only its content (steps.json, model.glb, parts/, logo); the player (player.html,
+parts.html, js/, vendor/) comes from the one copy in player/, as if it were in the kit folder. Any other folder is served as a
+published copy: it holds its own frozen player, and only the check script (js/runthrough.js, never published) is lent to it
+from player/. A site folder is served the way Render serves one: /<guide> answers with its index.html (no redirect), a missing
+file with site/404.html, and folders are not listed.
 
 Caching is switched off, so an edit always shows up on reload. For a kit, the part-image and thumbnail tools can save what they
 render back into the folder:
@@ -18,14 +20,18 @@ files.
 """
 import http.server
 import os
+import posixpath
 import sys
+import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAYER = ROOT / 'player'                     # the one copy of the player
+PLAYER_NAMES = ('player.html', 'parts.html', 'js', 'vendor')
 SAVE_DIRS = ('parts', 'thumbs')
 SAVE_TYPES = ('.png', '.webp', '.jpg', '.json', '.csv')
 MAX_BYTES = 20 * 1024 * 1024
+PORTS = {'site': 8797, 'releases': 8798, 'kit': 8791}
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -40,21 +46,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return False
         return ok
 
+    def url_parts(self, path):
+        """The request's path as parts below the served folder, or None if it tries to climb out."""
+        rel = urllib.parse.unquote(path.split('?', 1)[0].split('#', 1)[0])
+        parts = [p for p in posixpath.normpath('/' + rel).split('/') if p]
+        return None if '..' in parts else parts
+
     def translate_path(self, path):
         local = super().translate_path(path)
-        if os.path.exists(local):
+        parts = self.url_parts(path)
+        if os.path.exists(local) or not parts:
             return local
-        base, target = Path(self.directory).resolve(), Path(local).resolve()
-        if not target.is_relative_to(base):
-            return local
-        rel = target.relative_to(base)
         if self.server.kind == 'kit':                                # the player, from player/
-            lent = (PLAYER / rel).resolve()
-        elif rel.parts[-2:] == ('js', 'runthrough.js'):              # the check script, for a published copy
+            lent = PLAYER.joinpath(*parts)
+        elif parts[-2:] == ['js', 'runthrough.js']:                  # the check script, for a published copy
             lent = PLAYER / 'js' / 'runthrough.js'
         else:
             return local
-        return str(lent) if PLAYER in lent.parents and lent.exists() else local
+        lent = lent.resolve()
+        return str(lent) if PLAYER.resolve() in lent.parents and lent.is_file() else local
+
+    def send_head(self):
+        if self.server.kind == 'site':                               # as Render: no redirects, no listings, our own 404 page
+            local = Path(self.translate_path(self.path))
+            if local.is_dir():
+                if (local / 'index.html').is_file():
+                    self.path = self.path.split('?', 1)[0].rstrip('/') + '/index.html'
+                else:
+                    return self.not_found()
+            elif not local.exists():
+                return self.not_found()
+        return super().send_head()
+
+    def not_found(self):
+        page = Path(self.directory) / '404.html'
+        body = page.read_bytes() if page.is_file() else b'Not found'
+        self.send_response(404)
+        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.end_headers()
+        if self.command != 'HEAD':
+            self.wfile.write(body)
+        return None
 
     def end_headers(self):
         self.send_header('Cache-Control', 'no-store')
@@ -88,12 +121,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 if __name__ == '__main__':
     folder = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
     folder = (folder if folder.is_absolute() or folder.exists() else ROOT / folder).resolve()
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 8797
-    kind = folder.name if folder.name in ('site', 'releases') else 'kit'       # (a practice publish's site/ and releases/ too)
+    kind = 'kit' if (folder / 'guide.py').exists() else ('releases' if folder.name == 'releases' else 'site')
+    port = int(sys.argv[2]) if len(sys.argv) > 2 else PORTS[kind]
+    if kind == 'kit':
+        stray = [n for n in PLAYER_NAMES if (folder / n).exists()]
+        if stray:
+            print(f'WARNING: {folder.name} has its own {", ".join(stray)}: those are served instead of the one player in player/; '
+                  'delete them from the kit folder')
     os.chdir(folder)
     handler = lambda *a, **k: Handler(*a, directory=str(folder), **k)
     with http.server.ThreadingHTTPServer(('127.0.0.1', port), handler) as httpd:
         httpd.kind = kind
         start = {'kit': 'player.html', 'site': '<guide>/', 'releases': '<guide>/r<N>/'}[kind]
-        print(f'Serving {folder} at http://localhost:{port}/{start}  (Ctrl+C or close this window to stop)')
+        print(f'Serving {folder} ({kind}) at http://localhost:{port}/{start}  (Ctrl+C or close this window to stop)')
         httpd.serve_forever()

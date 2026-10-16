@@ -1,16 +1,29 @@
 # Render Blueprint for the build-guide website. Render serves site/ only (the current release of each published guide, written by
-# tools/publish.py); everything else in this repository stays private. Check the headers after the first deploy:
-#   curl -sI https://<domain>/<guide>/ ; curl -sI https://<domain>/<guide>/model.glb ; curl -sI https://<domain>/<guide>/js/player.js
-# (.js must come back as text/javascript; Cache-Control: no-cache everywhere.)
+# tools/publish.py); everything else in this repository stays private. THE GITHUB REPOSITORY MUST BE PRIVATE (it holds the CAD
+# meshes, the guide sources and every release): never make it public or fork it publicly, give Render's GitHub App access to this
+# one repository only, and use two-factor sign-in on both accounts.
+#
+# Render deploys the branch "live", not "main": main can be pushed at any time as a backup; a guide goes live only when
+#   python3 tools/check_site.py && git push origin main:live
+# is run, on Lee's word.
+#
+# After the first deploy, look at the headers:
+#   curl -sI https://<domain>/<guide>/ ; curl -sI https://<domain>/<guide>/js/player.js ; curl -sI -H 'Accept-Encoding: br, gzip' https://<domain>/<guide>/model.glb
+# (.js: a JavaScript type, text/javascript or application/javascript; .glb: any type; Cache-Control: no-cache; no X-Frame-Options.)
+# A header deleted from this file must also be deleted in Render's dashboard (Render keeps it otherwise): change a value instead.
+# Do not use the dashboard's Rollback button (it switches automatic deploys off): roll back with publish.py --restore, then push.
 services:
   - type: web
     name: techbox-build-guides
     runtime: static
-    branch: main
-    autoDeploy: true
-    buildCommand: python3 tools/check_site.py     # checks only (no generating on Render); a failed check keeps the last deploy live
+    branch: live
+    autoDeployTrigger: commit
+    buildCommand: python3 --version && python3 tools/check_site.py   # checks only (no generating on Render); a failed check keeps the last deploy live
     staticPublishPath: site
-    pullRequestPreviewsEnabled: false
+    # (no pull-request previews: a preview would put another version of a guide online)
+    # Once the custom domain is verified in Render, add it and close the onrender.com address:
+    # domains: [guides.example.com]
+    # renderSubdomainPolicy: disabled
     headers:
       # Every file is re-checked with the server each time a guide opens (a 304 "unchanged" costs almost nothing), so a new
       # release reaches the next learner who opens the guide, and there is never anything to clear or wait out.
@@ -26,7 +39,8 @@ services:
       - path: /*
         name: Referrer-Policy
         value: strict-origin-when-cross-origin
-      # Once the LMS's address is known, allow only it to show the guides in a frame (other sites then cannot embed them):
+      # Before the first LMS link goes out: allow only TechBox's LMS (and its test host, if any) to show the guides in a frame.
+      # Other sites' frames then stay blank. A new LMS host must be added here first.
       # - path: /*
       #   name: Content-Security-Policy
       #   value: "frame-ancestors https://lms.example.com"
