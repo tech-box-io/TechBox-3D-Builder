@@ -19,8 +19,10 @@ convention, add it to the rulebook. The evidence behind each rule is in
               |                       |                                  |
               |        tools/stepgen.py, tools/wires.py          tools/build_model.py
               |                       |                                  |
-              +---------------> steps.json                          model.glb  ---> player.html (js/, vendor/)
-                                parts.json  --------------------------------------> parts.html -> parts/*.png
+              +---------------> steps.json                          model.glb  ---> played by player/ (one player, every kit)
+                                parts.json  --------------------------------------> player/parts.html -> parts/*.png
+
+    tools/publish.py:  kit content + player/  ->  releases/<guide>/r<N>/ (frozen, this computer only)  ->  site/<guide>/ (the website)
 
 - `guide.py` (one per kit folder) lists the build in order: which part goes on next, the caption, and any
   motion that has to be set by hand. Everything else is worked out from the CAD by `tools/stepgen.py`:
@@ -31,7 +33,11 @@ convention, add it to the rulebook. The evidence behind each rule is in
   names no colour takes its colours, solid by solid, from the kit's colour atlas (for the MRA:
   `colour-atlas-mra.json`, read from TechBox's own Cadasio project for the kit); a rule that names a colour
   is a TechBox decision that overrides it.
-- `player.html` plays `steps.json`. `parts.html` renders one picture per part for the LMS parts list.
+- The player is `player/` (`player.html`, `parts.html`, `js/`, `vendor/`): the only copy, shared by every kit. A kit folder holds
+  only its content. `tools/serve.py` serves a kit with the player as if it were in the kit folder, so a kit's addresses are as
+  before (`http://localhost:8791/player.html`). `player.html` plays `steps.json`; `parts.html` renders one picture per part for
+  the parts list. Never copy the player into a kit: a player change is a change for every kit, so after one, run the check
+  below on every kit. A published guide keeps the player it was published with until it is published again.
 
 What a guide can do beyond "part hovers, part goes in" (described at the top of `tools/stepgen.py` and in the
 docstrings of `Guide.place` and `Guide.seat`):
@@ -106,14 +112,57 @@ beside it as well, for the LMS:
     .venv.nosync/bin/python tools/bundle.py "MRA Build Instructions Prototype" "share/<name>/MRA Full Build.html"
 
 `share/` holds the checkpoints made this way (a folder and its zip, with a read-me and a parts-list page). A checkpoint
-is a snapshot: make a new one after changing the guide.
+is a snapshot: make a new one after changing the guide. (`bundle.py` takes a steps file as a third argument, for a guide other
+than the kit's `steps.json`.) Checkpoints are for review; learners get the website (below).
+
+## Publishing: the website
+
+Learners open the guides on TechBox's website (a Render static site, embedded in TechBox's own LMS by iframe), one fixed
+address per guide: `https://<domain>/<guide>/`, the names in `guides.json` (Lee's: `mini-robot-arm-full-build`,
+`mini-robot-arm-part-1` ..., `remote-controlled-car-full-build`, `remote-controlled-car-part-1` ...,
+`remote-controlled-car-deconstruction`). An address in the LMS must never change.
+
+    python3 tools/publish.py <guide> --note "what changed"   # freeze the guide as its next release and put it in site/<guide>/
+    python3 tools/check_site.py                              # site/ holds only what may go out (Render runs this before each deploy)
+    /usr/bin/python3 tools/serve.py site 8797                # look at the site as Render will serve it: http://localhost:8797/<guide>/
+    python3 tools/publish.py <guide> --restore r3            # put an earlier release back (a roll-back); --take-down removes it
+    python3 tools/publish.py --list                          # which release each guide has on the website
+    /usr/bin/python3 tools/serve.py releases 8798            # every earlier release, on this computer only: /<guide>/r<N>/
+
+- **Only the current release is on the website** (Lee, 16 Oct 2026). `site/` holds one copy per guide; every release ever
+  published is kept in `releases/<guide>/r<N>/` with its record (`release.json`: when, Lee's reason, the source's git commit,
+  every file's checksum) and `releases/history.json`, in git but never uploaded (Render serves `site/` only).
+- **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (with the Review notes and
+  `text_key` taken out), the kit's `model.glb`, the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`,
+  `materials.json`, wire paths, decals or research. The model itself is a simplified, coloured mesh; anyone who opens a guide
+  can save it (any 3D viewer in a browser works that way), but no STEP or editable CAD ever leaves this folder.
+- **Going live is a commit and push of `site/`**, and happens only on Lee's word: publish, check, show Lee the local preview,
+  then commit and push when Lee says so (Render deploys on push). Commit the sources with it, so the release records a clean
+  commit. Every file is served with `Cache-Control: no-cache` (render.yaml): browsers re-check each file when a guide opens, so
+  a release reaches the next learner who opens it and there is never a cache to clear.
+- A new guide gets an entry in `guides.json` (its kit and its steps file) before its first publish.
+- `render.yaml` is the site's configuration. Once the LMS's address is known, its `frame-ancestors` line lets only the LMS
+  embed the guides. The site's own pages: `site/index.html` (a blank page), `404.html`, `robots.txt` (no search engines).
+
+## Part guides (chapters)
+
+Not built yet (planned: `docs/research/production_architecture.md` section 4, with Lee's decisions of 16 Oct 2026 below).
+- A kit's Part guides are cut from one run of its Full Build: the core steps of each Part are the Full Build's steps, the same
+  order, wording and cameras. A Part has its own title card / Start view (the model as that Part shows it), its own Completed
+  View (the model as that Part leaves it) and its own Parts List, of only the parts new in that Part (not those carried over).
+  Step numbers restart at 1 in each Part. All the guides of a kit share the kit's one `model.glb`.
+- **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
+  that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
+  title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
+- A guide that is not a cut of the Full Build (the RCC deconstruction) has its own steps file and must never shrink the kit's
+  shared model.
 
 ## Checking a change
 
 Every change to a guide is checked in the browser before it is reported as done.
 
 1. Regenerate, then load `player.html` and look at the steps that changed, plus one before and one after.
-2. Run the whole guide through the check in the kit's `js/runthrough.js`. In the page:
+2. Run the whole guide through the check in `player/js/runthrough.js` (served as `js/runthrough.js`). In the page:
    `(0, eval)(await fetch('js/runthrough.js').then(r => r.text())); _dev.freeze(); _runthrough()`.
    It steps every view forwards (animated), backwards and by jumping, and compares visible parts, where each
    part is, lead lines, arrows, wires, labels, eyes, cautions, close-ups and the parts list with `steps.json`. `_dev.show('Step 12c', 0.5)` and
@@ -128,6 +177,10 @@ Every change to a guide is checked in the browser before it is reported as done.
    `review_notes=False` the log's WARNING line says the same); a step with `lines=0` that is not the first part or a
    note card needs a look.
 4. `tools/build_model.py` prints a warning if one conductor changes colour between two cable pieces.
+5. Commit the change (sources and generated files) once it is checked; this folder is a git repository (below).
+
+A published copy is checked the same way: `serve.py site 8797`, open `/<guide>/`, run the same check (the server lends it the
+check script, which is never published).
 
 The preview launcher cannot read the Desktop folder, so start `tools/serve.py` from the shell (in the
 background) rather than through `.claude/launch.json`, which only attaches to it.
@@ -136,8 +189,14 @@ background) rather than through `.claude/launch.json`, which only attaches to it
 
     docs/                      the rulebook, its evidence, and the research reports (research/mra/ = this kit:
                                build videos, engraved codes, how the arm and claw go together, wires, pins, colours)
-    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py
+    player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts, runthrough), vendor/three/
+    guides.json                the guides that can be published: web-address name -> kit folder and steps file
+    site/                      the website (Render serves this folder only): the current release of each published guide
+    releases/                  every release ever published, frozen, with its record (never uploaded)
+    render.yaml                the Render static site's configuration
+    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, bundle.py, step_text.py
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
+    cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
     MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)
     MRA Build Instructions Prototype/
         guide.py, materials.json, mra.glb                         what the guide is generated from
@@ -145,13 +204,12 @@ background) rather than through `.claude/launch.json`, which only attaches to it
         silkscreen.py -> decals.json                              the I/O module's printing, placed from the CAD's pin positions
         usb-mini-b.glb, usb-a-end.glb                             the USB cable's ends, converted from cad_extra/*.STEP (materials.json "extra_parts")
         logo.webp                                                 the title-page logo
-        player.html, parts.html, js/, vendor/                     the viewer (no build step, no CDN)
         steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
         _v1/                                                      the first prototype's files, for reference
     RCC Build Instructions/    the second kit, the Radio Controlled Car (first draft, 15 Oct 2026): the same layout as the MRA's
                                (guide.py, materials.json, rcc.glb from RCC_Assembly_v1.STEP, colour-atlas-rcc.json, wire-paths.json,
                                silkscreen.py -> decals.json, nano-car.glb = the controller's Nano model for the car's seat,
-                               usb-a-end.glb, its own copies of player.html, js/, vendor/). Research: docs/research/rcc/.
+                               usb-a-end.glb). Research: docs/research/rcc/.
                                Commands as for the MRA with the folder name changed (server on port 8796: "Open Prototype.command").
 
 ## Conventions in the code
@@ -205,6 +263,13 @@ Decisions waiting on TechBox are in section 13 of the rulebook; what the player 
 kit-specific points are in the kit's `README.txt` and under `_notes` in its `materials.json`.
 The title page uses `logo.webp` (the picture Lee attached in chat); a `logo.svg` or `logo.png` dropped into the
 kit folder takes its place the next time `guide.py` runs.
+
+## Version control
+
+This folder is a git repository (branch `main`). Its data is in `.git.nosync` (`.git` is a pointer file to it), which keeps
+it out of iCloud sync, as the `.nosync` suffix does for the Python environment; until a remote is added the history is on this
+Mac only. Kept out of git (`.gitignore`): the build videos, `share/`, the source STEP files (checksums in `cad-sources.sha256`),
+`thumbs/`, environments. Commit each checked change; pushing publishes whatever is in `site/`, so push only on Lee's word.
 
 ## This computer
 

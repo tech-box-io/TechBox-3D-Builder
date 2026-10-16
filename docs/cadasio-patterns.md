@@ -45,6 +45,12 @@ Section 14 says what the in-house player does today against each rule.
 - **Every annotation lives for exactly one view.** On with a `Step N`, gone on the next. `Step Nc` is clean, except for an occasional single "check this" cue (5% of result views).
 - **Timing is uniform.** Every change takes 800 ms: parts and annotations fade in and out, part moves and camera moves glide. Going backwards is animated too.
 - **Parts and Full Builds.** A long build is cut into Parts of 5-26 numbered steps (median 13), each ending where a wiring run or a mechanical block is complete. A Full Build is the Parts run together: one `Start`, one `Completed View`, every section card kept, nothing inserted at the seams.
+- **TechBox's Part guides (Lee, 16 Oct 2026).** A kit's Part guides (in the web addresses `<kit>-part-1`, `-part-2` ...) are cut
+  from its Full Build: the core steps of a Part are the Full Build's steps, the same order, wording and cameras. What a Part has
+  of its own is its title card / `Start` (the model as that Part shows it), its `Completed View` (the model as that Part leaves
+  it) and its Parts List, which lists only the parts new in that Part, not those carried over from earlier Parts. Step numbers
+  restart at 1 in each Part. When a step in a Part is changed, ask whether the change also belongs in the Full Build (and so in
+  every guide that shares the step) or in that Part only, and say which was done.
 - **No instruction text outside the canvas.** Step descriptions and pop-ups are not used. Part names live in hover tooltips ("Housing Rear Side - Part D4").
 
 ## 3. What goes in one step, and in what order

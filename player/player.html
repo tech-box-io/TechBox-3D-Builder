@@ -3,6 +3,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Build Instructions</title>
 <link rel="icon" href="data:,">
+<script>
+// Hosted, a guide is the folder /<guide>/ (its index.html is this page): opened without the closing slash, the browser would look
+// for the guide's files one folder up, so add it before anything loads. (Locally the page is player.html, and nothing changes.)
+if (!/(\/|\.html?)$/i.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);
+</script>
 <style>
 :root{--blue:#1a9fd9;--ink:#111;--bar:#fff;--barh:86px;--caution:#c2410c}
 [hidden]{display:none!important}
@@ -22,6 +27,9 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,[t
 #gridbtn{background:none;border:0;cursor:pointer;padding:4px;flex:none}
 select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#55606a;text-align:center;text-align-last:center;border:1px solid #d5dbe0;border-radius:6px;background:#fff}
 #fs{position:fixed;top:14px;right:14px;background:none;border:0;cursor:pointer;z-index:5}
+#resetview{position:fixed;top:14px;right:54px;background:none;border:0;cursor:pointer;z-index:5}
+.nofs #resetview{right:14px}.nofs #review{right:56px}
+@media (min-width:701px){.reviewing #instructions{max-width:min(560px,70vw,calc(100vw - 236px))}}   /* (below 701 px the caption is under the buttons) */
 #start{position:fixed;left:24px;top:24px;bottom:calc(var(--barh) + 24px);width:min(46%,520px);display:flex;flex-direction:column;justify-content:center;pointer-events:none}
 #logo{position:absolute;top:0;left:0;background:#00b0ef;color:#fff;font:900 34px/1 Impact,"Arial Black",sans-serif;letter-spacing:1px;padding:10px 18px;border-radius:12px}
 #logo.image{position:static;background:none;padding:0;border-radius:0;width:min(100%,360px);margin:0 0 18px}
@@ -71,7 +79,7 @@ select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#5560
 #inset{position:fixed;z-index:2;margin:0;background:#fff;border:4px solid #7fdbff;border-radius:12px;padding:6px;box-sizing:border-box;pointer-events:none}
 #inset img{display:block;width:100%;height:auto;border-radius:6px}
 #inset figcaption{font:600 14px/1.3 Arial,sans-serif;color:#333;text-align:center;padding-top:4px}
-#review{position:fixed;top:14px;right:56px;font-size:12px;color:#555;z-index:5;background:#fff;padding:4px 6px;border-radius:6px}
+#review{position:fixed;top:14px;right:96px;font-size:12px;color:#555;z-index:5;background:#fff;padding:4px 6px;border-radius:6px}
 #picks{position:fixed;right:16px;bottom:calc(var(--barh) + 14px);z-index:4;max-width:min(560px,80vw);background:#111;color:#fff;border-radius:6px;padding:8px 10px;font-size:12px}
 #picklist{font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;user-select:text;max-height:30vh;overflow:auto;margin:4px 0 6px}
 #picks button{border:0;border-radius:4px;background:#fff;color:#111;font:600 12px Arial;padding:4px 8px;margin-right:6px;cursor:pointer}
@@ -119,6 +127,7 @@ select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#5560
 <div id="announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 <div id="picks" hidden>Picked points <span id="pickstate"></span><div id="picklist"></div><button id="pickcopy">Copy again</button><button id="pickclear">Clear</button></div>
 <label id="review"><input type="checkbox" id="rv" checked> Review notes</label>
+<button id="resetview" aria-label="Reset the view" title="Reset the view (back to this step's own view)"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1.5L7 6.5l5 5V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
 <button id="fs" aria-label="Full screen" title="Full screen"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v2H6.4l4.3 4.3-1.4 1.4L5 6.4V10H3zm18 0v7h-2V6.4l-4.3 4.3-1.4-1.4L17.6 5H14V3zM3 21v-7h2v3.6l4.3-4.3 1.4 1.4L6.4 19H10v2zm18 0h-7v-2h3.6l-4.3-4.3 1.4-1.4 4.3 4.3V14h2z"/></svg></button>
 <div id="gridwrap" role="dialog" aria-modal="true" aria-label="All steps" hidden><button id="gridclose" aria-label="Close the list of steps" title="Close (Esc)">&times;</button><div id="grid"></div></div>
 <nav id="bar" aria-label="Steps">

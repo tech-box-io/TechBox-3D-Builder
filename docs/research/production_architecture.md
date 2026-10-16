@@ -10,6 +10,25 @@ It is for Lee (who runs Render and the LMS) and for the Claude sessions that wil
 - Assumptions are marked **[A1]**, **[A2]** ... and listed in Appendix B. Where this plan departs from the architect's draft or
   from the two critiques, Appendix A says so and why.
 
+## Lee's decisions of 16 Oct 2026, and what was built (read this first)
+
+These replace the parts of the plan below that disagree with them:
+- **Only the current version of each guide is on the website**, at one fixed address per guide, `https://<domain>/<guide>/`.
+  There are no `/embed/`, pinned, preview or `/guides/<guide>/r<N>/` addresses and no year-long caching: `site/<guide>/` is
+  replaced by each publish and every file is served `no-cache`. Earlier releases stay in `releases/` on this computer (in git,
+  never uploaded); a roll-back puts one back into `site/`.
+- **Guide names** (web addresses): `mini-robot-arm-full-build`, `mini-robot-arm-part-1` ..., `remote-controlled-car-full-build`,
+  `remote-controlled-car-part-1` ..., `remote-controlled-car-deconstruction` (`guides.json`).
+- **The LMS is TechBox's own** and takes iframe embeds: no SCORM, xAPI or LTI. Render is set up by Lee (as for five other
+  services). Guides are public (the iframe shows the address); only what a learner's browser needs is published.
+- **Part guides:** core steps identical to the Full Build's; each Part's own Start, Completed View and Parts List (new parts
+  only); numbering restarts at 1; when a Part's step is edited, ask whether the change also belongs in the Full Build.
+- **The authoring folder is the git repository** (data in `.git.nosync`, out of iCloud), not a separate site repository.
+
+Built on 16 Oct 2026: one player (`player/`), `tools/serve.py` lending it to the kits, `tools/publish.py`, `tools/check_site.py`,
+`guides.json`, `render.yaml`, `site/` (no guide published yet), git. See CLAUDE.md "Publishing: the website" and "Part guides".
+Not built yet: Part guides (section 4, adapted to the decisions above), the heavy-job lock, the daily link check.
+
 ## The short version
 
 - **Lee's picture of the code is right.** There is one generic player. The guide content (steps, model, part pictures) is in

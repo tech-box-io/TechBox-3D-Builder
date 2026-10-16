@@ -13,3 +13,7 @@ __pycache__/
 .claude/settings.local.json
 # The repository's own data lives in .git.nosync (kept out of iCloud sync); .git is a pointer file to it.
 .git.nosync/
+# publish.py's lock and unfinished copies
+releases/.lock
+site/.*
+releases/*/.*.tmp/

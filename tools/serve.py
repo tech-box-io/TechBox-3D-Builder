@@ -1,20 +1,28 @@
-"""Local server for a kit folder.
+"""Local server, for this computer only.
 
-    python tools/serve.py "<kit folder>" [port]
+    python tools/serve.py "<kit folder>" [port]    a kit while it is being written: http://localhost:<port>/player.html
+    python tools/serve.py site [port]              the published site, as Render serves it: http://localhost:<port>/<guide>/
+    python tools/serve.py releases [port]          every release ever published (never uploaded): http://localhost:<port>/<guide>/r3/
 
-Serves the folder on http://localhost:<port> with caching switched off (so an edit always shows up on
-reload), and lets the part-image and thumbnail tools save what they render back into the folder:
+A kit folder holds only its content (steps.json, model.glb, parts/, logo); the player (player.html, parts.html, js/, vendor/)
+comes from the one copy in player/, as if it were in the kit folder. The site and the releases hold their own frozen copy of
+the player; only the check script (js/runthrough.js, never published) is lent to them from player/.
+
+Caching is switched off, so an edit always shows up on reload. For a kit, the part-image and thumbnail tools can save what they
+render back into the folder:
 
     POST /__save/parts/R1.png      body = the file
 
-Saving only works for requests from this computer, only inside the kit's generated-output folders,
-and only for image and JSON files.
+Saving only works for requests from this computer, only inside the kit's generated-output folders, and only for image and JSON
+files.
 """
 import http.server
 import os
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+PLAYER = ROOT / 'player'                     # the one copy of the player
 SAVE_DIRS = ('parts', 'thumbs')
 SAVE_TYPES = ('.png', '.webp', '.jpg', '.json', '.csv')
 MAX_BYTES = 20 * 1024 * 1024
@@ -32,13 +40,29 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return False
         return ok
 
+    def translate_path(self, path):
+        local = super().translate_path(path)
+        if os.path.exists(local):
+            return local
+        base, target = Path(self.directory).resolve(), Path(local).resolve()
+        if not target.is_relative_to(base):
+            return local
+        rel = target.relative_to(base)
+        if self.server.kind == 'kit':                                # the player, from player/
+            lent = (PLAYER / rel).resolve()
+        elif rel.parts[-2:] == ('js', 'runthrough.js'):              # the check script, for a published copy
+            lent = PLAYER / 'js' / 'runthrough.js'
+        else:
+            return local
+        return str(lent) if PLAYER in lent.parents and lent.exists() else local
+
     def end_headers(self):
         self.send_header('Cache-Control', 'no-store')
         super().end_headers()
 
     def do_POST(self):
         root = Path(self.directory).resolve()
-        if not self.path.startswith('/__save/') or self.client_address[0] not in ('127.0.0.1', '::1'):
+        if self.server.kind != 'kit' or not self.path.startswith('/__save/') or self.client_address[0] not in ('127.0.0.1', '::1'):
             return self.send_error(404)
         # Only pages served by this server may save (stops any other web page open in the browser from posting here).
         origin = self.headers.get('Origin')
@@ -62,10 +86,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    folder = Path(sys.argv[1] if len(sys.argv) > 1 else '.').resolve()
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 8790
+    folder = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
+    folder = (folder if folder.is_absolute() or folder.exists() else ROOT / folder).resolve()
+    port = int(sys.argv[2]) if len(sys.argv) > 2 else 8797
+    kind = folder.name if folder.name in ('site', 'releases') else 'kit'       # (a practice publish's site/ and releases/ too)
     os.chdir(folder)
     handler = lambda *a, **k: Handler(*a, directory=str(folder), **k)
     with http.server.ThreadingHTTPServer(('127.0.0.1', port), handler) as httpd:
-        print(f'Serving {folder} at http://localhost:{port}/player.html  (Ctrl+C or close this window to stop)')
+        httpd.kind = kind
+        start = {'kit': 'player.html', 'site': '<guide>/', 'releases': '<guide>/r<N>/'}[kind]
+        print(f'Serving {folder} at http://localhost:{port}/{start}  (Ctrl+C or close this window to stop)')
         httpd.serve_forever()

@@ -1,0 +1,32 @@
+# Render Blueprint for the build-guide website. Render serves site/ only (the current release of each published guide, written by
+# tools/publish.py); everything else in this repository stays private. Check the headers after the first deploy:
+#   curl -sI https://<domain>/<guide>/ ; curl -sI https://<domain>/<guide>/model.glb ; curl -sI https://<domain>/<guide>/js/player.js
+# (.js must come back as text/javascript; Cache-Control: no-cache everywhere.)
+services:
+  - type: web
+    name: techbox-build-guides
+    runtime: static
+    branch: main
+    autoDeploy: true
+    buildCommand: python3 tools/check_site.py     # checks only (no generating on Render); a failed check keeps the last deploy live
+    staticPublishPath: site
+    pullRequestPreviewsEnabled: false
+    headers:
+      # Every file is re-checked with the server each time a guide opens (a 304 "unchanged" costs almost nothing), so a new
+      # release reaches the next learner who opens the guide, and there is never anything to clear or wait out.
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      # Once the LMS's address is known, allow only it to show the guides in a frame (other sites then cannot embed them):
+      # - path: /*
+      #   name: Content-Security-Policy
+      #   value: "frame-ancestors https://lms.example.com"

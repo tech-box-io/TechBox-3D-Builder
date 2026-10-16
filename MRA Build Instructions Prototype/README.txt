@@ -7,7 +7,8 @@ HOW TO OPEN (Mac)
    If macOS says it cannot be opened: open System Settings > Privacy & Security, scroll down, and click "Open Anyway" next to "Open Prototype.command". (On older macOS: right-click the file and choose Open.)
    If macOS asks to install command line developer tools, click Install, then double-click the file again.
 2. When you are done, close the Terminal window.
-No internet connection is needed: the 3D viewer library is included in the vendor folder.
+No internet connection is needed: the viewer (with its 3D library) is the one copy in ../player/, shared by every kit;
+"Open Prototype.command" serves it with this kit's files.
 
 HOW TO USE
 - After the title page, the Parts List pages show every part of the kit, grouped by kind, with how many of each. Click a part (or Tab to it and press Enter) to see its picture large; Escape or the cross closes it.
@@ -56,7 +57,7 @@ WHAT TO LOOK AT
 
 FILES
 What the browser loads:
-  player.html, js/, vendor/     the viewer
+  ../player/                    the viewer (player.html, js/, vendor/), shared by every kit
   steps.json                    the steps (generated)
   model.glb                     the 3D model for the web (generated: a few MB instead of 42 MB; only the parts this guide shows)
   logo.webp                     the title-page logo

@@ -1,10 +1,11 @@
 """Pack a kit's guide into one HTML file that opens by double-click, with no server and no internet.
 
-    python tools/bundle.py "<kit folder>" "<out.html>"
+    python tools/bundle.py "<kit folder>" "<out.html>" [steps file]
 
-Everything the player loads goes inside the file: steps.json, model.glb and the logo (as data), the player's own code and
-three.js (as modules, each a data: URL in the page's import map). For sending a guide to someone to look at on their own
-computer. It is a snapshot: re-run it after regenerating the guide. The live kit folder keeps working as before.
+Everything the player loads goes inside the file: the guide's steps (steps.json, or the steps file named, e.g. a chapter's),
+model.glb and the logo (as data), the player's own code (from player/, the one copy) and three.js (as modules, each a data: URL
+in the page's import map). For sending a guide to someone to look at on their own computer. It is a snapshot: re-run it after
+regenerating the guide. The live kit folder keeps working as before. (Learners get the hosted guide: tools/publish.py.)
 """
 import base64
 import json
@@ -20,9 +21,12 @@ def data_url(raw, mime):
     return f'data:{mime};base64,' + base64.b64encode(raw).decode('ascii')
 
 
-def bundle(kit, out):
+PLAYER = Path(__file__).resolve().parent.parent / 'player'      # the one copy of the player
+
+
+def bundle(kit, out, steps_file='steps.json'):
     kit = Path(kit)
-    vendor = kit / 'vendor' / 'three'
+    vendor = PLAYER / 'vendor' / 'three'
     modules = {}                                     # bare specifier -> source text
 
     def addon_name(path):
@@ -41,8 +45,8 @@ def bundle(kit, out):
     for path in sorted((vendor / 'addons').rglob('*.js')):
         name = addon_name(path)
         modules[name] = relink(path.read_text(), name)
-    core = (kit / 'js' / 'core.js').read_text()
-    player = (kit / 'js' / 'player.js').read_text()
+    core = (PLAYER / 'js' / 'core.js').read_text()
+    player = (PLAYER / 'js' / 'player.js').read_text()
     fresh = "await import('./core.js' + new URL(import.meta.url).search)"
     fetch_steps = re.compile(r"const data = await fetch\(stepsFile[^\n]*\n")
     if fresh not in player or not fetch_steps.search(player):
@@ -52,8 +56,8 @@ def bundle(kit, out):
     modules['mra/core'] = core
     modules['mra/player'] = player
 
-    steps = json.load(open(kit / 'steps.json'))
-    steps['model'] = data_url((kit / 'model.glb').read_bytes(), 'model/gltf-binary')
+    steps = json.load(open(kit / steps_file))
+    steps['model'] = data_url((kit / steps['model'].split('?')[0]).read_bytes(), 'model/gltf-binary')
     for view in steps['views']:                      # the parts list's pictures (parts/*.png, from parts.html)
         for group in view.get('parts', []):
             for item in group['items']:
@@ -66,7 +70,7 @@ def bundle(kit, out):
         mime = {'.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp'}[Path(logo).suffix.lower()]
         steps['meta']['logo'] = data_url((kit / logo).read_bytes(), mime)
 
-    page = (kit / 'player.html').read_text()
+    page = (PLAYER / 'player.html').read_text()
     imports = {name: data_url(src.encode('utf-8'), 'text/javascript') for name, src in modules.items()}
     page, n1 = re.subn(r'<script type="importmap">.*?</script>', lambda m: '<script type="importmap">' + json.dumps({'imports': imports}) + '</script>', page, flags=re.S)
     page, n2 = re.subn(r'<link rel="modulepreload"[^\n]*\n', '', page)
@@ -81,7 +85,7 @@ def bundle(kit, out):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         raise SystemExit(__doc__)
-    size = bundle(sys.argv[1], sys.argv[2])
+    size = bundle(*sys.argv[1:])
     print(f'{sys.argv[2]}: {size / 1e6:.1f} MB')

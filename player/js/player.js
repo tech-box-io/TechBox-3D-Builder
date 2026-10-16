@@ -800,8 +800,10 @@ function select(thing, x, y) {
 
 // ---------- pick tool, for whoever is writing the guide: Option-click (Alt-click) a spot on a part to note
 // "step | part | [x, y, z]". The numbers are where that spot is once the part is seated, in mm, which is what
-// lines_at=[...] in guide.py takes. Not offered to students: off when the player is embedded, unless ?pick=1.
-const pickOn = params.get('pick') === '1' || (params.get('pick') !== '0' && window.parent === window);
+// lines_at=[...] in guide.py takes. Not offered to students: only on this computer (the local server, or a guide opened as a
+// file, such as a checkpoint), never embedded, and never on the hosted site, unless ?pick=1.
+const authoring = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+const pickOn = params.get('pick') === '1' || (params.get('pick') !== '0' && window.parent === window && authoring);
 const picked = [];
 let marks = [];                              // dots on the spots picked in this view: {id, p, el}
 const offsetNow = id => (liveOffsets && liveOffsets[id]) || views[cur].offsets[id] || ZERO;

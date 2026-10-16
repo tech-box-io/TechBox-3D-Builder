@@ -88,7 +88,7 @@ FILES
   wire-paths.json               the leads' centre lines and the plugs, measured from the CAD
   silkscreen.py -> decals.json  the printing on the boards and FRONT on L1
   rcc.glb                       the CAD (converted from RCC_Assembly_v1.STEP); nano-car.glb, usb-a-end.glb: extra parts
-  player.html, js/, vendor/, logo.webp, parts.html   the viewer (the same as the MRA's)
+  logo.webp                     the title-page logo (the viewer is the one copy in ../player/, shared with the MRA)
   steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
 Research: docs/research/rcc/ (cadasio_study.md, cad_study.md, reuse_and_colours.md, cad_wire_paths.md, silkscreen.md,
 materials_notes.md, review_v1.md).
