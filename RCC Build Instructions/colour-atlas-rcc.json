@@ -1,0 +1,8386 @@
+{
+ "_about": "Colours for every solid of the RCC's meshes that take their colours from an atlas, keyed by the mesh names of our CAD export (rcc.glb), in each mesh's OWN coordinates in mm (rcc.glb mesh coordinates x 1000), in the form tools/build_model.py colour_from_atlas reads (bbox_min / bbox_max, solids {name, min, max, colour}). Two sources. (1) The meshes the RCC shares with the MRA (the joysticks, the Nano I/O module, the controller's Nano, and the car Nano's regulator, LEDs, capacitors, resistors and reset button, which have the same mesh names and geometry) are copied unchanged from colour-atlas-mra.json, TechBox's own Cadasio project for the MRA as Lee approved it: same CAD bodies in the same own frames, and every entry matches rcc.glb's solids at 100 % (checked 15 Oct 2026). The RCC Cadasio colours these parts differently (royal-blue shield, teal Nanos, pure black joystick board): see _skipped. (2) Meshes the MRA lacks, where TechBox's published RCC project (instructions.online 19075, read with tools/cadasio/atlas.py) has one solid per solid of ours and colours worth keeping: the FS90R wheel motor and the barrel plug's two lead stubs. Everything else on the RCC is coloured by rules in materials.json; the published colours not used, and why, are under _skipped.",
+ "_how_to_read": [
+  "solids[*].min/max: for a solid that exists in our mesh ('solid' is its index as tools/build_model.py numbers connected components) these are OUR solid's box, and box_error_mm says how far Cadasio's box for the same body is from it (sum of the six face offsets).",
+  "solids[*].solid = null: a Cadasio body with no solid of its own in our mesh; min/max are then Cadasio's box moved into our mesh coordinates. 'inside_solid' names our solid whose box contains it (it was welded into that solid, or is a face copy lying on it).",
+  "skin = true: in our mesh this solid is an open shell lying within 0.05 mm of another solid (Cadasio name contains 'Surface-Offset'): a coloured face copy. The solid underneath must take the same colour or it shows through.",
+  "set_in_step = true: the colour was set in Cadasio (colour_main on the solid or an ancestor). false: Cadasio shows the SolidWorks colour (cad_colour) unchanged.",
+  "also_covers: Cadasio bodies of another colour that are part of this one solid in our mesh (they touch, so our split into connected solids cannot separate them). The colour given is that of the body whose box is nearest to the solid's.",
+  "shown = false: the author pushed this body under another surface, so it is not seen (servo label only).",
+  "Entries copied from the MRA keep the MRA's fields: 'solid' indices are the MRA mesh's numbering (rcc.glb is tessellated more coarsely and numbers some meshes' solids differently; the match is by boxes, so this does not matter), and 'instances' here lists the RCC instances that carry the mesh, with the MRA's in 'mra_instances'.",
+  "Entries from the RCC Cadasio ('source': 'rcc_cadasio') are tools/cadasio/atlas.py's output for that component: each solid's Cadasio box (identical to ours in the mesh's own frame, to 0.005 mm) and the colour it shows most often while visible; 'shown' is the number of visible steps.",
+  "materials.json may swap an atlas colour for a palette entry (a rule's atlas_colours): the FS90R's colours go through palette names so that one ruling from Lee changes them everywhere, and the lead stubs take the colours of the leads the player draws."
+ ],
+ "_source": {
+  "mra": {
+   "file": "MRA Build Instructions Prototype/colour-atlas-mra.json",
+   "project": "Mini Robot Arm(MRA)",
+   "written": "2026-10-13"
+  },
+  "rcc_cadasio": {
+   "payload": "docs/research/rcc/cadasio/raw/19075-rcc_remote_controlled_car.json",
+   "project": "RCC Remote Controlled Car (instructions.online 19075)",
+   "tool": "tools/cadasio/atlas.py",
+   "components": [
+    "Fitec FS90R Micro Servo NoConnector.step-1",
+    "DC_barrel_connector_9V-2"
+   ]
+  },
+  "written": "2026-10-15"
+ },
+ "_single_colour": {
+  "47uf CAP Dcase": "#191919",
+  "Baseplate_1": "#303030",
+  "blm21": "#a6a9aa",
+  "Case": "#a6a9aa",
+  "m7 diode": "#a5926d",
+  "reset core": "#191919",
+  "reset shell": "#a6a9aa",
+  "Rotator-Unit_1": "#808080",
+  "Samtec-SSW-115-01-F-S": "#181818",
+  "Shield_Arduino NANO": "#000f41",
+  "smt_resistor222_a": "#a6a9aa",
+  "Thumb-Button": "#303030",
+  "User Library-PJ-002AH_Body": "#181818"
+ },
+ "_single_colour_notes": {
+  "47uf CAP Dcase": "15 solids (can, base, two terminal skins, eleven marks on top), all left at the SolidWorks colour #191919.",
+  "Thumb-Button": "Cadasio's box for this body is 3.9 mm longer than our mesh in one axis; one body, one colour.",
+  "User Library-PJ-002AH_Body": "our mesh has a second solid (1.17 x 6.49 x 6.5 mm, the inside of the barrel); same colour."
+ },
+ "5x_Ang_Conn_1": {
+  "cadasio_part": "5x_Ang_Conn_1",
+  "bbox_min": [
+   -7.3,
+   -6.25,
+   -3.0
+  ],
+  "bbox_max": [
+   1.25,
+   6.25,
+   4.0
+  ],
+  "colours": {
+   "#a6a9aa": 10,
+   "#303030": 1
+  },
+  "solids": [
+   {
+    "name": "5x_Ang_Conn_1-Split1[7]",
+    "min": [
+     -7.3,
+     -5.3,
+     2.5
+    ],
+    "max": [
+     0.3,
+     -4.7,
+     4.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[8]",
+    "min": [
+     -7.3,
+     -2.8,
+     2.5
+    ],
+    "max": [
+     0.3,
+     -2.2,
+     4.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[6]",
+    "min": [
+     -7.3,
+     -0.3,
+     2.5
+    ],
+    "max": [
+     0.3,
+     0.3,
+     4.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 2,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[9]",
+    "min": [
+     -7.3,
+     2.2,
+     2.5
+    ],
+    "max": [
+     0.3,
+     2.8,
+     4.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 3,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[10]",
+    "min": [
+     -7.3,
+     4.7,
+     2.5
+    ],
+    "max": [
+     0.3,
+     5.3,
+     4.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 4,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[11]",
+    "min": [
+     -1.25,
+     -6.25,
+     0.0
+    ],
+    "max": [
+     1.25,
+     6.25,
+     2.5
+    ],
+    "colour": "#303030",
+    "solid": 5,
+    "set_in_step": false,
+    "cad_colour": "#303030",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[2]",
+    "min": [
+     -0.3,
+     -5.3,
+     -3.0
+    ],
+    "max": [
+     0.3,
+     -4.7,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 6,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[3]",
+    "min": [
+     -0.3,
+     -2.8,
+     -3.0
+    ],
+    "max": [
+     0.3,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 7,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[1]",
+    "min": [
+     -0.3,
+     -0.3,
+     -3.0
+    ],
+    "max": [
+     0.3,
+     0.3,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 8,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[4]",
+    "min": [
+     -0.3,
+     2.2,
+     -3.0
+    ],
+    "max": [
+     0.3,
+     2.8,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 9,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "5x_Ang_Conn_1-Split1[5]",
+    "min": [
+     -0.3,
+     4.7,
+     -3.0
+    ],
+    "max": [
+     0.3,
+     5.3,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 10,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   }
+  ],
+  "mra_instances": [
+   "NAUO80",
+   "NAUO81"
+  ],
+  "instances": [
+   "NAUO12",
+   "NAUO13"
+  ],
+  "source": "mra_atlas"
+ },
+ "PCB_1": {
+  "cadasio_part": "PCB_1",
+  "bbox_min": [
+   -17.0,
+   -14.0,
+   0.0
+  ],
+  "bbox_max": [
+   17.0,
+   12.0,
+   1.61
+  ],
+  "colours": {
+   "#e4e4e4": 30,
+   "#303030": 1
+  },
+  "solids": [
+   {
+    "name": "PCB_1-Split1[31]",
+    "min": [
+     -17.0,
+     -14.0,
+     0.0
+    ],
+    "max": [
+     17.0,
+     12.0,
+     1.61
+    ],
+    "colour": "#303030",
+    "solid": 0,
+    "set_in_step": false,
+    "cad_colour": "#303030",
+    "box_error_mm": 0.01
+   },
+   {
+    "name": "PCB_1-Split1[21]",
+    "min": [
+     -16.9,
+     -7.55,
+     1.6
+    ],
+    "max": [
+     -14.1,
+     5.25,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 1,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[3]",
+    "min": [
+     -13.793,
+     -4.437,
+     1.6
+    ],
+    "max": [
+     -12.656,
+     -3.153,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 2,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[4]",
+    "min": [
+     -13.793,
+     -1.837,
+     1.6
+    ],
+    "max": [
+     -12.656,
+     -0.553,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 3,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[1]",
+    "min": [
+     -13.72,
+     -6.974,
+     1.6
+    ],
+    "max": [
+     -12.692,
+     -5.616,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 4,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[8]",
+    "min": [
+     -13.72,
+     0.946,
+     1.6
+    ],
+    "max": [
+     -12.839,
+     1.827,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 5,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[11]",
+    "min": [
+     -13.72,
+     3.226,
+     1.6
+    ],
+    "max": [
+     -12.546,
+     4.584,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 6,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[9]",
+    "min": [
+     -12.692,
+     0.763,
+     1.6
+    ],
+    "max": [
+     -11.848,
+     2.047,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 7,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[2]",
+    "min": [
+     -12.619,
+     -6.937,
+     1.6
+    ],
+    "max": [
+     -10.968,
+     -5.653,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 8,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[24]",
+    "min": [
+     -12.472,
+     -4.437,
+     1.6
+    ],
+    "max": [
+     -11.335,
+     -3.153,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 9,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[25]",
+    "min": [
+     -12.472,
+     -1.837,
+     1.6
+    ],
+    "max": [
+     -11.335,
+     -0.553,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 10,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[12]",
+    "min": [
+     -12.289,
+     3.263,
+     1.6
+    ],
+    "max": [
+     -11.298,
+     4.547,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 11,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[10]",
+    "min": [
+     -11.775,
+     0.763,
+     1.6
+    ],
+    "max": [
+     -10.638,
+     2.047,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 12,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[5]",
+    "min": [
+     -11.39,
+     -4.437,
+     1.6
+    ],
+    "max": [
+     -10.216,
+     -3.153,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 13,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[6]",
+    "min": [
+     -11.317,
+     -1.837,
+     1.6
+    ],
+    "max": [
+     -10.179,
+     -0.553,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 14,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[28]",
+    "min": [
+     -11.005,
+     3.263,
+     1.6
+    ],
+    "max": [
+     -9.941,
+     4.547,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 15,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "PCB_1-Split1[13]",
+    "min": [
+     -7.7,
+     -5.3,
+     1.6
+    ],
+    "max": [
+     -7.45,
+     5.3,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 16,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[20]",
+    "min": [
+     -5.8,
+     -14.0,
+     1.6
+    ],
+    "max": [
+     5.8,
+     -7.45,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 17,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[15]",
+    "min": [
+     -5.8,
+     7.45,
+     1.6
+    ],
+    "max": [
+     5.8,
+     7.7,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 18,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[22]",
+    "min": [
+     -5.2,
+     8.0,
+     1.6
+    ],
+    "max": [
+     5.2,
+     12.0,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 19,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[26]",
+    "min": [
+     7.0,
+     -12.3,
+     1.6
+    ],
+    "max": [
+     11.8,
+     -10.2,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 20,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[14]",
+    "min": [
+     7.45,
+     -5.3,
+     1.6
+    ],
+    "max": [
+     7.7,
+     5.3,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 21,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[29]",
+    "min": [
+     7.6,
+     -11.9,
+     1.6
+    ],
+    "max": [
+     9.0,
+     -10.6,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 22,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[23]",
+    "min": [
+     8.0,
+     -5.2,
+     1.6
+    ],
+    "max": [
+     12.0,
+     5.2,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 23,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[30]",
+    "min": [
+     9.8,
+     -11.9,
+     1.6
+    ],
+    "max": [
+     11.2,
+     -10.6,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 24,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "PCB_1-Split1[27]",
+    "min": [
+     9.854,
+     -9.937,
+     1.6
+    ],
+    "max": [
+     10.991,
+     -8.653,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 25,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "PCB_1-Split1[7]",
+    "min": [
+     11.138,
+     -9.937,
+     1.6
+    ],
+    "max": [
+     11.725,
+     -8.653,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": 26,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "PCB_1-Split1[16]",
+    "min": [
+     -14.25,
+     -13.0,
+     1.6
+    ],
+    "max": [
+     -10.75,
+     -9.5,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "PCB_1-Split1[18]",
+    "min": [
+     12.25,
+     7.5,
+     1.6
+    ],
+    "max": [
+     15.75,
+     11.0,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "PCB_1-Split1[19]",
+    "min": [
+     -14.25,
+     7.5,
+     1.6
+    ],
+    "max": [
+     -10.75,
+     11.0,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "PCB_1-Split1[17]",
+    "min": [
+     12.25,
+     -13.0,
+     1.6
+    ],
+    "max": [
+     15.75,
+     -9.5,
+     1.61
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   }
+  ],
+  "mra_instances": [
+   "NAUO80",
+   "NAUO81"
+  ],
+  "instances": [
+   "NAUO12",
+   "NAUO13"
+  ],
+  "source": "mra_atlas"
+ },
+ "Potentiometer_01_1": {
+  "cadasio_part": "Potentiometer_01_1",
+  "bbox_min": [
+   -4.75,
+   -3.5,
+   -3.0
+  ],
+  "bbox_max": [
+   4.75,
+   0.0,
+   11.0
+  ],
+  "colours": {
+   "#e4e4e4": 5,
+   "#a6a9aa": 3,
+   "#303030": 1
+  },
+  "solids": [
+   {
+    "name": "Potentiometer_01_1-Combine1",
+    "min": [
+     -4.75,
+     -3.5,
+     0.0
+    ],
+    "max": [
+     4.75,
+     0.0,
+     11.0
+    ],
+    "colour": "#303030",
+    "solid": 0,
+    "set_in_step": false,
+    "cad_colour": "#303030",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_01_1-Split1[3]",
+    "min": [
+     -2.9,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     -2.15,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_01_1-Split1[4]",
+    "min": [
+     -1.95,
+     -3.5,
+     4.056
+    ],
+    "max": [
+     1.95,
+     -3.0,
+     7.944
+    ],
+    "colour": "#e4e4e4",
+    "solid": 2,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.011
+   },
+   {
+    "name": "Potentiometer_01_1-Split1[2]",
+    "min": [
+     -0.375,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     0.375,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 3,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_01_1-Split1[1]",
+    "min": [
+     2.15,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     2.9,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 4,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_01_1-Surface-Offset1[3]",
+    "min": [
+     -4.437,
+     -3.0,
+     6.75
+    ],
+    "max": [
+     -0.75,
+     -3.0,
+     10.438
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_01_1-Surface-Offset1[2]",
+    "min": [
+     -4.437,
+     -3.0,
+     1.563
+    ],
+    "max": [
+     -0.75,
+     -3.0,
+     5.25
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_01_1-Surface-Offset1[1]",
+    "min": [
+     0.75,
+     -3.0,
+     1.563
+    ],
+    "max": [
+     4.438,
+     -3.0,
+     5.25
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_01_1-Surface-Offset1[4]",
+    "min": [
+     0.75,
+     -3.0,
+     6.75
+    ],
+    "max": [
+     4.438,
+     -3.0,
+     10.438
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   }
+  ],
+  "mra_instances": [
+   "NAUO80",
+   "NAUO81"
+  ],
+  "instances": [
+   "NAUO12",
+   "NAUO13"
+  ],
+  "source": "mra_atlas"
+ },
+ "Potentiometer_02_1": {
+  "cadasio_part": "Potentiometer_02_1",
+  "bbox_min": [
+   -4.75,
+   -3.5,
+   -3.0
+  ],
+  "bbox_max": [
+   4.75,
+   0.0,
+   11.0
+  ],
+  "colours": {
+   "#e4e4e4": 5,
+   "#a6a9aa": 3,
+   "#303030": 1
+  },
+  "solids": [
+   {
+    "name": "Potentiometer_02_1-Combine1",
+    "min": [
+     -4.75,
+     -3.5,
+     0.0
+    ],
+    "max": [
+     4.75,
+     0.0,
+     11.0
+    ],
+    "colour": "#303030",
+    "solid": 0,
+    "set_in_step": false,
+    "cad_colour": "#303030",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_02_1-Split1[3]",
+    "min": [
+     -2.9,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     -2.15,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_02_1-Split1[4]",
+    "min": [
+     -1.95,
+     -3.5,
+     4.056
+    ],
+    "max": [
+     1.95,
+     -3.0,
+     7.944
+    ],
+    "colour": "#e4e4e4",
+    "solid": 2,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.011
+   },
+   {
+    "name": "Potentiometer_02_1-Split1[2]",
+    "min": [
+     -0.375,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     0.375,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 3,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_02_1-Split1[1]",
+    "min": [
+     2.15,
+     -2.5,
+     -3.0
+    ],
+    "max": [
+     2.9,
+     -2.2,
+     0.0
+    ],
+    "colour": "#a6a9aa",
+    "solid": 4,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "Potentiometer_02_1-Surface-Offset1[4]",
+    "min": [
+     0.75,
+     -3.0,
+     1.563
+    ],
+    "max": [
+     4.437,
+     -3.0,
+     5.25
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_02_1-Surface-Offset1[3]",
+    "min": [
+     0.75,
+     -3.0,
+     6.75
+    ],
+    "max": [
+     4.437,
+     -3.0,
+     10.438
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_02_1-Surface-Offset1[2]",
+    "min": [
+     -4.437,
+     -3.0,
+     6.75
+    ],
+    "max": [
+     -0.75,
+     -3.0,
+     10.438
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Potentiometer_02_1-Surface-Offset1[1]",
+    "min": [
+     -4.437,
+     -3.0,
+     1.563
+    ],
+    "max": [
+     -0.75,
+     -3.0,
+     5.25
+    ],
+    "colour": "#e4e4e4",
+    "solid": null,
+    "inside_solid": 0,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4"
+   }
+  ],
+  "mra_instances": [
+   "NAUO80",
+   "NAUO81"
+  ],
+  "instances": [
+   "NAUO12",
+   "NAUO13"
+  ],
+  "source": "mra_atlas"
+ },
+ "Tactile-Switch_1": {
+  "cadasio_part": "Tactile-Switch_1",
+  "bbox_min": [
+   -3.447,
+   -3.378,
+   -3.003
+  ],
+  "bbox_max": [
+   3.447,
+   4.953,
+   3.003
+  ],
+  "colours": {
+   "#a6a9aa": 8,
+   "#181818": 1,
+   "#404040": 1
+  },
+  "solids": [
+   {
+    "name": "Tactile-Switch_1-Combine1",
+    "min": [
+     -3.447,
+     -3.378,
+     -3.003
+    ],
+    "max": [
+     3.447,
+     3.683,
+     3.003
+    ],
+    "colour": "#181818",
+    "solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#404040",
+    "box_error_mm": 4.266,
+    "also_covers": [
+     {
+      "name": "Tactile-Switch_1-Split1[13]",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "Tactile-Switch_1-Split1[12]",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "Tactile-Switch_1-Split1[7]",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "Tactile-Switch_1-Split1[6]",
+      "colour": "#a6a9aa"
+     }
+    ]
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[2]",
+    "min": [
+     -2.766,
+     3.683,
+     -2.759
+    ],
+    "max": [
+     -1.677,
+     3.886,
+     -1.667
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#404040",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[4]",
+    "min": [
+     -2.766,
+     3.683,
+     1.667
+    ],
+    "max": [
+     -1.677,
+     3.886,
+     2.759
+    ],
+    "colour": "#a6a9aa",
+    "solid": 2,
+    "set_in_step": true,
+    "cad_colour": "#404040",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[5]",
+    "min": [
+     -1.71,
+     3.683,
+     -1.714
+    ],
+    "max": [
+     1.71,
+     4.953,
+     1.714
+    ],
+    "colour": "#404040",
+    "solid": 3,
+    "set_in_step": false,
+    "cad_colour": "#404040",
+    "box_error_mm": 0.011
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[3]",
+    "min": [
+     1.677,
+     3.683,
+     -2.759
+    ],
+    "max": [
+     2.766,
+     3.886,
+     -1.667
+    ],
+    "colour": "#a6a9aa",
+    "solid": 4,
+    "set_in_step": true,
+    "cad_colour": "#404040",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[1]",
+    "min": [
+     1.677,
+     3.683,
+     1.667
+    ],
+    "max": [
+     2.766,
+     3.886,
+     2.759
+    ],
+    "colour": "#a6a9aa",
+    "solid": 5,
+    "set_in_step": true,
+    "cad_colour": "#404040",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[13]",
+    "min": [
+     3.003,
+     -3.378,
+     -2.648
+    ],
+    "max": [
+     3.447,
+     1.304,
+     -1.937
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[12]",
+    "min": [
+     -3.447,
+     -3.378,
+     1.936
+    ],
+    "max": [
+     -3.004,
+     1.304,
+     2.647
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[7]",
+    "min": [
+     -3.447,
+     -3.378,
+     -2.648
+    ],
+    "max": [
+     -3.004,
+     1.304,
+     -1.937
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "Tactile-Switch_1-Split1[6]",
+    "min": [
+     3.003,
+     -3.378,
+     1.936
+    ],
+    "max": [
+     3.447,
+     1.304,
+     2.647
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   }
+  ],
+  "mra_instances": [
+   "NAUO80",
+   "NAUO81"
+  ],
+  "instances": [
+   "NAUO12",
+   "NAUO13"
+  ],
+  "source": "mra_atlas"
+ },
+ "nano_Varsayılan": {
+  "cadasio_part": "nano",
+  "bbox_min": [
+   -3.82,
+   -8.518,
+   -16.62
+  ],
+  "bbox_max": [
+   41.18,
+   10.105,
+   1.38
+  ],
+  "colours": {
+   "#a6a9aa": 125,
+   "#e4e4e4": 125,
+   "#181818": 20,
+   "#191919": 9,
+   "#d3d6d3": 6,
+   "#efefef": 4,
+   "#a5936d": 2,
+   "#000f41": 1,
+   "#cccccc": 1
+  },
+  "solids": [
+   {
+    "name": "nano-board.STEP-1-solid1",
+    "min": [
+     -3.82,
+     -1.5,
+     -16.62
+    ],
+    "max": [
+     39.38,
+     3.1,
+     1.38
+    ],
+    "colour": "#000f41",
+    "solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#d8d8d8",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "2pin_header__02.STEP-1-solid1",
+    "min": [
+     -3.643,
+     -1.65,
+     -11.43
+    ],
+    "max": [
+     1.357,
+     10.1,
+     -3.81
+    ],
+    "colour": "#181818",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 5.082,
+    "also_covers": [
+     {
+      "name": "2pin_header__02.STEP-3-solid1",
+      "colour": "#191919"
+     },
+     {
+      "name": "2pin_header__02.STEP-2-solid1",
+      "colour": "#191919"
+     }
+    ]
+   },
+   {
+    "name": "nano-Surface-Offset1[4]",
+    "min": [
+     -2.793,
+     4.1,
+     -10.54
+    ],
+    "max": [
+     -2.033,
+     10.105,
+     -9.78
+    ],
+    "colour": "#a6a9aa",
+    "solid": 2,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset1[6]",
+    "min": [
+     -2.793,
+     4.1,
+     -8.0
+    ],
+    "max": [
+     -2.033,
+     10.105,
+     -7.24
+    ],
+    "colour": "#a6a9aa",
+    "solid": 3,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset1[2]",
+    "min": [
+     -2.793,
+     4.1,
+     -5.46
+    ],
+    "max": [
+     -2.033,
+     10.105,
+     -4.7
+    ],
+    "colour": "#a6a9aa",
+    "solid": 4,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "15pin_header__.STEP-2-solid1",
+    "min": [
+     -1.27,
+     -8.5,
+     -16.51
+    ],
+    "max": [
+     36.83,
+     3.25,
+     -13.97
+    ],
+    "colour": "#191919",
+    "solid": 5,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "15pin_header__.STEP-1-solid1",
+    "min": [
+     -1.27,
+     -8.5,
+     -1.27
+    ],
+    "max": [
+     36.83,
+     3.25,
+     1.27
+    ],
+    "colour": "#191919",
+    "solid": 6,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[15]",
+    "min": [
+     -0.915,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     0.915,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 7,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[42]",
+    "min": [
+     -0.915,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     0.915,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 8,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[14]",
+    "min": [
+     -0.449,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     0.449,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 9,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[30]",
+    "min": [
+     -0.431,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     0.0,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 10,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[99]",
+    "min": [
+     -0.393,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     0.393,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 11,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[117]",
+    "min": [
+     -0.393,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     0.393,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 12,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[72]",
+    "min": [
+     -0.393,
+     0.0,
+     -15.627
+    ],
+    "max": [
+     0.393,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 13,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[73]",
+    "min": [
+     -0.393,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     0.393,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 14,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset1[3]",
+    "min": [
+     -0.253,
+     4.1,
+     -10.54
+    ],
+    "max": [
+     0.507,
+     10.105,
+     -9.78
+    ],
+    "colour": "#a6a9aa",
+    "solid": 15,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset1[5]",
+    "min": [
+     -0.253,
+     4.1,
+     -8.0
+    ],
+    "max": [
+     0.507,
+     10.105,
+     -7.24
+    ],
+    "colour": "#a6a9aa",
+    "solid": 16,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset1[1]",
+    "min": [
+     -0.253,
+     4.1,
+     -5.46
+    ],
+    "max": [
+     0.507,
+     10.105,
+     -4.7
+    ],
+    "colour": "#a6a9aa",
+    "solid": 17,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[16]",
+    "min": [
+     1.625,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     3.455,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 18,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[43]",
+    "min": [
+     1.625,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     3.455,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 19,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano - reg.STEP-1-solid1",
+    "min": [
+     1.95,
+     -1.6,
+     -13.41
+    ],
+    "max": [
+     10.25,
+     0.089,
+     -6.91
+    ],
+    "colour": "#181818",
+    "solid": 20,
+    "set_in_step": true,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[13]",
+    "min": [
+     2.091,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     2.989,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 21,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[31]",
+    "min": [
+     2.109,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     2.54,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 22,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[98]",
+    "min": [
+     2.147,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     2.933,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 23,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[116]",
+    "min": [
+     2.147,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     2.933,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 24,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[58]",
+    "min": [
+     2.147,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     2.933,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 25,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[74]",
+    "min": [
+     2.147,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     2.933,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 26,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[17]",
+    "min": [
+     4.165,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     5.995,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 27,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[44]",
+    "min": [
+     4.165,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     5.995,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 28,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[12]",
+    "min": [
+     4.631,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     5.529,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 29,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[97]",
+    "min": [
+     4.688,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     5.473,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 30,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[115]",
+    "min": [
+     4.688,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     5.473,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 31,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[59]",
+    "min": [
+     4.688,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     5.473,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 32,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[75]",
+    "min": [
+     4.688,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     5.473,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 33,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "cap106C.STEP-2-solid1",
+    "min": [
+     5.9,
+     -1.81,
+     -6.45
+    ],
+    "max": [
+     9.9,
+     0.0,
+     -4.75
+    ],
+    "colour": "#a5936d",
+    "solid": 34,
+    "set_in_step": false,
+    "cad_colour": "#a5936d",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "smt_resistor222.STEP-5-solid1",
+    "min": [
+     6.3,
+     -0.6,
+     -3.45
+    ],
+    "max": [
+     10.1,
+     0.0,
+     -1.75
+    ],
+    "colour": "#a6a9aa",
+    "solid": 35,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[27]",
+    "min": [
+     6.705,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     8.535,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 36,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[45]",
+    "min": [
+     6.705,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     8.535,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 37,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[11]",
+    "min": [
+     7.171,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     8.069,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 38,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[32]",
+    "min": [
+     7.189,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     7.62,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 39,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[96]",
+    "min": [
+     7.228,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     8.012,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 40,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[114]",
+    "min": [
+     7.228,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     8.012,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 41,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[60]",
+    "min": [
+     7.228,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     8.012,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 42,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[76]",
+    "min": [
+     7.228,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     8.012,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 43,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "led.STEP-3-solid1",
+    "min": [
+     8.4,
+     1.6,
+     -13.15
+    ],
+    "max": [
+     12.4,
+     2.1,
+     -11.85
+    ],
+    "colour": "#a6a9aa",
+    "solid": 44,
+    "set_in_step": true,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.219
+   },
+   {
+    "name": "led.STEP-4-solid1",
+    "min": [
+     8.4,
+     1.6,
+     -9.7
+    ],
+    "max": [
+     12.4,
+     2.1,
+     -8.4
+    ],
+    "colour": "#a6a9aa",
+    "solid": 45,
+    "set_in_step": true,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.219
+   },
+   {
+    "name": "led.STEP-2-solid1",
+    "min": [
+     8.4,
+     1.6,
+     -6.2
+    ],
+    "max": [
+     12.4,
+     2.1,
+     -4.9
+    ],
+    "colour": "#a6a9aa",
+    "solid": 46,
+    "set_in_step": true,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.219
+   },
+   {
+    "name": "led.STEP-1-solid1",
+    "min": [
+     8.4,
+     1.6,
+     -3.45
+    ],
+    "max": [
+     12.4,
+     2.1,
+     -2.15
+    ],
+    "colour": "#a6a9aa",
+    "solid": 47,
+    "set_in_step": true,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.219
+   },
+   {
+    "name": "nano-Surface-Offset3[18]",
+    "min": [
+     9.245,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     11.075,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 48,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[54]",
+    "min": [
+     9.245,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     11.075,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 49,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "led.STEP-3-solid2",
+    "min": [
+     9.7,
+     1.9,
+     -13.1
+    ],
+    "max": [
+     11.1,
+     2.4,
+     -11.9
+    ],
+    "colour": "#efefef",
+    "solid": 50,
+    "set_in_step": false,
+    "cad_colour": "#efefef",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "led.STEP-4-solid2",
+    "min": [
+     9.7,
+     1.9,
+     -9.65
+    ],
+    "max": [
+     11.1,
+     2.4,
+     -8.45
+    ],
+    "colour": "#efefef",
+    "solid": 51,
+    "set_in_step": false,
+    "cad_colour": "#efefef",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "led.STEP-2-solid2",
+    "min": [
+     9.7,
+     1.9,
+     -6.15
+    ],
+    "max": [
+     11.1,
+     2.4,
+     -4.95
+    ],
+    "colour": "#efefef",
+    "solid": 52,
+    "set_in_step": false,
+    "cad_colour": "#efefef",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "led.STEP-1-solid2",
+    "min": [
+     9.7,
+     1.9,
+     -3.4
+    ],
+    "max": [
+     11.1,
+     2.4,
+     -2.2
+    ],
+    "colour": "#efefef",
+    "solid": 53,
+    "set_in_step": false,
+    "cad_colour": "#efefef",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[10]",
+    "min": [
+     9.711,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     10.609,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 54,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[33]",
+    "min": [
+     9.729,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     10.16,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 55,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[95]",
+    "min": [
+     9.768,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     10.553,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 56,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[113]",
+    "min": [
+     9.768,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     10.553,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 57,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[61]",
+    "min": [
+     9.768,
+     0.0,
+     -15.627
+    ],
+    "max": [
+     10.553,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 58,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[77]",
+    "min": [
+     9.768,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     10.553,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 59,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "NANO DIODE.STEP-1-solid1",
+    "min": [
+     10.58,
+     -1.35,
+     -6.65
+    ],
+    "max": [
+     12.28,
+     0.0,
+     -1.75
+    ],
+    "colour": "#191919",
+    "solid": 60,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 0.058
+   },
+   {
+    "name": "nano-Surface-Offset3[19]",
+    "min": [
+     11.785,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     13.615,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 61,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[46]",
+    "min": [
+     11.785,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     13.615,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 62,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[9]",
+    "min": [
+     12.251,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     13.149,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 63,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[100]",
+    "min": [
+     12.307,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     13.092,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 64,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[112]",
+    "min": [
+     12.307,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     13.092,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 65,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[62]",
+    "min": [
+     12.307,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     13.092,
+     3.268,
+     -14.853
+    ],
+    "colour": "#a6a9aa",
+    "solid": 66,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[78]",
+    "min": [
+     12.307,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     13.092,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 67,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "reset core.STEP-1-solid1",
+    "min": [
+     13.75,
+     1.6,
+     -10.65
+    ],
+    "max": [
+     16.75,
+     3.75,
+     -5.45
+    ],
+    "colour": "#181818",
+    "solid": 68,
+    "set_in_step": true,
+    "cad_colour": "#cad1ee",
+    "box_error_mm": 0.204,
+    "also_covers": [
+     {
+      "name": "reset shell.STEP-1-solid1",
+      "colour": "#a6a9aa"
+     }
+    ]
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid2",
+    "min": [
+     14.25,
+     -0.455,
+     -12.45
+    ],
+    "max": [
+     17.25,
+     0.0,
+     -9.25
+    ],
+    "colour": "#191919",
+    "solid": 69,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 1.5,
+    "also_covers": [
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid4",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid7",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid10",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid5",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid8",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid3",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid6",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "189 RESISTOR PACK.STEP-1-solid9",
+      "colour": "#a6a9aa"
+     }
+    ]
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid2",
+    "min": [
+     14.25,
+     -0.455,
+     -6.8
+    ],
+    "max": [
+     17.25,
+     0.0,
+     -3.6
+    ],
+    "colour": "#191919",
+    "solid": 70,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 1.5,
+    "also_covers": [
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid4",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid10",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid7",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid5",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid8",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid3",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid6",
+      "colour": "#a6a9aa"
+     },
+     {
+      "name": "102 RESISTOR PACK.STEP-1-solid9",
+      "colour": "#a6a9aa"
+     }
+    ]
+   },
+   {
+    "name": "nano-Surface-Offset3[20]",
+    "min": [
+     14.325,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     16.155,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 71,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[47]",
+    "min": [
+     14.325,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     16.155,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 72,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[8]",
+    "min": [
+     14.791,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     15.689,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 73,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[34]",
+    "min": [
+     14.809,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     15.24,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 74,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[101]",
+    "min": [
+     14.848,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     15.633,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 75,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[111]",
+    "min": [
+     14.848,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     15.633,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 76,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[63]",
+    "min": [
+     14.848,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     15.633,
+     3.268,
+     -14.853
+    ],
+    "colour": "#a6a9aa",
+    "solid": 77,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[79]",
+    "min": [
+     14.848,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     15.633,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 78,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid1",
+    "min": [
+     15.1,
+     -0.35,
+     -12.45
+    ],
+    "max": [
+     16.4,
+     -0.05,
+     -9.25
+    ],
+    "colour": "#181818",
+    "solid": 79,
+    "set_in_step": true,
+    "cad_colour": "#ffffff",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid1",
+    "min": [
+     15.1,
+     -0.35,
+     -6.8
+    ],
+    "max": [
+     16.4,
+     -0.05,
+     -3.6
+    ],
+    "colour": "#181818",
+    "solid": 80,
+    "set_in_step": true,
+    "cad_colour": "#ffffff",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "16mhz crystal - measured.STEP-1-solid1",
+    "min": [
+     16.814,
+     1.6,
+     -5.251
+    ],
+    "max": [
+     20.208,
+     2.4,
+     -1.857
+    ],
+    "colour": "#d3d6d3",
+    "solid": 81,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset3[21]",
+    "min": [
+     16.865,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     18.695,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 82,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[48]",
+    "min": [
+     16.865,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     18.695,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 83,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[7]",
+    "min": [
+     17.331,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     18.229,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 84,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[102]",
+    "min": [
+     17.387,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     18.172,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 85,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[103]",
+    "min": [
+     17.387,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     18.172,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 86,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[64]",
+    "min": [
+     17.387,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     18.172,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 87,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[80]",
+    "min": [
+     17.387,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     18.172,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 88,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[29]",
+    "min": [
+     18.236,
+     1.65,
+     -9.274
+    ],
+    "max": [
+     19.523,
+     2.33,
+     -7.988
+    ],
+    "colour": "#a6a9aa",
+    "solid": 89,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[36]",
+    "min": [
+     18.236,
+     1.65,
+     -7.252
+    ],
+    "max": [
+     19.523,
+     2.33,
+     -5.966
+    ],
+    "colour": "#a6a9aa",
+    "solid": 90,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "atmega328.STEP-1-solid1",
+    "min": [
+     18.241,
+     1.65,
+     -13.229
+    ],
+    "max": [
+     29.459,
+     2.75,
+     -2.011
+    ],
+    "colour": "#191919",
+    "solid": 91,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[107]",
+    "min": [
+     18.515,
+     1.6,
+     -4.753
+    ],
+    "max": [
+     18.727,
+     1.65,
+     -4.541
+    ],
+    "colour": "#e4e4e4",
+    "solid": 92,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[110]",
+    "min": [
+     18.627,
+     1.791,
+     -2.42
+    ],
+    "max": [
+     18.792,
+     1.855,
+     -2.256
+    ],
+    "colour": "#e4e4e4",
+    "solid": 93,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[104]",
+    "min": [
+     18.727,
+     1.6,
+     -2.136
+    ],
+    "max": [
+     18.939,
+     1.65,
+     -1.924
+    ],
+    "colour": "#e4e4e4",
+    "solid": 94,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[30]",
+    "min": [
+     18.802,
+     1.65,
+     -9.84
+    ],
+    "max": [
+     20.088,
+     2.33,
+     -8.553
+    ],
+    "colour": "#a6a9aa",
+    "solid": 95,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[37]",
+    "min": [
+     18.802,
+     1.65,
+     -6.687
+    ],
+    "max": [
+     20.088,
+     2.33,
+     -5.4
+    ],
+    "colour": "#a6a9aa",
+    "solid": 96,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[24]",
+    "min": [
+     19.037,
+     2.351,
+     -7.761
+    ],
+    "max": [
+     19.137,
+     2.751,
+     -7.479
+    ],
+    "colour": "#e4e4e4",
+    "solid": 97,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[108]",
+    "min": [
+     19.109,
+     1.9,
+     -2.957
+    ],
+    "max": [
+     19.924,
+     2.405,
+     -2.141
+    ],
+    "colour": "#e4e4e4",
+    "solid": 98,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[106]",
+    "min": [
+     19.222,
+     1.6,
+     -4.046
+    ],
+    "max": [
+     19.434,
+     1.65,
+     -3.833
+    ],
+    "colour": "#e4e4e4",
+    "solid": 99,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[109]",
+    "min": [
+     19.222,
+     1.6,
+     -2.844
+    ],
+    "max": [
+     20.212,
+     1.9,
+     -1.853
+    ],
+    "colour": "#e4e4e4",
+    "solid": 100,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[31]",
+    "min": [
+     19.367,
+     1.65,
+     -10.405
+    ],
+    "max": [
+     20.654,
+     2.33,
+     -9.119
+    ],
+    "colour": "#a6a9aa",
+    "solid": 101,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[38]",
+    "min": [
+     19.367,
+     1.65,
+     -6.121
+    ],
+    "max": [
+     20.654,
+     2.33,
+     -4.835
+    ],
+    "colour": "#a6a9aa",
+    "solid": 102,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[28]",
+    "min": [
+     19.405,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     21.235,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 103,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[55]",
+    "min": [
+     19.405,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     21.235,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 104,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[6]",
+    "min": [
+     19.871,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     20.769,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 105,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[35]",
+    "min": [
+     19.889,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     20.751,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 106,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[92]",
+    "min": [
+     19.927,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     20.712,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 107,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[104]",
+    "min": [
+     19.927,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     20.712,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 108,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[65]",
+    "min": [
+     19.927,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     20.712,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 109,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[81]",
+    "min": [
+     19.927,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     20.712,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 110,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[105]",
+    "min": [
+     19.929,
+     1.6,
+     -3.338
+    ],
+    "max": [
+     20.141,
+     1.65,
+     -3.126
+    ],
+    "colour": "#e4e4e4",
+    "solid": 111,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[27]",
+    "min": [
+     19.932,
+     2.705,
+     -8.285
+    ],
+    "max": [
+     21.121,
+     2.75,
+     -7.096
+    ],
+    "colour": "#e4e4e4",
+    "solid": 112,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[32]",
+    "min": [
+     19.933,
+     1.65,
+     -10.971
+    ],
+    "max": [
+     21.22,
+     2.33,
+     -9.685
+    ],
+    "colour": "#a6a9aa",
+    "solid": 113,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[39]",
+    "min": [
+     19.933,
+     1.65,
+     -5.555
+    ],
+    "max": [
+     21.22,
+     2.33,
+     -4.269
+    ],
+    "colour": "#a6a9aa",
+    "solid": 114,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[59]",
+    "min": [
+     19.955,
+     -0.01,
+     -9.855
+    ],
+    "max": [
+     21.365,
+     0.005,
+     -8.145
+    ],
+    "colour": "#e4e4e4",
+    "solid": 115,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[53]",
+    "min": [
+     19.955,
+     -0.01,
+     -6.655
+    ],
+    "max": [
+     21.365,
+     0.005,
+     -4.945
+    ],
+    "colour": "#e4e4e4",
+    "solid": 116,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "smt_resistor222.STEP-2-solid1",
+    "min": [
+     19.96,
+     -0.6,
+     -9.85
+    ],
+    "max": [
+     23.76,
+     0.0,
+     -8.15
+    ],
+    "colour": "#a6a9aa",
+    "solid": 117,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "smt_resistor222.STEP-1-solid1",
+    "min": [
+     19.96,
+     -0.6,
+     -6.65
+    ],
+    "max": [
+     23.76,
+     0.0,
+     -4.95
+    ],
+    "colour": "#a6a9aa",
+    "solid": 118,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[33]",
+    "min": [
+     20.499,
+     1.65,
+     -11.537
+    ],
+    "max": [
+     21.785,
+     2.33,
+     -10.25
+    ],
+    "colour": "#a6a9aa",
+    "solid": 119,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[40]",
+    "min": [
+     20.499,
+     1.65,
+     -4.99
+    ],
+    "max": [
+     21.785,
+     2.33,
+     -3.703
+    ],
+    "colour": "#a6a9aa",
+    "solid": 120,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[34]",
+    "min": [
+     21.065,
+     1.65,
+     -12.102
+    ],
+    "max": [
+     22.351,
+     2.33,
+     -10.816
+    ],
+    "colour": "#a6a9aa",
+    "solid": 121,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[41]",
+    "min": [
+     21.065,
+     1.65,
+     -4.424
+    ],
+    "max": [
+     22.351,
+     2.33,
+     -3.138
+    ],
+    "colour": "#a6a9aa",
+    "solid": 122,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[58]",
+    "min": [
+     21.265,
+     -0.095,
+     -9.65
+    ],
+    "max": [
+     22.46,
+     -0.09,
+     -8.35
+    ],
+    "colour": "#e4e4e4",
+    "solid": 123,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[55]",
+    "min": [
+     21.265,
+     -0.095,
+     -6.45
+    ],
+    "max": [
+     22.46,
+     -0.09,
+     -5.15
+    ],
+    "colour": "#e4e4e4",
+    "solid": 124,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[5]",
+    "min": [
+     21.54,
+     2.745,
+     -7.163
+    ],
+    "max": [
+     22.43,
+     2.75,
+     -6.267
+    ],
+    "colour": "#e4e4e4",
+    "solid": 125,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.021
+   },
+   {
+    "name": "nano-Surface-Offset2[35]",
+    "min": [
+     21.63,
+     1.65,
+     -12.668
+    ],
+    "max": [
+     22.917,
+     2.33,
+     -11.382
+    ],
+    "colour": "#a6a9aa",
+    "solid": 126,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[42]",
+    "min": [
+     21.63,
+     1.65,
+     -3.858
+    ],
+    "max": [
+     22.917,
+     2.33,
+     -2.572
+    ],
+    "colour": "#a6a9aa",
+    "solid": 127,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[113]",
+    "min": [
+     21.712,
+     2.745,
+     -8.867
+    ],
+    "max": [
+     22.37,
+     2.75,
+     -8.209
+    ],
+    "colour": "#e4e4e4",
+    "solid": 128,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[22]",
+    "min": [
+     21.945,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     23.775,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 129,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[49]",
+    "min": [
+     21.945,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     23.775,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 130,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset2[4]",
+    "min": [
+     22.024,
+     2.745,
+     -7.566
+    ],
+    "max": [
+     22.833,
+     2.75,
+     -6.752
+    ],
+    "colour": "#e4e4e4",
+    "solid": 131,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.018
+   },
+   {
+    "name": "nano-Surface-Offset2[28]",
+    "min": [
+     22.196,
+     1.65,
+     -13.234
+    ],
+    "max": [
+     23.479,
+     2.33,
+     -11.947
+    ],
+    "colour": "#a6a9aa",
+    "solid": 132,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[26]",
+    "min": [
+     22.196,
+     1.65,
+     -3.289
+    ],
+    "max": [
+     23.482,
+     2.33,
+     -2.006
+    ],
+    "colour": "#a6a9aa",
+    "solid": 133,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[57]",
+    "min": [
+     22.355,
+     -0.01,
+     -9.855
+    ],
+    "max": [
+     23.765,
+     0.005,
+     -8.145
+    ],
+    "colour": "#e4e4e4",
+    "solid": 134,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[54]",
+    "min": [
+     22.355,
+     -0.01,
+     -6.655
+    ],
+    "max": [
+     23.765,
+     0.005,
+     -4.945
+    ],
+    "colour": "#e4e4e4",
+    "solid": 135,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[5]",
+    "min": [
+     22.411,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     23.309,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 136,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[36]",
+    "min": [
+     22.429,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     23.291,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 137,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[52]",
+    "min": [
+     22.455,
+     -0.605,
+     -5.15
+    ],
+    "max": [
+     22.56,
+     -0.09,
+     -5.045
+    ],
+    "colour": "#e4e4e4",
+    "solid": 138,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[91]",
+    "min": [
+     22.468,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     23.253,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 139,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[105]",
+    "min": [
+     22.468,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     23.253,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 140,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[66]",
+    "min": [
+     22.468,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     23.247,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 141,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[94]",
+    "min": [
+     22.468,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     23.253,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 142,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[3]",
+    "min": [
+     22.496,
+     2.745,
+     -7.904
+    ],
+    "max": [
+     23.176,
+     2.75,
+     -7.222
+    ],
+    "colour": "#e4e4e4",
+    "solid": 143,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.013
+   },
+   {
+    "name": "nano-Surface-Offset2[112]",
+    "min": [
+     22.51,
+     2.745,
+     -6.253
+    ],
+    "max": [
+     23.238,
+     2.75,
+     -5.519
+    ],
+    "colour": "#e4e4e4",
+    "solid": 144,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.016
+   },
+   {
+    "name": "nano-Surface-Offset2[13]",
+    "min": [
+     22.551,
+     2.745,
+     -11.424
+    ],
+    "max": [
+     24.03,
+     2.75,
+     -9.501
+    ],
+    "colour": "#e4e4e4",
+    "solid": 145,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[12]",
+    "min": [
+     22.634,
+     2.745,
+     -9.915
+    ],
+    "max": [
+     23.203,
+     2.75,
+     -9.092
+    ],
+    "colour": "#e4e4e4",
+    "solid": 146,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[9]",
+    "min": [
+     22.753,
+     2.745,
+     -6.82
+    ],
+    "max": [
+     23.483,
+     2.75,
+     -6.086
+    ],
+    "colour": "#e4e4e4",
+    "solid": 147,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.014
+   },
+   {
+    "name": "nano-Surface-Offset2[15]",
+    "min": [
+     22.867,
+     2.745,
+     -10.662
+    ],
+    "max": [
+     24.526,
+     2.75,
+     -8.935
+    ],
+    "colour": "#e4e4e4",
+    "solid": 148,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[111]",
+    "min": [
+     22.955,
+     2.745,
+     -8.253
+    ],
+    "max": [
+     23.683,
+     2.75,
+     -7.519
+    ],
+    "colour": "#e4e4e4",
+    "solid": 149,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.016
+   },
+   {
+    "name": "nano-Surface-Offset2[14]",
+    "min": [
+     22.966,
+     2.745,
+     -10.561
+    ],
+    "max": [
+     23.889,
+     2.75,
+     -9.678
+    ],
+    "colour": "#e4e4e4",
+    "solid": 150,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[2]",
+    "min": [
+     23.256,
+     2.745,
+     -8.777
+    ],
+    "max": [
+     23.985,
+     2.75,
+     -8.01
+    ],
+    "colour": "#e4e4e4",
+    "solid": 151,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "nano-Surface-Offset2[56]",
+    "min": [
+     23.36,
+     -0.09,
+     -6.63
+    ],
+    "max": [
+     23.54,
+     -0.015,
+     -6.45
+    ],
+    "colour": "#e4e4e4",
+    "solid": 152,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[11]",
+    "min": [
+     23.475,
+     2.745,
+     -10.926
+    ],
+    "max": [
+     24.214,
+     2.75,
+     -10.187
+    ],
+    "colour": "#e4e4e4",
+    "solid": 153,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[1]",
+    "min": [
+     23.708,
+     2.745,
+     -9.116
+    ],
+    "max": [
+     24.469,
+     2.75,
+     -8.348
+    ],
+    "colour": "#e4e4e4",
+    "solid": 154,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.013
+   },
+   {
+    "name": "nano-Surface-Offset2[25]",
+    "min": [
+     23.709,
+     2.351,
+     -12.433
+    ],
+    "max": [
+     23.991,
+     2.751,
+     -12.333
+    ],
+    "colour": "#e4e4e4",
+    "solid": 155,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[10]",
+    "min": [
+     23.8,
+     2.745,
+     -11.095
+    ],
+    "max": [
+     24.456,
+     2.75,
+     -10.512
+    ],
+    "colour": "#e4e4e4",
+    "solid": 156,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[101]",
+    "min": [
+     23.945,
+     -0.774,
+     -10.32
+    ],
+    "max": [
+     24.085,
+     -0.099,
+     -5.02
+    ],
+    "colour": "#181818",
+    "solid": 157,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "ftdi FT232rl.STEP-1-solid1",
+    "min": [
+     23.95,
+     -1.85,
+     -12.294
+    ],
+    "max": [
+     34.15,
+     0.05,
+     -3.046
+    ],
+    "colour": "#191919",
+    "solid": 158,
+    "set_in_step": false,
+    "cad_colour": "#191919",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[114]",
+    "min": [
+     24.091,
+     2.745,
+     -9.54
+    ],
+    "max": [
+     24.811,
+     2.75,
+     -8.82
+    ],
+    "colour": "#e4e4e4",
+    "solid": 159,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.013
+   },
+   {
+    "name": "nano-Surface-Offset2[8]",
+    "min": [
+     24.195,
+     2.745,
+     -7.936
+    ],
+    "max": [
+     24.761,
+     2.75,
+     -7.344
+    ],
+    "colour": "#e4e4e4",
+    "solid": 160,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.022
+   },
+   {
+    "name": "nano-Surface-Offset2[43]",
+    "min": [
+     24.218,
+     1.65,
+     -3.292
+    ],
+    "max": [
+     25.504,
+     2.33,
+     -2.006
+    ],
+    "colour": "#a6a9aa",
+    "solid": 161,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[23]",
+    "min": [
+     24.221,
+     1.65,
+     -13.234
+    ],
+    "max": [
+     25.504,
+     2.33,
+     -11.947
+    ],
+    "colour": "#a6a9aa",
+    "solid": 162,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[51]",
+    "min": [
+     24.448,
+     2.745,
+     -9.945
+    ],
+    "max": [
+     25.036,
+     2.75,
+     -9.176
+    ],
+    "colour": "#e4e4e4",
+    "solid": 163,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "nano-Surface-Offset2[102]",
+    "min": [
+     24.471,
+     -1.85,
+     -9.975
+    ],
+    "max": [
+     25.479,
+     -1.8,
+     -8.965
+    ],
+    "colour": "#181818",
+    "solid": 164,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[23]",
+    "min": [
+     24.485,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     26.315,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 165,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[50]",
+    "min": [
+     24.485,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     26.315,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 166,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset2[7]",
+    "min": [
+     24.516,
+     2.745,
+     -8.369
+    ],
+    "max": [
+     25.277,
+     2.75,
+     -7.6
+    ],
+    "colour": "#e4e4e4",
+    "solid": 167,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.013
+   },
+   {
+    "name": "nano-Surface-Offset2[96]",
+    "min": [
+     24.595,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     25.055,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 168,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[97]",
+    "min": [
+     24.595,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     25.055,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 169,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[100]",
+    "min": [
+     24.675,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     24.98,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 170,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[99]",
+    "min": [
+     24.675,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     24.975,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 171,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[98]",
+    "min": [
+     24.675,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     24.975,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 172,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[44]",
+    "min": [
+     24.783,
+     1.65,
+     -3.858
+    ],
+    "max": [
+     26.07,
+     2.33,
+     -2.572
+    ],
+    "colour": "#a6a9aa",
+    "solid": 173,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[22]",
+    "min": [
+     24.787,
+     1.65,
+     -12.668
+    ],
+    "max": [
+     26.07,
+     2.33,
+     -11.382
+    ],
+    "colour": "#a6a9aa",
+    "solid": 174,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[6]",
+    "min": [
+     24.92,
+     2.745,
+     -8.773
+    ],
+    "max": [
+     25.681,
+     2.75,
+     -8.005
+    ],
+    "colour": "#e4e4e4",
+    "solid": 175,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.013
+   },
+   {
+    "name": "nano-Surface-Offset3[4]",
+    "min": [
+     24.951,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     25.849,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 176,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[37]",
+    "min": [
+     24.969,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     25.831,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 177,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[90]",
+    "min": [
+     25.008,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     25.793,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 178,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[106]",
+    "min": [
+     25.008,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     25.793,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 179,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[67]",
+    "min": [
+     25.008,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     25.787,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 180,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[82]",
+    "min": [
+     25.008,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     25.793,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 181,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[72]",
+    "min": [
+     25.245,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     25.705,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 182,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[73]",
+    "min": [
+     25.245,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     25.705,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 183,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[95]",
+    "min": [
+     25.325,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     25.63,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 184,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[94]",
+    "min": [
+     25.325,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     25.625,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 185,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[93]",
+    "min": [
+     25.325,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     25.625,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 186,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[115]",
+    "min": [
+     25.344,
+     2.745,
+     -9.195
+    ],
+    "max": [
+     26.005,
+     2.75,
+     -8.516
+    ],
+    "colour": "#e4e4e4",
+    "solid": 187,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.014
+   },
+   {
+    "name": "nano-Surface-Offset2[45]",
+    "min": [
+     25.349,
+     1.65,
+     -4.424
+    ],
+    "max": [
+     26.635,
+     2.33,
+     -3.138
+    ],
+    "colour": "#a6a9aa",
+    "solid": 188,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[21]",
+    "min": [
+     25.353,
+     1.65,
+     -12.102
+    ],
+    "max": [
+     26.635,
+     2.33,
+     -10.816
+    ],
+    "colour": "#a6a9aa",
+    "solid": 189,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[70]",
+    "min": [
+     25.895,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     26.355,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 190,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[71]",
+    "min": [
+     25.895,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     26.355,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 191,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[46]",
+    "min": [
+     25.915,
+     1.65,
+     -4.99
+    ],
+    "max": [
+     27.201,
+     2.33,
+     -3.703
+    ],
+    "colour": "#a6a9aa",
+    "solid": 192,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[20]",
+    "min": [
+     25.918,
+     1.65,
+     -11.537
+    ],
+    "max": [
+     27.201,
+     2.33,
+     -10.25
+    ],
+    "colour": "#a6a9aa",
+    "solid": 193,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[92]",
+    "min": [
+     25.975,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     26.28,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 194,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[91]",
+    "min": [
+     25.975,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     26.275,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 195,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[90]",
+    "min": [
+     25.975,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     26.275,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 196,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[47]",
+    "min": [
+     26.48,
+     1.65,
+     -5.555
+    ],
+    "max": [
+     27.767,
+     2.33,
+     -4.269
+    ],
+    "colour": "#a6a9aa",
+    "solid": 197,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[19]",
+    "min": [
+     26.484,
+     1.65,
+     -10.971
+    ],
+    "max": [
+     27.767,
+     2.33,
+     -9.685
+    ],
+    "colour": "#a6a9aa",
+    "solid": 198,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[68]",
+    "min": [
+     26.545,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     27.005,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 199,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[69]",
+    "min": [
+     26.545,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     27.005,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 200,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[89]",
+    "min": [
+     26.625,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     26.93,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 201,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[88]",
+    "min": [
+     26.625,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     26.925,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 202,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[87]",
+    "min": [
+     26.625,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     26.925,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 203,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[24]",
+    "min": [
+     27.025,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     28.855,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 204,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[51]",
+    "min": [
+     27.025,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     28.855,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 205,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset2[48]",
+    "min": [
+     27.046,
+     1.65,
+     -6.121
+    ],
+    "max": [
+     28.332,
+     2.33,
+     -4.835
+    ],
+    "colour": "#a6a9aa",
+    "solid": 206,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[18]",
+    "min": [
+     27.05,
+     1.65,
+     -10.405
+    ],
+    "max": [
+     28.332,
+     2.33,
+     -9.119
+    ],
+    "colour": "#a6a9aa",
+    "solid": 207,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[66]",
+    "min": [
+     27.195,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     27.655,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 208,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[67]",
+    "min": [
+     27.195,
+     -0.055,
+     -5.099
+    ],
+    "max": [
+     27.655,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 209,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[86]",
+    "min": [
+     27.275,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     27.58,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 210,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[85]",
+    "min": [
+     27.275,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     27.575,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 211,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[84]",
+    "min": [
+     27.275,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     27.575,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 212,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[3]",
+    "min": [
+     27.491,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     28.389,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 213,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[38]",
+    "min": [
+     27.509,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     28.371,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 214,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[89]",
+    "min": [
+     27.547,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     28.332,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 215,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[108]",
+    "min": [
+     27.547,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     28.332,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 216,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[68]",
+    "min": [
+     27.547,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     28.332,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 217,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[83]",
+    "min": [
+     27.547,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     28.332,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 218,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[49]",
+    "min": [
+     27.612,
+     1.65,
+     -6.687
+    ],
+    "max": [
+     28.898,
+     2.33,
+     -5.4
+    ],
+    "colour": "#a6a9aa",
+    "solid": 219,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[17]",
+    "min": [
+     27.615,
+     1.65,
+     -9.84
+    ],
+    "max": [
+     28.898,
+     2.33,
+     -8.553
+    ],
+    "colour": "#a6a9aa",
+    "solid": 220,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano-Surface-Offset2[64]",
+    "min": [
+     27.845,
+     -0.055,
+     -12.299
+    ],
+    "max": [
+     28.305,
+     0.055,
+     -10.24
+    ],
+    "colour": "#181818",
+    "solid": 221,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[65]",
+    "min": [
+     27.845,
+     -0.055,
+     -5.099
+    ],
+    "max": [
+     28.305,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 222,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[83]",
+    "min": [
+     27.925,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     28.23,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 223,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[82]",
+    "min": [
+     27.925,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     28.225,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 224,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[81]",
+    "min": [
+     27.925,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     28.225,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 225,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[50]",
+    "min": [
+     28.177,
+     1.65,
+     -7.252
+    ],
+    "max": [
+     29.464,
+     2.33,
+     -5.966
+    ],
+    "colour": "#a6a9aa",
+    "solid": 226,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[16]",
+    "min": [
+     28.181,
+     1.65,
+     -9.274
+    ],
+    "max": [
+     29.464,
+     2.33,
+     -7.988
+    ],
+    "colour": "#a6a9aa",
+    "solid": 227,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[62]",
+    "min": [
+     28.495,
+     -0.055,
+     -10.47
+    ],
+    "max": [
+     28.955,
+     0.0,
+     -10.241
+    ],
+    "colour": "#e4e4e4",
+    "solid": 228,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[63]",
+    "min": [
+     28.495,
+     -0.055,
+     -5.099
+    ],
+    "max": [
+     28.955,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 229,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[80]",
+    "min": [
+     28.575,
+     -1.025,
+     -11.572
+    ],
+    "max": [
+     28.88,
+     -0.047,
+     -10.32
+    ],
+    "colour": "#181818",
+    "solid": 230,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[79]",
+    "min": [
+     28.575,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     28.875,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 231,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[78]",
+    "min": [
+     28.575,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     28.875,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 232,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[61]",
+    "min": [
+     28.575,
+     0.0,
+     -11.57
+    ],
+    "max": [
+     28.88,
+     0.055,
+     -10.939
+    ],
+    "colour": "#e4e4e4",
+    "solid": 233,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset2[60]",
+    "min": [
+     29.145,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     29.605,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 234,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[77]",
+    "min": [
+     29.225,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     29.525,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 235,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[76]",
+    "min": [
+     29.225,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     29.525,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 236,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[29]",
+    "min": [
+     29.565,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     31.395,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 237,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[52]",
+    "min": [
+     29.565,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     31.395,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 238,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset2[103]",
+    "min": [
+     29.795,
+     -0.01,
+     -5.099
+    ],
+    "max": [
+     30.255,
+     0.055,
+     -3.041
+    ],
+    "colour": "#e4e4e4",
+    "solid": 239,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[75]",
+    "min": [
+     29.875,
+     -0.92,
+     -5.02
+    ],
+    "max": [
+     30.175,
+     -0.883,
+     -4.658
+    ],
+    "colour": "#e4e4e4",
+    "solid": 240,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset2[74]",
+    "min": [
+     29.875,
+     -0.126,
+     -4.524
+    ],
+    "max": [
+     30.175,
+     -0.047,
+     -4.484
+    ],
+    "colour": "#e4e4e4",
+    "solid": 241,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[2]",
+    "min": [
+     30.031,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     30.929,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 242,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[39]",
+    "min": [
+     30.049,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     30.911,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 243,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[87]",
+    "min": [
+     30.087,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     30.872,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 244,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[107]",
+    "min": [
+     30.087,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     30.872,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 245,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[69]",
+    "min": [
+     30.087,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     30.872,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 246,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[84]",
+    "min": [
+     30.087,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     30.872,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 247,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "MINI USB CONTACT.STEP-1-solid1",
+    "min": [
+     30.78,
+     1.6,
+     -9.47
+    ],
+    "max": [
+     40.18,
+     4.15,
+     -8.97
+    ],
+    "colour": "#d3d6d3",
+    "solid": 248,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "MINI USB CONTACT.STEP-2-solid1",
+    "min": [
+     30.78,
+     1.6,
+     -8.67
+    ],
+    "max": [
+     40.18,
+     4.15,
+     -8.17
+    ],
+    "colour": "#d3d6d3",
+    "solid": 249,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "MINI USB CONTACT.STEP-3-solid1",
+    "min": [
+     30.78,
+     1.6,
+     -7.87
+    ],
+    "max": [
+     40.18,
+     4.15,
+     -7.37
+    ],
+    "colour": "#d3d6d3",
+    "solid": 250,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "MINI USB CONTACT.STEP-4-solid1",
+    "min": [
+     30.78,
+     1.6,
+     -7.07
+    ],
+    "max": [
+     40.18,
+     4.15,
+     -6.57
+    ],
+    "colour": "#d3d6d3",
+    "solid": 251,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "MINI USB CONTACT.STEP-5-solid1",
+    "min": [
+     30.78,
+     1.6,
+     -6.27
+    ],
+    "max": [
+     40.18,
+     4.15,
+     -5.77
+    ],
+    "colour": "#d3d6d3",
+    "solid": 252,
+    "set_in_step": false,
+    "cad_colour": "#d3d6d3",
+    "box_error_mm": 0.015
+   },
+   {
+    "name": "MINIUSBSHELL.STEP-1-solid1",
+    "min": [
+     31.78,
+     0.55,
+     -13.07
+    ],
+    "max": [
+     41.18,
+     5.35,
+     -2.17
+    ],
+    "colour": "#cccccc",
+    "solid": 253,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 1.056,
+    "also_covers": [
+     {
+      "name": "MINIUSBCORE.STEP-1-solid1",
+      "colour": "#a6a9aa"
+     }
+    ]
+   },
+   {
+    "name": "nano-Surface-Offset3[25]",
+    "min": [
+     32.105,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     33.935,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 254,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[56]",
+    "min": [
+     32.105,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     33.935,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 255,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[1]",
+    "min": [
+     32.571,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     33.469,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 256,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[40]",
+    "min": [
+     32.589,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     33.451,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 257,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[86]",
+    "min": [
+     32.627,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     33.413,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 258,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[109]",
+    "min": [
+     32.627,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     33.413,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 259,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[70]",
+    "min": [
+     32.627,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     33.413,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 260,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[85]",
+    "min": [
+     32.627,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     33.413,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 261,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[26]",
+    "min": [
+     34.645,
+     1.6,
+     -16.157
+    ],
+    "max": [
+     36.475,
+     3.118,
+     -14.322
+    ],
+    "colour": "#a6a9aa",
+    "solid": 262,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "nano-Surface-Offset3[53]",
+    "min": [
+     34.645,
+     1.6,
+     -0.917
+    ],
+    "max": [
+     36.475,
+     3.118,
+     0.917
+    ],
+    "colour": "#a6a9aa",
+    "solid": 263,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.007
+   },
+   {
+    "name": "smt_resistor222.STEP-4-solid1",
+    "min": [
+     34.85,
+     -0.6,
+     -12.85
+    ],
+    "max": [
+     38.65,
+     0.0,
+     -11.15
+    ],
+    "colour": "#a6a9aa",
+    "solid": 264,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "smt_resistor222.STEP-3-solid1",
+    "min": [
+     34.85,
+     -0.6,
+     -8.45
+    ],
+    "max": [
+     38.65,
+     0.0,
+     -6.75
+    ],
+    "colour": "#a6a9aa",
+    "solid": 265,
+    "set_in_step": true,
+    "cad_colour": "#e5eaed",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[57]",
+    "min": [
+     35.111,
+     1.583,
+     -15.69
+    ],
+    "max": [
+     36.009,
+     1.583,
+     -14.79
+    ],
+    "colour": "#e4e4e4",
+    "solid": 266,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "nano-Surface-Offset3[41]",
+    "min": [
+     35.129,
+     0.0,
+     -0.432
+    ],
+    "max": [
+     35.991,
+     1.6,
+     0.432
+    ],
+    "colour": "#e4e4e4",
+    "solid": 267,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.003
+   },
+   {
+    "name": "nano-Surface-Offset3[88]",
+    "min": [
+     35.167,
+     -8.518,
+     -15.633
+    ],
+    "max": [
+     35.953,
+     -2.5,
+     -14.848
+    ],
+    "colour": "#e4e4e4",
+    "solid": 268,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[110]",
+    "min": [
+     35.167,
+     -8.518,
+     -0.393
+    ],
+    "max": [
+     35.953,
+     -2.5,
+     0.393
+    ],
+    "colour": "#e4e4e4",
+    "solid": 269,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[71]",
+    "min": [
+     35.167,
+     0.0,
+     -15.633
+    ],
+    "max": [
+     35.953,
+     3.268,
+     -14.848
+    ],
+    "colour": "#a6a9aa",
+    "solid": 270,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "nano-Surface-Offset3[93]",
+    "min": [
+     35.167,
+     0.0,
+     -0.393
+    ],
+    "max": [
+     35.953,
+     3.268,
+     0.393
+    ],
+    "colour": "#a6a9aa",
+    "solid": 271,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "cap106C.STEP-1-solid1",
+    "min": [
+     35.2,
+     -1.81,
+     -4.15
+    ],
+    "max": [
+     39.2,
+     0.0,
+     -2.45
+    ],
+    "colour": "#a5936d",
+    "solid": 272,
+    "set_in_step": false,
+    "cad_colour": "#a5936d",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid4",
+    "min": [
+     16.449,
+     -0.352,
+     -6.602
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -6.2
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid4",
+    "min": [
+     16.449,
+     -0.352,
+     -12.252
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -11.85
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid10",
+    "min": [
+     14.247,
+     -0.352,
+     -4.2
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -3.797
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid7",
+    "min": [
+     16.449,
+     -0.352,
+     -4.202
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -3.8
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid7",
+    "min": [
+     16.449,
+     -0.352,
+     -9.852
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -9.45
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid5",
+    "min": [
+     16.449,
+     -0.352,
+     -5.802
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -5.4
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid10",
+    "min": [
+     14.247,
+     -0.352,
+     -9.85
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -9.447
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid5",
+    "min": [
+     16.449,
+     -0.352,
+     -11.452
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -11.05
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid8",
+    "min": [
+     14.247,
+     -0.352,
+     -5.8
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -5.397
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid8",
+    "min": [
+     14.247,
+     -0.352,
+     -11.45
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -11.047
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "reset shell.STEP-1-solid1",
+    "min": [
+     13.749,
+     1.6,
+     -10.05
+    ],
+    "max": [
+     16.749,
+     3.25,
+     -6.05
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 68,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "MINIUSBCORE.STEP-1-solid1",
+    "min": [
+     32.279,
+     0.55,
+     -11.47
+    ],
+    "max": [
+     40.479,
+     5.05,
+     -3.77
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 253,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "2pin_header__02.STEP-3-solid1",
+    "min": [
+     -3.644,
+     -1.65,
+     -11.43
+    ],
+    "max": [
+     1.356,
+     10.1,
+     -8.89
+    ],
+    "colour": "#191919",
+    "solid": null,
+    "inside_solid": 1,
+    "set_in_step": false,
+    "cad_colour": "#191919"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid3",
+    "min": [
+     14.247,
+     -0.352,
+     -6.6
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -6.197
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid3",
+    "min": [
+     14.247,
+     -0.352,
+     -12.25
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -11.847
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid6",
+    "min": [
+     16.449,
+     -0.352,
+     -5.002
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -4.6
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid6",
+    "min": [
+     16.449,
+     -0.352,
+     -10.652
+    ],
+    "max": [
+     17.252,
+     0.003,
+     -10.25
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "102 RESISTOR PACK.STEP-1-solid9",
+    "min": [
+     14.247,
+     -0.352,
+     -5.0
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -4.597
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 70,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "189 RESISTOR PACK.STEP-1-solid9",
+    "min": [
+     14.247,
+     -0.352,
+     -10.65
+    ],
+    "max": [
+     15.049,
+     0.003,
+     -10.247
+    ],
+    "colour": "#a6a9aa",
+    "solid": null,
+    "inside_solid": 69,
+    "set_in_step": true,
+    "cad_colour": "#e4e4e4"
+   },
+   {
+    "name": "2pin_header__02.STEP-2-solid1",
+    "min": [
+     -3.644,
+     -1.65,
+     -6.35
+    ],
+    "max": [
+     1.356,
+     10.1,
+     -3.81
+    ],
+    "colour": "#191919",
+    "solid": null,
+    "inside_solid": 1,
+    "set_in_step": false,
+    "cad_colour": "#191919"
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO27"
+  ],
+  "source": "mra_atlas"
+ },
+ "cap106C": {
+  "cadasio_part": "cap106C",
+  "bbox_min": [
+   -0.855,
+   -0.005,
+   -2.005
+  ],
+  "bbox_max": [
+   0.855,
+   1.815,
+   2.005
+  ],
+  "colours": {
+   "#cccecc": 6,
+   "#a6a9aa": 2,
+   "#a5936d": 1
+  },
+  "solids": [
+   {
+    "name": "cap106C-Surface-Offset1[6]",
+    "min": [
+     -0.855,
+     -0.005,
+     -2.005
+    ],
+    "max": [
+     0.855,
+     0.587,
+     -0.795
+    ],
+    "colour": "#a6a9aa",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "cap106C-Surface-Offset1[7]",
+    "min": [
+     -0.855,
+     -0.005,
+     0.795
+    ],
+    "max": [
+     0.855,
+     0.587,
+     2.005
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "cap106C-Boss-Extrude6",
+    "min": [
+     -0.85,
+     0.0,
+     -2.0
+    ],
+    "max": [
+     0.85,
+     1.81,
+     2.0
+    ],
+    "colour": "#a5936d",
+    "solid": 2,
+    "set_in_step": false,
+    "cad_colour": "#a5936d",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "cap106C-Surface-Offset1[8]",
+    "min": [
+     -0.85,
+     1.81,
+     -1.1
+    ],
+    "max": [
+     0.85,
+     1.81,
+     -0.5
+    ],
+    "colour": "#cccecc",
+    "solid": 3,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "cap106C-Surface-Offset1[2]",
+    "min": [
+     -0.359,
+     1.815,
+     0.027
+    ],
+    "max": [
+     0.359,
+     1.815,
+     0.364
+    ],
+    "colour": "#cccecc",
+    "solid": 4,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "cap106C-Surface-Offset1[3]",
+    "min": [
+     -0.359,
+     1.815,
+     0.427
+    ],
+    "max": [
+     0.359,
+     1.815,
+     0.764
+    ],
+    "colour": "#cccecc",
+    "solid": 5,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "cap106C-Surface-Offset1[4]",
+    "min": [
+     -0.359,
+     1.815,
+     0.836
+    ],
+    "max": [
+     0.359,
+     1.815,
+     1.291
+    ],
+    "colour": "#cccecc",
+    "solid": 6,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "cap106C-Surface-Offset1[1]",
+    "min": [
+     -0.35,
+     1.815,
+     -0.327
+    ],
+    "max": [
+     0.359,
+     1.815,
+     -0.136
+    ],
+    "colour": "#cccecc",
+    "solid": 7,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "cap106C-Surface-Offset1[5]",
+    "min": [
+     -0.85,
+     1.805,
+     -1.175
+    ],
+    "max": [
+     0.85,
+     1.805,
+     -1.1
+    ],
+    "colour": "#cccecc",
+    "solid": null,
+    "inside_solid": 3,
+    "flat": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc"
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "nano - reg": {
+  "cadasio_part": "nano - reg",
+  "bbox_min": [
+   -3.25,
+   -0.095,
+   -4.155
+  ],
+  "bbox_max": [
+   3.25,
+   1.6,
+   4.155
+  ],
+  "colours": {
+   "#cccecc": 6,
+   "#a6a9aa": 2,
+   "#181818": 1
+  },
+  "solids": [
+   {
+    "name": "nano - reg-Surface-Offset1[7]",
+    "min": [
+     -3.25,
+     -0.095,
+     -4.155
+    ],
+    "max": [
+     3.25,
+     0.695,
+     -1.727
+    ],
+    "colour": "#a6a9aa",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.011
+   },
+   {
+    "name": "nano - reg-Cut-Extrude2",
+    "min": [
+     -3.25,
+     -0.089,
+     -4.15
+    ],
+    "max": [
+     3.25,
+     1.6,
+     4.15
+    ],
+    "colour": "#181818",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[6]",
+    "min": [
+     -1.905,
+     -0.095,
+     1.727
+    ],
+    "max": [
+     1.905,
+     0.695,
+     4.155
+    ],
+    "colour": "#a6a9aa",
+    "solid": 2,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.01
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[5]",
+    "min": [
+     -1.253,
+     1.595,
+     -1.263
+    ],
+    "max": [
+     -0.721,
+     1.595,
+     -0.237
+    ],
+    "colour": "#cccecc",
+    "solid": 3,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[3]",
+    "min": [
+     -0.607,
+     1.595,
+     0.237
+    ],
+    "max": [
+     -0.075,
+     1.595,
+     1.237
+    ],
+    "colour": "#cccecc",
+    "solid": 4,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[4]",
+    "min": [
+     -0.461,
+     1.595,
+     -1.25
+    ],
+    "max": [
+     -0.149,
+     1.595,
+     -0.237
+    ],
+    "colour": "#cccecc",
+    "solid": 5,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[8]",
+    "min": [
+     0.033,
+     1.595,
+     -1.25
+    ],
+    "max": [
+     0.708,
+     1.595,
+     -0.25
+    ],
+    "colour": "#cccecc",
+    "solid": 6,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.001
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[2]",
+    "min": [
+     0.221,
+     1.595,
+     0.237
+    ],
+    "max": [
+     0.935,
+     1.595,
+     1.263
+    ],
+    "colour": "#cccecc",
+    "solid": 7,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   },
+   {
+    "name": "nano - reg-Surface-Offset1[1]",
+    "min": [
+     0.851,
+     1.595,
+     -1.25
+    ],
+    "max": [
+     1.409,
+     1.595,
+     -0.25
+    ],
+    "colour": "#cccecc",
+    "solid": 8,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#cccecc",
+    "box_error_mm": 0.0
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "led": {
+  "cadasio_part": "led",
+  "bbox_min": [
+   -2.0,
+   0.0,
+   -0.65
+  ],
+  "bbox_max": [
+   2.0,
+   0.8,
+   0.65
+  ],
+  "colours": {
+   "#a6a9aa": 1,
+   "#d8d8d8": 1
+  },
+  "solids": [
+   {
+    "name": "led-Mirror3",
+    "min": [
+     -2.0,
+     0.0,
+     -0.65
+    ],
+    "max": [
+     2.0,
+     0.5,
+     0.65
+    ],
+    "colour": "#a6a9aa",
+    "solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#d8d8d8",
+    "box_error_mm": 0.109
+   },
+   {
+    "name": "led-Boss-Extrude5",
+    "min": [
+     -0.7,
+     0.3,
+     -0.6
+    ],
+    "max": [
+     0.7,
+     0.8,
+     0.6
+    ],
+    "colour": "#d8d8d8",
+    "solid": 1,
+    "set_in_step": false,
+    "cad_colour": "#d8d8d8",
+    "box_error_mm": 0.0
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-103-01-F-S": {
+  "cadasio_part": "Samtec-TLW-103-01-F-S",
+  "bbox_min": [
+   -3.82,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   3.82,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff7f": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-103-01-F-S-Surface-Offset1",
+    "min": [
+     -3.82,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     3.82,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff7f",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": true,
+    "cad_colour": "#fffc9f",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "Samtec-TLW-103-01-F-S-Terminal Pattern",
+    "min": [
+     -3.81,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     3.81,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#fffc9f",
+    "box_error_mm": 0.004
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-104-01-F-S_B": {
+  "cadasio_part": "Samtec-TLW-104-01-F-S_B",
+  "bbox_min": [
+   -5.09,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   5.09,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-104-01-F-S_B-Surface-Offset1",
+    "min": [
+     -5.09,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     5.09,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-104-01-F-S_B-Terminal Pattern",
+    "min": [
+     -5.08,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     5.08,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-104-01-F-S_N": {
+  "cadasio_part": "Samtec-TLW-104-01-F-S_N",
+  "bbox_min": [
+   -5.09,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   5.09,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-104-01-F-S_N-Surface-Offset1",
+    "min": [
+     -5.09,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     5.09,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-104-01-F-S_N-Terminal Pattern",
+    "min": [
+     -5.08,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     5.08,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-104-01-F-S_R": {
+  "cadasio_part": "Samtec-TLW-104-01-F-S_R",
+  "bbox_min": [
+   -5.09,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   5.09,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-104-01-F-S_R-Surface-Offset1",
+    "min": [
+     -5.09,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     5.09,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-104-01-F-S_R-Terminal Pattern",
+    "min": [
+     -5.08,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     5.08,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-104-01-F-S_W": {
+  "cadasio_part": "Samtec-TLW-104-01-F-S_W",
+  "bbox_min": [
+   -5.09,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   5.09,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-104-01-F-S_W-Surface-Offset1",
+    "min": [
+     -5.09,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     5.09,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-104-01-F-S_W-Terminal Pattern",
+    "min": [
+     -5.08,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     5.08,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-108-01-F-S_B": {
+  "cadasio_part": "Samtec-TLW-108-01-F-S_B",
+  "bbox_min": [
+   -10.17,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   10.17,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-108-01-F-S_B-Surface-Offset1",
+    "min": [
+     -10.17,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     10.17,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-108-01-F-S_B-Terminal Pattern",
+    "min": [
+     -10.16,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     10.16,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-108-01-F-S_N": {
+  "cadasio_part": "Samtec-TLW-108-01-F-S_N",
+  "bbox_min": [
+   -10.17,
+   -3.594,
+   -1.255
+  ],
+  "bbox_max": [
+   10.17,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-108-01-F-S_N-Surface-Offset1",
+    "min": [
+     -10.17,
+     -3.594,
+     -1.255
+    ],
+    "max": [
+     10.17,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-108-01-F-S_N-Terminal Pattern",
+    "min": [
+     -10.16,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     10.16,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Samtec-TLW-108-01-F-S_R": {
+  "cadasio_part": "Samtec-TLW-108-01-F-S_R",
+  "bbox_min": [
+   -10.17,
+   -3.587,
+   -1.255
+  ],
+  "bbox_max": [
+   10.17,
+   6.413,
+   1.255
+  ],
+  "colours": {
+   "#ffff80": 1,
+   "#a6a9aa": 1
+  },
+  "solids": [
+   {
+    "name": "Samtec-TLW-108-01-F-S_R-Surface-Offset1",
+    "min": [
+     -10.17,
+     -0.963,
+     -1.255
+    ],
+    "max": [
+     10.17,
+     0.582,
+     1.255
+    ],
+    "colour": "#ffff80",
+    "solid": 0,
+    "skin": true,
+    "set_in_step": false,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   },
+   {
+    "name": "Samtec-TLW-108-01-F-S_R-Terminal Pattern",
+    "min": [
+     -10.16,
+     -3.587,
+     -1.245
+    ],
+    "max": [
+     10.16,
+     6.413,
+     1.245
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#ffff80",
+    "box_error_mm": 0.002
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "User Library-PJ-002AH_Pad": {
+  "cadasio_part": "User Library-PJ-002AH_Pad",
+  "bbox_min": [
+   -13.88,
+   -9.996,
+   -4.9
+  ],
+  "bbox_max": [
+   -1.0,
+   2.1,
+   1.5
+  ],
+  "colours": {
+   "#a6a9aa": 2,
+   "#c0c0c0": 2
+  },
+  "solids": [
+   {
+    "name": "User Library-PJ-002AH_Pad-Imported4",
+    "min": [
+     -13.88,
+     -9.996,
+     -1.5
+    ],
+    "max": [
+     -13.52,
+     2.1,
+     1.5
+    ],
+    "colour": "#a6a9aa",
+    "solid": 0,
+    "set_in_step": true,
+    "cad_colour": "#c0c0c0",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "User Library-PJ-002AH_Pad-Imported1",
+    "min": [
+     -11.95,
+     -9.996,
+     -4.9
+    ],
+    "max": [
+     -9.45,
+     -3.5,
+     -4.5
+    ],
+    "colour": "#a6a9aa",
+    "solid": 1,
+    "set_in_step": true,
+    "cad_colour": "#c0c0c0",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "User Library-PJ-002AH_Pad-Imported3",
+    "min": [
+     -7.825,
+     -9.996,
+     -1.25
+    ],
+    "max": [
+     -7.575,
+     -6.5,
+     1.25
+    ],
+    "colour": "#c0c0c0",
+    "solid": 2,
+    "set_in_step": false,
+    "cad_colour": "#c0c0c0",
+    "box_error_mm": 0.004
+   },
+   {
+    "name": "User Library-PJ-002AH_Pad-Imported2",
+    "min": [
+     -7.0,
+     -0.997,
+     -1.0
+    ],
+    "max": [
+     -1.0,
+     0.997,
+     1.0
+    ],
+    "colour": "#c0c0c0",
+    "solid": 3,
+    "set_in_step": false,
+    "cad_colour": "#c0c0c0",
+    "box_error_mm": 0.006
+   }
+  ],
+  "mra_instances": [
+   "NAUO82"
+  ],
+  "instances": [
+   "NAUO23"
+  ],
+  "source": "mra_atlas"
+ },
+ "Fitec FS90R Micro Servo NoConnector.step_По умолчанию": {
+  "source": "rcc_cadasio",
+  "cadasio_part": "Fitec FS90R Micro Servo NoConnector.step-1",
+  "bbox_min": [
+   -6.15,
+   -11.2,
+   -16.15
+  ],
+  "bbox_max": [
+   6.053,
+   18.5,
+   16.15
+  ],
+  "colours": {
+   "#0073b3": 1,
+   "#7e4e00": 1,
+   "#f50900": 1,
+   "#ffd500": 1,
+   "#c6c1bc": 1,
+   "#00639a": 1
+  },
+  "solids": [
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported1",
+    "min": [
+     -6.053,
+     -11.2,
+     -16.15
+    ],
+    "max": [
+     6.053,
+     15.503,
+     16.15
+    ],
+    "colour": "#0073b3",
+    "shown": 26
+   },
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported2",
+    "min": [
+     0.6,
+     -7.575,
+     -11.75
+    ],
+    "max": [
+     1.6,
+     -6.575,
+     -10.25
+    ],
+    "colour": "#7e4e00",
+    "shown": 26
+   },
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported3",
+    "min": [
+     -0.5,
+     -7.575,
+     -11.75
+    ],
+    "max": [
+     0.5,
+     -6.575,
+     -10.25
+    ],
+    "colour": "#f50900",
+    "shown": 26
+   },
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported4",
+    "min": [
+     -1.6,
+     -7.575,
+     -11.75
+    ],
+    "max": [
+     -0.6,
+     -6.575,
+     -10.25
+    ],
+    "colour": "#ffd500",
+    "shown": 26
+   },
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported5",
+    "min": [
+     -2.3,
+     15.5,
+     -7.447
+    ],
+    "max": [
+     2.282,
+     18.5,
+     -2.853
+    ],
+    "colour": "#c6c1bc",
+    "shown": 26
+   },
+   {
+    "name": "Fitec FS90R Micro Servo NoConnector.step-Imported6",
+    "min": [
+     -6.15,
+     -7.75,
+     -10.0
+    ],
+    "max": [
+     -6.05,
+     3.5,
+     10.0
+    ],
+    "colour": "#00639a",
+    "shown": 26
+   }
+  ],
+  "instances": [
+   "NAUO17",
+   "NAUO18"
+  ],
+  "parts": {
+   "#0073b3": "case",
+   "#00639a": "label sheet (0.1 mm, on the case's -x face)",
+   "#c6c1bc": "output spline",
+   "#7e4e00": "brown lead stub (own x 0.6..1.6)",
+   "#f50900": "red lead stub (own x -0.5..0.5)",
+   "#ffd500": "yellow (signal) lead stub (own x -1.6..-0.6)"
+  }
+ },
+ "Wires": {
+  "source": "rcc_cadasio",
+  "cadasio_part": "DC_barrel_connector_9V-2",
+  "bbox_min": [
+   36.55,
+   -0.65,
+   -1.35
+  ],
+  "bbox_max": [
+   39.55,
+   0.65,
+   1.35
+  ],
+  "colours": {
+   "#3f3f3f": 1,
+   "#c43527": 1
+  },
+  "solids": [
+   {
+    "name": "Wires-Body1[1]",
+    "min": [
+     36.55,
+     -0.65,
+     -1.35
+    ],
+    "max": [
+     39.55,
+     0.65,
+     -0.05
+    ],
+    "colour": "#3f3f3f",
+    "shown": 3
+   },
+   {
+    "name": "Wires-Body2[1]",
+    "min": [
+     36.55,
+     -0.65,
+     0.05
+    ],
+    "max": [
+     39.55,
+     0.65,
+     1.35
+    ],
+    "colour": "#c43527",
+    "shown": 3
+   }
+  ],
+  "instances": [
+   "NAUO28",
+   "NAUO29"
+  ],
+  "parts": {
+   "#3f3f3f": "black lead stub (own z < 0)",
+   "#c43527": "red lead stub (own z > 0)"
+  }
+ },
+ "_conductors": {
+  "note": "Lead colours traced through rcc.glb by shared end points (15 Oct 2026), for the player's wires and the stubs on the parts.",
+  "battery_lead": "The CAD's battery lead (NAUO41 plugged, NAUO42 unplugged) has two conductors. The one leaving the battery clip (NAUO15 DC_Adaptor) from its stub at own z -1.7..-0.3 (assembly x 640.7) ends on the barrel plug's red stub (Wires, own z > 0, assembly z 1354.8); the one from the clip's stub at own z 0.3..1.7 (x 642.7) ends on the plug's black stub (z 1353.3). So the clip's stub at own z < 0 is red (materials.json DC_Adaptor regions). Polarity against the real clip not checked.",
+  "servo_leads": "Each FS90R carries three 1.5 mm lead stubs; Cadasio colours them brown (own x +1.1), red (0) and yellow (-1.1). On the right motor NAUO17 they sit at assembly y 907.96 / 906.86 / 905.76 (brown on top), as the CAD's own lead bodies (Fitec ... Wire Brown / Red / Yellow) have them. Both plugged leads end yellow on S, red on V, brown on G (docs/research/rcc/cad_study.md 3.3)."
+ },
+ "_skipped": {
+  "note": "Published RCC colours (TechBox's Cadasio project 19075) that this guide does not use, and why. 'Lee' = a ruling Lee made for the MRA that applies to the same part here; 'house' = the rulebook's colour library (docs/cadasio-patterns.md section 8).",
+  "Ensamblaje_Shield_NANO (I/O module) board #224bbe": "Lee 2026-10-14: the I/O module's board is the Nano's navy #000f41. The rest of the module (yellow header bases, silver pins) takes the MRA atlas, which the published RCC colours also agree with.",
+  "nano-4 (controller Nano) and nano-3 boards #002d37 / teal, pads and print left at SolidWorks grey #e4e4e4": "house Nano board #000f41; the MRA atlas entry for nano_Varsayılan (navy board, silver pins) is used for the controller's Nano.",
+  "the car Nano inside Ensamblaje_Shield_NANO (nano-board #002e37, chips #e4e4e4, headers tan #ffdd87, resistor packs #d8d8d8, MINIUSBSHELL and NANO DIODE #ffffff)": "SolidWorks defaults and a teal board, never coloured by the author (the published guide hid this Nano and used a separate model). Coloured by rules instead (materials.json, the car Nano's rules).",
+  "KY-023 joystick PCB and potentiometers #000000": "pure black reads as a silhouette; the MRA atlas (board #303030, pads and print #e4e4e4) is used.",
+  "Mini USB B #cbd2ef (all metal parts)": "SolidWorks default blue-grey, a slip (rulebook appendix B); the MRA rule (black overmould, silver plug) is used.",
+  "USB Cable end #81878c / #e4e4e4": "not in the RCC CAD; the MRA's A end and its rule (black, silver shell, white tongue) are used.",
+  "nRF24L01 modules, one solid #000000": "our model has 40 solids; coloured by rules (board black, chip IC black, crystal and pins silver, small parts tan).",
+  "adapter board (3D_1-PCB ... Adapter) header pins gold #f2c22e / #d3aa21, C1 #323232": "Lee 2026-10-13: pins are silver #a6a9aa. C1: a silver can on a black base, as in Lee's photos.",
+  "Controller-with-vias silkscreen #ffffff, pins #d1b36e / #fffff1, BottomCopper #ebebeb": "Lee's photo: black print on a white board (decals.json); pins silver (Lee 2026-10-13); the board and its copper slab one white #f4f4f4.",
+  "BLS-3 servo plug contacts #f6e099 / #eeeeee (they switch from step to step), housing #282828": "the MRA's servo plugs: housing #404040, contacts #a6a9aa.",
+  "Pololu Wheel 60mm rim #191919, tyre #272727": "house black plastic #1e1616 for the rim and cable-jacket black #2d2926 for the tyre: the same look, in colours the library already has.",
+  "DC_barrel_connector_9V: Component3 / eBom-FreeParts #c4c5c4, Component4 / Insolation #191919": "house metal #a6a9aa and black plastic #1e1616. (Its lead stubs are used: entry 'Wires'.)",
+  "Wires stub colours #3f3f3f / #c43527": "kept for which stub is which; materials.json swaps them for the house pre-wired lead colours (#2d2926 / #ef3340).",
+  "9V-battery, one solid #1c1c1c (end of guide; grey #e3e3e3 earlier)": "our model has 5 solids; body grey #5f5f5f so it reads against the black clip, terminals silver (unconfirmed: which battery?).",
+  "DC_Adaptor (battery clip), one solid #000000": "our model has 5 solids: housing black #1e1616, snaps silver, lead stubs red / black (see _conductors).",
+  "2024-RCC_ControllerHandles (guards) #000000": "the same, as house black plastic #1e1616 (the light grey #e3e3e3 in the digest is only the colour left after the last step).",
+  "L1-L7 wood (CAD default, rendered pale yellow)": "house wood #deb887, engraving ink #1e1616."
+ }
+}

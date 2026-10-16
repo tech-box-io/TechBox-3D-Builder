@@ -1,0 +1,553 @@
+{
+  "_about": "Colour and detail rules for the RCC's 3D model. Edit here, then run: python tools/build_model.py \"RCC Build Instructions\". Rules are tried top to bottom against each CAD mesh name; the first match wins. A mesh whose rule names no colour takes its colours from the \"atlas\" file (colour-atlas-rcc.json): the MRA's atlas for the parts the two kits share, and TechBox's own RCC Cadasio project where its colours suit. A rule that does name a colour is a TechBox decision or a house-library colour that overrides it (see _notes). First draft, 15 Oct 2026: the colours listed under _notes.unconfirmed wait on Lee.",
+  "source": "rcc.glb",
+  "source_scale_to_mm": 1000,
+  "palette": {
+    "edge": "#111111",
+    "wood": "#deb887",
+    "steel": "#a6a9aa",
+    "black_plastic": "#1e1616",
+    "white_plastic": "#f5f5f6",
+    "pcb_blue": "#224bbe",
+    "pcb_navy": "#000f41",
+    "pcb_black": "#1e1616",
+    "pcb_white": "#f4f4f4",
+    "pin": "#a6a9aa",
+    "pin_silver": "#a6a9aa",
+    "metal_can": "#a6a9aa",
+    "ic_black": "#191919",
+    "header_red": "#ef3340",
+    "header_black": "#181818",
+    "header_white": "#f5f5f6",
+    "header_yellow": "#ffff80",
+    "plug_grey": "#404040",
+    "cap_tan": "#a5936d",
+    "pot_blue": "#0074d9",
+    "servo_body": "#2d2926",
+    "servo_label": "#f5f5f6",
+    "servo_fs90r": "#0073b3",
+    "servo_fs90r_label": "#00639a",
+    "servo_fs90r_spline": "#c6c1bc",
+    "tyre": "#2d2926",
+    "battery_grey": "#5f5f5f",
+    "wire_brown": "#7c5a30",
+    "wire_red": "#ef3340",
+    "wire_orange": "#ff851b",
+    "wire_yellow": "#ffdc00",
+    "wire_green": "#3d9970",
+    "wire_blue": "#0074d9",
+    "wire_purple": "#a75294",
+    "wire_grey": "#737980",
+    "wire_white": "#f2f2f2",
+    "grey": "#a6a9aa",
+    "ink": "#1e1616",
+    "silk_black": "#1e1616",
+    "lead_brown": "#975100",
+    "lead_red": "#bd291f",
+    "lead_orange": "#ff9d07",
+    "lead_yellow": "#ffd500",
+    "sticker_white": "#ffffff",
+    "sticker_black": "#1a1a1a",
+    "sticker_blue": "#0074d9",
+    "cable_black": "#2d2926",
+    "sticker_off_black": "#181818"
+  },
+  "defaults": {
+    "color": "grey",
+    "edge_angle": 40,
+    "simplify_mm": 0.04,
+    "edge_min_size_mm": 0.0
+  },
+  "rules": [
+    {
+      "match": "^(Fitec (Right|Left) Wires? |Batt?ery Wires )",
+      "omit": true,
+      "_about": "the CAD's own lead bodies (NAUO31-42: both servo leads in both poses, and the battery lead in both poses): the player draws these leads as wires along wire-paths.json. Not the plug housings (BLS-3) or the barrel plugs."
+    },
+    {
+      "match": "^Mini USB B$",
+      "color": "black_plastic",
+      "regions": [
+        {
+          "box": [
+            [0.05, -5, -5],
+            [8, 5, 5]
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "the USB cable's Mini-B end (NAUO16, in the CAD: the same model and own frame as the MRA's usb-mini-b.glb): the metal plug (x > 0 in its own frame) silver, the overmould black. The MRA's ^MiniUSBB$ rule, renamed."
+    },
+    {
+      "match": "^USBCableend$",
+      "color": "black_plastic",
+      "components": [
+        {
+          "rank": 1,
+          "color": "pin"
+        },
+        {
+          "rank": 2,
+          "color": "white_plastic"
+        },
+        {
+          "rank": [3, 4],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "the USB cable's A end (extra part USB_A, the MRA's usb-a-end.glb): overmould black, shell and contacts silver, tongue white"
+    },
+    {
+      "match": "^L[1-7]$",
+      "color": "wood",
+      "simplify_mm": 0,
+      "engraving": "ink"
+    },
+    {
+      "match": "^rim$",
+      "color": "black_plastic",
+      "simplify_mm": 0.05,
+      "max_tris": 4000,
+      "_about": "wheel rim (NAUO8 / NAUO9)"
+    },
+    {
+      "match": "^tyre$",
+      "color": "tyre",
+      "simplify_mm": 0.05,
+      "max_tris": 6000,
+      "outline": true,
+      "_about": "wheel tyre: cable-jacket black, a shade off the rim's black so the two tell apart; outlined, since its round tread has no crease to draw"
+    },
+    {
+      "match": "^RadioFrequencyCommunicationModule_nRF24L01",
+      "color": "pin",
+      "components": [
+        {
+          "rank": 0,
+          "color": "pcb_black"
+        },
+        {
+          "thin": [0.05, 0.15],
+          "mid": [8.0, 9.5],
+          "long": [11.0, 12.5],
+          "color": "pcb_black"
+        },
+        {
+          "thin": [0.4, 0.6],
+          "mid": [3.8, 4.2],
+          "long": [3.8, 4.2],
+          "color": "ic_black"
+        },
+        {
+          "thin": [0.7, 0.9],
+          "mid": [0.7, 0.9],
+          "long": [1.4, 1.6],
+          "color": "cap_tan"
+        }
+      ],
+      "edge_min_size_mm": 1.6,
+      "_about": "nRF24L01 radio (NAUO10 car, NAUO11 controller), one mesh of 40 solids: the board with the header's plastic under it (one solid) and the antenna area (a 0.1 mm sheet) black, the 4 x 4 mm chip IC black, the 0.8 x 0.8 x 1.5 mm parts tan, the rest (crystal, header pins, pads) silver"
+    },
+    {
+      "match": "^9V-battery$",
+      "color": "battery_grey",
+      "components": [
+        {
+          "rank": [2, 3],
+          "color": "pin"
+        }
+      ],
+      "_about": "9 V battery (NAUO14), 5 solids: the body in three pieces grey, the two terminals silver"
+    },
+    {
+      "match": "^DC_Adaptor$",
+      "color": "black_plastic",
+      "components": [
+        {
+          "rank": [1, 2],
+          "color": "pin"
+        },
+        {
+          "rank": [3, 4],
+          "color": "cable_black"
+        }
+      ],
+      "regions": [
+        {
+          "box": [
+            [39.55, 42.5, -1.75],
+            [45.6, 44.0, -0.25]
+          ],
+          "color": "wire_red"
+        }
+      ],
+      "_about": "battery clip (NAUO15), 5 solids: housing black, the two snaps silver, the two lead stubs black, and the stub at own z < 0 red: the CAD's battery lead runs from it to the barrel plug's red stub (colour-atlas-rcc.json _conductors). The box stops short of x 39.5, the floor of the housing's pocket, so the housing stays black."
+    },
+    {
+      "match": "^Fitec FS90R",
+      "atlas_colours": {
+        "#0073b3": "servo_fs90r",
+        "#00639a": "servo_fs90r_label",
+        "#c6c1bc": "servo_fs90r_spline",
+        "#7e4e00": "lead_brown",
+        "#f50900": "lead_red",
+        "#ffd500": "lead_yellow"
+      },
+      "simplify_mm": 0.05,
+      "fillet_edges_mm": 0.5,
+      "_about": "FS90R wheel motor (NAUO17 right, NAUO18 left), 6 solids, coloured from the RCC Cadasio project (atlas): case blue, label darker blue, spline light grey, as published (unconfirmed); its three lead stubs in the colours of the lead the player draws"
+    },
+    {
+      "match": "^BLS-3",
+      "color": "plug_grey",
+      "components": [
+        {
+          "rank": [1, 2, 3],
+          "color": "pin"
+        }
+      ],
+      "_about": "the servo leads' 3-way plug housings (NAUO19-22): as the MRA's servo plugs, housing #404040 and contacts silver"
+    },
+    {
+      "match": "^2024-RCC_ControllerHandles",
+      "color": "black_plastic",
+      "_about": "the controller's two guards (NAUO24 left, NAUO25 right)"
+    },
+    {
+      "match": "^(Board~j5tP|BottomCopper~j5tP|Board~hwXZ)",
+      "color": "pcb_white",
+      "simplify_mm": 0.02,
+      "_about": "the controller board (NAUO30: a 0.09 mm top sheet over a 2.54 mm copper slab, both white) and the adapter board (NAUO26): white, black print as decals"
+    },
+    {
+      "match": "^CAP-SMD_BD6\\.3",
+      "color": "metal_can",
+      "regions": [
+        {
+          "box": [
+            [-4, -4, -0.5],
+            [4, 4, 2.05]
+          ],
+          "color": "black_plastic"
+        },
+        {
+          "box": [
+            [3.31, -4, -0.5],
+            [4, 4, 0.35]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-4, -4, -0.5],
+            [-3.31, 4, 0.35]
+          ],
+          "color": "pin"
+        }
+      ],
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.02,
+      "_about": "C1 on the controller and on the adapter (470 uF can, one solid each): the square base (own z below 1.9) black, the can silver, the terminal tabs beyond the base silver; the can's print is a decal"
+    },
+    {
+      "match": "^HDR-TH_",
+      "color": "pin",
+      "components": [
+        {
+          "rank": 0,
+          "color": "header_black"
+        }
+      ],
+      "simplify_mm": 0.02,
+      "_about": "every header and socket on the controller and adapter boards (U1, U2, U3, H1, H2, L-JS, R-JS, the radio socket and the adapter's underside sockets): plastic black, pins silver (the controller's radio socket is one solid, so all black)"
+    },
+    {
+      "match": "^Component4$",
+      "color": "black_plastic",
+      "_about": "barrel plug (NAUO28 / NAUO29): the grip"
+    },
+    {
+      "match": "^(Component3|eBom-FreeParts)$",
+      "color": "metal_can",
+      "_about": "barrel plug: the sleeve and the inner part"
+    },
+    {
+      "match": "^Insolation$",
+      "color": "black_plastic",
+      "_about": "barrel plug: the insulating ring at its tip"
+    },
+    {
+      "match": "^Wires$",
+      "atlas_colours": {
+        "#3f3f3f": "cable_black",
+        "#c43527": "wire_red"
+      },
+      "_about": "barrel plug: its two lead stubs, red and black as the RCC Cadasio project has them (atlas), in the house pre-wired lead colours"
+    },
+    {
+      "match": "^nano-board$",
+      "color": "pcb_navy",
+      "simplify_mm": 0.02,
+      "_about": "the car's Nano (NAUO86, its own part: own_parts) is a plainer model than the controller's (see _notes.car_nano); its board navy, as every Nano"
+    },
+    {
+      "match": "^atmega328$",
+      "color": "ic_black",
+      "regions": [
+        {
+          "box": [
+            [3.95, -1, -6],
+            [6, 2, 6]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-6, -1, -6],
+            [-3.95, 2, 6]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-6, -1, 3.95],
+            [6, 2, 6]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-6, -1, -6],
+            [6, 2, -3.95]
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 3000,
+      "edge_min_size_mm": 1.5,
+      "_about": "car Nano: the processor, one solid with its legs: body IC black, legs (beyond 3.95 mm from its middle) silver"
+    },
+    {
+      "match": "^ftdi FT232rl$",
+      "color": "ic_black",
+      "regions": [
+        {
+          "box": [
+            [3.35, -1, -6],
+            [6, 3, 6]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-6, -1, -6],
+            [-3.35, 3, 6]
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 2500,
+      "edge_min_size_mm": 1.5,
+      "_about": "car Nano: the USB chip, one solid with its legs: body IC black, legs (beyond 3.35 mm across) silver"
+    },
+    {
+      "match": "^(NANO DIODE|MINIUSBCORE)$",
+      "color": "ic_black",
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.015,
+      "_about": "car Nano: the diode and the USB socket's insert"
+    },
+    {
+      "match": "^(16mhz crystal - measured|MINIUSBSHELL|MINI USB CONTACT|MINI USB SOLDER)$",
+      "color": "pin",
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.015,
+      "_about": "car Nano: the crystal, the USB socket's shell (the same silver as the pins, as Lee ruled for the MRA), its contacts and solder pads"
+    },
+    {
+      "match": "RESISTOR PACK$",
+      "color": "ic_black",
+      "regions": [
+        {
+          "box": [
+            [-2, -0.1, 0.7],
+            [2, 1, 2]
+          ],
+          "color": "pin"
+        },
+        {
+          "box": [
+            [-2, -0.1, -2],
+            [2, 1, -0.7]
+          ],
+          "color": "pin"
+        }
+      ],
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.015,
+      "_about": "car Nano: the two resistor arrays (102, 189): body black, terminals along both long sides silver"
+    },
+    {
+      "match": "^(15pin_header__|2pin_header__02)$",
+      "color": "pin",
+      "regions": [
+        {
+          "box": [
+            [-50, -0.01, -50],
+            [50, 2.55, 50]
+          ],
+          "color": "header_black"
+        }
+      ],
+      "simplify_mm": 0.02,
+      "_about": "car Nano: its pin rows and ICSP pins, each one solid with its plastic: the 2.5 mm spacer (own y 0 to 2.5) black, the pins silver"
+    },
+    {
+      "match": "^nano_",
+      "simplify_mm": 0.06,
+      "edge_min_size_mm": 2.0,
+      "max_tris": 16000,
+      "atlas_colours": {
+        "#cccccc": "pin"
+      },
+      "_about": "the controller's Nano (NAUO27): the MRA's Nano model, rule and atlas"
+    },
+    {
+      "match": "^Shield_Arduino",
+      "color": "pcb_navy",
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^Samtec-TLW-",
+      "color": "pin",
+      "components": [
+        {
+          "rank": 1,
+          "color": "header_yellow",
+          "skin": true
+        }
+      ],
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^47uf CAP",
+      "color": "metal_can",
+      "components": [
+        {
+          "thin": [0, 0.05],
+          "color": "black_plastic"
+        }
+      ],
+      "edge_min_size_mm": 2,
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^cap106C",
+      "simplify_mm": 0.015,
+      "edge_min_size_mm": 1.5
+    },
+    {
+      "match": "^(m7 diode|smt_resistor|nano - reg|blm21|reset core)",
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.015
+    },
+    {
+      "match": "^reset shell",
+      "simplify_mm": 0.015
+    },
+    {
+      "match": "^led$",
+      "simplify_mm": 0.015,
+      "edge_min_size_mm": 1.0
+    },
+    {
+      "match": "^PCB_1",
+      "edge_min_size_mm": 5
+    },
+    {
+      "match": "^5x_Ang_Conn"
+    },
+    {
+      "match": "^Thumb-Button",
+      "simplify_mm": 0.06,
+      "max_tris": 3500,
+      "outline": true,
+      "fillet_edges_mm": 0.5
+    },
+    {
+      "match": "^Tactile-Switch",
+      "simplify_mm": 0.05,
+      "edge_min_size_mm": 3
+    }
+  ],
+  "_notes": {
+    "unconfirmed": [
+      "FS90R wheel motors (NAUO17 / NAUO18): blue #0073b3 with a darker blue label #00639a and a light grey spline #c6c1bc, as TechBox's published RCC guide shows them (palette servo_fs90r, servo_fs90r_label, servo_fs90r_spline). No text source states the real colour; Feetech's own FS90R may be black with a white label. Lee to rule from the kit's motor (one palette change).",
+      "Servo lead signal wire: yellow #ffd500 (lead_yellow), as the CAD names it and the published guide shows it, on the motors' lead stubs and for the leads the player draws; orange if the kit's leads are orange (the MRA's are). Brown #975100 and red #bd291f are the MRA's lead colours.",
+      "nRF24L01 radio boards (NAUO10 / NAUO11): black #1e1616 as published (the modules also come green); chip #191919, crystal and pins silver, small parts tan #a5936d.",
+      "Wheels (NAUO8 / NAUO9): rim #1e1616, tyre #2d2926 (published #191919 / #272727). Black, but check the kit's wheels.",
+      "9 V battery (NAUO14): body grey #5f5f5f (palette battery_grey), terminals silver. Which battery, and is it in the kit?",
+      "Battery clip (NAUO15): housing black, snaps silver, its two lead stubs red #ef3340 and black #2d2926 (the house pre-wired lead colours), red on the conductor the CAD takes to the barrel plug's red stub. The barrel plug: grip and tip ring black, sleeve silver, stubs red / black as the published guide has them.",
+      "Servo plug housings BLS-3 (NAUO19-22): #404040 (palette plug_grey) like the MRA's servo plugs, contacts silver; or house Dupont black #1e1616.",
+      "Header pins silver #a6a9aa (house, and Lee's MRA ruling), though Lee's controller photo shows gold pins on L-JS / R-JS and gold-looking pins on U1 / U2 (the published guide has gold #d3aa21 / #f2c22e).",
+      "Both TechBox boards (controller NAUO30, adapter NAUO26) white #f4f4f4 (palette pcb_white) with black print (decals.json): near-white clips to page white on a lit face, so the board reads by its black edges, as in Lee's photos. Their C1 cans silver on a black base.",
+      "The car's Nano (NAUO86): coloured by rules (board navy, chips IC black with silver legs, pins and USB shell silver, header spacers black) because it is a plainer model than the controller's Nano; see car_nano.",
+      "The I/O module (NAUO23) keeps the MRA's colours and silkscreen: is the RCC kit's module the same board as the MRA's?",
+      "Wherever the atlas shows SolidWorks' default grey #e4e4e4 (pads and print on the Nano and joystick boards), nobody has coloured that solid in Cadasio yet (as on the MRA).",
+      "47 uF capacitor on the I/O module: kept as a silver can; the Cadasio projects have it all near-black (as on the MRA).",
+      "USB cable: the STEP files have no colours (SolidWorks' default only). Drawn black (#1e1616) with silver metal and a white tongue in the A end, as on the MRA."
+    ],
+    "decided": [
+      "2026-10-13 (Lee, MRA): every pin-header base on the I/O Extension Module is yellow, whatever colour the CAD names it.",
+      "2026-10-13 (Lee, MRA): outline edges use Cadasio's crease angle of 40 degrees on every part.",
+      "2026-10-13 (Lee, MRA): colours follow TechBox's own Cadasio project (the atlas file) unless a rule here says otherwise. For the RCC the atlas carries the MRA's entries for the parts the kits share (the RCC project colours them differently: colour-atlas-rcc.json _skipped) and the RCC project's colours where they suit.",
+      "2026-10-13 (Lee, MRA): pins are silver: regulator pins, solder mounds on the Nano, joystick header pins. The mini-USB shell is the same silver as the pins.",
+      "2026-10-13 (MRA): on a servo lead brown goes on G and the signal wire on S. The RCC CAD agrees: both plugged leads end yellow on S, red on V, brown on G (docs/research/rcc/cad_study.md 3.3).",
+      "2026-10-14 (Lee, MRA): the I/O module carries its silkscreen (pin names, G V S legends, POWER, RESET, the capacitor's and the regulator's print), from Lee's photos of the real board, placed from the CAD's pin positions: decals.json, named by \"decals\" here. The RCC's decals.json also carries the two TechBox boards' print and L1's FRONT.",
+      "2026-10-14 (Lee, MRA third round): the I/O module's board is the same navy as the Nano's (#000f41, pcb_navy); the house blue looked off beside the darker Nano.",
+      "2026-10-15 (Lee, drawing of L1): L1 is etched FRONT at the front-left corner and L1 at the front-right, reading upright from behind the car (flat, wheel end away). The CAD's L1 code is in that corner but upside down, so it is turned half round in place (move_engraving); FRONT is not in the CAD and is drawn as a decal (decals.json)."
+    ],
+    "adjusted": [
+      "L1's engraved code (NAUO1) is turned half round on its face, in place, so that it reads upright from behind the car as in Lee's drawing (docs/research/rcc/cad_study.md 2.5): its pocket is filled in and the code drawn there instead (build_model.move_engraving)."
+    ],
+    "wires": "The CAD's lead bodies (NAUO31-38 and NAUO39 / NAUO40: each servo's one lead in its loose and its plugged pose; NAUO41 / NAUO42: the battery lead in both poses) are left out of the model: the player draws the leads itself, along the centre lines in wire-paths.json, so that they can move. The plug housings (BLS-3) and the barrel plug stay; one of each pair of poses is used.",
+    "car_nano": "Option (b) is used: the controller's Nano model in the car's seat (extra part NANO_CAR, nano-car.glb). NAUO86's rules stay, in case the CAD's own car Nano is shown again.",
+    "extra_parts": "USB_A is the MRA's USB cable A end (cad_extra/USBCableend.STEP, converted once): the RCC CAD has the Mini-B end (NAUO16) but no A end. Laid flat on the table beyond the controller's grips, in line with the Nano, plug pointing away (-X), with the MRA's 56 mm gap to the Mini-B end's cable (docs/research/rcc/reuse_and_colours.md 1.5); the camera and the table layout may want it elsewhere.",
+    "not_carried_over": "MRA rules that have no counterpart here: the M3 screws, MG90S servos, shoulder parts, pathways and JR cables, the base horn and R8 adjustments, R8's moved engraving, the motor dot stickers, the servo label and horn colours (Lee 2026-10-13: pink labels, black horns: MG90S only), and the extra Mini-B end (the RCC CAD has one)."
+  },
+  "atlas": "colour-atlas-rcc.json",
+  "own_parts": {
+    "NAUO86": "the car's Nano Board: inside the I/O module (NAUO23) in the CAD, its own part in the guide, which fits it onto the module"
+  },
+  "extra_parts": {
+    "USB_A": {
+      "glb": "usb-a-end.glb",
+      "pose": {
+        "t": [401.0, 913.51, 1112.91],
+        "r": [1, 0, 0, -90],
+        "at": [0, 0, 0]
+      },
+      "_about": "the USB cable's A end (the MRA's usb-a-end.glb), lying flat on the table beyond the controller's grips (underside at the guards' underside, y 913.36), plug pointing away from the controller (plug tip x 535.3, cable end x 585.0), in line with the Nano (z 1112.91)"
+    },
+    "NANO_CAR": {
+      "glb": "nano-car.glb",
+      "pose": [0.0, 0.0, 225.0],
+      "_about": "the car's Nano Board: the controller's Nano model (NAUO27, the MRA's Nano Board, cut out of rcc.glb into nano-car.glb in the assembly frame) moved 225 mm along z into the car's seat on the I/O module, so that the two Nano Boards look alike (option (b) in docs/research/rcc/reuse_and_colours.md 1.4). The CAD's own car Nano, NAUO86 (own_parts), is a plainer model; the guide does not show it, so it is left out of the model."
+    }
+  },
+  "move_engraving": {
+    "NAUO1": {
+      "by": [-0.74, 0, -0.95],
+      "turn": 180
+    }
+  },
+  "decals": "decals.json"
+}

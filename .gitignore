@@ -1,0 +1,15 @@
+# Large or local-only files. The CAD's source STEP files are too big for GitHub (the RCC's is 101 MB) and are not needed to
+# regenerate a guide (the converted .glb files are kept); their checksums are in cad-sources.sha256.
+*.STEP
+*.step
+*.stp
+MRA_Videos/
+share/
+thumbs/
+.venv.nosync/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/settings.local.json
+# The repository's own data lives in .git.nosync (kept out of iCloud sync); .git is a pointer file to it.
+.git.nosync/

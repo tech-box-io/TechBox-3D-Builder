@@ -1,0 +1,10059 @@
+{
+ "meta": {
+  "id": "19075-rcc_remote_controlled_car",
+  "url": "https://instructions.online/?id=19075-rcc_remote_controlled_car",
+  "name": "RCC Remote Controlled Car",
+  "type": "standard",
+  "mm_per_unit": 4.191,
+  "ordered_steps": 55,
+  "viewer_steps": 52,
+  "behaviours": {
+   "pause": 49,
+   "play": 3,
+   "hidden": 3
+  },
+  "scene": {
+   "colour_main": "#EEEEEE",
+   "colour_type": "Single",
+   "scene_render_style": "matt",
+   "scene_edge_style": "none",
+   "scene_edge_colour": "#000000",
+   "scene_edge_width": 1,
+   "scene_edge_angle": 40,
+   "scene_silhouette_style": "none",
+   "scene_camera_fov": null,
+   "scene_light_intensity_ambient": 1.2,
+   "scene_light_intensity_directional": 1,
+   "scene_light_colour_ambient": "#333333",
+   "scene_light_colour_directional": "#cccccc",
+   "scene_light_follow_camera": true,
+   "show_viewcube": true,
+   "up_axis": "+y"
+  },
+  "part_style_overrides": {
+   "toon": 3840
+  },
+  "part_edge_overrides": {
+   "normal": 1995,
+   "default": 1995
+  },
+  "camera_fov": 45,
+  "camera_type": "perspective",
+  "project_flags": {
+   "autoStart": true,
+   "animateStepsViewer": true,
+   "animatePreviousStep": true,
+   "edgesVisibleOnAnimate": true,
+   "baseFontSize": 20,
+   "defaultFont": "PublicSansMedium",
+   "defaultFontColour": "#637381",
+   "stepPrefix": "Step",
+   "tooltips": false,
+   "viewerNavigationOverlay": null,
+   "interactionPrompt": false,
+   "transparentBackground": false,
+   "forceLandscape": false,
+   "speakStepDescriptionViewer": false,
+   "chain": false,
+   "repeatCount": 0,
+   "embedSize": {
+    "width": 560,
+    "height": 315
+   }
+  },
+  "animation": {
+   "duration": {
+    "800": 55
+   },
+   "cad": {
+    "{\"animation_hide\": \"fade\", \"animation_move\": \"tween\", \"animation_show\": \"fade\"}": 11,
+    "{\"animation_attention\": \"none\", \"animation_hide\": \"fade\", \"animation_move\": \"tween\", \"animation_show\": \"fade\"}": 44
+   },
+   "camera": {
+    "{\"animate_orbit\": \"false\", \"animation_move\": \"tween\", \"animation_speed\": \"2\"}": 11,
+    "{\"animate_orbit\": false, \"animation_move\": \"tween\", \"animation_speed\": 2}": 44
+   }
+  },
+  "toolbox": {
+   "image": 6,
+   "lead line": 8
+  },
+  "label_styles": [],
+  "line_styles": [
+   {
+    "style": [
+     "lead line",
+     "#ff0000",
+     "solid"
+    ],
+    "n": 8
+   }
+  ],
+  "label_texts": [],
+  "images": [
+   {
+    "name": "new eye",
+    "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+    "n": 4
+   },
+   {
+    "name": "Image",
+    "src": "ASS25556654-f7ad-814c-1dfb-f1126dacde98.png",
+    "n": 1
+   },
+   {
+    "name": "Image",
+    "src": "ASSd3aeb562-c85c-b108-42b8-13e71f410bd9.svg",
+    "n": 1
+   }
+  ],
+  "colour_overrides": [
+   {
+    "part": "BLS-3.step-Imported",
+    "colour": "#eeeeee",
+    "name": "white",
+    "n": 24
+   },
+   {
+    "part": "BLS-3.step-Imported",
+    "colour": "#f6e099",
+    "name": "tan/wood",
+    "n": 24
+   },
+   {
+    "part": "PCB_1",
+    "colour": "#000000",
+    "name": "black",
+    "n": 8
+   },
+   {
+    "part": "PCB_1",
+    "colour": "#c9c9c9",
+    "name": "light grey",
+    "n": 8
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-F~HDR2.54-F-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-F~HDR2.54-F-LI-1X3P~hwXZ[4]",
+    "colour": "#181818",
+    "name": "black",
+    "n": 6
+   },
+   {
+    "part": "HDR-TH_2P-P2.54-V-F-1~HDR2.54-F-LI-1X2P~hwXZ-HDR-TH_2P-P2.54-V-F-1~HDR2.54-F-LI-1X2P~hwXZ[3]",
+    "colour": "#181818",
+    "name": "black",
+    "n": 6
+   },
+   {
+    "part": "Fitec FS90R Micro Servo NoConnector.step-Imported",
+    "colour": "#0073b3",
+    "name": "blue",
+    "n": 6
+   },
+   {
+    "part": "Fitec FS90R Micro Servo NoConnector.step-Imported",
+    "colour": "#00639a",
+    "name": "blue",
+    "n": 6
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-F~HDR2.54-F-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-F~HDR2.54-F-LI-1X3P~hwXZ[4]",
+    "colour": "#3f3f3f",
+    "name": "dark grey",
+    "n": 6
+   },
+   {
+    "part": "HDR-TH_2P-P2.54-V-F-1~HDR2.54-F-LI-1X2P~hwXZ-HDR-TH_2P-P2.54-V-F-1~HDR2.54-F-LI-1X2P~hwXZ[3]",
+    "colour": "#3f3f3f",
+    "name": "dark grey",
+    "n": 6
+   },
+   {
+    "part": "Fitec FS90R Micro Servo NoConnector.step-Imported",
+    "colour": "#1aa2ef",
+    "name": "blue",
+    "n": 6
+   },
+   {
+    "part": "Fitec FS90R Micro Servo NoConnector.step-Imported",
+    "colour": "#ffffff",
+    "name": "white",
+    "n": 6
+   },
+   {
+    "part": "Potentiometer_02_1",
+    "colour": "#000000",
+    "name": "black",
+    "n": 5
+   },
+   {
+    "part": "RadioFrequencyCommunicationModule_nRF24L01",
+    "colour": "#000000",
+    "name": "black",
+    "n": 5
+   },
+   {
+    "part": "Potentiometer_02_1",
+    "colour": "#dadce1",
+    "name": "light grey",
+    "n": 5
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[1]",
+    "colour": "#c4c4c4",
+    "name": "silver",
+    "n": 4
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[2]",
+    "colour": "#c4c4c4",
+    "name": "silver",
+    "n": 4
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[3]",
+    "colour": "#c4c4c4",
+    "name": "silver",
+    "n": 4
+   },
+   {
+    "part": "Samtec-SSW-115-01-F-S",
+    "colour": "#181818",
+    "name": "black",
+    "n": 4
+   },
+   {
+    "part": "Potentiometer_01_1",
+    "colour": "#000000",
+    "name": "black",
+    "n": 4
+   },
+   {
+    "part": "Case",
+    "colour": "#808080",
+    "name": "grey",
+    "n": 4
+   },
+   {
+    "part": "L2",
+    "colour": "#deb887",
+    "name": "tan/wood",
+    "n": 4
+   },
+   {
+    "part": "2pin_header__02.STEP-1-solid",
+    "colour": "#181818",
+    "name": "black",
+    "n": 4
+   },
+   {
+    "part": "L2",
+    "colour": "#e3e3e3",
+    "name": "light grey",
+    "n": 4
+   },
+   {
+    "part": "2pin_header__02.STEP-1-solid",
+    "colour": "#e5e9ec",
+    "name": "white",
+    "n": 4
+   },
+   {
+    "part": "nano-board.STEP-1-solid",
+    "colour": "#d8d8d8",
+    "name": "light grey",
+    "n": 4
+   },
+   {
+    "part": "Potentiometer_01_1",
+    "colour": "#dadce1",
+    "name": "light grey",
+    "n": 4
+   },
+   {
+    "part": "Samtec-SSW-115-01-F-S",
+    "colour": "#f0ff97",
+    "name": "tan/wood",
+    "n": 4
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[3]",
+    "colour": "#f6e099",
+    "name": "tan/wood",
+    "n": 4
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[1]",
+    "colour": "#f6e099",
+    "name": "tan/wood",
+    "n": 4
+   },
+   {
+    "part": "HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ[2]",
+    "colour": "#393939",
+    "name": "dark grey",
+    "n": 4
+   },
+   {
+    "part": "Board~hwXZ",
+    "colour": "#ffffff",
+    "name": "white",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_4P-P2.54-V-F~HDR-TH_4P-P2.54-V-F~hwXZ-HDR-TH_4P-P2.54-V-F~HDR-TH_4P-P2.54-V-F~hwXZ[5]",
+    "colour": "#181818",
+    "name": "black",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_6P-P2.54-V-F-R2-C3-S2.54~HDR-TH_6P-P2.54-F-LI-2X3P~hwXZ",
+    "colour": "#181818",
+    "name": "black",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_8P-P2.54-V-F-R2-C4-S2.54~HDR-TH_8P-P2.54-F-LI-2X4P~hwXZ",
+    "colour": "#181818",
+    "name": "black",
+    "n": 3
+   },
+   {
+    "part": "Case",
+    "colour": "#000000",
+    "name": "black",
+    "n": 3
+   },
+   {
+    "part": "L3",
+    "colour": "#deb887",
+    "name": "tan/wood",
+    "n": 3
+   },
+   {
+    "part": "nano-board.STEP-1-solid",
+    "colour": "#000f41",
+    "name": "navy",
+    "n": 3
+   },
+   {
+    "part": "reset core.STEP-1-solid",
+    "colour": "#d3d6d3",
+    "name": "light grey",
+    "n": 3
+   },
+   {
+    "part": "Board~hwXZ",
+    "colour": "#005f92",
+    "name": "blue",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_4P-P2.54-V-F~HDR-TH_4P-P2.54-V-F~hwXZ-HDR-TH_4P-P2.54-V-F~HDR-TH_4P-P2.54-V-F~hwXZ[5]",
+    "colour": "#393939",
+    "name": "dark grey",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_6P-P2.54-V-F-R2-C3-S2.54~HDR-TH_6P-P2.54-F-LI-2X3P~hwXZ",
+    "colour": "#bfbfbf",
+    "name": "silver",
+    "n": 3
+   },
+   {
+    "part": "HDR-TH_8P-P2.54-V-F-R2-C4-S2.54~HDR-TH_8P-P2.54-F-LI-2X4P~hwXZ",
+    "colour": "#bfbfbf",
+    "name": "silver",
+    "n": 3
+   },
+   {
+    "part": "L3",
+    "colour": "#e3e3e3",
+    "name": "light grey",
+    "n": 3
+   },
+   {
+    "part": "reset core.STEP-1-solid",
+    "colour": "#cad1ed",
+    "name": "light grey",
+    "n": 3
+   },
+   {
+    "part": "RadioFrequencyCommunicationModule_nRF24L01",
+    "colour": "#ffde86",
+    "name": "tan/wood",
+    "n": 3
+   },
+   {
+    "part": "2024-RCC_ControllerHandles_mod1_Left",
+    "colour": "#000000",
+    "name": "black",
+    "n": 2
+   },
+   {
+    "part": "2024-RCC_ControllerHandles_mod1",
+    "colour": "#000000",
+    "name": "black",
+    "n": 2
+   },
+   {
+    "part": "HDR-TH_15P-P2.54-V-F~HDR-TH_15P-P2.54-V-F~j5tP-HDR-TH_15P-P2.54-V-F~HDR-TH_15P-P2.54-V-F~j5tP[1]",
+    "colour": "#181818",
+    "name": "black",
+    "n": 2
+   },
+   {
+    "part": "HDR-TH_10P-P2.54-H-F-R2-C5-W12.7-N~HDR-TH_10P-P2.54-H-F-R2-C5-W12.7-N~j5tP",
+    "colour": "#181818",
+    "name": "black",
+    "n": 2
+   },
+   {
+    "part": "Shield_Arduino NANO",
+    "colour": "#224bbe",
+    "name": "blue",
+    "n": 2
+   },
+   {
+    "part": "Fitec FS90R Micro Servo.step-Fitec FS90R Micro Servo.STEP<1>[6]",
+    "colour": "#eeeeee",
+    "name": "white",
+    "n": 2
+   },
+   {
+    "part": "L6",
+    "colour": "#deb887",
+    "name": "tan/wood",
+    "n": 2
+   },
+   {
+    "part": "L7",
+    "colour": "#deb887",
+    "name": "tan/wood",
+    "n": 2
+   },
+   {
+    "part": "USB Cable end-Cut-Extrude",
+    "colour": "#000000",
+    "name": "black",
+    "n": 2
+   },
+   {
+    "part": "2024-RCC_ControllerHandles_mod1_Left",
+    "colour": "#e3e3e3",
+    "name": "light grey",
+    "n": 2
+   },
+   {
+    "part": "2024-RCC_ControllerHandles_mod1",
+    "colour": "#e3e3e3",
+    "name": "light grey",
+    "n": 2
+   },
+   {
+    "part": "USB Cable end-Cut-Extrude",
+    "colour": "#80868b",
+    "name": "grey",
+    "n": 2
+   },
+   {
+    "part": "Shield_Arduino NANO",
+    "colour": "#d8d8d8",
+    "name": "light grey",
+    "n": 2
+   },
+   {
+    "part": "L6",
+    "colour": "#e3e3e3",
+    "name": "light grey",
+    "n": 2
+   }
+  ]
+ },
+ "inventory": [
+  {
+   "name": "2024-RCC_ControllerHandles_mod1-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "2024-RCC_ControllerHandles_mod1_Left-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+   "solids": 29,
+   "colours": [
+    [
+     "#f2c22e",
+     "yellow",
+     10
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     4
+    ],
+    [
+     "#d3aa21",
+     "gold",
+     4
+    ],
+    [
+     "#f6e099",
+     "tan/wood",
+     4
+    ],
+    [
+     "#393939",
+     "dark grey",
+     3
+    ],
+    [
+     "#bfbfbf",
+     "silver",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-2",
+   "solids": 29,
+   "colours": [
+    [
+     "#f2c22e",
+     "yellow",
+     10
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     4
+    ],
+    [
+     "#d3aa21",
+     "gold",
+     4
+    ],
+    [
+     "#f6e099",
+     "tan/wood",
+     4
+    ],
+    [
+     "#393939",
+     "dark grey",
+     3
+    ],
+    [
+     "#bfbfbf",
+     "silver",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-3",
+   "solids": 29,
+   "colours": [
+    [
+     "#f2c22e",
+     "yellow",
+     10
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     4
+    ],
+    [
+     "#d3aa21",
+     "gold",
+     4
+    ],
+    [
+     "#f7e099",
+     "tan/wood",
+     4
+    ],
+    [
+     "#393939",
+     "dark grey",
+     3
+    ],
+    [
+     "#bfbfbf",
+     "silver",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "9V-battery-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#5f5f5f",
+     "dark grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "9V-battery-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#606060",
+     "dark grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-1",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-10",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-2",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-3",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-4",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-6",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-7",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "BLS-3.step-8",
+   "solids": 4,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#282828",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Batery Wires 2^RCC_Assembly-1",
+   "solids": 2,
+   "colours": [
+    [
+     "#b10000",
+     "red",
+     1
+    ],
+    [
+     "#191919",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Batery Wires 2^RCC_Assembly-2",
+   "solids": 2,
+   "colours": [
+    [
+     "#b10000",
+     "red",
+     1
+    ],
+    [
+     "#191919",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Batery Wires 2^RCC_Assembly-3",
+   "solids": 2,
+   "colours": [
+    [
+     "#b10000",
+     "red",
+     1
+    ],
+    [
+     "#191919",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Battery Wires 1^RCC_Assembly-1",
+   "solids": 2,
+   "colours": [
+    [
+     "#b10000",
+     "red",
+     1
+    ],
+    [
+     "#191919",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Controller-with-vias-1",
+   "solids": 219,
+   "colours": [
+    [
+     "#ebebeb",
+     "white",
+     89
+    ],
+    [
+     "#ffffff",
+     "white",
+     67
+    ],
+    [
+     "#d1b36e",
+     "tan/wood",
+     30
+    ],
+    [
+     "#fffff1",
+     "white",
+     26
+    ],
+    [
+     "#505050",
+     "dark grey",
+     2
+    ],
+    [
+     "#393939",
+     "dark grey",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_Adaptor-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#c3c4c3",
+     "silver",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_Adaptor-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_Adaptor-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_barrel_connector_9V-1",
+   "solids": 6,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     2
+    ],
+    [
+     "#191919",
+     "black",
+     2
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     1
+    ],
+    [
+     "#c43527",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_barrel_connector_9V-2",
+   "solids": 6,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     2
+    ],
+    [
+     "#191919",
+     "black",
+     2
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     1
+    ],
+    [
+     "#c43527",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_barrel_connector_9V-3",
+   "solids": 6,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     2
+    ],
+    [
+     "#191919",
+     "black",
+     2
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     1
+    ],
+    [
+     "#c43527",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "DC_barrel_connector_9V-4",
+   "solids": 6,
+   "colours": [
+    [
+     "#c4c5c4",
+     "silver",
+     2
+    ],
+    [
+     "#191919",
+     "black",
+     2
+    ],
+    [
+     "#3f3f3f",
+     "dark grey",
+     1
+    ],
+    [
+     "#c43527",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Ensamblaje_Shield_NANO-1",
+   "solids": 185,
+   "colours": [
+    [
+     "#cccecc",
+     "light grey",
+     50
+    ],
+    [
+     "#ffff80",
+     "tan/wood",
+     34
+    ],
+    [
+     "#d8d8d8",
+     "light grey",
+     32
+    ],
+    [
+     "#191919",
+     "black",
+     18
+    ],
+    [
+     "#84878c",
+     "grey",
+     9
+    ],
+    [
+     "#d1d1d1",
+     "light grey",
+     8
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Ensamblaje_Shield_NANO-2",
+   "solids": 185,
+   "colours": [
+    [
+     "#cccecc",
+     "light grey",
+     50
+    ],
+    [
+     "#ffff80",
+     "tan/wood",
+     34
+    ],
+    [
+     "#d8d8d8",
+     "light grey",
+     32
+    ],
+    [
+     "#191919",
+     "black",
+     18
+    ],
+    [
+     "#84878c",
+     "grey",
+     9
+    ],
+    [
+     "#d1d1d1",
+     "light grey",
+     8
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-1",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-2",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-3",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-4",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-5",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo NoConnector.step-7",
+   "solids": 6,
+   "colours": [
+    [
+     "#1aa2ef",
+     "blue",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#ffffff",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo.step-1",
+   "solids": 13,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     2
+    ],
+    [
+     "#1ba2f0",
+     "blue",
+     2
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     2
+    ],
+    [
+     "#f7e099",
+     "tan/wood",
+     2
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec FS90R Micro Servo.step-2",
+   "solids": 13,
+   "colours": [
+    [
+     "#f6e099",
+     "tan/wood",
+     3
+    ],
+    [
+     "#f50900",
+     "red",
+     2
+    ],
+    [
+     "#1ba2f0",
+     "blue",
+     2
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     2
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Brown 1^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Brown 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Brown 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Red 1^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Red 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Red 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Red 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Yellow 1^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Yellow 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Yellow 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wires 1^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wires 2^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wires 3^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wires 4^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Left Wires 5^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Brown 1^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Brown 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Brown 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Red 1^RCC_Assembly-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Red 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Red 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Red 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Yellow 1^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Yellow 2^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Yellow 3^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wires 1^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wires 2^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ],
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wires 3^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wires 4^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Fitec Right Wires 5^RCC_Assembly-1",
+   "solids": 3,
+   "colours": [
+    [
+     "#ffd500",
+     "yellow",
+     1
+    ],
+    [
+     "#f50900",
+     "red",
+     1
+    ],
+    [
+     "#7e4e00",
+     "brown",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-1",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#818181",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-2",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#808080",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-3",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#808080",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-4",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#818181",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-5",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#818181",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "KY-023_Joystick-Module-6",
+   "solids": 9,
+   "colours": [
+    [
+     "#303030",
+     "dark grey",
+     2
+    ],
+    [
+     "#dadce1",
+     "light grey",
+     2
+    ],
+    [
+     "#818181",
+     "grey",
+     1
+    ],
+    [
+     "#f1fcef",
+     "white",
+     1
+    ],
+    [
+     "#c6c1bc",
+     "silver",
+     1
+    ],
+    [
+     "#cccccc",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L1-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L2-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L2-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L2-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L2-4",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L3-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L3-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L3-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L4-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L4-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L5-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L5-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L5-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L6-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L6-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L7-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "L7-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#e3e3e3",
+     "light grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Mini USB B-1",
+   "solids": 7,
+   "colours": [
+    [
+     "#cbd2ef",
+     "light grey",
+     6
+    ],
+    [
+     "#000000",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Mini USB B-2",
+   "solids": 7,
+   "colours": [
+    [
+     "#cbd2ef",
+     "light grey",
+     6
+    ],
+    [
+     "#000000",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-1",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-2",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-3",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-4",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-5",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "Pololu Wheel 60mm-6",
+   "solids": 2,
+   "colours": [
+    [
+     "#191919",
+     "black",
+     1
+    ],
+    [
+     "#272727",
+     "black",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffde86",
+     "tan/wood",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "RadioFrequencyCommunicationModule_nRF24L01-2",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffde86",
+     "tan/wood",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "RadioFrequencyCommunicationModule_nRF24L01-3",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffde87",
+     "tan/wood",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "RadioFrequencyCommunicationModule_nRF24L01-4",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffde86",
+     "tan/wood",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "RadioFrequencyCommunicationModule_nRF24L01-5",
+   "solids": 1,
+   "colours": [
+    [
+     "#ffde87",
+     "tan/wood",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "USB Cable end-1",
+   "solids": 5,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     4
+    ],
+    [
+     "#81878c",
+     "grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "USB Cable end-2",
+   "solids": 5,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     4
+    ],
+    [
+     "#80868b",
+     "grey",
+     1
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "nano-1",
+   "solids": 293,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     257
+    ],
+    [
+     "#d3d6d3",
+     "light grey",
+     11
+    ],
+    [
+     "#191919",
+     "black",
+     9
+    ],
+    [
+     "#e5eaed",
+     "white",
+     5
+    ],
+    [
+     "#efefef",
+     "white",
+     4
+    ],
+    [
+     "#ffffff",
+     "white",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "nano-2",
+   "solids": 293,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     257
+    ],
+    [
+     "#d3d6d3",
+     "light grey",
+     11
+    ],
+    [
+     "#191919",
+     "black",
+     9
+    ],
+    [
+     "#e5eaed",
+     "white",
+     5
+    ],
+    [
+     "#efefef",
+     "white",
+     4
+    ],
+    [
+     "#ffffff",
+     "white",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "nano-3",
+   "solids": 293,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     257
+    ],
+    [
+     "#d3d6d3",
+     "light grey",
+     11
+    ],
+    [
+     "#191919",
+     "black",
+     9
+    ],
+    [
+     "#e5eaed",
+     "white",
+     5
+    ],
+    [
+     "#efefef",
+     "white",
+     4
+    ],
+    [
+     "#ffffff",
+     "white",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "nano-4",
+   "solids": 293,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     257
+    ],
+    [
+     "#d3d6d3",
+     "light grey",
+     11
+    ],
+    [
+     "#191919",
+     "black",
+     9
+    ],
+    [
+     "#e5eaed",
+     "white",
+     5
+    ],
+    [
+     "#efefef",
+     "white",
+     4
+    ],
+    [
+     "#ffffff",
+     "white",
+     2
+    ]
+   ],
+   "ever_visible": true
+  },
+  {
+   "name": "nano-5",
+   "solids": 293,
+   "colours": [
+    [
+     "#e4e4e4",
+     "white",
+     257
+    ],
+    [
+     "#d3d6d3",
+     "light grey",
+     11
+    ],
+    [
+     "#191919",
+     "black",
+     9
+    ],
+    [
+     "#e5eaed",
+     "white",
+     6
+    ],
+    [
+     "#efefef",
+     "white",
+     4
+    ],
+    [
+     "#ffffff",
+     "white",
+     2
+    ]
+   ],
+   "ever_visible": true
+  }
+ ],
+ "steps": [
+  {
+   "order_index": 0,
+   "name": "Start",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/b72a2c23-becd-d35f-aaed-8a040074c348.webp?t=1787769912",
+   "appeared": [
+    {
+     "top": "06bac668-e876-b3b2-f370-3da144ddd70d",
+     "name": "Batery Wires 2^RCC_Assembly-1",
+     "n": 1,
+     "total": 2,
+     "partial": true,
+     "sub": " sub-parts: Batery Wires 2^RCC_Assembly-Sweep2",
+     "colours": "black"
+    },
+    {
+     "top": "58e9988e-acc6-f88c-9a0e-73470ebcfc9a",
+     "name": "DC_barrel_connector_9V-1",
+     "n": 5,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d75",
+     "colours": "black, silver, dark grey"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 3,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported1, BLS-3.step-Imported2, BLS-3.step-Imported3",
+     "colours": "white"
+    },
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 3,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported1, BLS-3.step-Imported2, BLS-3.step-Imported3",
+     "colours": "white"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 2,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d72",
+     "colours": "silver, black"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 88,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: arduino nano-1\u00d788",
+     "colours": "light grey, grey, tan/wood"
+    },
+    {
+     "top": "6ab46922-470e-f9ac-7fa6-512e7eaa987c",
+     "name": "Mini USB B-1",
+     "n": 7,
+     "total": 7,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, black"
+    },
+    {
+     "top": "6cb3a750-3b46-0287-d1da-c16825cea078",
+     "name": "USB Cable end-1",
+     "n": 5,
+     "total": 5,
+     "partial": false,
+     "sub": "",
+     "colours": "white, grey"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "Batery Wires 2^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "DC_barrel_connector_9V-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 5
+    }
+   ],
+   "moved": [
+    {
+     "part": "2024-RCC_ControllerHandles_mod1_Left-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "seated": false
+    },
+    {
+     "part": "2024-RCC_ControllerHandles_mod1-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "seated": false
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 148,
+     "total": 219,
+     "delta_mm": [
+      412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+X",
+     "now_offset_mm": [
+      412.4,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 1,
+     "total": 219,
+     "delta_mm": [
+      -412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-X",
+     "now_offset_mm": [
+      -412.4,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 58,
+     "total": 219,
+     "delta_mm": [
+      0.0,
+      -412.4,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      -412.4,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 12,
+     "total": 219,
+     "delta_mm": [
+      412.4,
+      0.0,
+      0.5
+     ],
+     "dist_mm": 412.4,
+     "dir": "+X",
+     "now_offset_mm": [
+      412.4,
+      0.0,
+      0.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 9,
+     "total": 9,
+     "delta_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 9,
+     "total": 9,
+     "delta_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "nano-4",
+     "n": 293,
+     "total": 293,
+     "delta_mm": [
+      0.0,
+      0.0,
+      -412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      -412.4
+     ],
+     "seated": false
+    },
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {
+    "9V-battery-1": 1,
+    "Battery Wires 1^RCC_Assembly-1": 2,
+    "DC_Adaptor-1": 1,
+    "DC_barrel_connector_9V-2": 2,
+    "KY-023_Joystick-Module-1": 9,
+    "KY-023_Joystick-Module-2": 9,
+    "L2-1": 1
+   },
+   "tb_on": [
+    {
+     "kind": "image",
+     "name": "Image",
+     "src": "ASS25556654-f7ad-814c-1dfb-f1126dacde98.png",
+     "anchored_to": [],
+     "width": 41.59,
+     "screen_xy": [
+      5,
+      64
+     ],
+     "leader": "#000000",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "Image",
+     "src": "ASSd3aeb562-c85c-b108-42b8-13e71f410bd9.svg",
+     "anchored_to": [],
+     "width": 36.98,
+     "screen_xy": [
+      6,
+      6
+     ],
+     "leader": "#000000",
+     "static": false
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "image": 2
+   },
+   "camera": {
+    "change": {
+     "angle_deg": 67.9,
+     "target_shift_mm": 248,
+     "dist_from": 624,
+     "dist_to": 302,
+     "zoom": 2.07
+    },
+    "dist_mm": 302,
+    "elev": 36,
+    "azim": 139
+   },
+   "visible_parts": 31,
+   "visible_solids": 705,
+   "displaced_parts": {
+    "2024-RCC_ControllerHandles_mod1_Left-1": 1,
+    "2024-RCC_ControllerHandles_mod1-1": 1,
+    "Controller-with-vias-1": 219,
+    "KY-023_Joystick-Module-1": 9,
+    "KY-023_Joystick-Module-2": 9,
+    "nano-4": 293,
+    "RadioFrequencyCommunicationModule_nRF24L01-4": 1
+   },
+   "scene_change": {
+    "colour_main": "#ffffff",
+    "scene_light_intensity_ambient": 1.875,
+    "scene_light_intensity_directional": 1.15,
+    "scene_light_follow_camera": true
+   }
+  },
+  {
+   "order_index": 1,
+   "name": "Step 1",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/8054c44f-8f87-296d-04e7-e099ba6b9b74.webp?t=1782444408",
+   "appeared": [],
+   "disappeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    },
+    {
+     "top": "0249e57f-feef-3620-525f-139af6ed7465",
+     "name": "9V-battery-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "06bac668-e876-b3b2-f370-3da144ddd70d",
+     "name": "Batery Wires 2^RCC_Assembly-1",
+     "n": 1,
+     "total": 2,
+     "partial": true,
+     "sub": " sub-parts: Batery Wires 2^RCC_Assembly-Sweep2",
+     "colours": "black"
+    },
+    {
+     "top": "046b199b-aae3-aaef-4a7d-bf227b8bf9db",
+     "name": "Battery Wires 1^RCC_Assembly-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "red, black"
+    },
+    {
+     "top": "fe7d676e-523a-ec7d-c373-0922f2ce960f",
+     "name": "DC_Adaptor-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "58e9988e-acc6-f88c-9a0e-73470ebcfc9a",
+     "name": "DC_barrel_connector_9V-1",
+     "n": 5,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d75",
+     "colours": "black, silver, dark grey"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 4,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d73, eBom-FreeParts-1",
+     "colours": "black, dark grey, red"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "98b15545-f923-92f4-f997-00be7b6f2a93",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "aee69ecc-6858-3811-b8dc-c8c613c149bb",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "d267790c-3391-c971-4a1c-f0e3a6068720",
+     "name": "KY-023_Joystick-Module-1",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    },
+    {
+     "top": "d6d6c46a-c68b-59d5-88cf-99ec43c445de",
+     "name": "KY-023_Joystick-Module-2",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    },
+    {
+     "top": "8e791cca-fc33-2c98-ac2e-927269961b25",
+     "name": "L1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "f1d61a8d-8be0-c889-f636-0a4135f7fc98",
+     "name": "L2-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "d60bbe65-e8d9-b434-e0ed-71d8ed8e6af4",
+     "name": "L3-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "8a0faafc-0f31-6890-80fd-6ac5c13334bf",
+     "name": "L4-2",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "8f0c278c-a344-d94b-7412-5007df7389b5",
+     "name": "L5-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "049aa749-2958-edb2-ce5d-0788d5b9b549",
+     "name": "L6-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "f1edb0eb-6cd1-ffa1-573e-84d57c816a4d",
+     "name": "L7-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "96a9c20b-3dae-db02-c4ad-cf87b14b4639",
+     "name": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "17e68284-79fa-51cb-9402-0b7b0a1c9bba",
+     "name": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "b5038cc0-3387-a4c5-8e8e-b99458c60080",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "2024-RCC_ControllerHandles_mod1_Left-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      0.0,
+      -412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "2024-RCC_ControllerHandles_mod1-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      0.0,
+      -412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 148,
+     "total": 219,
+     "delta_mm": [
+      -412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 1,
+     "total": 219,
+     "delta_mm": [
+      412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 58,
+     "total": 219,
+     "delta_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "n": 12,
+     "total": 219,
+     "delta_mm": [
+      -412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "nano-4",
+     "n": 293,
+     "total": 293,
+     "delta_mm": [
+      0.0,
+      30.0,
+      412.4
+     ],
+     "dist_mm": 413.4,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      30.0,
+      0.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "image",
+     "name": "Image",
+     "src": "ASS25556654-f7ad-814c-1dfb-f1126dacde98.png",
+     "anchored_to": [],
+     "width": 41.59,
+     "screen_xy": [
+      5,
+      64
+     ],
+     "leader": "#000000",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "Image",
+     "src": "ASSd3aeb562-c85c-b108-42b8-13e71f410bd9.svg",
+     "anchored_to": [],
+     "width": 36.98,
+     "screen_xy": [
+      6,
+      6
+     ],
+     "leader": "#000000",
+     "static": false
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 76.0,
+     "target_shift_mm": 329,
+     "dist_from": 302,
+     "dist_to": 222,
+     "zoom": 1.36
+    },
+    "dist_mm": 222,
+    "elev": 42,
+    "azim": -116
+   },
+   "visible_parts": 4,
+   "visible_solids": 514,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "nano-4": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 2,
+   "name": "Step 2",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/4f3bab59-a170-7931-7944-a66b448ada68.webp?t=1782443808",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "nano-4",
+     "n": 293,
+     "total": 293,
+     "delta_mm": [
+      0.0,
+      -30.0,
+      0.0
+     ],
+     "dist_mm": 30.0,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 222,
+    "elev": 42,
+    "azim": -116
+   },
+   "visible_parts": 4,
+   "visible_solids": 514,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 3,
+   "name": "Step 3",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/21a6f981-dadc-6db1-7b21-96c0798e2c92.webp?t=1782443808",
+   "appeared": [
+    {
+     "top": "b5038cc0-3387-a4c5-8e8e-b99458c60080",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "offset_mm": [
+      0.0,
+      26.3,
+      0.0
+     ],
+     "dist_mm": 26.3,
+     "dir": "+Y (up)",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 222,
+    "elev": 42,
+    "azim": -116
+   },
+   "visible_parts": 5,
+   "visible_solids": 515,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "RadioFrequencyCommunicationModule_nRF24L01-4": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 4,
+   "name": "Step 4",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/537671f5-0f96-f559-24db-ea00be61aa48.webp?t=1782443808",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -26.3,
+      0.0
+     ],
+     "dist_mm": 26.3,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 222,
+    "elev": 42,
+    "azim": -116
+   },
+   "visible_parts": 5,
+   "visible_solids": 515,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 5,
+   "name": "Step 5",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/f846ed75-e084-7e7b-d31a-96272737b021.webp?t=1782443809",
+   "appeared": [
+    {
+     "top": "d267790c-3391-c971-4a1c-f0e3a6068720",
+     "name": "KY-023_Joystick-Module-1",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.8,
+      0.0,
+      6.9
+     ],
+     "dist_mm": 66.2,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.3,
+      0.0,
+      6.8
+     ],
+     "dist_mm": 65.6,
+     "dir": "+X",
+     "n": 2
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.7,
+      0.0,
+      7.5
+     ],
+     "dist_mm": 66.2,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.8,
+      -0.0,
+      6.9
+     ],
+     "dist_mm": 66.1,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.8,
+      -0.0,
+      6.9
+     ],
+     "dist_mm": 66.2,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.9,
+      0.0,
+      5.6
+     ],
+     "dist_mm": 66.1,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      66.0,
+      0.0,
+      6.9
+     ],
+     "dist_mm": 66.3,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      65.3,
+      0.0,
+      6.8
+     ],
+     "dist_mm": 65.6,
+     "dir": "+X",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 45.3,
+     "target_shift_mm": 10,
+     "dist_from": 222,
+     "dist_to": 222,
+     "zoom": 1.0
+    },
+    "dist_mm": 222,
+    "elev": 29,
+    "azim": -170
+   },
+   "visible_parts": 6,
+   "visible_solids": 524,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "KY-023_Joystick-Module-1": 9
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 6,
+   "name": "Transition",
+   "behaviour": "play",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/9cf5ec99-0ddf-1856-c59f-3eb78b26009f.webp?t=1782443808",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.1,
+      0.0,
+      1.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 2,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.5,
+      0.0,
+      1.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.0,
+      0.0,
+      2.3
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.0,
+      -0.0,
+      1.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.1,
+      -0.0,
+      1.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.1,
+      0.0,
+      0.4
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      1.2,
+      0.0,
+      1.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -64.7,
+      0.0,
+      -5.2
+     ],
+     "dist_mm": 65.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.5,
+      0.0,
+      1.6
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 222,
+    "elev": 29,
+    "azim": -170
+   },
+   "visible_parts": 6,
+   "visible_solids": 524,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "KY-023_Joystick-Module-1": 9
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 7,
+   "name": "Step 6",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/6688d5fc-f7f2-97d5-56e6-f87095ae2eef.webp?t=1782443809",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.1,
+      -0.0,
+      -1.6
+     ],
+     "dist_mm": 2.0,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 2,
+     "total": 9,
+     "delta_mm": [
+      -0.5,
+      -0.0,
+      -1.6
+     ],
+     "dist_mm": 1.7,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.0,
+      -0.0,
+      -2.3
+     ],
+     "dist_mm": 2.5,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.0,
+      0.0,
+      -1.6
+     ],
+     "dist_mm": 1.9,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.1,
+      0.0,
+      -1.6
+     ],
+     "dist_mm": 1.9,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.1,
+      -0.0,
+      -0.4
+     ],
+     "dist_mm": 1.2,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -1.2,
+      -0.0,
+      -1.6
+     ],
+     "dist_mm": 2.0,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -0.5,
+      -0.0,
+      -1.6
+     ],
+     "dist_mm": 1.7,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {
+    "KY-023_Joystick-Module-1": 9
+   },
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 222,
+    "elev": 29,
+    "azim": -170
+   },
+   "visible_parts": 6,
+   "visible_solids": 524,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 8,
+   "name": "Step 7",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/02a70243-4cdc-9168-3083-bfa16e6d7664.webp?t=1782443808",
+   "appeared": [
+    {
+     "top": "d6d6c46a-c68b-59d5-88cf-99ec43c445de",
+     "name": "KY-023_Joystick-Module-2",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.6,
+      0.0,
+      7.6
+     ],
+     "dist_mm": 64.1,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.0,
+      0.0,
+      7.6
+     ],
+     "dist_mm": 63.4,
+     "dir": "+X",
+     "n": 2
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.5,
+      0.0,
+      8.3
+     ],
+     "dist_mm": 64.0,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.5,
+      -0.0,
+      7.6
+     ],
+     "dist_mm": 64.0,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.6,
+      -0.0,
+      7.6
+     ],
+     "dist_mm": 64.0,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.7,
+      0.0,
+      6.1
+     ],
+     "dist_mm": 64.0,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.8,
+      0.0,
+      7.6
+     ],
+     "dist_mm": 64.2,
+     "dir": "+X",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      63.0,
+      0.0,
+      7.5
+     ],
+     "dist_mm": 63.4,
+     "dir": "+X",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 119.0,
+     "target_shift_mm": 29,
+     "dist_from": 222,
+     "dist_to": 190,
+     "zoom": 1.17
+    },
+    "dist_mm": 190,
+    "elev": 29,
+    "azim": -10
+   },
+   "visible_parts": 7,
+   "visible_solids": 533,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "KY-023_Joystick-Module-2": 9
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 9,
+   "name": "Transition",
+   "behaviour": "play",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/6539338a-9f40-d0ef-8a9a-994e77886837.webp?t=1782443808",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.2,
+      0.0,
+      2.2
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 2,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      4.5,
+      0.0,
+      2.1
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.1,
+      0.0,
+      2.9
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.1,
+      -0.0,
+      2.2
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.1,
+      -0.0,
+      2.2
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.3,
+      0.0,
+      0.7
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      5.3,
+      0.0,
+      2.2
+     ],
+     "seated": false
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -58.4,
+      0.0,
+      -5.4
+     ],
+     "dist_mm": 58.7,
+     "dir": "-X",
+     "now_offset_mm": [
+      4.5,
+      0.0,
+      2.1
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 190,
+    "elev": 29,
+    "azim": -10
+   },
+   "visible_parts": 7,
+   "visible_solids": 533,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "KY-023_Joystick-Module-2": 9
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 10,
+   "name": "Step 8",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/9a666225-1552-63e9-23c4-c86d6422e4f8.webp?t=1782443809",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.2,
+      -0.0,
+      -2.2
+     ],
+     "dist_mm": 5.6,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 2,
+     "total": 9,
+     "delta_mm": [
+      -4.5,
+      -0.0,
+      -2.1
+     ],
+     "dist_mm": 5.0,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.1,
+      -0.0,
+      -2.9
+     ],
+     "dist_mm": 5.8,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.1,
+      0.0,
+      -2.2
+     ],
+     "dist_mm": 5.5,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.1,
+      0.0,
+      -2.2
+     ],
+     "dist_mm": 5.6,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.3,
+      -0.0,
+      -0.7
+     ],
+     "dist_mm": 5.3,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -5.3,
+      -0.0,
+      -2.2
+     ],
+     "dist_mm": 5.8,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "n": 1,
+     "total": 9,
+     "delta_mm": [
+      -4.5,
+      -0.0,
+      -2.1
+     ],
+     "dist_mm": 5.0,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {
+    "KY-023_Joystick-Module-2": 9
+   },
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 190,
+    "elev": 29,
+    "azim": -10
+   },
+   "visible_parts": 7,
+   "visible_solids": 533,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 11,
+   "name": "Step 9",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/842ce5c1-f855-f8b2-bd69-69329d5490cd.webp?t=1782443808",
+   "appeared": [
+    {
+     "top": "8073e214-741e-8ed6-f825-16a7611602d2",
+     "name": "Mini USB B-2",
+     "n": 7,
+     "total": 7,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, black"
+    },
+    {
+     "top": "14566657-4447-4ab1-ab52-a29c2d3d054b",
+     "name": "USB Cable end-2",
+     "n": 5,
+     "total": 5,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "Mini USB B-2",
+     "offset_mm": [
+      -5.7,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 5.7,
+     "dir": "-X",
+     "n": 7
+    },
+    {
+     "part": "USB Cable end-2",
+     "offset_mm": [
+      -5.7,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 5.7,
+     "dir": "-X",
+     "n": 5
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 40.7,
+     "target_shift_mm": 12,
+     "dist_from": 190,
+     "dist_to": 259,
+     "zoom": 0.74
+    },
+    "dist_mm": 259,
+    "elev": 62,
+    "azim": -47
+   },
+   "visible_parts": 9,
+   "visible_solids": 545,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "Mini USB B-2": 7,
+    "USB Cable end-2": 5
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 12,
+   "name": "Step 10",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/7722c356-1ff7-e29d-6303-5ebb75bc8adc.webp?t=1782443808",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "Mini USB B-2",
+     "n": 7,
+     "total": 7,
+     "delta_mm": [
+      31.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 31.9,
+     "dir": "+X",
+     "now_offset_mm": [
+      26.2,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "USB Cable end-2",
+     "n": 5,
+     "total": 5,
+     "delta_mm": [
+      31.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 31.9,
+     "dir": "+X",
+     "now_offset_mm": [
+      26.2,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 259,
+    "elev": 62,
+    "azim": -47
+   },
+   "visible_parts": 9,
+   "visible_solids": 545,
+   "displaced_parts": {
+    "Controller-with-vias-1": 12,
+    "Mini USB B-2": 7,
+    "USB Cable end-2": 5
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 13,
+   "name": "Step 11",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/b797b540-6a35-6610-ff9c-0853138f3a50.webp?t=1782443809",
+   "appeared": [
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 1,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: eBom-FreeParts-1",
+     "colours": "silver"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "fd266b66-3750-0839-f848-e7bd48f7f4cd",
+     "name": "nano-3",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "33a01df3-4513-568a-32bf-2adc1678d838",
+     "name": "2024-RCC_ControllerHandles_mod1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey"
+    },
+    {
+     "top": "20c8a027-48e7-9643-da81-74330ee3ce21",
+     "name": "2024-RCC_ControllerHandles_mod1_Left-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey"
+    },
+    {
+     "top": "1929ba17-fabc-d7bc-b582-e6f1a95aaa09",
+     "name": "Controller-with-vias-1",
+     "n": 219,
+     "total": 219,
+     "partial": false,
+     "sub": "",
+     "colours": "white, tan/wood, black"
+    },
+    {
+     "top": "d267790c-3391-c971-4a1c-f0e3a6068720",
+     "name": "KY-023_Joystick-Module-1",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, dark grey, grey"
+    },
+    {
+     "top": "d6d6c46a-c68b-59d5-88cf-99ec43c445de",
+     "name": "KY-023_Joystick-Module-2",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, dark grey, black"
+    },
+    {
+     "top": "8073e214-741e-8ed6-f825-16a7611602d2",
+     "name": "Mini USB B-2",
+     "n": 7,
+     "total": 7,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, black"
+    },
+    {
+     "top": "b5038cc0-3387-a4c5-8e8e-b99458c60080",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "14566657-4447-4ab1-ab52-a29c2d3d054b",
+     "name": "USB Cable end-2",
+     "n": 5,
+     "total": 5,
+     "partial": false,
+     "sub": "",
+     "colours": "white, grey"
+    },
+    {
+     "top": "4f8e0f99-78fb-060c-c2d7-34eec7493bc2",
+     "name": "nano-4",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 97
+    },
+    {
+     "part": "nano-3",
+     "offset_mm": [
+      -131.9,
+      95.1,
+      22.0
+     ],
+     "dist_mm": 164.1,
+     "dir": "-X & +Y (up)",
+     "n": 293
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 87.6,
+     "target_shift_mm": 190,
+     "dist_from": 259,
+     "dist_to": 182,
+     "zoom": 1.42
+    },
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 3,
+   "visible_solids": 391,
+   "displaced_parts": {
+    "nano-3": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 14,
+   "name": "Step 12",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/b5051c9c-88fc-621f-4dd9-c5723b32fad6.webp?t=1782443809",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "nano-3",
+     "n": 293,
+     "total": 293,
+     "delta_mm": [
+      0.0,
+      -38.7,
+      0.0
+     ],
+     "dist_mm": 38.7,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      -131.9,
+      56.4,
+      22.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 3,
+   "visible_solids": 391,
+   "displaced_parts": {
+    "nano-3": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 15,
+   "name": "Step 13",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/57d9d59f-de98-2fd1-1ccc-460e4a3130c5.webp?t=1782443809",
+   "appeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      0.0,
+      -0.0,
+      43.4
+     ],
+     "dist_mm": 43.4,
+     "dir": "+Z",
+     "n": 9
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      -0.0,
+      0.0,
+      -43.4
+     ],
+     "dist_mm": 43.4,
+     "dir": "-Z",
+     "n": 20
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 4,
+   "visible_solids": 420,
+   "displaced_parts": {
+    "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1": 29,
+    "nano-3": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 16,
+   "name": "Step 14",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/a169d7c1-1122-8a45-7ad8-c864c58d08b3.webp?t=1782443809",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 9,
+     "total": 29,
+     "delta_mm": [
+      0.0,
+      0.0,
+      -43.4
+     ],
+     "dist_mm": 43.4,
+     "dir": "-Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 20,
+     "total": 29,
+     "delta_mm": [
+      0.0,
+      0.0,
+      43.4
+     ],
+     "dist_mm": 43.4,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 4,
+   "visible_solids": 420,
+   "displaced_parts": {
+    "nano-3": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 17,
+   "name": "Step 15",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/f32f12a8-8bca-e8ab-c390-cdba37aafd2a.webp?t=1782443809",
+   "appeared": [
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "offset_mm": [
+      0.0,
+      30.8,
+      0.0
+     ],
+     "dist_mm": 30.8,
+     "dir": "+Y (up)",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 5,
+   "visible_solids": 421,
+   "displaced_parts": {
+    "nano-3": 293,
+    "RadioFrequencyCommunicationModule_nRF24L01-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 18,
+   "name": "Step 16",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/46deb175-4bd4-e8e4-c5ff-4f27f13d297f.webp?t=1782443809",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -30.8,
+      0.0
+     ],
+     "dist_mm": 30.8,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 31,
+    "azim": 138
+   },
+   "visible_parts": 5,
+   "visible_solids": 421,
+   "displaced_parts": {
+    "nano-3": 293
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 19,
+   "name": "Step 17",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/ff356130-9966-77ec-1b58-1f82753a52f0.webp?t=1782443336",
+   "appeared": [
+    {
+     "top": "ab2e690f-7649-aadf-3f6a-f48b45286653",
+     "name": "BLS-3.step-10",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "aee69ecc-6858-3811-b8dc-c8c613c149bb",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "9e721493-5c7e-8ef5-3107-38d1536e9350",
+     "name": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "580316d3-396a-1115-33dd-cd9ebeca82cc",
+     "name": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "b713cf47-3018-3a58-5ce4-b7a3ece56d72",
+     "name": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "4c00ea21-4cd4-3546-d4e6-7a007854af25",
+     "name": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "brown, red, yellow"
+    },
+    {
+     "top": "17e68284-79fa-51cb-9402-0b7b0a1c9bba",
+     "name": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-10",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 4
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 6
+    },
+    {
+     "part": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wires 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    },
+    {
+     "part": "Pololu Wheel 60mm-2",
+     "offset_mm": [
+      0.0,
+      0.1,
+      0.0
+     ],
+     "dist_mm": 0.1,
+     "dir": "+Y (up)",
+     "n": 2
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 47.0,
+     "target_shift_mm": 0,
+     "dist_from": 182,
+     "dist_to": 182,
+     "zoom": 1.0
+    },
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 12,
+   "visible_solids": 439,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 20,
+   "name": "Step 18",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/62c77cd2-4bd8-ba6e-99a7-490e7fa9a177.webp?t=1782443331",
+   "appeared": [
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "ab2e690f-7649-aadf-3f6a-f48b45286653",
+     "name": "BLS-3.step-10",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "9e721493-5c7e-8ef5-3107-38d1536e9350",
+     "name": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "580316d3-396a-1115-33dd-cd9ebeca82cc",
+     "name": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "b713cf47-3018-3a58-5ce4-b7a3ece56d72",
+     "name": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "4c00ea21-4cd4-3546-d4e6-7a007854af25",
+     "name": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "brown, red, yellow"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 9,
+   "visible_solids": 433,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 21,
+   "name": "Step 19",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/e4c2be49-587f-0b55-cb59-209bf12a469e.webp?t=1782443340",
+   "appeared": [
+    {
+     "top": "dea28143-f650-87ff-8ad4-d498b6bab55f",
+     "name": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "98b15545-f923-92f4-f997-00be7b6f2a93",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "c2bd731e-fe25-6a30-86fd-6c03e44fa437",
+     "name": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "0896d20a-1da3-393c-3ce2-1b1baaa583f8",
+     "name": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "83f8eb1c-3122-3500-201b-2f36ef0dd818",
+     "name": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "420e0997-1ab6-3ddd-cceb-8844d3bb0c17",
+     "name": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "96a9c20b-3dae-db02-c4ad-cf87b14b4639",
+     "name": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-8",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 4
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 6
+    },
+    {
+     "part": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wires 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    },
+    {
+     "part": "Pololu Wheel 60mm-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      -0.0
+     ],
+     "dist_mm": 0.1,
+     "dir": "+Y (up) & -Z",
+     "n": 2
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 16,
+   "visible_solids": 451,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 22,
+   "name": "Step 20",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/1e7a2677-8912-8c4e-e81d-a73d5302974a.webp?t=1782443809",
+   "appeared": [
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "dea28143-f650-87ff-8ad4-d498b6bab55f",
+     "name": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "c2bd731e-fe25-6a30-86fd-6c03e44fa437",
+     "name": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "0896d20a-1da3-393c-3ce2-1b1baaa583f8",
+     "name": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "83f8eb1c-3122-3500-201b-2f36ef0dd818",
+     "name": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "420e0997-1ab6-3ddd-cceb-8844d3bb0c17",
+     "name": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 13,
+   "visible_solids": 445,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 23,
+   "name": "Step 21",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/5f07fae0-5e29-cd95-53c8-eeecedb8b6af.webp?t=1782444989",
+   "appeared": [
+    {
+     "top": "8e791cca-fc33-2c98-ac2e-927269961b25",
+     "name": "L1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "f1d61a8d-8be0-c889-f636-0a4135f7fc98",
+     "name": "L2-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    },
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 1,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: eBom-FreeParts-1",
+     "colours": "silver"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "98b15545-f923-92f4-f997-00be7b6f2a93",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "aee69ecc-6858-3811-b8dc-c8c613c149bb",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "96a9c20b-3dae-db02-c4ad-cf87b14b4639",
+     "name": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "17e68284-79fa-51cb-9402-0b7b0a1c9bba",
+     "name": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "fd266b66-3750-0839-f848-e7bd48f7f4cd",
+     "name": "nano-3",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "L1-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "L2-1",
+     "offset_mm": [
+      59.4,
+      -80.0,
+      0.0
+     ],
+     "dist_mm": 99.7,
+     "dir": "+X & -Y (down)",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 4,
+     "length_mm": 71.7,
+     "direction": "-X & +Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L1-1",
+      "L1-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "lead line": 1
+   },
+   "camera": {
+    "change": {
+     "angle_deg": 86.8,
+     "target_shift_mm": 47,
+     "dist_from": 182,
+     "dist_to": 289,
+     "zoom": 0.63
+    },
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 2,
+   "visible_solids": 2,
+   "displaced_parts": {
+    "L2-1": 1
+   },
+   "scene_change": {
+    "up_axis": "-y"
+   }
+  },
+  {
+   "order_index": 24,
+   "name": "Step 32",
+   "behaviour": "play",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/3578c204-7081-8042-c89b-c513de0a49d6.webp?t=1782444997",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L2-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      54.8,
+      0.0
+     ],
+     "dist_mm": 54.8,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      59.4,
+      -25.2,
+      0.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 4,
+     "length_mm": 71.7,
+     "direction": "-X & +Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L1-1",
+      "L1-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 2,
+   "visible_solids": 2,
+   "displaced_parts": {
+    "L2-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 25,
+   "name": "Step 22",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/0c503d02-55be-97b7-2cdf-30067c3e31d3.webp?t=1782445007",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L2-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -56.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 56.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      3.5,
+      -25.2,
+      0.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 21.6,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "lead line": 1
+   },
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 2,
+   "visible_solids": 2,
+   "displaced_parts": {
+    "L2-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 26,
+   "name": "Step 23",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/36e2b8dd-01ad-9e04-677a-5ed6113c696e.webp?t=1782444780",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L2-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -3.5,
+      25.2,
+      -0.0
+     ],
+     "dist_mm": 25.5,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {
+    "L2-1": 1
+   },
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 21.6,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 2,
+   "visible_solids": 2,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 27,
+   "name": "Step 24",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/5a728e5c-e3cc-140a-0750-1c764ca153b8.webp?t=1782444784",
+   "appeared": [
+    {
+     "top": "d60bbe65-e8d9-b434-e0ed-71d8ed8e6af4",
+     "name": "L3-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L3-1",
+     "offset_mm": [
+      0.0,
+      -55.4,
+      0.0
+     ],
+     "dist_mm": 55.4,
+     "dir": "-Y (down)",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 52.0,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L3-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 52.0,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L3-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "lead line": 2
+   },
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 3,
+   "visible_solids": 3,
+   "displaced_parts": {
+    "L3-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 28,
+   "name": "Step 25",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/03edbb66-8744-1442-764c-fe0df3d3b0d8.webp?t=1782444789",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L3-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      55.4,
+      0.0
+     ],
+     "dist_mm": 55.4,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 52.0,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L3-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 52.0,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L3-1",
+      "L1-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": -34,
+    "azim": 25
+   },
+   "visible_parts": 3,
+   "visible_solids": 3,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 29,
+   "name": "Step 26",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/606e5137-22d9-41ee-ad63-dcb4d183b574.webp?t=1782443368",
+   "appeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    },
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 1,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: eBom-FreeParts-1",
+     "colours": "silver"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "98b15545-f923-92f4-f997-00be7b6f2a93",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "aee69ecc-6858-3811-b8dc-c8c613c149bb",
+     "name": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "partial": false,
+     "sub": "",
+     "colours": "blue, brown, red"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    },
+    {
+     "top": "96a9c20b-3dae-db02-c4ad-cf87b14b4639",
+     "name": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "17e68284-79fa-51cb-9402-0b7b0a1c9bba",
+     "name": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "fd266b66-3750-0839-f848-e7bd48f7f4cd",
+     "name": "nano-3",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "8e791cca-fc33-2c98-ac2e-927269961b25",
+     "name": "L1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "f1d61a8d-8be0-c889-f636-0a4135f7fc98",
+     "name": "L2-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "d60bbe65-e8d9-b434-e0ed-71d8ed8e6af4",
+     "name": "L3-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 29
+    },
+    {
+     "part": "BLS-3.step-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "BLS-3.step-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 97
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 6
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 6
+    },
+    {
+     "part": "Fitec Left Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    },
+    {
+     "part": "Fitec Right Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    },
+    {
+     "part": "nano-3",
+     "offset_mm": [
+      -131.9,
+      56.4,
+      22.0
+     ],
+     "dist_mm": 145.2,
+     "dir": "-X & +Y (up)",
+     "n": 293
+    },
+    {
+     "part": "Pololu Wheel 60mm-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      -0.0
+     ],
+     "dist_mm": 0.1,
+     "dir": "+Y (up) & -Z",
+     "n": 2
+    },
+    {
+     "part": "Pololu Wheel 60mm-2",
+     "offset_mm": [
+      0.0,
+      0.1,
+      0.0
+     ],
+     "dist_mm": 0.1,
+     "dir": "+Y (up)",
+     "n": 2
+    },
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 86.8,
+     "target_shift_mm": 47,
+     "dist_from": 289,
+     "dist_to": 182,
+     "zoom": 1.59
+    },
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 13,
+   "visible_solids": 445,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {
+    "up_axis": "+y"
+   }
+  },
+  {
+   "order_index": 30,
+   "name": "Step 27",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/f794c121-070a-0bb1-4b1e-c7c92db099b3.webp?t=1782443449",
+   "appeared": [
+    {
+     "top": "dea28143-f650-87ff-8ad4-d498b6bab55f",
+     "name": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "c2bd731e-fe25-6a30-86fd-6c03e44fa437",
+     "name": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "0896d20a-1da3-393c-3ce2-1b1baaa583f8",
+     "name": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "83f8eb1c-3122-3500-201b-2f36ef0dd818",
+     "name": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "420e0997-1ab6-3ddd-cceb-8844d3bb0c17",
+     "name": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-8",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 4
+    },
+    {
+     "part": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wires 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 16,
+   "visible_solids": 451,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 31,
+   "name": "Step 28",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/20ca2dee-0634-bbd4-98bb-e78601b015c4.webp?t=1782443495",
+   "appeared": [
+    {
+     "top": "ab2e690f-7649-aadf-3f6a-f48b45286653",
+     "name": "BLS-3.step-10",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "9e721493-5c7e-8ef5-3107-38d1536e9350",
+     "name": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "580316d3-396a-1115-33dd-cd9ebeca82cc",
+     "name": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "b713cf47-3018-3a58-5ce4-b7a3ece56d72",
+     "name": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "4c00ea21-4cd4-3546-d4e6-7a007854af25",
+     "name": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "brown, red, yellow"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-10",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 4
+    },
+    {
+     "part": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wires 4^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 19,
+   "visible_solids": 457,
+   "displaced_parts": {
+    "nano-3": 293,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 32,
+   "name": "Step 29",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/d2b3dc75-9a91-5813-a6aa-8466f3971a8e.webp?t=1782445119",
+   "appeared": [],
+   "disappeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 1,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: eBom-FreeParts-1",
+     "colours": "silver"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "fd266b66-3750-0839-f848-e7bd48f7f4cd",
+     "name": "nano-3",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "appeared_offsets": [],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 182,
+    "elev": 35,
+    "azim": 81
+   },
+   "visible_parts": 14,
+   "visible_solids": 36,
+   "displaced_parts": {
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 33,
+   "name": "Step 30",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/b2275a87-168e-430f-ae01-22a7423ae343.webp?t=1782443739",
+   "appeared": [
+    {
+     "top": "8f0c278c-a344-d94b-7412-5007df7389b5",
+     "name": "L5-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L5-1",
+     "offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "+Y (up)",
+     "n": 1
+    }
+   ],
+   "moved": [
+    {
+     "part": "BLS-3.step-10",
+     "n": 3,
+     "total": 4,
+     "delta_mm": [
+      -73.9,
+      0.0,
+      -39.5
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      -73.9,
+      0.0,
+      -39.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "BLS-3.step-10",
+     "n": 1,
+     "total": 4,
+     "delta_mm": [
+      -73.9,
+      -0.0,
+      -39.5
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      -73.9,
+      -0.0,
+      -39.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "delta_mm": [
+      73.9,
+      0.0,
+      -39.5
+     ],
+     "dist_mm": 83.8,
+     "dir": "+X & -Z",
+     "now_offset_mm": [
+      73.9,
+      0.0,
+      -39.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      73.9,
+      0.0,
+      -39.5
+     ],
+     "dist_mm": 83.8,
+     "dir": "+X & -Z",
+     "now_offset_mm": [
+      73.9,
+      0.0,
+      -39.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      -73.9,
+      0.0,
+      -39.5
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & -Z",
+     "now_offset_mm": [
+      -73.9,
+      0.0,
+      -39.5
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "dist_mm": 83.8,
+     "dir": "-X & +Y (up)",
+     "now_offset_mm": [
+      -39.5,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      -0.0,
+      73.8,
+      -39.5
+     ],
+     "dist_mm": 83.7,
+     "dir": "+Y (up) & -Z",
+     "now_offset_mm": [
+      -0.0,
+      73.8,
+      -39.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      -0.0,
+      83.3,
+      8.3
+     ],
+     "dist_mm": 83.7,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      -0.0,
+      83.4,
+      8.3
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 43.4,
+     "target_shift_mm": 50,
+     "dist_from": 182,
+     "dist_to": 289,
+     "zoom": 0.63
+    },
+    "dist_mm": 289,
+    "elev": 36,
+    "azim": 135
+   },
+   "visible_parts": 15,
+   "visible_solids": 37,
+   "displaced_parts": {
+    "BLS-3.step-10": 4,
+    "BLS-3.step-8": 4,
+    "Fitec FS90R Micro Servo NoConnector.step-1": 6,
+    "Fitec FS90R Micro Servo NoConnector.step-2": 6,
+    "Fitec Left Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Left Wires 4^RCC_Assembly-1": 3,
+    "Fitec Right Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Right Wires 4^RCC_Assembly-1": 3,
+    "L5-1": 1,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 34,
+   "name": "Step 31",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/cedb4842-e088-0091-bcdc-10f03e253f29.webp?t=1782444453",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "BLS-3.step-10",
+     "n": 3,
+     "total": 4,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.5
+     ],
+     "dist_mm": 39.5,
+     "dir": "+Z",
+     "now_offset_mm": [
+      -73.9,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "BLS-3.step-10",
+     "n": 1,
+     "total": 4,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.5
+     ],
+     "dist_mm": 39.5,
+     "dir": "+Z",
+     "now_offset_mm": [
+      -73.9,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.5
+     ],
+     "dist_mm": 39.5,
+     "dir": "+Z",
+     "now_offset_mm": [
+      73.9,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.5
+     ],
+     "dist_mm": 39.5,
+     "dir": "+Z",
+     "now_offset_mm": [
+      73.9,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.5
+     ],
+     "dist_mm": 39.5,
+     "dir": "+Z",
+     "now_offset_mm": [
+      -73.9,
+      0.0,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      39.5,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 39.5,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      0.0,
+      0.0,
+      39.6
+     ],
+     "dist_mm": 39.6,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      73.8,
+      0.0
+     ],
+     "seated": false
+    },
+    {
+     "part": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      0.0,
+      -15.2,
+      -36.6
+     ],
+     "dist_mm": 39.6,
+     "dir": "-Y (down) & -Z",
+     "now_offset_mm": [
+      0.0,
+      68.2,
+      -28.3
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": 36,
+    "azim": 135
+   },
+   "visible_parts": 15,
+   "visible_solids": 37,
+   "displaced_parts": {
+    "BLS-3.step-10": 4,
+    "BLS-3.step-8": 4,
+    "Fitec FS90R Micro Servo NoConnector.step-1": 6,
+    "Fitec FS90R Micro Servo NoConnector.step-2": 6,
+    "Fitec Left Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Left Wires 4^RCC_Assembly-1": 3,
+    "Fitec Right Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Right Wires 4^RCC_Assembly-1": 3,
+    "L5-1": 1,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 35,
+   "name": "Step 32",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/3d7bcff8-0e96-7e5d-714c-f583bc95497d.webp?t=1782444460",
+   "appeared": [
+    {
+     "top": "8a0faafc-0f31-6890-80fd-6ac5c13334bf",
+     "name": "L4-2",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L4-2",
+     "offset_mm": [
+      -100.4,
+      81.3,
+      0.0
+     ],
+     "dist_mm": 129.2,
+     "dir": "-X & +Y (up)",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 26.5,
+     "direction": "-X",
+     "anchored_to": [
+      "BLS-3.step-10 > BLS-3.step-Imported1",
+      "L4-2"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 25.4,
+     "direction": "-X",
+     "anchored_to": [
+      "BLS-3.step-8 > BLS-3.step-Imported4",
+      "L4-2"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "lead line": 2
+   },
+   "camera": {
+    "change": {
+     "angle_deg": 3.6,
+     "target_shift_mm": 36,
+     "dist_from": 289,
+     "dist_to": 289,
+     "zoom": 1.0
+    },
+    "dist_mm": 289,
+    "elev": 39,
+    "azim": 135
+   },
+   "visible_parts": 16,
+   "visible_solids": 38,
+   "displaced_parts": {
+    "BLS-3.step-10": 4,
+    "BLS-3.step-8": 4,
+    "Fitec FS90R Micro Servo NoConnector.step-1": 6,
+    "Fitec FS90R Micro Servo NoConnector.step-2": 6,
+    "Fitec Left Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Left Wires 4^RCC_Assembly-1": 3,
+    "Fitec Right Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Right Wires 4^RCC_Assembly-1": 3,
+    "L4-2": 1,
+    "L5-1": 1,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 36,
+   "name": "Step 33",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/aa3cbfec-853b-4132-6fc7-9114b1699102.webp?t=1782444465",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L4-2",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      100.4,
+      -7.4,
+      0.0
+     ],
+     "dist_mm": 100.7,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      73.9,
+      0.0
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 26.5,
+     "direction": "-X",
+     "anchored_to": [
+      "BLS-3.step-10 > BLS-3.step-Imported1",
+      "L4-2"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 25.4,
+     "direction": "-X",
+     "anchored_to": [
+      "BLS-3.step-8 > BLS-3.step-Imported4",
+      "L4-2"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": 39,
+    "azim": 135
+   },
+   "visible_parts": 16,
+   "visible_solids": 38,
+   "displaced_parts": {
+    "BLS-3.step-10": 4,
+    "BLS-3.step-8": 4,
+    "Fitec FS90R Micro Servo NoConnector.step-1": 6,
+    "Fitec FS90R Micro Servo NoConnector.step-2": 6,
+    "Fitec Left Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Left Wires 4^RCC_Assembly-1": 3,
+    "Fitec Right Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Right Wires 4^RCC_Assembly-1": 3,
+    "L4-2": 1,
+    "L5-1": 1,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 37,
+   "name": "Step 34",
+   "behaviour": "pause",
+   "duration": 800,
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/ee817e6c-9d8f-20eb-333d-17a03b899489.webp?t=1782444472",
+   "appeared": [
+    {
+     "top": "8e791cca-fc33-2c98-ac2e-927269961b25",
+     "name": "L1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "f1d61a8d-8be0-c889-f636-0a4135f7fc98",
+     "name": "L2-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    },
+    {
+     "top": "d60bbe65-e8d9-b434-e0ed-71d8ed8e6af4",
+     "name": "L3-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L1-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "L2-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "L3-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 73.9,
+     "direction": "-Y (down)",
+     "anchored_to": [
+      "L4-2",
+      "L2-1"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 73.9,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L5-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "lead line": 2
+   },
+   "camera": {
+    "change": {
+     "angle_deg": 66.2,
+     "target_shift_mm": 81,
+     "dist_from": 289,
+     "dist_to": 289,
+     "zoom": 1.0
+    },
+    "dist_mm": 289,
+    "elev": 34,
+    "azim": -139
+   },
+   "visible_parts": 19,
+   "visible_solids": 41,
+   "displaced_parts": {
+    "BLS-3.step-10": 4,
+    "BLS-3.step-8": 4,
+    "Fitec FS90R Micro Servo NoConnector.step-1": 6,
+    "Fitec FS90R Micro Servo NoConnector.step-2": 6,
+    "Fitec Left Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Left Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Left Wires 4^RCC_Assembly-1": 3,
+    "Fitec Right Wire Brown 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Red 4^RCC_Assembly-1": 1,
+    "Fitec Right Wire Yellow 4^RCC_Assembly-1": 1,
+    "Fitec Right Wires 4^RCC_Assembly-1": 3,
+    "L4-2": 1,
+    "L5-1": 1,
+    "Pololu Wheel 60mm-1": 2,
+    "Pololu Wheel 60mm-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 38,
+   "name": "Step 35",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/e11a4a64-3640-3276-bd39-04ced38eaa85.webp?t=1782444478",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "BLS-3.step-10",
+     "n": 4,
+     "total": 4,
+     "delta_mm": [
+      73.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "delta_mm": [
+      -73.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-1",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      -73.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec FS90R Micro Servo NoConnector.step-2",
+     "n": 6,
+     "total": 6,
+     "delta_mm": [
+      73.9,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "L4-2",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "L5-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -73.9,
+      0.0
+     ],
+     "dist_mm": 73.9,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Pololu Wheel 60mm-1",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      0.0,
+      -73.8,
+      0.0
+     ],
+     "dist_mm": 73.8,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Pololu Wheel 60mm-2",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      -0.0,
+      -68.2,
+      28.3
+     ],
+     "dist_mm": 73.8,
+     "dir": "-Y (down) & +Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 73.9,
+     "direction": "-Y (down)",
+     "anchored_to": [
+      "L4-2",
+      "L2-1"
+     ],
+     "name": "Lead Line_basic"
+    },
+    {
+     "kind": "lead line",
+     "sub": "basic",
+     "colour": "#ff0000",
+     "style": "solid",
+     "n_points": 2,
+     "length_mm": 73.9,
+     "direction": "+Y (up)",
+     "anchored_to": [
+      "L2-1",
+      "L5-1"
+     ],
+     "name": "Lead Line_basic"
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 289,
+    "elev": 34,
+    "azim": -139
+   },
+   "visible_parts": 19,
+   "visible_solids": 41,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 39,
+   "name": "Step 36",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/97f182d0-e914-1f3c-cdb9-7ce7e520929a.webp?t=1782444488",
+   "appeared": [
+    {
+     "top": "82fec463-bd94-6bee-f801-0ddda7a5924f",
+     "name": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 29,
+     "total": 29,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, black, silver"
+    },
+    {
+     "top": "ebb28e88-ea65-3323-520a-7226440e4e82",
+     "name": "Ensamblaje_Shield_NANO-1",
+     "n": 97,
+     "total": 185,
+     "partial": true,
+     "sub": " sub-parts: 47uf CAP Dcase-1\u00d715, cap106C-1\u00d79, cap106C-2\u00d79, nano - reg-1\u00d79, User Library-PJ-002AH-1\u00d75 \u2026",
+     "colours": "tan/wood, light grey, black"
+    },
+    {
+     "top": "ad6c83a0-e4ec-65ff-a003-2d023795b2ab",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      -111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-X",
+     "n": 10
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      0.0,
+      -111.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-Y (down)",
+     "n": 9
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "offset_mm": [
+      0.0,
+      111.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+Y (up)",
+     "n": 10
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+X",
+     "n": 41
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      -111.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-Z",
+     "n": 8
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      -111.0,
+      0.0,
+      -0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-X",
+     "n": 47
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "offset_mm": [
+      0.0,
+      111.0,
+      -0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+Y (up)",
+     "n": 1
+    },
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "offset_mm": [
+      111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+X",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 5.5,
+     "target_shift_mm": 10,
+     "dist_from": 289,
+     "dist_to": 248,
+     "zoom": 1.17
+    },
+    "dist_mm": 248,
+    "elev": 39,
+    "azim": -141
+   },
+   "visible_parts": 22,
+   "visible_solids": 168,
+   "displaced_parts": {
+    "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1": 29,
+    "Ensamblaje_Shield_NANO-1": 97,
+    "RadioFrequencyCommunicationModule_nRF24L01-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 40,
+   "name": "Step 37",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/24a1556e-6423-718f-0dae-3c3c72f5feb4.webp?t=1782444524",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 10,
+     "total": 29,
+     "delta_mm": [
+      111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 9,
+     "total": 29,
+     "delta_mm": [
+      -0.0,
+      111.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1",
+     "n": 10,
+     "total": 29,
+     "delta_mm": [
+      -0.0,
+      -111.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "n": 41,
+     "total": 185,
+     "delta_mm": [
+      -111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "n": 8,
+     "total": 185,
+     "delta_mm": [
+      -0.0,
+      0.0,
+      111.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+Z",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "n": 47,
+     "total": 185,
+     "delta_mm": [
+      111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "+X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "Ensamblaje_Shield_NANO-1",
+     "n": 1,
+     "total": 185,
+     "delta_mm": [
+      -0.0,
+      -111.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    },
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -111.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 111.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 248,
+    "elev": 39,
+    "azim": -141
+   },
+   "visible_parts": 22,
+   "visible_solids": 168,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 41,
+   "name": "Step 38",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/f9ab6326-944d-2bfe-1c6d-68486a1a7b14.webp?t=1782444526",
+   "appeared": [
+    {
+     "top": "f1edb0eb-6cd1-ffa1-573e-84d57c816a4d",
+     "name": "L7-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L7-1",
+     "offset_mm": [
+      86.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 86.0,
+     "dir": "+X",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 92.7,
+     "target_shift_mm": 30,
+     "dist_from": 248,
+     "dist_to": 212,
+     "zoom": 1.17
+    },
+    "dist_mm": 212,
+    "elev": -18,
+    "azim": 140
+   },
+   "visible_parts": 23,
+   "visible_solids": 169,
+   "displaced_parts": {
+    "L7-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 42,
+   "name": "Step 39",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/326943ad-6240-5150-9572-bf2dcc66b4fe.webp?t=1782444528",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L7-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -86.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 86.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 212,
+    "elev": -18,
+    "azim": 140
+   },
+   "visible_parts": 23,
+   "visible_solids": 169,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 43,
+   "name": "Step 40",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/c17b09d5-c610-7b63-c6ac-ec70ee455166.webp?t=1782444531",
+   "appeared": [
+    {
+     "top": "049aa749-2958-edb2-ce5d-0788d5b9b549",
+     "name": "L6-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "tan/wood"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "L6-1",
+     "offset_mm": [
+      86.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 86.0,
+     "dir": "+X",
+     "n": 1
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 94.9,
+     "target_shift_mm": 0,
+     "dist_from": 212,
+     "dist_to": 212,
+     "zoom": 1.0
+    },
+    "dist_mm": 212,
+    "elev": -17,
+    "azim": 39
+   },
+   "visible_parts": 24,
+   "visible_solids": 170,
+   "displaced_parts": {
+    "L6-1": 1
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 44,
+   "name": "Step 41",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/5b051df4-4f5f-03da-32fa-006169f64d03.webp?t=1782444533",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "L6-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      -86.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 86.0,
+     "dir": "-X",
+     "now_offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "seated": true
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 212,
+    "elev": -17,
+    "azim": 39
+   },
+   "visible_parts": 24,
+   "visible_solids": 170,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 45,
+   "name": "Step 42",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/6ec76e01-6e09-c830-3222-f9a82a157fdc.webp?t=1782445170",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "BLS-3.step-10 > BLS-3.step-Imported4"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      59,
+      4
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1 > U1~HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-2 > HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      33,
+      5
+     ],
+     "leader": null,
+     "static": false
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "image": 2
+   },
+   "camera": {
+    "change": {
+     "angle_deg": 70.0,
+     "target_shift_mm": 26,
+     "dist_from": 212,
+     "dist_to": 212,
+     "zoom": 1.0
+    },
+    "dist_mm": 212,
+    "elev": 46,
+    "azim": 73
+   },
+   "visible_parts": 24,
+   "visible_solids": 170,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 46,
+   "name": "Step 43",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/c27e62fb-6a9b-f66d-365e-0ab640858c5e.webp?t=1782445181",
+   "appeared": [
+    {
+     "top": "a0f6ab7d-6ffa-0b72-f057-e27d18d72e03",
+     "name": "BLS-3.step-2",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "5c3e7a35-d7e0-6853-3c2a-b187898d5354",
+     "name": "Fitec Left Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "ab2e690f-7649-aadf-3f6a-f48b45286653",
+     "name": "BLS-3.step-10",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "9e721493-5c7e-8ef5-3107-38d1536e9350",
+     "name": "Fitec Left Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "580316d3-396a-1115-33dd-cd9ebeca82cc",
+     "name": "Fitec Left Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "b713cf47-3018-3a58-5ce4-b7a3ece56d72",
+     "name": "Fitec Left Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "4c00ea21-4cd4-3546-d4e6-7a007854af25",
+     "name": "Fitec Left Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "brown, red, yellow"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Left Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "BLS-3.step-10 > BLS-3.step-Imported4"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      59,
+      4
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1 > U1~HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-2 > HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      37,
+      8
+     ],
+     "leader": null,
+     "static": false
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 212,
+    "elev": 46,
+    "azim": 73
+   },
+   "visible_parts": 21,
+   "visible_solids": 164,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 47,
+   "name": "Step 44",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/e0de749e-1160-5972-b3a9-d1eef7768db0.webp?t=1782445183",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "BLS-3.step-8 > BLS-3.step-Imported4"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      26,
+      17
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1 > U1~HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1 > HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      64,
+      24
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    }
+   ],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {
+    "image": 2
+   },
+   "camera": {
+    "change": null,
+    "dist_mm": 212,
+    "elev": 46,
+    "azim": 73
+   },
+   "visible_parts": 21,
+   "visible_solids": 164,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 48,
+   "name": "Step 45",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/d3945400-21d7-0e67-0c13-b1c8bb727d51.webp?t=1782445185",
+   "appeared": [
+    {
+     "top": "14a8be7d-6516-f6fe-ece6-6161ce6f251f",
+     "name": "BLS-3.step-1",
+     "n": 1,
+     "total": 4,
+     "partial": true,
+     "sub": " sub-parts: BLS-3.step-Imported4",
+     "colours": "black"
+    },
+    {
+     "top": "e44b75cc-33bd-9575-68ee-74de675eee8e",
+     "name": "Fitec Right Wires 5^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "dea28143-f650-87ff-8ad4-d498b6bab55f",
+     "name": "BLS-3.step-8",
+     "n": 4,
+     "total": 4,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "c2bd731e-fe25-6a30-86fd-6c03e44fa437",
+     "name": "Fitec Right Wire Brown 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "brown"
+    },
+    {
+     "top": "0896d20a-1da3-393c-3ce2-1b1baaa583f8",
+     "name": "Fitec Right Wire Red 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "red"
+    },
+    {
+     "top": "83f8eb1c-3122-3500-201b-2f36ef0dd818",
+     "name": "Fitec Right Wire Yellow 4^RCC_Assembly-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow"
+    },
+    {
+     "top": "420e0997-1ab6-3ddd-cceb-8844d3bb0c17",
+     "name": "Fitec Right Wires 4^RCC_Assembly-1",
+     "n": 3,
+     "total": 3,
+     "partial": false,
+     "sub": "",
+     "colours": "yellow, red, brown"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "BLS-3.step-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "Fitec Right Wires 5^RCC_Assembly-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 3
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "BLS-3.step-8 > BLS-3.step-Imported4"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      26,
+      17
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    },
+    {
+     "kind": "image",
+     "name": "new eye",
+     "src": "ASS3e405c2c-ac76-88fc-a2d0-31bb66a7ae52.png",
+     "anchored_to": [
+      "3D_1-PCB_PCB_RCC_nRF24L01_Capacitor_Adapter copy_2026-06-14-1 > U1~HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1 > HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ-1"
+     ],
+     "width": 8.2,
+     "screen_xy": [
+      64,
+      24
+     ],
+     "leader": "#7fdbff",
+     "static": false
+    }
+   ],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 212,
+    "elev": 46,
+    "azim": 73
+   },
+   "visible_parts": 18,
+   "visible_solids": 158,
+   "displaced_parts": {},
+   "scene_change": {}
+  },
+  {
+   "order_index": 49,
+   "name": "Step 46",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/eba09c99-b875-c18c-b45d-37b5fa9a9e51.webp?t=1782444572",
+   "appeared": [
+    {
+     "top": "0249e57f-feef-3620-525f-139af6ed7465",
+     "name": "9V-battery-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "046b199b-aae3-aaef-4a7d-bf227b8bf9db",
+     "name": "Battery Wires 1^RCC_Assembly-1",
+     "n": 2,
+     "total": 2,
+     "partial": false,
+     "sub": "",
+     "colours": "red, black"
+    },
+    {
+     "top": "fe7d676e-523a-ec7d-c373-0922f2ce960f",
+     "name": "DC_Adaptor-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "58e9988e-acc6-f88c-9a0e-73470ebcfc9a",
+     "name": "DC_barrel_connector_9V-1",
+     "n": 3,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d73",
+     "colours": "black, silver"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 3,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d73",
+     "colours": "black, dark grey, red"
+    }
+   ],
+   "disappeared": [],
+   "appeared_offsets": [
+    {
+     "part": "9V-battery-1",
+     "offset_mm": [
+      17.0,
+      42.8,
+      -40.2
+     ],
+     "dist_mm": 61.1,
+     "dir": "+Y (up) & -Z",
+     "n": 1
+    },
+    {
+     "part": "Battery Wires 1^RCC_Assembly-1",
+     "offset_mm": [
+      1297.9,
+      42.5,
+      2669.8
+     ],
+     "dist_mm": 2968.9,
+     "dir": "+X & +Z",
+     "n": 2
+    },
+    {
+     "part": "DC_Adaptor-1",
+     "offset_mm": [
+      0.4,
+      42.8,
+      60.7
+     ],
+     "dist_mm": 74.2,
+     "dir": "+Y (up) & +Z",
+     "n": 1
+    },
+    {
+     "part": "DC_barrel_connector_9V-1",
+     "offset_mm": [
+      91.4,
+      -42.8,
+      -30.6
+     ],
+     "dist_mm": 105.4,
+     "dir": "+X & -Y (down)",
+     "n": 2
+    },
+    {
+     "part": "DC_barrel_connector_9V-1",
+     "offset_mm": [
+      91.4,
+      -42.8,
+      -30.7
+     ],
+     "dist_mm": 105.5,
+     "dir": "+X & -Y (down)",
+     "n": 1
+    },
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "offset_mm": [
+      109.3,
+      -42.8,
+      -30.5
+     ],
+     "dist_mm": 121.3,
+     "dir": "+X & -Y (down)",
+     "n": 2
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 50.7,
+     "target_shift_mm": 70,
+     "dist_from": 212,
+     "dist_to": 337,
+     "zoom": 0.63
+    },
+    "dist_mm": 337,
+    "elev": 35,
+    "azim": 140
+   },
+   "visible_parts": 23,
+   "visible_solids": 168,
+   "displaced_parts": {
+    "9V-battery-1": 1,
+    "Battery Wires 1^RCC_Assembly-1": 2,
+    "DC_Adaptor-1": 1,
+    "DC_barrel_connector_9V-1": 3,
+    "DC_barrel_connector_9V-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 50,
+   "name": "Step 47",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/e6454f3f-4e5c-443a-92b4-6aa82b6f8f71.webp?t=1782444695",
+   "appeared": [],
+   "disappeared": [],
+   "appeared_offsets": [],
+   "moved": [
+    {
+     "part": "9V-battery-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      17.0,
+      0.0,
+      -40.2
+     ],
+     "seated": false
+    },
+    {
+     "part": "Battery Wires 1^RCC_Assembly-1",
+     "n": 2,
+     "total": 2,
+     "delta_mm": [
+      0.0,
+      -42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      1297.9,
+      -0.3,
+      2669.8
+     ],
+     "seated": false
+    },
+    {
+     "part": "DC_Adaptor-1",
+     "n": 1,
+     "total": 1,
+     "delta_mm": [
+      0.0,
+      -42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "-Y (down)",
+     "now_offset_mm": [
+      0.4,
+      -0.0,
+      60.7
+     ],
+     "seated": false
+    },
+    {
+     "part": "DC_barrel_connector_9V-1",
+     "n": 2,
+     "total": 6,
+     "delta_mm": [
+      0.0,
+      42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      91.4,
+      -0.0,
+      -30.6
+     ],
+     "seated": false
+    },
+    {
+     "part": "DC_barrel_connector_9V-1",
+     "n": 1,
+     "total": 6,
+     "delta_mm": [
+      0.0,
+      42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      91.4,
+      -0.0,
+      -30.7
+     ],
+     "seated": false
+    },
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "n": 2,
+     "total": 6,
+     "delta_mm": [
+      0.0,
+      42.8,
+      0.0
+     ],
+     "dist_mm": 42.8,
+     "dir": "+Y (up)",
+     "now_offset_mm": [
+      109.3,
+      -0.0,
+      -30.5
+     ],
+     "seated": false
+    }
+   ],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": null,
+    "dist_mm": 337,
+    "elev": 35,
+    "azim": 140
+   },
+   "visible_parts": 23,
+   "visible_solids": 168,
+   "displaced_parts": {
+    "9V-battery-1": 1,
+    "Battery Wires 1^RCC_Assembly-1": 2,
+    "DC_Adaptor-1": 1,
+    "DC_barrel_connector_9V-1": 3,
+    "DC_barrel_connector_9V-2": 2
+   },
+   "scene_change": {}
+  },
+  {
+   "order_index": 51,
+   "name": "Completed View",
+   "behaviour": "pause",
+   "duration": "800",
+   "description": "",
+   "popup": null,
+   "image": "https://s3.amazonaws.com/userstore.prod.cadasio.com/workspaces/3aa8594b-c298-4fb0-9f8c-813b3b22481e/projects/f8c8cb9b-7058-4d20-8e01-70ab82569e84/images/f8ba8133-24c4-e90a-5f49-3fa2d3baac71.webp?t=1782444657",
+   "appeared": [
+    {
+     "top": "33a01df3-4513-568a-32bf-2adc1678d838",
+     "name": "2024-RCC_ControllerHandles_mod1-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "20c8a027-48e7-9643-da81-74330ee3ce21",
+     "name": "2024-RCC_ControllerHandles_mod1_Left-1",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "1929ba17-fabc-d7bc-b582-e6f1a95aaa09",
+     "name": "Controller-with-vias-1",
+     "n": 219,
+     "total": 219,
+     "partial": false,
+     "sub": "",
+     "colours": "white, tan/wood, black"
+    },
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 1,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: eBom-FreeParts-1",
+     "colours": "silver"
+    },
+    {
+     "top": "d267790c-3391-c971-4a1c-f0e3a6068720",
+     "name": "KY-023_Joystick-Module-1",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    },
+    {
+     "top": "d6d6c46a-c68b-59d5-88cf-99ec43c445de",
+     "name": "KY-023_Joystick-Module-2",
+     "n": 9,
+     "total": 9,
+     "partial": false,
+     "sub": "",
+     "colours": "black, dark grey, grey"
+    },
+    {
+     "top": "8073e214-741e-8ed6-f825-16a7611602d2",
+     "name": "Mini USB B-2",
+     "n": 7,
+     "total": 7,
+     "partial": false,
+     "sub": "",
+     "colours": "light grey, black"
+    },
+    {
+     "top": "b5038cc0-3387-a4c5-8e8e-b99458c60080",
+     "name": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "n": 1,
+     "total": 1,
+     "partial": false,
+     "sub": "",
+     "colours": "black"
+    },
+    {
+     "top": "14566657-4447-4ab1-ab52-a29c2d3d054b",
+     "name": "USB Cable end-2",
+     "n": 5,
+     "total": 5,
+     "partial": false,
+     "sub": "",
+     "colours": "white, black"
+    },
+    {
+     "top": "4f8e0f99-78fb-060c-c2d7-34eec7493bc2",
+     "name": "nano-4",
+     "n": 293,
+     "total": 293,
+     "partial": false,
+     "sub": "",
+     "colours": "white, light grey, black"
+    }
+   ],
+   "disappeared": [
+    {
+     "top": "1629cd90-cf24-ccaf-342d-bd396d612352",
+     "name": "DC_barrel_connector_9V-2",
+     "n": 2,
+     "total": 6,
+     "partial": true,
+     "sub": " sub-parts: DC_barrel_connector_9V_1-1\u00d72",
+     "colours": "dark grey, red"
+    }
+   ],
+   "appeared_offsets": [
+    {
+     "part": "2024-RCC_ControllerHandles_mod1_Left-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "n": 1
+    },
+    {
+     "part": "2024-RCC_ControllerHandles_mod1-1",
+     "offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "n": 1
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "offset_mm": [
+      412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+X",
+     "n": 148
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "offset_mm": [
+      -412.4,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-X",
+     "n": 1
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "offset_mm": [
+      0.0,
+      -412.4,
+      0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Y (down)",
+     "n": 58
+    },
+    {
+     "part": "Controller-with-vias-1",
+     "offset_mm": [
+      412.4,
+      0.0,
+      0.5
+     ],
+     "dist_mm": 412.4,
+     "dir": "+X",
+     "n": 12
+    },
+    {
+     "part": "DC_barrel_connector_9V-2",
+     "offset_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "dist_mm": 0.0,
+     "dir": "none",
+     "n": 1
+    },
+    {
+     "part": "KY-023_Joystick-Module-1",
+     "offset_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Y (up)",
+     "n": 9
+    },
+    {
+     "part": "KY-023_Joystick-Module-2",
+     "offset_mm": [
+      -0.0,
+      412.4,
+      -0.0
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Y (up)",
+     "n": 9
+    },
+    {
+     "part": "Mini USB B-2",
+     "offset_mm": [
+      26.2,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 413.2,
+     "dir": "+Z",
+     "n": 7
+    },
+    {
+     "part": "nano-4",
+     "offset_mm": [
+      0.0,
+      0.0,
+      -412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "-Z",
+     "n": 293
+    },
+    {
+     "part": "RadioFrequencyCommunicationModule_nRF24L01-4",
+     "offset_mm": [
+      0.0,
+      0.0,
+      412.4
+     ],
+     "dist_mm": 412.4,
+     "dir": "+Z",
+     "n": 1
+    },
+    {
+     "part": "USB Cable end-2",
+     "offset_mm": [
+      26.2,
+      -412.4,
+      0.0
+     ],
+     "dist_mm": 413.2,
+     "dir": "-Y (down)",
+     "n": 5
+    }
+   ],
+   "moved": [],
+   "rotated": {},
+   "tb_on": [],
+   "tb_off": [],
+   "tb_changed": [],
+   "tb_visible_counts": {},
+   "camera": {
+    "change": {
+     "angle_deg": 13.9,
+     "target_shift_mm": 133,
+     "dist_from": 337,
+     "dist_to": 302,
+     "zoom": 1.12
+    },
+    "dist_mm": 302,
+    "elev": 36,
+    "azim": 123
+   },
+   "visible_parts": 32,
+   "visible_solids": 712,
+   "displaced_parts": {
+    "2024-RCC_ControllerHandles_mod1_Left-1": 1,
+    "2024-RCC_ControllerHandles_mod1-1": 1,
+    "9V-battery-1": 1,
+    "Battery Wires 1^RCC_Assembly-1": 2,
+    "Controller-with-vias-1": 219,
+    "DC_Adaptor-1": 1,
+    "DC_barrel_connector_9V-1": 3,
+    "KY-023_Joystick-Module-1": 9,
+    "KY-023_Joystick-Module-2": 9,
+    "Mini USB B-2": 7,
+    "nano-4": 293,
+    "RadioFrequencyCommunicationModule_nRF24L01-4": 1,
+    "USB Cable end-2": 5
+   },
+   "scene_change": {}
+  }
+ ]
+}

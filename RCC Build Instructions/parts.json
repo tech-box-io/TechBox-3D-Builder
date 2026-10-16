@@ -1,0 +1,595 @@
+{
+ "meta": {
+  "title": "Radio Controlled Car (RCC)",
+  "part": "Full Build",
+  "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved."
+ },
+ "parts": [
+  {
+   "name": "Controller Board",
+   "ids": [
+    "NAUO30"
+   ],
+   "qty": 1,
+   "view": {
+    "roll": 180
+   },
+   "picture": "parts/Controller-Board.png",
+   "group": "Controller"
+  },
+  {
+   "name": "Left Controller Guard",
+   "ids": [
+    "NAUO24"
+   ],
+   "qty": 1,
+   "view": {
+    "dir": [
+     -0.45,
+     0.85,
+     0.25
+    ]
+   },
+   "picture": "parts/Left-Controller-Guard.png",
+   "group": "Controller"
+  },
+  {
+   "name": "Right Controller Guard",
+   "ids": [
+    "NAUO25"
+   ],
+   "qty": 1,
+   "view": {
+    "dir": [
+     -0.45,
+     0.85,
+     -0.25
+    ]
+   },
+   "picture": "parts/Right-Controller-Guard.png",
+   "group": "Controller"
+  },
+  {
+   "name": "Nano Board",
+   "ids": [
+    "NAUO27",
+    "NANO_CAR"
+   ],
+   "qty": 2,
+   "picture": "parts/Nano-Board.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "Radio Module",
+   "ids": [
+    "NAUO11",
+    "NAUO10"
+   ],
+   "qty": 2,
+   "picture": "parts/Radio-Module.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "Joystick",
+   "ids": [
+    "NAUO12",
+    "NAUO13"
+   ],
+   "qty": 2,
+   "picture": "parts/Joystick.png",
+   "group": "Controller"
+  },
+  {
+   "name": "Nano I/O Module",
+   "ids": [
+    "NAUO23"
+   ],
+   "qty": 1,
+   "picture": "parts/Nano-I-O-Module.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "Adapter Board",
+   "ids": [
+    "NAUO26"
+   ],
+   "qty": 1,
+   "view": {
+    "dir": [
+     0.45,
+     0.85,
+     0.25
+    ]
+   },
+   "picture": "parts/Adapter-Board.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "Wheel Motor",
+   "ids": [
+    "NAUO18",
+    "NAUO17"
+   ],
+   "qty": 2,
+   "picture": "parts/Wheel-Motor.png",
+   "group": "Motors and wheels"
+  },
+  {
+   "name": "Wheel",
+   "ids": [
+    "NAUO9",
+    "NAUO8"
+   ],
+   "qty": 2,
+   "picture": "parts/Wheel.png",
+   "group": "Motors and wheels"
+  },
+  {
+   "name": "9V Battery",
+   "ids": [
+    "NAUO14"
+   ],
+   "qty": 1,
+   "picture": "parts/9V-Battery.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "Battery Clip",
+   "ids": [
+    "NAUO15"
+   ],
+   "qty": 1,
+   "with": [
+    "NAUO29"
+   ],
+   "poses": {
+    "NAUO29": [
+     -30.0,
+     -14.0,
+     22.0
+    ]
+   },
+   "wires": [
+    {
+     "colour": "#ef3340",
+     "radius": 0.68,
+     "pts": [
+      [
+       640.67,
+       943.34,
+       1347.68
+      ],
+      [
+       640.58,
+       943.23,
+       1349.16
+      ],
+      [
+       640.33,
+       942.9,
+       1350.6
+      ],
+      [
+       639.97,
+       942.41,
+       1351.96
+      ],
+      [
+       639.52,
+       941.8,
+       1353.24
+      ],
+      [
+       639.0,
+       941.1,
+       1354.46
+      ],
+      [
+       638.44,
+       940.33,
+       1355.61
+      ],
+      [
+       637.85,
+       939.51,
+       1356.7
+      ],
+      [
+       637.24,
+       938.64,
+       1357.75
+      ],
+      [
+       636.6,
+       937.74,
+       1358.75
+      ],
+      [
+       635.96,
+       936.8,
+       1359.72
+      ],
+      [
+       635.31,
+       935.84,
+       1360.65
+      ],
+      [
+       634.65,
+       934.85,
+       1361.56
+      ],
+      [
+       633.99,
+       933.84,
+       1362.44
+      ],
+      [
+       633.33,
+       932.82,
+       1363.3
+      ],
+      [
+       632.67,
+       931.77,
+       1364.14
+      ],
+      [
+       632.01,
+       930.71,
+       1364.96
+      ],
+      [
+       631.36,
+       929.64,
+       1365.76
+      ],
+      [
+       630.72,
+       928.54,
+       1366.55
+      ],
+      [
+       630.09,
+       927.43,
+       1367.33
+      ],
+      [
+       629.47,
+       926.31,
+       1368.09
+      ],
+      [
+       628.87,
+       925.17,
+       1368.85
+      ],
+      [
+       628.29,
+       924.01,
+       1369.59
+      ],
+      [
+       627.73,
+       922.84,
+       1370.33
+      ],
+      [
+       627.21,
+       921.65,
+       1371.05
+      ],
+      [
+       626.72,
+       920.44,
+       1371.77
+      ],
+      [
+       626.28,
+       919.2,
+       1372.49
+      ],
+      [
+       625.91,
+       917.94,
+       1373.21
+      ],
+      [
+       625.63,
+       916.66,
+       1373.91
+      ],
+      [
+       625.48,
+       915.36,
+       1374.62
+      ],
+      [
+       625.55,
+       914.04,
+       1375.31
+      ],
+      [
+       625.97,
+       912.77,
+       1375.96
+      ],
+      [
+       626.91,
+       911.75,
+       1376.47
+      ],
+      [
+       628.26,
+       911.19,
+       1376.74
+      ],
+      [
+       629.74,
+       911.04,
+       1376.81
+      ]
+     ]
+    },
+    {
+     "colour": "#2d2926",
+     "radius": 0.68,
+     "pts": [
+      [
+       642.67,
+       943.34,
+       1347.68
+      ],
+      [
+       642.57,
+       943.23,
+       1349.16
+      ],
+      [
+       642.31,
+       942.9,
+       1350.58
+      ],
+      [
+       641.91,
+       942.41,
+       1351.92
+      ],
+      [
+       641.42,
+       941.8,
+       1353.18
+      ],
+      [
+       640.86,
+       941.1,
+       1354.37
+      ],
+      [
+       640.25,
+       940.33,
+       1355.48
+      ],
+      [
+       639.61,
+       939.5,
+       1356.54
+      ],
+      [
+       638.94,
+       938.63,
+       1357.54
+      ],
+      [
+       638.25,
+       937.73,
+       1358.5
+      ],
+      [
+       637.55,
+       936.8,
+       1359.42
+      ],
+      [
+       636.84,
+       935.84,
+       1360.31
+      ],
+      [
+       636.13,
+       934.86,
+       1361.16
+      ],
+      [
+       635.41,
+       933.86,
+       1361.99
+      ],
+      [
+       634.69,
+       932.84,
+       1362.8
+      ],
+      [
+       633.97,
+       931.8,
+       1363.58
+      ],
+      [
+       633.25,
+       930.75,
+       1364.35
+      ],
+      [
+       632.54,
+       929.68,
+       1365.1
+      ],
+      [
+       631.84,
+       928.6,
+       1365.83
+      ],
+      [
+       631.14,
+       927.5,
+       1366.55
+      ],
+      [
+       630.46,
+       926.38,
+       1367.26
+      ],
+      [
+       629.79,
+       925.25,
+       1367.95
+      ],
+      [
+       629.14,
+       924.11,
+       1368.64
+      ],
+      [
+       628.52,
+       922.94,
+       1369.31
+      ],
+      [
+       627.92,
+       921.76,
+       1369.98
+      ],
+      [
+       627.35,
+       920.55,
+       1370.65
+      ],
+      [
+       626.83,
+       919.33,
+       1371.3
+      ],
+      [
+       626.38,
+       918.07,
+       1371.96
+      ],
+      [
+       626.01,
+       916.79,
+       1372.61
+      ],
+      [
+       625.76,
+       915.48,
+       1373.26
+      ],
+      [
+       625.72,
+       914.14,
+       1373.9
+      ],
+      [
+       626.05,
+       912.83,
+       1374.51
+      ],
+      [
+       626.93,
+       911.76,
+       1374.99
+      ],
+      [
+       628.27,
+       911.19,
+       1375.24
+      ],
+      [
+       629.74,
+       911.04,
+       1375.31
+      ]
+     ]
+    }
+   ],
+   "picture": "parts/Battery-Clip.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "USB Cable",
+   "ids": [
+    "NAUO16"
+   ],
+   "qty": 1,
+   "picture": "parts/USB-Cable.png",
+   "group": "Electronics"
+  },
+  {
+   "name": "L1",
+   "ids": [
+    "NAUO1"
+   ],
+   "qty": 1,
+   "view": {
+    "roll": 180
+   },
+   "picture": "parts/L1.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L2",
+   "ids": [
+    "NAUO2"
+   ],
+   "qty": 1,
+   "picture": "parts/L2.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L3",
+   "ids": [
+    "NAUO3"
+   ],
+   "qty": 1,
+   "picture": "parts/L3.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L5",
+   "ids": [
+    "NAUO5"
+   ],
+   "qty": 1,
+   "picture": "parts/L5.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L4",
+   "ids": [
+    "NAUO4"
+   ],
+   "qty": 1,
+   "picture": "parts/L4.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L7",
+   "ids": [
+    "NAUO7"
+   ],
+   "qty": 1,
+   "picture": "parts/L7.png",
+   "group": "Chassis (L1 - L7)"
+  },
+  {
+   "name": "L6",
+   "ids": [
+    "NAUO6"
+   ],
+   "qty": 1,
+   "picture": "parts/L6.png",
+   "group": "Chassis (L1 - L7)"
+  }
+ ]
+}

@@ -1,0 +1,272 @@
+{
+ "kit": "Mini Robot Arm (MRA)",
+ "part": "Full Build",
+ "image_size": 500,
+ "parts": [
+  {
+   "name": "Nano I/O Module",
+   "quantity": 1,
+   "image": "Nano-I-O-Module.png"
+  },
+  {
+   "name": "Nano Board",
+   "quantity": 1,
+   "image": "Nano-Board.png"
+  },
+  {
+   "name": "Joystick",
+   "quantity": 2,
+   "image": "Joystick.png"
+  },
+  {
+   "name": "Breadboard Wire (F-F)",
+   "quantity": 8,
+   "image": "Breadboard-Wire-F-F.png"
+  },
+  {
+   "name": "Base Motor",
+   "quantity": 1,
+   "image": "Base-Motor.png"
+  },
+  {
+   "name": "Elbow Motor",
+   "quantity": 1,
+   "image": "Elbow-Motor.png"
+  },
+  {
+   "name": "Shoulder Motor",
+   "quantity": 1,
+   "image": "Shoulder-Motor.png"
+  },
+  {
+   "name": "Claw Motor",
+   "quantity": 1,
+   "image": "Claw-Motor.png"
+  },
+  {
+   "name": "USB Cable",
+   "quantity": 1,
+   "image": "USB-Cable.png"
+  },
+  {
+   "name": "R1",
+   "quantity": 1,
+   "image": "R1.png"
+  },
+  {
+   "name": "R2",
+   "quantity": 1,
+   "image": "R2.png"
+  },
+  {
+   "name": "R3",
+   "quantity": 1,
+   "image": "R3.png"
+  },
+  {
+   "name": "R4",
+   "quantity": 1,
+   "image": "R4.png"
+  },
+  {
+   "name": "R5",
+   "quantity": 1,
+   "image": "R5.png"
+  },
+  {
+   "name": "R6",
+   "quantity": 1,
+   "image": "R6.png"
+  },
+  {
+   "name": "B2",
+   "quantity": 1,
+   "image": "B2.png"
+  },
+  {
+   "name": "B1",
+   "quantity": 1,
+   "image": "B1.png"
+  },
+  {
+   "name": "6mm Hex Screw",
+   "quantity": 15,
+   "image": "6mm-Hex-Screw.png"
+  },
+  {
+   "name": "B3",
+   "quantity": 1,
+   "image": "B3.png"
+  },
+  {
+   "name": "B4",
+   "quantity": 1,
+   "image": "B4.png"
+  },
+  {
+   "name": "B5",
+   "quantity": 1,
+   "image": "B5.png"
+  },
+  {
+   "name": "B6",
+   "quantity": 2,
+   "image": "B6.png"
+  },
+  {
+   "name": "B7",
+   "quantity": 1,
+   "image": "B7.png"
+  },
+  {
+   "name": "B8",
+   "quantity": 1,
+   "image": "B8.png"
+  },
+  {
+   "name": "A6",
+   "quantity": 1,
+   "image": "A6.png"
+  },
+  {
+   "name": "A7",
+   "quantity": 1,
+   "image": "A7.png"
+  },
+  {
+   "name": "A9",
+   "quantity": 2,
+   "image": "A9.png"
+  },
+  {
+   "name": "16mm Hex Screw",
+   "quantity": 4,
+   "image": "16mm-Hex-Screw.png"
+  },
+  {
+   "name": "A8",
+   "quantity": 1,
+   "image": "A8.png"
+  },
+  {
+   "name": "A1",
+   "quantity": 1,
+   "image": "A1.png"
+  },
+  {
+   "name": "A2",
+   "quantity": 1,
+   "image": "A2.png"
+  },
+  {
+   "name": "A3",
+   "quantity": 1,
+   "image": "A3.png"
+  },
+  {
+   "name": "10mm Hex Screw",
+   "quantity": 8,
+   "image": "10mm-Hex-Screw.png"
+  },
+  {
+   "name": "R8",
+   "quantity": 1,
+   "image": "R8.png"
+  },
+  {
+   "name": "A4",
+   "quantity": 1,
+   "image": "A4.png"
+  },
+  {
+   "name": "A5",
+   "quantity": 1,
+   "image": "A5.png"
+  },
+  {
+   "name": "R7",
+   "quantity": 1,
+   "image": "R7.png"
+  },
+  {
+   "name": "A10",
+   "quantity": 1,
+   "image": "A10.png"
+  },
+  {
+   "name": "A11",
+   "quantity": 1,
+   "image": "A11.png"
+  },
+  {
+   "name": "A12",
+   "quantity": 1,
+   "image": "A12.png"
+  },
+  {
+   "name": "A13",
+   "quantity": 1,
+   "image": "A13.png"
+  },
+  {
+   "name": "C3",
+   "quantity": 1,
+   "image": "C3.png"
+  },
+  {
+   "name": "C1",
+   "quantity": 1,
+   "image": "C1.png"
+  },
+  {
+   "name": "C2",
+   "quantity": 1,
+   "image": "C2.png"
+  },
+  {
+   "name": "C4",
+   "quantity": 1,
+   "image": "C4.png"
+  },
+  {
+   "name": "C5",
+   "quantity": 1,
+   "image": "C5.png"
+  },
+  {
+   "name": "C6",
+   "quantity": 1,
+   "image": "C6.png"
+  },
+  {
+   "name": "C7",
+   "quantity": 1,
+   "image": "C7.png"
+  },
+  {
+   "name": "C9",
+   "quantity": 1,
+   "image": "C9.png"
+  },
+  {
+   "name": "C8",
+   "quantity": 1,
+   "image": "C8.png"
+  },
+  {
+   "name": "Servo Extension Wire",
+   "quantity": 1,
+   "image": "Servo-Extension-Wire.png"
+  },
+  {
+   "name": "T1",
+   "quantity": 2,
+   "image": "T1.png"
+  },
+  {
+   "name": "T2",
+   "quantity": 2,
+   "image": "T2.png"
+  }
+ ]
+}

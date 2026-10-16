@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MRA Base and Controller</title>
+<style>
+:root{--blue:#1a9fd9;--ink:#111;--bar:#fff}
+html,body{margin:0;height:100%;background:#fff;font-family:"Helvetica Neue",Arial,sans-serif;overflow:hidden;color:var(--ink)}
+#stage{position:fixed;inset:0 0 86px 0}
+#stage canvas{display:block}
+#overlay{position:fixed;left:0;top:0;width:100%;height:calc(100% - 86px);pointer-events:none}
+#bar{position:fixed;left:0;right:0;bottom:0;height:86px;display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--bar);box-sizing:border-box}
+.rb{border:0;background:var(--blue);color:#fff;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
+.rb.big{width:58px;height:58px}.rb.sm{width:36px;height:36px}
+.rb:disabled{opacity:.35;cursor:default}
+.rb svg{fill:#fff}
+#grid{background:none;border:0;cursor:pointer;padding:4px;flex:none}
+select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#55606a;text-align:center;text-align-last:center;border:1px solid #d5dbe0;border-radius:6px;background:#fff}
+#fs{position:fixed;top:14px;right:14px;background:none;border:0;cursor:pointer;z-index:5}
+#start{position:fixed;left:24px;top:24px;bottom:110px;width:min(46%,520px);display:flex;flex-direction:column;justify-content:center;pointer-events:none}
+#start .logo{position:absolute;top:0;left:0;background:#1586c2;color:#fff;font:900 34px/1 Impact,"Arial Black",sans-serif;letter-spacing:1px;padding:10px 18px;border-radius:12px}
+#start h1{font:800 34px/1.1 "Arial Narrow",Arial,sans-serif;margin:0}
+#start h2{font:700 18px Arial;margin:4px 0 6px}
+#start small{font-size:11px;color:#333}
+#caption{position:fixed;left:16px;top:14px;max-width:min(520px,70vw);background:rgba(255,255,255,.92);border-left:4px solid var(--blue);padding:8px 12px;font-size:16px;line-height:1.35;display:none}
+#flag{position:fixed;left:16px;bottom:100px;max-width:min(520px,80vw);background:#fff7d6;border:1px solid #e3c54a;padding:7px 10px;font-size:13px;line-height:1.35;display:none}
+#card{position:fixed;inset:0 0 86px 0;display:none;place-items:center;pointer-events:none}
+#card div{max-width:560px;margin:0 16px;font-size:24px;line-height:1.4;text-align:center;border:3px solid var(--blue);border-radius:14px;padding:28px 32px;background:#fff}
+#review{position:fixed;top:14px;right:56px;font-size:12px;color:#555;z-index:5;background:#fff;padding:4px 6px;border-radius:6px}
+#list{position:fixed;inset:0 0 86px 0;background:rgba(255,255,255,.97);display:none;overflow:auto;padding:24px;box-sizing:border-box;z-index:6}
+#list button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #e5e9ec;background:none;padding:10px 6px;font-size:16px;cursor:pointer}
+#list button b{display:inline-block;width:110px;color:var(--blue)}
+#loading{position:fixed;inset:0;display:grid;place-items:center;font-size:18px;color:#555;background:#fff;z-index:9}
+@media (max-width:600px){#start h1{font-size:24px}#start .logo{font-size:24px}#card div{font-size:19px}select{font-size:16px}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head><body>
+<div id="loading">Loading model…</div>
+<div id="stage"></div>
+<svg id="overlay"></svg>
+<div id="start"><div class="logo">TECHBOX</div><h1>Mini Robot Arm (MRA)</h1><h2>Part 2: Base and Controller</h2><small>Prototype build instructions generated from CAD and build notes. Not for distribution.</small></div>
+<div id="caption"></div>
+<div id="card"><div></div></div>
+<div id="flag"></div>
+<label id="review"><input type="checkbox" id="rv" checked> Review notes</label>
+<button id="fs" aria-label="Full screen"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 3h7v2H6.4l4.3 4.3-1.4 1.4L5 6.4V10H3zm18 0v7h-2V6.4l-4.3 4.3-1.4-1.4L17.6 5H14V3zM3 21v-7h2v3.6l4.3-4.3 1.4 1.4L6.4 19H10v2zm18 0h-7v-2h3.6l-4.3-4.3 1.4-1.4 4.3 4.3V14h2z"/></svg></button>
+<div id="list"></div>
+<div id="bar">
+  <button class="rb sm" id="first" aria-label="First step"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 2h2v12H2zM14 2v12L5 8z"/></svg></button>
+  <button class="rb big" id="prev" aria-label="Previous step"><svg width="22" height="22" viewBox="0 0 16 16"><path d="M12 1v14L2 8z"/></svg></button>
+  <button id="grid" aria-label="All steps"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M1 1h6v6H1zm8 0h6v6H9zM1 9h6v6H1zm8 0h6v6H9z" fill="#222"/></svg></button>
+  <select id="sel" aria-label="Step"></select>
+  <button class="rb big" id="next" aria-label="Next step"><svg width="22" height="22" viewBox="0 0 16 16"><path d="M4 1v14l10-7z"/></svg></button>
+  <button class="rb sm" id="last" aria-label="Last step"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M12 2h2v12h-2zM2 2v12l9-6z"/></svg></button>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {Line2} from 'three/addons/lines/Line2.js';
+import {LineMaterial} from 'three/addons/lines/LineMaterial.js';
+import {LineGeometry} from 'three/addons/lines/LineGeometry.js';
+
+const $ = id => document.getElementById(id);
+const stageEl = $('stage'), svg = $('overlay');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xffffff);
+const cam = new THREE.PerspectiveCamera(30, 1, 1, 20000);
+const renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+stageEl.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xbbbbbb, 2.2));
+const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(-1, 2, -0.6); scene.add(sun);
+const controls = new OrbitControls(cam, renderer.domElement); controls.enableDamping = true;
+
+const [gltf, data] = await Promise.all([new GLTFLoader().loadAsync('mra.glb'), fetch('steps.json').then(r => r.json())]);
+const root = gltf.scene; root.scale.setScalar(1000); scene.add(root); // metres -> mm
+root.updateMatrixWorld(true);
+
+// ---------- parts ----------
+const meshName = o => { const a = gltf.parser.associations.get(o); return a && a.meshes !== undefined ? gltf.parser.json.meshes[a.meshes].name : ''; };
+const inst = {}; // top-level instance id -> Object3D
+root.traverse(o => { if (o.parent && o.parent.name === 'ARA_Pathways') inst[o.name] = o; });
+function colorFor(n) {
+  if (/^ARA_|^TB_/.test(n)) return 0xeac9a0;            // laser-cut wood
+  if (/M3x/.test(n)) return 0xb9bec4;                    // screws
+  if (/MG90S/.test(n)) return 0x2b2b2e;                  // servo body
+  if (/Shoulder/.test(n)) return 0xf2f2f2;               // servo horn
+  if (/PCB|Shield|nano|Samtec-SSW|5x_Ang/.test(n)) return /Samtec|5x_Ang/.test(n) ? 0x1d1d1d : 0x1f4e9c;
+  if (/Thumb-Button|Rotator|Case|Baseplate/.test(n)) return 0x1b1b1b;
+  if (/Potentiometer|Tactile/.test(n)) return 0x3a6ea5;
+  if (/_R$|_R\b|TLW-.*_R/.test(n)) return 0xd83a2e;
+  if (/_B$|TLW-.*_B/.test(n)) return 0x2e5fd8;
+  if (/_W$/.test(n)) return 0xf0f0f0;
+  if (/Wire Cap|JR-3|JWT/.test(n)) return 0x222222;
+  if (/Part[67]\^/.test(n)) return 0xe0912f;
+  if (/Samtec|PJ-002/.test(n)) return 0x222222;
+  return 0x9aa3ad;
+}
+const edgeMat = new THREE.LineBasicMaterial({color: 0x111111});
+root.traverse(o => {
+  if (!o.isMesh) return;
+  const n = meshName(o) || o.name;
+  o.material = new THREE.MeshLambertMaterial({color: colorFor(n), polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1});
+  const e = new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry, /^ARA_|M3x|Shoulder/.test(n) ? 20 : 40), edgeMat);
+  o.add(e);
+});
+for (const k in inst) { inst[k].userData.home = inst[k].position.clone(); }
+
+// Offsets in the steps file are in mm in assembly space; convert to each part's parent space.
+function toLocal(id, v) { const m = new THREE.Matrix3().setFromMatrix4(new THREE.Matrix4().copy(inst[id].parent.matrixWorld).invert()); return new THREE.Vector3(...v).applyMatrix3(m); }
+
+// ---------- build views (Start, Step N, Step Nc ..., Completed View) ----------
+const used = new Set();
+data.steps.forEach(s => { (s.add || []).forEach(i => used.add(i)); (s.appear || []).forEach(i => used.add(i)); });
+const CAP = 70;
+const cap = (p, n = 2) => { if (n > 2) return p; const v = new THREE.Vector3(...p); const l = v.length(); return l > CAP ? v.multiplyScalar(CAP / l).toArray() : p; };
+const views = [];
+let visible = new Set(), off = {}, n = 0;
+const snap = () => ({visible: new Set(visible), off: Object.fromEntries(Object.entries(off).map(([k, v]) => [k, v.slice()]))});
+views.push({name: 'Start', kind: 'start', ...(() => { const v = {visible: new Set(used), off: {}}; return v; })()});
+data.steps.forEach((s, i) => {
+  n++;
+  if (s.kind === 'card') { views.push({name: `Step ${n}`, kind: 'card', caption: s.caption, flag: s.flag, ...snap()}); return; }
+  const path = s.path.map(q => cap(q, s.path.length));
+  const next = data.steps[i + 1];
+  const stageOff = s.stage || null;
+  if (stageOff) s.stage_of.forEach(id => { off[id] = stageOff.slice(); });
+  s.add.forEach(id => visible.add(id));
+  // Parts already staged (a subassembly built in hand) hover where they are; others start along the path.
+  s.move.forEach(id => { off[id] = stageOff ? stageOff.map((b, k) => b + path[0][k]) : (off[id] || path[0].slice()); });
+  const hover = snap();
+  views.push({name: `Step ${n}`, kind: 'hover', step: s, path, caption: s.caption, flag: s.flag, ...hover});
+  s.move.forEach(id => { off[id] = stageOff ? stageOff.slice() : [0, 0, 0]; if (!stageOff) delete off[id]; });
+  (s.appear || []).forEach(id => visible.add(id));
+  views.push({name: `Step ${n}c`, kind: 'c', step: s, path, caption: s.caption, flag: s.flag, ...snap()});
+});
+views.push({name: 'Completed View', kind: 'done', visible: new Set(visible), off: {}});
+
+const sel = $('sel');
+views.forEach((v, i) => sel.add(new Option(v.name, i)));
+$('list').innerHTML = views.map((v, i) => `<button data-i="${i}"><b>${v.name}</b>${v.caption || (v.kind === 'start' ? 'Title' : v.kind === 'done' ? 'Finished Part 2' : '')}</button>`).join('');
+
+// ---------- geometry helpers ----------
+function boxAt(id, offv) { // world box of a part if placed at offset offv (mm)
+  const o = inst[id]; const cur = o.position.clone(); o.position.copy(o.userData.home); o.updateMatrixWorld(true);
+  const bb = new THREE.Box3().setFromObject(o); o.position.copy(cur); o.updateMatrixWorld(true);
+  return bb.translate(new THREE.Vector3(...(offv || [0, 0, 0])));
+}
+function setOffset(id, v) { const o = inst[id]; o.position.copy(o.userData.home).add(toLocal(id, v)); }
+
+// Leading points of the moving parts (for red guide lines): vertices furthest along the approach.
+function guidePoints(ids, dir, count = 4) {
+  const pts = [], d = new THREE.Vector3(...dir).normalize().negate(), v = new THREE.Vector3();
+  ids.forEach(id => { const o = inst[id]; const cur = o.position.clone(); o.position.copy(o.userData.home); o.updateMatrixWorld(true);
+    o.traverse(m => { if (!m.isMesh) return; const p = m.geometry.attributes.position; const step = Math.max(1, Math.floor(p.count / 3000));
+      for (let i = 0; i < p.count; i += step) pts.push(v.fromBufferAttribute(p, i).applyMatrix4(m.matrixWorld).clone()); });
+    o.position.copy(cur); o.updateMatrixWorld(true); });
+  if (!pts.length) return [];
+  let mx = -Infinity; pts.forEach(p => mx = Math.max(mx, p.dot(d)));
+  const lead = pts.filter(p => p.dot(d) > mx - 1.5);
+  const out = [lead[0]];
+  while (out.length < Math.min(count, lead.length)) { let best = null, bd = -1;
+    for (const p of lead) { const dd = Math.min(...out.map(q => q.distanceTo(p))); if (dd > bd) { bd = dd; best = p; } }
+    if (bd < 4) break; out.push(best); }
+  return out;
+}
+
+// ---------- view state + animation ----------
+let cur = 0, anim = null, guides = [], labels = [];
+const lineMat = new LineMaterial({color: 0xe0201b, linewidth: 2.5});
+function clearGuides() { guides.forEach(g => scene.remove(g)); guides = []; }
+function drawGuides(v) {
+  clearGuides();
+  if (v.kind !== "hover" || v.visible.size <= v.step.move.length) return;
+  const s = v.step, base = v.off;
+  const pts = guidePoints(s.move, v.path[0]);
+  const stage = s.stage || [0, 0, 0];
+  pts.forEach(p => {
+    const arr = [];
+    v.path.forEach(w => arr.push(p.x + w[0] + (s.stage_of ? stage[0] : 0), p.y + w[1] + (s.stage_of ? stage[1] : 0), p.z + w[2] + (s.stage_of ? stage[2] : 0)));
+    const g = new LineGeometry(); g.setPositions(arr); const l = new Line2(g, lineMat); l.computeLineDistances(); scene.add(l); guides.push(l);
+  });
+}
+function partsBox(v) {
+  const b = new THREE.Box3();
+  v.visible.forEach(id => { if (inst[id]) b.union(boxAt(id, v.off[id])); });
+  return b;
+}
+function cameraFor(v) {
+  const box = partsBox(v); const c = box.getCenter(new THREE.Vector3()); const r = box.getSize(new THREE.Vector3()).length() / 2;
+  let dir = new THREE.Vector3(-1, 0.85, -0.65).normalize();
+  if (v.step && v.path) { const m = new THREE.Vector3(...v.path[0]).normalize(); if (m.dot(dir) < -0.35) dir.z *= -1; }
+  if (v.kind === 'start') dir = new THREE.Vector3(-1, 0.7, -0.9).normalize();
+  const dist = r / Math.sin(THREE.MathUtils.degToRad(cam.fov / 2)) * (cam.aspect < 1 ? 1.5 / cam.aspect : 1.05);
+  // On the title screen, shift the model right so the title text has room.
+  const tgt = v.kind === 'start' ? c.clone().add(new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(r * (cam.aspect < 1 ? 0.3 : 0.55))) : c;
+  return {pos: tgt.clone().add(dir.multiplyScalar(dist)), tgt};
+}
+function render() { renderer.render(scene, cam); drawLabels(); }
+
+function go(i, animate = true) {
+  i = Math.max(0, Math.min(views.length - 1, i));
+  const from = views[cur], to = views[i];
+  const forwardStep = animate && i === cur + 1;
+  cur = i; sel.value = i;
+  $('prev').disabled = $('first').disabled = i === 0;
+  $('next').disabled = $('last').disabled = i === views.length - 1;
+  $('start').style.display = to.kind === 'start' ? 'flex' : 'none';
+  $('card').style.display = to.kind === 'card' ? 'grid' : 'none';
+  $('card').firstElementChild.textContent = to.caption || '';
+  $('caption').style.display = to.caption && to.kind !== 'card' ? 'block' : 'none';
+  $('caption').textContent = to.caption || '';
+  const showFlag = to.flag && $('rv').checked;
+  $('flag').style.display = showFlag ? 'block' : 'none';
+  $('flag').textContent = to.flag ? 'Review: ' + to.flag : '';
+  for (const id in inst) inst[id].visible = to.visible.has(id) && to.kind !== 'card';
+  if (to.kind === 'card') { clearGuides(); labels = []; return; }
+  // Animate offsets. Moving into a "c" view follows the path waypoints; entering a hover view flies the new parts in.
+  const startOff = {}, endOff = {};
+  for (const id of to.visible) { endOff[id] = to.off[id] || [0, 0, 0]; startOff[id] = (from.visible && from.visible.has(id) && from.kind !== 'start' && from.kind !== 'card') ? (from.off[id] || [0, 0, 0]) : endOff[id]; }
+  const waypoints = {};
+  if (forwardStep && to.kind === 'c') to.step.move.forEach(id => { const e = endOff[id]; waypoints[id] = to.path.map(w => [e[0] + w[0], e[1] + w[1], e[2] + w[2]]); });
+  if (forwardStep && to.kind === 'hover') to.step.move.filter(id => !(from.visible && from.visible.has(id))).forEach(id => { const e = endOff[id]; startOff[id] = e.map((x, k) => x + to.path[0][k] * 0.8); });
+  const camTo = cameraFor(to), camFrom = {pos: cam.position.clone(), tgt: controls.target.clone()};
+  labels = [];
+  clearGuides();
+  const t0 = performance.now(), dur = animate ? (to.kind === 'c' ? 1300 : 900) : 0;
+  anim = {t0, dur, startOff, endOff, waypoints, camFrom, camTo, to};
+}
+function lerp3(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+function alongPath(pts, t) { if (pts.length < 2) return pts[0]; const seg = Math.min(pts.length - 2, Math.floor(t * (pts.length - 1))); const lt = t * (pts.length - 1) - seg; return lerp3(pts[seg], pts[seg + 1], lt); }
+function tick(now) {
+  requestAnimationFrame(tick);
+  if (anim) {
+    const k = anim.dur ? Math.min(1, (now - anim.t0) / anim.dur) : 1, e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    for (const id in anim.endOff) setOffset(id, anim.waypoints[id] ? alongPath(anim.waypoints[id], e) : lerp3(anim.startOff[id], anim.endOff[id], e));
+    cam.position.lerpVectors(anim.camFrom.pos, anim.camTo.pos, e); controls.target.lerpVectors(anim.camFrom.tgt, anim.camTo.tgt, e);
+    if (k >= 1) { const v = anim.to; anim = null; drawGuides(v); labels = (v.kind === 'hover' ? v.step.labels : []); }
+  }
+  controls.update(); render();
+}
+// ---------- Cadasio-style leader labels ----------
+function drawLabels() {
+  const W = svg.clientWidth, H = svg.clientHeight; let html = '';
+  const placed = [];
+  labels.forEach((L, i) => {
+    const o = inst[L.id]; if (!o || !o.visible) return;
+    const p = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()).project(cam);
+    const ax = (p.x + 1) / 2 * W, ay = (1 - p.y) / 2 * H;
+    const left = ax > W / 2;
+    const fs = W < 600 ? 18 : 26, tw = L.text.length * fs * 0.6 + 16;
+    let ly = Math.max(fs + 76, ay - 90 - (i % 2) * 40);
+    placed.forEach(q => { if (Math.abs(q - ly) < fs + 14) ly = q + fs + 18; }); placed.push(ly);
+    const lx0 = left ? Math.max(8, ax - 260) : Math.min(W - tw - 8, ax + 120), lx1 = lx0 + tw;
+    const jx = left ? lx1 : lx0;
+    html += `<line x1="${lx0}" y1="${ly}" x2="${lx1}" y2="${ly}" stroke="#4cc3f0" stroke-width="3"/>`
+      + `<line x1="${jx}" y1="${ly}" x2="${ax}" y2="${ay}" stroke="#4cc3f0" stroke-width="3"/>`
+      + `<circle cx="${ax}" cy="${ay}" r="8" fill="none" stroke="#4cc3f0" stroke-width="3" stroke-dasharray="4 3"/>`
+      + `<text x="${lx0 + 8}" y="${ly - 8}" font-size="${fs}" font-weight="700" font-family="Arial">${L.text}</text>`;
+  });
+  svg.innerHTML = html;
+}
+// ---------- UI ----------
+function resize() { const w = stageEl.clientWidth, h = stageEl.clientHeight; renderer.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); lineMat.resolution.set(w, h); }
+addEventListener('resize', () => { resize(); go(cur, false); });
+$('next').onclick = () => go(cur + 1); $('prev').onclick = () => go(cur - 1, false);
+$('first').onclick = () => go(0, false); $('last').onclick = () => go(views.length - 1, false);
+sel.onchange = () => go(+sel.value, false);
+$('grid').onclick = () => { const l = $('list'); l.style.display = l.style.display === 'block' ? 'none' : 'block'; };
+$('list').onclick = e => { const b = e.target.closest('button'); if (b) { $('list').style.display = 'none'; go(+b.dataset.i, false); } };
+$('fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+$('rv').onchange = () => go(cur, false);
+addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1, false); });
+resize(); go(0, false); $('loading').remove();
+requestAnimationFrame(tick);
+window._views = views; window._go = go;
+</script>
+</body></html>

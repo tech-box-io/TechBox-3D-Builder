@@ -1,0 +1,14 @@
+# Lee's second note of 15 Oct 2026, and what was done
+
+Step numbers are the player's (unchanged this round). No camera changed: every view's camera was compared with steps.json from
+before the round.
+
+| Request | Done |
+|---|---|
+| "Row" in Steps 40, 98, 99 and 100 too | "Reconnect the base motor to Row 5.", "Reconnect the elbow motor to Row 6.", "Reconnect the shoulder motor to Row 9.", "Connect the servo extension wire to Row 10." (with "Remember brown to G, red to V, and orange to S." after each, as before). |
+| Step 26: "Once R1 - R6 are together, slide B2 in between the servo horn and R5 / R6, until the motor sits in the round cut-out." | Word for word (read aloud as "R1 to R6" and "R5 and R6"). |
+| Step 98: the elbow motor's wires clipped through the base motor's wires on the way to the plug's row | Measured: up to 0.94 mm into the base motor's orange wire for the second half of the move. The elbow motor's lead runs from R5's side under the arch that the base motor's lead makes over to row 5, and in one move the lead's extra length swept straight from the hook to its place, through that arch. Now three beats, the lead keeping pace stage by stage: the plug comes off the hook and goes under the arch, low (12 - 14 mm below the base motor's lead), out to the row 6 side; then upright over row 6, 41 mm up, where its lead comes straight down to it (the plugged lead, as far as there, so that it only has to go on down); then down onto row 6. Checked at 121 frames each way: the elbow motor's wires touch no other wire and pass through no part; its plug touches the base motor's lead only where the two plugs sit side by side on rows 5 and 6. |
+| Step 99: the shoulder motor's wire flipped round and kinked | The plug hangs on its hook the other way round from the way it goes onto row 9 (orange on top, its lead coming in level): 169 degrees to turn in all, and in one move it turned right over and its lead twisted through an S near the plug. Now three beats: off the hook, its lead dipping towards the row so that the plug is half-way round (85 degrees); up over the joysticks' wires and upright over row 9 (the other 83 degrees); then down onto the row (it straightens the last 23 degrees about its lead there, as the plugged lead twists into it). It turns at most 4.4 degrees in a hundredth of a second (it was 9). The lead never comes closer to itself than 6.2 mm, touches no other wire and passes through no part; the plug stays clear of the jumper wires. For about a quarter of a second mid-move the lead is a little narrower as it turns (its wires 0.71 mm apart, centre to centre, against about 1.0 mm), where it had pinched to 0.39 mm before the independent review of this round. |
+
+Steps 98 and 99 now take 2.4 s each (three beats, as Step 100). After the changes: `_runthrough()` 211 views, 0 problems; the
+independent review of this round is review_v10.md. Checkpoint: `share/MRA Full Build 2026-10-15b/` and its zip.

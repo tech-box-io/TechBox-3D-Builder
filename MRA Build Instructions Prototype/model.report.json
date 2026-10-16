@@ -1,0 +1,1248 @@
+{
+ "summary": {
+  "source": "mra.glb",
+  "source_bytes": 41802208,
+  "model_bytes": 2125532,
+  "triangles_in": 1176532,
+  "triangles_out": 284058,
+  "edge_segments": 100207,
+  "meshes": 92,
+  "parts_kept": 108,
+  "parts_in_source": 115,
+  "materials": [
+   "edge",
+   "ink",
+   "wood",
+   "#262626",
+   "#975100",
+   "#bd291f",
+   "#c7c2bd",
+   "#ff00ff",
+   "#ff9d07",
+   "#ffffff",
+   "#1a1a1a",
+   "steel",
+   "#975000",
+   "#303030",
+   "#e4e4e4",
+   "#a6a9aa",
+   "#808080",
+   "#181818",
+   "#404040",
+   "pcb_navy",
+   "#c0c0c0",
+   "header_yellow",
+   "pin",
+   "#000f41",
+   "#191919",
+   "#a5936d",
+   "#d3d6d3",
+   "#efefef",
+   "black_plastic",
+   "metal_can",
+   "#a5926d",
+   "#cccecc",
+   "#d8d8d8",
+   "white_plastic",
+   "sticker_off_black",
+   "sticker_white",
+   "sticker_blue"
+  ],
+  "wire_colour_breaks": []
+ },
+ "meshes": [
+  {
+   "mesh": "ARA_B1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2197,
+   "tris_out": 2197,
+   "edge_segments": 919,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2694,
+   "tris_out": 2694,
+   "edge_segments": 1074,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B4",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 980,
+   "tris_out": 980,
+   "edge_segments": 318,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1849,
+   "tris_out": 1849,
+   "edge_segments": 647,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B6",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 2692,
+   "tris_out": 2692,
+   "edge_segments": 1012,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1256,
+   "tris_out": 1256,
+   "edge_segments": 462,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B9",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2499,
+   "tris_out": 2499,
+   "edge_segments": 791,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_B10",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2907,
+   "tris_out": 2907,
+   "edge_segments": 1097,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1723,
+   "tris_out": 1723,
+   "edge_segments": 769,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1861,
+   "tris_out": 1861,
+   "edge_segments": 707,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R3v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2515,
+   "tris_out": 2507,
+   "edge_segments": 935,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R4v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2080,
+   "tris_out": 2074,
+   "edge_segments": 934,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2362,
+   "tris_out": 2362,
+   "edge_segments": 848,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R6",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1832,
+   "tris_out": 1832,
+   "edge_segments": 664,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R7",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1066,
+   "tris_out": 1066,
+   "edge_segments": 388,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_R8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2576,
+   "tris_out": 2004,
+   "edge_segments": 288,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1000,
+   "tris_out": 1000,
+   "edge_segments": 452,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1391,
+   "tris_out": 1391,
+   "edge_segments": 541,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A2_Supplement",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1746,
+   "tris_out": 1746,
+   "edge_segments": 612,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A3",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 665,
+   "tris_out": 665,
+   "edge_segments": 289,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A4",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1246,
+   "tris_out": 1246,
+   "edge_segments": 452,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 921,
+   "tris_out": 921,
+   "edge_segments": 409,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A6",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1881,
+   "tris_out": 1881,
+   "edge_segments": 611,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A7",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 741,
+   "tris_out": 741,
+   "edge_segments": 305,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1392,
+   "tris_out": 1392,
+   "edge_segments": 493,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A9",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1103,
+   "tris_out": 1103,
+   "edge_segments": 380,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A10",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1487,
+   "tris_out": 1487,
+   "edge_segments": 459,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A11",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1736,
+   "tris_out": 1736,
+   "edge_segments": 656,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_A12",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 1070,
+   "tris_out": 1070,
+   "edge_segments": 282,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1688,
+   "tris_out": 1688,
+   "edge_segments": 683,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1866,
+   "tris_out": 1866,
+   "edge_segments": 669,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C3",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2371,
+   "tris_out": 2371,
+   "edge_segments": 823,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C4",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2348,
+   "tris_out": 2348,
+   "edge_segments": 812,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1073,
+   "tris_out": 1073,
+   "edge_segments": 373,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C6",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1590,
+   "tris_out": 1590,
+   "edge_segments": 510,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C7",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2949,
+   "tris_out": 2949,
+   "edge_segments": 1039,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2183,
+   "tris_out": 2175,
+   "edge_segments": 923,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "ARA_C9",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1868,
+   "tris_out": 1868,
+   "edge_segments": 550,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "TB_TopBot",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 175,
+   "tris_out": 175,
+   "edge_segments": 71,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "TB_CenterLatches",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 1478,
+   "tris_out": 1478,
+   "edge_segments": 634,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "MG90S",
+   "used_by": 3,
+   "solids": 6,
+   "tris_in": 31598,
+   "tris_out": 8965,
+   "edge_segments": 2883,
+   "colours": [
+    "#262626",
+    "#975100",
+    "#bd291f",
+    "#c7c2bd",
+    "#ff00ff",
+    "#ff9d07",
+    "#ffffff"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "2PartShoulder_Mirrored",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 35106,
+   "tris_out": 2204,
+   "edge_segments": 1049,
+   "colours": [
+    "#1a1a1a"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.08
+  },
+  {
+   "mesh": "M3x6mm_91292A111",
+   "used_by": 15,
+   "solids": 1,
+   "tris_in": 6662,
+   "tris_out": 2094,
+   "edge_segments": 216,
+   "colours": [
+    "steel"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "M3x16mm_91292A115",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 14000,
+   "tris_out": 2558,
+   "edge_segments": 216,
+   "colours": [
+    "steel"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.123
+  },
+  {
+   "mesh": "M3x10mm_91292A113",
+   "used_by": 8,
+   "solids": 1,
+   "tris_in": 17030,
+   "tris_out": 2704,
+   "edge_segments": 216,
+   "colours": [
+    "steel"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.048
+  },
+  {
+   "mesh": "1PartShoulder",
+   "used_by": 3,
+   "solids": 2,
+   "tris_in": 18936,
+   "tris_out": 1882,
+   "edge_segments": 787,
+   "colours": [
+    "#1a1a1a"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "MG90S_Cut wires shorter",
+   "used_by": 1,
+   "solids": 6,
+   "tris_in": 31624,
+   "tris_out": 8945,
+   "edge_segments": 2882,
+   "colours": [
+    "#262626",
+    "#975000",
+    "#bd291f",
+    "#c7c2bd",
+    "#ff00ff",
+    "#ff9d07",
+    "#ffffff"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "PCB_1",
+   "used_by": 2,
+   "solids": 27,
+   "tris_in": 8676,
+   "tris_out": 3392,
+   "edge_segments": 1257,
+   "colours": [
+    "#303030",
+    "#e4e4e4"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "5x_Ang_Conn_1",
+   "used_by": 2,
+   "solids": 11,
+   "tris_in": 764,
+   "tris_out": 444,
+   "edge_segments": 318,
+   "colours": [
+    "#303030",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Baseplate_1",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 816,
+   "tris_out": 332,
+   "edge_segments": 205,
+   "colours": [
+    "#303030"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Case",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 1560,
+   "tris_out": 710,
+   "edge_segments": 372,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Rotator-Unit_1",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 3046,
+   "tris_out": 1358,
+   "edge_segments": 678,
+   "colours": [
+    "#808080"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Potentiometer_01_1",
+   "used_by": 2,
+   "solids": 5,
+   "tris_in": 966,
+   "tris_out": 574,
+   "edge_segments": 287,
+   "colours": [
+    "#303030",
+    "#a6a9aa",
+    "#e4e4e4"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Potentiometer_02_1",
+   "used_by": 2,
+   "solids": 5,
+   "tris_in": 966,
+   "tris_out": 568,
+   "edge_segments": 284,
+   "colours": [
+    "#303030",
+    "#a6a9aa",
+    "#e4e4e4"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Tactile-Switch_1",
+   "used_by": 2,
+   "solids": 6,
+   "tris_in": 19194,
+   "tris_out": 1012,
+   "edge_segments": 392,
+   "colours": [
+    "#181818",
+    "#404040",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Thumb-Button",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 17150,
+   "tris_out": 2914,
+   "edge_segments": 453,
+   "colours": [
+    "#303030"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Shield_Arduino NANO",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 6220,
+   "tris_out": 2156,
+   "edge_segments": 1016,
+   "colours": [
+    "pcb_navy"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "User Library-PJ-002AH_Body",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 760,
+   "tris_out": 562,
+   "edge_segments": 338,
+   "colours": [
+    "#181818"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "User Library-PJ-002AH_Pad",
+   "used_by": 1,
+   "solids": 4,
+   "tris_in": 1108,
+   "tris_out": 354,
+   "edge_segments": 186,
+   "colours": [
+    "#a6a9aa",
+    "#c0c0c0"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Samtec-TLW-103-01-F-S",
+   "used_by": 2,
+   "solids": 2,
+   "tris_in": 692,
+   "tris_out": 692,
+   "edge_segments": 544,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "280 faces under a skin recoloured"
+  },
+  {
+   "mesh": "nano_Varsay\u0131lan",
+   "used_by": 1,
+   "solids": 273,
+   "tris_in": 380001,
+   "tris_out": 34193,
+   "edge_segments": 14541,
+   "colours": [
+    "#000f41",
+    "#181818",
+    "#191919",
+    "#a5936d",
+    "#a6a9aa",
+    "#d3d6d3",
+    "#e4e4e4",
+    "#efefef",
+    "pin"
+   ],
+   "note": "atlas match 100%; 141247 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-SSW-115-01-F-S",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 1332,
+   "tris_out": 1332,
+   "edge_segments": 972,
+   "colours": [
+    "#181818"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "47uf CAP Dcase",
+   "used_by": 1,
+   "solids": 15,
+   "tris_in": 7719,
+   "tris_out": 2658,
+   "edge_segments": 903,
+   "colours": [
+    "black_plastic",
+    "metal_can"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "m7 diode",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2208,
+   "tris_out": 646,
+   "edge_segments": 384,
+   "colours": [
+    "#a5926d"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "smt_resistor222_a",
+   "used_by": 3,
+   "solids": 1,
+   "tris_in": 4056,
+   "tris_out": 380,
+   "edge_segments": 106,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "nano - reg",
+   "used_by": 1,
+   "solids": 9,
+   "tris_in": 4092,
+   "tris_out": 1450,
+   "edge_segments": 649,
+   "colours": [
+    "#181818",
+    "#a6a9aa",
+    "#cccecc"
+   ],
+   "note": "atlas match 100%; 2315 faces under a skin recoloured"
+  },
+  {
+   "mesh": "cap106C",
+   "used_by": 2,
+   "solids": 8,
+   "tris_in": 6702,
+   "tris_out": 1249,
+   "edge_segments": 323,
+   "colours": [
+    "#a5936d",
+    "#a6a9aa",
+    "#cccecc"
+   ],
+   "note": "atlas match 100%; 3669 faces under a skin recoloured"
+  },
+  {
+   "mesh": "led",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1716,
+   "tris_out": 430,
+   "edge_segments": 95,
+   "colours": [
+    "#a6a9aa",
+    "#d8d8d8"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "reset core",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1692,
+   "tris_out": 522,
+   "edge_segments": 202,
+   "colours": [
+    "#191919"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "reset shell",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 904,
+   "tris_out": 408,
+   "edge_segments": 252,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "blm21",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1708,
+   "tris_out": 312,
+   "edge_segments": 94,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_N",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 920,
+   "tris_out": 920,
+   "edge_segments": 724,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "372 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_R",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 908,
+   "tris_out": 908,
+   "edge_segments": 750,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "360 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_B",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 920,
+   "tris_out": 920,
+   "edge_segments": 724,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "372 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_W",
+   "used_by": 2,
+   "solids": 2,
+   "tris_in": 906,
+   "tris_out": 906,
+   "edge_segments": 755,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "358 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_B",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1800,
+   "tris_out": 1800,
+   "edge_segments": 1508,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "708 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_R",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1768,
+   "tris_out": 1768,
+   "edge_segments": 1588,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "676 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_N",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1844,
+   "tris_out": 1843,
+   "edge_segments": 1464,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "750 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Copy of JR-3^JR-3_with_cable",
+   "used_by": 3,
+   "solids": 1,
+   "tris_in": 816,
+   "tris_out": 380,
+   "edge_segments": 258,
+   "colours": [
+    "#404040"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Copy of JWT-CONTACT^JR-3_with_cable",
+   "used_by": 9,
+   "solids": 1,
+   "tris_in": 144,
+   "tris_out": 64,
+   "edge_segments": 43,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Copy of JR-3_2^JR-3",
+   "used_by": 3,
+   "solids": 1,
+   "tris_in": 816,
+   "tris_out": 380,
+   "edge_segments": 258,
+   "colours": [
+    "#404040"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Copy of JWT-CONTACT_1^JR-3",
+   "used_by": 9,
+   "solids": 1,
+   "tris_in": 144,
+   "tris_out": 64,
+   "edge_segments": 43,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "JR-3 Bridge",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 60,
+   "tris_out": 60,
+   "edge_segments": 48,
+   "colours": [
+    "#404040"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Wire Cap",
+   "used_by": 16,
+   "solids": 1,
+   "tris_in": 316,
+   "tris_out": 126,
+   "edge_segments": 75,
+   "colours": [
+    "#404040"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "MiniUSBB",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 8586,
+   "tris_out": 2409,
+   "edge_segments": 1207,
+   "colours": [
+    "black_plastic",
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "USBCableend",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 8128,
+   "tris_out": 3099,
+   "edge_segments": 1767,
+   "colours": [
+    "black_plastic",
+    "pin",
+    "white_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "sticker sticker_off_black on NAUO58",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_off_black"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_off_black on NAUO58",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_off_black"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_white on NAUO66",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_white"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_white on NAUO66",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_white"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_blue on NAUO72",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_blue"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_blue on NAUO72",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_blue"
+   ],
+   "note": "added by the kit"
+  }
+ ]
+}

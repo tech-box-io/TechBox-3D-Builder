@@ -1,0 +1,46 @@
+# RCC CAD: top-level instances (rcc.glb, converted from RCC_Assembly_v1.STEP on 15 Oct 2026)
+
+Assembly mm, Y up (as the GLB has it, x1000).
+
+- **NAUO1**: size [172.0, 3.0, 130.0] mm, at [688.5, 907.7, 1338.5]; 1 meshes: L1
+- **NAUO2**: size [162.0, 44.7, 3.0] mm, at [693.5, 899.4, 1338.5]; 1 meshes: L2
+- **NAUO3**: size [3.0, 35.6, 64.9] mm, at [641.7, 894.8, 1338.6]; 1 meshes: L3
+- **NAUO4**: size [3.0, 30.2, 130.0] mm, at [714.6, 906.4, 1338.5]; 1 meshes: L4
+- **NAUO5**: size [3.0, 30.2, 130.0] mm, at [741.0, 906.4, 1338.5]; 1 meshes: L5
+- **NAUO6**: size [64.7, 28.6, 3.0] mm, at [742.1, 907.4, 1354.0]; 1 meshes: L6
+- **NAUO7**: size [64.7, 28.6, 3.0] mm, at [742.1, 907.4, 1323.0]; 1 meshes: L7
+- **NAUO8**: size [60.0, 60.0, 8.0] mm, at [722.6, 906.9, 1409.2]; 2 meshes: rim, tyre
+- **NAUO9**: size [78.4, 78.4, 8.0] mm, at [722.6, 906.9, 1267.6]; 2 meshes: rim, tyre
+- **NAUO10**: size [29.0, 12.8, 15.3] mm, at [758.1, 939.8, 1323.4]; 1 meshes: RadioFrequencyCommunicationModule_nRF24L01_기본
+- **NAUO11**: size [29.0, 12.8, 15.3] mm, at [723.7, 928.1, 1132.9]; 1 meshes: RadioFrequencyCommunicationModule_nRF24L01_기본
+- **NAUO12**: size [40.0, 34.3, 27.3] mm, at [711.7, 932.1, 1085.2]; 9 meshes: PCB_1, 5x_Ang_Conn_1, Baseplate_1, Case, Rotator-Unit_1, Potentiometer_01_1, Potentiometer_02_1, Tactile-Switch_1 ...
+- **NAUO13**: size [40.0, 34.3, 27.3] mm, at [711.7, 932.1, 1158.0]; 9 meshes: PCB_1, 5x_Ang_Conn_1, Baseplate_1, Case, Rotator-Unit_1, Potentiometer_01_1, Potentiometer_02_1, Tactile-Switch_1 ...
+- **NAUO14**: size [17.1, 47.9, 26.0] mm, at [641.7, 916.2, 1338.5]; 1 meshes: 9V-battery
+- **NAUO15**: size [12.0, 7.2, 28.0] mm, at [641.7, 941.9, 1339.7]; 1 meshes: DC_Adaptor
+- **NAUO16**: size [54.0, 7.7, 10.5] mm, at [667.9, 933.2, 1112.9]; 1 meshes: Mini USB B
+- **NAUO17**: size [32.3, 12.2, 29.7] mm, at [727.8, 906.8, 1395.4]; 1 meshes: Fitec FS90R Micro Servo NoConnector.step_По умолчанию
+- **NAUO18**: size [32.3, 12.2, 29.7] mm, at [727.8, 906.9, 1281.6]; 1 meshes: Fitec FS90R Micro Servo NoConnector.step_По умолчанию
+- **NAUO19**: size [2.6, 14.0, 7.6] mm, at [730.1, 939.7, 1321.0]; 1 meshes: BLS-3.step_По умолчанию
+- **NAUO20**: size [2.6, 14.0, 7.6] mm, at [717.4, 939.7, 1321.0]; 1 meshes: BLS-3.step_По умолчанию
+- **NAUO21**: size [14.0, 7.6, 2.6] mm, at [645.1, 913.0, 1385.7]; 1 meshes: BLS-3.step_По умолчанию
+- **NAUO22**: size [14.0, 7.6, 2.6] mm, at [645.1, 913.0, 1291.2]; 1 meshes: BLS-3.step_По умолчанию
+- **NAUO23**: size [59.0, 24.6, 53.3] mm, at [718.8, 927.3, 1338.5]; 70 meshes: smt_resistor222_a x8, led x5, MINI USB CONTACT x5, cap106C x4, Samtec-TLW-104-01-F-S_N x4, Samtec-TLW-104-01-F-S_R x4, Samtec-TLW-104-01-F-S_B x4, 2pin_header__02 x3 ...
+- **NAUO24**: size [95.0, 7.0, 78.1] mm, at [701.0, 916.8, 1081.3]; 1 meshes: 2024-RCC_ControllerHandles_mod1_Left
+- **NAUO25**: size [95.0, 7.0, 78.1] mm, at [701.0, 916.8, 1160.9]; 1 meshes: 2024-RCC_ControllerHandles_mod1
+- **NAUO26**: size [57.4, 18.8, 33.8] mm, at [721.4, 929.5, 1331.7]; 11 meshes: HDR-TH_3P-P2.54-V-M~HDR-TH_3P-P2.54-M-LI-1X3P~hwXZ x2, HDR-TH_2P-P2.54-V-F-1~HDR2.54-F-LI-1X2P~hwXZ x2, HDR-TH_3P-P2.54-V-F~HDR2.54-F-LI-1X3P~hwXZ x2, CAP-SMD_BD6.3-L6.6-W6.6-LS7.6-FD~CAP-SMD_BD6.3-L6.6-W6.6-H7.7~hwXZ, HDR-TH_6P-P2.54-V-F-R2-C3-S2.54~HDR-TH_6P-P2.54-F-LI-2X3P~hwXZ, HDR-TH_4P-P2.54-V-F~HDR-TH_4P-P2.54-V-F~hwXZ, HDR-TH_8P-P2.54-V-F-R2-C4-S2.54~HDR-TH_8P-P2.54-F-LI-2X4P~hwXZ, Board~hwXZ
+- **NAUO27**: size [45.0, 18.6, 18.0] mm, at [711.9, 930.3, 1112.9]; 1 meshes: nano_Varsayılan
+- **NAUO28**: size [39.6, 8.6, 8.6] mm, at [667.6, 925.0, 1354.1]; 5 meshes: Insolation, Component3, Component4, Wires, eBom-FreeParts
+- **NAUO29**: size [39.6, 8.6, 8.6] mm, at [676.5, 925.0, 1354.1]; 5 meshes: Insolation, Component3, Component4, Wires, eBom-FreeParts
+- **NAUO30**: size [87.0, 11.9, 149.7] mm, at [701.0, 921.3, 1121.1]; 8 meshes: HDR-TH_15P-P2.54-V-F~HDR-TH_15P-P2.54-V-F~j5tP x2, HDR-TH_10P-P2.54-H-F-R2-C5-W12.7-N~HDR-TH_10P-P2.54-H-F-R2-C5-W12.7-N~j5tP x2, BottomCopper~j5tP-43, HDR-TH_8P-P2.54-V-F-R2-C4-S2.54~HDR-TH_8P-P2.54-F-LI-2X4P~j5tP, CAP-SMD_BD6.3-L6.6-W6.6-LS7.6-FD~CAP-SMD_BD6.3-L6.6-W6.6-H7.7~j5tP, Board~j5tP
+- **NAUO31**: size [53.9, 9.4, 2.1] mm, at [689.1, 910.0, 1385.2]; 1 meshes: Fitec Right Wires 4^RCC_Assembly
+- **NAUO32**: size [13.2, 2.4, 1.0] mm, at [655.5, 911.2, 1385.7]; 1 meshes: Fitec Right Wire Yellow 4^RCC_Assembly
+- **NAUO33**: size [13.2, 1.0, 1.0] mm, at [655.5, 913.0, 1385.7]; 1 meshes: Fitec Right Wire Red 4^RCC_Assembly
+- **NAUO34**: size [13.2, 2.4, 1.0] mm, at [655.5, 914.9, 1385.7]; 1 meshes: Fitec Right Wire Brown 4^RCC_Assembly
+- **NAUO35**: size [53.9, 9.4, 2.1] mm, at [689.1, 910.0, 1291.8]; 1 meshes: Fitec Left Wires 4^RCC_Assembly
+- **NAUO36**: size [13.2, 2.4, 1.0] mm, at [655.5, 914.9, 1291.3]; 1 meshes: Fitec Left Wire Yellow 4^RCC_Assembly
+- **NAUO37**: size [13.2, 1.0, 1.0] mm, at [655.5, 913.0, 1291.3]; 1 meshes: Fitec Left Wire Red 4^RCC_Assembly
+- **NAUO38**: size [13.2, 2.4, 1.0] mm, at [655.5, 911.2, 1291.3]; 1 meshes: Fitec Left Wire Brown 4^RCC_Assembly
+- **NAUO39**: size [30.0, 76.9, 67.4] mm, at [715.9, 943.7, 1351.6]; 1 meshes: Fitec Right Wires 5^RCC_Assembly
+- **NAUO40**: size [13.1, 66.3, 32.3] mm, at [711.4, 938.4, 1307.9]; 1 meshes: Fitec Left Wires 5^RCC_Assembly
+- **NAUO41**: size [19.8, 19.8, 5.6] mm, at [649.9, 934.2, 1355.4]; 1 meshes: Battery Wires 1^RCC_Assembly
+- **NAUO42**: size [10.8, 19.7, 5.5] mm, at [645.4, 934.2, 1355.3]; 1 meshes: Batery Wires 2^RCC_Assembly

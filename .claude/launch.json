@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mra-prototype",
+      "url": "http://localhost:8791",
+      "port": 8791
+    },
+    {
+      "name": "rcc-prototype",
+      "url": "http://localhost:8796",
+      "port": 8796
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+ "label": "low_drape",
+ "corners": [
+  [
+   118,
+   131.5,
+   146.6
+  ],
+  [
+   105.5,
+   121.0,
+   152.6
+  ],
+  [
+   101.2,
+   108,
+   163.0
+  ],
+  [
+   101.2,
+   97.5,
+   172.0
+  ],
+  [
+   109.2,
+   94.6,
+   179.0
+  ],
+  [
+   117,
+   94.6,
+   183.0
+  ],
+  [
+   126,
+   95.25,
+   183.4
+  ]
+ ],
+ "radius": 8,
+ "end_across": [
+  0.0444,
+  -0.0,
+  -0.999
+ ],
+ "fan_mm": 10,
+ "length": 98.3,
+ "plug_pose": {
+  "t": [
+   73.476,
+   -25.715999999999994,
+   28.64100000000002
+  ],
+  "r": [
+   0.6077821969954813,
+   -0.5409345114093183,
+   -0.58136963747835,
+   -121.02280980686324
+  ],
+  "at": [
+   52.524,
+   120.966,
+   154.759
+  ]
+ },
+ "plug_bounds": [
+  [
+   124.73,
+   93.7,
+   179.41
+  ],
+  [
+   139.21,
+   97.45,
+   187.83
+  ]
+ ],
+ "plug_shown_share": {
+  "Step 97c": 0.82,
+  "Step 100": 1.0
+ },
+ "extra_clearances_97c": {
+  "NAUO2": 0.31,
+  "NAUO6": 0.36,
+  "NAUO51": 1.41
+ },
+ "step100_lift_waypoints_contact": [
+  [
+   126,
+   95.25,
+   183.4
+  ],
+  [
+   126,
+   112,
+   181
+  ],
+  [
+   112,
+   128,
+   168
+  ],
+  [
+   96,
+   148,
+   158
+  ],
+  [
+   78,
+   164,
+   155
+  ],
+  [
+   60,
+   163,
+   155
+  ],
+  [
+   52.5,
+   140,
+   154.8
+  ],
+  [
+   52.52,
+   120.97,
+   154.76
+  ]
+ ],
+ "summary": {
+  "length": 98.3,
+  "wanted_length": 100.6,
+  "worst_wire_part": {
+   "view": "Step 97c",
+   "part": "B2 (NAUO2)",
+   "clearance": 0.31
+  },
+  "worst_wire_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 1.25
+  },
+  "plug_touching_parts": [
+   [
+    "B2 (NAUO2)",
+    "{'corners_inside': 0, 'its_points_inside_plug': 0, 'nearest': 0.17}"
+   ]
+  ],
+  "worst_plug_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 31.55
+  },
+  "plug_on_screen": {
+   "Step 97c": [
+    [
+     1286,
+     632
+    ],
+    true
+   ],
+   "Step 98": [
+    [
+     1413,
+     667
+    ],
+    true
+   ],
+   "Step 98c": [
+    [
+     1413,
+     667
+    ],
+    true
+   ],
+   "Step 99": [
+    [
+     1413,
+     667
+    ],
+    true
+   ],
+   "Step 99c": [
+    [
+     1413,
+     667
+    ],
+    true
+   ],
+   "Step 100": [
+    [
+     1413,
+     667
+    ],
+    true
+   ]
+  },
+  "seen": {
+   "Step 97c": {
+    "wire": 1.0,
+    "plug": true
+   },
+   "Step 100": {
+    "wire": 1.0,
+    "plug": true
+   }
+  },
+  "during_steps_98_100": {
+   "Step 97c -> Step 98": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.25,
+    "plug_wire_gap": 31.55
+   },
+   "Step 98 -> Step 98c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.25,
+    "plug_wire_gap": 31.55
+   },
+   "Step 98c -> Step 99": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.25,
+    "plug_wire_gap": 31.55
+   },
+   "Step 99 -> Step 99c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.25,
+    "plug_wire_gap": 31.55
+   },
+   "Step 99c -> Step 100": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.25,
+    "plug_wire_gap": 31.55
+   }
+  }
+ }
+}

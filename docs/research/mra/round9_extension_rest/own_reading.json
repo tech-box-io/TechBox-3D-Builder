@@ -1,0 +1,466 @@
+{
+ "label": "own_reading",
+ "corners": [
+  [
+   129.97,
+   133.54,
+   145.26
+  ],
+  [
+   128.29,
+   133.54,
+   145.72
+  ],
+  [
+   126.69,
+   133.54,
+   146.39
+  ],
+  [
+   125.2,
+   133.54,
+   147.28
+  ],
+  [
+   123.83,
+   133.54,
+   148.36
+  ],
+  [
+   122.62,
+   133.54,
+   149.61
+  ],
+  [
+   121.42,
+   133.35,
+   151.04
+  ],
+  [
+   120.26,
+   132.76,
+   152.4
+  ],
+  [
+   119.21,
+   131.82,
+   153.65
+  ],
+  [
+   118.31,
+   130.56,
+   154.72
+  ],
+  [
+   117.59,
+   129.04,
+   155.56
+  ],
+  [
+   117.1,
+   127.32,
+   156.15
+  ],
+  [
+   116.85,
+   125.48,
+   156.44
+  ],
+  [
+   116.72,
+   123.56,
+   156.6
+  ],
+  [
+   116.58,
+   121.63,
+   156.75
+  ],
+  [
+   116.45,
+   119.7,
+   156.91
+  ],
+  [
+   116.32,
+   117.78,
+   157.06
+  ],
+  [
+   116.19,
+   115.85,
+   157.22
+  ],
+  [
+   116.06,
+   113.92,
+   157.37
+  ],
+  [
+   115.93,
+   112.0,
+   157.53
+  ],
+  [
+   115.8,
+   110.07,
+   157.68
+  ],
+  [
+   115.67,
+   108.14,
+   157.84
+  ],
+  [
+   115.54,
+   106.22,
+   157.99
+  ],
+  [
+   115.41,
+   104.29,
+   158.15
+  ],
+  [
+   115.28,
+   102.36,
+   158.3
+  ],
+  [
+   115.02,
+   100.52,
+   158.6
+  ],
+  [
+   114.53,
+   98.8,
+   159.18
+  ],
+  [
+   113.82,
+   97.28,
+   160.03
+  ],
+  [
+   112.91,
+   96.02,
+   161.1
+  ],
+  [
+   111.86,
+   95.08,
+   162.34
+  ],
+  [
+   110.71,
+   94.5,
+   163.71
+  ],
+  [
+   109.5,
+   94.3,
+   165.14
+  ],
+  [
+   108.37,
+   94.3,
+   166.77
+  ],
+  [
+   107.56,
+   94.3,
+   168.58
+  ],
+  [
+   107.11,
+   94.3,
+   170.52
+  ],
+  [
+   107.04,
+   94.3,
+   172.5
+  ],
+  [
+   107.33,
+   94.3,
+   174.46
+  ],
+  [
+   108.0,
+   94.3,
+   176.33
+  ],
+  [
+   109.0,
+   94.3,
+   178.05
+  ],
+  [
+   110.31,
+   94.3,
+   179.54
+  ],
+  [
+   111.87,
+   94.3,
+   180.76
+  ],
+  [
+   113.64,
+   94.3,
+   181.67
+  ],
+  [
+   115.54,
+   94.3,
+   182.23
+  ],
+  [
+   117.52,
+   94.3,
+   182.41
+  ],
+  [
+   119.24,
+   94.38,
+   182.41
+  ],
+  [
+   120.96,
+   94.67,
+   182.41
+  ],
+  [
+   122.68,
+   94.99,
+   182.41
+  ],
+  [
+   124.12,
+   95.1,
+   182.41
+  ],
+  [
+   126.12,
+   95.1,
+   182.41
+  ]
+ ],
+ "radius": 50.0,
+ "end_across": [
+  0.0,
+  0.0,
+  -1.0
+ ],
+ "fan_mm": 10.0,
+ "built_from": {
+  "turtle": [
+   [
+    "arc",
+    13,
+    -46
+   ],
+   [
+    "drop",
+    9,
+    84,
+    -39.24
+   ],
+   [
+    "arc",
+    10.5,
+    -130.2
+   ],
+   [
+    "line",
+    8.6
+   ]
+  ],
+  "note": "turtle in tool.py from P0 (heading 176.2 deg in x-z): level turn r13 by 46 deg towards +z; drop 39.24 mm (bend r9, 84 deg slope, bend r9) along heading 130.2 deg; level hook r10.5 to heading +x; 8.6 mm straight; last 8 mm rise 0.8 mm into the plug's middle contact, level for the last 2 mm; sampled every 2 mm"
+ },
+ "length": 100.39,
+ "plug_pose": {
+  "t": [
+   73.596,
+   -25.866,
+   27.65100000000001
+  ],
+  "r": [
+   -0.5776922301140784,
+   0.5766657389958634,
+   0.5776922301140786,
+   120.05884847469808
+  ],
+  "at": [
+   52.524,
+   120.966,
+   154.759
+  ]
+ },
+ "summary": {
+  "length": 100.4,
+  "wanted_length": 100.6,
+  "worst_wire_part": {
+   "view": "Step 97c",
+   "part": "B2 (NAUO2)",
+   "clearance": 0.26
+  },
+  "worst_wire_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 1.21
+  },
+  "plug_touching_parts": [
+   [
+    "B2 (NAUO2)",
+    "{'corners_inside': 0, 'its_points_inside_plug': 0, 'nearest': 0.09}"
+   ]
+  ],
+  "worst_plug_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 31.6
+  },
+  "plug_on_screen": {
+   "Step 97c": [
+    [
+     1281,
+     635
+    ],
+    true
+   ],
+   "Step 98": [
+    [
+     1408,
+     663
+    ],
+    true
+   ],
+   "Step 98c": [
+    [
+     1408,
+     663
+    ],
+    true
+   ],
+   "Step 99": [
+    [
+     1408,
+     663
+    ],
+    true
+   ],
+   "Step 99c": [
+    [
+     1408,
+     663
+    ],
+    true
+   ],
+   "Step 100": [
+    [
+     1408,
+     663
+    ],
+    true
+   ]
+  },
+  "seen": {
+   "Step 97c": {
+    "wire": 0.97,
+    "plug": true
+   },
+   "Step 100": {
+    "wire": 1.0,
+    "plug": true
+   }
+  },
+  "during_steps_98_100": {
+   "Step 97c -> Step 98": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.21,
+    "plug_wire_gap": 31.6
+   },
+   "Step 98 -> Step 98c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.21,
+    "plug_wire_gap": 31.6
+   },
+   "Step 98c -> Step 99": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.21,
+    "plug_wire_gap": 31.6
+   },
+   "Step 99 -> Step 99c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.21,
+    "plug_wire_gap": 31.6
+   },
+   "Step 99c -> Step 100": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.21,
+    "plug_wire_gap": 31.6
+   }
+  }
+ },
+ "seen_97c": {
+  "wire_seen": 0.97,
+  "plug_seen": true
+ },
+ "seen_100": {
+  "wire_seen": 1.0,
+  "plug_seen": true
+ },
+ "plug_surface_seen_share": {
+  "step97c": 0.86,
+  "step100": 1.0
+ },
+ "plug_box": [
+  [
+   125.11,
+   93.62,
+   178.46
+  ],
+  [
+   139.12,
+   96.39,
+   186.36
+  ]
+ ],
+ "min_bend_radius_mm": 6.4,
+ "plug_contact_on_screen": {
+  "Step 97c": [
+   1281,
+   635
+  ],
+  "Step 100": [
+   1408,
+   663
+  ]
+ },
+ "plug_middle_on_screen": {
+  "Step 97c": [
+   1255,
+   607
+  ],
+  "Step 100": [
+   1429,
+   636
+  ]
+ },
+ "step100_lift": {
+  "path": [
+   "REST (plug_pose above)",
+   "via(REST lifted 10 mm: t + [0, 10, 0], same turn)",
+   "via([71.48, -6.97, 27.24])  # upright, middle contact at [124, 114, 182]: beside R6 front corner, under the shoulder lead loop",
+   "via(T_UNDER = [45.5, 17.0, -2.8])  # under the shoulder motor wire beside the module, as today",
+   "T_RISEN",
+   "via(T_ACROSS)",
+   "T_OVER",
+   "[0, 0, 0]"
+  ],
+  "checked": "plug box against Step 100 parts and wires at 10 interpolated poses: no corner inside a part, nearest part >= 0.3 mm, nearest wire >= 11.9 mm (rotation interpolated about the pose at-point). Going straight from the flat rest to upright without the 10 mm lift dips a corner into B2.",
+  "wire_routes_needed": "a route for the lead at each new stop (not designed here)"
+ }
+}

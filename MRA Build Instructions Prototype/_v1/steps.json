@@ -1,0 +1,782 @@
+{
+ "labels": {
+  "NAUO10": "R1",
+  "NAUO11": "R2",
+  "NAUO12": "R3",
+  "NAUO13": "R4",
+  "NAUO15": "R5",
+  "NAUO14": "R6",
+  "NAUO1": "B1",
+  "NAUO2": "B2",
+  "NAUO9": "B3",
+  "NAUO3": "B4",
+  "NAUO4": "B5",
+  "NAUO5": "B6",
+  "NAUO6": "B6",
+  "NAUO7": "B7",
+  "NAUO8": "B8",
+  "NAUO45": "Base Servo",
+  "NAUO80": "Left Joystick",
+  "NAUO81": "Right Joystick",
+  "NAUO82": "I/O Extension Module"
+ },
+ "steps": [
+  {
+   "kind": "card",
+   "caption": "Before you start, disconnect all servos from the I/O extension module.",
+   "flag": null
+  },
+  {
+   "kind": "place",
+   "caption": "Begin with R1.",
+   "add": [
+    "NAUO10"
+   ],
+   "move": [
+    "NAUO10"
+   ],
+   "path": [
+    [
+     0.0,
+     80.8,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO10",
+     "text": "R1"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Insert the base servo into R2, then add R2.",
+   "add": [
+    "NAUO11",
+    "NAUO45"
+   ],
+   "move": [
+    "NAUO11",
+    "NAUO45"
+   ],
+   "path": [
+    [
+     0.0,
+     88.2,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO11",
+     "text": "R2"
+    },
+    {
+     "id": "NAUO45",
+     "text": "Base Servo"
+    }
+   ],
+   "flag": "The build notes do not say when the base servo goes in. This placement comes from the video and CAD.",
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Add R3.",
+   "add": [
+    "NAUO12"
+   ],
+   "move": [
+    "NAUO12"
+   ],
+   "path": [
+    [
+     0.0,
+     68.8,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO12",
+     "text": "R3"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Add R4.",
+   "add": [
+    "NAUO13"
+   ],
+   "move": [
+    "NAUO13"
+   ],
+   "path": [
+    [
+     0.0,
+     68.8,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO13",
+     "text": "R4"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Add R5.",
+   "add": [
+    "NAUO15"
+   ],
+   "move": [
+    "NAUO15"
+   ],
+   "path": [
+    [
+     0.0,
+     0.0,
+     -93.1
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     0,
+     -1
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO15",
+     "text": "R5"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Add R6.",
+   "add": [
+    "NAUO14"
+   ],
+   "move": [
+    "NAUO14"
+   ],
+   "path": [
+    [
+     0.0,
+     0.0,
+     98.7
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     0,
+     1
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO14",
+     "text": "R6"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Once R1 - R6 are together, attach R1 - R6 to B2.",
+   "add": [
+    "NAUO2",
+    "NAUO46"
+   ],
+   "move": [
+    "NAUO10",
+    "NAUO11",
+    "NAUO12",
+    "NAUO13",
+    "NAUO15",
+    "NAUO14",
+    "NAUO45"
+   ],
+   "path": [
+    [
+     0.0,
+     114.4,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     -1
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO2",
+     "text": "B2"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Then screw B2 onto B1 with 6mm screws.",
+   "add": [
+    "NAUO1"
+   ],
+   "move": [
+    "NAUO10",
+    "NAUO11",
+    "NAUO12",
+    "NAUO13",
+    "NAUO15",
+    "NAUO14",
+    "NAUO45",
+    "NAUO2",
+    "NAUO46"
+   ],
+   "path": [
+    [
+     0.0,
+     222.0,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO1",
+     "text": "B1"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Screw B2 onto B1 with six 6mm screws.",
+   "add": [
+    "NAUO47",
+    "NAUO48",
+    "NAUO49",
+    "NAUO50",
+    "NAUO51",
+    "NAUO52"
+   ],
+   "move": [
+    "NAUO47",
+    "NAUO48",
+    "NAUO49",
+    "NAUO50",
+    "NAUO51",
+    "NAUO52"
+   ],
+   "path": [
+    [
+     0,
+     25,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": false,
+   "free": [],
+   "labels": [
+    {
+     "id": "NAUO47",
+     "text": "6mm Screw x6"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Insert B3 into B2.",
+   "add": [
+    "NAUO9"
+   ],
+   "move": [
+    "NAUO9"
+   ],
+   "path": [
+    [
+     0.0,
+     87.2,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO9",
+     "text": "B3"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Insert B4 into B2.",
+   "add": [
+    "NAUO3"
+   ],
+   "move": [
+    "NAUO3"
+   ],
+   "path": [
+    [
+     0.0,
+     61.7,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO3",
+     "text": "B4"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Place the left joystick (the joystick connected to A3) into B5 and B6.",
+   "add": [
+    "NAUO4",
+    "NAUO5",
+    "NAUO80"
+   ],
+   "move": [
+    "NAUO80"
+   ],
+   "path": [
+    [
+     0,
+     40,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": false,
+   "free": [],
+   "labels": [
+    {
+     "id": "NAUO80",
+     "text": "Left Joystick"
+    },
+    {
+     "id": "NAUO4",
+     "text": "B5"
+    },
+    {
+     "id": "NAUO5",
+     "text": "B6"
+    }
+   ],
+   "flag": "The joystick model overlaps B5 and B6 in the CAD, so no clear path could be calculated. No straight-line path found in the CAD: motion set by hand, needs review.",
+   "stage_of": [
+    "NAUO4",
+    "NAUO5",
+    "NAUO80"
+   ],
+   "appear": [],
+   "stage": [
+    -170,
+    80,
+    0
+   ]
+  },
+  {
+   "kind": "place",
+   "caption": "Then place B5 and B6 onto B3.",
+   "add": [],
+   "move": [
+    "NAUO4",
+    "NAUO5",
+    "NAUO80"
+   ],
+   "path": [
+    [
+     -170,
+     80,
+     0
+    ],
+    [
+     0,
+     80,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Place the right joystick into B6 and B7.",
+   "add": [
+    "NAUO6",
+    "NAUO7",
+    "NAUO81"
+   ],
+   "move": [
+    "NAUO81"
+   ],
+   "path": [
+    [
+     0,
+     40,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": false,
+   "free": [],
+   "labels": [
+    {
+     "id": "NAUO81",
+     "text": "Right Joystick"
+    },
+    {
+     "id": "NAUO6",
+     "text": "B6"
+    },
+    {
+     "id": "NAUO7",
+     "text": "B7"
+    }
+   ],
+   "flag": "The joystick model overlaps B6 and B7 in the CAD, so no clear path could be calculated. No straight-line path found in the CAD: motion set by hand, needs review.",
+   "stage_of": [
+    "NAUO6",
+    "NAUO7",
+    "NAUO81"
+   ],
+   "appear": [],
+   "stage": [
+    -170,
+    80,
+    0
+   ]
+  },
+  {
+   "kind": "place",
+   "caption": "Then place B6 and B7 onto B3.",
+   "add": [],
+   "move": [
+    "NAUO6",
+    "NAUO7",
+    "NAUO81"
+   ],
+   "path": [
+    [
+     -170,
+     80,
+     0
+    ],
+    [
+     0,
+     80,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Attach B8 on top of B5 - B7.",
+   "add": [
+    "NAUO8"
+   ],
+   "move": [
+    "NAUO8"
+   ],
+   "path": [
+    [
+     0.0,
+     89.8,
+     0.0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": true,
+   "free": [
+    [
+     0,
+     1,
+     0
+    ]
+   ],
+   "labels": [
+    {
+     "id": "NAUO8",
+     "text": "B8"
+    }
+   ],
+   "flag": null,
+   "stage_of": null,
+   "appear": []
+  },
+  {
+   "kind": "place",
+   "caption": "Slide the extension module through the slots in B6 on top of B4.",
+   "add": [
+    "NAUO82"
+   ],
+   "move": [
+    "NAUO82"
+   ],
+   "path": [
+    [
+     0,
+     6,
+     70
+    ],
+    [
+     0,
+     6,
+     0
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "auto": false,
+   "free": [],
+   "labels": [
+    {
+     "id": "NAUO82",
+     "text": "I/O Extension Module"
+    }
+   ],
+   "flag": "Two-part move (slide through the B6 slots, then drop onto B4). The slide was found from the CAD; the drop was set by hand.",
+   "stage_of": null,
+   "appear": [
+    "NAUO111",
+    "NAUO112",
+    "NAUO95",
+    "NAUO96",
+    "NAUO97",
+    "NAUO98",
+    "NAUO99",
+    "NAUO100",
+    "NAUO101",
+    "NAUO102",
+    "NAUO103",
+    "NAUO104",
+    "NAUO105",
+    "NAUO106",
+    "NAUO107",
+    "NAUO108",
+    "NAUO109",
+    "NAUO110"
+   ]
+  },
+  {
+   "kind": "card",
+   "caption": "Reconnect the servo to 5. Remember brown to G, red to V, and orange to S.",
+   "flag": "Wiring is not animated in this test."
+  },
+  {
+   "kind": "card",
+   "caption": "Move the servo wire into the L-shaped slot in R4.",
+   "flag": "Wiring is not animated in this test."
+  },
+  {
+   "kind": "card",
+   "caption": "Connect the power cable to the nano.",
+   "flag": "Wiring is not animated in this test."
+  }
+ ]
+}

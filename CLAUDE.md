@@ -1,0 +1,214 @@
+# TechBox build instructions
+
+An in-house replacement for Cadasio: step-by-step 3D build guides for TechBox kits, generated from the
+CAD and a short guide script, played in the browser. The guides are maintained by asking Claude for
+changes in chat; there is no visual editor.
+
+## House rules come first
+
+Before authoring or changing any guide, read `docs/cadasio-patterns.md`. It is the rulebook extracted
+from TechBox's 20 published Cadasio guides (one part per step, one wire per step, `Step N` / `Step Nc`
+pairs, lead lines tab-to-slot, camera fixed inside a pair, and so on) and it applies to construction and
+deconstruction guides alike. If a kit needs to break a rule, say which one and why. When Lee states a new
+convention, add it to the rulebook. The evidence behind each rule is in
+`docs/cadasio-patterns-evidence.md`; the working reports are in `docs/research/`.
+
+## How a guide is made
+
+    CAD export (GLB from STEP)  +  guide.py (+ wire-paths.json)  +  materials.json (+ colour atlas)
+              |                       |                                  |
+              |        tools/stepgen.py, tools/wires.py          tools/build_model.py
+              |                       |                                  |
+              +---------------> steps.json                          model.glb  ---> player.html (js/, vendor/)
+                                parts.json  --------------------------------------> parts.html -> parts/*.png
+
+- `guide.py` (one per kit folder) lists the build in order: which part goes on next, the caption, and any
+  motion that has to be set by hand. Everything else is worked out from the CAD by `tools/stepgen.py`:
+  insertion direction (collision test), hover distance, lead-line anchors (where the parts grip each
+  other), label anchors, and the camera for each step.
+- `materials.json` gives colours and how much detail to keep. `tools/build_model.py` turns the raw CAD
+  export into the small, coloured `model.glb`, keeping only the parts the guide shows. A mesh whose rule
+  names no colour takes its colours, solid by solid, from the kit's colour atlas (for the MRA:
+  `colour-atlas-mra.json`, read from TechBox's own Cadasio project for the kit); a rule that names a colour
+  is a TechBox decision that overrides it.
+- `player.html` plays `steps.json`. `parts.html` renders one picture per part for the LMS parts list.
+
+What a guide can do beyond "part hovers, part goes in" (described at the top of `tools/stepgen.py` and in the
+docstrings of `Guide.place` and `Guide.seat`):
+
+- **Poses.** A part's position in a view is a pose relative to where it sits when built: `[x, y, z]`, or
+  `turned(axis, degrees, at, t)` for a part that is tilted or spun on its way in. A hand-set `path=[...]` may
+  have several poses; `via(pose)` marks one the part passes through without pausing.
+- **Wires.** Flexible leads are not CAD parts. Each is a centre line (a "route", see `tools/wires.py`) that the
+  player draws as a tube, tied to the part at each end so it follows them, and it can change route from one
+  step to the next (`wires=`, `wires_done=`); going back from such a step plays it backwards. The CAD's own cable bodies are left out of the model
+  (`"omit": true` in `materials.json`); their centre lines are in the kit's `wire-paths.json`.
+- **Riding parts.** A plug on a loose lead, or the cap of a jumper wire, rides with another part
+  (`g.carry(...)`) until a step moves it to its seat. `g.rest_at(...)` parks a part beside the model.
+  `paths={id: path}` gives each moving part its own way in (the two ends of a jumper wire).
+- **Cameras.** Chosen from the four diagonal views; the generator prefers one from which the engraved code
+  of each wood part coming in can be read (`engraved-codes.json`). `look_from=` picks the diagonal nearest a
+  direction, `view_dir=` gives an exact direction, `focus=` / `frame=` punch in. `flip=True` shows the step with
+  the model turned over (work done with the kit upside down): the player turns the model, not the camera, so
+  the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them.
+  `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
+  screenshot, with the narrowest window it suits, `min_aspect`) and can leave parts off them (`hide=`).
+- **Note cards** take line breaks: a caption with `\n` in it is shown as a list, ranged left (a checklist).
+- **A bench set-up before the build.** `g.put_away(ids)` takes parts off the screen; a later step brings them
+  back as new parts (the MRA's electronics test, before the base). Declare their riding and resting for the
+  build after it. The view after a put-away starts afresh: nothing glides over from the view before it.
+- **On a step, too:** `caution=` (an orange Caution box under the caption, read aloud with it; not a Review note),
+  `arrows=` (fat red arrows instead of lead lines, for a slide with nothing to line up), `inset=` (a framed close-up on
+  Step Nc with some parts left out, e.g. gears under a cover, with a leader to the spot), `wiggle=True` (a jiggle on the
+  spot, played as the step opens and as it completes: a check that parts move freely), `single=True` (one view, no Step Nc).
+  Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
+  pace with it stop by stop (the MRA's extension wire onto row 10).
+  For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
+  `cut_lead`), its turn split about evenly between stages: two routes twisted differently at the same length pinch the lead
+  as it blends between them (Steps 98 and 99).
+- **Parts list.** `Guide(parts_list=fn)` puts Parts List pages after the title page, built from the parts the guide
+  shows (so a guide for one part of the build lists that part's parts); `fn` groups them (the MRA's is in its guide.py).
+  `g.part_picture(name, add=, poses=, wires=)` pictures a part whole (both ends of an extension wire and the wire between);
+  `g.list_part()` lists a kit part whose CAD pieces are hover-only (the breadboard wires). `Guide(review_notes=False)` hides
+  the Review notes and their switch once a guide is past review. `Guide(hover_names={id: name})` names a part more exactly
+  on hover and click than the parts list does (the MRA's Left / Right Joystick, "Joystick x2" in the list). In the step list
+  a Parts List page is pictured as the page itself, small (its part pictures load once the list is opened).
+- **Step text, edited outside.** `tools/step_text.py export` writes every step's instruction and caution to a CSV for an
+  editor, keyed by each step's `text_key` (a short code from the guide's own wording and which step with that wording it
+  is, so edits find their step after renumbering and a Replace All cannot break them); `import` checks the columns, reads
+  UTF-8 or Excel's plain CSV, and writes only what changed into the kit's `step-text.json`, which the generator applies on
+  the next run. The wording in guide.py stays as written: rewording a step there gives it a new key (the generator warns of
+  edits it no longer finds), and a caution changed in guide.py after it was edited outside is kept, with a warning.
+- **Printing on a part.** `materials.json` `"decals"` names a JSON file of flat pictures to lay on parts (the I/O module's
+  silkscreen, written by the kit's `silkscreen.py`); `build_model.py` puts them in the model and the player draws them.
+
+## Commands
+
+Run from this folder. The Python environment is `.venv.nosync` (the Desktop is iCloud-synced; the
+`.nosync` suffix keeps it out of the sync). Create it with
+`python3 -m venv .venv.nosync && .venv.nosync/bin/pip install -r tools/requirements.txt`.
+
+    .venv.nosync/bin/python "MRA Build Instructions Prototype/guide.py"            # after editing guide.py
+    .venv.nosync/bin/python tools/build_model.py "MRA Build Instructions Prototype" # after editing materials.json or replacing the CAD
+    .venv.nosync/bin/python "MRA Build Instructions Prototype/silkscreen.py"       # after editing the module's printing (then build_model)
+    /usr/bin/python3 tools/serve.py "MRA Build Instructions Prototype" 8791         # local server; then open http://localhost:8791/player.html
+
+`guide.py` rebuilds the model by itself when the set of parts shown changes. Opening
+`http://localhost:8791/parts.html` re-renders the part pictures and saves them into `parts/`.
+
+    python3 tools/step_text.py export "MRA Build Instructions Prototype" "share/<folder>/MRA step text.csv"   # step text for editing
+    python3 tools/step_text.py import "MRA Build Instructions Prototype" "<edited>.csv"                       # then run guide.py
+
+To send a guide to someone, pack it into one HTML file that opens by double-click with no server and no internet
+(player, model, steps, logo and the part pictures for the parts list's large view all inside), and put the part pictures
+beside it as well, for the LMS:
+
+    .venv.nosync/bin/python tools/bundle.py "MRA Build Instructions Prototype" "share/<name>/MRA Full Build.html"
+
+`share/` holds the checkpoints made this way (a folder and its zip, with a read-me and a parts-list page). A checkpoint
+is a snapshot: make a new one after changing the guide.
+
+## Checking a change
+
+Every change to a guide is checked in the browser before it is reported as done.
+
+1. Regenerate, then load `player.html` and look at the steps that changed, plus one before and one after.
+2. Run the whole guide through the check in the kit's `js/runthrough.js`. In the page:
+   `(0, eval)(await fetch('js/runthrough.js').then(r => r.text())); _dev.freeze(); _runthrough()`.
+   It steps every view forwards (animated), backwards and by jumping, and compares visible parts, where each
+   part is, lead lines, arrows, wires, labels, eyes, cautions, close-ups and the parts list with `steps.json`. `_dev.show('Step 12c', 0.5)` and
+   `_dev.look(part, direction)` are for looking at one step or half-way through its animation. (The built-in
+   browser pauses animation while its pane is hidden, which is why the check draws its own frames; a
+   screenshot can lag one frame, so take a small throwaway one first. When the pane's screenshots stay stale,
+   draw a frame, copy the canvas (and the `#overlay` labels) into a picture and POST it to
+   `/__save/thumbs/<name>.png`: `tools/serve.py` saves it into the kit's `thumbs/` folder, where it can be opened
+   as a file. The page's own boxes (caption, caution, parts list, close-up) are HTML: to see them too, clone the page
+   with its computed styles into an SVG foreignObject and draw that over the canvas. Delete `thumbs/` afterwards.)
+3. Read the generator's log: a step with `hand` motion carries a yellow Review note in the player (in a guide with
+   `review_notes=False` the log's WARNING line says the same); a step with `lines=0` that is not the first part or a
+   note card needs a look.
+4. `tools/build_model.py` prints a warning if one conductor changes colour between two cable pieces.
+
+The preview launcher cannot read the Desktop folder, so start `tools/serve.py` from the shell (in the
+background) rather than through `.claude/launch.json`, which only attaches to it.
+
+## Layout
+
+    docs/                      the rulebook, its evidence, and the research reports (research/mra/ = this kit:
+                               build videos, engraved codes, how the arm and claw go together, wires, pins, colours)
+    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py
+                               cadasio/ = scripts for studying published guides; video/ = stills from a build video
+    MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)
+    MRA Build Instructions Prototype/
+        guide.py, materials.json, mra.glb                         what the guide is generated from
+        colour-atlas-mra.json, wire-paths.json, engraved-codes.json   colours, wire centre lines and engraved codes measured for this kit
+        silkscreen.py -> decals.json                              the I/O module's printing, placed from the CAD's pin positions
+        usb-mini-b.glb, usb-a-end.glb                             the USB cable's ends, converted from cad_extra/*.STEP (materials.json "extra_parts")
+        logo.webp                                                 the title-page logo
+        player.html, parts.html, js/, vendor/                     the viewer (no build step, no CDN)
+        steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
+        _v1/                                                      the first prototype's files, for reference
+    RCC Build Instructions/    the second kit, the Radio Controlled Car (first draft, 15 Oct 2026): the same layout as the MRA's
+                               (guide.py, materials.json, rcc.glb from RCC_Assembly_v1.STEP, colour-atlas-rcc.json, wire-paths.json,
+                               silkscreen.py -> decals.json, nano-car.glb = the controller's Nano model for the car's seat,
+                               usb-a-end.glb, its own copies of player.html, js/, vendor/). Research: docs/research/rcc/.
+                               Commands as for the MRA with the folder name changed (server on port 8796: "Open Prototype.command").
+
+## Conventions in the code
+
+- Coordinates in `steps.json` are millimetres in assembly space, Y up. Part ids are the CAD's top-level
+  instance names (`NAUO10`); student-facing names live in `guide.py`.
+- CAD file names for the MRA do not match the codes engraved on the wood for 26 of the 44 wood parts (CAD
+  B10 = B3, B8 = B7, B9 = B8, R5 / R6 swapped, and almost all of the arm: the engraved arm set is A1-A13).
+  `guide.py` follows the engravings; `docs/research/mra/cad_codes_base.md` has the table.
+- Where the CAD has a part out of place, `materials.json` `"adjust_mm"` moves it (`[x, y, z]`) or turns it (a pose,
+  `{"t", "r", "at"}`); the model and the collision tests both use it, and `_notes.adjusted` says why. The MRA's base
+  horn (moved) and R8 (turned end for end) are the cases so far. `"own_parts"` makes a CAD node inside a part a
+  part of its own (the Nano Board, inside the I/O module's assembly in the CAD). `"stickers"` adds round stickers
+  that the kit puts on a purchased part (the coloured dots that tell the MRA's motors apart). `"extra_parts"` adds a part
+  that comes as a STEP file of its own (the USB cable's two ends): convert it once with `tools/step_to_glb.py` into the
+  kit folder, and give the GLB and a pose placing it in the assembly; both tools then treat it as a CAD part. A rule's
+  `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid.
+  `"move_engraving"` moves a wood part's engraved code elsewhere on its face (and can turn it the right way up), for a part
+  the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead.
+- The player renders only when something changes. Do not add per-frame work. (A close-up is drawn once as its view
+  opens; the parts list's pictures load only when its page is shown; reading aloud uses the browser's own voice.)
+- Every step opens on its own camera (the player swings back to it whatever the viewer did). A camera Lee sends as a
+  screenshot is solved by matching renders to it (silhouette and colours, coarse to fine, from a start read off the
+  picture) and written as `view_dir=` + `frame=`. Never change another step's camera unasked: after regenerating, diff
+  every view's camera against a copy of steps.json saved before the edit.
+- Controls stay real buttons, lists and tick boxes (keyboard and screen reader); on-screen text the student needs is
+  in the page or in the announcement made as each step opens, never only in the 3D picture.
+- New colours go in `materials.json`'s palette, following the colour library in the rulebook. Colours with
+  no published reference are listed under `_notes.unconfirmed` there; colours Lee has ruled on are under
+  `_notes.decided` and are not to be changed back.
+
+## How edits are asked for
+
+Lee names a step as the player's step list shows it ("Step 12") and says what should change; the edit is
+made in the kit's `guide.py` (order, captions, direction, hover, `lines_to=`, `lines_at=`, labels) or
+`materials.json` (a colour or the detail of one part of a model), then regenerated and checked as above.
+Option-click in the player copies "step | part (id) | [x, y, z]" for a spot on a part; those points go
+straight into `lines_at=[...]` when a lead line has to start or end somewhere exact. One edge threshold
+(`defaults.edge_angle`, 40 as in Cadasio) applies to every part; do not set it per part without being asked.
+Two per-rule options in `materials.json` deal with purchased-part CAD rather than with the threshold:
+`edge_min_spacing_mm` leaves out crease lines packed closer than that (a modelled screw thread turns into a
+black patch at guide scale), and `"skin": true` on a component marks a coloured shell laid over a copy of the
+body, so the body underneath takes the same colour and the two cannot flicker.
+
+## Open items
+
+Questions for Lee about particular steps are on those steps as yellow Review notes (`review=` in `guide.py`; the MRA guide
+hides them now that it is past review, `?review=1` shows any left); the independent
+reviews behind them are `docs/research/mra/review_*.md`.
+Decisions waiting on TechBox are in section 13 of the rulebook; what the player does not do yet is in section 14;
+kit-specific points are in the kit's `README.txt` and under `_notes` in its `materials.json`.
+The title page uses `logo.webp` (the picture Lee attached in chat); a `logo.svg` or `logo.png` dropped into the
+kit folder takes its place the next time `guide.py` runs.
+
+## This computer
+
+16 GB of memory and a nearly full disk: when memory runs out, swap fills the disk and the machine goes down
+(it did on 2026-10-13). Run one heavy job at a time (`build_model.py` peaks near 2 GB), check
+`df -h /System/Volumes/Data` and `sysctl vm.swapusage` before starting several agents, and have agents save
+their reports into `docs/research/` as they go.

@@ -1,0 +1,107 @@
+{
+ "kit": "Radio Controlled Car (RCC)",
+ "part": "Full Build",
+ "image_size": 500,
+ "parts": [
+  {
+   "name": "Controller Board",
+   "quantity": 1,
+   "image": "Controller-Board.png"
+  },
+  {
+   "name": "Left Controller Guard",
+   "quantity": 1,
+   "image": "Left-Controller-Guard.png"
+  },
+  {
+   "name": "Right Controller Guard",
+   "quantity": 1,
+   "image": "Right-Controller-Guard.png"
+  },
+  {
+   "name": "Nano Board",
+   "quantity": 2,
+   "image": "Nano-Board.png"
+  },
+  {
+   "name": "Radio Module",
+   "quantity": 2,
+   "image": "Radio-Module.png"
+  },
+  {
+   "name": "Joystick",
+   "quantity": 2,
+   "image": "Joystick.png"
+  },
+  {
+   "name": "Nano I/O Module",
+   "quantity": 1,
+   "image": "Nano-I-O-Module.png"
+  },
+  {
+   "name": "Adapter Board",
+   "quantity": 1,
+   "image": "Adapter-Board.png"
+  },
+  {
+   "name": "Wheel Motor",
+   "quantity": 2,
+   "image": "Wheel-Motor.png"
+  },
+  {
+   "name": "Wheel",
+   "quantity": 2,
+   "image": "Wheel.png"
+  },
+  {
+   "name": "9V Battery",
+   "quantity": 1,
+   "image": "9V-Battery.png"
+  },
+  {
+   "name": "Battery Clip",
+   "quantity": 1,
+   "image": "Battery-Clip.png"
+  },
+  {
+   "name": "USB Cable",
+   "quantity": 1,
+   "image": "USB-Cable.png"
+  },
+  {
+   "name": "L1",
+   "quantity": 1,
+   "image": "L1.png"
+  },
+  {
+   "name": "L2",
+   "quantity": 1,
+   "image": "L2.png"
+  },
+  {
+   "name": "L3",
+   "quantity": 1,
+   "image": "L3.png"
+  },
+  {
+   "name": "L5",
+   "quantity": 1,
+   "image": "L5.png"
+  },
+  {
+   "name": "L4",
+   "quantity": 1,
+   "image": "L4.png"
+  },
+  {
+   "name": "L7",
+   "quantity": 1,
+   "image": "L7.png"
+  },
+  {
+   "name": "L6",
+   "quantity": 1,
+   "image": "L6.png"
+  }
+ ]
+}

@@ -1,0 +1,259 @@
+{
+ "label": "on_b2_front_of_r6",
+ "design": "n9",
+ "corners": [
+  [
+   124.5,
+   133.0,
+   147
+  ],
+  [
+   118.2,
+   128.3,
+   151.5
+  ],
+  [
+   113.8,
+   111.5,
+   154
+  ],
+  [
+   111.5,
+   98,
+   155.5
+  ],
+  [
+   106.9,
+   94.5,
+   159.0
+  ],
+  [
+   101.4,
+   94.5,
+   165.8
+  ],
+  [
+   101.9,
+   94.5,
+   173.6
+  ],
+  [
+   108.7,
+   94.75,
+   179.4
+  ],
+  [
+   113.5,
+   95.12,
+   183.25
+  ],
+  [
+   121,
+   95.12,
+   183.4
+  ]
+ ],
+ "radius": 10,
+ "end_across": [
+  0.02,
+  0.0,
+  -0.9998
+ ],
+ "fan_mm": 10,
+ "length": 99.84,
+ "plug_pose": {
+  "t": [
+   68.476,
+   -25.84599999999999,
+   28.64100000000002
+  ],
+  "r": [
+   0.5850470733340546,
+   -0.5734631295834359,
+   -0.573463129583436,
+   -119.34071298986683
+  ],
+  "at": [
+   52.524,
+   120.966,
+   154.759
+  ]
+ },
+ "summary": {
+  "length": 99.8,
+  "wanted_length": 100.6,
+  "worst_wire_part": {
+   "view": "Step 97c",
+   "part": "B2 (NAUO2)",
+   "clearance": 0.39
+  },
+  "worst_wire_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 1.23
+  },
+  "plug_touching_parts": [
+   [
+    "B2 (NAUO2)",
+    "{'corners_inside': 0, 'its_points_inside_plug': 0, 'nearest': 0.11}"
+   ]
+  ],
+  "worst_plug_wire": {
+   "view": "Step 97c",
+   "wire": "base orange",
+   "gap": 34.37
+  },
+  "plug_on_screen": {
+   "Step 97c": [
+    [
+     1308,
+     657
+    ],
+    true
+   ],
+   "Step 98": [
+    [
+     1394,
+     689
+    ],
+    true
+   ],
+   "Step 98c": [
+    [
+     1394,
+     689
+    ],
+    true
+   ],
+   "Step 99": [
+    [
+     1394,
+     689
+    ],
+    true
+   ],
+   "Step 99c": [
+    [
+     1394,
+     689
+    ],
+    true
+   ],
+   "Step 100": [
+    [
+     1394,
+     689
+    ],
+    true
+   ]
+  },
+  "seen": {
+   "Step 97c": {
+    "wire": 0.84,
+    "plug": true
+   },
+   "Step 100": {
+    "wire": 1.0,
+    "plug": true
+   }
+  },
+  "during_steps_98_100": {
+   "Step 97c -> Step 98": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.23,
+    "plug_wire_gap": 34.37
+   },
+   "Step 98 -> Step 98c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.23,
+    "plug_wire_gap": 34.37
+   },
+   "Step 98c -> Step 99": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.23,
+    "plug_wire_gap": 34.37
+   },
+   "Step 99 -> Step 99c": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.23,
+    "plug_wire_gap": 34.37
+   },
+   "Step 99c -> Step 100": {
+    "moving_part_gap": 99.0,
+    "wire_gap": 1.23,
+    "plug_wire_gap": 34.37
+   }
+  }
+ },
+ "seen": {
+  "Step 97c": {
+   "wire_seen": 0.84,
+   "plug_seen": true
+  },
+  "Step 100": {
+   "wire_seen": 1.0,
+   "plug_seen": true
+  }
+ },
+ "shape": {
+  "plug_tilt_deg": 0.0,
+  "side_min_y": 94.42,
+  "max_deg_per_mm": 8.29,
+  "min_y": 94.5,
+  "plug_bounds": [
+   [
+    119.92,
+    93.64,
+    179.43
+   ],
+   [
+    134.07,
+    96.39,
+    187.51
+   ]
+  ],
+  "end": [
+   121.0,
+   95.12,
+   183.4
+  ],
+  "end_heading": [
+   1.0,
+   0.0,
+   0.02
+  ]
+ },
+ "step100_plug_waypoints_rel_seat": {
+  "note": "plug contact-top positions relative to the row 10 seat (EXT_TOP); first two keep the rest orientation, the rest are upright (seated orientation)",
+  "rest": {
+   "t": [
+    68.476,
+    -25.84599999999999,
+    28.64100000000002
+   ],
+   "r": [
+    0.5850470733340546,
+    -0.5734631295834359,
+    -0.573463129583436,
+    -119.34071298986683
+   ],
+   "at": [
+    52.524,
+    120.966,
+    154.759
+   ]
+  },
+  "lift": "rest pose moved +35 mm in y",
+  "turn_upright_at": [
+   50.0,
+   21.0,
+   10.0
+  ],
+  "then": [
+   "T_RISEN [43.5, 52, 3.4]",
+   "via T_ACROSS [0, 52, 3.4]",
+   "T_OVER [0, 52, 0]",
+   "[0, 0, 0]"
+  ]
+ }
+}

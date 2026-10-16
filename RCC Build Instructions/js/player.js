@@ -1,0 +1,825 @@
+// Step-by-step build guide player. Reads steps.json (written by guide.py) and plays its views:
+// "Step N" shows the new part hovering with red lead lines and labels, "Step Nc" shows it seated.
+const {createStage, THREE} = await import('./core.js' + new URL(import.meta.url).search);   // (the same fresh copy as player.js)
+
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const ACCENT = '#7fdbff';                    // label underline, leader and anchor ring
+const STEP_MS = 800;                         // every transition, as in the published guides
+
+// Always the latest steps (the model URL inside carries its own version). ?steps= may name another steps file in this folder, nothing else.
+const stepsFile = /^[\w.-]+\.json$/.test(params.get('steps') || '') ? params.get('steps') : 'steps.json';
+const data = await fetch(stepsFile, {cache: 'no-cache'}).then(r => { if (!r.ok) throw new Error(`${stepsFile}: ${r.status}`); return r.json(); });
+const views = data.views;
+const stage = await createStage($('stage'), {modelUrl: data.model, fov: data.fov, padding: data.frame_padding, pixelRatioCap: params.get('quality') === 'low' ? 1 : 1.5, antialias: params.get('quality') !== 'low'});
+const {camera, controls} = stage;
+const canvasEl = stage.renderer.domElement;
+canvasEl.setAttribute('role', 'img');
+
+// ---------- title page
+$('title').textContent = data.meta.title;
+$('subtitle').textContent = data.meta.part;
+$('copyright').textContent = data.meta.copyright || '';
+document.title = `${data.meta.title} - ${data.meta.part}`;
+if (data.meta.logo) {                        // a logo file in the kit folder replaces the text badge (guide.py records its name)
+  const img = new Image();
+  img.onload = () => { img.alt = 'TechBox'; $('logo').replaceChildren(img); $('logo').classList.add('image'); };
+  img.src = data.meta.logo;
+}
+const flat = v => v.kind === 'card';         // a view with no model on screen: a note card, or the parts list (a card with `parts`)
+const stepCount = views.filter(v => /^Step \d+$/.test(v.name)).length;
+
+// ---------- poses: where a part is shown, relative to where it sits when built (see core.js)
+const ZERO = [0, 0, 0];
+const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+const pM = new THREE.Matrix4(), pV = new THREE.Vector3(), qA = new THREE.Quaternion(), qB = new THREE.Quaternion(), pAxis = new THREE.Vector3();
+const turn = pose => pose && !Array.isArray(pose) && pose.r && pose.r[3] ? pose.r : null;
+const shift = pose => !pose ? ZERO : Array.isArray(pose) ? pose : pose.t || ZERO;
+function applyPose(pose, p) {
+  if (!turn(pose)) { const t = shift(pose); return [p[0] + t[0], p[1] + t[1], p[2] + t[2]]; }
+  pV.set(p[0], p[1], p[2]).applyMatrix4(stage.poseMatrix(pose, pM)); return [pV.x, pV.y, pV.z];
+}
+function unapplyPose(pose, p) {
+  if (!turn(pose)) { const t = shift(pose); return [p[0] - t[0], p[1] - t[1], p[2] - t[2]]; }
+  pV.set(p[0], p[1], p[2]).applyMatrix4(stage.poseMatrix(pose, pM).invert()); return [pV.x, pV.y, pV.z];
+}
+const quat = (pose, q) => { const r = turn(pose); return r ? q.setFromAxisAngle(pAxis.set(r[0], r[1], r[2]).normalize(), THREE.MathUtils.degToRad(r[3])) : q.identity(); };
+// The same pose written as a turn about another point.
+function about(pose, at, q) { const t = shift(pose), a = pose.at || ZERO; pV.set(at[0] - a[0], at[1] - a[1], at[2] - a[2]); const d = pV.clone().applyQuaternion(q).sub(pV); return [t[0] + d.x, t[1] + d.y, t[2] + d.z]; }
+// A pose part of the way from a to b: the turn is spread evenly, about b's pivot (or a's if b has none).
+function mixPose(a, b, k) {
+  if (!turn(a) && !turn(b)) return lerp3(shift(a), shift(b), k);
+  const at = (turn(b) ? b.at : a.at) || ZERO;
+  quat(a, qA); quat(b, qB);
+  const ta = turn(a) ? about(a, at, qA) : shift(a), tb = turn(b) ? about(b, at, qB) : shift(b);
+  qA.slerp(qB, k);
+  const s = Math.sqrt(Math.max(0, 1 - qA.w * qA.w)), deg = THREE.MathUtils.radToDeg(2 * Math.acos(Math.min(1, Math.abs(qA.w)))) * (qA.w < 0 ? -1 : 1);
+  return {t: lerp3(ta, tb, k), r: s < 1e-6 ? [0, 1, 0, 0] : [qA.x / s, qA.y / s, qA.z / s, deg], at};
+}
+// Where a part that rides with another is (see `carry` in a view): its own pose `inner`, then the carrier's pose
+// `outer` on top. Written as a turn about the part's own middle, so that it glides sensibly once it is let go.
+const pN = new THREE.Matrix4(), pC = new THREE.Vector3();
+function composePose(outer, inner, id) {
+  if (!turn(outer) && !shift(outer).some(Boolean)) return inner || ZERO;
+  const m = pN.copy(stage.poseMatrix(outer, pM)).multiply(stage.poseMatrix(inner || null, pM));
+  const c = stage.parts.get(id).userData.sphere.center;
+  pC.copy(c).applyMatrix4(m);
+  const t = [pC.x - c.x, pC.y - c.y, pC.z - c.z];
+  qA.setFromRotationMatrix(m);
+  const s = Math.sqrt(Math.max(0, 1 - qA.w * qA.w));
+  if (s < 1e-6) return t;
+  return {t, r: [qA.x / s, qA.y / s, qA.z / s, THREE.MathUtils.radToDeg(2 * Math.acos(Math.min(1, Math.abs(qA.w)))) * (qA.w < 0 ? -1 : 1)], at: [c.x, c.y, c.z]};
+}
+// A pose part of the way (k = 0..1) through a list of poses, each stretch taking the same share of the time.
+function throughPoses(list, k) { const n = list.length - 1, s = Math.min(n - 1, Math.floor(k * n)); return mixPose(list[s], list[s + 1], k * n - s); }
+const further = pose => Array.isArray(pose) ? pose.map(v => v * 1.8) : {...pose, t: shift(pose).map(v => v * 1.8)};   // a new part glides in from a little further out
+// The stops of a moving part's way in (the poses it pauses at): its own when it has a way of its own.
+const stopsFor = (view, id) => view.paths && view.paths[id] ? (view.path_stops && view.path_stops[id]) || null : view.stops || null;
+// A step whose wire passes through routes in between (a lead laid into a slot, the extension onto row 10): going back
+// from it plays it backwards, since straight back the wire would cut through the parts it was laid round.
+const staged = view => Object.keys(view.wire_via || {}).length > 0;
+
+// ---------- wires: each follows a route (a centre line in seated coordinates) and is tied to the parts at its two
+// ends, so it bends along when they move; from one view to the next a wire changes route smoothly.
+const wireDefs = data.wires || {};
+const routes = (data.routes || []).map(r => {
+  const n = r.pts.length, s = new Float32Array(n); let len = 0;
+  for (let i = 1; i < n; i++) { len += Math.hypot(r.pts[i][0] - r.pts[i - 1][0], r.pts[i][1] - r.pts[i - 1][1], r.pts[i][2] - r.pts[i - 1][2]); s[i] = len; }
+  for (let i = 1; i < n; i++) s[i] /= len || 1;
+  return {...r, s, len};
+});
+const wireSamples = {};                      // points along each wire: enough for its longest route
+for (const v of views) for (const id in v.wires || {}) wireSamples[id] = Math.max(wireSamples[id] || 0, Math.min(160, Math.max(12, Math.ceil(routes[v.wires[id]].len / 1.5))));
+const ramp = s => { const t = Math.min(1, Math.max(0, (s - 0.1) / 0.8)); return t * t * (3 - 2 * t); };   // the ends stay with their parts
+const mA = new THREE.Matrix4(), mB = new THREE.Matrix4(), mR = new THREE.Matrix4();
+// How far the part at one end of a route has moved from where it was when the route was drawn (`ref`, normally its seat).
+function endMove(part, ref, poses, out) {
+  if (!part || !(poses[part] || ref)) return null;
+  stage.poseMatrix(poses[part] || null, out);
+  return ref ? out.multiply(stage.poseMatrix(ref, mR).invert()) : out;
+}
+// The route's centre line with its ends carried along by their parts: {pts, cum (distance along it), total}.
+function skinned(route, poses) {
+  const A = endMove(route.a, route.a_ref, poses, mA), B = endMove(route.b, route.b_ref, poses, mB), m = route.pts.length;
+  const pts = new Float32Array(m * 3), cum = new Float32Array(m);
+  for (let i = 0; i < m; i++) {
+    const p = route.pts[i];
+    let x = p[0], y = p[1], z = p[2];
+    if (A || B) {
+      // how much this point goes with the part at the far end: none at all before `b_from` mm (a lead held in a slot there)
+      const u = route.b_from ? (route.s[i] * route.len - route.b_from) / Math.max(1e-6, route.len - route.b_from) : route.s[i];
+      const wb = route.b ? ramp(u) : 0, wa = route.a ? 1 - wb : 0;
+      if (A && wa) { pV.set(p[0], p[1], p[2]).applyMatrix4(A); x += wa * (pV.x - p[0]); y += wa * (pV.y - p[1]); z += wa * (pV.z - p[2]); }
+      if (B && wb) { pV.set(p[0], p[1], p[2]).applyMatrix4(B); x += wb * (pV.x - p[0]); y += wb * (pV.y - p[1]); z += wb * (pV.z - p[2]); }
+    }
+    pts[i * 3] = x; pts[i * 3 + 1] = y; pts[i * 3 + 2] = z;
+    if (i) cum[i] = cum[i - 1] + Math.hypot(x - pts[i * 3 - 3], y - pts[i * 3 - 2], z - pts[i * 3 - 1]);
+  }
+  return {pts, cum, total: cum[m - 1], m};
+}
+// n points along it, evenly spaced over `span` mm from its first end (points past its own end stay on the end).
+function sampled(line, n, span = line.total) {
+  const {pts, cum, total, m} = line, out = new Float32Array(n * 3);
+  for (let k = 0, i = 0; k < n; k++) {
+    const d = Math.min(total, span * k / (n - 1));
+    while (i < m - 2 && cum[i + 1] < d) i++;
+    const f = cum[i + 1] > cum[i] ? Math.min(1, (d - cum[i]) / (cum[i + 1] - cum[i])) : 0;
+    for (let c = 0; c < 3; c++) out[k * 3 + c] = pts[i * 3 + c] + (pts[i * 3 + 3 + c] - pts[i * 3 + c]) * f;
+  }
+  return out;
+}
+// Draw the wires of `view` with parts at `poses`; with `from` and k < 1, part of the way from that view's routes.
+// A wire changing route keeps each bit of itself the same distance from its first end, so what both routes share
+// (the run from a servo to the slot it passes through) stays put, and a longer route grows out of the wire's tip.
+function drawWires(view, poses, from, k = 1, via = null) {
+  const list = [], marks = [];
+  for (const id in view.wires || {}) {
+    const def = wireDefs[id], route = routes[view.wires[id]], n = wireSamples[id], line = skinned(route, poses);
+    const changing = from && from.wires && from.wires[id] != null && from.wires[id] !== view.wires[id] && k < 1;
+    let pts, fade = route.fade || null;
+    if (changing) {                            // from the old route, through any in-between routes the view names, to the new one
+      const way = [from.wires[id], ...(((via || view.wire_via) || {})[id] || []), view.wires[id]], legs = way.length - 1;   // (going back: `via`, the routes the step came through, the other way)
+      const leg = Math.min(legs - 1, Math.floor(k * legs)), f = k * legs - leg;
+      const a = leg === 0 ? skinned(routes[way[0]], poses) : skinned(routes[way[leg]], poses), b = leg === legs - 1 ? line : skinned(routes[way[leg + 1]], poses);
+      const span = Math.max(a.total, b.total), pa = sampled(a, n, span);
+      pts = sampled(b, n, span);
+      for (let i = 0; i < pts.length; i++) pts[i] = pa[i] + (pts[i] - pa[i]) * f;
+      const fa = routes[way[leg]].fade, fb = routes[way[leg + 1]].fade;
+      if (fa || fb) {                          // a faded end grows out to the whole wire (or back)
+        const whole = [span, span + 1], from_ = fa || whole, to_ = fb || whole;
+        fade = [from_[0] + (to_[0] - from_[0]) * f, from_[1] + (to_[1] - from_[1]) * f];
+      }
+    } else {
+      pts = sampled(line, n);
+      if (route.mark) { const A = endMove(route.a, route.a_ref, poses, mA); marks.push(route.mark.map(p => A ? pV.set(p[0], p[1], p[2]).applyMatrix4(A).toArray() : p)); }
+    }
+    list.push({id, colour: def.colour, radius: def.radius, pts, fade});
+  }
+  stage.setWires(list); stage.setMarks(marks);
+}
+
+// ---------- scene state for a view
+function leadLines(view) {
+  if (view.kind !== 'hover' || !view.guides) return [];
+  const hops = view.path.some(turn) ? [view.path[0]] : view.path.slice(0, -1);   // a part that is turned on its way in gets one straight line from where it hovers
+  return view.guides.map(g => [...hops.map(w => applyPose(w, g.tip)), g.mouth]);
+}
+const arrowsOf = view => view.kind === 'hover' ? view.arrows || [] : [];
+function applyState(view, poses) {
+  stage.setVisible(flat(view) ? [] : view.visible);
+  for (const id of view.visible) stage.setPose(id, (poses || view.offsets)[id] || ZERO);
+  drawWires(flat(view) ? {} : view, poses || view.offsets);
+}
+function poseFor(view, aspect) {
+  // A camera framed for one shape of window (the title page's, from a screenshot) says how narrow a frame it suits; on a
+  // narrower one the guide's other camera is used, which the title-page shift below keeps clear of the title.
+  const camera = view.camera.min_aspect && aspect < view.camera.min_aspect ? view.camera.otherwise : view.camera;
+  const pose = stage.cameraPose(camera, aspect);
+  if (view.kind === 'start') {               // leave the left of the title page for the logo and title, as far as the frame has room to spare
+    const dir = new THREE.Vector3(...camera.dir).normalize(), r = camera.radius;
+    const spare = pose.position.distanceTo(pose.target) * Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * aspect - r;
+    const side = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(Math.max(0, Math.min((camera.shift ?? 0.6) * r, spare)));   // (shift: how far, in radii, the guide asks)
+    pose.target.add(side); pose.position.add(side);
+  }
+  return pose;
+}
+
+// ---------- labels: a fixed spot on screen for each, chosen once per step; only the leader follows the part
+const svg = $('overlay');
+const NS = 'http://www.w3.org/2000/svg';
+let callouts = [];                           // {el parts..., box, anchor fn}
+const measureCtx = document.createElement('canvas').getContext('2d');
+function textWidth(text, size) { measureCtx.font = `700 ${size}px Arial, Helvetica, sans-serif`; return measureCtx.measureText(text).width; }
+let projWorld = null;                         // the turn of the model to project with (the one on screen unless a picture is being drawn)
+function project(p, cam, W, H) { const v = new THREE.Vector3(p[0], p[1], p[2]).applyMatrix4(projWorld || stage.world.matrixWorld).project(cam); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * H]; }
+function anchorOf(item, view, poses) { return applyPose((poses || view.offsets)[item.id], item.anchor); }
+
+// Where the model sits on screen, so labels can go in the white space around it.
+function screenRect(view, cam, W, H) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const id of view.visible) {
+    const part = stage.parts.get(id); if (!part) continue;
+    const b = part.userData.box, o = view.offsets[id];
+    for (let k = 0; k < 8; k++) {
+      const [x, y] = project(applyPose(o, [k & 1 ? b.max.x : b.min.x, k & 2 ? b.max.y : b.min.y, k & 4 ? b.max.z : b.min.z]), cam, W, H);
+      x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+    }
+  }
+  for (const id in view.wires || {}) {       // wires reach beyond the parts they join
+    const {pts, m} = skinned(routes[view.wires[id]], view.offsets);
+    for (let i = 0; i < m; i += 4) {
+      const [x, y] = project([pts[i * 3], pts[i * 3 + 1], pts[i * 3 + 2]], cam, W, H);
+      x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+    }
+  }
+  return {x0, y0, x1, y1};
+}
+// The box of instructions on screen, for labels and close-ups to keep clear of (null when it is not shown).
+const onScreenInstructions = () => { const el = $('instructions'); if (el.hidden) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
+// Returns [{text|eye, x, y, w, h, side}] in pixels for a W x H frame.
+function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = null} = {}) {
+  const size = Math.max(15, Math.min(28, W * 0.027)), pad = 10, gap = Math.max(14, W * 0.02);
+  const R = screenRect(view, cam, W, H);
+  const items = [...labelsOf(view).map(l => ({...l, w: textWidth(l.text, size) + 2 * pad, h: size + 12})),
+                 ...(view.eye || []).map(e => ({...e, eye: true, w: Math.max(44, W * 0.07), h: Math.max(44, W * 0.07) * 0.56}))];
+  for (const it of items) {
+    const [ax, ay] = project(anchorOf(it, view), cam, W, H);
+    const room = {right: W - R.x1 - gap - it.w - 8, left: R.x0 - gap - it.w - 8, top: R.y0 - gap - it.h - top, bottom: H - R.y1 - gap - it.h - bottom};
+    const reach = {right: R.x1 - ax, left: ax - R.x0, top: ay - R.y0, bottom: R.y1 - ay};
+    const sides = Object.keys(room).filter(s => room[s] >= 0).sort((a, b) => reach[a] - reach[b]);
+    it.side = sides[0] || 'float';
+    if (it.side === 'right') { it.x = R.x1 + gap; it.y = ay - it.h - gap * 1.6; }           // a little above the part, so the leader slopes
+    else if (it.side === 'left') { it.x = R.x0 - gap - it.w; it.y = ay - it.h - gap * 1.6; }
+    else if (it.side === 'top') { it.x = ax + gap; it.y = R.y0 - gap - it.h; }
+    else if (it.side === 'bottom') { it.x = ax + gap; it.y = R.y1 + gap; }
+    else { it.x = ax + (ax > W / 2 ? -1 : 1) * 90 - (ax > W / 2 ? it.w : 0); it.y = ay - 90; }   // no white space: sit near the part
+    it.x = Math.max(8, Math.min(W - it.w - 8, it.x)); it.y = Math.max(top, Math.min(H - it.h - bottom, it.y));
+  }
+  // never under the instructions at the top left (caption and caution can be tall, on a phone most of all)
+  const box = keepClear && keepClear();
+  if (box) for (const it of items) if (it.x < box.right + 8 && it.x + it.w > box.left - 8 && it.y < box.bottom + 8) it.y = Math.min(H - it.h - bottom, box.bottom + 12);
+  // keep labels on the same side from overlapping
+  for (const side of ['right', 'left', 'top', 'bottom', 'float']) {
+    const group = items.filter(i => i.side === side), horizontal = side === 'top' || side === 'bottom';
+    group.sort((a, b) => horizontal ? a.x - b.x : a.y - b.y);
+    for (let i = 1; i < group.length; i++) {
+      const a = group[i - 1], b = group[i];
+      if (horizontal) { if (b.x < a.x + a.w + 14) b.x = a.x + a.w + 14; }
+      else if (b.y < a.y + a.h + 10) b.y = a.y + a.h + 10;
+    }
+  }
+  return {items, size, pad};
+}
+// The "look here" eye, drawn in a 100 x 56 box.
+const EYE = {outline: 'M0 28C18 4 82 4 100 28 82 52 18 52 0 28Z', circles: [[50, 28, 17, '#fff'], [50, 28, 11, '#111'], [56, 23, 4.5, '#fff']]};
+const showLabels = params.get('labels') !== '0';
+const labelsOf = view => showLabels ? (view.labels || []) : (view.labels || []).filter(l => /^\d+x$/.test(l.text));   // quantities always show
+// Every label sits on a white box, which cannot be seen in white space and keeps the text readable where a label has to
+// go over the model (a close-up, where the model fills the frame: Lee, 14 Oct 2026).
+const BACKING = 'rgba(255,255,255,0.92)';
+function buildCallouts(view) {
+  svg.replaceChildren(); callouts = [];
+  if (view.kind !== 'hover' || !(labelsOf(view).length || (view.eye && view.eye.length))) return;
+  const W = stage.width, H = stage.height;
+  camera.updateMatrixWorld(true);
+  const {items, size, pad} = layoutCallouts(view, camera, W, H, {keepClear: onScreenInstructions});   // laid out once, for the view as the step opens
+  const stroke = Math.max(3, size * 0.16);
+  const make = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
+  for (const it of items) {
+    const leader = make('line', {stroke: ACCENT, 'stroke-width': stroke, 'stroke-linecap': 'round'});
+    const ring = it.ring === false ? null : make('circle', {r: size * 0.36, fill: 'none', stroke: ACCENT, 'stroke-width': stroke, 'stroke-dasharray': `${size * 0.2} ${size * 0.13}`});   // (no ring on a label for an exact spot, such as a pin)
+    if (it.eye) {
+      const g = make('g', {transform: `translate(${it.x} ${it.y}) scale(${it.w / 100})`});
+      const p = document.createElementNS(NS, 'path'); p.setAttribute('d', EYE.outline); p.setAttribute('fill', '#111'); g.appendChild(p);
+      for (const [cx, cy, r, fill] of EYE.circles) { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r); c.setAttribute('fill', fill); g.appendChild(c); }
+    } else {
+      make('rect', {x: it.x - 2, y: it.y + 2, width: it.w + 4, height: it.h - 2 + stroke / 2, rx: 5, fill: BACKING});
+      make('line', {x1: it.x, y1: it.y + it.h, x2: it.x + it.w, y2: it.y + it.h, stroke: ACCENT, 'stroke-width': stroke, 'stroke-linecap': 'round'});
+      const t = make('text', {x: it.x + pad, y: it.y + it.h - 9, 'font-size': size, 'font-weight': 700, 'font-family': 'Arial, Helvetica, sans-serif', fill: '#111'});
+      t.textContent = it.text;
+    }
+    callouts.push({it, leader, ring});
+  }
+}
+function updateCallouts() {
+  if (insetLeader) placeLeader(insetLeader);
+  if (!callouts.length) return;
+  const view = views[cur], W = stage.width, H = stage.height;
+  for (const {it, leader, ring} of callouts) {
+    const [ax, ay] = project(anchorOf(it, view, liveOffsets), camera, W, H);
+    // leader leaves from whichever end of the underline (or the eye) is nearer the part
+    const y = it.eye ? it.y + it.h / 2 : it.y + it.h;
+    const x = Math.abs(ax - it.x) < Math.abs(ax - (it.x + it.w)) ? it.x : it.x + it.w;
+    leader.setAttribute('x1', x); leader.setAttribute('y1', y); leader.setAttribute('x2', ax); leader.setAttribute('y2', ay);
+    if (ring) { ring.setAttribute('cx', ax); ring.setAttribute('cy', ay); }
+  }
+}
+stage.onRender(updateCallouts);
+
+// ---------- a close-up picture (an inset) with a blue frame and a lead line to the place it shows: drawn once as the
+// view opens, with some parts left out (to show what is inside), and placed in the white space beside the model.
+let insetLeader = null;
+function placeLeader(L) {
+  const [ax, ay] = project(L.anchor, camera, stage.width, stage.height);
+  const x = Math.max(L.box.x, Math.min(L.box.x + L.box.w, ax)), y = Math.max(L.box.y, Math.min(L.box.y + L.box.h, ay));
+  L.line.setAttribute('x1', x); L.line.setAttribute('y1', y); L.line.setAttribute('x2', ax); L.line.setAttribute('y2', ay);
+  L.ring.setAttribute('cx', ax); L.ring.setAttribute('cy', ay);
+}
+function buildInset(view) {
+  const I = view.inset, box = $('inset');
+  insetLeader = null;
+  if (!I) { box.hidden = true; return; }
+  const W = stage.width, H = stage.height, w = Math.round(Math.max(200, Math.min(400, W * 0.28))), h = Math.round(w * 0.72);
+  const ratio = Math.min(2, devicePixelRatio || 1), picked = stage.highlighted();
+  const shown = view.visible.filter(id => !(I.hide || []).includes(id));
+  const {canvas, camera: cam} = stage.snapshot(Math.round(w * ratio), Math.round(h * ratio), {setup: c => {
+    stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows([]);
+    const at = stage.toWorld(I.target), d = new THREE.Vector3(...I.dir).normalize().applyQuaternion(stage.world.quaternion);
+    const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);   // the picture is turned as the main view is
+    up.addScaledVector(d, -up.dot(d)); if (up.lengthSq() < 1e-6) up.set(0, 0, 1);
+    c.up.copy(up.normalize());
+    c.position.copy(at).addScaledVector(d, I.radius / Math.sin(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * 1.05);
+    c.lookAt(at); c.updateMatrixWorld(true);
+    return () => { stage.setVisible(view.visible); stage.setHighlight(picked); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); };
+  }});
+  if (I.mark) {                              // a thin red box round the exact detail, as in the published guides
+    const ctx = canvas.getContext('2d'), v = stage.toWorld(I.target).project(cam);
+    const half = THREE.MathUtils.degToRad((data.fov || 45) / 2), across = I.radius * 1.05 / Math.cos(half);   // (half the picture's height at the detail, in mm)
+    const cx = (v.x + 1) / 2 * canvas.width, cy = (1 - v.y) / 2 * canvas.height, r = I.mark / across * canvas.height * 0.5;
+    ctx.strokeStyle = '#ff0000'; ctx.lineWidth = 2 * ratio; ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(cx - r, cy - r, 2 * r, 2 * r, 4 * ratio); else ctx.rect(cx - r, cy - r, 2 * r, 2 * r);
+    ctx.stroke();
+  }
+  $('insetimg').src = canvas.toDataURL('image/png');
+  $('insetimg').alt = I.alt || '';
+  $('insetcap').textContent = I.caption || '';
+  // where: the side of the model with the most room, level with the place it shows
+  camera.updateMatrixWorld(true);
+  const R = screenRect(view, camera, W, H), [ax, ay] = project(I.target, camera, W, H), boxH = h + 12 + (I.caption ? 24 : 0) + 8, boxW = w + 20;
+  const room = {right: W - R.x1, left: R.x0, top: R.y0 - 70, bottom: H - R.y1};
+  const side = Object.keys(room).sort((a, b) => room[b] - room[a])[0];
+  let x = side === 'right' ? R.x1 + Math.max(24, (W - R.x1 - boxW) / 2) : side === 'left' ? Math.min(R.x0 - boxW - 24, (R.x0 - boxW) / 2) : ax - boxW / 2;   // (in the middle of the free space)
+  let y = side === 'top' ? 70 : side === 'bottom' ? H - boxH - 16 : ay - boxH / 2;
+  x = Math.max(12, Math.min(W - boxW - 12, x)); y = Math.max(70, Math.min(H - boxH - 12, y));
+  const clear = onScreenInstructions();         // (not over the instructions)
+  if (clear && x < clear.right + 8 && x + boxW > clear.left - 8 && y < clear.bottom + 8) y = Math.min(H - boxH - 12, clear.bottom + 12);
+  Object.assign(box.style, {left: x + 'px', top: y + 'px', width: boxW + 'px'});
+  box.hidden = false;
+  const stroke = Math.max(3, Math.min(28, W * 0.027) * 0.16), make = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
+  insetLeader = {anchor: I.target, box: {x, y, w: boxW, h: boxH},
+                 line: make('line', {stroke: ACCENT, 'stroke-width': stroke, 'stroke-linecap': 'round'}),
+                 ring: make('circle', {r: 9, fill: 'none', stroke: ACCENT, 'stroke-width': stroke, 'stroke-dasharray': '5 3.4'})};
+  placeLeader(insetLeader);
+}
+
+// ---------- the instructions: caption and caution in a box at the top left, read aloud on request, and announced to a screen reader
+const speech = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance === 'function' ? window.speechSynthesis : null;   // (built into the browser: nothing to load)
+const speakButtons = [$('speak'), $('cardspeak')];
+if (!speech) for (const b of speakButtons) b.hidden = true;
+const partsText = view => view.parts.map(g => `${g.title}: ` + g.items.map(p => `${p.qty} ${p.name}${p.tag ? ` (${p.tag})` : ''}`).join(', ')).join('. ');
+function wordsOf(view) {
+  if (view.kind === 'start') return `${data.meta.title}. ${data.meta.part}.`;
+  if (view.parts) return `${view.name}. ${partsText(view)}.`;
+  if (view.kind === 'end') return 'The finished model.';
+  return [view.caption, view.caution && `Caution: ${view.caution}`].filter(Boolean).join(' ');
+}
+// What the speech engine is given: the same words, with the build's shorthand spelled out.
+const sayable = text => text.replace(/•/g, '').replace(/\b([A-Z]\d+) - ([A-Z]\d+)\b/g, '$1 to $2').replace(/\b([A-Z]\d+) \/ ([A-Z]\d+)\b/g, '$1 and $2')
+  .replace(/I\/O/g, 'I O').replace(/\+5V/g, 'plus 5 volts').replace(/(\d)mm\b/g, '$1 millimetre')
+  .replace(/([.:;!?])[ \t]*\n+\s*/g, '$1 ').replace(/\s*\n+\s*/g, '. ');   // (one pause between the lines of a list)
+let reading = null;                          // the utterance being read now
+function setSpeaking(on) { for (const b of speakButtons) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.title = on ? 'Stop reading' : 'Read aloud'; } }
+function speak() {
+  if (!speech) return;
+  if (speech.speaking || speech.pending) { speech.cancel(); setSpeaking(false); return; }
+  const u = new SpeechSynthesisUtterance(sayable(wordsOf(views[cur])));
+  u.lang = document.documentElement.lang || 'en'; u.rate = 0.95;
+  u.onend = u.onerror = () => { if (reading === u) { reading = null; setSpeaking(false); } };   // (a cancelled one ends later, after a new one may have started)
+  reading = u; speech.speak(u); setSpeaking(true);
+}
+for (const b of speakButtons) b.onclick = speak;
+function announce(view, i) {
+  const where = view.kind === 'start' ? 'Title page' : view.kind === 'end' ? 'Completed View' : view.name;
+  const labels = view.kind === 'hover' ? labelsOf(view).map(l => l.text) : [];
+  const words = view.kind === 'start' ? wordsOf(view) : view.parts ? `${view.parts.reduce((n, g) => n + g.items.length, 0)} kinds of part; the list is on the page.` : wordsOf(view);
+  $('announce').textContent = `${where}, ${i + 1} of ${views.length}. ${words}${labels.length ? ` Labels: ${labels.join(', ')}.` : ''}`;
+  canvasEl.setAttribute('aria-label', flat(view) ? 'No model on this page' : `3D view of the model, ${where}${labels.length ? ': ' + labels.join(', ') : ''}. Drag to turn it.`);
+}
+
+// ---------- the parts list: one band per part (quantity, name, size or dot, picture), grouped by kind as in the published guides
+const ICONS = {
+  electronics: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 36 11v18L20 38 4 29V11z" fill="#e5484d"/><rect x="13" y="13" width="14" height="14" rx="2" fill="#fff"/><path d="M16 9v4M20 9v4M24 9v4M16 27v4M20 27v4M24 27v4M9 16h4M9 20h4M9 24h4M27 16h4M27 20h4M27 24h4" stroke="#fff" stroke-width="2"/></svg>',
+  motors: '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#6ab04c"/><path d="M20 9l2.4 3.6 4.2-1.2.2 4.4 4 1.8-2.2 3.4 2.2 3.4-4 1.8-.2 4.4-4.2-1.2L20 31l-2.4-3.6-4.2 1.2-.2-4.4-4-1.8 2.2-3.4-2.2-3.4 4-1.8.2-4.4 4.2 1.2z" fill="#fff"/><circle cx="20" cy="20" r="4" fill="#6ab04c"/></svg>',
+  screws: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 38 35H2z" fill="#22a39f"/><rect x="15" y="12" width="10" height="5" rx="1" fill="#fff"/><path d="M18 17h4v13l-2 3-2-3z" fill="#fff"/><path d="M17.5 21l5 1.5M17.5 24.5l5 1.5" stroke="#22a39f" stroke-width="1.2"/></svg>',
+  wood: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="6" fill="#f08c3a"/><rect x="8" y="12" width="24" height="16" rx="2" fill="#fff"/><circle cx="13" cy="20" r="2" fill="#f08c3a"/><path d="M19 17h9M19 20h9M19 23h6" stroke="#f08c3a" stroke-width="1.6"/></svg>',
+};
+const builtParts = new Map();                // view index -> its groups, made the first time it is shown (so no picture loads before then)
+function showParts(view, i) {
+  if (!builtParts.has(i)) {
+    const groups = [];
+    for (const g of view.parts) {
+      const section = document.createElement('section'); section.className = 'pgroup';
+      section.style.setProperty('--band', g.colour); section.style.setProperty('--halo', g.halo || g.colour);
+      const h = document.createElement('h3'); h.innerHTML = ICONS[g.icon] || ''; h.append(g.title); section.appendChild(h);
+      const ul = document.createElement('ul');
+      for (const p of g.items) {
+        const li = document.createElement('li'), band = document.createElement('button');
+        band.type = 'button'; band.className = 'pband'; band.title = 'Show this part larger';
+        band.setAttribute('aria-label', `${p.qty} ${p.name}${p.tag ? ` (${p.tag})` : ''}: show the picture larger`);
+        const q = document.createElement('span'); q.className = 'pqty'; q.textContent = `${p.qty}x`;
+        const name = document.createElement('span'); name.className = 'pname';
+        if (p.tag) { const t = document.createElement('span'); t.className = 'ptag'; t.textContent = p.tag; name.appendChild(t); }
+        name.append(p.name);
+        const img = new Image(); img.alt = ''; img.decoding = 'async'; img.src = p.picture;   // (the name is right beside it)
+        band.append(q, name, img); band.onclick = () => zoomPart(p, band);
+        li.appendChild(band); ul.appendChild(li);
+      }
+      section.appendChild(ul); groups.push(section);
+    }
+    builtParts.set(i, groups);
+  }
+  $('partsgroups').replaceChildren(...builtParts.get(i));
+  $('partstitle').textContent = view.name;
+  $('partsview').scrollTop = 0;
+}
+
+// A part's picture, large (the 500 x 500 px picture from parts.html), with its name: a click on its band, Escape or a click
+// outside closes it and puts the keyboard back on the band.
+let zoomFrom = null;
+function zoomPart(p, from) {
+  zoomFrom = from;
+  $('partzoomimg').src = p.picture; $('partzoomimg').alt = p.name;
+  $('partzoomname').textContent = `${p.qty}x ${p.name}${p.tag ? ` (${p.tag})` : ''}`;
+  $('partzoom').hidden = false; $('partzoomclose').focus();
+}
+function unzoomPart(refocus = true) {
+  if ($('partzoom').hidden) return false;
+  $('partzoom').hidden = true;
+  if (refocus && zoomFrom && zoomFrom.isConnected) zoomFrom.focus();   // (not on a change of view: its band is about to go)
+  zoomFrom = null; return true;
+}
+$('partzoomclose').onclick = () => unzoomPart();
+$('partzoom').onclick = e => { if (e.target === $('partzoom')) unzoomPart(); };
+
+// ---------- stepping and animation
+let cur = 0, anim = null, liveOffsets = null;
+const ease = k => k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+// How far apart two poses are, for pacing: millimetres moved plus half a millimetre per degree turned.
+function poseGap(a, b) { const s = shift(a), t = shift(b); quat(a, qA); quat(b, qB); return Math.hypot(t[0] - s[0], t[1] - s[1], t[2] - s[2]) + THREE.MathUtils.radToDeg(qA.angleTo(qB)) * 0.5; }
+// A pose along a path at time t (0..1). The path is played stop to stop, one beat each, easing in and out of every
+// stop; poses between two stops are passed through at a steady pace.
+function alongPath(pts, t, stops) {
+  if (pts.length < 2) return pts[0];
+  stops = stops || pts.map((_, i) => i);
+  const beats = stops.length - 1, beat = Math.min(beats - 1, Math.floor(t * beats)), from = stops[beat], to = stops[beat + 1];
+  const k = ease(t * beats - beat);
+  if (to - from === 1) return mixPose(pts[from], pts[to], k);
+  const gaps = []; let total = 0;
+  for (let i = from; i < to; i++) { gaps.push(poseGap(pts[i], pts[i + 1])); total += gaps[gaps.length - 1]; }
+  let d = k * total, i = 0;
+  while (i < gaps.length - 1 && d > gaps[i]) d -= gaps[i++];
+  return mixPose(pts[from + i], pts[from + i + 1], gaps[i] ? Math.min(1, d / gaps[i]) : 1);
+}
+
+function go(i, animate = true) {
+  i = Math.max(0, Math.min(views.length - 1, i));
+  const from = views[cur], to = views[i], sameView = i === cur;
+  // After the bench test is put away the build starts afresh: no part glides over from the view before (`cut`).
+  if ((i === cur + 1 && to.cut) || (i === cur - 1 && from.cut)) animate = false;
+  const forward = animate && i === cur + 1, backward = animate && i === cur - 1;
+  cur = i;
+  sel.value = i;
+  const focused = document.activeElement;
+  $('prev').disabled = $('first').disabled = i === 0;
+  $('next').disabled = $('last').disabled = i === views.length - 1;
+  if (focused && focused.disabled) ({next: $('prev'), last: $('prev'), prev: $('next'), first: $('next')})[focused.id]?.focus();   // (keyboard focus never falls off a button that turns off)
+  if (!sameView && speech && (speech.speaking || speech.pending)) { reading = null; speech.cancel(); setSpeaking(false); }
+  $('start').hidden = to.kind !== 'start';
+  $('card').hidden = !flat(to) || !!to.parts;
+  $('partsview').hidden = !to.parts;
+  if (!sameView) unzoomPart(false);
+  if (to.parts && !sameView) showParts(to, i);
+  $('cardtext').textContent = flat(to) && !to.parts ? to.caption : '';
+  $('cardbox').classList.toggle('list', flat(to) && !to.parts && to.caption.includes('\n'));   // a checklist: one item a line, ranged left
+  $('cardcaution').hidden = !(flat(to) && to.caution); $('cardcautiontext').textContent = flat(to) && to.caution || '';
+  const showCaption = to.caption && !flat(to) && params.get('captions') !== '0';
+  $('caption').hidden = !showCaption; $('captiontext').textContent = to.caption || '';
+  $('caution').hidden = !(to.caution && !flat(to)); $('cautiontext').textContent = to.caution || '';
+  $('instructions').hidden = $('caption').hidden && $('caution').hidden;
+  $('flag').hidden = !(to.review && $('rv').checked); $('flag').textContent = to.review ? 'Review: ' + to.review : '';
+  stage.setLeadLines([]); stage.setArrows([]); stage.setMarks([]); svg.replaceChildren(); callouts = []; insetLeader = null; $('inset').hidden = true; tip.hidden = true; select(null);
+  if (!sameView) marks = [];                 // (a resize redraws the same view: its picked dots stay)
+  for (const c of grid.children) { const on = +c.dataset.i === i; c.classList.toggle('active', on); if (on) c.setAttribute('aria-current', 'step'); else c.removeAttribute('aria-current'); }
+  if (!sameView) announce(to, i);
+  const shown = el => el.getClientRects().length > 0;   // (not inside something hidden)
+  if (focused && focused !== document.body && !focused.disabled && !shown(focused)) {   // its box was hidden: e.g. the caption's speaker, on a card
+    const speakNow = flat(to) && !to.parts ? $('cardspeak') : $('speak');
+    (shown(speakNow) ? speakNow : $('next').disabled ? $('prev') : $('next')).focus();
+  }
+  if (window.parent !== window) window.parent.postMessage({type: 'techbox-step', index: i, name: to.name, total: views.length}, '*');
+
+  stage.setVisible(flat(to) ? [] : to.visible);
+  const was = id => !flat(from) && from.kind !== 'start' && from.visible.includes(id) && animate;
+  const start = {}, end = {}, ways = {};
+  for (const id of to.visible) {
+    end[id] = to.offsets[id] || ZERO;
+    start[id] = was(id) ? (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
+  }
+  // seat the part along its path (may have more than one leg); a wiggle on the spot (`wiggle`) also plays as its step opens
+  // (the wiggle plays however its step is reached: stepping forward or back, or jumping to it)
+  let wayStops = null, wireVia = null;
+  if ((forward && to.kind === 'done' && from.kind === 'hover') || (to.wiggle && !sameView)) {
+    for (const id of to.moving) { ways[id] = ((to.paths && to.paths[id]) || to.path).slice(); ways[id][0] = start[id]; }   // from wherever it is now (a part may have a way of its own)
+  } else if (backward && from.kind === 'done' && to.kind === 'hover' && staged(from)) {
+    // Back from a step whose wire goes in by stages (Steps 97 and 100: the extension past R4 and the jumper wires): the
+    // part's way backwards, stop by stop, its wire back through the same routes and a riding plug back the way it came.
+    wayStops = {};
+    for (const id of from.moving) {
+      const way = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = way.length - 1, s = stopsFor(from, id);
+      way[0] = start[id]; way[n] = end[id];
+      ways[id] = way;
+      if (s) wayStops[id] = s.map(k => n - k).reverse();
+    }
+    if (from.wire_via) { wireVia = {}; for (const id in from.wire_via) wireVia[id] = from.wire_via[id].slice().reverse(); }
+  }
+  if (forward && to.kind === 'hover') {                               // a new part glides in from a little further out
+    for (const id of to.moving) if (!was(id)) start[id] = further(end[id]);
+  }
+  if (from.isolated && !to.isolated) for (const id of to.visible) start[id] = end[id];   // leaving a sub-assembly close-up: the model is simply there
+  // Every step opens on its own camera, whatever the viewer has turned or zoomed to since (Lee, 14 Oct 2026): the camera
+  // swings back from where it is now, or is simply there when the step is jumped to.
+  if (controls) { controls.enableDamping = false; controls.update(); controls.enableDamping = true; }   // (drop any spin still running from a drag)
+  const pose = poseFor(to, stage.width / stage.height);
+  const stopsOf = id => wayStops ? wayStops[id] || null : stopsFor(to, id);
+  const legs = Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1;
+  // the model is turned over (or back) for a view of its underside: about the new view's target, as the camera moves
+  const w0 = {q: worldLive.q.clone(), at: worldLive.at.clone()}, w1 = flat(to) ? w0 : stage.worldFor(to.camera);   // (from the turn on screen, which may be half done)
+  const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
+  const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
+  const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
+  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+          cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
+          world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
+  if (!turning) turnWorld(w1.q, w1.at);
+  stage.invalidate();
+}
+const vA = new THREE.Vector3(), vB = new THREE.Vector3(), sA = new THREE.Spherical(), sB = new THREE.Spherical();
+const ONE = new THREE.Quaternion(), qW = new THREE.Quaternion(), aW = new THREE.Vector3();
+const worldLive = {q: new THREE.Quaternion(), at: new THREE.Vector3()};   // how the model is turned on screen right now
+function turnWorld(q, at) { worldLive.q.copy(q); worldLive.at.copy(at); stage.setWorld(worldLive); }
+function stepAnimation(now) {
+  if (!anim) return false;
+  const k = anim.dur ? Math.min(1, Math.max(0, (now - anim.t0) / anim.dur)) : 1, e = ease(k);   // a frame can be stamped just before the click
+  if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, e), aW.lerpVectors(w.at0, w.at1, e)); }
+  liveOffsets = {};
+  for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], k, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
+  const carry = anim.to.carry || {}, before = (anim.from && anim.from.carry) || {}, back = !!anim.wireVia;
+  for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
+    if (!(id in anim.end)) continue;
+    const c = carry[id], was = before[id] && before[id].by === c.by ? before[id].pose : null;
+    const via = back ? ((was && before[id].via) || []).slice().reverse() : c.via || [];
+    if (was) liveOffsets[id] = composePose(liveOffsets[c.by], JSON.stringify(was) === JSON.stringify(c.pose) ? c.pose : throughPoses([was, ...via, c.pose], e), id);   // (it may be moved to a new place on its carrier)
+    else if (anim.fresh.has(id)) liveOffsets[id] = composePose(liveOffsets[c.by], c.pose, id);        // new with its carrier: it rides from the start
+    else liveOffsets[id] = mixPose(anim.start[id], composePose(liveOffsets[c.by], c.pose, id), e);   // it was not riding before: it glides there
+    stage.setPose(id, liveOffsets[id]);
+  }
+  // A wire that passes through as many routes as the moving part has stops keeps pace with it, stop by stop (the
+  // servo extension wire onto row 10); any other wire changes route over the whole step.
+  const wireVia = anim.wireVia || anim.to.wire_via;
+  const beats = anim.dur ? Math.max(1, Math.round(anim.dur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
+  let we = e;
+  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(k * beats)); we = (b + ease(k * beats - b)) / beats; }
+  drawWires(flat(anim.to) ? {} : anim.to, liveOffsets, anim.from, we, anim.wireVia);
+  if (anim.cam) {                            // swing around the target rather than cutting through the model
+    const c = anim.cam;
+    controls.target.lerpVectors(c.t0, c.t1, e);
+    vA.subVectors(c.p0, c.t0); vB.subVectors(c.p1, c.t1);
+    if (k >= 1 || vA.length() < 1e-6) camera.position.copy(c.p1);
+    else {                                   // turn about the vertical and tilt separately, so a big swing never goes over the top
+      sA.setFromVector3(vA); sB.setFromVector3(vB);
+      let turn = sB.theta - sA.theta;
+      if (turn > Math.PI) turn -= 2 * Math.PI; else if (turn < -Math.PI) turn += 2 * Math.PI;
+      camera.position.setFromSphericalCoords(sA.radius + (sB.radius - sA.radius) * e, sA.phi + (sB.phi - sA.phi) * e, sA.theta + turn * e).add(controls.target);
+    }
+    camera.lookAt(controls.target);
+  }
+  if (k >= 1) {
+    const view = anim.to; anim = null;
+    if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
+    if (view.inset) buildInset(view);
+  }
+  return true;
+}
+
+// ---------- all-steps grid with a picture of every step
+const grid = $('grid');
+const thumbs = new Array(views.length).fill(null);
+function drawCalloutsOn(ctx, view, cam, W, H) {
+  const {items, size, pad} = layoutCallouts(view, cam, W, H, {top: 6, bottom: 6});
+  if (!items.length) return;
+  const stroke = Math.max(2, size * 0.16);
+  ctx.lineCap = 'round'; ctx.lineWidth = stroke; ctx.strokeStyle = ACCENT; ctx.fillStyle = '#111'; ctx.font = `700 ${size}px Arial, Helvetica, sans-serif`;
+  for (const it of items) {
+    const [ax, ay] = project(anchorOf(it, view), cam, W, H);
+    const y = it.eye ? it.y + it.h / 2 : it.y + it.h, x = Math.abs(ax - it.x) < Math.abs(ax - (it.x + it.w)) ? it.x : it.x + it.w;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(ax, ay); ctx.stroke();
+    if (it.ring !== false) { ctx.beginPath(); ctx.arc(ax, ay, size * 0.36, 0, Math.PI * 2); ctx.stroke(); }
+    if (it.eye) { ctx.save(); ctx.translate(it.x, it.y); ctx.scale(it.w / 100, it.w / 100); ctx.fillStyle = '#111'; ctx.fill(new Path2D(EYE.outline)); for (const [cx, cy, r, fill] of EYE.circles) { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); } ctx.restore(); ctx.fillStyle = '#111'; }
+    else { ctx.fillStyle = BACKING; ctx.fillRect(it.x - 2, it.y + 2, it.w + 4, it.h - 2); ctx.fillStyle = '#111'; ctx.beginPath(); ctx.moveTo(it.x, it.y + it.h); ctx.lineTo(it.x + it.w, it.y + it.h); ctx.stroke(); ctx.fillText(it.text, it.x + pad, it.y + it.h - 9); }
+  }
+}
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const lines = [];
+  for (const para of text.split('\n')) {
+    let line = '';
+    for (const word of para.split(' ')) { const t = line ? line + ' ' + word : word; if (ctx.measureText(t).width > maxWidth && line) { lines.push(line); line = word; } else line = t; }
+    lines.push(line);
+  }
+  lines.forEach((l, i) => ctx.fillText(l, x, y + (i - (lines.length - 1) / 2) * lineHeight));
+}
+function renderThumb(i) {
+  const view = views[i], W = 480, H = 300;
+  let turn = null;
+  const {canvas, camera: cam} = stage.snapshot(W, H, {setup: c => {
+    const before = {q: stage.world.quaternion.clone(), position: stage.world.position.clone()}, picked = stage.highlighted();
+    stage.setHighlight([]);                  // (a part picked on screen is not picked in the pictures)
+    applyState(view); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view));
+    if (!flat(view)) stage.setWorld(stage.worldFor(view.camera));
+    turn = stage.world.matrixWorld.clone();
+    const pose = poseFor({...view, kind: view.kind === 'start' ? 'end' : view.kind}, W / H);
+    c.position.copy(pose.position); c.lookAt(pose.target); c.updateMatrixWorld(true);
+    return () => {
+      const now = views[cur]; applyState(now, liveOffsets); stage.setLeadLines(anim ? [] : leadLines(now)); stage.setArrows(anim ? [] : arrowsOf(now));
+      stage.world.quaternion.copy(before.q); stage.world.position.copy(before.position); stage.world.updateMatrixWorld(true);
+      stage.setHighlight(picked);
+    };
+  }});
+  const ctx = canvas.getContext('2d');
+  if (flat(view)) {
+    const text = view.parts ? view.name : view.caption, list = !view.parts && text.includes('\n');
+    ctx.fillStyle = '#111'; ctx.font = `600 ${list ? 13 : 22}px Arial, Helvetica, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; wrapText(ctx, text, W / 2, H / 2, W - 40, list ? 16 : 28);
+  }
+  else if (view.kind === 'hover') { projWorld = turn; drawCalloutsOn(ctx, view, cam, W, H); projWorld = null; }   // (uses the same label switch as the main view)
+  thumbs[i] = canvas.toDataURL('image/webp', 0.82);
+  const img = grid.children[i] && grid.children[i].querySelector('img');
+  if (img) img.src = thumbs[i];
+}
+views.forEach((v, i) => {
+  const card = document.createElement('button');
+  card.className = 'tile'; card.dataset.i = i;
+  card.innerHTML = '<span class="pic"><img alt=""></span><span class="name"></span>';
+  card.querySelector('.name').textContent = v.name;
+  card.setAttribute('aria-label', v.kind === 'start' ? 'Title page' : v.caption && !v.parts ? `${v.name}: ${v.caption.split('\n')[0]}` : v.name);
+  grid.appendChild(card);
+});
+// Pictures are drawn one at a time in spare moments after the guide has loaded, and never during a step
+// animation, so stepping stays smooth on slow laptops. Opening the grid finishes whatever is left at once.
+let thumbQueue = views.map((_, i) => i), lastDraw = 0;
+stage.onRender(() => { lastDraw = performance.now(); });
+const quiet = () => !anim && !stage.contextLost() && performance.now() - lastDraw > 200;   // not animating, rotating or zooming
+function pumpThumbs() {
+  if (thumbQueue.length && quiet()) renderThumb(thumbQueue.shift());
+  if (thumbQueue.length) schedule();
+}
+const schedule = () => window.requestIdleCallback ? requestIdleCallback(pumpThumbs, {timeout: 400}) : setTimeout(pumpThumbs, 60);
+setTimeout(schedule, 900);
+let focusBeforeGrid = null;
+function openGrid(open) {
+  if (open === !$('gridwrap').hidden) return;
+  $('gridwrap').hidden = !open;
+  if (!open) { if (focusBeforeGrid) focusBeforeGrid.focus(); return; }
+  focusBeforeGrid = document.activeElement.id === 'partzoomclose' ? zoomFrom || $('gridbtn') : document.activeElement;
+  unzoomPart(false);                         // (the step list opens over the parts list: the large picture closes; closing the list goes back to its band)
+  const active = grid.querySelector('.active');
+  if (active) { active.scrollIntoView({block: 'center'}); active.focus({preventScroll: true}); }
+  (function finish() { if ($('gridwrap').hidden || !thumbQueue.length) return; if (!anim && !stage.contextLost()) for (let k = 0; k < 3 && thumbQueue.length; k++) renderThumb(thumbQueue.shift()); setTimeout(finish, 0); })();
+}
+grid.onclick = e => { const b = e.target.closest('.tile'); if (b) { openGrid(false); go(+b.dataset.i, false); } };
+$('gridclose').onclick = () => openGrid(false);
+$('gridwrap').onclick = e => { if (e.target === $('gridwrap')) openGrid(false); };
+
+// ---------- part names on hover (the published viewer does the same)
+const tip = $('tip'), ray = new THREE.Raycaster(), pointer = new THREE.Vector2();
+let tipTimer = 0;
+function hitUnder(x, y) {                     // {id, point} of the part surface under a screen position, or null
+  const r = canvasEl.getBoundingClientRect();
+  pointer.set((x - r.left) / r.width * 2 - 1, 1 - (y - r.top) / r.height * 2);
+  ray.setFromCamera(pointer, camera);
+  const shown = [...stage.parts.values()].filter(o => o.visible);
+  for (const hit of ray.intersectObjects(shown, true)) {
+    if (!hit.object.isMesh || hit.object.userData.hull) continue;
+    let o = hit.object; while (o && !stage.parts.has(o.name)) o = o.parent;
+    return o ? {id: o.name, point: stage.fromWorld(hit.point)} : null;      // (in assembly space, whichever way up the model is shown)
+  }
+  return null;
+}
+const partUnder = (x, y) => { const hit = hitUnder(x, y); return hit && hit.id; };
+const meshNames = Object.entries(data.mesh_names || {});   // CAD mesh name (its start) -> name, for a part inside a part (the Nano on its module)
+function thingUnder(x, y) {                   // what the pointer is on: {name, object} for a wire, a named sub-part or a part
+  const r = canvasEl.getBoundingClientRect();
+  pointer.set((x - r.left) / r.width * 2 - 1, 1 - (y - r.top) / r.height * 2);
+  ray.setFromCamera(pointer, camera);
+  const shown = [...stage.parts.values()].filter(o => o.visible);
+  for (const hit of ray.intersectObjects([...shown, ...stage.wireGroup.children.filter(o => o.visible)], true)) {
+    if (!hit.object.isMesh || hit.object.userData.hull) continue;
+    if (hit.object.userData.wire) return {name: (wireDefs[hit.object.userData.wire] || {}).name || null, object: hit.object};
+    let o = hit.object; while (o && !stage.parts.has(o.name)) o = o.parent;
+    const sub = meshNames.find(([start]) => (hit.object.userData.meshName || '').startsWith(start));
+    if (sub) return {name: sub[1], object: o};
+    return o ? {name: data.names[o.name] || null, object: o} : null;
+  }
+  return null;
+}
+const nameUnder = (x, y) => { const t = thingUnder(x, y); return t && t.name; };
+canvasEl.addEventListener('pointermove', e => {
+  tip.hidden = true; clearTimeout(tipTimer);
+  if (e.buttons || e.pointerType === 'touch') return;        // not while rotating
+  tipTimer = setTimeout(() => {                               // only once the pointer rests, so it costs nothing while moving
+    const name = nameUnder(e.clientX, e.clientY);
+    if (!name) return;
+    tip.textContent = name; tip.style.left = e.clientX + 14 + 'px'; tip.style.top = e.clientY + 14 + 'px'; tip.hidden = false;
+  }, 160);
+});
+canvasEl.addEventListener('pointerleave', () => { tip.hidden = true; clearTimeout(tipTimer); });
+// A click on a part (or a wire) picks it out, as in the published viewer: it is tinted and its name stays up until the
+// next click, or the next step. A click on nothing lets it go. (A drag still turns the view; Option-click is the pick tool.)
+const chosen = $('chosen');
+function select(thing, x, y) {
+  stage.setHighlight(thing && thing.object ? [thing.object] : []);
+  chosen.hidden = !(thing && thing.name);
+  if (thing && thing.name) { chosen.textContent = thing.name; chosen.style.left = x + 14 + 'px'; chosen.style.top = y + 14 + 'px'; }
+}
+{
+  let down = null;
+  canvasEl.addEventListener('pointerdown', e => { down = !e.altKey && e.button === 0 ? [e.clientX, e.clientY] : null; });
+  canvasEl.addEventListener('pointerup', e => {
+    const from = down; down = null;
+    if (!from || Math.hypot(e.clientX - from[0], e.clientY - from[1]) > 4) return;
+    select(thingUnder(e.clientX, e.clientY), e.clientX, e.clientY);
+    tip.hidden = true;
+  });
+}
+
+// ---------- pick tool, for whoever is writing the guide: Option-click (Alt-click) a spot on a part to note
+// "step | part | [x, y, z]". The numbers are where that spot is once the part is seated, in mm, which is what
+// lines_at=[...] in guide.py takes. Not offered to students: off when the player is embedded, unless ?pick=1.
+const pickOn = params.get('pick') === '1' || (params.get('pick') !== '0' && window.parent === window);
+const picked = [];
+let marks = [];                              // dots on the spots picked in this view: {id, p, el}
+const offsetNow = id => (liveOffsets && liveOffsets[id]) || views[cur].offsets[id] || ZERO;
+function updateMarks() {
+  for (const m of marks) {
+    if (!m.el.isConnected) svg.appendChild(m.el);            // the overlay is redrawn when a step finishes opening
+    const [x, y] = project(applyPose(offsetNow(m.id), m.p), camera, stage.width, stage.height);
+    m.el.setAttribute('cx', x); m.el.setAttribute('cy', y);
+  }
+}
+function showPicks() {
+  $('picks').hidden = !picked.length;
+  $('picklist').textContent = picked.join('\n');
+  if (!picked.length) return;
+  const say = ok => { $('pickstate').textContent = ok ? '(copied to the clipboard)' : '(not copied: select the lines and copy them)'; };
+  if (navigator.clipboard) navigator.clipboard.writeText(picked.join('\n')).then(() => say(true), () => say(false)); else say(false);
+}
+if (pickOn) {
+  const el = canvasEl;
+  let down = null;
+  stage.onRender(updateMarks);
+  el.addEventListener('pointerdown', e => { down = e.altKey && e.button === 0 ? [e.clientX, e.clientY] : null; });
+  el.addEventListener('pointerup', e => {
+    const from = down; down = null;
+    if (!from || Math.hypot(e.clientX - from[0], e.clientY - from[1]) > 4) return;   // a drag rotates the view as usual
+    const hit = hitUnder(e.clientX, e.clientY);
+    if (!hit) return;
+    const p = unapplyPose(offsetNow(hit.id), [hit.point.x, hit.point.y, hit.point.z]).map(v => Math.round(v * 10) / 10 + 0);
+    picked.push(`${views[cur].name} | ${data.names[hit.id] || hit.id} (${hit.id}) | [${p.join(', ')}]`);
+    const dot = document.createElementNS(NS, 'circle');
+    for (const [k, v] of Object.entries({r: 5, fill: '#e6007e', stroke: '#fff', 'stroke-width': 1.5})) dot.setAttribute(k, v);
+    marks.push({id: hit.id, p, el: dot});
+    updateMarks(); showPicks();
+  });
+  $('pickcopy').onclick = showPicks;
+  $('pickclear').onclick = () => { picked.length = 0; for (const m of marks) m.el.remove(); marks = []; showPicks(); };
+}
+
+// ---------- controls (every one is a button, a list or a tick box: Tab reaches it, Enter or Space works it)
+const sel = $('sel');
+sel.add(new Option('--- View all steps ---', 'all'));
+views.forEach((v, i) => sel.add(new Option(v.name, i)));
+sel.onchange = () => { if (sel.value === 'all') { sel.value = cur; openGrid(true); } else go(+sel.value, false); };
+$('next').onclick = () => go(cur + 1);
+$('prev').onclick = () => go(cur - 1);          // going back is animated too, as in the published viewer
+$('first').onclick = () => go(0, false);
+$('last').onclick = () => go(views.length - 1, false);
+$('gridbtn').onclick = () => openGrid($('gridwrap').hidden);
+if (!document.fullscreenEnabled) $('fs').hidden = true;      // e.g. embedded without permission to go full screen
+$('fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+$('rv').onchange = () => { const v = views[cur]; $('flag').hidden = !(v.review && $('rv').checked); };
+const reviewsOff = params.get('review') === '0' || (params.get('review') !== '1' && (data.meta.review_notes === false || !views.some(v => v.review)));
+if (reviewsOff) { $('rv').checked = false; $('review').hidden = true; }   // (a guide past review shows neither the notes nor their switch)
+addEventListener('keydown', e => {
+  if (e.key === 'Escape') return unzoomPart() || openGrid(false);
+  if (!$('partzoom').hidden) { if (e.key === 'Tab') { e.preventDefault(); $('partzoomclose').focus(); } return; }   // (the large picture has one control)
+  if (!$('gridwrap').hidden && e.key === 'Tab') {             // while the list of steps is open, Tab stays inside it
+    const inside = [$('gridclose'), ...grid.querySelectorAll('.tile')], first = inside[0], last = inside[inside.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    else if (!$('gridwrap').contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    return;
+  }
+  if (e.altKey || e.ctrlKey || e.metaKey || !$('gridwrap').hidden) return;
+  const key = {ArrowRight: () => go(cur + 1), ArrowLeft: () => go(cur - 1), Home: () => go(0, false), End: () => go(views.length - 1, false)}[e.key];
+  if (!key) return;
+  e.preventDefault();                        // otherwise a focused step list would move a second time on its own
+  key();
+});
+addEventListener('resize', () => { stage.resize(); go(cur, false); });
+// The page that embeds the player (and only that page) may ask it to jump to a step.
+addEventListener('message', e => { if (e.source === window.parent && e.data && e.data.type === 'techbox-go' && Number.isInteger(e.data.index)) go(e.data.index, false); });
+
+go(Math.max(0, Math.min(views.length - 1, +(params.get('step') || 0))), false);
+announce(views[cur], cur);
+$('loading').remove();
+const frame = now => stage.frame(now, stepAnimation(now));
+(function tick(now) { requestAnimationFrame(tick); frame(now); })(performance.now());
+window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; }};   // handle for tests and debugging

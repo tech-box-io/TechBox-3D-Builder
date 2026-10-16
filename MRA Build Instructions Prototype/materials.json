@@ -1,0 +1,382 @@
+{
+  "_about": "Colour and detail rules for this kit's 3D model. Edit here, then run: python tools/build_model.py \"<this folder>\". Rules are tried top to bottom against each CAD mesh name; the first match wins. A mesh whose rule names no colour takes its colours from the \"atlas\" file: the colour of every solid in TechBox's own Cadasio project for this kit. A rule that does name a colour is a TechBox decision or a house-library colour that overrides it (see _notes).",
+  "source": "mra.glb",
+  "source_scale_to_mm": 1000,
+  "palette": {
+    "edge": "#111111",
+    "wood": "#deb887",
+    "steel": "#a6a9aa",
+    "black_plastic": "#1e1616",
+    "white_plastic": "#f5f5f6",
+    "pcb_blue": "#224bbe",
+    "pcb_navy": "#000f41",
+    "pcb_black": "#1e1616",
+    "pin": "#a6a9aa",
+    "pin_silver": "#a6a9aa",
+    "metal_can": "#a6a9aa",
+    "header_red": "#ef3340",
+    "header_black": "#181818",
+    "header_white": "#f5f5f6",
+    "header_yellow": "#ffff80",
+    "cap_tan": "#a5936d",
+    "pot_blue": "#0074d9",
+    "servo_body": "#2d2926",
+    "servo_label": "#f5f5f6",
+    "wire_brown": "#7c5a30",
+    "wire_red": "#ef3340",
+    "wire_orange": "#ff851b",
+    "wire_yellow": "#ffdc00",
+    "wire_green": "#3d9970",
+    "wire_blue": "#0074d9",
+    "wire_purple": "#a75294",
+    "wire_grey": "#737980",
+    "wire_white": "#f2f2f2",
+    "grey": "#a6a9aa",
+    "ink": "#1e1616",
+    "lead_brown": "#975100",
+    "lead_red": "#bd291f",
+    "lead_orange": "#ff9d07",
+    "sticker_white": "#ffffff",
+    "sticker_black": "#1a1a1a",
+    "sticker_blue": "#0074d9",
+    "cable_black": "#2d2926",
+    "sticker_off_black": "#181818"
+  },
+  "defaults": {
+    "color": "grey",
+    "edge_angle": 40,
+    "simplify_mm": 0.04,
+    "edge_min_size_mm": 0.0
+  },
+  "rules": [
+    {
+      "match": "^MiniUSBB$",
+      "color": "black_plastic",
+      "regions": [
+        {
+          "box": [
+            [
+              0.05,
+              -5,
+              -5
+            ],
+            [
+              8,
+              5,
+              5
+            ]
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "one solid: the metal plug (in front of the overmould, x > 0 in its own frame) silver, the rest black"
+    },
+    {
+      "match": "^USBCableend$",
+      "color": "black_plastic",
+      "components": [
+        {
+          "rank": 1,
+          "color": "pin"
+        },
+        {
+          "rank": 2,
+          "color": "white_plastic"
+        },
+        {
+          "rank": [
+            3,
+            4
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "overmould black, shell and contacts silver, tongue white"
+    },
+    {
+      "match": "^(ARA|TB)_",
+      "color": "wood",
+      "simplify_mm": 0,
+      "engraving": "ink"
+    },
+    {
+      "match": "^M3x",
+      "color": "steel",
+      "simplify_mm": 0.03,
+      "max_tris": 3000,
+      "edges_from": "source",
+      "edge_min_spacing_mm": 0.25,
+      "outline": true,
+      "fillet_edges_mm": 0.4
+    },
+    {
+      "match": "^MG90S",
+      "simplify_mm": 0.05,
+      "max_tris": 8000,
+      "fillet_edges_mm": 0.5,
+      "edge_min_size_mm": 0.0
+    },
+    {
+      "match": "Shoulder",
+      "simplify_mm": 0.05,
+      "max_tris": 2500,
+      "fillet_edges_mm": 0.4
+    },
+    {
+      "match": "^nano_",
+      "simplify_mm": 0.06,
+      "edge_min_size_mm": 2.0,
+      "max_tris": 16000,
+      "atlas_colours": {
+        "#cccccc": "pin"
+      }
+    },
+    {
+      "match": "^Shield_Arduino",
+      "color": "pcb_navy",
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^Samtec-TLW-",
+      "color": "pin",
+      "components": [
+        {
+          "rank": 1,
+          "color": "header_yellow",
+          "skin": true
+        }
+      ],
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^47uf CAP",
+      "color": "metal_can",
+      "components": [
+        {
+          "thin": [
+            0,
+            0.05
+          ],
+          "color": "black_plastic"
+        }
+      ],
+      "edge_min_size_mm": 2,
+      "simplify_mm": 0.02
+    },
+    {
+      "match": "^cap106C",
+      "simplify_mm": 0.015,
+      "edge_min_size_mm": 1.5
+    },
+    {
+      "match": "^(m7 diode|smt_resistor|nano - reg|blm21|reset core)",
+      "edge_min_size_mm": 1.5,
+      "simplify_mm": 0.015
+    },
+    {
+      "match": "^reset shell",
+      "simplify_mm": 0.015
+    },
+    {
+      "match": "^led$",
+      "simplify_mm": 0.015,
+      "edge_min_size_mm": 1.0
+    },
+    {
+      "match": "^PCB_1",
+      "edge_min_size_mm": 5
+    },
+    {
+      "match": "^5x_Ang_Conn"
+    },
+    {
+      "match": "^Thumb-Button",
+      "simplify_mm": 0.06,
+      "max_tris": 3500,
+      "outline": true,
+      "fillet_edges_mm": 0.5
+    },
+    {
+      "match": "^Tactile-Switch",
+      "simplify_mm": 0.05,
+      "edge_min_size_mm": 3
+    },
+    {
+      "match": "^Part4\\^",
+      "simplify_mm": 0.1,
+      "smooth": true,
+      "weld_mm": 0.03,
+      "edges": false,
+      "outline": true,
+      "normal_weight": 0.1,
+      "max_tris": 6000
+    },
+    {
+      "match": "^Part5\\^",
+      "simplify_mm": 0.1,
+      "smooth": true,
+      "weld_mm": 0.03,
+      "edges": false,
+      "outline": true,
+      "normal_weight": 0.1,
+      "max_tris": 6000
+    },
+    {
+      "match": "^Part[67]\\^",
+      "simplify_mm": 0.1,
+      "smooth": true,
+      "weld_mm": 0.03,
+      "edges": false,
+      "outline": true,
+      "normal_weight": 0.1,
+      "max_tris": 6000
+    },
+    {
+      "match": "(\\^ARA_Pathways$|Cable_JR)",
+      "omit": true
+    }
+  ],
+  "_notes": {
+    "unconfirmed": [
+      "Wherever the atlas shows SolidWorks' default grey #e4e4e4 (pads and print on the Nano and joystick boards), nobody has coloured that solid in Cadasio yet.",
+      "47 uF capacitor: kept as a silver can; the Cadasio project has it all near-black (not coloured yet).",
+      "USB cable: the STEP files have no colours (SolidWorks' default only). Drawn black (#1e1616) with silver metal and a white tongue in the A end; the cable itself 3.5 mm, in the house cable-jacket black #2d2926."
+    ],
+    "decided": [
+      "2026-10-13 (Lee): every pin-header base on the I/O Extension Module is yellow, whatever colour the CAD names it.",
+      "2026-10-13 (Lee): outline edges use Cadasio's crease angle of 40 degrees on every part.",
+      "2026-10-13 (Lee): colours follow TechBox's own Cadasio project for the MRA (the atlas file) unless a rule here says otherwise.",
+      "2026-10-13 (Lee): pins are silver: regulator pins, solder mounds on the Nano, joystick header pins. The mini-USB shell is the same silver as the pins (the Cadasio project has it lighter, #cccccc).",
+      "2026-10-13 (Lee): servo labels are pink with white lettering; servo horns are black.",
+      "2026-10-13: brown / red / orange on a servo lead: brown is on G (the pin nearest the board edge), orange on S (nearest the Nano). Read from the board legends on video and the same in the Cadasio project.",
+      "2026-10-14 (Lee): the Elbow, Shoulder and Claw Motors carry a round sticker, about 0.25 in (6.35 mm; drawn 7 mm), on both wide faces, in the middle of the part of the face that shows (not under R7 / R8): black on the Elbow Motor, white on the Shoulder Motor (TechBox's Testing Checklist; corrected the same day), blue on the Claw Motor. The Base Motor has none.",
+      "2026-10-14 (Lee): the I/O module's silkscreen (pin names, G V S legends, POWER, RESET, the capacitor's and the regulator's print), from Lee's photos of the real board, placed from the CAD's pin positions: decals.json, written by silkscreen.py and named by \"decals\" here; build_model.py puts it in model.glb as data and the player draws it.",
+      "2026-10-14 (Lee, third round): the Elbow Motor's dot is just off black, #181818 (palette sticker_off_black); the grey tried before (#5a5a5a) was too grey. Motor labels name the dot: 'Elbow Motor (Black Dot)', 'Shoulder Motor (White Dot)', 'Claw Motor (Blue Dot)'.",
+      "2026-10-14 (Lee, third round): the I/O module's board is the same navy as the Nano's (#000f41, pcb_navy, as TechBox's own Cadasio project has it); the house blue looked off beside the darker Nano."
+    ],
+    "adjusted": [
+      "NAUO46 (the base motor's double horn) is drawn 1.8 mm lower than in the CAD, where its arms sit inside B2. On the real kit the arms lie in B1's horn-shaped cut-out and B2 slides over them. Fix the CAD and remove this.",
+      "NAUO17 (R8, the elbow motor's clamp plate) is turned end for end (half a turn about its own normal, through its middle): the CAD has its notch at the opposite end from the motor's lead; on the real kit the notch is over the lead, as on R7 (Lee, 2026-10-14).",
+      "R8's engraved code is moved 18.4 mm up its face, into the band above the notch (Lee, 14 Oct 2026, with a picture), and turned the right way up, as R7's reads: turning the CAD's R8 end for end had left it upside down below the cut-out. Its pocket is filled in and the code drawn there instead (build_model.move_engraving)."
+    ],
+    "wires": "The CAD's cable bodies (Part1-7^ARA_Pathways and the 40 mm of cable on each JR plug) are left out of the model: the player draws wires itself, along the centre lines in wire-paths.json, so that they can move."
+  },
+  "atlas": "colour-atlas-mra.json",
+  "adjust_mm": {
+    "NAUO46": [
+      0,
+      -1.8,
+      0
+    ],
+    "NAUO17": {
+      "t": [
+        0,
+        0,
+        0
+      ],
+      "r": [
+        0,
+        0,
+        1,
+        180
+      ],
+      "at": [
+        170.283,
+        162.28,
+        104.96
+      ]
+    }
+  },
+  "own_parts": {
+    "NAUO126": "the Nano Board: inside the I/O module (NAUO82) in the CAD, its own part in the guide, which fits it onto the module"
+  },
+  "stickers": [
+    {
+      "on": "NAUO58",
+      "colour": "sticker_off_black",
+      "diameter_mm": 7.0,
+      "faces": "wide",
+      "_part": "Elbow Motor",
+      "place": "middle of what shows"
+    },
+    {
+      "on": "NAUO66",
+      "colour": "sticker_white",
+      "diameter_mm": 7.0,
+      "faces": "wide",
+      "_part": "Shoulder Motor",
+      "place": "middle of what shows"
+    },
+    {
+      "on": "NAUO72",
+      "colour": "sticker_blue",
+      "diameter_mm": 7.0,
+      "faces": "wide",
+      "_part": "Claw Motor",
+      "place": "middle of what shows"
+    }
+  ],
+  "extra_parts": {
+    "USB_B": {
+      "glb": "usb-mini-b.glb",
+      "pose": {
+        "t": [
+          69.46,
+          120.94,
+          176.6
+        ],
+        "r": [
+          0,
+          1,
+          0,
+          90
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the USB cable's Mini-B end (cad_extra/MiniUSBB.STEP, Lee 14 Oct 2026), plugged into the Nano Board's socket: wide side up, tip 5.2 mm in"
+    },
+    "USB_A": {
+      "glb": "usb-a-end.glb",
+      "pose": {
+        "t": [
+          69.46,
+          87.68,
+          464.0
+        ],
+        "r": [
+          -0.57735,
+          0.57735,
+          0.57735,
+          120
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the USB cable's A end (cad_extra/USBCableend.STEP), lying flat on the table beyond the base, plug pointing away from the robot"
+    }
+  },
+  "move_engraving": {
+    "NAUO17": {
+      "by": [
+        0,
+        18.42,
+        0
+      ],
+      "turn": 180
+    }
+  },
+  "decals": "decals.json"
+}

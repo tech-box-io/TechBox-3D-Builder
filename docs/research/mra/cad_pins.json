@@ -1,0 +1,2145 @@
+{
+ "_stills": "stills/pins/ (see cad_pins.md for which still shows what)",
+ "_about": "Pins the Mini Robot Arm wires plug into. mm, assembly space of mra.glb, Y up. Measured from the CAD; names from Controller.mov and from Lee. See cad_pins.md.",
+ "shield": {
+  "instance": "NAUO82",
+  "pin_direction": [
+   0,
+   1,
+   0
+  ],
+  "pin_top_y": 113.8,
+  "header_plastic_top_y": 107.97,
+  "board_top_y": 106.43,
+  "board_bottom_y": 104.78,
+  "pin_exposed_length_mm": 5.83,
+  "pin_pitch_mm": 2.54,
+  "board_outline_xz": {
+   "lo": [
+    43.36,
+    115.96
+   ],
+   "hi": [
+    96.7,
+    173.16
+   ]
+  },
+  "usb_end": "+z (Nano USB socket overhangs the board edge to z = 174.86)",
+  "power_jack": {
+   "lo": [
+    81.11,
+    106.43,
+    160.59
+   ],
+   "hi": [
+    90.11,
+    117.43,
+    174.99
+   ],
+   "opening_faces": "+z"
+  },
+  "column_x": {
+   "digital": {
+    "G": 50.085,
+    "V": 52.574,
+    "S": 55.064
+   },
+   "analogue": {
+    "G": 83.126,
+    "V": 85.615,
+    "S": 88.105
+   }
+  },
+  "column_meshes": {
+   "digital": {
+    "G": [
+     "NAUO143",
+     "NAUO142",
+     "NAUO141",
+     "NAUO140"
+    ],
+    "V": [
+     "NAUO147",
+     "NAUO146",
+     "NAUO145",
+     "NAUO144"
+    ],
+    "S": [
+     "NAUO151",
+     "NAUO150",
+     "NAUO149",
+     "NAUO148"
+    ]
+   },
+   "analogue": {
+    "G": "NAUO156",
+    "V": "NAUO155",
+    "S": "NAUO154"
+   }
+  },
+  "cad_suffix_meaning": "CAD mesh-name suffix _N = G column, _R = V column, _B = S column (on both sides of the board); _W = the two unused 4-pin headers",
+  "pins": {
+   "D0": {
+    "G": [
+     50.085,
+     113.798,
+     124.374
+    ],
+    "V": [
+     52.574,
+     113.798,
+     124.374
+    ],
+    "S": [
+     55.064,
+     113.798,
+     124.374
+    ]
+   },
+   "D1": {
+    "G": [
+     50.085,
+     113.798,
+     126.914
+    ],
+    "V": [
+     52.574,
+     113.798,
+     126.914
+    ],
+    "S": [
+     55.064,
+     113.798,
+     126.914
+    ]
+   },
+   "D2": {
+    "G": [
+     50.085,
+     113.798,
+     129.454
+    ],
+    "V": [
+     52.574,
+     113.798,
+     129.454
+    ],
+    "S": [
+     55.064,
+     113.798,
+     129.454
+    ]
+   },
+   "D3": {
+    "G": [
+     50.085,
+     113.798,
+     131.994
+    ],
+    "V": [
+     52.574,
+     113.798,
+     131.994
+    ],
+    "S": [
+     55.064,
+     113.798,
+     131.994
+    ]
+   },
+   "D4": {
+    "G": [
+     50.085,
+     113.798,
+     136.924
+    ],
+    "V": [
+     52.574,
+     113.798,
+     136.924
+    ],
+    "S": [
+     55.064,
+     113.798,
+     136.924
+    ]
+   },
+   "D5": {
+    "G": [
+     50.085,
+     113.798,
+     139.464
+    ],
+    "V": [
+     52.574,
+     113.798,
+     139.464
+    ],
+    "S": [
+     55.064,
+     113.798,
+     139.464
+    ]
+   },
+   "D6": {
+    "G": [
+     50.085,
+     113.798,
+     142.004
+    ],
+    "V": [
+     52.574,
+     113.798,
+     142.004
+    ],
+    "S": [
+     55.064,
+     113.798,
+     142.004
+    ]
+   },
+   "D7": {
+    "G": [
+     50.085,
+     113.798,
+     144.544
+    ],
+    "V": [
+     52.574,
+     113.798,
+     144.544
+    ],
+    "S": [
+     55.064,
+     113.798,
+     144.544
+    ]
+   },
+   "D8": {
+    "G": [
+     50.085,
+     113.798,
+     149.474
+    ],
+    "V": [
+     52.574,
+     113.798,
+     149.474
+    ],
+    "S": [
+     55.064,
+     113.798,
+     149.474
+    ]
+   },
+   "D9": {
+    "G": [
+     50.085,
+     113.798,
+     152.014
+    ],
+    "V": [
+     52.574,
+     113.798,
+     152.014
+    ],
+    "S": [
+     55.064,
+     113.798,
+     152.014
+    ]
+   },
+   "D10": {
+    "G": [
+     50.085,
+     113.798,
+     154.554
+    ],
+    "V": [
+     52.574,
+     113.798,
+     154.554
+    ],
+    "S": [
+     55.064,
+     113.798,
+     154.554
+    ]
+   },
+   "D11": {
+    "G": [
+     50.085,
+     113.798,
+     157.094
+    ],
+    "V": [
+     52.574,
+     113.798,
+     157.094
+    ],
+    "S": [
+     55.064,
+     113.798,
+     157.094
+    ]
+   },
+   "D12": {
+    "G": [
+     50.085,
+     113.798,
+     162.024
+    ],
+    "V": [
+     52.574,
+     113.798,
+     162.024
+    ],
+    "S": [
+     55.064,
+     113.798,
+     162.024
+    ]
+   },
+   "D13": {
+    "G": [
+     50.085,
+     113.798,
+     164.564
+    ],
+    "V": [
+     52.574,
+     113.798,
+     164.564
+    ],
+    "S": [
+     55.064,
+     113.798,
+     164.564
+    ]
+   },
+   "GND_row": {
+    "G": [
+     50.085,
+     113.798,
+     167.104
+    ],
+    "V": [
+     52.574,
+     113.798,
+     167.104
+    ],
+    "S": [
+     55.064,
+     113.798,
+     167.104
+    ]
+   },
+   "AREF_row": {
+    "G": [
+     50.085,
+     113.798,
+     169.644
+    ],
+    "V": [
+     52.574,
+     113.798,
+     169.644
+    ],
+    "S": [
+     55.064,
+     113.798,
+     169.644
+    ]
+   },
+   "A0": {
+    "G": [
+     83.126,
+     113.798,
+     141.483
+    ],
+    "V": [
+     85.615,
+     113.798,
+     141.483
+    ],
+    "S": [
+     88.105,
+     113.798,
+     141.483
+    ]
+   },
+   "A1": {
+    "G": [
+     83.126,
+     113.798,
+     138.943
+    ],
+    "V": [
+     85.615,
+     113.798,
+     138.943
+    ],
+    "S": [
+     88.105,
+     113.798,
+     138.943
+    ]
+   },
+   "A2": {
+    "G": [
+     83.126,
+     113.798,
+     136.403
+    ],
+    "V": [
+     85.615,
+     113.798,
+     136.403
+    ],
+    "S": [
+     88.105,
+     113.798,
+     136.403
+    ]
+   },
+   "A3": {
+    "G": [
+     83.126,
+     113.798,
+     133.863
+    ],
+    "V": [
+     85.615,
+     113.798,
+     133.863
+    ],
+    "S": [
+     88.105,
+     113.798,
+     133.863
+    ]
+   },
+   "A4": {
+    "G": [
+     83.126,
+     113.798,
+     131.323
+    ],
+    "V": [
+     85.615,
+     113.798,
+     131.323
+    ],
+    "S": [
+     88.105,
+     113.798,
+     131.323
+    ]
+   },
+   "A5": {
+    "G": [
+     83.126,
+     113.798,
+     128.783
+    ],
+    "V": [
+     85.615,
+     113.798,
+     128.783
+    ],
+    "S": [
+     88.105,
+     113.798,
+     128.783
+    ]
+   },
+   "A6": {
+    "G": [
+     83.126,
+     113.798,
+     126.243
+    ],
+    "V": [
+     85.615,
+     113.798,
+     126.243
+    ],
+    "S": [
+     88.105,
+     113.798,
+     126.243
+    ]
+   },
+   "A7": {
+    "G": [
+     83.126,
+     113.798,
+     123.703
+    ],
+    "V": [
+     85.615,
+     113.798,
+     123.703
+    ],
+    "S": [
+     88.105,
+     113.798,
+     123.703
+    ]
+   }
+  },
+  "printed": {
+   "D0": "RX 0",
+   "D1": "TX 1",
+   "D2": "2",
+   "D3": "3",
+   "D4": "4",
+   "D5": "5",
+   "D6": "6",
+   "D7": "7",
+   "D8": "8",
+   "D9": "9",
+   "D10": "10",
+   "D11": "11",
+   "D12": "12",
+   "D13": "13",
+   "GND_row": "GND",
+   "AREF_row": "AREF",
+   "A0": "A0",
+   "A1": "A1",
+   "A2": "A2",
+   "A3": "A3",
+   "A4": "A4",
+   "A5": "A5",
+   "A6": "A6",
+   "A7": "A7"
+  },
+  "name_confidence": {
+   "D0": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D1": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D2": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D3": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D4": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D5": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D6": "high: legends 4 and 5 read in that block (t04m24s), 6 and 7 follow in sequence (standard on this board); 7 6 5 4 read at t00m32s",
+   "D7": "high: legends 4 and 5 read in that block (t04m24s), 6 and 7 follow in sequence (standard on this board); 7 6 5 4 read at t00m32s",
+   "D8": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D9": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D10": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D11": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D12": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "D13": "high: legend read in the video (t00m32s top view and t04m24s)",
+   "GND_row": "medium-high: legend GND read at t00m32s beside the second row from the USB end; what its three pins carry was not traced (not used by the kit)",
+   "AREF_row": "medium-high: legend AREF read at t00m32s beside the row nearest the USB socket; not used by the kit",
+   "A0": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A1": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A2": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A3": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A4": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A5": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A6": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree",
+   "A7": "high: legend A0..A7 read in the video (stills t00m40s), A0 at the capacitor / power-jack end; Lee's wiring and the CAD end caps agree"
+  },
+  "other_headers": {
+   "ICSP_like_2x3": {
+    "meshes": [
+     "NAUO124",
+     "NAUO125"
+    ],
+    "pins": [
+     [
+      76.332,
+      113.798,
+      121.632
+     ],
+     [
+      76.332,
+      113.798,
+      124.172
+     ],
+     [
+      76.332,
+      113.798,
+      126.712
+     ],
+     [
+      73.832,
+      113.798,
+      121.632
+     ],
+     [
+      73.832,
+      113.798,
+      124.172
+     ],
+     [
+      73.832,
+      113.798,
+      126.712
+     ]
+    ],
+    "note": "two 3-pin headers side by side between the Nano sockets at the end away from USB; not used by the kit; printed names not read"
+   },
+   "aux_1x4_a": {
+    "meshes": [
+     "NAUO153"
+    ],
+    "pins": [
+     [
+      69.515,
+      113.798,
+      118.787
+     ],
+     [
+      69.515,
+      113.798,
+      121.327
+     ],
+     [
+      69.515,
+      113.798,
+      123.867
+     ],
+     [
+      69.515,
+      113.798,
+      126.407
+     ]
+    ],
+    "note": "4-pin header (CAD suffix _W); not used; printed names not read (guess: an I2C or serial breakout)"
+   },
+   "aux_1x4_b": {
+    "meshes": [
+     "NAUO152"
+    ],
+    "pins": [
+     [
+      64.563,
+      113.798,
+      118.83
+     ],
+     [
+      64.563,
+      113.798,
+      121.37
+     ],
+     [
+      64.563,
+      113.798,
+      123.91
+     ],
+     [
+      64.563,
+      113.798,
+      126.45
+     ]
+    ],
+    "note": "4-pin header (CAD suffix _W); not used; printed names not read"
+   }
+  }
+ },
+ "joysticks": {
+  "left": {
+   "instance": "NAUO80",
+   "side_for_student": "left",
+   "header_mesh": "5x_Ang_Conn_1",
+   "pin_direction": [
+    1,
+    0,
+    0
+   ],
+   "pin_pitch_mm": 2.5,
+   "pin_exposed_length_mm": 6.05,
+   "pins": {
+    "SW": {
+     "tip": [
+      25.46,
+      124.23,
+      113.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      113.34
+     ]
+    },
+    "VRy": {
+     "tip": [
+      25.46,
+      124.23,
+      115.84
+     ],
+     "root": [
+      19.41,
+      124.23,
+      115.84
+     ]
+    },
+    "VRx": {
+     "tip": [
+      25.46,
+      124.23,
+      118.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      118.34
+     ]
+    },
+    "+5V": {
+     "tip": [
+      25.46,
+      124.23,
+      120.84
+     ],
+     "root": [
+      19.41,
+      124.23,
+      120.84
+     ]
+    },
+    "GND": {
+     "tip": [
+      25.46,
+      124.23,
+      123.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      123.34
+     ]
+    }
+   },
+   "pin_order_low_z_to_high_z": [
+    "SW",
+    "VRy",
+    "VRx",
+    "+5V",
+    "GND"
+   ],
+   "real_ribbon": "yellow-green-blue-purple",
+   "real_wire_colours": {
+    "GND": "yellow",
+    "+5V": "green",
+    "VRx": "blue",
+    "VRy": "purple",
+    "SW": null
+   }
+  },
+  "right": {
+   "instance": "NAUO81",
+   "side_for_student": "right",
+   "header_mesh": "5x_Ang_Conn_1",
+   "pin_direction": [
+    1,
+    0,
+    0
+   ],
+   "pin_pitch_mm": 2.5,
+   "pin_exposed_length_mm": 6.05,
+   "pins": {
+    "SW": {
+     "tip": [
+      25.46,
+      124.23,
+      158.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      158.34
+     ]
+    },
+    "VRy": {
+     "tip": [
+      25.46,
+      124.23,
+      160.84
+     ],
+     "root": [
+      19.41,
+      124.23,
+      160.84
+     ]
+    },
+    "VRx": {
+     "tip": [
+      25.46,
+      124.23,
+      163.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      163.34
+     ]
+    },
+    "+5V": {
+     "tip": [
+      25.46,
+      124.23,
+      165.84
+     ],
+     "root": [
+      19.41,
+      124.23,
+      165.84
+     ]
+    },
+    "GND": {
+     "tip": [
+      25.46,
+      124.23,
+      168.34
+     ],
+     "root": [
+      19.41,
+      124.23,
+      168.34
+     ]
+    }
+   },
+   "pin_order_low_z_to_high_z": [
+    "SW",
+    "VRy",
+    "VRx",
+    "+5V",
+    "GND"
+   ],
+   "real_ribbon": "black-brown-red-orange",
+   "real_wire_colours": {
+    "GND": "black",
+    "+5V": "brown",
+    "VRx": "red",
+    "VRy": "orange",
+    "SW": null
+   }
+  }
+ },
+ "joystick_wires": [
+  {
+   "joystick": "NAUO80",
+   "joystick_pin": "GND",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    123.34
+   ],
+   "joystick_cap": "NAUO104",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     122.47
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     124.22
+    ]
+   },
+   "wire": "NAUO112",
+   "solid_in_cad_wires_json": 3,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    123.34
+   ],
+   "wire_end_at_shield": [
+    83.13,
+    115.97,
+    136.48
+   ],
+   "shield_cap": "NAUO99",
+   "shield_pin": "A2 G",
+   "shield_pin_top": [
+    83.126,
+    113.798,
+    136.403
+   ],
+   "shield_cap_box": {
+    "lo": [
+     82.25,
+     107.97,
+     135.61
+    ],
+    "hi": [
+     84.0,
+     115.97,
+     137.36
+    ]
+   },
+   "real_wire_colour": "yellow",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO80",
+   "joystick_pin": "+5V",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    120.84
+   ],
+   "joystick_cap": "NAUO105",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     119.97
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     121.72
+    ]
+   },
+   "wire": "NAUO112",
+   "solid_in_cad_wires_json": 2,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    120.84
+   ],
+   "wire_end_at_shield": [
+    85.61,
+    115.97,
+    136.48
+   ],
+   "shield_cap": "NAUO100",
+   "shield_pin": "A2 V",
+   "shield_pin_top": [
+    85.615,
+    113.798,
+    136.403
+   ],
+   "shield_cap_box": {
+    "lo": [
+     84.74,
+     107.97,
+     135.61
+    ],
+    "hi": [
+     86.49,
+     115.97,
+     137.36
+    ]
+   },
+   "real_wire_colour": "green",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO80",
+   "joystick_pin": "VRx",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    118.34
+   ],
+   "joystick_cap": "NAUO106",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     117.47
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     119.22
+    ]
+   },
+   "wire": "NAUO112",
+   "solid_in_cad_wires_json": 1,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    118.34
+   ],
+   "wire_end_at_shield": [
+    88.11,
+    115.97,
+    136.48
+   ],
+   "shield_cap": "NAUO101",
+   "shield_pin": "A2 S",
+   "shield_pin_top": [
+    88.105,
+    113.798,
+    136.403
+   ],
+   "shield_cap_box": {
+    "lo": [
+     87.23,
+     107.97,
+     135.61
+    ],
+    "hi": [
+     88.98,
+     115.97,
+     137.36
+    ]
+   },
+   "real_wire_colour": "blue",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO80",
+   "joystick_pin": "VRy",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    115.84
+   ],
+   "joystick_cap": "NAUO107",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     114.97
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     116.72
+    ]
+   },
+   "wire": "NAUO112",
+   "solid_in_cad_wires_json": 0,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    115.84
+   ],
+   "wire_end_at_shield": [
+    88.11,
+    115.97,
+    133.94
+   ],
+   "shield_cap": "NAUO102",
+   "shield_pin": "A3 S",
+   "shield_pin_top": [
+    88.105,
+    113.798,
+    133.863
+   ],
+   "shield_cap_box": {
+    "lo": [
+     87.23,
+     107.97,
+     133.07
+    ],
+    "hi": [
+     88.98,
+     115.97,
+     134.82
+    ]
+   },
+   "real_wire_colour": "purple",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO81",
+   "joystick_pin": "GND",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    168.34
+   ],
+   "joystick_cap": "NAUO103",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     167.47
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     169.22
+    ]
+   },
+   "wire": "NAUO111",
+   "solid_in_cad_wires_json": 3,
+   "wire_end_at_joystick": [
+    27.46,
+    124.32,
+    168.34
+   ],
+   "wire_end_at_shield": [
+    83.13,
+    115.97,
+    141.48
+   ],
+   "shield_cap": "NAUO97",
+   "shield_pin": "A0 G",
+   "shield_pin_top": [
+    83.126,
+    113.798,
+    141.483
+   ],
+   "shield_cap_box": {
+    "lo": [
+     82.25,
+     107.97,
+     140.61
+    ],
+    "hi": [
+     84.0,
+     115.97,
+     142.36
+    ]
+   },
+   "real_wire_colour": "black",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO81",
+   "joystick_pin": "+5V",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    165.84
+   ],
+   "joystick_cap": "NAUO108",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     164.97
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     166.72
+    ]
+   },
+   "wire": "NAUO111",
+   "solid_in_cad_wires_json": 2,
+   "wire_end_at_joystick": [
+    27.46,
+    124.26,
+    165.84
+   ],
+   "wire_end_at_shield": [
+    85.61,
+    115.97,
+    141.48
+   ],
+   "shield_cap": "NAUO96",
+   "shield_pin": "A0 V",
+   "shield_pin_top": [
+    85.615,
+    113.798,
+    141.483
+   ],
+   "shield_cap_box": {
+    "lo": [
+     84.74,
+     107.97,
+     140.61
+    ],
+    "hi": [
+     86.49,
+     115.97,
+     142.36
+    ]
+   },
+   "real_wire_colour": "brown",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO81",
+   "joystick_pin": "VRx",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    163.34
+   ],
+   "joystick_cap": "NAUO109",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     162.47
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     164.22
+    ]
+   },
+   "wire": "NAUO111",
+   "solid_in_cad_wires_json": 1,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    163.34
+   ],
+   "wire_end_at_shield": [
+    88.11,
+    115.97,
+    141.48
+   ],
+   "shield_cap": "NAUO95",
+   "shield_pin": "A0 S",
+   "shield_pin_top": [
+    88.105,
+    113.798,
+    141.483
+   ],
+   "shield_cap_box": {
+    "lo": [
+     87.23,
+     107.97,
+     140.61
+    ],
+    "hi": [
+     88.98,
+     115.97,
+     142.36
+    ]
+   },
+   "real_wire_colour": "red",
+   "agrees_with_lee": true
+  },
+  {
+   "joystick": "NAUO81",
+   "joystick_pin": "VRy",
+   "joystick_pin_tip": [
+    25.46,
+    124.23,
+    160.84
+   ],
+   "joystick_cap": "NAUO110",
+   "joystick_cap_box": {
+    "lo": [
+     19.46,
+     123.36,
+     159.97
+    ],
+    "hi": [
+     27.46,
+     125.11,
+     161.72
+    ]
+   },
+   "wire": "NAUO111",
+   "solid_in_cad_wires_json": 0,
+   "wire_end_at_joystick": [
+    27.46,
+    124.23,
+    160.84
+   ],
+   "wire_end_at_shield": [
+    88.11,
+    115.97,
+    138.94
+   ],
+   "shield_cap": "NAUO98",
+   "shield_pin": "A1 S",
+   "shield_pin_top": [
+    88.105,
+    113.798,
+    138.943
+   ],
+   "shield_cap_box": {
+    "lo": [
+     87.23,
+     107.97,
+     138.07
+    ],
+    "hi": [
+     88.98,
+     115.97,
+     139.82
+    ]
+   },
+   "real_wire_colour": "orange",
+   "agrees_with_lee": true
+  }
+ ],
+ "servo_leads": [
+  {
+   "servo": "base",
+   "servo_instance": "NAUO45",
+   "shield_row": "D5",
+   "printed": "5",
+   "plug": "NAUO83",
+   "plug_box": {
+    "lo": [
+     48.57,
+     107.97,
+     137.98
+    ],
+    "hi": [
+     56.47,
+     121.97,
+     140.73
+    ]
+   },
+   "pins": {
+    "G (brown)": [
+     50.085,
+     113.798,
+     139.464
+    ],
+    "V (red)": [
+     52.574,
+     113.798,
+     139.464
+    ],
+    "S (orange)": [
+     55.064,
+     113.798,
+     139.464
+    ]
+   },
+   "lead": "NAUO87",
+   "flag_on_real_lead": "5 (white paper flag, hand-written; Controller.mov from 0:00, Arm.mov 5:56)",
+   "note": "lead Part1 runs from the top of the plug's cable stub (y 160.96) to the base servo body in the turret",
+   "solid_in_cad_wires_json": {
+    "G": 0,
+    "V": 1,
+    "S": 2
+   },
+   "lead_end_at_shield": {
+    "G": [
+     51.5,
+     160.96,
+     139.39
+    ],
+    "V": [
+     52.52,
+     160.96,
+     139.36
+    ],
+    "S": [
+     53.54,
+     160.96,
+     139.33
+    ]
+   },
+   "lead_far_end": {
+    "G": [
+     162.62,
+     119.11,
+     149.76
+    ],
+    "V": [
+     163.64,
+     119.11,
+     149.76
+    ],
+    "S": [
+     164.66,
+     119.11,
+     149.76
+    ]
+   }
+  },
+  {
+   "servo": "side servo at low z (student's left of the turret); shoulder or elbow - not decided here",
+   "servo_instance": "NAUO58",
+   "shield_row": "D6",
+   "printed": "6",
+   "plug": "NAUO84",
+   "plug_box": {
+    "lo": [
+     48.57,
+     107.97,
+     140.73
+    ],
+    "hi": [
+     56.47,
+     121.97,
+     143.48
+    ]
+   },
+   "pins": {
+    "G (brown)": [
+     50.085,
+     113.798,
+     142.004
+    ],
+    "V (red)": [
+     52.574,
+     113.798,
+     142.004
+    ],
+    "S (orange)": [
+     55.064,
+     113.798,
+     142.004
+    ]
+   },
+   "lead": "NAUO88",
+   "flag_on_real_lead": "6 (black flag, white underlined 6; Arm.mov 5:28: on the lead of the servo being fitted in the frame engraved R8 on the B5 / R5 side of the turret, the low-z side; also Arm.mov 5:56 and Claw.mov 7:05)",
+   "note": "lead Part2",
+   "solid_in_cad_wires_json": {
+    "G": 0,
+    "V": 1,
+    "S": 2
+   },
+   "lead_end_at_shield": {
+    "G": [
+     51.5,
+     160.96,
+     142.11
+    ],
+    "V": [
+     52.52,
+     160.96,
+     142.11
+    ],
+    "S": [
+     53.54,
+     160.96,
+     142.1
+    ]
+   },
+   "lead_far_end": {
+    "G": [
+     184.58,
+     163.3,
+     92.85
+    ],
+    "V": [
+     184.58,
+     162.28,
+     92.85
+    ],
+    "S": [
+     184.58,
+     161.26,
+     92.85
+    ]
+   }
+  },
+  {
+   "servo": "side servo at high z (student's right of the turret); shoulder or elbow - not decided here",
+   "servo_instance": "NAUO66",
+   "shield_row": "D9",
+   "printed": "9",
+   "plug": "NAUO86",
+   "plug_box": {
+    "lo": [
+     48.57,
+     107.97,
+     150.53
+    ],
+    "hi": [
+     56.47,
+     121.97,
+     153.28
+    ]
+   },
+   "pins": {
+    "G (brown)": [
+     50.085,
+     113.798,
+     152.014
+    ],
+    "V (red)": [
+     52.574,
+     113.798,
+     152.014
+    ],
+    "S (orange)": [
+     55.064,
+     113.798,
+     152.014
+    ]
+   },
+   "lead": "NAUO89",
+   "flag_on_real_lead": "not read (expected 9)",
+   "note": "lead Part3",
+   "solid_in_cad_wires_json": {
+    "G": 0,
+    "V": 1,
+    "S": 2
+   },
+   "lead_end_at_shield": {
+    "G": [
+     51.5,
+     160.96,
+     151.89
+    ],
+    "V": [
+     52.52,
+     160.96,
+     151.91
+    ],
+    "S": [
+     53.54,
+     160.96,
+     151.93
+    ]
+   },
+   "lead_far_end": {
+    "G": [
+     184.58,
+     161.26,
+     188.35
+    ],
+    "V": [
+     184.58,
+     162.28,
+     188.35
+    ],
+    "S": [
+     184.58,
+     163.3,
+     188.35
+    ]
+   }
+  },
+  {
+   "servo": "claw",
+   "servo_instance": "NAUO72",
+   "shield_row": "D10",
+   "printed": "10",
+   "plug": "NAUO85",
+   "plug_box": {
+    "lo": [
+     48.57,
+     107.97,
+     153.28
+    ],
+    "hi": [
+     56.47,
+     121.97,
+     156.03
+    ]
+   },
+   "pins": {
+    "G (brown)": [
+     50.085,
+     113.798,
+     154.554
+    ],
+    "V (red)": [
+     52.574,
+     113.798,
+     154.554
+    ],
+    "S (orange)": [
+     55.064,
+     113.798,
+     154.554
+    ]
+   },
+   "lead": "NAUO93",
+   "flag_on_real_lead": "not read for certain (a blue flag on the twisted extension lead in Claw.mov 7:00; expected 10)",
+   "note": "lead Part4 runs from inside the plug (no cable stub on this plug) to the extension joint NAUO92 / NAUO91 / NAUO90 in the turret; Part5 (NAUO94) carries on to the claw servo",
+   "solid_in_cad_wires_json": {
+    "G": 0,
+    "V": 2,
+    "S": 1
+   },
+   "lead_end_at_shield": {
+    "G": [
+     49.95,
+     116.29,
+     154.71
+    ],
+    "V": [
+     52.57,
+     115.89,
+     154.65
+    ],
+    "S": [
+     55.11,
+     115.54,
+     154.62
+    ]
+   },
+   "lead_far_end": {
+    "G": [
+     142.02,
+     133.62,
+     142.12
+    ],
+    "V": [
+     141.99,
+     133.62,
+     144.66
+    ],
+    "S": [
+     141.56,
+     133.62,
+     147.2
+    ]
+   }
+  }
+ ],
+ "routing": {
+  "note": "Controller-side routing. In the CAD every wire arcs through open air above the controller; the only wood features the leads pass through are the three slots in the turret. Points are wire centre lines.",
+  "features": [
+   {
+    "id": "R4_L_slot",
+    "part": "NAUO13",
+    "engraved": "R4",
+    "slab": "x 131.94 to 134.94",
+    "kind": "L-shaped slot open at the top edge",
+    "outline_yz": [
+     [
+      146.59,
+      140.6
+     ],
+     [
+      127.25,
+      140.6
+     ],
+     [
+      127.25,
+      148.72
+     ],
+     [
+      135.75,
+      148.72
+     ],
+     [
+      135.75,
+      142.72
+     ],
+     [
+      146.59,
+      142.72
+     ]
+    ],
+    "entry": "top edge of R4 (y = 146.59), 2.12 mm wide, z 140.60 to 142.72",
+    "pocket": {
+     "y": [
+      127.25,
+      135.75
+     ],
+     "z": [
+      140.6,
+      148.72
+     ]
+    },
+    "corner_radius_mm": 0.5,
+    "used_by_in_cad": {
+     "NAUO87 (base servo lead, row 5)": [
+      [
+       133.44,
+       131.48,
+       143.2
+      ],
+      [
+       133.44,
+       129.0,
+       143.68
+      ],
+      [
+       133.44,
+       130.27,
+       143.47
+      ]
+     ],
+     "NAUO93 (claw extension lead, row 10)": [
+      [
+       133.44,
+       133.54,
+       144.92
+      ],
+      [
+       133.44,
+       133.04,
+       146.59
+      ],
+      [
+       133.44,
+       133.66,
+       142.21
+      ]
+     ]
+    },
+    "seen_in_video": "Controller.mov 3:58 and 4:24: the base servo lead leaves the turret through this slot. Claw.mov 7:00 / 7:05: the twisted extension lead for the claw also comes through it, with the extension joint just inside the turret."
+   },
+   {
+    "id": "R5_hook_slot",
+    "part": "NAUO15",
+    "engraved": "R5",
+    "slab": "z 109.00 to 112.00",
+    "kind": "hook-shaped slot in the ear that sticks out towards the controller, open at the -x edge",
+    "outline_xy": [
+     [
+      117.58,
+      166.28
+     ],
+     [
+      121.94,
+      166.28
+     ],
+     [
+      121.94,
+      158.28
+     ],
+     [
+      125.12,
+      158.28
+     ],
+     [
+      125.12,
+      168.53
+     ],
+     [
+      117.58,
+      168.53
+     ]
+    ],
+    "entry": "-x edge of the ear (x = 117.58), 2.25 mm wide, y 166.28 to 168.53",
+    "pocket": {
+     "x": [
+      121.94,
+      125.12
+     ],
+     "y": [
+      158.28,
+      168.53
+     ]
+    },
+    "used_by_in_cad": {
+     "NAUO88 (row 6 lead, to servo NAUO58)": [
+      [
+       123.74,
+       164.42,
+       110.5
+      ],
+      [
+       123.56,
+       163.44,
+       110.5
+      ],
+      [
+       123.33,
+       162.41,
+       110.5
+      ]
+     ]
+    },
+    "seen_in_video": "Claw.mov 7:00 / 7:05: the lead of the servo on the student's left runs through this hook. Its flag reads 6 (Arm.mov 5:56)."
+   },
+   {
+    "id": "R6_hook_slot",
+    "part": "NAUO14",
+    "engraved": "R6",
+    "slab": "z 169.20 to 172.20",
+    "kind": "hook-shaped slot, same shape and same x / y as the one in R5",
+    "outline_xy": [
+     [
+      117.58,
+      166.28
+     ],
+     [
+      121.94,
+      166.28
+     ],
+     [
+      121.94,
+      158.28
+     ],
+     [
+      125.12,
+      158.28
+     ],
+     [
+      125.12,
+      168.53
+     ],
+     [
+      117.58,
+      168.53
+     ]
+    ],
+    "entry": "-x edge of the ear (x = 117.58), 2.25 mm wide, y 166.28 to 168.53",
+    "pocket": {
+     "x": [
+      121.94,
+      125.12
+     ],
+     "y": [
+      158.28,
+      168.53
+     ]
+    },
+    "used_by_in_cad": {
+     "NAUO89 (row 9 lead, to servo NAUO66)": [
+      [
+       122.92,
+       164.58,
+       170.7
+      ],
+      [
+       123.57,
+       163.31,
+       170.7
+      ],
+      [
+       124.12,
+       162.3,
+       170.7
+      ]
+     ]
+    },
+    "seen_in_video": "Claw.mov 7:00 / 7:05: the lead of the servo on the student's right runs through this hook."
+   },
+   {
+    "id": "B6_shield_slots",
+    "parts": [
+     "NAUO5",
+     "NAUO6"
+    ],
+    "engraved": "B6 (both)",
+    "slab": "z 128.63 to 131.63 and z 150.00 to 153.00",
+    "kind": "two notches per wall that hold the shield board",
+    "notch_joystick_side": {
+     "x": [
+      43.04,
+      45.2
+     ],
+     "y": [
+      104.78,
+      106.31
+     ]
+    },
+    "notch_turret_side": {
+     "x": [
+      94.73,
+      97.02
+     ],
+     "y": [
+      104.78,
+      106.31
+     ]
+    },
+    "wall_top_between_notches_y": 102.11,
+    "tower_turret_side": {
+     "x": [
+      94.86,
+      107.6
+     ],
+     "top_y": 118.5
+    },
+    "tower_joystick_side": {
+     "x": [
+      19.8,
+      32.5
+     ],
+     "top_y": 134.23,
+     "step_down_to_y": 110.2,
+     "step_x": [
+      32.5,
+      45.2
+     ]
+    },
+    "note": "No wire passes through these. They matter because between x = 45.2 and x = 94.7 the B6 walls are only y = 102.1 high, lower than the board, so nothing stands between the bays above the board."
+   },
+   {
+    "id": "B4_end_posts",
+    "part": "NAUO3",
+    "engraved": "B4",
+    "slab": "x 68.53 to 71.53",
+    "kind": "cross wall under the shield with a post at each end",
+    "top_y": 102.11,
+    "post_low_z": {
+     "z": [
+      108.05,
+      115.67
+     ],
+     "top_y": 109.41
+    },
+    "post_high_z": {
+     "z": [
+      173.45,
+      179.8
+     ],
+     "top_y": 107.89
+    },
+    "note": "The board (z 115.96 to 173.16) sits between the posts. No wire passes through B4."
+   },
+   {
+    "id": "left_bay_mouth",
+    "between": [
+     "NAUO4 (B5), inner face z = 108.05",
+     "NAUO5 (B6 left), inner face z = 128.63"
+    ],
+    "under": "NAUO8 (B8), underside y = 134.23, front edge x = 32.5",
+    "kind": "open gap the left joystick's four wires leave through",
+    "plane_x": 32.5,
+    "z": [
+     108.05,
+     128.63
+    ],
+    "y": [
+     93.5,
+     134.23
+    ],
+    "cad_wires_cross_at": {
+     "NAUO112 tube 0": [
+      32.5,
+      124.2,
+      116.4
+     ],
+     "NAUO112 tube 1": [
+      32.5,
+      124.3,
+      118.6
+     ],
+     "NAUO112 tube 2": [
+      32.5,
+      124.3,
+      120.7
+     ],
+     "NAUO112 tube 3": [
+      32.5,
+      124.2,
+      122.8
+     ]
+    },
+    "y_note": "floor (top of B2) to the underside of B8",
+    "beyond_the_mouth": "for x > 32.5 the two walls drop to y = 109.4 (B5, as far as x = 83.3) and y = 110.2 falling to 109.4 (B6, as far as x = 45.2)"
+   },
+   {
+    "id": "right_bay_mouth",
+    "between": [
+     "NAUO6 (B6 right), inner face z = 153.00",
+     "NAUO7 (B7), inner face z = 173.63"
+    ],
+    "under": "NAUO8 (B8), underside y = 134.23, front edge x = 32.5",
+    "kind": "open gap the right joystick's four wires leave through",
+    "plane_x": 32.5,
+    "z": [
+     153.0,
+     173.63
+    ],
+    "y": [
+     93.5,
+     134.23
+    ],
+    "cad_wires_cross_at": {
+     "NAUO111 tube 0": [
+      32.5,
+      124.5,
+      167.5
+     ],
+     "NAUO111 tube 1": [
+      32.5,
+      124.3,
+      165.5
+     ],
+     "NAUO111 tube 2": [
+      32.5,
+      124.2,
+      163.5
+     ],
+     "NAUO111 tube 3": [
+      32.5,
+      124.3,
+      161.5
+     ]
+    },
+    "y_note": "floor (top of B2) to the underside of B8",
+    "beyond_the_mouth": "B7 stops at x = 32.5; B6 right drops to y = 110.2 falling to 109.4 as far as x = 45.2"
+   },
+   {
+    "id": "left_side_gap_beside_shield",
+    "between": [
+     "NAUO4 (B5) inner face z = 108.05 (top y = 109.4, x 33.3 to 83.3)",
+     "shield board edge z = 115.96"
+    ],
+    "kind": "7.9 mm wide gap beside the low-z edge of the board",
+    "z": [
+     108.05,
+     115.96
+    ],
+    "x": [
+     43.4,
+     96.7
+    ],
+    "blocked_by": "B4 post at x 68.53 to 71.53, up to y = 109.41",
+    "note": "Not used by the CAD wires. In the video the left joystick's ribbon lies in and above this gap on its way round to A2 / A3."
+   }
+  ],
+  "cad_paths": {
+   "jumper_peak": {
+    "NAUO112": [
+     [
+      74.0,
+      156.5,
+      127.0
+     ],
+     [
+      72.5,
+      155.6,
+      127.2
+     ],
+     [
+      71.8,
+      154.9,
+      127.9
+     ],
+     [
+      71.6,
+      154.1,
+      129.0
+     ]
+    ],
+    "NAUO111": [
+     [
+      72.5,
+      153.9,
+      154.7
+     ],
+     [
+      73.1,
+      155.0,
+      153.4
+     ],
+     [
+      72.8,
+      156.1,
+      153.0
+     ],
+     [
+      73.2,
+      157.2,
+      152.2
+     ]
+    ]
+   },
+   "jumpers_cross_B6_plane": {
+    "NAUO112 over B6 left (z = 130.13)": [
+     [
+      78.7,
+      153.9,
+      130.1
+     ],
+     [
+      76.8,
+      154.2,
+      130.1
+     ],
+     [
+      74.8,
+      154.0,
+      130.1
+     ],
+     [
+      73.1,
+      153.8,
+      130.1
+     ]
+    ],
+    "NAUO111 over B6 right (z = 151.55)": [
+     [
+      76.1,
+      152.8,
+      151.6
+     ],
+     [
+      75.6,
+      154.2,
+      151.6
+     ],
+     [
+      75.0,
+      155.7,
+      151.6
+     ],
+     [
+      74.2,
+      157.1,
+      151.6
+     ]
+    ]
+   },
+   "servo_lead_peak": {
+    "NAUO87": [
+     76.0,
+     183.4,
+     139.5
+    ],
+    "NAUO88": [
+     76.2,
+     178.1,
+     137.5
+    ],
+    "NAUO89": [
+     153.8,
+     195.9,
+     204.8
+    ],
+    "NAUO93": [
+     71.8,
+     168.4,
+     151.4
+    ]
+   },
+   "servo_leads_at_x_107.6_(turret_end_of_B6)": {
+    "NAUO87": [
+     [
+      107.6,
+      158.8,
+      138.3
+     ]
+    ],
+    "NAUO88": [
+     [
+      107.6,
+      169.1,
+      127.5
+     ]
+    ],
+    "NAUO89": [
+     [
+      107.6,
+      159.7,
+      151.1
+     ]
+    ],
+    "NAUO93": [
+     [
+      107.6,
+      139.6,
+      145.6
+     ]
+    ]
+   },
+   "servo_leads_at_x_117.58_(edge_of_R5_R6_ears)": {
+    "NAUO87": [
+     [
+      117.6,
+      145.8,
+      138.1
+     ]
+    ],
+    "NAUO88": [
+     [
+      117.6,
+      164.7,
+      120.2
+     ]
+    ],
+    "NAUO89": [
+     [
+      117.6,
+      154.9,
+      154.5
+     ]
+    ],
+    "NAUO93": [
+     [
+      117.6,
+      134.2,
+      144.1
+     ]
+    ]
+   },
+   "in_material": "none: no wire centre line passes through wood at any slab mid-plane (NAUO1 to NAUO17 tested)"
+  }
+ }
+}

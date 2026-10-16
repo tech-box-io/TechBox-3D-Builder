@@ -1,0 +1,4637 @@
+{
+ "status": "COMPLETE: all sections written (1 codes, 2 T parts, 3 a-f base)",
+ "units": "mm, assembly space (mra.glb x 1000), Y up",
+ "codes": [
+  {
+   "id": "NAUO1",
+   "cad_name": "ARA_B1",
+   "engraved": "B1",
+   "face_normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_up_axis": "+Z",
+   "code_centre": [
+    -7.9,
+    90.4,
+    100.0
+   ],
+   "code_box_mm": [
+    8.4,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.92,
+    0.07
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    87.5,
+    93.3
+   ],
+   "bbox_hi": [
+    215.5,
+    90.5,
+    188.3
+   ],
+   "size_reading": [
+    242.7,
+    95.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO2",
+   "cad_name": "ARA_B2",
+   "engraved": "B2",
+   "face_normal": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_up_axis": "+Z",
+   "code_centre": [
+    -10.2,
+    93.4,
+    100.0
+   ],
+   "code_box_mm": [
+    9.5,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.93,
+    0.07
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    90.5,
+    93.3
+   ],
+   "bbox_hi": [
+    215.5,
+    93.5,
+    188.3
+   ],
+   "size_reading": [
+    242.7,
+    95.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO3",
+   "cad_name": "ARA_B4",
+   "engraved": "B4",
+   "face_normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "face_normal_axis": "-X",
+   "text_right": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    68.7,
+    97.2,
+    122.1
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.23,
+    0.35
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    68.5,
+    90.5,
+    105.1
+   ],
+   "bbox_hi": [
+    71.5,
+    109.4,
+    179.8
+   ],
+   "size_reading": [
+    74.8,
+    18.9,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO4",
+   "cad_name": "ARA_B5",
+   "engraved": "B5",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    -14.9,
+    106.9,
+    105.2
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.89,
+    0.33
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    90.5,
+    105.1
+   ],
+   "bbox_hi": [
+    83.3,
+    140.2,
+    108.1
+   ],
+   "size_reading": [
+    110.5,
+    49.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO5",
+   "cad_name": "ARA_B6",
+   "engraved": "B6",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    -14.9,
+    106.9,
+    128.8
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.91,
+    0.35
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    87.1,
+    128.6
+   ],
+   "bbox_hi": [
+    107.6,
+    143.2,
+    131.6
+   ],
+   "size_reading": [
+    134.7,
+    56.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO6",
+   "cad_name": "ARA_B6",
+   "engraved": "B6",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    -14.9,
+    106.9,
+    150.2
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.91,
+    0.35
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    87.1,
+    150.0
+   ],
+   "bbox_hi": [
+    107.6,
+    143.2,
+    153.0
+   ],
+   "size_reading": [
+    134.7,
+    56.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO7",
+   "cad_name": "ARA_B8",
+   "engraved": "B7",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    -14.9,
+    106.9,
+    173.8
+   ],
+   "code_box_mm": [
+    9.6,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.79,
+    0.33
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    90.5,
+    173.6
+   ],
+   "bbox_hi": [
+    32.5,
+    140.2,
+    176.6
+   ],
+   "size_reading": [
+    59.7,
+    49.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO8",
+   "cad_name": "ARA_B9",
+   "engraved": "B8",
+   "face_normal": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "text_up_axis": "+X",
+   "code_centre": [
+    26.1,
+    137.1,
+    141.2
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.5,
+    0.89
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    -27.2,
+    134.2,
+    93.3
+   ],
+   "bbox_hi": [
+    32.5,
+    137.2,
+    188.3
+   ],
+   "size_reading": [
+    95.0,
+    59.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO9",
+   "cad_name": "ARA_B10",
+   "engraved": "B3",
+   "face_normal": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "face_normal_axis": "-X",
+   "text_right": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    1.3,
+    106.8,
+    140.7
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.5,
+    0.37
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    1.2,
+    87.1,
+    93.3
+   ],
+   "bbox_hi": [
+    4.2,
+    140.6,
+    188.3
+   ],
+   "size_reading": [
+    95.0,
+    53.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO10",
+   "cad_name": "ARA_R1",
+   "engraved": "R1",
+   "face_normal": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "text_up_axis": "+X",
+   "code_centre": [
+    139.5,
+    102.8,
+    142.7
+   ],
+   "code_box_mm": [
+    8.9,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.53,
+    0.16
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    127.6,
+    100.0,
+    105.6
+   ],
+   "bbox_hi": [
+    200.3,
+    103.0,
+    175.6
+   ],
+   "size_reading": [
+    70.0,
+    72.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO11",
+   "cad_name": "ARA_R2",
+   "engraved": "R2",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    145.9,
+    128.8,
+    129.7
+   ],
+   "code_box_mm": [
+    10.0,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.75,
+    0.45
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    127.6,
+    96.6,
+    129.6
+   ],
+   "bbox_hi": [
+    200.3,
+    167.9,
+    132.6
+   ],
+   "size_reading": [
+    72.7,
+    71.3,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO12",
+   "cad_name": "ARA_R3v2",
+   "engraved": "R3",
+   "face_normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "face_normal_axis": "+X",
+   "text_right": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "text_right_axis": "-Z",
+   "text_up": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    195.5,
+    112.6,
+    147.7
+   ],
+   "code_box_mm": [
+    10.1,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.4,
+    0.32
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    192.7,
+    96.6,
+    105.6
+   ],
+   "bbox_hi": [
+    195.7,
+    146.6,
+    175.6
+   ],
+   "size_reading": [
+    70.0,
+    50.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO13",
+   "cad_name": "ARA_R4v2",
+   "engraved": "R4",
+   "face_normal": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "face_normal_axis": "-X",
+   "text_right": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    132.1,
+    112.6,
+    147.3
+   ],
+   "code_box_mm": [
+    10.1,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.6,
+    0.32
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    131.9,
+    96.6,
+    105.6
+   ],
+   "bbox_hi": [
+    134.9,
+    146.6,
+    175.6
+   ],
+   "size_reading": [
+    70.0,
+    50.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO14",
+   "cad_name": "ARA_R5",
+   "engraved": "R6",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    140.7,
+    112.6,
+    172.1
+   ],
+   "code_box_mm": [
+    10.1,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.28,
+    0.21
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    117.6,
+    93.5,
+    169.2
+   ],
+   "bbox_hi": [
+    200.3,
+    185.0,
+    172.2
+   ],
+   "size_reading": [
+    82.7,
+    91.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO15",
+   "cad_name": "ARA_R6",
+   "engraved": "R5",
+   "face_normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    140.4,
+    112.6,
+    109.1
+   ],
+   "code_box_mm": [
+    10.1,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.72,
+    0.23
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    117.6,
+    93.5,
+    109.0
+   ],
+   "bbox_hi": [
+    200.3,
+    175.4,
+    112.0
+   ],
+   "size_reading": [
+    82.7,
+    81.8,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO16",
+   "cad_name": "ARA_R7",
+   "engraved": "R7",
+   "face_normal": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    181.1,
+    171.4,
+    177.6
+   ],
+   "code_box_mm": [
+    7.2,
+    4.5
+   ],
+   "code_pos_frac": [
+    0.8,
+    0.86
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    152.4,
+    149.7,
+    174.7
+   ],
+   "bbox_hi": [
+    188.1,
+    174.8,
+    177.7
+   ],
+   "size_reading": [
+    35.7,
+    25.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO17",
+   "cad_name": "ARA_R8",
+   "engraved": "R8",
+   "face_normal": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    159.5,
+    171.4,
+    103.6
+   ],
+   "code_box_mm": [
+    7.2,
+    4.6
+   ],
+   "code_pos_frac": [
+    0.8,
+    0.86
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    152.4,
+    149.7,
+    103.5
+   ],
+   "bbox_hi": [
+    188.1,
+    174.8,
+    106.5
+   ],
+   "size_reading": [
+    35.7,
+    25.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO18",
+   "cad_name": "ARA_A1",
+   "engraved": "A1",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.911,
+    0.412,
+    0.0
+   ],
+   "text_right_axis": "[-0.91, 0.41, 0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    150.1,
+    173.5,
+    123.7
+   ],
+   "code_box_mm": [
+    9.3,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.77,
+    0.55
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    136.9,
+    149.1,
+    123.6
+   ],
+   "bbox_hi": [
+    194.8,
+    183.3,
+    126.6
+   ],
+   "size_reading": [
+    60.0,
+    12.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO19",
+   "cad_name": "ARA_A2",
+   "engraved": "A2",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.911,
+    0.412,
+    0.0
+   ],
+   "text_right_axis": "[-0.91, 0.41, 0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    150.1,
+    172.6,
+    120.7
+   ],
+   "code_box_mm": [
+    10.4,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.77,
+    0.51
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    137.0,
+    149.0,
+    120.6
+   ],
+   "bbox_hi": [
+    194.8,
+    183.3,
+    123.6
+   ],
+   "size_reading": [
+    60.0,
+    12.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO20",
+   "cad_name": "ARA_A2_Supplement",
+   "engraved": "A3",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.911,
+    0.412,
+    0.0
+   ],
+   "text_right_axis": "[-0.91, 0.41, 0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    151.0,
+    172.3,
+    117.7
+   ],
+   "code_box_mm": [
+    10.5,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.76,
+    0.5
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    137.0,
+    149.0,
+    117.6
+   ],
+   "bbox_hi": [
+    194.8,
+    183.3,
+    120.6
+   ],
+   "size_reading": [
+    60.0,
+    12.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO21",
+   "cad_name": "ARA_A3",
+   "engraved": "A4",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.67,
+    -0.742,
+    -0.0
+   ],
+   "text_right_axis": "[-0.67, -0.74, -0.00]",
+   "text_up": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    153.5,
+    186.7,
+    126.7
+   ],
+   "code_box_mm": [
+    10.5,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.78,
+    0.51
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    138.5,
+    171.3,
+    126.6
+   ],
+   "bbox_hi": [
+    202.1,
+    240.7,
+    129.6
+   ],
+   "size_reading": [
+    90.0,
+    10.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO22",
+   "cad_name": "ARA_A4",
+   "engraved": "A5",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.911,
+    0.412,
+    0.0
+   ],
+   "text_right_axis": "[-0.91, 0.41, 0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    209.7,
+    229.4,
+    123.7
+   ],
+   "code_box_mm": [
+    10.5,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.84,
+    0.48
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    192.1,
+    183.3,
+    123.6
+   ],
+   "bbox_hi": [
+    306.9,
+    240.7,
+    126.6
+   ],
+   "size_reading": [
+    125.0,
+    10.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO23",
+   "cad_name": "ARA_A5",
+   "engraved": "A7",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -0.67,
+    -0.742,
+    -0.0
+   ],
+   "text_right_axis": "[-0.67, -0.74, -0.00]",
+   "text_up": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    206.2,
+    196.2,
+    126.7
+   ],
+   "code_box_mm": [
+    10.5,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.43,
+    0.51
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    169.3,
+    155.9,
+    126.6
+   ],
+   "bbox_hi": [
+    234.9,
+    227.3,
+    129.6
+   ],
+   "size_reading": [
+    92.0,
+    12.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO24",
+   "cad_name": "ARA_A6",
+   "engraved": "A8",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.67,
+    0.742,
+    0.0
+   ],
+   "text_right_axis": "[0.67, 0.74, 0.00]",
+   "text_up": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    203.9,
+    192.1,
+    162.3
+   ],
+   "code_box_mm": [
+    10.5,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.52,
+    0.47
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    169.3,
+    155.9,
+    159.4
+   ],
+   "bbox_hi": [
+    234.9,
+    227.3,
+    162.4
+   ],
+   "size_reading": [
+    92.0,
+    12.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO25",
+   "cad_name": "ARA_A7",
+   "engraved": "A11",
+   "face_normal": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.671,
+    0.741,
+    0.0
+   ],
+   "text_right_axis": "[0.67, 0.74, 0.00]",
+   "text_up": [
+    -0.741,
+    0.671,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    185.4,
+    229.4,
+    169.1
+   ],
+   "code_box_mm": [
+    14.1,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.8,
+    0.48
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    134.4,
+    174.8,
+    166.2
+   ],
+   "bbox_hi": [
+    198.1,
+    244.1,
+    169.2
+   ],
+   "size_reading": [
+    90.0,
+    10.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO26",
+   "cad_name": "ARA_A8",
+   "engraved": "A10",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.999,
+    -0.048,
+    0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    0.048,
+    0.999,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    221.5,
+    237.8,
+    166.1
+   ],
+   "code_box_mm": [
+    15.1,
+    6.9
+   ],
+   "code_pos_frac": [
+    0.6,
+    0.76
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    188.1,
+    216.3,
+    163.2
+   ],
+   "bbox_hi": [
+    244.1,
+    244.1,
+    166.2
+   ],
+   "size_reading": [
+    56.0,
+    27.9,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO27",
+   "cad_name": "ARA_A9",
+   "engraved": "A12",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.911,
+    -0.412,
+    -0.0
+   ],
+   "text_right_axis": "[0.91, -0.41, -0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    256.3,
+    230.2,
+    169.1
+   ],
+   "code_box_mm": [
+    15.3,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.27,
+    0.49
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    234.1,
+    200.7,
+    166.2
+   ],
+   "bbox_hi": [
+    317.0,
+    243.7,
+    169.2
+   ],
+   "size_reading": [
+    90.0,
+    10.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO28",
+   "cad_name": "ARA_A10",
+   "engraved": "A13",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.911,
+    -0.412,
+    -0.0
+   ],
+   "text_right_axis": "[0.91, -0.41, -0.00]",
+   "text_up": [
+    0.412,
+    0.911,
+    0.0
+   ],
+   "text_up_axis": "[0.41, 0.91, 0.00]",
+   "code_centre": [
+    247.4,
+    212.5,
+    169.1
+   ],
+   "code_box_mm": [
+    15.4,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.29,
+    0.49
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    224.0,
+    183.3,
+    166.2
+   ],
+   "bbox_hi": [
+    306.8,
+    226.3,
+    169.2
+   ],
+   "size_reading": [
+    90.0,
+    10.0,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO29",
+   "cad_name": "ARA_A11",
+   "engraved": "A6",
+   "face_normal": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "face_normal_axis": "[-0.74, 0.67, 0.00]",
+   "text_right": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    0.67,
+    0.742,
+    0.0
+   ],
+   "text_up_axis": "[0.67, 0.74, 0.00]",
+   "code_centre": [
+    213.8,
+    206.5,
+    137.8
+   ],
+   "code_box_mm": [
+    10.5,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.32,
+    0.73
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    181.2,
+    168.6,
+    126.4
+   ],
+   "bbox_hi": [
+    228.2,
+    220.2,
+    162.6
+   ],
+   "size_reading": [
+    36.2,
+    66.8,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO30",
+   "cad_name": "ARA_A12",
+   "engraved": "A9",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.67,
+    0.742,
+    0.0
+   ],
+   "text_right_axis": "[0.67, 0.74, 0.00]",
+   "text_up": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    197.3,
+    192.7,
+    139.4
+   ],
+   "code_box_mm": [
+    7.4,
+    4.6
+   ],
+   "code_pos_frac": [
+    0.49,
+    0.72
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    186.5,
+    181.8,
+    136.5
+   ],
+   "bbox_hi": [
+    207.9,
+    204.6,
+    139.5
+   ],
+   "size_reading": [
+    25.0,
+    11.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO31",
+   "cad_name": "ARA_A12",
+   "engraved": "A9",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    0.67,
+    0.742,
+    0.0
+   ],
+   "text_right_axis": "[0.67, 0.74, 0.00]",
+   "text_up": [
+    -0.742,
+    0.67,
+    0.0
+   ],
+   "text_up_axis": "[-0.74, 0.67, 0.00]",
+   "code_centre": [
+    205.3,
+    201.5,
+    152.3
+   ],
+   "code_box_mm": [
+    7.4,
+    4.6
+   ],
+   "code_pos_frac": [
+    0.49,
+    0.72
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    194.5,
+    190.7,
+    149.5
+   ],
+   "bbox_hi": [
+    215.9,
+    213.5,
+    152.5
+   ],
+   "size_reading": [
+    25.0,
+    11.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO32",
+   "cad_name": "ARA_C1",
+   "engraved": "C1",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    1.0,
+    -0.011,
+    -0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    0.011,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    335.9,
+    203.7,
+    166.1
+   ],
+   "code_box_mm": [
+    9.2,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.78,
+    0.82
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    297.8,
+    170.5,
+    163.2
+   ],
+   "bbox_hi": [
+    346.4,
+    211.4,
+    166.2
+   ],
+   "size_reading": [
+    48.4,
+    40.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO33",
+   "cad_name": "ARA_C2",
+   "engraved": "C2",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    0.011,
+    -0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    0.011,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    335.4,
+    203.6,
+    126.7
+   ],
+   "code_box_mm": [
+    10.3,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.23,
+    0.82
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    297.9,
+    170.5,
+    126.6
+   ],
+   "bbox_hi": [
+    346.5,
+    211.4,
+    129.6
+   ],
+   "size_reading": [
+    48.4,
+    40.7,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO34",
+   "cad_name": "ARA_C3",
+   "engraved": "C3",
+   "face_normal": [
+    -0.011,
+    -1.0,
+    -0.0
+   ],
+   "face_normal_axis": "-Y",
+   "text_right": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    -1.0,
+    0.011,
+    -0.0
+   ],
+   "text_up_axis": "-X",
+   "code_centre": [
+    314.0,
+    193.6,
+    147.3
+   ],
+   "code_box_mm": [
+    10.4,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.52,
+    0.66
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    294.3,
+    193.0,
+    122.6
+   ],
+   "bbox_hi": [
+    352.5,
+    196.7,
+    170.2
+   ],
+   "size_reading": [
+    47.7,
+    58.2,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO35",
+   "cad_name": "ARA_C4",
+   "engraved": "C6",
+   "face_normal": [
+    -0.011,
+    -1.0,
+    -0.0
+   ],
+   "face_normal_axis": "-Y",
+   "text_right": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    -1.0,
+    0.011,
+    -0.0
+   ],
+   "text_up_axis": "-X",
+   "code_centre": [
+    313.8,
+    180.1,
+    147.3
+   ],
+   "code_box_mm": [
+    10.4,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.52,
+    0.83
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    305.8,
+    179.5,
+    122.6
+   ],
+   "bbox_hi": [
+    352.4,
+    183.0,
+    170.2
+   ],
+   "size_reading": [
+    47.7,
+    46.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO36",
+   "cad_name": "ARA_C5",
+   "engraved": "C4",
+   "face_normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "face_normal_axis": "-Z",
+   "text_right": [
+    -1.0,
+    0.011,
+    -0.0
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    0.011,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    335.1,
+    186.6,
+    129.7
+   ],
+   "code_box_mm": [
+    10.4,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.28,
+    0.42
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    305.8,
+    179.9,
+    129.6
+   ],
+   "bbox_hi": [
+    346.3,
+    196.4,
+    132.6
+   ],
+   "size_reading": [
+    40.4,
+    16.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO37",
+   "cad_name": "ARA_C6",
+   "engraved": "C5",
+   "face_normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    1.0,
+    -0.011,
+    0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    0.011,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    327.2,
+    186.7,
+    158.6
+   ],
+   "code_box_mm": [
+    10.4,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.53,
+    0.42
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    305.8,
+    179.9,
+    155.7
+   ],
+   "bbox_hi": [
+    346.3,
+    196.4,
+    158.7
+   ],
+   "size_reading": [
+    40.4,
+    16.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO38",
+   "cad_name": "ARA_C7",
+   "engraved": "C8",
+   "face_normal": [
+    -0.011,
+    -1.0,
+    -0.0
+   ],
+   "face_normal_axis": "-Y",
+   "text_right": [
+    -0.999,
+    0.011,
+    0.033
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    -0.033,
+    0.0,
+    -0.999
+   ],
+   "text_up_axis": "-Z",
+   "code_centre": [
+    362.4,
+    176.5,
+    157.8
+   ],
+   "code_box_mm": [
+    10.5,
+    6.9
+   ],
+   "code_pos_frac": [
+    0.46,
+    0.38
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    325.0,
+    176.1,
+    145.6
+   ],
+   "bbox_hi": [
+    393.9,
+    179.8,
+    166.5
+   ],
+   "size_reading": [
+    69.0,
+    21.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO39",
+   "cad_name": "ARA_C8",
+   "engraved": "C7",
+   "face_normal": [
+    -0.011,
+    -1.0,
+    0.0
+   ],
+   "face_normal_axis": "-Y",
+   "text_right": [
+    -0.999,
+    0.011,
+    -0.05
+   ],
+   "text_right_axis": "-X",
+   "text_up": [
+    0.05,
+    -0.001,
+    -0.999
+   ],
+   "text_up_axis": "-Z",
+   "code_centre": [
+    363.1,
+    176.5,
+    136.9
+   ],
+   "code_box_mm": [
+    10.7,
+    6.9
+   ],
+   "code_pos_frac": [
+    0.45,
+    0.62
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    324.7,
+    176.1,
+    127.3
+   ],
+   "bbox_hi": [
+    393.8,
+    179.8,
+    148.8
+   ],
+   "size_reading": [
+    69.2,
+    21.5,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO40",
+   "cad_name": "ARA_C9",
+   "engraved": "C9",
+   "face_normal": [
+    -0.011,
+    -1.0,
+    -0.0
+   ],
+   "face_normal_axis": "-Y",
+   "text_right": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    -1.0,
+    0.011,
+    -0.0
+   ],
+   "text_up_axis": "-X",
+   "code_centre": [
+    314.1,
+    174.1,
+    147.6
+   ],
+   "code_box_mm": [
+    10.4,
+    6.5
+   ],
+   "code_pos_frac": [
+    0.53,
+    0.79
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    305.7,
+    173.6,
+    122.6
+   ],
+   "bbox_hi": [
+    346.1,
+    177.0,
+    170.2
+   ],
+   "size_reading": [
+    47.6,
+    40.4,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO41",
+   "cad_name": "TB_TopBot",
+   "engraved": "T1",
+   "face_normal": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    0.0,
+    -0.0,
+    -1.0
+   ],
+   "text_up_axis": "-Z",
+   "code_centre": [
+    205.3,
+    93.8,
+    47.0
+   ],
+   "code_box_mm": [
+    8.5,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.76,
+    0.8
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    176.1,
+    90.9,
+    39.5
+   ],
+   "bbox_hi": [
+    214.2,
+    93.9,
+    77.6
+   ],
+   "size_reading": [
+    38.1,
+    38.1,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO42",
+   "cad_name": "TB_CenterLatches",
+   "engraved": "T2",
+   "face_normal": [
+    1.0,
+    0.0,
+    -0.0
+   ],
+   "face_normal_axis": "+X",
+   "text_right": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "text_up_axis": "-Y",
+   "code_centre": [
+    196.6,
+    108.0,
+    58.6
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.5,
+    0.61
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    193.7,
+    87.5,
+    47.4
+   ],
+   "bbox_hi": [
+    196.7,
+    140.1,
+    69.7
+   ],
+   "size_reading": [
+    22.2,
+    52.6,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO43",
+   "cad_name": "TB_CenterLatches",
+   "engraved": "T2",
+   "face_normal": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "face_normal_axis": "+Z",
+   "text_right": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "text_right_axis": "+X",
+   "text_up": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "text_up_axis": "+Y",
+   "code_centre": [
+    195.2,
+    119.7,
+    59.9
+   ],
+   "code_box_mm": [
+    9.6,
+    6.4
+   ],
+   "code_pos_frac": [
+    0.5,
+    0.61
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    184.1,
+    87.5,
+    57.0
+   ],
+   "bbox_hi": [
+    206.3,
+    140.1,
+    60.0
+   ],
+   "size_reading": [
+    22.2,
+    52.6,
+    3.0
+   ]
+  },
+  {
+   "id": "NAUO44",
+   "cad_name": "TB_TopBot",
+   "engraved": "T1",
+   "face_normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "face_normal_axis": "+Y",
+   "text_right": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "text_right_axis": "+Z",
+   "text_up": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "text_up_axis": "+X",
+   "code_centre": [
+    206.7,
+    136.6,
+    68.6
+   ],
+   "code_box_mm": [
+    8.5,
+    6.3
+   ],
+   "code_pos_frac": [
+    0.76,
+    0.8
+   ],
+   "depth_mm": 0.25,
+   "bbox_lo": [
+    176.1,
+    133.7,
+    39.5
+   ],
+   "bbox_hi": [
+    214.2,
+    136.7,
+    77.6
+   ],
+   "size_reading": [
+    38.1,
+    38.1,
+    3.0
+   ]
+  }
+ ],
+ "T_parts": {
+  "T1": {
+   "ids": [
+    "NAUO41",
+    "NAUO44"
+   ],
+   "cad": "TB_TopBot",
+   "size": [
+    38.1,
+    38.1,
+    3.0
+   ],
+   "y": [
+    [
+     90.91,
+     93.91
+    ],
+    [
+     133.74,
+     136.74
+    ]
+   ],
+   "x": [
+    176.14,
+    214.24
+   ],
+   "z": [
+    39.49,
+    77.59
+   ],
+   "plus_slot": {
+    "arm_width": 3.0,
+    "arm_length": 20.34,
+    "centre": [
+     195.19,
+     58.54
+    ]
+   }
+  },
+  "T2": {
+   "ids": [
+    "NAUO42",
+    "NAUO43"
+   ],
+   "cad": "TB_CenterLatches",
+   "size": [
+    22.23,
+    52.59,
+    3.0
+   ],
+   "y": [
+    87.53,
+    140.12
+   ],
+   "NAUO42_plane_x": [
+    193.69,
+    196.69
+   ],
+   "NAUO43_plane_z": [
+    57.04,
+    60.04
+   ],
+   "half_lap": {
+    "NAUO42_slot_open": "top",
+    "NAUO43_slot_open": "bottom",
+    "travel": 26.1
+   },
+   "width_in_T1": 19.82,
+   "width_outside_T1": [
+    21.98,
+    22.2
+   ],
+   "end_beyond_T1": 3.38
+  },
+  "touches_other_parts": false,
+  "stands_on_y": 87.53,
+  "gap_to_B1_edge": 15.75,
+  "distance_from_turret_axis": 88.1,
+  "guess": "free-standing block for the claw to pick up; not part of base/controller/arm/claw"
+ },
+ "base": {
+  "shaft_axis": {
+   "x": 163.64,
+   "z": 140.84
+  },
+  "pivot_P": [
+   163.64,
+   91.19,
+   140.84
+  ],
+  "servo_NAUO45": {
+   "shaft": {
+    "dia": 4.87,
+    "y": [
+     91.61,
+     95.56
+    ]
+   },
+   "gearbox": {
+    "y": [
+     95.56,
+     101.31
+    ],
+    "x": [
+     157.74,
+     169.54
+    ],
+    "z": [
+     132.0,
+     146.73
+    ],
+    "max_radius_from_axis": 8.84
+   },
+   "body": {
+    "y": [
+     101.31,
+     123.86
+    ],
+    "x": [
+     157.56,
+     169.71
+    ],
+    "z": [
+     124.19,
+     146.74
+    ]
+   },
+   "ears": {
+    "y": [
+     102.96,
+     105.46
+    ],
+    "z": [
+     119.37,
+     151.57
+    ]
+   },
+   "lead_stubs": {
+    "x": [
+     162.12,
+     165.16
+    ],
+    "y": [
+     118.61,
+     119.6
+    ],
+    "z": [
+     146.77,
+     149.77
+    ]
+   }
+  },
+  "horn_NAUO46": {
+   "length": 36.35,
+   "x": [
+    145.46,
+    181.81
+   ],
+   "z": [
+    137.52,
+    144.17
+   ],
+   "hub": {
+    "dia": 6.65,
+    "y": [
+     89.86,
+     94.41
+    ]
+   },
+   "arms": {
+    "y": [
+     90.16,
+     92.21
+    ],
+    "width_at_hub": 5.9,
+    "width_at_tip": 3.24
+   },
+   "neck_height_between_arms_and_gearbox": 3.35
+  },
+  "R1_NAUO10": {
+   "y": [
+    99.96,
+    102.96
+   ],
+   "body": {
+    "x": [
+     127.58,
+     200.28
+    ],
+    "z": [
+     112.0,
+     169.2
+    ]
+   },
+   "hole": {
+    "x": [
+     157.39,
+     169.89
+    ],
+    "z": [
+     124.09,
+     146.84
+    ]
+   },
+   "notch": {
+    "x": [
+     160.78,
+     166.49
+    ],
+    "z": [
+     146.84,
+     153.19
+    ]
+   },
+   "relief_slit": {
+    "x": [
+     157.39,
+     158.39
+    ],
+    "z": [
+     112.0,
+     124.09
+    ]
+   },
+   "opening_outline_xz": [
+    [
+     158.39,
+     112.0
+    ],
+    [
+     158.39,
+     124.09
+    ],
+    [
+     169.89,
+     124.09
+    ],
+    [
+     169.89,
+     146.84
+    ],
+    [
+     166.49,
+     146.84
+    ],
+    [
+     166.49,
+     153.19
+    ],
+    [
+     160.78,
+     153.19
+    ],
+    [
+     160.78,
+     146.84
+    ],
+    [
+     157.39,
+     146.84
+    ],
+    [
+     157.39,
+     112.0
+    ]
+   ],
+   "longest_line_through_opening": 30.49,
+   "slots": {
+    "for_R2": [
+     {
+      "x": [
+       129.49,
+       140.49
+      ],
+      "z": [
+       129.55,
+       132.55
+      ]
+     },
+     {
+      "x": [
+       187.24,
+       198.24
+      ],
+      "z": [
+       129.55,
+       132.55
+      ]
+     }
+    ],
+    "for_R3": [
+     {
+      "x": [
+       192.67,
+       195.67
+      ],
+      "z": [
+       114.03,
+       125.03
+      ]
+     },
+     {
+      "x": [
+       192.67,
+       195.67
+      ],
+      "z": [
+       156.17,
+       167.17
+      ]
+     }
+    ],
+    "for_R4": [
+     {
+      "x": [
+       131.94,
+       134.94
+      ],
+      "z": [
+       114.03,
+       125.03
+      ]
+     },
+     {
+      "x": [
+       131.94,
+       134.94
+      ],
+      "z": [
+       156.17,
+       167.17
+      ]
+     }
+    ]
+   },
+   "tabs": {
+    "to_R5_NAUO15": [
+     {
+      "kind": "latch pair",
+      "x": [
+       148.34,
+       156.19
+      ],
+      "tip_z": 105.62,
+      "barb": {
+       "x": 147.18,
+       "z": [
+        107.95,
+        109.0
+       ]
+      }
+     },
+     {
+      "kind": "plain",
+      "x": [
+       180.09,
+       192.79
+      ],
+      "end_z": 109.0
+     }
+    ],
+    "to_R6_NAUO14": [
+     {
+      "kind": "latch pair",
+      "x": [
+       176.94,
+       184.88
+      ],
+      "tip_z": 175.58,
+      "barb": {
+       "x": 185.96,
+       "z": [
+        172.2,
+        173.25
+       ]
+      }
+     },
+     {
+      "kind": "plain",
+      "x": [
+       134.83,
+       143.72
+      ],
+      "end_z": 172.2
+     }
+    ]
+   }
+  },
+  "servo_into_R1": {
+   "straight_down_possible": false,
+   "tilt_about_Z_with_horn_across_and_servo_square_possible": false,
+   "tilt_axis": "X",
+   "see": "servo_into_R1 (top level of this file)",
+   "sequence_in_video": "B",
+   "window_for_sequence_B_lift": [
+    7.4,
+    7.75
+   ]
+  },
+  "R2_NAUO11": {
+   "plane_z": [
+    129.55,
+    132.55
+   ],
+   "direction": [
+    0,
+    -1,
+    0
+   ],
+   "cutout": {
+    "x": [
+     157.39,
+     169.89
+    ],
+    "y": [
+     102.96,
+     123.29
+    ]
+   },
+   "passes_over": "servo body (x 157.56-169.71)",
+   "servo_top_y": 123.86,
+   "overlap_with_servo": 0.58,
+   "min_start_above_seat": 20.9,
+   "legs": [
+    {
+     "side": "-X",
+     "tab_x_at_tip": [
+      133.3,
+      139.56
+     ],
+     "finger_x_at_tip": [
+      129.91,
+      131.93
+     ],
+     "barb_x": 128.53,
+     "barb_y": [
+      98.91,
+      99.96
+     ],
+     "tip": [
+      134.74,
+      96.57,
+      131.05
+     ],
+     "slot_mouth": [
+      134.99,
+      102.96,
+      131.05
+     ]
+    },
+    {
+     "side": "+X",
+     "tab_x_at_tip": [
+      188.29,
+      194.55
+     ],
+     "finger_x_at_tip": [
+      195.92,
+      197.94
+     ],
+     "barb_x": 199.32,
+     "barb_y": [
+      98.91,
+      99.96
+     ],
+     "tip": [
+      193.12,
+      96.57,
+      131.05
+     ],
+     "slot_mouth": [
+      192.74,
+      102.96,
+      131.05
+     ]
+    }
+   ],
+   "snap_fit": {
+    "deepest": 1.0,
+    "overlap_from": 0.0,
+    "overlap_to": 5.5,
+    "clear_from": 6.5
+   }
+  },
+  "B2_NAUO2": {
+   "y": [
+    90.53,
+    93.53
+   ],
+   "slot": {
+    "x": [
+     157.29,
+     169.99
+    ],
+    "z": [
+     93.34,
+     133.74
+    ],
+    "opens_towards": "-Z"
+   },
+   "round_cutout": {
+    "centre": [
+     163.64,
+     140.84
+    ],
+    "radius": 9.525
+   },
+   "B2_moves_relative_to_turret": [
+    0,
+    0,
+    -1
+   ],
+   "travel_shaft_at_edge_to_seat": 47.5,
+   "travel_hub_clear": 50.83,
+   "turret_bottom_edges_y": 93.53,
+   "horn_overlap_as_modelled": {
+    "depth": 1.68,
+    "minus_x_arm_x": [
+     145.46,
+     154.45
+    ],
+    "plus_x_arm_x": [
+     172.87,
+     181.81
+    ],
+    "y": [
+     90.53,
+     92.21
+    ]
+   },
+   "gap_between_horn_arms_and_turret_bottom": 1.32,
+   "straight_slide_free_if_horn_lowered_by": 1.68,
+   "clearance_if_horn_lowered": {
+    "1.75": 0.08,
+    "2.0": 0.33,
+    "2.6": 0.93
+   },
+   "alternative": {
+    "what": "horn turned along Z drops straight through the slot when the turret is at least 8.7 mm towards -Z of its seat",
+    "min_offset": 8.7
+   },
+   "slide_free_if_servo_and_horn_lowered_together": {
+    "1.70": 0.03,
+    "2.03": 0.36,
+    "2.10": 0.43,
+    "2.33": 0.43,
+    "limit": 2.33,
+    "gearbox_enters_keyhole_from": 2.03
+   }
+  },
+  "B1_NAUO1": {
+   "y": [
+    87.53,
+    90.53
+   ],
+   "pocket": {
+    "x": [
+     144.81,
+     182.45
+    ],
+    "z": [
+     136.86,
+     144.82
+    ],
+    "through": true,
+    "along": "X",
+    "centre": [
+     163.63,
+     140.84
+    ],
+    "least_gap_to_horn": 0.24
+   },
+   "horn_enters_along": [
+    0,
+    -1,
+    0
+   ],
+   "alignment_tolerance_deg": 1.0,
+   "horn_depth_in_pocket_as_modelled": {
+    "hub": 0.67,
+    "arms": 0.37
+   }
+  },
+  "walls": {
+   "R3_NAUO12": {
+    "plane_x": [
+     192.67,
+     195.67
+    ],
+    "direction": [
+     0,
+     -1,
+     0
+    ],
+    "legs": [
+     {
+      "tip": [
+       194.17,
+       96.57,
+       119.16
+      ],
+      "slot_mouth": [
+       194.17,
+       102.96,
+       119.53
+      ]
+     },
+     {
+      "tip": [
+       194.17,
+       96.57,
+       162.04
+      ],
+      "slot_mouth": [
+       194.17,
+       102.96,
+       161.67
+      ]
+     }
+    ],
+    "half_lap_over_R2": {
+     "z": [
+      129.55,
+      132.55
+     ],
+     "y": [
+      102.96,
+      127.66
+     ]
+    },
+    "arm_tips": [
+     [
+      194.17,
+      139.44,
+      105.62
+     ],
+     [
+      194.17,
+      139.44,
+      175.58
+     ]
+    ],
+    "clear_of_R1_from": 6.5,
+    "clear_of_R2_from": 24.75
+   },
+   "R4_NAUO13": {
+    "plane_x": [
+     131.94,
+     134.94
+    ],
+    "direction": [
+     0,
+     -1,
+     0
+    ],
+    "legs": [
+     {
+      "tip": [
+       133.44,
+       96.57,
+       119.16
+      ],
+      "slot_mouth": [
+       133.44,
+       102.96,
+       119.53
+      ]
+     },
+     {
+      "tip": [
+       133.44,
+       96.57,
+       162.04
+      ],
+      "slot_mouth": [
+       133.44,
+       102.96,
+       161.67
+      ]
+     }
+    ],
+    "half_lap_over_R2": {
+     "z": [
+      129.55,
+      132.55
+     ],
+     "y": [
+      102.96,
+      127.66
+     ]
+    },
+    "arm_tips": [
+     [
+      133.44,
+      139.44,
+      105.62
+     ],
+     [
+      133.44,
+      139.44,
+      175.58
+     ]
+    ],
+    "clear_of_R1_from": 6.5,
+    "clear_of_R2_from": 24.75,
+    "L_slot": {
+     "open_at_top_z": [
+      140.6,
+      142.72
+     ],
+     "down_to_y": 127.25,
+     "foot_to_z": 148.72,
+     "foot_y": [
+      127.25,
+      135.75
+     ]
+    }
+   },
+   "R5_NAUO15": {
+    "plane_z": [
+     109.0,
+     112.0
+    ],
+    "direction": [
+     0,
+     0,
+     1
+    ],
+    "bottom_edge_y": 93.53,
+    "joints": [
+     {
+      "slot_xy": [
+       [
+        148.39,
+        156.19
+       ],
+       [
+        99.96,
+        102.96
+       ]
+      ],
+      "takes": "R1 latch pair",
+      "tip": [
+       152.27,
+       101.46,
+       105.62
+      ],
+      "mouth": [
+       152.29,
+       101.46,
+       112.0
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        180.09,
+        192.79
+       ],
+       [
+        99.96,
+        102.96
+       ]
+      ],
+      "takes": "R1 plain tab",
+      "tip": [
+       186.44,
+       101.46,
+       109.0
+      ],
+      "mouth": [
+       186.44,
+       101.46,
+       112.0
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        131.94,
+        134.94
+       ],
+       [
+        133.56,
+        144.56
+       ]
+      ],
+      "takes": "R4 -Z arm",
+      "tip": [
+       133.44,
+       139.44,
+       105.62
+      ],
+      "mouth": [
+       133.44,
+       139.06,
+       112.0
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        192.67,
+        195.67
+       ],
+       [
+        133.56,
+        144.56
+       ]
+      ],
+      "takes": "R3 -Z arm",
+      "tip": [
+       194.17,
+       139.44,
+       105.62
+      ],
+      "mouth": [
+       194.17,
+       139.06,
+       112.0
+      ]
+     }
+    ],
+    "clear_from": 6.5
+   },
+   "R6_NAUO14": {
+    "plane_z": [
+     169.2,
+     172.2
+    ],
+    "direction": [
+     0,
+     0,
+     -1
+    ],
+    "bottom_edge_y": 93.53,
+    "joints": [
+     {
+      "slot_xy": [
+       [
+        176.94,
+        184.75
+       ],
+       [
+        99.96,
+        102.96
+       ]
+      ],
+      "takes": "R1 latch pair",
+      "tip": [
+       180.91,
+       101.46,
+       175.58
+      ],
+      "mouth": [
+       180.85,
+       101.46,
+       169.2
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        134.83,
+        143.72
+       ],
+       [
+        99.96,
+        102.96
+       ]
+      ],
+      "takes": "R1 plain tab",
+      "tip": [
+       139.28,
+       101.46,
+       172.2
+      ],
+      "mouth": [
+       139.28,
+       101.46,
+       169.2
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        131.94,
+        134.94
+       ],
+       [
+        133.56,
+        144.56
+       ]
+      ],
+      "takes": "R4 +Z arm",
+      "tip": [
+       133.44,
+       139.44,
+       175.58
+      ],
+      "mouth": [
+       133.44,
+       139.06,
+       169.2
+      ]
+     },
+     {
+      "slot_xy": [
+       [
+        192.67,
+        195.67
+       ],
+       [
+        133.56,
+        144.56
+       ]
+      ],
+      "takes": "R3 +Z arm",
+      "tip": [
+       194.17,
+       139.44,
+       175.58
+      ],
+      "mouth": [
+       194.17,
+       139.06,
+       169.2
+      ]
+     }
+    ],
+    "clear_from": 6.5
+   },
+   "rigid_path_overlaps": {
+    "R2_off_Y_vs_R1": {
+     "deepest": 1.0,
+     "overlap_from": 0.0,
+     "overlap_to": 5.5,
+     "clear_from": 6.5
+    },
+    "R3_off_Y_vs_R1": {
+     "deepest": 1.02,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.0
+    },
+    "R3_off_Y_vs_R2": {
+     "deepest": 0.03,
+     "overlap_from": null,
+     "overlap_to": null,
+     "clear_from": 24.75
+    },
+    "R4_off_Y_vs_R1": {
+     "deepest": 1.02,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.5
+    },
+    "R4_off_Y_vs_R2": {
+     "deepest": 0.03,
+     "overlap_from": null,
+     "overlap_to": null,
+     "clear_from": 24.75
+    },
+    "R5_off_Z_vs_R1": {
+     "deepest": 1.21,
+     "overlap_from": 0.0,
+     "overlap_to": 5.75,
+     "clear_from": 6.5
+    },
+    "R5_off_Z_vs_R3": {
+     "deepest": 1.07,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.0
+    },
+    "R5_off_Z_vs_R4": {
+     "deepest": 1.07,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.5
+    },
+    "R5_off_Z_vs_B2": {
+     "deepest": 0.0,
+     "overlap_from": null,
+     "overlap_to": null,
+     "clear_from": 0.0
+    },
+    "R6_off_Z_vs_R1": {
+     "deepest": 1.23,
+     "overlap_from": 0.0,
+     "overlap_to": 5.75,
+     "clear_from": 6.5
+    },
+    "R6_off_Z_vs_R3": {
+     "deepest": 1.07,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.0
+    },
+    "R6_off_Z_vs_R4": {
+     "deepest": 1.07,
+     "overlap_from": 0.25,
+     "overlap_to": 5.5,
+     "clear_from": 6.5
+    },
+    "R6_off_Z_vs_B2": {
+     "deepest": 0.0,
+     "overlap_from": null,
+     "overlap_to": null,
+     "clear_from": 0.0
+    }
+   }
+  },
+  "forced_order": [
+   "R1",
+   "base servo + horn",
+   "R2",
+   "R3 and R4",
+   "R5 and R6",
+   "B2",
+   "B1",
+   "screws"
+  ],
+  "cad_overlaps_seated_mm": {
+   "horn/B2": 1.68,
+   "servo/R2": 0.58,
+   "R1/R2": 0.13,
+   "R1/R6": 0.13,
+   "R1/R5": 0.12,
+   "R1/R4": 0.06,
+   "R1/R3": 0.05
+  }
+ },
+ "screws": [
+  {
+   "id": "NAUO47",
+   "axis_x": 209.16,
+   "axis_z": 99.69,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     209.16,
+     99.69
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     209.16,
+     99.69
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.41
+  },
+  {
+   "id": "NAUO48",
+   "axis_x": 104.07,
+   "axis_z": 99.69,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     104.07,
+     99.69
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     104.07,
+     99.69
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.42
+  },
+  {
+   "id": "NAUO49",
+   "axis_x": -20.84,
+   "axis_z": 99.69,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     -20.84,
+     99.69
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     -20.84,
+     99.69
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.41
+  },
+  {
+   "id": "NAUO50",
+   "axis_x": -20.84,
+   "axis_z": 181.99,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     -20.84,
+     181.99
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     -20.84,
+     181.99
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.41
+  },
+  {
+   "id": "NAUO51",
+   "axis_x": 104.07,
+   "axis_z": 181.99,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     104.07,
+     181.99
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     104.07,
+     181.99
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.42
+  },
+  {
+   "id": "NAUO52",
+   "axis_x": 209.16,
+   "axis_z": 181.99,
+   "y_tip": 87.53,
+   "y_top": 96.53,
+   "head_y": [
+    93.03,
+    96.53
+   ],
+   "head_dia": 5.5,
+   "thread_dia": 3.05,
+   "B2_hole": {
+    "centre": [
+     209.16,
+     181.99
+    ],
+    "dia": 2.8,
+    "offset": 0.0
+   },
+   "B1_hole": {
+    "centre": [
+     209.16,
+     181.99
+    ],
+    "dia": 2.3,
+    "offset": 0.0
+   },
+   "overlap_B2": 0.16,
+   "overlap_B1": 0.41
+  }
+ ],
+ "servo_into_R1": {
+  "pivot_P": [
+   163.64,
+   91.19,
+   140.84
+  ],
+  "pose_convention": "turn r=[ax, ay, az, degrees] about the axis through `at`, then move by t; relative to the seated position (same as stepgen.turned)",
+  "straight_down_possible": false,
+  "B_as_in_video": {
+   "note": "servo and horn move as one rigid piece; this is the sequence the video report (video_base_seg1.md, 0:18-0:22) describes",
+   "poses": [
+    {
+     "name": "B0",
+     "what": "above R1, quarter-turn about the shaft away from seated, laid over 60 deg",
+     "servo": {
+      "r": [
+       -0.4472,
+       0.7746,
+       -0.4472,
+       104.48
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       40.0,
+       -6.0
+      ]
+     }
+    },
+    {
+     "name": "B1",
+     "what": "straight down: leading horn tip through the hole, 10 mm below R1",
+     "servo": {
+      "r": [
+       -0.4472,
+       0.7746,
+       -0.4472,
+       104.48
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       14.5,
+       -6.0
+      ]
+     }
+    },
+    {
+     "name": "B2",
+     "what": "swung upright: hub and trailing tip through (trailing tip through the notch)",
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       90
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       7.5,
+       -6.0
+      ]
+     }
+    },
+    {
+     "name": "B3",
+     "what": "slid 6 mm towards +Z: shaft on its seated axis",
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       90
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       7.5,
+       0
+      ]
+     }
+    },
+    {
+     "name": "B4",
+     "what": "twisted back a quarter-turn about the shaft axis (only possible at lift 7.40-7.75)",
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       7.5,
+       0
+      ]
+     }
+    },
+    {
+     "name": "B5",
+     "what": "pressed down: seated, ears on R1",
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   ],
+   "horn_same_as_servo": true,
+   "decomposition": "turn = Rx(pitch) * Ry(+90 deg), pitch -60 deg for B0-B1 and 0 for B2-B3; between B1 and B2 the pitch and t are interpolated linearly",
+   "tested_segments": [
+    {
+     "frm": [
+      -60,
+      40.0,
+      -6.0
+     ],
+     "to": [
+      -60,
+      14.5,
+      -6.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.83,
+     "poses_tested": 256
+    },
+    {
+     "frm": [
+      -60,
+      14.5,
+      -6.0
+     ],
+     "to": [
+      0,
+      7.5,
+      -6.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.1,
+     "poses_tested": 121
+    },
+    {
+     "frm": [
+      0,
+      7.5,
+      -6.0
+     ],
+     "to": [
+      0,
+      7.5,
+      0.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.1,
+     "poses_tested": 61
+    },
+    {
+     "frm": "B3",
+     "to": "B4",
+     "max_penetration": 0,
+     "min_clearance": 0.1
+    },
+    {
+     "frm": "B4",
+     "to": "B5",
+     "max_penetration": 0,
+     "min_clearance": 0.0
+    }
+   ],
+   "twist_window_lift": [
+    7.4,
+    7.75
+   ],
+   "swing_fixed_pivot": {
+    "Bsteep swing": {
+     "pivot": [
+      163.64,
+      102.18,
+      128.78
+     ],
+     "degrees": 60,
+     "max_penetration": 0.229,
+     "min_clearance": 0.0
+    },
+    "B swing (20 deg)": {
+     "pivot": [
+      163.64,
+      98.27,
+      128.92
+     ],
+     "degrees": 20,
+     "max_penetration": 0,
+     "min_clearance": 0.1
+    }
+   }
+  },
+  "B_min_tilt_20deg": {
+   "poses": [
+    {
+     "what": "above R1, whole servo turned 90 deg about the shaft axis and tilted",
+     "pitch_deg": -20,
+     "lift": 40.0,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       40.0,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       40.0,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "lowered: the -Z horn tip has gone through the hole",
+     "pitch_deg": -20,
+     "lift": 14.5,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       14.5,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       14.5,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "lower",
+     "pitch_deg": -20,
+     "lift": 12.0,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       12.0,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       12.0,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "slid 8.5 mm towards -Z along the horn",
+     "pitch_deg": -20,
+     "lift": 9.5,
+     "slide_z": -6.5,
+     "servo": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       9.5,
+       -6.5
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       9.5,
+       -6.5
+      ]
+     }
+    },
+    {
+     "what": "levelled: horn 0.25 mm under the floor, gearbox 0.1 mm above it",
+     "pitch_deg": 0,
+     "lift": 7.5,
+     "slide_z": -6.0,
+     "servo": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       -6.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       -6.0
+      ]
+     }
+    },
+    {
+     "what": "slid 6 mm towards +Z: shaft on its seated axis",
+     "pitch_deg": 0,
+     "lift": 7.5,
+     "slide_z": 0.0,
+     "servo": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       0.0
+      ]
+     }
+    },
+    {
+     "what": "twisted back 90 deg about the shaft axis at lift 7.5 (only lifts 7.40 to 7.75 allow it)",
+     "pitch_deg": 0,
+     "lift": 7.5,
+     "slide_z": 0,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.5,
+       0.0
+      ]
+     }
+    },
+    {
+     "what": "seated (ears on R1)",
+     "pitch_deg": 0,
+     "lift": 0,
+     "slide_z": 0,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "segments": [
+    {
+     "frm": [
+      0,
+      40.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      40.0,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 3.0,
+     "poses_tested": 41
+    },
+    {
+     "frm": [
+      -20,
+      40.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      14.5,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 1.33,
+     "poses_tested": 256
+    },
+    {
+     "frm": [
+      -20,
+      14.5,
+      2.0
+     ],
+     "to": [
+      -20,
+      12.0,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.45,
+     "poses_tested": 26
+    },
+    {
+     "frm": [
+      -20,
+      12.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      9.5,
+      -6.5
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.44,
+     "poses_tested": 86
+    },
+    {
+     "frm": [
+      -20,
+      9.5,
+      -6.5
+     ],
+     "to": [
+      0,
+      7.5,
+      -6.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.1,
+     "poses_tested": 41
+    },
+    {
+     "frm": [
+      0,
+      7.5,
+      -6.0
+     ],
+     "to": [
+      0,
+      7.5,
+      0.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.1,
+     "poses_tested": 61
+    }
+   ],
+   "extra": {
+    "twist": {
+     "max_penetration": 0,
+     "min_clearance": 0.1
+    },
+    "drop": {
+     "max_penetration": 0,
+     "min_clearance": 0.0
+    }
+   }
+  },
+  "A_horn_turned_on_shaft": {
+   "poses": [
+    {
+     "what": "above R1, tilted",
+     "pitch_deg": -20,
+     "lift": 40.0,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -1.0,
+       0.0,
+       0.0,
+       20.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       40.0,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       40.0,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "lowered: the -Z horn tip has gone through the hole near its -Z end",
+     "pitch_deg": -20,
+     "lift": 14.5,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -1.0,
+       0.0,
+       0.0,
+       20.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       14.5,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       14.5,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "lower",
+     "pitch_deg": -20,
+     "lift": 12.0,
+     "slide_z": 2.0,
+     "servo": {
+      "r": [
+       -1.0,
+       0.0,
+       0.0,
+       20.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       12.0,
+       2.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       12.0,
+       2.0
+      ]
+     }
+    },
+    {
+     "what": "slid 8 mm towards -Z along the horn: first half of the horn is under the floor, +Z tip is over the notch",
+     "pitch_deg": -20,
+     "lift": 10.0,
+     "slide_z": -6.0,
+     "servo": {
+      "r": [
+       -1.0,
+       0.0,
+       0.0,
+       20.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       10.0,
+       -6.0
+      ]
+     },
+     "horn": {
+      "r": [
+       -0.1711,
+       0.9703,
+       -0.1711,
+       91.73
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       10.0,
+       -6.0
+      ]
+     }
+    },
+    {
+     "what": "levelled: +Z tip has dropped through the notch; horn is 0.75 mm under the floor",
+     "pitch_deg": 0,
+     "lift": 7.0,
+     "slide_z": -6.5,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.0,
+       -6.5
+      ]
+     },
+     "horn": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.0,
+       -6.5
+      ]
+     }
+    },
+    {
+     "what": "slid 6.5 mm towards +Z: shaft on its seated axis",
+     "pitch_deg": 0,
+     "lift": 7.0,
+     "slide_z": 0.0,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.0,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       7.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "what": "seated (ears on R1)",
+     "pitch_deg": 0,
+     "lift": 0.0,
+     "slide_z": 0.0,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0.0,
+       1.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "what": "horn turned back 90 deg about the shaft axis (under R1), to the CAD pose",
+     "pitch_deg": 0,
+     "lift": 0,
+     "slide_z": 0,
+     "servo": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "horn": {
+      "r": [
+       0,
+       1,
+       0,
+       0
+      ],
+      "at": [
+       163.64,
+       91.19,
+       140.84
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "segments": [
+    {
+     "frm": [
+      0,
+      40.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      40.0,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 3.0,
+     "poses_tested": 41
+    },
+    {
+     "frm": [
+      -20,
+      40.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      14.5,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 1.33,
+     "poses_tested": 256
+    },
+    {
+     "frm": [
+      -20,
+      14.5,
+      2.0
+     ],
+     "to": [
+      -20,
+      12.0,
+      2.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.45,
+     "poses_tested": 26
+    },
+    {
+     "frm": [
+      -20,
+      12.0,
+      2.0
+     ],
+     "to": [
+      -20,
+      10.0,
+      -6.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.45,
+     "poses_tested": 81
+    },
+    {
+     "frm": [
+      -20,
+      10.0,
+      -6.0
+     ],
+     "to": [
+      0,
+      7.0,
+      -6.5
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.31,
+     "poses_tested": 41
+    },
+    {
+     "frm": [
+      0,
+      7.0,
+      -6.5
+     ],
+     "to": [
+      0,
+      7.0,
+      0.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.31,
+     "poses_tested": 66
+    },
+    {
+     "frm": [
+      0,
+      7.0,
+      0.0
+     ],
+     "to": [
+      0,
+      0.0,
+      0.0
+     ],
+     "max_penetration": 0.0,
+     "min_clearance": 0.0,
+     "poses_tested": 71
+    }
+   ]
+  }
+ }
+}
