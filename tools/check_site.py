@@ -20,10 +20,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import site_pages  # noqa: E402  (guides.json's own check, and the frame guard it writes)
+
 SITE = ROOT / 'site'
 TOP_FILES = ('index.html', '404.html', 'robots.txt')
 TOP_DIRS = ('assets', 'kits')
-ASSETS = ('site.css', 'techbox-wordmark-white.svg')
+ASSETS = ('site.css', 'techbox-wordmark-white.svg', 'frame-guard.js')
 IGNORED = ('.DS_Store',)                     # (Finder's; never committed, so never deployed)
 MODEL_GENERATOR = 'TechBox build_model.py'
 MODEL_LIMIT = 15_000_000
@@ -143,6 +146,8 @@ def check_guide(name, folder, releases):
         page = (folder / 'index.html').read_text()
         if "import('./js/player.js?v=' + Date.now())" in page:
             errors.append('index.html is the authoring copy of the player, not a published one')
+        if '<script src="/assets/frame-guard.js"></script>' not in page:
+            errors.append('index.html does not load the site\'s frame guard')
         errors += check_imports(folder, files)
     return errors
 
@@ -155,6 +160,9 @@ def check_pages(site, spec):
         files, problems = walk(assets)
         errors += [f'assets/{p}' for p in problems] + [f'assets/{f}: not one of the site\'s own files' for f in files if f not in ASSETS]
     errors += [f'assets/{a} is missing' for a in ASSETS if not (assets / a).is_file()]
+    guard = assets / 'frame-guard.js'
+    if guard.is_file() and guard.read_text() != site_pages.frame_guard_js(spec):
+        errors.append('assets/frame-guard.js does not match guides.json embed_origins (run python3 tools/site_pages.py)')
     pages = [site / 'index.html', site / '404.html']
     kits = site / 'kits'
     if kits.is_dir():
@@ -202,14 +210,21 @@ def header_rules(text):
 
 def check_render(spec):
     """render.yaml: no page may be framed (X-Frame-Options: DENY on /*), except each guide, by guides.json's embed_origins only
-    (two Content-Security-Policy rules per guide); never a Content-Security-Policy on /* (Render picks one of two at random)."""
+    (two Content-Security-Policy rules per guide); never a Content-Security-Policy on /*, and no header name both on /* and on a
+    narrower path (Render picks one of two same-named matching rules at random); no other site may load the files
+    (Cross-Origin-Resource-Policy: same-site; never Access-Control-Allow-Origin)."""
     path = ROOT / 'render.yaml'
     if not path.is_file():
-        return []
+        return ['render.yaml is missing: it holds the site\'s headers (who may frame what)']
     rules = header_rules(path.read_text())
     errors = []
-    if ('/*', 'X-Frame-Options', 'DENY') not in rules:
-        errors.append('render.yaml: no "X-Frame-Options: DENY" on /* (any site could frame the site\'s own pages)')
+    xfo = [(p, v) for p, n, v in rules if n.lower() == 'x-frame-options']
+    if xfo != [('/*', 'DENY')]:
+        errors.append(f'render.yaml: X-Frame-Options must be one rule, "/*: DENY" (found {xfo or "none"})')
+    if ('/*', 'Cross-Origin-Resource-Policy', 'same-site') not in rules:
+        errors.append('render.yaml: no "Cross-Origin-Resource-Policy: same-site" on /*')
+    if any(n.lower() == 'access-control-allow-origin' for _, n, _ in rules):
+        errors.append('render.yaml: Access-Control-Allow-Origin would let any site load the guides\' files')
     csp = [(p, v) for p, n, v in rules if n.lower() == 'content-security-policy']
     if any(p == '/*' for p, _ in csp):
         errors.append('render.yaml: a Content-Security-Policy on /* (it would collide with the guides\' own)')
@@ -219,12 +234,25 @@ def check_render(spec):
         errors.append(f'render.yaml: no rule "{p}: {v}" (run python3 tools/site_pages.py)')
     for p, v in sorted(set(csp) - want):
         errors.append(f'render.yaml: unexpected Content-Security-Policy rule "{p}: {v}"')
-    names = {}
-    for p, n, _ in rules:                                        # (the same header name twice on one path: Render picks at random)
-        if (p, n.lower()) in names:
+    on_all = {n.lower() for p, n, _ in rules if p == '/*'}
+    seen = set()
+    for p, n, _ in rules:
+        if (p, n.lower()) in seen:
             errors.append(f'render.yaml: two {n} rules on {p}')
-        names[(p, n.lower())] = True
+        seen.add((p, n.lower()))
+        if p != '/*' and n.lower() in on_all:
+            errors.append(f'render.yaml: {n} on {p} and on /* (Render would pick one at random)')
     return errors
+
+
+def uncommitted():
+    """On this computer (not on Render): what the deploy needs that is not committed yet."""
+    try:
+        out = subprocess.run(['git', 'status', '--porcelain', '--', 'site', 'releases', 'render.yaml', 'guides.json'], cwd=ROOT,
+                             capture_output=True, text=True, check=True).stdout.rstrip()
+    except (OSError, subprocess.CalledProcessError):
+        return []
+    return [l for l in out.split('\n') if l.strip()]
 
 
 def check_git_case(site, name, files):
@@ -253,7 +281,10 @@ def check(site=SITE):
     if not site.is_dir():
         return [f'{site} is missing'], 0
     releases = site.parent / 'releases'
-    spec = json.load(open(ROOT / 'guides.json'))
+    try:
+        spec = site_pages.validate(json.load(open(ROOT / 'guides.json')))
+    except SystemExit as e:
+        return [str(e)], 0
     guides = spec['guides']
     for f in TOP_FILES:
         if not (site / f).is_file():
@@ -293,6 +324,11 @@ if __name__ == '__main__':
     errors, total = check(site)
     for e in errors:
         print('ERROR: ' + e)
+    if site == SITE and not os.environ.get('RENDER'):                 # (Render sets RENDER; there the checkout is what deploys)
+        pending = uncommitted()
+        if pending:
+            print(f'NOTE: not committed yet ({len(pending)}): {", ".join(l[3:] for l in pending[:6])}{" ..." if len(pending) > 6 else ""}'
+                  ' (commit them before pushing to live)')
     published = sorted(p.name for p in site.iterdir() if p.is_dir() and not p.name.startswith('.') and p.name not in TOP_DIRS) if site.is_dir() else []
     print(f'{site.name}/: {len(published)} guide(s) ({", ".join(published) or "none"}), {total / 1e6:.1f} MB; '
           f'{"OK" if not errors else f"{len(errors)} problem(s)"}')

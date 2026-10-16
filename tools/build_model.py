@@ -13,7 +13,8 @@ What it does, per mesh:
   * simplifies the triangles to a tolerance in millimetres (purchased parts such as screws, servos
     and cables carry far more detail than a student can see);
   * roughens laser-cut plates ("roughen_mm"): their edges shifted a fraction of a millimetre in the
-    plate's plane, so that no cutting file can be traced from the published model;
+    plate's plane, so that a cutting file traced from the published model comes out slightly wrong
+    (a deterrent, not a guarantee: at 0.1 mm most joints would still fit);
   * extracts the outline (crease) edges once, here, so the player never has to compute them;
   * quantizes and meshopt-compresses the result.
 Identical meshes (the CAD export repeats a screw's geometry for every screw) are processed and stored once.
@@ -294,7 +295,8 @@ def move_engraving(V, N, F, Vp, Fp, face_colour, delta, turn, ink, lift_mm=0.05)
 
 def roughen(V, F, amount_mm, name, wavelength_mm=12.0, n_waves=16):
     """Shift a laser-cut plate's edges by about amount_mm in its own plane, so that a cutting file traced from the model comes
-    out slightly wrong (its tabs and slots do not fit) while the part looks just the same.
+    out slightly wrong while the part looks just the same. A deterrent, not a guarantee: at 0.1 mm a slot's width changes by
+    0.04 - 0.14 mm (median, 95th percentile), within laser and plywood tolerances, so most traced joints would still fit.
 
     The plate's thickness runs along one axis of the mesh's own frame (as engraved_faces assumes), and nothing moves along it.
     Vertices that share a place in the plate's plane (its two faces, the top and bottom of every wall) move together, so the
@@ -907,7 +909,7 @@ def build(kit_dir, keep='guide'):
             for colour, faces in flat_marks(V, F, mats.atlas(rule['atlas'])).items():
                 face_colour[faces] = rule.get('atlas_colours', {}).get(colour, colour)
         # "roughen_mm": a laser-cut plate's edges, slots, holes and engraving shifted by about that much in its plane (see
-        # roughen), so that no cutting file can be traced from the published model. After the engraving is moved and before the
+        # roughen), so that a cutting file traced from the published model comes out slightly wrong. After the engraving is moved and before the
         # crease lines are drawn, so the lines follow the moved faces.
         if rule.get('roughen_mm'):
             V, eased, left = roughen(V, F, rule['roughen_mm'], mesh['name'])

@@ -51,6 +51,7 @@ window._runthrough = () => {
 window._dev = {
   async card() {
     const P = window._player, i = P.views.findIndex(v => v.kind === 'end'), W = 1440, H = 900;
+    if (i < 0) throw new Error('this guide has no Completed View to picture');
     const big = P.renderThumb(i, [2 * W, 2 * H]);              // (drawn large, then cut to the model with a margin, so every card is filled)
     const d = big.getContext('2d').getImageData(0, 0, big.width, big.height).data;
     let x0 = big.width, y0 = big.height, x1 = 0, y1 = 0;
@@ -58,6 +59,7 @@ window._dev = {
       const k = 4 * (y * big.width + x);
       if (d[k] < 245 || d[k + 1] < 245 || d[k + 2] < 245) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
     }
+    if (x1 < x0) throw new Error('the Completed View came out empty: nothing to picture');
     let w = (x1 - x0) * 1.12, h = (y1 - y0) * 1.12;              // (a 6% margin all round, then widened or heightened to the card's shape)
     if (w / h < W / H) w = h * W / H; else h = w * H / W;
     const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, canvas = document.createElement('canvas');

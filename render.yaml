@@ -10,7 +10,8 @@
 # After the first deploy, look at the headers:
 #   for p in / /kits/mini-robot-arm /404.html /mini-robot-arm-full-build /mini-robot-arm-full-build/ /mini-robot-arm-full-build/steps.json; do
 #     echo "== $p"; curl -sI "https://models.tech-box.io$p" | grep -i -E '^(HTTP|content-security-policy|x-frame-options|cache-control)'; done
-# (a guide: content-security-policy: frame-ancestors https://edu.tech-box.io; every other page: x-frame-options: DENY and no CSP;
+# (a guide: content-security-policy: frame-ancestors https://edu.tech-box.io, and x-frame-options: DENY, which browsers ignore
+# when that CSP is there; every other page: x-frame-options: DENY and no CSP;
 # Cache-Control: no-cache everywhere; .js comes as a JavaScript type). Repeat over a few minutes (Render's CDN) and expect the
 # same answers every time; then try a real embed from the LMS, and a frame from anywhere else, which must stay blank.
 # A header deleted from this file must also be deleted in Render's dashboard (Render keeps it otherwise): change a value instead.
@@ -25,7 +26,7 @@ services:
     staticPublishPath: site
     # (no pull-request previews: a preview would put another version of a guide online)
     domains: [models.tech-box.io]
-    # Once models.tech-box.io is verified and working, close the onrender.com address:
+    # Before any address goes into the LMS, once models.tech-box.io is verified and working, close the onrender.com address:
     # renderSubdomainPolicy: disabled
     headers:
       # Every file is re-checked with the server each time a guide opens (a 304 "unchanged" costs almost nothing), so a new
@@ -42,6 +43,10 @@ services:
       - path: /*
         name: Referrer-Policy
         value: strict-origin-when-cross-origin
+      # No other site may load the guides' files into its own pages (never add Access-Control-Allow-Origin).
+      - path: /*
+        name: Cross-Origin-Resource-Policy
+        value: same-site
       # FRAMING. No page may be shown inside another site's frame (X-Frame-Options: DENY on every path), except a guide, which
       # TechBox's LMS may frame (its own Content-Security-Policy frame-ancestors, which browsers obey instead of X-Frame-Options).
       # Never put a Content-Security-Policy on /*: when two rules with the same header name match one path, Render sends one of

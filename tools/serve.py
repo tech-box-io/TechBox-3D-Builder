@@ -8,7 +8,8 @@ A kit folder (one with a guide.py) holds only its content (steps.json, model.glb
 parts.html, js/, vendor/) comes from the one copy in player/, as if it were in the kit folder. Any other folder is served as a
 published copy: it holds its own frozen player, and only the check script (js/runthrough.js, never published) is lent to it
 from player/. A site folder is served the way Render serves one: /<guide> answers with its index.html (no redirect), a missing
-file with site/404.html, and folders are not listed.
+file with site/404.html, folders are not listed, and render.yaml's headers are sent (Cache-Control apart), so that framing can
+be tried here too.
 
 Caching is switched off, so an edit always shows up on reload. For a kit, the part-image and thumbnail tools can save what they
 render back into the folder:
@@ -91,6 +92,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header('Cache-Control', 'no-store')
+        if self.server.kind == 'site':                               # the website's headers (render.yaml), so framing can be tried here
+            path = urllib.parse.unquote(self.path.split('?', 1)[0])
+            for rule, name, value in self.server.headers:
+                if name.lower() != 'cache-control' and (rule == '/*' or rule == path or (rule.endswith('/*') and path.startswith(rule[:-1]))):
+                    self.send_header(name, value)
         super().end_headers()
 
     def do_POST(self):
@@ -132,6 +138,11 @@ if __name__ == '__main__':
     handler = lambda *a, **k: Handler(*a, directory=str(folder), **k)
     with http.server.ThreadingHTTPServer(('127.0.0.1', port), handler) as httpd:
         httpd.kind = kind
+        httpd.headers = []
+        if kind == 'site' and (ROOT / 'render.yaml').is_file():
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from check_site import header_rules
+            httpd.headers = header_rules((ROOT / 'render.yaml').read_text())
         start = {'kit': 'player.html', 'site': '<guide>/', 'releases': '<guide>/r<N>/'}[kind]
         print(f'Serving {folder} ({kind}) at http://localhost:{port}/{start}  (Ctrl+C or close this window to stop)')
         httpd.serve_forever()

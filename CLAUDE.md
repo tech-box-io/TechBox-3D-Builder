@@ -149,10 +149,14 @@ publish copies it into the release (it warns when a guide has none, or one older
   opens a guide can save the model. Only the STEP and editable CAD stay private. So the laser-cut wood is **roughened** in every
   model (Lee, 16 Oct 2026): `materials.json` `"roughen_mm": 0.1` on the wood rule makes `build_model.py` move each vertex of a
   plate's outline 0.05 - 0.1 mm within the plate's plane (the same for both faces, so the plate stays a straight-sided slab;
-  deterministic), so a traced cutting file comes out slightly wrong and its tabs and slots do not fit. Invisible in the guide.
-  The collision tests and cameras use the exact CAD, not the model, so they are unaffected.
+  deterministic), so a traced cutting file comes out slightly wrong. Invisible in the guide. It is a deterrent, not a guarantee:
+  at 0.1 mm a slot's width changes by 0.04 - 0.14 mm, within laser and plywood tolerances, so most traced joints would still
+  fit (an independent review, 16 Oct 2026; told to Lee). Making traced joints reliably fail would take 0.3 - 0.5 mm per slot or
+  tab, which can show as gaps or parts passing into each other in close-ups: Lee's call. The collision tests and cameras use the
+  exact CAD, not the model, so they are unaffected. Checkpoints made before 16 Oct 2026 15:49 (share/) carry the exact geometry.
 - **The order:** commit the checked sources; publish; look at it (`serve.py site`, and `_runthrough()` on `/<guide>/`); run
-  `check_site.py`; commit `site/` and `releases/`. Then, **only on Lee's word**, put it live: `git push origin main:live` (Render
+  `check_site.py`; commit `site/`, `releases/`, `render.yaml` and `guides.json`. Then, **only on Lee's word**, put it live:
+  `git push origin main:live` (Render
   deploys the branch `live`; `main` can be pushed at any time as a backup). If Lee declines, `--restore` the previous release
   (or `--take-down`) before committing. Push outside lesson hours: a learner who has a guide open during a deploy could get a
   mix of old and new files.
@@ -161,8 +165,13 @@ publish copies it into the release (it warns when a guide has none, or one older
   is never a cache to clear. Render needs no routine upkeep: deploys follow the push, the HTTPS certificate renews itself.
 - **On Render:** the GitHub repository must be private, with Render's GitHub App limited to it. Do not use Render's Rollback
   button (it switches automatic deploys off): roll back with `--restore` and push. A header deleted from render.yaml must also
-  be deleted in Render's dashboard. Once the LMS's address is known, render.yaml's `frame-ancestors` line lets only the LMS
-  embed the guides (a new LMS host must be added there first).
+  be deleted in Render's dashboard. **A new LMS address** (a staging host, a new domain) goes into `guides.json`
+  `embed_origins` (lower case, `https://`, no path), then `python3 tools/site_pages.py` (it rewrites render.yaml's rules and
+  `assets/frame-guard.js`), commit, push: no guide needs publishing again.
+- **Before the first LMS link goes out:** the custom domain verified, then `renderSubdomainPolicy: disabled` in render.yaml (the
+  onrender.com address closed); render.yaml's curl loop answers the same over a few minutes; a real embed from the LMS plays on an
+  iPad (Safari) and a Chromebook; a frame from any other site stays blank. Locally, `serve.py site` sends render.yaml's headers,
+  so a frame from `http://127.0.0.1:<port>` is refused by the header just as a foreign site would be.
 - **The embed** (one guide per LMS page, the address with its closing slash, no `?step=`):
   `<iframe src="https://models.tech-box.io/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"
   style="width:100%;height:min(80vh,720px);min-height:420px;border:0"></iframe>`. If the LMS ever adds a `sandbox`, it needs
@@ -226,11 +235,13 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     docs/                      the rulebook, its evidence, and the research reports (research/mra/ = this kit:
                                build videos, engraved codes, how the arm and claw go together, wires, pins, colours)
     player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts, runthrough), vendor/three/
-    guides.json                the guides that can be published: web-address name -> kit folder and steps file
+    guides.json                the kits and guides on the website: kits (name, code, folder), guides (kit, steps file, card label),
+                               embed_origins (the LMS addresses that may frame a guide)
     site/                      the website (Render serves this folder only): the current release of each published guide
     releases/                  every release ever published, frozen, with its record (never uploaded)
     render.yaml                the Render static site's configuration
-    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, bundle.py, step_text.py
+    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
+                               bundle.py, step_text.py; site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
     MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)

@@ -20,9 +20,11 @@ How it fits together:
   cannot be reached from the web. tools/check_site.py (Render's build command) compares it with its release record. After every
   change the website's own pages (the landing page, a page per kit) are made again from what is on the site (tools/site_pages.py).
 - A guide may be shown inside a frame only by the sites in guides.json "embed_origins" (TechBox's LMS): render.yaml's headers say
-  so, and the published index.html carries a second guard. The website's own pages may not be framed at all.
-- What the model gives away: a 3D guide has to send the part shapes to the browser, and for laser-cut wood the mesh holds each
-  plate's exact outline, slots and holes; anyone with the address can save it. Only STEP and editable CAD stay private.
+  so (the real check), and each published index.html loads the site's assets/frame-guard.js (made from embed_origins by
+  site_pages.py, so not frozen into the release) as a second guard. The website's own pages may not be framed at all.
+- What the model gives away: a 3D guide has to send the part shapes to the browser; anyone with the address can save the model.
+  The laser-cut wood is roughened in every model (materials.json "roughen_mm", build_model.py): a deterrent against tracing
+  cutting files straight from it, not a guarantee (at 0.1 mm most joints would still fit). Only STEP and editable CAD stay private.
 - The order: commit the checked sources, publish, look (python3 tools/serve.py site 8797 -> http://localhost:8797/<guide>/),
   commit site/ and releases/; going live is pushing to the branch Render deploys (render.yaml), only on Lee's word.
 
@@ -53,31 +55,9 @@ NAME = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
 RELEASE = re.compile(r'^r[1-9][0-9]*$')
 PLAYER_FILES = ['js/core.js', 'js/player.js']                       # (not parts.html, parts.js or runthrough.js: authoring tools)
 AUTHORING_KEYS = ('review', 'text_key')                              # per view: Review notes for TechBox; the step-text spreadsheet's key
-FRESH_IMPORT = "import('./js/player.js?v=' + Date.now());"          # player.html's "a fresh copy on every load", for authoring
+FRESH_IMPORT = "import('./js/player.js?v=' + Date.now());   // (a fresh copy of the player's code on every load: no browser can keep an old one)"   # player.html's, for authoring
 ICON = '<link rel="icon" href="data:,">'
-GUARD = """<script>
-// Only TechBox's LMS may show this guide inside a frame: the server's Content-Security-Policy frame-ancestors is the real check,
-// this is a second guard. It refuses only a definite foreign origin ("null", no referrer or our own: the header decides).
-(function () {
-  if (window.top === window.self) return;
-  var allowed = ORIGINS, bad = false, ao = location.ancestorOrigins;
-  var local = function (o) { return /^https?:\\/\\/(localhost|127\\.0\\.0\\.1)(:\\d+)?$/.test(o); };
-  if (ao && ao.length) {
-    for (var i = 0; i < ao.length; i++) if (ao[i] !== 'null' && allowed.indexOf(ao[i]) < 0 && !local(ao[i])) bad = true;
-  } else if (document.referrer) {
-    try { var o = new URL(document.referrer).origin; if (o !== location.origin && allowed.indexOf(o) < 0 && !local(o)) bad = true; } catch (e) {}
-  }
-  if (!bad) return;
-  window.techboxFrameRefused = true;
-  document.documentElement.style.visibility = 'hidden';
-  document.addEventListener('DOMContentLoaded', function () {
-    var p = document.createElement('p'), a = document.createElement('a');
-    a.href = location.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Open this build guide in a new tab';
-    p.style.cssText = 'font:16px system-ui,sans-serif;padding:16px'; p.appendChild(a);
-    document.body.replaceChildren(p); document.documentElement.style.visibility = '';
-  });
-})();
-</script>"""
+GUARD = '<script src="/assets/frame-guard.js"></script>'            # the site's second guard against framing (tools/site_pages.py)
 SLASH_FIX = """<script>
 // On the website a guide is the folder /<guide>/ and this page is its index.html: opened without the closing slash, the browser
 // would look for the guide's files one folder up, so add the slash before anything loads.
@@ -104,19 +84,11 @@ def spec():
 
 
 def registry():
-    """The guides in guides.json, each with its kit folder ("folder"), checked."""
-    s = spec()
-    kits, guides = s['kits'], s['guides']
-    for name in list(kits) + list(guides):
-        if not NAME.match(name):
-            raise SystemExit(f'guides.json: "{name}" is not a web-address name (lower-case words joined by hyphens)')
-    for name, g in guides.items():
-        if g.get('kit') not in kits:
-            raise SystemExit(f'guides.json: guide "{name}" names kit "{g.get("kit")}", which is not under "kits"')
-        if name in kits or name in ('kits', 'assets'):
-            raise SystemExit(f'guides.json: "{name}" would clash with a page of the website')
-        g['folder'] = kits[g['kit']]['folder']
-    return guides
+    """The guides in guides.json, each with its kit folder ("folder"), checked (site_pages.validate)."""
+    s = site_pages.validate(spec())
+    for g in s['guides'].values():
+        g['folder'] = s['kits'][g['kit']]['folder']
+    return s['guides']
 
 
 def history(name):
@@ -289,9 +261,8 @@ def build_release(name, entry, note):
         raise SystemExit(f'{final} exists already: a release is never overwritten')
     tmp.mkdir(parents=True)
     player_v = sha256(b''.join((PLAYER / f).read_bytes() for f in PLAYER_FILES))[:12]
-    guard = GUARD.replace('ORIGINS', json.dumps(spec().get('embed_origins', [])))
-    (tmp / 'index.html').write_text(page.replace(FRESH_IMPORT, f"if (!window.techboxFrameRefused) import('./js/player.js?v={player_v}');")
-                                    .replace(ICON, ICON + '\n' + SLASH_FIX + '\n' + guard))
+    (tmp / 'index.html').write_text(page.replace(FRESH_IMPORT, f"if (!window.techboxFrameRefused) import('./js/player.js?v={player_v}');   // (the player's code, named by its content)")
+                                    .replace(ICON, ICON + '\n' + SLASH_FIX + '\n' + GUARD))
     for f in PLAYER_FILES:
         (tmp / f).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(PLAYER / f, tmp / f)
@@ -403,7 +374,7 @@ def main():
             shutil.rmtree(SITE / name, ignore_errors=True)
             h['log'].append(dict(when=when, action='taken down', was=was, note=args.note))
             save_history(name, h)
-            site_pages.build(SITE)
+            site_pages.build(SITE, write_yaml=not args.to)
             print(f'{name}: taken off the website (site/{name}/ removed; commit and push to make it so). Releases kept: '
                   f'{", ".join(f"r{n}" for n in releases_of(name)) or "none"}')
             return
@@ -414,7 +385,7 @@ def main():
             put_on_site(name, src)
             h['log'].append(dict(when=when, action='restored', release=args.restore, was=was, note=args.note))
             save_history(name, h)
-            site_pages.build(SITE)
+            site_pages.build(SITE, write_yaml=not args.to)
             print(f'{name}: {args.restore} is back in site/{name}/. Look: {site_cmd} -> http://localhost:8797/{name}/ ; then commit and push.')
             return
         if not args.note:
@@ -429,7 +400,7 @@ def main():
             raise
         h['log'].append(dict(when=when, action='published', release=record['release'], note=args.note, source=record['source']))
         save_history(name, h)
-        site_pages.build(SITE)
+        site_pages.build(SITE, write_yaml=not args.to)
     size = sum((final / f).stat().st_size for f in record['files'])
     print(f'{name}: {record["release"]} published to site/{name}/ ({len(record["files"])} files, {size / 1e6:.1f} MB; {record["views"]} views)')
     for line in report:
@@ -439,7 +410,7 @@ def main():
     if record['source']['uncommitted_changes']:
         print('  NOTE: the guide\'s sources had uncommitted changes: commit the sources first, so that the release names their commit')
     print(f'  Look first: {site_cmd} -> http://localhost:8797/{name}/   then: {check_cmd}')
-    print('  Then commit site/ and releases/; it goes live when pushed to the branch Render deploys (only on Lee\'s word).')
+    print('  Then commit site/, releases/, render.yaml and guides.json; it goes live when pushed to the branch Render deploys (only on Lee\'s word).')
 
 
 if __name__ == '__main__':

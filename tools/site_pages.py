@@ -8,19 +8,73 @@ guides (opened in the same tab, full window); nothing is offered for download. L
 serves /kits/x as well as /kits/x/.
 
 Framing: these pages may not be shown inside any frame (render.yaml sends X-Frame-Options: DENY on every path, and a line of
-script here is a second guard); a guide may be framed only by guides.json "embed_origins" (TechBox's LMS). This script also
-writes render.yaml's per-guide Content-Security-Policy rules, between its "BEGIN guide framing" and "END guide framing" lines,
-from guides.json: two rules per guide (/<guide> and /<guide>/*), and never a Content-Security-Policy on /* (Render picks one
-value at random when two rules with the same header name match a path). Only the standard library.
+script here is a second guard); a guide may be framed only by guides.json "embed_origins" (TechBox's LMS). This script writes
+the guides' own second guard, assets/frame-guard.js (each published guide's index.html loads it), from embed_origins, so a new
+LMS address reaches every guide without publishing them again; and, for the real site, render.yaml's per-guide
+Content-Security-Policy rules, between its "BEGIN guide framing" and "END guide framing" lines: two rules per guide (/<guide>
+and /<guide>/*), and never a Content-Security-Policy on /* (Render picks one value at random when two rules with the same
+header name match a path). Only the standard library.
 """
 import html
 import json
+import re
+import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'
+SOURCE_ASSETS = Path(__file__).resolve().parent / 'site_assets'      # the TechBox wordmark, copied from the LMS
 YEAR = 2026
+NAME = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
+ORIGIN = re.compile(r'^https://[a-z0-9-]+(\.[a-z0-9-]+)+(:[0-9]{1,5})?$')
+RESERVED = ('kits', 'assets')
+
+
+def validate(spec):
+    """guides.json, checked (the tools that read it all call this): web-address names, each guide's kit, its label, and the LMS
+    addresses (lower case, https, no path or slash: the guard compares them exactly)."""
+    kits, guides, origins = spec.get('kits', {}), spec.get('guides', {}), spec.get('embed_origins')
+    errors = [f'"{n}" is not a web-address name (lower-case words joined by hyphens)' for n in list(kits) + list(guides) if not NAME.match(n)]
+    errors += [f'"{n}" would clash with a page of the website' for n in list(guides) + list(kits) if n in RESERVED]
+    errors += [f'guide "{n}" is also the name of a kit' for n in guides if n in kits]
+    errors += [f'guide "{n}" names kit "{g.get("kit")}", which is not under "kits"' for n, g in guides.items() if g.get('kit') not in kits]
+    errors += [f'guide "{n}" has no "label" (how its card is named)' for n, g in guides.items() if not g.get('label')]
+    errors += [f'kit "{n}" has no "name" or "folder"' for n, k in kits.items() if not k.get('name') or not k.get('folder')]
+    if not isinstance(origins, list) or not origins:
+        errors.append('"embed_origins" must list the LMS address(es), e.g. ["https://edu.tech-box.io"]')
+    else:
+        errors += [f'embed_origins: "{o}" is not an address like https://edu.tech-box.io (lower case, no path or slash)' for o in origins if not ORIGIN.match(str(o))]
+    if errors:
+        raise SystemExit('guides.json: ' + '; '.join(errors))
+    return spec
+
+
+def frame_guard_js(spec):
+    """The guides' second guard against framing (the server's Content-Security-Policy is the real check): it refuses only a
+    definite foreign origin ("null", no referrer or our own: the header decides), and lets this computer frame a guide."""
+    return r"""// Only TechBox's LMS may show a guide inside a frame: the server's Content-Security-Policy frame-ancestors is the real check,
+// this is a second guard (made by tools/site_pages.py from guides.json embed_origins; every published guide loads it).
+(function () {
+  if (window.top === window.self) return;
+  var allowed = ORIGINS, bad = false, ao = location.ancestorOrigins;
+  var local = function (o) { return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(o); };
+  if (ao && ao.length) {
+    for (var i = 0; i < ao.length; i++) if (ao[i] !== 'null' && allowed.indexOf(ao[i]) < 0 && !local(ao[i])) bad = true;
+  } else if (document.referrer) {
+    try { var o = new URL(document.referrer).origin; if (o !== location.origin && allowed.indexOf(o) < 0 && !local(o)) bad = true; } catch (e) {}
+  }
+  if (!bad) return;
+  window.techboxFrameRefused = true;
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function () {
+    var p = document.createElement('p'), a = document.createElement('a');
+    a.href = location.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Open this build guide in a new tab';
+    p.style.cssText = 'font:16px system-ui,sans-serif;padding:16px'; p.appendChild(a);
+    document.body.replaceChildren(p); document.documentElement.style.visibility = '';
+  });
+})();
+""".replace('ORIGINS', json.dumps(spec['embed_origins']))
 
 FRAME_GUARD = """<script>
 // This page is not to be shown inside a frame (only a guide may be, and only by TechBox's LMS); the server's X-Frame-Options:
@@ -139,12 +193,17 @@ def published(site, guides):
     return out
 
 
-def build(site=SITE):
-    spec = json.load(open(ROOT / 'guides.json'))
+def build(site=SITE, write_yaml=None):
+    """write_yaml: also write render.yaml's framing rules (by default only when this is the real site, not a practice one)."""
+    spec = validate(json.load(open(ROOT / 'guides.json')))
     kits, guides = spec['kits'], spec['guides']
     live = published(site, guides)
     (site / 'assets').mkdir(parents=True, exist_ok=True)
     (site / 'assets' / 'site.css').write_text(CSS)
+    (site / 'assets' / 'frame-guard.js').write_text(frame_guard_js(spec))
+    for f in SOURCE_ASSETS.iterdir():
+        if f.is_file() and not f.name.startswith('.'):
+            shutil.copy2(f, site / 'assets' / f.name)
     kit_cards, written = [], set()
     for slug, kit in kits.items():
         names = [n for n, g in guides.items() if g['kit'] == slug and n in live]
@@ -153,7 +212,7 @@ def build(site=SITE):
         cards = []
         for n in names:
             meta, has_pic = live[n]
-            cards.append(card(f'/{n}/', f'/{n}/card.webp' if has_pic else None, guides[n].get('label') or meta.get('part'),
+            cards.append(card(f'/{n}/', f'/{n}/card.webp' if has_pic else None, guides[n].get('label') or meta.get('part') or n,
                               meta.get('title'), 'Open the 3D guide'))
         title = f'{kit["name"]} ({kit["code"]})' if kit.get('code') else kit['name']
         body = (f'<p class="crumbs"><a href="/">Build Guides</a> <span aria-hidden="true">›</span> {esc(kit["name"])}</p>\n'
@@ -171,11 +230,11 @@ def build(site=SITE):
     (site / '404.html').write_text(page('Not found – TechBox Build Guides', '<h1>This page isn’t here</h1>\n'
                                        '<p class="lead">The guide may have moved. <a href="/">See all the build guides</a>, or open it again from your course.</p>'))
     for old in (site / 'kits').glob('*') if (site / 'kits').exists() else []:   # (a kit with no guide left on the site has no page)
-        if old.is_dir() and old.name not in written:
-            for f in old.iterdir():
-                f.unlink()
-            old.rmdir()
-    write_render_yaml(spec)
+        if old.is_dir() and not old.is_symlink() and old.name not in written and (site / 'kits').resolve() in old.resolve().parents:
+            shutil.rmtree(old)
+    if write_yaml if write_yaml is not None else site.resolve() == SITE.resolve():
+        if write_render_yaml(spec):
+            print('render.yaml: the guides\' framing rules changed: commit render.yaml (and guides.json) with site/ and releases/')
     return sorted(written)
 
 
@@ -190,17 +249,19 @@ def framing_rules(spec):
 
 
 def write_render_yaml(spec, path=ROOT / 'render.yaml'):
+    """Write the framing rules into render.yaml; True if the file changed."""
     if not path.is_file():
-        return
+        raise SystemExit(f'{path} is missing: the site\'s headers (who may frame what) are in it')
     text = path.read_text().split('\n')
-    try:
-        a = next(k for k, l in enumerate(text) if l.strip() == BEGIN)
-        b = next(k for k, l in enumerate(text) if l.strip() == END)
-    except StopIteration:
-        raise SystemExit(f'render.yaml has no "{BEGIN}" / "{END}" lines to write the guides\' framing rules between')
-    new = text[:a + 1] + framing_rules(spec) + text[b:]
-    if new != text:
-        path.write_text('\n'.join(new))
+    begins = [k for k, l in enumerate(text) if l.strip() == BEGIN]
+    ends = [k for k, l in enumerate(text) if l.strip() == END]
+    if len(begins) != 1 or len(ends) != 1 or begins[0] > ends[0]:
+        raise SystemExit(f'render.yaml needs one "{BEGIN}" line and, after it, one "{END}" line, to write the guides\' framing rules between')
+    new = text[:begins[0] + 1] + framing_rules(spec) + text[ends[0]:]
+    if new == text:
+        return False
+    path.write_text('\n'.join(new))
+    return True
 
 
 if __name__ == '__main__':
