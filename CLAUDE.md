@@ -216,7 +216,7 @@ Every change to a guide is checked in the browser before it is reported as done.
    screenshot can lag one frame, so take a small throwaway one first. When the pane's screenshots stay stale,
    draw a frame, copy the canvas (and the `#overlay` labels) into a picture and POST it to
    `/__save/thumbs/<name>.png`: `tools/serve.py` saves it into the kit's `thumbs/` folder, where it can be opened
-   as a file. The page's own boxes (caption, caution, parts list, close-up) are HTML: to see them too, clone the page
+   as a file (`_cam.snap(name)` in `player/js/camsolve.js` does this). The page's own boxes (caption, caution, parts list, close-up) are HTML: to see them too, clone the page
    with its computed styles into an SVG foreignObject and draw that over the canvas. Delete `thumbs/` afterwards.)
 3. Read the generator's log: a step with `hand` motion carries a yellow Review note in the player (in a guide with
    `review_notes=False` the log's WARNING line says the same); a step with `lines=0` that is not the first part or a
@@ -234,14 +234,15 @@ background) rather than through `.claude/launch.json`, which only attaches to it
 
     docs/                      the rulebook, its evidence, and the research reports (research/mra/ = this kit:
                                build videos, engraved codes, how the arm and claw go together, wires, pins, colours)
-    player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts, runthrough), vendor/three/
+    player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts; runthrough and camsolve:
+                               authoring tools, never published), vendor/three/
     guides.json                the kits and guides on the website: kits (name, code, folder), guides (kit, steps file, card label),
                                embed_origins (the LMS addresses that may frame a guide)
     site/                      the website (Render serves this folder only): the current release of each published guide
     releases/                  every release ever published, frozen, with its record (never uploaded)
     render.yaml                the Render static site's configuration
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
-                               bundle.py, step_text.py; site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
+                               bundle.py, step_text.py, step_to_glb.py, cut_part.py; site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
     MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)
@@ -253,10 +254,10 @@ background) rather than through `.claude/launch.json`, which only attaches to it
         logo.webp                                                 the title-page logo
         steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
         _v1/                                                      the first prototype's files, for reference
-    RCC Build Instructions/    the second kit, the Remote Controlled Car (first draft, 15 Oct 2026): the same layout as the MRA's
-                               (guide.py, materials.json, rcc.glb from RCC_Assembly_v1.STEP, colour-atlas-rcc.json, wire-paths.json,
-                               silkscreen.py -> decals.json, nano-car.glb = the controller's Nano model for the car's seat,
-                               usb-a-end.glb). Research: docs/research/rcc/.
+    RCC Build Instructions/    the second kit, the Remote Controlled Car (first draft 15 Oct 2026, Lee's first round 16 Oct): the same
+                               layout as the MRA's (guide.py, materials.json, rcc.glb from RCC_Assembly_v1.STEP, colour-atlas-rcc.json,
+                               wire-paths.json, silkscreen.py -> decals.json, nano-mra.glb = the MRA's export of the Nano model, for both
+                               of the RCC's Nano Boards (tools/cut_part.py), usb-a-end.glb). Research: docs/research/rcc/.
                                Commands as for the MRA with the folder name changed (server on port 8796: "Open Prototype.command").
 
 ## Conventions in the code
@@ -268,19 +269,24 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   `guide.py` follows the engravings; `docs/research/mra/cad_codes_base.md` has the table.
 - Where the CAD has a part out of place, `materials.json` `"adjust_mm"` moves it (`[x, y, z]`) or turns it (a pose,
   `{"t", "r", "at"}`); the model and the collision tests both use it, and `_notes.adjusted` says why. The MRA's base
-  horn (moved) and R8 (turned end for end) are the cases so far. `"own_parts"` makes a CAD node inside a part a
+  horn (moved) and R8 (turned end for end) are the cases so far. It also moves a piece inside a part (the RCC adapter
+  board's 2-pin socket, `NAUO70`), in assembly mm all the same; only the model shows that (the collision tests take
+  whole parts). `"own_parts"` makes a CAD node inside a part a
   part of its own (the Nano Board, inside the I/O module's assembly in the CAD). `"stickers"` adds round stickers
-  that the kit puts on a purchased part (the coloured dots that tell the MRA's motors apart). `"extra_parts"` adds a part
+  that the kit puts on a purchased part (the coloured dots that tell the MRA's motors apart, on their wide faces; or one at
+  a spot, `"at"`: the RCC Nano Boards' processors). `"extra_parts"` adds a part
   that comes as a STEP file of its own (the USB cable's two ends): convert it once with `tools/step_to_glb.py` into the
-  kit folder, and give the GLB and a pose placing it in the assembly; both tools then treat it as a CAD part. A rule's
-  `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid.
+  kit folder, and give the GLB and a pose placing it in the assembly; both tools then treat it as a CAD part. The same
+  part from a better export in another kit is cut out with `tools/cut_part.py` (the RCC's Nanos). A rule's
+  `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid; with
+  `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's).
   `"move_engraving"` moves a wood part's engraved code elsewhere on its face (and can turn it the right way up), for a part
   the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead.
 - The player renders only when something changes. Do not add per-frame work. (A close-up is drawn once as its view
   opens; the parts list's pictures load only when its page is shown; reading aloud uses the browser's own voice.)
 - Every step opens on its own camera (the player swings back to it whatever the viewer did). A camera Lee sends as a
-  screenshot is solved by matching renders to it (silhouette and colours, coarse to fine, from a start read off the
-  picture) and written as `view_dir=` + `frame=`. Never change another step's camera unasked: after regenerating, diff
+  screenshot is solved by matching renders to it (silhouette and colours, coarse to fine: `player/js/camsolve.js`)
+  and written as `view_dir=` + `frame=` (with `one_off_camera=True` where the next step chooses its own). Never change another step's camera unasked: after regenerating, diff
   every view's camera against a copy of steps.json saved before the edit.
 - Controls stay real buttons, lists and tick boxes (keyboard and screen reader); on-screen text the student needs is
   in the page or in the announcement made as each step opens, never only in the 3D picture.

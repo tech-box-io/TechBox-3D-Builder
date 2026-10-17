@@ -1,5 +1,5 @@
-"""The RCC's printing, written to decals.json (materials.json "decals" names it): the silkscreen of its three boards and the
-FRONT engraved on L1.
+"""The RCC's printing, written to decals.json (materials.json "decals" names it): the silkscreen of its three boards, the
+radio modules' antenna and the FRONT engraved on L1.
 
     .venv.nosync/bin/python "RCC Build Instructions/silkscreen.py"      then   .venv.nosync/bin/python tools/build_model.py "RCC Build Instructions"
 
@@ -12,6 +12,8 @@ FRONT engraved on L1.
   board's lettering is about 1.4 x the CAD's); the adapter's, which no CAD has, is measured on its photo (calibrated on its
   headers, about 16.5 px/mm). The TechBox logo on both is traced from the kit's logo.webp (the same artwork, white on blue):
   icon and wordmark fitted to the Cadasio solids' boxes on the controller, to the photo on the adapter.
+- NAUO10 / NAUO11, the radio modules: the gold antenna trace, which the CAD has as a plain black sheet (Lee, 16 Oct 2026,
+  with a photo of the module).
 - NAUO1, L1: "FRONT" at the front-left corner of its top face, as Lee drew it (L1_etching.png), in the palette's ink. The CAD
   has no pocket for it, so it is drawn here, in the stroke weight and letter height of the CAD's own engraved "L1" (which
   materials.json "move_engraving" turns the right way up: {"NAUO1": {"by": [-0.74, 0, -0.95], "turn": 180}}).
@@ -384,9 +386,29 @@ o = [code_top + 0.4, L1_TOP + 0.02, L1_LEFT + 5.1 - 0.4]
 l1 = [decal('engraving FRONT', o, [0, 0, 1], [-1, 0, 0], (29.5, 7.2), 40, INK, front(0.4, 0.4))]
 
 
+# ---------------------------------------------------------------- NAUO10 / NAUO11, the radio modules: the gold antenna trace
+# The CAD has the antenna as a plain 0.1 mm black sheet on the board's top (own y 1.2 - 1.3, at the end away from the header).
+# The trace is measured on Lee's photo of the module (lee_images 2026-10-16, about 16.4 px/mm): picture x runs along the board
+# from its antenna end (own z -14.5), picture y across it from the crystal's edge (own x 7.65). Both modules lie face up,
+# turned the same way: own (x, y, z) -> assembly (t_x - z, t_y + y, t_z + x).
+GOLD = '#c8a25c'           # the trace's gold, read off the photo
+TRACE = 0.5                # mm wide
+xl, xr = 0.75, 4.65
+rows = [4.48, 5.70, 6.85, 8.0, 9.15, 10.3]
+meander = [[xl, 0.45]]
+for k, y in enumerate(rows):                              # down the left edge, then back and forth, the turns alternating right / left
+    a, b = (xl, xr) if k % 2 == 0 else (xr, xl)
+    meander += [[a, y], [b, y]]
+meander += [[xl, 11.5], [8.6, 11.5]]                      # ... and along the bottom to the matching parts
+antenna_items = [dict(poly=meander, line=TRACE, open=True), dict(poly=[[6.6, 4.15], [6.6, 11.5]], line=TRACE, open=True)]
+radios = {}
+for rid, (tx, ty, tz) in (('NAUO10', (758.057, 941.378, 1323.433)), ('NAUO11', (723.699, 929.736, 1132.903))):
+    radios[rid] = [decal('antenna', [tx + 14.5, ty + 1.3 + 0.02, tz + 7.65], [-1, 0, 0], [0, 0, -1], (9.5, 12.0), 40, GOLD, antenna_items)]
+
+
 # ---------------------------------------------------------------- write
 out = {'_about': 'Printing on parts, drawn by the player (js/core.js); materials.json "decals" names this file. Written by silkscreen.py: edit that, not this.',
-       'NAUO1': l1, 'NAUO23': shield, 'NAUO26': adapter, 'NAUO30': controller}
+       'NAUO1': l1, 'NAUO23': shield, 'NAUO26': adapter, 'NAUO30': controller, **radios}
 with open(HERE / 'decals.json', 'w') as f:                # (one item a line)
     keys = [k for k in out if k != '_about']
     f.write('{\n "_about": ' + json.dumps(out['_about']) + ',\n')

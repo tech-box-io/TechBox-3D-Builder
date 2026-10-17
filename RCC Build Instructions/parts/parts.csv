@@ -1,16 +1,13 @@
 name,quantity,image
 "Controller Board",1,Controller-Board.png
-"Left Controller Guard",1,Left-Controller-Guard.png
-"Right Controller Guard",1,Right-Controller-Guard.png
 "Nano Board",2,Nano-Board.png
 "Radio Module",2,Radio-Module.png
 "Joystick",2,Joystick.png
 "Nano I/O Module",1,Nano-I-O-Module.png
 "Adapter Board",1,Adapter-Board.png
 "Wheel Motor",2,Wheel-Motor.png
-"Wheel",2,Wheel.png
 "9V Battery",1,9V-Battery.png
-"Battery Clip",1,Battery-Clip.png
+"9V Adapter",1,9V-Adapter.png
 "USB Cable",1,USB-Cable.png
 "L1",1,L1.png
 "L2",1,L2.png

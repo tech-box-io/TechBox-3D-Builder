@@ -2,13 +2,13 @@
  "summary": {
   "source": "rcc.glb",
   "source_bytes": 33164812,
-  "model_bytes": 1968068,
-  "triangles_in": 1050284,
-  "triangles_out": 235642,
-  "edge_segments": 111852,
-  "meshes": 68,
+  "model_bytes": 1987208,
+  "triangles_in": 1409870,
+  "triangles_out": 236554,
+  "edge_segments": 112021,
+  "meshes": 70,
   "parts_kept": 29,
-  "parts_in_source": 45,
+  "parts_in_source": 46,
   "materials": [
    "edge",
    "ink",
@@ -25,12 +25,14 @@
    "#808080",
    "#181818",
    "#404040",
-   "battery_grey",
+   "battery_amber",
+   "battery_slate",
+   "battery_top",
    "cable_black",
    "wire_red",
    "lead_brown",
+   "lead_orange",
    "lead_red",
-   "lead_yellow",
    "servo_fs90r",
    "servo_fs90r_label",
    "servo_fs90r_spline",
@@ -46,10 +48,12 @@
    "#191919",
    "header_black",
    "pcb_white",
+   "white_plastic",
    "#000f41",
    "#d3d6d3",
    "#efefef",
-   "white_plastic"
+   "sticker_white",
+   "sticker_blue"
   ],
   "wire_colour_breaks": []
  },
@@ -306,11 +310,13 @@
    "mesh": "9V-battery",
    "used_by": 1,
    "solids": 5,
-   "tris_in": 13834,
-   "tris_out": 2824,
-   "edge_segments": 640,
+   "tris_in": 15294,
+   "tris_out": 3106,
+   "edge_segments": 939,
    "colours": [
-    "battery_grey",
+    "battery_amber",
+    "battery_slate",
+    "battery_top",
     "pin"
    ],
    "note": ""
@@ -349,11 +355,11 @@
    "solids": 6,
    "tris_in": 7288,
    "tris_out": 1777,
-   "edge_segments": 658,
+   "edge_segments": 700,
    "colours": [
     "lead_brown",
+    "lead_orange",
     "lead_red",
-    "lead_yellow",
     "servo_fs90r",
     "servo_fs90r_label",
     "servo_fs90r_spline"
@@ -769,26 +775,6 @@
    "note": ""
   },
   {
-   "mesh": "nano_Varsay\u0131lan",
-   "used_by": 2,
-   "solids": 273,
-   "tris_in": 200938,
-   "tris_out": 33878,
-   "edge_segments": 14648,
-   "colours": [
-    "#000f41",
-    "#181818",
-    "#191919",
-    "#a5936d",
-    "#a6a9aa",
-    "#d3d6d3",
-    "#e4e4e4",
-    "#efefef",
-    "pin"
-   ],
-   "note": "atlas match 100%; 70545 faces under a skin recoloured"
-  },
-  {
    "mesh": "Insolation",
    "used_by": 1,
    "solids": 1,
@@ -938,6 +924,50 @@
     "white_plastic"
    ],
    "note": ""
+  },
+  {
+   "mesh": "nano_Varsay\u0131lan",
+   "used_by": 2,
+   "solids": 273,
+   "tris_in": 380001,
+   "tris_out": 34193,
+   "edge_segments": 14541,
+   "colours": [
+    "#000f41",
+    "#181818",
+    "#191919",
+    "#a5936d",
+    "#a6a9aa",
+    "#d3d6d3",
+    "#e4e4e4",
+    "#efefef",
+    "pin"
+   ],
+   "note": "atlas match 100%; 141247 faces under a skin recoloured"
+  },
+  {
+   "mesh": "sticker sticker_white on NANO_CONTROLLER",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_white"
+   ],
+   "note": "added by the kit"
+  },
+  {
+   "mesh": "sticker sticker_blue on NANO_CAR",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 0,
+   "tris_out": 120,
+   "edge_segments": 40,
+   "colours": [
+    "sticker_blue"
+   ],
+   "note": "added by the kit"
   }
  ]
 }

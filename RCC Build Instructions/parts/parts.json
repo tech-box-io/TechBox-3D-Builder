@@ -9,16 +9,6 @@
    "image": "Controller-Board.png"
   },
   {
-   "name": "Left Controller Guard",
-   "quantity": 1,
-   "image": "Left-Controller-Guard.png"
-  },
-  {
-   "name": "Right Controller Guard",
-   "quantity": 1,
-   "image": "Right-Controller-Guard.png"
-  },
-  {
    "name": "Nano Board",
    "quantity": 2,
    "image": "Nano-Board.png"
@@ -49,19 +39,14 @@
    "image": "Wheel-Motor.png"
   },
   {
-   "name": "Wheel",
-   "quantity": 2,
-   "image": "Wheel.png"
-  },
-  {
    "name": "9V Battery",
    "quantity": 1,
    "image": "9V-Battery.png"
   },
   {
-   "name": "Battery Clip",
+   "name": "9V Adapter",
    "quantity": 1,
-   "image": "Battery-Clip.png"
+   "image": "9V-Adapter.png"
   },
   {
    "name": "USB Cable",

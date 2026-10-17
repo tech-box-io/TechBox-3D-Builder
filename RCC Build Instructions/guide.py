@@ -8,6 +8,12 @@ First draft (15 Oct 2026). The order and the wiring follow TechBox's published C
 cadasio_study.md), put right where that guide goes wrong (the car's Nano Board disappears and looks reversed, the battery is
 never plugged in, the joysticks glide in through the guard, the test is half there); the geometry is the CAD's (docs/research/
 rcc/cad_study.md). Lee's open decisions are yellow Review notes on their steps. One part or one action per step.
+
+Lee's first round (16 Oct 2026): the controller guards come fitted to the controller board and the wheels to the wheel motors (no
+steps for them; one part each, "Controller Board" and "Wheel Motor"); "9V Adapter" for the battery clip; brown, red and orange
+leads; the 9V adapter and battery taken off as one before the motors are unplugged; the leads lie straight back along L1; the
+cameras of Steps 6, 7, 16, 23, 25 - 28 as he gave them (the step numbers here are the new ones: Steps 1 and 2, the guards, and
+Steps 10 and 11, the wheels, are gone, and a step is added before the motors are unplugged).
 """
 import re
 import sys
@@ -35,52 +41,67 @@ MODULE = 'NAUO23'                                                   # the Nano I
 CAR_NANO = 'NANO_CAR'                                               # the car's Nano Board: the controller's Nano model in the car's seat (materials.json "extra_parts")
 GUARD_LEFT, GUARD_RIGHT = 'NAUO24', 'NAUO25'
 ADAPTER = 'NAUO26'                                                  # TechBox's L-shaped adapter board: U1 (LWh), U2 (RWh), U3 (radio)
-CONTROLLER_NANO = 'NAUO27'
+CONTROLLER_NANO = 'NANO_CONTROLLER'                                 # the controller's Nano Board: the MRA's export of the CAD's NAUO27 (materials.json "extra_parts")
 BARREL = 'NAUO29'                                                   # the barrel plug on the battery clip's lead, as the CAD has it in the power socket
 BOARD = 'NAUO30'                                                    # the controller board
 # (Not used: the CAD poses each lead twice. NAUO21 / 22 are the same plugs lying loose, NAUO28 the barrel plug out of its
-# socket, NAUO31 - 42 the leads' bodies, drawn as wires here; NAUO86 is the car's Nano as the CAD has it, a plainer model.)
+# socket, NAUO31 - 42 the leads' bodies, drawn as wires here; NAUO86 is the car's Nano as the CAD has it, a plainer model, and
+# NAUO27 the controller's, whose export has sliver triangles across the board.)
 
 NAMES = {L1: 'L1', L2: 'L2', L3: 'L3', L4: 'L4', L5: 'L5', L6: 'L6', L7: 'L7',
-         WHEEL_R: 'Wheel', WHEEL_L: 'Wheel', CAR_RADIO: 'Radio Module', CONTROLLER_RADIO: 'Radio Module',
-         JOY_LEFT: 'Joystick', JOY_RIGHT: 'Joystick', BATTERY: '9V Battery', CLIP: 'Battery Clip', USB_B: 'USB Cable', USB_A: 'USB Cable',
+         CAR_RADIO: 'Radio Module', CONTROLLER_RADIO: 'Radio Module',
+         JOY_LEFT: 'Joystick', JOY_RIGHT: 'Joystick', BATTERY: '9V Battery', CLIP: '9V Adapter', USB_B: 'USB Cable', USB_A: 'USB Cable',   # ("9V Adapter": Lee, 16 Oct 2026)
          MOTOR_R: 'Wheel Motor', MOTOR_L: 'Wheel Motor', PLUG_R: 'Wheel Motor', PLUG_L: 'Wheel Motor',
-         MODULE: 'Nano I/O Module', CAR_NANO: 'Nano Board', CONTROLLER_NANO: 'Nano Board', ADAPTER: 'Adapter Board',
-         GUARD_LEFT: 'Left Controller Guard', GUARD_RIGHT: 'Right Controller Guard', BOARD: 'Controller Board'}
-PART_OF = {BARREL: CLIP}                                            # the barrel plug comes on the battery clip's lead: one part
+         MODULE: 'Nano I/O Module', CAR_NANO: 'Nano Board', CONTROLLER_NANO: 'Nano Board', ADAPTER: 'Adapter Board', BOARD: 'Controller Board'}
+# The barrel plug comes on the 9V adapter's lead; the guards come fitted to the controller board, and the wheels to the wheel
+# motors (Lee, 16 Oct 2026): one part each, no step to fit them.
+PART_OF = {BARREL: CLIP, GUARD_LEFT: BOARD, GUARD_RIGHT: BOARD, WHEEL_R: MOTOR_R, WHEEL_L: MOTOR_L}
+# The pointer names the two of each more exactly than the parts list does (as each is labelled when it comes in).
+HOVER_NAMES = {JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick', MOTOR_L: 'Left Wheel Motor', MOTOR_R: 'Right Wheel Motor',
+               PLUG_L: 'Left Wheel Motor', PLUG_R: 'Right Wheel Motor'}
 UNLISTED = [PLUG_R, PLUG_L, USB_A]                                  # named on hover only (a motor's plug; the USB cable is listed by its Mini-B end)
 # How the parts list pictures a part, where the generator's own view does not suit: L1's FRONT / L1 and the controller board's
-# print came out upside down; the guards and the adapter board are seen from above, so that their print and rims show.
+# print came out upside down; the adapter board is seen from above, so that its print shows; the wheel motor from its inner
+# side, so that the motor shows and not only its wheel.
 PART_VIEWS = {'L1': {'roll': 180}, 'Controller Board': {'roll': 180}, 'Adapter Board': {'dir': [0.45, 0.85, 0.25]},
-              'Left Controller Guard': {'dir': [-0.45, 0.85, 0.25]}, 'Right Controller Guard': {'dir': [-0.45, 0.85, -0.25]}}
+              'Wheel Motor': {'dir': [-0.45, 0.55, 0.7]}}
 
-# The parts list after the title page: one band per kind of part (as in the MRA guide).
+# The parts list after the title page: one band per kind of part (as in the MRA guide). The controller's band holds the parts
+# that go on the controller board (one Nano Board and one radio module of the two: Lee, 16 Oct 2026), so a band takes parts by
+# their ids. The wood's bands are blue-grey, as the MRA's (Lee, 16 Oct 2026).
+WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'
+ON_CONTROLLER = {BOARD, CONTROLLER_NANO, CONTROLLER_RADIO, JOY_LEFT, JOY_RIGHT}
 PART_GROUPS = [
-    ('Parts List', 'Controller', 'electronics', '#f9c0c0', '#ec8d8d', lambda n: n in ('Controller Board', 'Left Controller Guard', 'Right Controller Guard', 'Joystick')),
-    ('Parts List', 'Electronics', 'electronics', '#f9c0c0', '#ec8d8d', lambda n: n in ('Nano Board', 'Nano I/O Module', 'Adapter Board', 'Radio Module', 'USB Cable', '9V Battery', 'Battery Clip')),
-    ('Parts List', 'Motors and wheels', 'motors', '#d8edc6', '#a3cf84', lambda n: n in ('Wheel Motor', 'Wheel')),
-    ('Parts List (Cont.)', 'Chassis', 'wood', '#fddcbc', '#f3b583', lambda n: re.fullmatch(r'L\d+', n)),
+    ('Parts List', 'Controller', 'electronics', '#f9c0c0', '#ec8d8d', lambda n, i: i in ON_CONTROLLER),
+    ('Parts List', 'Electronics', 'electronics', '#f9c0c0', '#ec8d8d', lambda n, i: n in ('Nano Board', 'Nano I/O Module', 'Adapter Board', 'Radio Module', 'USB Cable', '9V Battery', '9V Adapter')),
+    ('Parts List', 'Motors', 'motors', '#d8edc6', '#a3cf84', lambda n, i: n == 'Wheel Motor'),
+    ('Parts List (Cont.)', 'Chassis', 'wood', WOOD_BAND, WOOD_HALO, lambda n, i: re.fullmatch(r'L\d+', n)),
 ]
 
 
 def parts_list(parts):
-    """The parts list's pages for the parts this guide shows (see Guide(parts_list=))."""
+    """The parts list's pages for the parts this guide shows (see Guide(parts_list=)): a part whose pieces belong to two bands
+    (a Nano Board on the controller and one in the car) is listed in each, with the number that band takes."""
     natural = lambda p: [int(t) if t.isdigit() else t for t in re.split(r'(\d+)', p['name'])]
     pages, used = {}, set()
     for page, title, icon, colour, halo, wanted in PART_GROUPS:
-        items = [p for p in parts if wanted(p['name']) and p['name'] not in used]
+        items = []
+        for p in parts:
+            ids = [i for i in p['ids'] if i not in used and wanted(p['name'], i)]
+            if ids:
+                used.update(ids)
+                items.append((p, round(p['qty'] * len(ids) / len(p['ids']))))
         if icon == 'wood':
-            items.sort(key=natural)
+            items.sort(key=lambda t: natural(t[0]))
         if not items:
             continue
-        used.update(p['name'] for p in items)
         if icon == 'wood':
-            title = f"{title} ({items[0]['name']}{' - ' + items[-1]['name'] if len(items) > 1 else ''})"
-        for p in items:
-            p['group'] = title
+            title = f"{title} ({items[0][0]['name']}{' - ' + items[-1][0]['name'] if len(items) > 1 else ''})"
+        for p, _ in items:
+            p['group'] = f"{p['group']} / {title}" if p.get('group') else title
         pages.setdefault(page, []).append(dict(title=title, icon=icon, colour=colour, halo=halo,
-                                               items=[dict(name=p['name'], qty=p['qty'], picture=p['picture']) for p in items]))
-    left = [p for p in parts if p['name'] not in used]
+                                               items=[dict(name=p['name'], qty=qty, picture=p['picture']) for p, qty in items]))
+    left = [p for p in parts if any(i not in used for i in p['ids'])]
     if left:
         other = dict(title='Other parts', icon='wood', colour='#e8e8e8', halo='#bdbdbd', items=[dict(name=p['name'], qty=p['qty'], picture=p['picture']) for p in left])
         pages.setdefault(list(pages)[-1] if pages else 'Parts List', []).append(other)
@@ -95,22 +116,22 @@ CODES = {L1: ([0, 1, 0], [766.26, 908.97, 1394.03]), L2: ([0, 0, -1], [677.40, 8
          L7: ([0, 0, -1], [767.15, 902.08, 1321.48])}
 
 g = Guide(HERE, title='Remote Controlled Car (RCC)',   # ("Remote": Lee, 16 Oct 2026)
-          part='Full Build', names=NAMES, part_views=PART_VIEWS, part_of=PART_OF, unlisted=UNLISTED, source='rcc.glb',
+          part='Full Build', names=NAMES, part_views=PART_VIEWS, part_of=PART_OF, unlisted=UNLISTED, hover_names=HOVER_NAMES, source='rcc.glb',
           codes=CODES, hero_azimuth=135,                            # the finished car from the front, on its left (the controller's) side, above
           parts_list=parts_list,
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
 
 # ---------------------------------------------------------------- wires
 # The CAD's lead bodies are left out of the model (materials.json "omit"); the leads are drawn from wire-paths.json. A wheel
-# motor's lead is three wires (brown on G, red on V, yellow on S) ending in a plug, which rides on the loose end of the lead until
-# a step plugs it in. The battery clip's lead is two wires (red, black) ending in the barrel plug.
+# motor's lead is three wires (brown on G, red on V, orange on S) ending in a plug, which rides on the loose end of the lead until
+# a step plugs it in. The 9V adapter's lead is two wires (red, black) ending in the barrel plug.
 paths = W.load(HERE / 'wire-paths.json')
-LEAD_COLOURS = ['lead_brown', 'lead_red', 'lead_yellow']            # G, V, S (yellow, as the CAD and the published guide have it: see Step 13's note)
+LEAD_COLOURS = ['lead_brown', 'lead_red', 'lead_orange']            # G, V, S (orange, as the MRA's servos: Lee, 16 Oct 2026)
 ZERO = [0.0, 0.0, 0.0]
 
 
 def lead_wires(name, motor_name):
-    ids = [f'{name} {c}' for c in ('brown', 'red', 'yellow')]
+    ids = [f'{name} {c}' for c in ('brown', 'red', 'orange')]
     for wire_id, colour in zip(ids, LEAD_COLOURS):
         g.wire(wire_id, colour, 0.5, name=motor_name)
     return ids
@@ -136,10 +157,12 @@ def to_length(corners, length, radius=6.0):
 
 
 # The table: on the bench the I/O module lies on its underside; the motors stand on their wheels beside it and the battery on its
-# end behind it, each where it goes in the car but lifted onto the table (the chassis is not there yet).
+# end behind it, each where it goes in the car but lifted onto the table (the chassis is not there yet). The battery stands 18 mm
+# further back than in the car, so that the barrel plug can be held in line with the power socket, 20 mm out, and pushed
+# straight in (Lee, 16 Oct 2026).
 TABLE_Y = float(g.model.inst[MODULE].bounds[0][1])
 MOTOR_ON_BENCH = [0.0, round(TABLE_Y - float(g.model.inst[WHEEL_R].bounds[0][1]), 2), 0.0]
-BATTERY_ON_BENCH = [0.0, round(TABLE_Y - float(g.model.inst[BATTERY].bounds[0][1]), 2), 0.0]
+BATTERY_ON_BENCH = [-18.0, round(TABLE_Y - float(g.model.inst[BATTERY].bounds[0][1]), 2), 0.0]
 LEAD_MM = 115.0                                                     # one length for both motors' leads (the CAD's differ: see Step 13's note)
 
 
@@ -183,7 +206,7 @@ def motor_lead(name, motor, plug_id, side, bench_over, plugged_over):
     corners its middle wire passes over on its way to its header, on the bench / in the car (it leaves the motor backwards, -X)."""
     chain = paths['chains'][motor]
     plug = W.plug(paths['plugs'][plug_id], g_towards=[0, 0, 1])     # (S at +Z, G at -Z on U1 and U2, as printed "S V G")
-    exit_, across, ids = np.asarray(chain['leaves_servo_at'], float), np.asarray(chain['across'], float), lead_wires(name, 'Wheel Motor')
+    exit_, across, ids = np.asarray(chain['leaves_servo_at'], float), np.asarray(chain['across'], float), lead_wires(name, f'{name.title()} Wheel Motor')
     top = plug['tops'][1]
     ends = dict(a=motor, b=plug_id)
     lead = dict(chain=chain, plug=plug, wires=ids, exit=exit_)
@@ -201,12 +224,15 @@ def motor_lead(name, motor, plug_id, side, bench_over, plugged_over):
     # In the hand (the motor into L5, L4 slid along the leads): straight back from the motor.
     straight, lead['hand_pose'] = W.loose_lead(to_length([exit_, exit_ + [-LEAD_MM, 0, 0]], LEAD_MM), across, plug)
     lead['hand'] = routes(ids, straight, b_at=lead['hand_pose'], **ends)
-    # On L1 once the motors are in: out through the hole in L4 and L1's notch behind it, up onto L1 and back along it outside the
-    # battery's hole, then round behind it, the plug lying flat on L1 pointing towards the middle of the car (the two plugs' ends
-    # some 12 mm apart, either side of L2's tab).
+    # On L1 once the motors are in: out through the hole in L4, up out of L1's notch behind it (the notch ends at x 703.5, so the
+    # lead is on top of L1 by then) and straight back along L1; the round end of L1 leaves no room for the whole lead straight
+    # back at the motor's side, so for its last part it angles in towards the back of the car, the plug lying flat on L1 behind
+    # the battery's hole, pointing back (Lee, 16 Oct 2026: no wrapping round, and the lead must not pass through L1).
+    # (It leaves the motor on edge and turns flat evenly along its length, so it comes up out of the notch 0.8 mm higher and
+    # settles onto L1 as it turns.)
     z, on_l1 = exit_[2], 909.23 + FLAT
-    deck = [exit_, [704.0, exit_[1], z], [695.0, on_l1, z], [640.0, on_l1, z], [620.0, on_l1, z - side * 14.0], [620.0, on_l1, z - side * 60.0]]
-    lying, lead['deck_pose'] = lying_flat(to_length(deck, LEAD_MM), across, plug, [1.0, 0.0, 0.0])
+    deck = [exit_, [711.0, exit_[1], z], [707.0, on_l1 + 0.8, z], [672.0, on_l1, z], [620.0, on_l1, 1338.5 + side * 13.0]]
+    lying, lead['deck_pose'] = lying_flat(to_length(deck, LEAD_MM, 5.0), across, plug, [0.0, 0.0, 1.0])
     lead['deck'] = routes(ids, lying, b_at=lead['deck_pose'], **ends)
     # Plugged in, in the car: out through L4, up behind it and over the module to its header.
     plugged = W.plugged_lead(fitted(lambda s: W.rounded([exit_, [705.0, exit_[1], z], *over(plugged_over, s), [top[0], top[1] + 14, top[2]], top], radius=8), LEAD_MM),
@@ -225,35 +251,51 @@ LEFT_LEAD = motor_lead('left', MOTOR_L, PLUG_L, -1, bench_over=[[700.0, 950.0, 1
 for _lead in (RIGHT_LEAD, LEFT_LEAD):
     g.log.append(f"  lead {_lead['wires'][0].split()[0]}: plugged in {_lead['plugged_mm']:.1f} mm in the car, {_lead['bench_mm']:.1f} mm on the bench (loose {LEAD_MM:.0f} mm)")
 
-# --- the battery clip's lead: two wires from the clip on the battery to the barrel plug. The CAD has it out of the socket and in.
+# --- the 9V adapter's lead: two wires from the clip on the battery to the barrel plug. The CAD has it out of the socket and in.
+# The clip and the plug each have a stub of each wire (6 mm and 3 mm long); the CAD's conductors start at the inner end of the
+# clip's stubs and end at the plug's grip, so each wire is drawn from the end of its stub on the clip to the end of its stub on
+# the plug, carrying on along both (Lee, 16 Oct 2026: they looked like stubs with other wires leaving beside them).
 BATTERY_LEAD = ['battery red', 'battery black']
 for _wire, _colour in zip(BATTERY_LEAD, ('wire_red', 'cable_black')):   # (the colours of the stubs on the clip and the plug)
-    g.wire(_wire, _colour, 0.68, name='Battery Clip')
+    g.wire(_wire, _colour, 0.68, name='9V Adapter')
 OUT_OF_SOCKET = [-8.95, 0.0, 0.0]                                   # the barrel plug out of the power socket, as the CAD has it (NAUO28)
-OVER_SOCKET = [-8.95, 14.0, 0.0]                                    # ... and lifted clear of the socket, its back against the battery: how it rides until plugged in
+CLIP_STUB, PLUG_STUB = 6.0, 3.0
 battery = paths['battery']
-battery_in = {w: W.route(battery['plugged'][c], a=CLIP, b=BARREL) for w, c in zip(BATTERY_LEAD, ('red', 'black'))}
+
+
+def stub_ends(c):
+    """Where conductor c leaves the end of its stub on the clip and where it meets the end of its stub on the plug (seated), and the
+    way each stub points (clip: away from the clip; plug: into the plug)."""
+    line = np.asarray(battery['plugged'][c], float)
+    out, into = W._unit(line[1] - line[0]), W._unit(line[-1] - line[-2])
+    return line[0] + out * CLIP_STUB, out, line[-1] - into * PLUG_STUB, into
+
+
+def cad_lead(pose):
+    """The CAD's own lead, in its pose 'plugged' or 'out', from stub end to stub end."""
+    return {w: W.route(W.along(battery[pose][c], CLIP_STUB, W.length(battery[pose][c]) - PLUG_STUB), a=CLIP, b=BARREL,
+                       b_at=OUT_OF_SOCKET if pose == 'out' else None) for w, c in zip(BATTERY_LEAD, ('red', 'black'))}
+
+
+battery_in, battery_out = cad_lead('plugged'), cad_lead('out')
 PICTURED_PLUG = [-30.0, -14.0, 22.0]                               # (in the parts list: the clip with its barrel plug laid out beside it on its lead)
-g.part_picture('Battery Clip', poses={BARREL: PICTURED_PLUG},
-               wires=[dict(colour=colour, radius=0.68, pts=W.curve(np.asarray(battery['plugged'][c][0]), np.subtract(battery['plugged'][c][1], battery['plugged'][c][0]),
-                                                                   apply_pose(PICTURED_PLUG, battery['plugged'][c][-1]), [1.0, 0.0, 0.0], pull=14.0))
-                      for colour, c in (('wire_red', 'red'), ('cable_black', 'black'))])
+g.part_picture('9V Adapter', poses={BARREL: PICTURED_PLUG},
+               wires=[dict(colour=colour, radius=0.68, pts=W.curve(a, out, apply_pose(PICTURED_PLUG, b), into, pull=14.0))
+                      for colour, (a, out, b, into) in (('wire_red', stub_ends('red')), ('cable_black', stub_ends('black')))])
 
 
 def battery_lead(plug_pose, battery_pose=ZERO):
-    """The clip's lead from the clip (on the battery at `battery_pose`) to the barrel plug at `plug_pose`: on the bench the battery
-    stands on the table, its clip higher than in the car, and the lead is a little longer than the CAD's so that it reaches."""
+    """The 9V adapter's lead from the clip (on the battery at `battery_pose`) to the barrel plug at `plug_pose` (both moves):
+    on the bench the battery stands on the table, and the lead is a little longer than the CAD's so that it reaches."""
     out = {}
     for w, c in zip(BATTERY_LEAD, ('red', 'black')):
-        line = np.asarray(battery['plugged'][c], float)
-        start, end = line[0] + battery_pose, apply_pose(plug_pose, line[-1])
-        out[w] = W.route(W.curve(start, line[1] - line[0], end, line[-1] - line[-2], pull=14.0), a=CLIP, b=BARREL,
+        a, leaves, b, into = stub_ends(c)
+        out[w] = W.route(W.curve(np.add(a, battery_pose), leaves, apply_pose(plug_pose, b), into, pull=14.0), a=CLIP, b=BARREL,
                          a_at=battery_pose if battery_pose != ZERO else None, b_at=plug_pose if plug_pose != ZERO else None)
     return out
 
 
 bench_battery_lead = lambda plug_pose: battery_lead(plug_pose, BATTERY_ON_BENCH)
-battery_out = battery_lead(OVER_SOCKET)
 
 
 # --- the USB cable: the Mini-B end, out of the controller's Nano Board, to the A end lying on the table beyond the grips
@@ -278,28 +320,17 @@ def usb_cable(plug=0.0):
 CONTROLLER = [BOARD, GUARD_LEFT, GUARD_RIGHT, CONTROLLER_NANO, CONTROLLER_RADIO, JOY_LEFT, JOY_RIGHT]
 
 # ================================================================ THE CONTROLLER (begin)
-# The guards go on first (the published guide has them on from the start): each is a tray round one half of the board that
-# also holds the floor of a joystick pocket, so the board is laid face down and each guard pressed onto it.
-GUARD_NOTE = ('How do the guards go on? The CAD has each as a tray under one half of the board (here pressed on with the board face '
-              'down); your photo shows four rim pieces. And should they go on first, as here?')
-g.place('Begin the controller with the controller board, printed side down. Press the left guard onto the half of the board with the L-JS socket.',
-        move=[GUARD_LEFT], show=[BOARD], direction=[0, -1, 0], flip=True, labels={BOARD: 'Controller Board', GUARD_LEFT: 'Left Controller Guard'},
-        review=GUARD_NOTE + ' Names to confirm: Controller Board, Left / Right Controller Guard, Nano Board, Radio Module, Joystick, USB Cable, '
-                             'Nano I/O Module, Adapter Board, Wheel Motor, Wheel, 9V Battery, Battery Clip.')
-g.place('Press the right guard onto the other half.', move=[GUARD_RIGHT], direction=[0, -1, 0], flip=True)
-
-# The Nano Board and the radio module go straight down into their sockets (the CAD's sockets are solid blocks, so the generator
-# cannot find the way in: set by hand, with the lead lines on the corner pins).
+# The guards come fitted to the controller board (Lee, 16 Oct 2026). The Nano Board and the radio module go straight down into
+# their sockets (the CAD's sockets are solid blocks, so the generator cannot find the way in: set by hand, with the lead lines on
+# the corner pins).
 H_PIN_TOP = 927.04
-g.place('Turn the controller over. Press a Nano Board into H1 and H2, its USB socket at the end of the board marked USB.', move=[CONTROLLER_NANO],
-        direction=[0, 1, 0], hover=35,
-        labels=[dict(id=CONTROLLER_NANO, text='Nano Board'), dict(text='H1', anchor=[733.0, H_PIN_TOP, 1120.53], id=BOARD, ring=False),
-                dict(text='H2', anchor=[733.0, H_PIN_TOP, 1105.29], id=BOARD, ring=False)],
+g.place('Begin the controller with the controller board. Press a Nano Board into H1 and H2, its USB socket at the end of the board marked USB.',
+        move=[CONTROLLER_NANO], show=[BOARD, GUARD_LEFT, GUARD_RIGHT], direction=[0, 1, 0], hover=35, look_from=[-1, 1, -1],
+        labels={BOARD: 'Controller Board', CONTROLLER_NANO: 'Nano Board'},     # (no H1 / H2 labels: Lee, 16 Oct 2026)
         lines_at=[[[x, 921.04, z], [x, H_PIN_TOP, z]] for x in (695.04, 730.60) for z in (1105.3, 1120.5)],
         review='A section card before this step with your photo of the controller board, its pin names boxed in red? (The player has text-only cards so far.)')
 g.place('Press a radio module into the socket marked NRF24L01, so that the module lies over the board, away from the USB end.', move=[CONTROLLER_RADIO],
-        direction=[0, 1, 0], hover=35,
-        labels=[dict(id=CONTROLLER_RADIO, text='Radio Module'), dict(text='NRF24L01', anchor=[711.9, 927.24, 1130.6], id=BOARD, ring=False)],
+        direction=[0, 1, 0], hover=35, labels={CONTROLLER_RADIO: 'Radio Module'},                 # (no NRF24L01 label: Lee)
         lines_at=[[[710.70, 921.74, 1126.75], [710.70, 927.24, 1126.75]], [[713.20, 921.74, 1134.25], [713.20, 927.24, 1134.25]]])
 
 # Each joystick is set down into its pocket a few millimetres short of its socket, then pushed towards it until its pins are in
@@ -313,7 +344,7 @@ for joystick, side, socket, at, near in ((JOY_LEFT, 'left', 'L-JS', [725.75, 921
     g.place(f'Set the {side} joystick into its pocket, then push it towards {socket} until its pins are all the way into the socket.', move=[joystick],
             path=[[-7.0, 35.0, 0.0], [-7.0, 0.0, 0.0], ZERO], look_from=near,
             lines_at=[[[731.75, 921.86, z], [at[0], at[1], z]] for z in (at[2] - 4.92, at[2] + 5.08)],   # (the two end pins into the socket's mouth)
-            labels=[dict(id=joystick, text=f'{side.title()} Joystick'), dict(text=socket, anchor=at, id=BOARD, ring=False)],
+            labels={joystick: f'{side.title()} Joystick'},                                         # (no L-JS / R-JS label: Lee)
             review=JOY_NOTE if side == 'left' else None)
 # The controller is put aside while the car's electronics are put together; it comes back for the test.
 g.put_away(CONTROLLER)
@@ -322,66 +353,57 @@ g.put_away(CONTROLLER)
 # ================================================================ ELECTRONICS TEST (begin)
 # As on the MRA: the car's electronics are put together on the bench and tried before anything is built. The I/O module lies
 # where the CAD has it (the chassis is not there yet); the motors stand on their wheels beside it and the battery behind it.
-g.carry([PLUG_R], by=MODULE, pose=RIGHT_LEAD['bench_loose_pose'], appear=False)
-g.carry([PLUG_L], by=MODULE, pose=LEFT_LEAD['bench_loose_pose'], appear=False)
 g.place("Begin the car's electronics with the I/O module. Press the other Nano Board into it, its USB socket at the same end as the power socket.",
         move=[CAR_NANO], show=[MODULE], direction=[0, 1, 0], hover=35, labels={CAR_NANO: 'Nano Board', MODULE: 'Nano I/O Module'}, look_from=[-1, 1, 1],
         review="The published guide shows this Nano Board the other way round (USB socket towards the front); the CAD and the MRA have it at "
                "the power socket's end, as here. And the CAD's Nano Board here is a plainer model, so the controller's Nano Board is shown instead. "
                "Colours to confirm (materials.json _notes.unconfirmed): the wheel motors' blue (as published, or black?), the radio boards black or green, "
                "the wheels, the plug housings, silver or gold pins, the white boards; and is this I/O module the MRA's board (its printing is carried over)?")
+# (Steps 6 and 7 from the corner opposite Step 5's, above: Lee, 16 Oct 2026.)
 g.place('Press the adapter board onto the I/O module, its sockets over the pins along the side, with U3 at the end away from the power socket.', move=[ADAPTER],
-        direction=[0, 1, 0], hover=35, labels={ADAPTER: 'Adapter Board'},
+        direction=[0, 1, 0], hover=35, labels={ADAPTER: 'Adapter Board'}, look_from=[1, 1, -1],
         review='A section card before this step with your photo of the adapter board (U1 / LWh, U2 / RWh, U3, S V G)?',
         lines_at=[[[694.64, 920.08, 1318.43], [694.64, 925.91, 1318.43]], [[740.36, 920.08, 1323.51], [740.36, 925.91, 1323.51]]])
 g.place('Press the other radio module into U3, so that it sticks out past the end of the I/O module.', move=[CAR_RADIO], direction=[0, 1, 0], hover=35,
-        labels=[dict(id=CAR_RADIO, text='Radio Module'), dict(text='U3', anchor=[746.33, 938.88, 1320.97], id=ADAPTER, ring=False)],
+        labels={CAR_RADIO: 'Radio Module'}, look_from=[1, 1, -1],                                  # (no U3 label: Lee)
         lines_at=[[[745.06, 933.38, 1317.28], [745.06, 938.88, 1317.28]], [[747.56, 933.38, 1324.78], [747.56, 938.88, 1324.78]]])
 
-# The wheels: each motor appears standing beside the module, its lead loose on the table, and a wheel is pressed onto its shaft.
-for motor, wheel, plug_id, lead, side, outwards in ((MOTOR_L, WHEEL_L, PLUG_L, LEFT_LEAD, 'left', -1), (MOTOR_R, WHEEL_R, PLUG_R, RIGHT_LEAD, 'right', 1)):
-    g.rest_at([motor], MOTOR_ON_BENCH)
-    g.carry([wheel], by=motor, pose=[0.0, 0.0, outwards * 40.0], appear=False)
-    hub = g.model.inst[wheel].bounds.mean(0)
-    g.place(f'Press a wheel onto the shaft of the {side} wheel motor.' if side == 'left' else 'Press the other wheel onto the right wheel motor.',
-            appear=[motor, wheel, plug_id], ride={wheel: ZERO}, wires=lead['bench_loose'], lines=False,
-            # (the wheel rides with a motor standing off its seat, so the generator cannot draw a lead line: an arrow along the axle)
-            arrows=[dict(tail=(hub + [0.0, 0.0, outwards * 14.0]).tolist(), head=(hub - [0.0, 0.0, outwards * 26.0]).tolist(), normal=[0, 1, 0], part=wheel)],
-            labels=[dict(id=wheel, text='Wheel'), dict(id=motor, text=f'{side.title()} Wheel Motor')],
-            review=('Wheels on for the test, as in the published guide (the student sees them turn), or pressed on at the end of the build?'
-                    if side == 'left' else None))
-
-# The motors plugged in for the test: each plug is brought up over its header and pushed straight down.
+# The motors plugged in for the test (each comes with its wheel fitted: Lee, 16 Oct 2026): a motor stands beside the module, its
+# plug held over its header, and the plug is pushed straight down.
 BROWN_TO_G = 'Very important: the brown wire goes on G, the pin on the same side as the left wheel.'   # (G is at the car's left on U1 and U2)
-for motor, plug_id, lead, side, header, printed in ((MOTOR_L, PLUG_L, LEFT_LEAD, 'left', 717.5, 'LWh'), (MOTOR_R, PLUG_R, RIGHT_LEAD, 'right', 730.2, 'RWh')):
-    g.place(f'Plug the {side} wheel motor into {printed} for the test. Remember brown to G, red to V, and yellow to S.',
-            ride={plug_id: [lead['bench_above_pose'], ZERO]}, lines=False, wires_done={w: [lead['bench_above'][w], lead['bench_plugged'][w]] for w in lead['wires']},
-            labels=[dict(text=printed, anchor=[header, 938.68, 1320.97], id=ADAPTER, ring=False), dict(id=plug_id, text=f'{side.title()} Wheel Motor')],
+BENCH_VIEW = dict(view_dir=[-0.5792, 0.5736, 0.5792], frame=([688.3, 945.0, 1358.4], 130.3))   # (Steps 8 - 10 keep the camera they had before Lee's first round)
+for motor, wheel, plug_id, lead, side, printed in ((MOTOR_L, WHEEL_L, PLUG_L, LEFT_LEAD, 'left', 'LWh'), (MOTOR_R, WHEEL_R, PLUG_R, RIGHT_LEAD, 'right', 'RWh')):
+    g.rest_at([motor], MOTOR_ON_BENCH)
+    g.carry([wheel], by=motor)
+    g.carry([plug_id], by=MODULE, pose=lead['bench_above_pose'], appear=False)
+    g.place(f'Plug the {side} wheel motor into {printed} for the test. Remember brown to G, red to V, and orange to S.',
+            appear=[motor, plug_id], ride={plug_id: ZERO}, lines=False, wires=lead['bench_above'], wires_done=lead['bench_plugged'], **BENCH_VIEW,
+            labels={motor: f'{side.title()} Wheel Motor'},                                          # (no LWh / RWh label: Lee)
             caution=BROWN_TO_G if side == 'left' else None,
-            review=("The CAD and the published guide draw the signal wire yellow (the MRA's captions say orange): which is it on the kit's FS90R? "
-                    "And how long is the lead? The CAD's two poses of each lead differ (71 mm loose, 110 / 165 mm plugged); both are drawn 115 mm here."
+            review=("How long is the motors' lead? The CAD's two poses of each lead differ (71 mm loose, 110 / 165 mm plugged); all are drawn 115 mm here."
                     if side == 'left' else None))
 
-# Power: the battery stands on the table behind the module; its clip goes on and its barrel plug into the power socket.
+# Power: the battery stands on the table behind the module; the 9V adapter snaps onto it, and its barrel plug, held in line with
+# the power socket, goes straight in.
 g.rest_at([BATTERY], BATTERY_ON_BENCH)
 g.carry([CLIP], by=BATTERY, pose=[0.0, 30.0, 0.0], appear=False)
-BENCH_PLUG_OUT = [-20.0, round(TABLE_Y + 4.3 - 925.05, 2), 12.0]    # the barrel plug lying loose on the table beside the battery, before it is plugged in
+BENCH_PLUG_OUT = [-20.0, 0.0, 0.0]                                  # the barrel plug held in line with the power socket, 20 mm out
 g.rest_at([BARREL], BENCH_PLUG_OUT)
 POWER_NOTE = ('Power for the test: the 9V battery for the car, as here, and USB for the controller? Or USB for both (two cables)? The '
-              'Testing Checklist below assumes the battery. And how long is the battery clip\'s lead? The CAD\'s is about 30 mm (drawn longer here on the bench).')
+              'Testing Checklist below assumes the battery. And how long is the 9V adapter\'s lead? The CAD\'s is about 30 mm (drawn longer here on the bench).')
 _clip = g.model.inst[CLIP].bounds.mean(0)
-g.place('Snap the battery clip onto the 9V battery.', appear=[BATTERY, CLIP, BARREL], ride={CLIP: ZERO}, lines=False,
-        arrows=[dict(tail=(_clip + [0.0, 2.0, 0.0]).tolist(), head=(_clip - [0.0, 24.0, 0.0]).tolist(), normal=[0.71, 0, 0.71], part=CLIP)],
-        labels={BATTERY: '9V Battery', CLIP: 'Battery Clip'}, wires=bench_battery_lead(BENCH_PLUG_OUT), review=POWER_NOTE)
-g.place("Plug the battery clip's barrel plug into the power socket on the I/O module.", move=[BARREL], path=[BENCH_PLUG_OUT, [-12.0, 0.0, 0.0], ZERO],
-        lines_at=[[696.29, 925.05, 1354.06]], labels=[dict(id=BARREL, text='Battery Clip')], look_from=[-1, 1, 1],   # (from the side the plug lies on)
-        wires_done=bench_battery_lead(ZERO))
+g.place('Snap the 9V adapter onto the 9V battery.', appear=[BATTERY, CLIP, BARREL], ride={CLIP: ZERO}, lines=False,
+        # (the arrow's face turned to the camera, which looks from the -x, +z side: Lee, 16 Oct 2026, it was seen edge on)
+        arrows=[dict(tail=(_clip + [0.0, 2.0, 0.0]).tolist(), head=(_clip - [0.0, 24.0, 0.0]).tolist(), normal=[-0.71, 0, 0.71], part=CLIP)],
+        labels={BATTERY: '9V Battery', CLIP: '9V Adapter'}, wires=bench_battery_lead(BENCH_PLUG_OUT), review=POWER_NOTE, **BENCH_VIEW)
+g.place("Plug the 9V adapter's barrel plug into the power socket on the I/O module.", move=[BARREL], path=[BENCH_PLUG_OUT, ZERO],
+        lines_at=[[696.29, 925.05, 1354.06]], labels={BARREL: '9V Adapter'},   # (from the side the plug lies on; its camera as before Lee's first round)
+        view_dir=[-0.5792, 0.5736, 0.5792], frame=([702.8, 945.0, 1338.4], 106.6), wires_done=bench_battery_lead(ZERO))
 # The controller comes back, and its USB cable goes in (a computer or a power bank at the other end).
 g.place("Connect the USB cable to the controller's Nano Board.", move=[USB_B], show=CONTROLLER + [USB_A], direction=[-1, 0, 0], hover=USB_OUT,
         lines_at=[[[694.92, 933.05, 1112.91], [689.42, 933.05, 1112.91]]], labels={USB_B: 'USB Cable'},
         wires=usb_cable(USB_OUT), wires_done=usb_cable(), focus=CONTROLLER + [USB_B, USB_A], focus_pad=1.1,
         review='Should the Completed View show the controller with its USB cable in, as the published guide does (and as the last step here does)?')
-# (The checklist's last line has the battery and the USB cable unplugged after the test, so they leave the bench with it.)
 g.put_away(CONTROLLER + [USB_B, USB_A, BATTERY, CLIP, BARREL])
 g.note('Testing Checklist\nGo through the following checklist to make sure you have tested each part of your RCC:\n'
        '•  The controller was powered on by connecting a Mini-USB cable to its Nano.\n'
@@ -392,6 +414,16 @@ g.note('Testing Checklist\nGo through the following checklist to make sure you h
        '•  The battery was unplugged and the Mini-USB cable disconnected after testing.',
        review="A placeholder: TechBox's RCC Testing Checklist is needed word for word, as for the MRA. Which joystick drives which wheel? "
               "Does the FS90R's stop trim need setting during the test?")
+# After the checklist the battery is unplugged (Lee, 16 Oct 2026): the 9V adapter stays on it, and the two are set aside as one,
+# the barrel plug pulled straight out of the socket. (They come back as they were, riding together, so that they can move off.)
+SET_ASIDE = [-40.0, 0.0, 0.0]
+g.carry([BATTERY], by=MODULE, pose=BATTERY_ON_BENCH, appear=False)
+g.carry([CLIP], by=BATTERY, appear=False)
+g.carry([BARREL], by=BATTERY, pose=[-c for c in BATTERY_ON_BENCH], appear=False)   # (plugged in while the battery stands on the bench)
+g.place('Unplug the 9V adapter from the power socket, and set the battery aside with the 9V adapter still on it.',
+        appear=[BATTERY, CLIP, BARREL], ride={BATTERY: np.add(BATTERY_ON_BENCH, SET_ASIDE).tolist()}, lines=False, labels=[], eye=[BARREL],
+        wires=bench_battery_lead(ZERO))
+g.put_away([BATTERY, CLIP, BARREL])
 g.place('Unplug both wheel motors from the adapter board.', ride={PLUG_L: lifted(ZERO, 40.0), PLUG_R: lifted(ZERO, 40.0)}, lines=False, eye=[PLUG_L],
         caution='Set the controller, the battery, the wheel motors and the I/O module aside for now. You will use them again in a bit.')
 g.put_away([MODULE, CAR_NANO, ADAPTER, CAR_RADIO, MOTOR_L, MOTOR_R, WHEEL_L, WHEEL_R, PLUG_L, PLUG_R])
@@ -404,7 +436,7 @@ g.carry([PLUG_R], by=MOTOR_R, pose=RIGHT_LEAD['hand_pose'])
 g.carry([PLUG_L], by=MOTOR_L, pose=LEFT_LEAD['hand_pose'])
 g.carry([CAR_NANO, ADAPTER, CAR_RADIO], by=MODULE)
 g.carry([CLIP], by=BATTERY)
-g.carry([BARREL], by=BATTERY, pose=OVER_SOCKET)
+g.carry([BARREL], by=BATTERY, pose=OUT_OF_SOCKET)                   # in line with the power socket, so that it goes straight in (Lee)
 
 # ================================================================ THE CHASSIS (begin)
 # L2 and L3 go on with the car upside down. L2 cannot go straight in: its front end is a barbed hook that goes through the notch
@@ -414,7 +446,9 @@ HOOK = [765.0, 911.5, 1338.5]
 hooked = lambda t: turned([0, 0, 1], 25.0, HOOK, t)
 g.place('Begin the car with L1, engraved side down. Hook the end of L2 over the notch at the flat end of L1, then swing L2 down so its tabs go into the slots in L1.',
         move=[L2], show=[L1], path=[hooked([6.0, -40.0, 0.0]), via(hooked([6.0, 0.0, 0.0])), hooked(ZERO), ZERO], flip=True,
-        labels={L1: 'L1', L2: 'L2'}, lines_at=[[617.5, 909.2, 1338.5], [675.7, 909.2, 1338.5]],
+        view_dir=[-0.306, -0.2011, -0.9306], one_off_camera=True,           # (lower, from Lee's picture, 16 Oct 2026: solved by matching renders to it)
+        labels=[dict(id=L1, text='L1', anchor=[618.0, 906.23, 1312.0]), dict(id=L2, text='L2')],   # (L1's on its round end, clear of L2 and its etching: Lee)
+        lines_at=[[617.5, 909.2, 1338.5], [675.7, 909.2, 1338.5], [772.1, 914.3, 1339.0]],   # (the third, the hook into the notch: Lee, 16 Oct 2026)
         review='One step with the hook-and-swing (as here), or two (hook it on, then swing it down)? And L1: FRONT and L1 are etched as in your '
                'drawing, on the top face (the CAD\'s L1 read upside down; FRONT is new).')
 g.place('Push L3 onto L2 so its two tabs go into the short slots in L1.', move=[L3], flip=True)
@@ -425,9 +459,9 @@ g.put_away([])
 # two leads, each plug passing through the hole at its end of L4.
 g.place('Push the right wheel motor into one end of L5, its mounting tab through the slot, its wheel outwards and its wire pointing away from L5.',
         move=[MOTOR_R], show=[L5], against=[L5], staged=True, wires=RIGHT_LEAD['hand'],
-        labels=[dict(id=MOTOR_R, text='Right Wheel Motor'), dict(id=L5, text='L5')])
+        labels={MOTOR_R: 'Right Wheel Motor', L5: 'L5'})
 g.place('Push the left wheel motor into the other end of L5 the same way.', move=[MOTOR_L], against=[L5, MOTOR_R], staged=True, wires=LEFT_LEAD['hand'],
-        labels=[dict(id=MOTOR_L, text='Left Wheel Motor')])
+        labels={MOTOR_L: 'Left Wheel Motor'})
 L4_HOLES = [[714.62, 906.86, 1385.68], [714.62, 906.86, 1291.28]]   # the holes for the leads at the ends of L4
 g.place("Pass each motor's plug through the hole at its end of L4, then slide L4 along the wires onto the motors.", move=[L4], against=[L5, MOTOR_R, MOTOR_L],
         staged=True, direction=[-1, 0, 0], hover=LEAD_MM + 20.0, lines_at=L4_HOLES,
@@ -440,30 +474,39 @@ g.seat("Turn the car the right way up. Lower L4 and L5, with the motors, onto L1
 # then L7 and L6 slide in from the front and lock it (their heads stop it coming forward).
 g.place('Slide the I/O module, with everything on it, into the grooves in L5 and L4 from the front of the car, until it stops against L2.',
         move=[MODULE], direction=[1, 0, 0], hover=60, labels={MODULE: 'Nano I/O Module'},
+        view_dir=[0.5792, 0.5736, -0.5792], frame=([717.5, 911.5, 1338.4], 141.5),        # (as before: the leads lying on L1 moved, the camera does not)
         lines_at=[[[691.1, 917.7, z], [713.1, 917.7, z]] for z in (1312.6, 1364.4)])   # (the board's back corners, to the back of L4's grooves)
 L67_NOTE = ("L7 and L6 go on after the I/O module, as in the published guide: their heads hold it in. They slide in under L1, so the car is "
             "shown turned over for them. Their codes are on the parts under L1: in the finished car they show only from below.")
 g.place("Turn the car over. Slide L7 in from the front, through the slots in L5 and L4, on the left wheel's side of L2.", move=[L7], labels={L7: 'L7'},
-        flip=True, review=L67_NOTE)
-g.place("Slide L6 in the same way, on the right wheel's side of L2.", move=[L6], labels={L6: 'L6'}, flip=True)
+        flip=True, review=L67_NOTE,
+        view_dir=[0.6103, -0.515, -0.6019], frame=([734.8, 938.1, 1330.3], 118.2), one_off_camera=True)   # (Lee's picture, 16 Oct 2026)
+g.place("Slide L6 in the same way, on the right wheel's side of L2.", move=[L6], labels={L6: 'L6'}, flip=True,
+        view_dir=[0.5792, -0.5736, 0.5792], frame=([720.8, 911.5, 1338.4], 144.2))       # (its camera as before)
 # ================================================================ THE CHASSIS (end)
 
 # ================================================================ WIRING AND POWER (begin)
-# One plug per step: lifted off L1, brought upright over its header and pushed straight down.
-for plug_id, lead, side, header, printed in ((PLUG_L, LEFT_LEAD, 'left', 717.5, 'LWh'), (PLUG_R, RIGHT_LEAD, 'right', 730.2, 'RWh')):
-    g.place(f"{'Turn the car the right way up. ' if side == 'left' else ''}Reconnect the {side} wheel motor to {printed}. Remember brown to G, red to V, and yellow to S.",
+# One plug per step: lifted off L1, carried over the module high enough to clear the plug already in (U1 and U2 are side by
+# side: the right plug passed through the left one on its way, Lee, 16 Oct 2026), lowered upright over its header and pushed
+# straight down; closer in than the steps around them, so that the wires show (Lee).
+for plug_id, lead, side, printed in ((PLUG_L, LEFT_LEAD, 'left', 'LWh'), (PLUG_R, RIGHT_LEAD, 'right', 'RWh')):
+    g.place(f"{'Turn the car the right way up. ' if side == 'left' else ''}Reconnect the {side} wheel motor to {printed}. Remember brown to G, red to V, and orange to S.",
             move=[plug_id],
-            path=[lead['deck_pose'], via(lifted(lead['deck_pose'], 40.0)), lead['above_pose'], ZERO], lines=False,
-            labels=[dict(text=printed, anchor=[header, 938.68, 1320.97], id=ADAPTER, ring=False), dict(id=plug_id, text=f'{side.title()} Wheel Motor')],
+            path=[lead['deck_pose'], via(lifted(lead['deck_pose'], 45.0)), via(lifted(lead['above_pose'], 25.0)), lead['above_pose'], ZERO], lines=False,
+            labels={plug_id: f'{side.title()} Wheel Motor'},                                        # (no LWh / RWh label: Lee)
+            look_from=[-1, 1, -1], focus=[MODULE, ADAPTER, plug_id], focus_pad=1.15,
             wires_done={w: [lead['above'][w], lead['plugged'][w]] for w in lead['wires']}, caution=BROWN_TO_G if side == 'left' else None)
+# (Steps 27 and 28: Lee's picture, 16 Oct 2026, solved by matching renders to it; the model then let down 4% of the frame, so that
+# the battery clears the caption and its label has room above it: the picture was cut off just under the caption.)
+BATTERY_VIEW = dict(view_dir=[-0.6337, 0.5821, 0.5095], frame=([690.1, 926.7, 1346.5], 76.4))
 g.place('Push the 9V battery, clip at the top, down through the square hole in L1 into L3.', move=[BATTERY], direction=[0, 1, 0],
-        labels={BATTERY: '9V Battery'}, wires=battery_out)
-g.place("Plug the battery clip's barrel plug into the power socket on the I/O module.", move=[BARREL], path=[OVER_SOCKET, OUT_OF_SOCKET, ZERO],
-        lines_at=[[696.29, 925.05, 1354.06]], labels=[dict(id=BARREL, text='Battery Clip')], wires_done=battery_in, focus=[BARREL, BATTERY, MODULE], focus_pad=1.3,
+        labels=[dict(id=BATTERY, text='9V Battery', anchor=[633.1, 932.0, 1340.0])], wires=battery_out, **BATTERY_VIEW)   # (on the face towards the camera, high up)
+g.place("Plug the 9V adapter's barrel plug into the power socket on the I/O module.", move=[BARREL], path=[OUT_OF_SOCKET, ZERO],
+        lines_at=[[696.29, 925.05, 1354.06]], labels={BARREL: '9V Adapter'}, wires_done=battery_in, **BATTERY_VIEW,
         review='Plugged in at the end, as here (the CAD has it in), or left out with a caution ("plug it in to drive, unplug it when you stop")?')
 g.place("Connect the USB cable to the controller's Nano Board.", move=[USB_B], show=CONTROLLER + [USB_A], direction=[-1, 0, 0], hover=USB_OUT,
         lines_at=[[[694.92, 933.05, 1112.91], [689.42, 933.05, 1112.91]]], labels={USB_B: 'USB Cable'},
-        wires=usb_cable(USB_OUT), wires_done=usb_cable(), focus=CONTROLLER + [USB_B, USB_A], focus_pad=1.1)
+        wires=usb_cable(USB_OUT), wires_done=usb_cable(), focus=CONTROLLER + [USB_B, USB_A], focus_pad=1.1, look_from=[1, 1, -1])
 # ================================================================ WIRING AND POWER (end)
 
 g.build()

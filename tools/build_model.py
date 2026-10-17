@@ -207,6 +207,41 @@ def drop_degenerate(F):
     return F[(F[:, 0] != F[:, 1]) & (F[:, 1] != F[:, 2]) & (F[:, 0] != F[:, 2])]
 
 
+def cut_faces(V, N, F, axis, value, tol=1e-6):
+    """Split every triangle that crosses the plane (mesh frame) where coordinate `axis` equals `value`, so that a colour region
+    can end exactly on that plane (a band round a battery whose sides are a few long triangles). Positions and normals of the
+    new corners are interpolated; winding is kept. Returns (V, N, F)."""
+    d = V[F, axis] - value                                    # (faces, 3) signed distance of each corner
+    s = np.where(np.abs(d) < tol, 0, np.sign(d)).astype(int)
+    crossing = (s.max(1) > 0) & (s.min(1) < 0)
+    if not crossing.any():
+        return V, N, F
+    V, N, keep, new = list(V), list(N), F[~crossing].tolist(), []
+
+    def point(a, b):                                          # where edge a-b meets the plane: a new vertex
+        t = (value - V[a][axis]) / (V[b][axis] - V[a][axis])
+        V.append(V[a] + (V[b] - V[a]) * t)
+        n = N[a] + (N[b] - N[a]) * t
+        N.append(n / (np.linalg.norm(n) or 1.0))
+        return len(V) - 1
+
+    for f, sf in zip(F[crossing], s[crossing]):
+        for r in range(3):                                    # turn the corners so that the odd one out comes first
+            a, b, c = f[r], f[(r + 1) % 3], f[(r + 2) % 3]
+            sa, sb, sc = sf[r], sf[(r + 1) % 3], sf[(r + 2) % 3]
+            if sa == 0 and sb * sc < 0:                       # a corner on the plane, the other two either side
+                m = point(b, c)
+                new += [[a, b, m], [a, m, c]]
+                break
+            if sa != 0 and sb != 0 and sc != 0 and sb == sc and sa != sb:   # one corner alone on its side
+                p, q = point(a, b), point(a, c)
+                new += [[a, p, q], [p, b, c], [p, c, q]]
+                break
+        else:
+            keep.append(list(f))                              # (a corner on the plane and the others on one side: nothing to cut)
+    return np.array(V), np.array(N), np.array(keep + new, dtype=np.int64)
+
+
 def smooth_normals(V, F):
     """Area-weighted vertex normals (for tubes and other parts with no hard edges)."""
     fn = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
@@ -652,7 +687,9 @@ def stickers(doc, blob, specs, to_mm, world, adjust=None, assembly=None):
     "wide": one on each of the two widest faces of the part's body (across its thinnest axis), in the middle of the part of
     that face that shows when the part is in place: the face is looked at square on, past the parts round it (R7 and R8
     stand across the motors' faces), and the dot goes to the spot nearest the middle of what shows that leaves a little
-    room round it (or as much room as there is). Returns [(instance node index, vertices in assembly mm, faces, rim segments, colour)]."""
+    room round it (or as much room as there is). Or "at": [x, y, z] (seated assembly mm) instead of "faces": one dot on the
+    part's face under that spot, looking along -"normal" (default [0, 1, 0], straight down): a dot on a chip's top (the RCC's
+    Nano Boards). Returns [(instance node index, vertices in assembly mm, faces, rim segments, colour)]."""
     import trimesh
     from scipy.ndimage import distance_transform_edt
     adjust = adjust or {}
@@ -693,9 +730,34 @@ def stickers(doc, blob, specs, to_mm, world, adjust=None, assembly=None):
 
     tops = nodes[assembly].get('children', []) if assembly is not None else []
     out = []
+    def dot(base, normal, u, w, radius, k=40):
+        """A round sticker 0.12 mm thick lying on a face at `base` (already just proud of it): vertices, faces, rim segments."""
+        ring = [base + radius * (np.cos(t) * u + np.sin(t) * w) for t in np.linspace(0, 2 * np.pi, k, endpoint=False)]
+        top_ring = [p + normal * 0.12 for p in ring]
+        middle = base + normal * 0.12
+        if np.dot(np.cross(top_ring[0] - middle, top_ring[1] - middle), normal) < 0:   # (faces outwards whichever way u and w turn)
+            top_ring, ring = top_ring[::-1], ring[::-1]
+        V = np.array([base + normal * 0.12] + top_ring + ring)
+        F = [[0, 1 + j, 1 + (j + 1) % k] for j in range(k)]
+        F += [[1 + j, 1 + k + j, 1 + (j + 1) % k] for j in range(k)] + [[1 + (j + 1) % k, 1 + k + j, 1 + k + (j + 1) % k] for j in range(k)]
+        rim = np.array([[top_ring[j], top_ring[(j + 1) % k]] for j in range(k)])
+        return V, np.array(F), rim
+
     for spec in specs:
         top = by_name[spec['on']]
         body = instance(top)
+        if 'at' in spec:                                  # one dot on the face under a given spot
+            normal = np.asarray(spec.get('normal', [0, 1, 0]), float)
+            normal /= np.linalg.norm(normal)
+            locs, _, _ = body.ray.intersects_location([np.asarray(spec['at'], float) + normal * 30.0], [-normal], multiple_hits=False)
+            if not len(locs):
+                raise SystemExit(f"stickers: nothing of {spec['on']} under {spec['at']}")
+            u = np.cross(normal, [1.0, 0.0, 0.0] if abs(normal[0]) < 0.9 else [0.0, 0.0, 1.0])
+            u /= np.linalg.norm(u)
+            V, F, rim = dot(locs[0] + normal * 0.06, normal, u, np.cross(normal, u), spec.get('diameter_mm', 7.0) / 2)
+            out.append((top, V, F, rim, spec['colour']))
+            print(f"  sticker on {spec['on']}: {spec['colour']} at {locs[0].round(2).tolist()}")
+            continue
         box = body.bounding_box_oriented
         axes, size, centre = box.primitive.transform[:3, :3], box.primitive.extents, box.primitive.transform[:3, 3]
         lo, hi = body.bounds
@@ -733,16 +795,8 @@ def stickers(doc, blob, specs, to_mm, world, adjust=None, assembly=None):
             if room[iu, iw] < radius:
                 print(f"  note: sticker on {spec['on']} has only {room[iu, iw]:.1f} mm of free face round its middle (wants {radius:.1f})")
             base = centre + normal * outer + gu[iu] * u + gw[iw] * w + normal * 0.06   # (just proud of the face, so the two never flicker)
-            ring = [base + radius * (np.cos(t) * u + np.sin(t) * w) for t in np.linspace(0, 2 * np.pi, k, endpoint=False)]
-            top_ring = [p + normal * 0.12 for p in ring]
-            V = np.array([base + normal * 0.12] + top_ring + ring)
-            if np.dot(np.cross(top_ring[0] - V[0], top_ring[1] - V[0]), normal) < 0:   # (faces outwards whichever way u and w turn)
-                top_ring, ring = top_ring[::-1], ring[::-1]
-                V = np.array([base + normal * 0.12] + top_ring + ring)
-            F = [[0, 1 + j, 1 + (j + 1) % k] for j in range(k)]
-            F += [[1 + j, 1 + k + j, 1 + (j + 1) % k] for j in range(k)] + [[1 + (j + 1) % k, 1 + k + j, 1 + k + (j + 1) % k] for j in range(k)]
-            rim = np.array([[top_ring[j], top_ring[(j + 1) % k]] for j in range(k)])
-            out.append((top, V, np.array(F), rim, spec['colour']))
+            V, F, rim = dot(base, normal, u, w, radius, k)
+            out.append((top, V, F, rim, spec['colour']))
             print(f"  sticker on {spec['on']}: {spec['colour']} at {base.round(1).tolist()} ({room[iu, iw]:.1f} mm of free face round it)")
     return out
 
@@ -876,6 +930,12 @@ def build(kit_dir, keep='guide'):
         V = raw[0].astype(np.float64) * to_mm
         N = raw[1].astype(np.float64).copy()
         F = raw[2].reshape(-1, 3).astype(np.int64)
+        for region in rule.get('regions', []):        # a region with "cut": its box's faces cut the triangles that cross them first
+            if region.get('cut'):
+                for axis in range(3):
+                    for value in np.asarray(region['box'], float)[:, axis]:
+                        if V[:, axis].min() < value < V[:, axis].max():
+                            V, N, F = cut_faces(V, N, F, axis, value)
 
         Vp, remap = weld_positions(V)
         Fp = remap[F]
@@ -897,7 +957,7 @@ def build(kit_dir, keep='guide'):
                 recoloured += int(under.sum())
             if recoloured:
                 note = (note + '; ' if note else '') + f'{recoloured} faces under a skin recoloured'
-        for region in rule.get('regions', []):        # faces whose middle lies in a box (mm, the mesh's own frame): one solid in two colours
+        for region in rule.get('regions', []):        # faces whose middle lies in a box (mm, the mesh's own frame): one solid in two colours (see cut_faces for "cut")
             lo, hi = np.asarray(region['box'], float)
             middle = Vp[Fp].mean(axis=1)
             face_colour[np.all((middle >= lo) & (middle <= hi), axis=1)] = region['color']
@@ -1012,6 +1072,7 @@ def build(kit_dir, keep='guide'):
         decals = json.load(open(kit_dir / decals))
     # nodes: same names and hierarchy; mesh nodes get the de-quantization baked into their matrix
     new_node_index = {old: new for new, old in enumerate(kept_nodes)}
+    parent_of = {c: k for k, n in enumerate(nodes) for c in n.get('children', [])}
     nodes_json = []
     for i in kept_nodes:
         node = nodes[i]
@@ -1024,7 +1085,11 @@ def build(kit_dir, keep='guide'):
         m = node_matrix(node)
         m[:3, 3] *= to_mm
         if node.get('name') in adjust:
-            m = pose_matrix(adjust[node['name']]) @ m
+            move = pose_matrix(adjust[node['name']])
+            up = parent_of.get(i)
+            if up is not None and up != assembly:    # a piece inside a part (a socket on a board): the move is in assembly mm all the same
+                move = np.linalg.inv(world0[up]) @ move @ world0[up]
+            m = move @ m
         if 'mesh' in node and node['mesh'] not in omitted:
             out['mesh'] = new_mesh_index[same_as[node['mesh']]]
             lo, step = dequant[same_as[node['mesh']]]
