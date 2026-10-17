@@ -26,7 +26,13 @@ change route from one step to the next (the player bends it across). See tools/w
 Riding parts. A plug on the loose end of a lead, or the cap on a jumper wire, is a CAD part that has no
 place of its own until it is plugged in: `carry()` makes it ride with another part (the servo, the joystick)
 from when that part appears until a step moves it to its seat.
+
+More than one guide per kit. The Full Build writes steps.json (and parts.json). `chapter()` marks where each Part begins: the
+same run also writes each Part as a guide of its own (steps-<slug>.json, its steps the Full Build's) and chapters.json, the map
+between them. A guide that is not a cut of the Full Build (a deconstruction) is a script of its own in the kit folder with
+Guide(steps_file='steps-<name>.json'). Every guide of a kit uses the kit's one model.glb, which holds the parts all of them show.
 """
+import copy
 import hashlib
 import json
 import re
@@ -73,6 +79,18 @@ def _shift(pose):
     if pose is None:
         return np.zeros(3)
     return np.asarray(pose.get('t', [0, 0, 0]) if isinstance(pose, dict) else pose, float)
+
+
+def model_stamp(path):
+    """A model's version, as steps files name it (model.glb?v=...): from its content, so that it holds on any computer and
+    after any git checkout (a file's date does not)."""
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:12]
+
+
+def step_text_file(steps_file):
+    """The step-text file of a guide's steps file: step-text.json for the Full Build (and so its Parts), step-text-<name>.json for
+    a guide of its own (steps-<name>.json)."""
+    return 'step-text.json' if steps_file == 'steps.json' else 'step-text-' + steps_file[len('steps-'):-len('.json')] + '.json'
 
 
 def apply_pose(pose, pts):
@@ -579,7 +597,8 @@ ZERO = [0.0, 0.0, 0.0]
 
 class Guide:
     def __init__(self, kit_dir, title, part, names, source='mra.glb', copyright_line='', part_views=None, part_of=None, unlisted=(), mesh_names=None,
-                 codes=None, hero_azimuth=225.0, start_view=None, end_view=None, parts_list=None, review_notes=True, hover_names=None, **overrides):
+                 codes=None, hero_azimuth=225.0, start_view=None, end_view=None, parts_list=None, review_notes=True, hover_names=None,
+                 steps_file='steps.json', **overrides):
         """codes: {id: (normal, centre)}, the engraved code on each wood part (the way its face looks, and the middle of the
         code, seated): the camera then prefers a side from which the codes of the parts coming in can be read.
         hero_azimuth: the side the title page and the finished model are seen from (degrees about the vertical; 0 = from +Z).
@@ -610,8 +629,17 @@ class Guide:
         hover_names: {id: name} where the pointer (hover or click) should name one part more exactly than the parts list does
         (the MRA's Left Joystick and Right Joystick, both "Joystick" in the parts list).
         The step text can be edited outside the guide: tools/step_text.py exports it to a CSV and brings an edited one back
-        into the kit's step-text.json, which build() applies (matched by each step's text_key)."""
+        into the kit's step-text.json, which build() applies (matched by each step's text_key).
+        steps_file: the file this guide is written to. 'steps.json' is the kit's Full Build (it also writes parts.json, from which
+        the part pictures are made); a guide of its own in the same kit folder, not cut from the Full Build (a deconstruction
+        guide), gets its own, e.g. 'steps-deconstruction.json', and its own step-text file ('step-text-deconstruction.json').
+        A kit's guides share its one model.glb, which holds every part any of them shows (see _sync_model): no guide ever
+        shrinks it. Part guides are cut from the Full Build itself (see chapter())."""
         self.kit_dir = Path(kit_dir)
+        self.steps_file = steps_file
+        if not re.fullmatch(r'steps(-[a-z0-9]+(-[a-z0-9]+)*)?\.json', steps_file):
+            raise ValueError(f'steps_file: steps.json, or steps-<lower-case words joined by hyphens>.json, not {steps_file!r}')
+        self.chapters = []                      # Part guides cut from this one (see chapter())
         self.cfg = {**DEFAULTS, **overrides}
         self.hero_azimuth = float(hero_azimuth)
         self.start_view = dict(start_view or {})
@@ -704,6 +732,25 @@ class Guide:
         self.wire_defs[wire_id] = dict(colour=self.palette.get(colour, colour), radius=float(radius), **({'name': name} if name else {}))
 
     # -- step kinds
+    def chapter(self, slug, part, start_view=None, end_view=None):
+        """From here on, until the next chapter() (or the end), the steps are also a Part guide of their own, written by the same
+        run to steps-<slug>.json (Lee, 16 Oct 2026: "Part guides"). Its core steps are this Full Build's own, with their wording
+        and cameras, numbered from Step 1; it gets its own title page, a Parts List of only the parts new in it (the parts
+        earlier Parts brought in are not listed again), and its own Completed View. Its title page and Completed View show the
+        model as the Part leaves it. part: how its title page names it under the guide's title (e.g. "Part 1: The Controller").
+        start_view / end_view: as Guide's, for this Part (default: the finished model's corner, framing what the Part shows).
+        The run also writes chapters.json, the map from each Part's steps to the Full Build's (for "Part 2, Step 5" edits).
+        Call it before the first step of the Part, in the Full Build's guide.py only (a guide with steps_file='steps.json')."""
+        if self.steps_file != 'steps.json':
+            raise ValueError('chapter(): Part guides are cut from the Full Build (steps.json), not from a guide of their own')
+        if not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', slug):
+            raise ValueError(f'chapter({slug!r}): lower-case words joined by hyphens (it names steps-{slug}.json)')
+        if any(c['slug'] == slug for c in self.chapters):
+            raise ValueError(f'chapter({slug!r}) is there already')
+        if self.chapters and self.chapters[-1]['at'] == len(self.steps):
+            raise ValueError(f'chapter({slug!r}): the chapter before it ({self.chapters[-1]["slug"]}) has no steps')
+        self.chapters.append(dict(slug=slug, part=part, at=len(self.steps), start_view=dict(start_view or {}), end_view=dict(end_view or {})))
+
     def note(self, caption, review=None, caution=None):
         """A text-only card (no 3D), for things the model cannot show. caution: as in place()."""
         self.steps.append(dict(kind='card', caption=caption, review=review, caution=caution))
@@ -986,7 +1033,7 @@ class Guide:
                 k = seen.get(s['caption'], 0)
                 seen[s['caption']] = k + 1
                 s['text_key'] = text_key(s['caption'], k)
-        path = self.kit_dir / 'step-text.json'
+        path = self.kit_dir / step_text_file(self.steps_file)
         if not path.exists():
             return
         edits = {e['key']: e for e in json.loads(path.read_text(encoding='utf-8')).get('steps', [])}
@@ -1050,7 +1097,9 @@ class Guide:
                     poses[i] = compose(poses.get(by), rel, self._pivot(i))
                     carry[i] = dict(by=by, pose=pose_out(rel))
             return poses, carry
+        first_view = []                                  # the index of each step's first view (for the Part guides, chapter())
         for s in self.steps:
+            first_view.append(len(views))
             if s['kind'] == 'put_away':                                    # off the screen, until a step brings them in again
                 gone = set(s['ids'])
                 visible[:] = [i for i in visible if i not in gone]
@@ -1165,6 +1214,7 @@ class Guide:
                 if c['by'] in turns and i not in turns:
                     turns[i] = turns[c['by']]
             return {**last, **{i: compose(pose, last.get(i), self._pivot(i)) for i, pose in turns.items() if i in used}}
+        steps_end = len(views)                           # (where the Completed View goes: the end of the last Part)
         start_last, end_last = posed(self.start_view), posed(self.end_view)
         views.append(dict(name='Completed View', kind='end', visible=list(visible), offsets=poses_out(end_last), wires=wires_in(wires, visible), carry=carry_last,
                           **({'cut': True} if self.end_view.get('poses') else {})))     # (a part turned for the view: no glide from the last step)
@@ -1197,10 +1247,10 @@ class Guide:
                     out[key].append(round(float(val), 3))
             return out
 
-        def special(sv, shown, offsets, title=False):
+        def special(sv, shown, offsets, title=False, fit=False):
             """A camera given for the title page or the Completed View (see __init__), or the finished model's (framing the parts
-            as that view poses them, if it poses any)."""
-            t, r = _fit(self.model, shown, [offsets]) if sv.get('poses') else (hero_target, hero_radius)
+            as that view poses them, if it poses any, or always with fit: a Part guide's)."""
+            t, r = _fit(self.model, shown, [offsets]) if sv.get('poses') or fit else (hero_target, hero_radius)
             base = dict(hero, target=t.round(1).tolist(), radius=round(r, 1))
             if 'dir' in sv:
                 cam = given(sv)
@@ -1325,34 +1375,152 @@ class Guide:
         low = [f.lower() for f in files]                     # (the Mac's disk does not tell Nano-Board.png from nano-board.png)
         if len(low) != len(set(low)):
             raise SystemExit(f'two parts list pictures would share a file: {sorted(f for f in files if low.count(f.lower()) > 1)}')
+        chapters = self._chapters(views, routes, parts, first_view, steps_end, special, used) if self.chapters else []
         if self.parts_list:                                 # the parts list, on pages of its own after the title page
             for k, page in enumerate(self.parts_list(parts)):
                 views.insert(1 + k, dict(name=page['name'], kind='card', caption=page['name'], parts=page['groups'], visible=[], offsets={}, camera=hero))
 
         model_file = self.kit_dir / 'model.glb'
-        stamp = f'?v={int(model_file.stat().st_mtime)}' if model_file.exists() else ''     # so browsers refetch the model only when it changes
+        stamp = f'?v={model_stamp(model_file)}' if model_file.exists() else ''     # so browsers refetch the model only when it changes
         logo = next((f for f in ('logo.svg', 'logo.png', 'logo.webp') if (self.kit_dir / f).exists()), None)
         meta = dict(self.meta, **({'logo': logo} if logo else {}))
+        names = {i: self.hover_names.get(i, self.hover_names.get(self.part_of.get(i), self.names[i])) for i in used if i in self.names}   # (a part fitted to another takes its hover name)
         out = dict(meta=meta, model='model.glb' + stamp, fov=self.cfg['fov'], frame_padding=self.cfg['frame_padding'],
-                   names={i: self.hover_names.get(i, self.hover_names.get(self.part_of.get(i), self.names[i])) for i in used if i in self.names},   # (a part fitted to another takes its hover name)
-                   mesh_names=self.mesh_names, wires=self.wire_defs, routes=routes, views=views)
-        json.dump(out, open(self.kit_dir / 'steps.json', 'w'), indent=1)
-        json.dump(dict(meta=self.meta, parts=parts), open(self.kit_dir / 'parts.json', 'w'), indent=1)
+                   names=names, mesh_names=self.mesh_names, wires=self.wire_defs, routes=routes, views=views)
+        written = [self.steps_file]
+        if chapters:                                     # (one run: every Part is cut from this very Full Build, which says so)
+            run = hashlib.sha256(json.dumps(out, sort_keys=True).encode('utf-8')).hexdigest()[:12]
+            out['meta'] = dict(meta, run=run)
+        json.dump(out, open(self.kit_dir / self.steps_file, 'w'), indent=1)
+        if self.steps_file == 'steps.json':              # (the Full Build's parts list: the kit's part pictures are made from it)
+            json.dump(dict(meta=self.meta, parts=parts), open(self.kit_dir / 'parts.json', 'w'), indent=1)
+            written.append('parts.json')
+        if self.steps_file == 'steps.json' and (chapters or (self.kit_dir / 'chapters.json').exists()):   # (only the Full Build has Parts)
+            written += self._write_chapters(chapters, out, names)
         for line in self.log:
             print(line)
-        print(f"{len(self.steps)} steps -> {len(views)} views, {len(parts)} parts, {len(self.wire_defs)} wires; wrote steps.json and parts.json")
-        self._sync_model(used)
+        print(f"{len(self.steps)} steps -> {len(views)} views, {len(parts)} parts, {len(self.wire_defs)} wires; wrote {', '.join(written)}")
+        self._sync_model()
         return out
 
-    def _sync_model(self, used):
-        """model.glb holds only the parts the guide shows, so rebuild it whenever that set changes."""
+    def _chapters(self, views, routes, parts, first_view, steps_end, special, used):
+        """The Part guides (see chapter()): each one's views, cut from the Full Build's (before its parts list pages go in)."""
+        marks, out = self.chapters, []
+        number = lambda name: int(re.match(r'Step (\d+)', name).group(1)) if re.match(r'Step \d+', name or '') else None
+        for k, c in enumerate(marks):
+            end_at = marks[k + 1]['at'] if k + 1 < len(marks) else len(self.steps)
+            a = first_view[c['at']] if c['at'] < len(first_view) else steps_end
+            b = first_view[end_at] if end_at < len(first_view) else steps_end
+            core = [copy.deepcopy(v) for v in views[a:b]]
+            state = next((v for v in reversed(core) if v['kind'] in ('hover', 'done')), None)
+            if state is None:
+                raise SystemExit(f"chapter {c['slug']!r}: it has no step that shows the model")
+            n0 = min(number(v['name']) for v in core if number(v['name']))
+            renamed = {}
+            for v in core:
+                if number(v['name']):
+                    new = f"Step {number(v['name']) - n0 + 1}" + ('c' if v['name'].endswith('c') else '')
+                    renamed[new] = v['name']
+                    v['name'] = new
+            cited = [v['name'] for v in core if re.search(r'\bSteps? \d', f"{v.get('caption') or ''} {v.get('caution') or ''}")]
+            if cited:
+                self.log.append(f"  NOTE: chapter {c['slug']!r}: {', '.join(dict.fromkeys(cited))} name a step by number, the Full Build's (the Part's start at 1)")
+            # (a boundary that falls inside something that belongs together is allowed, but worth a look)
+            if a > 1 and views[a - 1]['kind'] in ('hover', 'done') and views[a - 1]['camera'].get('flip') and core[0].get('camera', {}).get('flip'):
+                self.log.append(f"  NOTE: chapter {c['slug']!r} begins in the middle of steps shown turned over ({views[a - 1]['name']} / {renamed.get(core[0]['name'], core[0]['name'])})")
+            if core[0].get('isolated'):
+                self.log.append(f"  NOTE: chapter {c['slug']!r} begins in the middle of a sub-assembly built in the hand")
+            before = [v for v in views[1:a] if v['kind'] in ('hover', 'done', 'card')]
+            seen = {i for v in before for i in v.get('visible', [])}
+            shown = {i for v in core for i in v.get('visible', [])}
+            new_ids = [i for i in used if i in shown and i not in seen]
+            ch_parts = []
+            for p in parts:                                   # this Part's own parts: the kinds it brings in, as many as it brings
+                ids = [i for i in p['ids'] if i in new_ids]
+                if not ids:
+                    continue
+                e = copy.deepcopy(p)
+                e['ids'], e['qty'] = ids, (len(ids) if len(p['ids']) == p['qty'] else p['qty'])
+                also = [dict(x, ids=[i for i in x['ids'] if i in ids]) for x in e.pop('also', [])]
+                also = [x for x in also if x['ids']]
+                if also and all(any(i in x['ids'] for x in also) for i in ids) and len(also) == 1:
+                    e['picture'] = also[0]['picture']         # (every piece it brings has a picture of its own: that one)
+                elif also:
+                    e['also'] = also
+                e.pop('group', None)
+                ch_parts.append(e)
+            visible = [i for i in state['visible']]
+            sv, ev = c['start_view'], c['end_view']
+            offsets_of = lambda sv_: {**state['offsets'], **{i: pose_out(compose(pose, state['offsets'].get(i), self._pivot(i))) for i, pose in (sv_.get('poses') or {}).items() if i in visible}}
+            start_shown = [i for i in visible if i not in sv.get('hide', ())]
+            end_shown = [i for i in visible if i not in ev.get('hide', ())]
+            start_off, end_off = offsets_of(sv), offsets_of(ev)
+            wires_of = lambda shown_: {w: no for w, no in (state.get('wires') or {}).items() if all(routes[no].get(e) is None or routes[no][e] in shown_ for e in ('a', 'b'))}
+            start = dict(name='Start', kind='start', visible=start_shown, offsets=start_off, wires=wires_of(start_shown), carry=state.get('carry', {}),
+                         camera=special(sv, start_shown, start_off, title=True, fit=True))
+            end = dict(name='Completed View', kind='end', visible=end_shown, offsets=end_off, wires=wires_of(end_shown), carry=state.get('carry', {}),
+                       camera=special(ev, end_shown, end_off, fit=True), **({'cut': True} if ev.get('poses') else {}))
+            pages = []
+            if self.parts_list and ch_parts:
+                hero_cam = start['camera'] if 'dir' in start['camera'] else None
+                for page in self.parts_list(copy.deepcopy(ch_parts)):
+                    pages.append(dict(name=page['name'], kind='card', caption=page['name'], parts=page['groups'], visible=[], offsets={},
+                                      camera={key: val for key, val in (hero_cam or {}).items() if key in ('dir', 'target', 'radius')}))
+            out.append(dict(chapter=c, views=[start] + pages + core + [end], renamed=renamed, parts=ch_parts,
+                            first=renamed.get(next(v['name'] for v in core if number(v['name'])), ''),
+                            last=renamed.get([v['name'] for v in core if number(v['name'])][-1], '')))
+        return out
+
+    def _write_chapters(self, chapters, full, names):
+        """Write each Part guide (steps-<slug>.json) and chapters.json, the map; take away the files of Parts no longer there."""
+        old = self.kit_dir / 'chapters.json'
+        before = [c['file'] for c in json.load(open(old)).get('chapters', [])] if old.exists() else []
+        written, entries = [], []
+        for ch in chapters:
+            c, views = ch['chapter'], ch['views']
+            used_routes = sorted({no for v in views for no in (v.get('wires') or {}).values()} |
+                                 {no for v in views for nos in (v.get('wire_via') or {}).values() for no in nos})
+            remap = {old_no: k for k, old_no in enumerate(used_routes)}
+            for v in views:
+                if v.get('wires'):
+                    v['wires'] = {w: remap[no] for w, no in v['wires'].items()}
+                if v.get('wire_via'):
+                    v['wire_via'] = {w: [remap[no] for no in nos] for w, nos in v['wire_via'].items()}
+            wire_ids = {w for v in views for w in (v.get('wires') or {})} | {w for v in views for w in (v.get('wire_via') or {})}
+            shown = {i for v in views for i in v.get('visible', [])}
+            meta = dict(full['meta'], part=c['part'], chapter=c['slug'])
+            file = f"steps-{c['slug']}.json"
+            json.dump(dict(full, meta=meta, names={i: n for i, n in names.items() if i in shown},
+                           wires={w: d for w, d in full['wires'].items() if w in wire_ids}, routes=[full['routes'][o] for o in used_routes], views=views),
+                      open(self.kit_dir / file, 'w'), indent=1)
+            written.append(file)
+            entries.append(dict(slug=c['slug'], part=c['part'], file=file, first=ch['first'], last=ch['last'],
+                                parts=[dict(name=p['name'], qty=p['qty']) for p in ch['parts']], views=ch['renamed']))
+        for f in before:                                 # (a Part taken out or renamed: its old file would mislead)
+            if f not in written and (self.kit_dir / f).exists():
+                (self.kit_dir / f).unlink()
+                self.log.append(f'  removed {f}: no chapter() makes it any more')
+        if chapters:
+            json.dump(dict(_about='The Part guides cut from this kit\'s Full Build (stepgen.py chapter()): for each, its file, its first and '
+                                  'last step in the Full Build, the parts it brings in, and its step names -> the Full Build\'s.',
+                           full_build=self.steps_file, run=full['meta']['run'], chapters=entries), open(old, 'w'), indent=1)
+            written.append('chapters.json')
+        elif old.exists():
+            old.unlink()
+        return written
+
+    def _sync_model(self):
+        """model.glb holds the parts the kit's guides show (every steps file in the kit folder: the Full Build, its Parts, a
+        guide of its own such as a deconstruction), so rebuild it whenever that set changes: no guide ever shrinks it below
+        what another needs."""
         import build_model
         from glbio import read_glb
         model_file = self.kit_dir / 'model.glb'
+        needed = build_model.parts_shown(self.kit_dir) or set()
         have = {n.get('name') for n in read_glb(model_file)[0]['nodes']} if model_file.exists() else set()
         report = self.kit_dir / 'model.report.json'
         kept = json.load(open(report))['summary'].get('parts_kept') if report.exists() else None
-        if set(used) <= have and kept == len(used):
+        if needed <= have and kept == len(needed):
             return
-        print('The set of parts shown has changed: rebuilding model.glb ...')
+        print('The set of parts the kit\'s guides show has changed: rebuilding model.glb ...')
         build_model.build(self.kit_dir)

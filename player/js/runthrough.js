@@ -71,6 +71,9 @@ window._dev = {
     const steps = (new URLSearchParams(location.search).get('steps') || 'steps.json').replace(/\.json$/, '');
     const r = await fetch(`/__save/cards/${steps}.webp`, {method: 'POST', body: blob});
     if (!r.ok) throw new Error(`saving the card picture failed: ${r.status}`);
+    const model = (await fetch(`${steps}.json`, {cache: 'no-cache'}).then(x => x.json())).model.split('?v=')[1] || '';
+    const n = await fetch(`/__save/cards/${steps}.json`, {method: 'POST', body: JSON.stringify({model, made: new Date().toISOString()})});   // (the model it shows: publish.py checks it)
+    if (!n.ok) throw new Error(`saving the card's record failed: ${n.status}`);
     return `cards/${steps}.webp (${Math.round(blob.size / 1024)} kB)`;
   },
   freeze() { window.requestAnimationFrame = () => 0; },

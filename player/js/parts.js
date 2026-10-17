@@ -96,7 +96,7 @@ for (const part of list.parts) {
   tile(blob, part.name, part.qty > 1 ? `${part.name}  ×${part.qty}` : part.name, file);
   for (const e of extras.filter(e => also.includes(e.file))) tile(e.blob, part.name, `${part.name} (${e.file})`, e.file);
 }
-const manifest = {kit: list.meta.title, part: list.meta.part, image_size: SIZE,
+const manifest = {kit: list.meta.title, part: list.meta.part, image_size: SIZE, model: steps.model.split('?v=')[1] || '',   // (the model they were drawn from: publish.py checks it)
                   parts: results.map(r => ({name: r.name, quantity: r.qty, image: r.file, ...(r.also.length ? {also: r.also} : {})}))};
 const csv = 'name,quantity,image\n' + results.map(r => `"${r.name.replace(/"/g, '""')}",${r.qty},${r.file}`).join('\n') + '\n';
 

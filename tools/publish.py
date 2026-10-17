@@ -3,6 +3,8 @@
     python3 tools/publish.py <guide> --note "what changed"    a new release of that guide (guides.json names them)
     python3 tools/publish.py <guide> --restore r3             put an earlier release back on the website (a roll-back)
     python3 tools/publish.py <guide> --take-down              take the guide off the website (its releases are kept)
+    python3 tools/publish.py --kit <kit> --note "..."         every guide of a kit (Full Build, Parts, deconstruction) that has
+                                                              changed: the Parts, cut from one Full Build run, stay in step
     python3 tools/publish.py --list                           every guide: which release the website has, and the others
     (add --to <folder> for a practice run that writes there instead of releases/ and site/)
 
@@ -182,6 +184,11 @@ def rough_problems(kit, model):
 
 
 def published_model(src, dst, steps):
+    """Write published_model_bytes(src, steps) to dst."""
+    Path(dst).write_bytes(published_model_bytes(src, steps))
+
+
+def published_model_bytes(src, steps):
     """The model with the CAD's own names taken out: the player finds parts by the names of the assembly's direct children (the
     ids in steps.json) and keeps those, and the assembly's own name becomes "model"; every other node name goes, and the mesh
     (body / file) names unless the guide names parts inside a part by them (steps.json mesh_names). Geometry is untouched."""
@@ -203,7 +210,7 @@ def published_model(src, dst, steps):
     text = json.dumps(doc, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
     text += b' ' * (-len(text) % 4)
     body = struct.pack('<II', len(text), 0x4E4F534A) + text + rest
-    Path(dst).write_bytes(struct.pack('<III', 0x46546C67, 2, 12 + len(body)) + body)
+    return struct.pack('<III', 0x46546C67, 2, 12 + len(body)) + body
 
 
 def published_steps(steps, name, release, model_v):
@@ -230,6 +237,55 @@ def needed_files(steps):
     return files
 
 
+def run_problems(kit, entry, steps):
+    """Why a Part guide and its Full Build would not be from the same run (stepgen.py chapter(): one run writes them all)."""
+    path = kit / 'chapters.json'
+    if not path.exists():
+        return []
+    chapters = json.load(open(path))
+    files = [c['file'] for c in chapters.get('chapters', [])] + [chapters.get('full_build', 'steps.json')]
+    if entry['steps'] in files and steps['meta'].get('run') != chapters.get('run'):
+        return [f'{entry["steps"]} is not from the run that made chapters.json (run {chapters.get("run")}): run the kit\'s guide.py again']
+    return []
+
+
+def content_now(name, entry):
+    """What the guide would publish as now, in brief: its steps' content, and the checksum of every other file a release of it
+    would hold (but index.html, made from player.html), to compare with a release. None if it cannot be made (a file missing)."""
+    kit = ROOT / entry['folder']
+    try:
+        steps = json.load(open(inside(kit, entry['steps'])))
+        files = needed_files(steps)
+        model_bytes = published_model_bytes(inside(kit, files[0]), steps)
+        hashes = {files[0]: sha256(model_bytes)}
+        hashes.update({f: sha256(inside(kit, f)) for f in files[1:]})
+        card = kit / 'cards' / (Path(entry['steps']).stem + '.webp')
+        if card.is_file():
+            hashes['card.webp'] = sha256(card)
+        hashes.update({f: sha256(PLAYER / f) for f in PLAYER_FILES})
+        hashes.update({p.relative_to(PLAYER).as_posix(): sha256(p) for p in sorted((PLAYER / 'vendor').rglob('*')) if p.is_file() and not p.name.startswith('.')})
+    except (OSError, ValueError, SystemExit):
+        return None
+    out = published_steps(steps, name, None, hashes[files[0]][:12])
+    content = dict(out, meta={k: v for k, v in out['meta'].items() if k != 'release'})
+    return dict(steps_content=sha256(json.dumps(content, sort_keys=True).encode('utf-8')), files=hashes)
+
+
+def same_as_release(now, record):
+    """True if a guide as it is now would publish exactly what that release holds (but for its release number)."""
+    if not (now and record) or now['steps_content'] != record.get('steps_content'):
+        return False
+    held = {f: h for f, h in record.get('files', {}).items() if f not in ('index.html', 'steps.json')}
+    return held == now['files']
+
+
+def site_record(name):
+    """The record of the release the website has for a guide, or None."""
+    release = on_site(name)
+    path = RELEASES / name / str(release) / 'release.json'
+    return json.load(open(path)) if release and release != '?' and path.exists() else None
+
+
 def verify_release(folder):
     """Errors if a release folder is not exactly what its record says."""
     record = json.load(open(folder / 'release.json'))
@@ -242,6 +298,8 @@ def verify_release(folder):
 def build_release(name, entry, note):
     kit = ROOT / entry['folder']
     steps_file = inside(kit, entry['steps'])
+    if not steps_file.is_file():
+        raise SystemExit(f'{name}: no {entry["steps"]} in {kit.name}: run {entry.get("script", "guide.py")} first')
     steps = json.load(open(steps_file))
     files = needed_files(steps)
     missing = [f for f in files if not inside(kit, f).exists()]
@@ -251,25 +309,37 @@ def build_release(name, entry, note):
     problems = model_problems(model)
     if problems:
         raise SystemExit(f'{name}: {files[0]} is not a guide model: {"; ".join(problems)}')
-    problems = rough_problems(kit, model)
+    problems = rough_problems(kit, model) + run_problems(kit, entry, steps)
     if problems:
         raise SystemExit(f'{name}: not published: {"; ".join(problems)}')
-    stamp = steps['model'].partition('?v=')[2]
-    if stamp.isdigit() and int(stamp) != int(model.stat().st_mtime):
+    stamp = steps['model'].partition('?v=')[2]                # (the model's content: stepgen.model_stamp; a file date before 17 Oct 2026)
+    if stamp != (str(int(model.stat().st_mtime)) if stamp.isdigit() else sha256(model)[:12]):
         raise SystemExit(f'{name}: {entry["steps"]} and {files[0]} are from different runs (the model changed after the steps were written): '
                          'run the kit\'s guide script again, then publish')
     warnings = []
-    stale = [f for f in files[1:] if f.startswith('parts/') and inside(kit, f).stat().st_mtime < model.stat().st_mtime]
+    version = sha256(model)[:12]
+
+    def drawn_from(record):
+        """The model a picture was drawn from, by its version, as parts.html / _dev.card() noted it (None: not noted)."""
+        try:
+            return json.load(open(record)).get('model') or None
+        except (OSError, ValueError):
+            return None
+    pictures = [f for f in files[1:] if f.startswith('parts/')]
+    noted = drawn_from(kit / 'parts' / 'parts.json')
+    stale = ([] if noted == version else pictures) if noted else [f for f in pictures if inside(kit, f).stat().st_mtime < model.stat().st_mtime]
     if stale:
-        warnings.append(f'{len(stale)} part picture(s) are older than the model; re-render them with parts.html if the model changed: {", ".join(stale[:4])}{" ..." if len(stale) > 4 else ""}')
+        warnings.append(f'{len(stale)} part picture(s) were drawn from {"an earlier" if noted else "what may be an earlier"} model; '
+                        f're-render them with parts.html: {", ".join(stale[:4])}{" ..." if len(stale) > 4 else ""}')
     script = kit / entry.get('script', 'guide.py')
     if script.exists() and steps_file.stat().st_mtime < script.stat().st_mtime:
         warnings.append(f'{entry["steps"]} is older than {script.name}: has it been run since its last edit?')
     card = kit / 'cards' / (Path(entry['steps']).stem + '.webp')
     if not card.is_file():
         warnings.append(f'no card picture ({card.relative_to(ROOT)}): the website shows "No picture yet"; make one in the player with _dev.card()')
-    elif card.stat().st_mtime < model.stat().st_mtime:
-        warnings.append(f'the card picture is older than the model: make it again with _dev.card() if the model changed')
+    elif (card_noted := drawn_from(card.with_suffix('.json'))) != version and (card_noted or card.stat().st_mtime < model.stat().st_mtime):
+        warnings.append(f'the card picture was drawn from {"an earlier" if card_noted else "what may be an earlier"} model: '
+                        f'make it again with _dev.card() (player.html?steps={entry["steps"]})')
     reviews = sum(1 for v in steps['views'] if v.get('review'))
     if reviews:
         warnings.append(f'{reviews} view(s) carry Review notes; they are left out of the published copy (still in the kit)')
@@ -356,6 +426,7 @@ def main():
     what.add_argument('--take-down', action='store_true', help='take the guide off the website')
     what.add_argument('--list', action='store_true')
     ap.add_argument('--note', help='what changed, or why (kept in the record)')
+    ap.add_argument('--kit', help='publish every guide of this kit (guides.json "kits") that has changed since its release on the website')
     ap.add_argument('--to', metavar='FOLDER', help='a practice run: write the releases and the site under FOLDER instead')
     args = ap.parse_args()
     if args.to:
@@ -367,6 +438,8 @@ def main():
     site_cmd = f'python3 tools/serve.py "{SITE}" 8797' if args.to else 'python3 tools/serve.py site 8797'
     check_cmd = f'python3 tools/check_site.py "{SITE}"' if args.to else 'python3 tools/check_site.py'
     guides = registry()
+    if args.kit:
+        return publish_kit(args, guides, site_cmd, check_cmd)
     if args.list or not args.guide:
         for name, entry in guides.items():
             log = history(name)['log']
@@ -431,7 +504,64 @@ def main():
         print('  WARNING: ' + w)
     if record['source']['uncommitted_changes']:
         print('  NOTE: the guide\'s sources had uncommitted changes: commit the sources first, so that the release names their commit')
+    others = [n for n, e in guides.items() if n != name and e['kit'] == guides[name]['kit'] and site_record(n)
+              and not same_as_release(content_now(n, e), site_record(n))]
+    if others:
+        print(f'  WARNING: other guides of this kit have changed since their release on the website: {", ".join(others)}. Publish them '
+              f'too (python3 tools/publish.py --kit {guides[name]["kit"]} --note "..."), so that the kit\'s guides stay in step.')
     print(f'  Look first: {site_cmd} -> http://localhost:8797/{name}/   then: {check_cmd}')
+    print('  Then commit site/, releases/, render.yaml and guides.json; it goes live when pushed to the branch Render deploys (only on Lee\'s word).')
+
+
+def publish_kit(args, guides, site_cmd, check_cmd):
+    """publish.py --kit <kit>: a new release of each of the kit's guides that has changed since the release the website has (or
+    that is not on the website yet), all in one go: the Parts are cut from one Full Build run, and published together they
+    cannot drift apart. A guide that has not changed keeps its release."""
+    names = [n for n, e in guides.items() if e['kit'] == args.kit]
+    if not names:
+        raise SystemExit(f'no guide of a kit "{args.kit}" in guides.json')
+    if not args.note:
+        raise SystemExit('say what changed: --note "..."')
+    RELEASES.mkdir(parents=True, exist_ok=True)
+    done = []
+    with open(RELEASES / '.lock', 'w') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise SystemExit('another publish is running')
+        for name in names:                                         # (every one checked before any is put on the site)
+            tidy(name)
+            entry = guides[name]
+            if same_as_release(content_now(name, entry), site_record(name)):
+                done.append((name, None, None, [f'unchanged: the website keeps {on_site(name)}'], []))
+                continue
+            try:
+                final, record, warnings = build_release(name, entry, args.note)
+            except BaseException:                                  # (none of the kit goes out: take away the releases built so far)
+                for _, built, *_ in done:
+                    if built is not None:
+                        shutil.rmtree(built, ignore_errors=True)
+                print(f'--kit {args.kit}: nothing published (the website keeps every guide of the kit as it was):', file=sys.stderr)
+                raise
+            done.append((name, final, record, changes(name, final, on_site(name)), warnings))
+        when = datetime.datetime.now().isoformat(timespec='seconds')
+        for name, final, record, report, warnings in done:
+            if final is None:
+                continue
+            h, was = history(name), on_site(name)
+            put_on_site(name, final)
+            h['log'].append(dict(when=when, action='published', release=record['release'], note=args.note, source=record['source'], was=was))
+            save_history(name, h)
+        site_pages.build(SITE, write_yaml=not args.to)
+    for name, final, record, report, warnings in done:
+        print(f'{name}: ' + (f'{record["release"]} published to site/{name}/ ({record["views"]} views)' if final else report[0]))
+        for line in (report if final else []):
+            print('  ' + line)
+        for w in warnings:
+            print('  WARNING: ' + w)
+    if any(r and r['source']['uncommitted_changes'] for _, _, r, _, _ in done):
+        print('  NOTE: the sources had uncommitted changes: commit the sources first, so that the releases name their commit')
+    print(f'  Look first: {site_cmd} -> http://localhost:8797/<guide>/   then: {check_cmd}')
     print('  Then commit site/, releases/, render.yaml and guides.json; it goes live when pushed to the branch Render deploys (only on Lee\'s word).')
 
 

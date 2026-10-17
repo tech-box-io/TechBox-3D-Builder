@@ -2,6 +2,10 @@
 
     python3 tools/step_text.py export "MRA Build Instructions Prototype" "share/<folder>/MRA step text.csv"
     python3 tools/step_text.py import "MRA Build Instructions Prototype" "edited.csv"
+    python3 tools/step_text.py export "RCC Build Instructions" "<csv>" steps-deconstruction.json   # a guide of its own in the kit
+
+The Full Build's wording is also its Parts' (they are cut from it: stepgen chapter()); a guide of its own (a deconstruction guide)
+has its own wording file, step-text-<name>.json.
 
 export writes one row per step (as the player's step list names it) and per note card, from the kit's steps.json: the
 instruction, the caution, a column for comments, and the step's key, a short code (text_key in steps.json, from the guide's
@@ -26,9 +30,15 @@ COLUMNS = ['Step', 'Type', 'Instruction', 'Caution', 'Comments for TechBox', 'Ke
 NEEDED = {'instruction': 'Instruction', 'caution': 'Caution', 'key': 'Key (do not edit)'}
 
 
-def steps_of(kit):
+def text_file(steps_file):
+    """Where a guide's edited wording is kept: step-text.json for the Full Build (its Parts share its steps and so its wording),
+    step-text-<name>.json for a guide of its own (steps-<name>.json, a deconstruction guide). (As stepgen.step_text_file.)"""
+    return 'step-text.json' if steps_file == 'steps.json' else 'step-text-' + steps_file[len('steps-'):-len('.json')] + '.json'
+
+
+def steps_of(kit, steps_file='steps.json'):
     """[(name, type, instruction, caution, key)] for each step and note card, in order."""
-    views = json.loads((Path(kit) / 'steps.json').read_text(encoding='utf-8'))['views']
+    views = json.loads((Path(kit) / steps_file).read_text(encoding='utf-8'))['views']
     seen, out = set(), []
     for v in views:
         if v['kind'] not in ('hover', 'done', 'card') or v.get('parts') or not v.get('caption'):
@@ -44,8 +54,8 @@ def steps_of(kit):
     return out
 
 
-def export(kit, csv_path):
-    rows = steps_of(kit)
+def export(kit, csv_path, steps_file='steps.json'):
+    rows = steps_of(kit, steps_file)
     path = Path(csv_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, 'w', newline='', encoding='utf-8-sig') as f:   # (the byte-order mark makes Excel read it as UTF-8)
@@ -106,10 +116,10 @@ def read_rows(path, current):
     return best[0], best[1]
 
 
-def import_(kit, csv_path):
-    order = steps_of(kit)
+def import_(kit, csv_path, steps_file='steps.json'):
+    order = steps_of(kit, steps_file)
     current = {key: (name, caption, caution) for name, _, caption, caution, key in order}
-    out_path = Path(kit) / 'step-text.json'
+    out_path = Path(kit) / text_file(steps_file)
     kept = {e['key']: e for e in (json.loads(out_path.read_text(encoding='utf-8')).get('steps', []) if out_path.exists() else [])}
     rows, encoding = read_rows(csv_path, current)
     changed, notes, comments, done = [], [], [], {}
@@ -158,6 +168,6 @@ def import_(kit, csv_path):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4 or sys.argv[1] not in ('export', 'import'):
+    if len(sys.argv) not in (4, 5) or sys.argv[1] not in ('export', 'import'):
         raise SystemExit(__doc__)
-    (export if sys.argv[1] == 'export' else import_)(sys.argv[2], sys.argv[3])
+    (export if sys.argv[1] == 'export' else import_)(*sys.argv[2:])        # (a 5th argument: a guide of its own, steps-<name>.json)

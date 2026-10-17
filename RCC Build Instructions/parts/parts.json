@@ -2,6 +2,7 @@
  "kit": "Remote Controlled Car (RCC)",
  "part": "Full Build",
  "image_size": 500,
+ "model": "be5ea8ab0dfc",
  "parts": [
   {
    "name": "Controller Board",

@@ -4,8 +4,8 @@
 
 Reads  <kit>/source.glb (or the `source` named in materials.json) and <kit>/materials.json.
 Writes <kit>/model.glb and <kit>/model.report.json.
-If <kit>/steps.json exists, only the parts that guide shows are kept (the rest of the CAD is never
-drawn, so there is no reason to download it), and the guide is pointed at the new model.
+If the kit has guides (steps.json, and any steps-*.json: its Parts, a deconstruction guide), only the parts they show are kept
+(the rest of the CAD is never drawn, so there is no reason to download it), and every one of them is pointed at the new model.
 
 What it does, per mesh:
   * colours it from materials.json — one colour, or several by splitting the mesh into its
@@ -884,14 +884,21 @@ def wire_breaks(wires):
 
 
 # ---------------------------------------------------------------- main
+def guide_files(kit_dir):
+    """The kit's guides' steps files: steps.json (the Full Build) and any steps-<name>.json (its Parts, a guide of its own)."""
+    kit_dir = Path(kit_dir)
+    return sorted(p for p in kit_dir.glob('steps*.json') if re.fullmatch(r'steps(-[a-z0-9]+(-[a-z0-9]+)*)?\.json', p.name))
+
+
 def parts_shown(kit_dir):
-    """Ids of the parts the kit's guide ever shows, or None if there is no guide yet."""
-    steps = kit_dir / 'steps.json'
-    if not steps.exists():
+    """Ids of the parts any of the kit's guides ever shows (they all share the one model), or None if there is no guide yet."""
+    files = guide_files(kit_dir)
+    if not files:
         return None
     shown = set()
-    for view in json.load(open(steps))['views']:
-        shown.update(view.get('visible', []))
+    for steps in files:
+        for view in json.load(open(steps))['views']:
+            shown.update(view.get('visible', []))
     return shown
 
 
@@ -1243,14 +1250,15 @@ def build(kit_dir, keep='guide'):
                    materials=[m['name'] for m in materials_json], wire_colour_breaks=breaks)
     json.dump(dict(summary=summary, meshes=report), open(kit_dir / 'model.report.json', 'w'), indent=1)
 
-    # point the guide at the new file, so browsers that cached the old model fetch this one
-    steps = kit_dir / 'steps.json'
-    if steps.exists():
+    # point every guide of the kit at the new file (by its content: see stepgen.model_stamp), so browsers that cached the old
+    # model fetch this one, and publish.py can tell the steps and the model belong together
+    stamp = hashlib.sha256((kit_dir / 'model.glb').read_bytes()).hexdigest()[:12]
+    for steps in guide_files(kit_dir):
         data = json.load(open(steps))
-        data['model'] = f"model.glb?v={int((kit_dir / 'model.glb').stat().st_mtime)}"
+        data['model'] = f'model.glb?v={stamp}'
         json.dump(data, open(steps, 'w'), indent=1)
 
-    scope = f"{len(keep)} of {all_parts} parts (those the guide shows)" if keep is not None else 'all parts'
+    scope = f"{len(keep)} of {all_parts} parts (those the kit's guides show)" if keep is not None else 'all parts'
     print(f"{src.name}: {summary['source_bytes'] / 1e6:.1f} MB  ->  model.glb: {size / 1e6:.2f} MB, {inst_out:,} triangles ({inst_in:,} in the source for the same parts), {scope}")
     for r in sorted(report, key=lambda r: -r['tris_out'] * r['used_by'])[:12]:
         relaxed = f"  (detail relaxed to {r['tolerance_relaxed_to_mm']} mm to meet max_tris)" if 'tolerance_relaxed_to_mm' in r else ''
