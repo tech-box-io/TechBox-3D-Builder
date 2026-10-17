@@ -14,6 +14,10 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import publish  # noqa: E402
+from check_site import guide_parts  # noqa: E402
+
 IMPORT = re.compile(r"""(\bfrom\s*|\bimport\s*\(?\s*)(['"])([^'"]+)\2""")
 
 
@@ -57,7 +61,9 @@ def bundle(kit, out, steps_file='steps.json'):
     modules['mra/player'] = player
 
     steps = json.load(open(kit / steps_file))
-    steps['model'] = data_url((kit / steps['model'].split('?')[0]).read_bytes(), 'model/gltf-binary')
+    _, doc, rest = publish.read_glb(kit / steps['model'].split('?')[0])
+    pruned = publish.only_parts(doc, rest, guide_parts(steps))       # (a Part's file carries only that Part's parts, as on the website)
+    steps['model'] = data_url(publish.glb_bytes(*pruned) if pruned else (kit / steps['model'].split('?')[0]).read_bytes(), 'model/gltf-binary')
     for view in steps['views']:                      # the parts list's pictures (parts/*.png, from parts.html)
         for group in view.get('parts', []):
             for item in group['items']:

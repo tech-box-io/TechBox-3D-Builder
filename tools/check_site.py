@@ -65,6 +65,32 @@ def walk(folder):
 GUIDE_TYPES = ('.html', '.js', '.glb', '.png', '.webp', '.jpg', '.svg')   # (and steps.json, vendor/three/LICENSE)
 
 
+def steps_stamp(steps):
+    """A guide's content, in brief (its meta and the model's version left out): a deconstruction guide records the stamp of the
+    Full Build it was taken apart from (stepgen take_apart(): meta.taken_from), and publish.py warns once the Full Build has
+    changed since."""
+    body = {k: v for k, v in steps.items() if k not in ('meta', 'model')}
+    return hashlib.sha256(json.dumps(body, sort_keys=True).encode('utf-8')).hexdigest()[:12]
+
+
+def guide_parts(steps):
+    """The parts (CAD instance ids) a guide shows in any of its views, or carries with one it shows: what its model must hold.
+    (publish.py leaves every other part out of a guide's published model, so that a Part guide downloads only its own parts.)"""
+    ids = set()
+    for view in steps.get('views', []):
+        ids.update(view.get('visible', []))
+        ids.update(view.get('leaving', []))
+        for i, c in (view.get('carry') or {}).items():
+            ids.update((i, c.get('by')))
+        ids.update(view.get('moving', []))
+        ids.update(view.get('still', []))
+        ids.update((view.get('paths') or {}).keys())
+        ids.update((view.get('inset') or {}).get('hide', []))
+        ids.update(item['id'] for item in view.get('labels', []) + view.get('eye', []) if item.get('id'))
+    ids.discard(None)
+    return ids
+
+
 def check_model(path, steps=None):
     raw = Path(path).read_bytes()
     if raw[:4] != b'glTF' or len(raw) < 20:
@@ -78,6 +104,13 @@ def check_model(path, steps=None):
         out.append('not meshopt-compressed')
     if len(raw) > MODEL_LIMIT:
         out.append(f'{len(raw) / 1e6:.1f} MB, too big for a guide model')
+    rest = raw[20 + n:]                          # (the binary chunk: publish.py packs it again when it leaves parts out)
+    blen = struct.unpack('<II', rest[:8])[0] if len(rest) >= 8 else -1
+    if blen != len(rest) - 8 or (doc.get('buffers') and doc['buffers'][0].get('byteLength') != blen):
+        out.append('its binary chunk is not the length the model says')
+    elif any(not (0 <= e.get('byteOffset', 0) and e.get('byteOffset', 0) + e.get('byteLength', 0) <= blen)
+             for e in ((v.get('extensions') or {}).get('EXT_meshopt_compression') for v in doc.get('bufferViews', [])) if e):
+        out.append('a compressed buffer view lies outside its binary chunk')
     if any('name' in m for m in doc.get('meshes', [])) and not doc.get('asset', {}).get('copyright'):
         out.append('still carries the CAD\'s names (not a published copy)')
     # (publish.py names only the assembly, "model", and the parts under it, and keeps a mesh's name only where the guide names a
@@ -89,6 +122,10 @@ def check_model(path, steps=None):
         stray = [n['name'] for k, n in enumerate(nodes) if 'name' in n and k != roots[0] and k not in parts]
         if stray:
             out.append(f'{len(stray)} node(s) keep a CAD name (e.g. {stray[0]!r}): not a published copy')
+        if steps is not None:                    # (a part the guide shows but its model lacks would silently not be there)
+            missing = sorted(guide_parts(steps) - {nodes[k].get('name') for k in parts})
+            if missing:
+                out.append(f'{len(missing)} part(s) the guide shows are not in its model (e.g. {missing[0]!r})')
     else:
         out.append('its assembly is not named "model": not a published copy')
     prefixes = tuple(((steps or {}).get('mesh_names') or {}).keys())

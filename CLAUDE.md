@@ -96,6 +96,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   the Review notes and their switch once a guide is past review. `Guide(hover_names={id: name})` names a part more exactly
   on hover and click than the parts list does (the MRA's Left / Right Joystick, "Joystick x2" in the list). In the step list
   a Parts List page is pictured as the page itself, small (its part pictures load once the list is opened).
+- **More guides from one kit.** Part guides cut from the Full Build (`g.chapter()`; `g.in_part()` and `g.note(only_in=)` for
+  what one Part has of its own) and a deconstruction guide (`g.take_apart()`, then `remove()`, `unplug()`, `lift()`): see "A kit's
+  guides" below.
 - **Step text, edited outside.** `tools/step_text.py export` writes every step's instruction and caution to a CSV for an
   editor, keyed by each step's `text_key` (a short code from the guide's own wording and which step with that wording it
   is, so edits find their step after renumbering and a Replace All cannot break them); `import` checks the columns, reads
@@ -122,8 +125,8 @@ Run from this folder. The Python environment is `.venv.nosync` (the Desktop is i
     python3 tools/step_text.py export "MRA Build Instructions Prototype" "share/<folder>/MRA step text.csv"   # step text for editing
     python3 tools/step_text.py import "MRA Build Instructions Prototype" "<edited>.csv"                       # then run guide.py
 
-(`step_text.py` takes a steps file as a fifth argument, for a guide of its own such as a deconstruction; a Part guide's text is
-the Full Build's.)
+(`step_text.py` takes a steps file as a fourth argument, for a Part or a guide of its own such as a deconstruction: a Part's sheet
+is imported with `--only-this-part` or `--everywhere`, see "A kit's guides".)
 
 To send a guide to someone, pack it into one HTML file that opens by double-click with no server and no internet
 (player, model, steps, logo and the part pictures for the parts list's large view all inside), and put the part pictures
@@ -169,9 +172,10 @@ the same way, and publish warns about part pictures drawn from another model).
   every file's checksum) and `releases/<guide>/history.json`, in git but never uploaded (Render serves `site/` only).
   `check_site.py` requires each `site/<guide>/` to be byte for byte the release its `steps.json` names, so only `publish.py`
   can change what goes out.
-- **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (without Review notes or
-  `text_key`), the kit's `model.glb` (without the CAD's own body and file names; the part ids stay, as the player needs them),
-  the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`, `materials.json`, wire paths, `decals.json`
+- **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (without Review notes,
+  `text_key` or the generator's own records), the kit's `model.glb` cut down to the parts that guide shows (a Part guide downloads
+  only its own: Lee, 17 Oct 2026; without the CAD's own body and file names; the part ids stay, as the player needs them), the logo
+  and the part pictures the Parts List shows. Never the CAD, `guide.py`, `materials.json`, wire paths, `decals.json`
   (the printing travels inside the model as shapes) or research. `check_site.py` refuses any other kind of file in a guide's
   folder (only .html, .js, .glb, .png, .webp, .jpg, .svg, steps.json and the three.js licence) and a CAD name left in its model.
 - **What the model gives away** (told to Lee, 16 Oct 2026): a 3D guide has to send the part shapes to the browser; anyone who
@@ -239,26 +243,49 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **Part guides** are cut from the Full Build by the same run (Lee, 16 Oct 2026): in `guide.py`, `g.chapter('part-1',
   part='Part 1: The Controller')` just before the first step of each Part (optional `start_view=` / `end_view=`, as
   `Guide`'s). Running guide.py then also writes `steps-part-1.json` ... and `chapters.json`, the map: each Part's first and last
-  step in the Full Build, the parts it brings in, and its step names -> the Full Build's (for "Part 2, Step 5"). A Part's core
-  steps are the Full Build's, with their order, wording and cameras, numbered from Step 1. It has its own title page and
-  Completed View, both showing the model as that Part leaves it (by default from the finished model's corner, framed on what
-  the Part shows), and a Parts List of only the parts new in it (a Part with none has no Parts List). Its step text is the
-  Full Build's. Take a `chapter()` line out and the next run removes that Part's file. The log notes a Part that begins inside
-  a turned-over run or a sub-assembly built in the hand, and a caption that names a step by its (Full Build) number.
-- **A guide of its own** (the RCC deconstruction) is a script of its own in the kit folder with `Guide(...,
-  steps_file='steps-deconstruction.json')`, named in its `guides.json` entry (`"script"`). It writes only its steps file (its
-  step text: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add parts to the model but not
-  take any away.
-- **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
-  pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
-  whose steps are not from the run that wrote `chapters.json` is refused.
+  step in the Full Build, the parts it brings in, and its step names -> the Full Build's (for "Part 2, Step 5"; null for a card
+  only the Part has). A Part's steps are the Full Build's, with their order, wording and cameras, numbered from Step 1. It has its
+  own title page and Completed View, both showing the model as that Part leaves it (by default from the finished model's corner,
+  framed on what the Part shows), and a Parts List of only the parts new in it (a Part with none has no Parts List). Take a
+  `chapter()` line out and the next run removes that Part's file. The log notes a Part that begins inside a turned-over run or a
+  sub-assembly built in the hand, and a caption that names a step by its (Full Build) number.
+- **A change in one Part only** (Lee, 17 Oct 2026): `g.in_part(caption=, caution=, view_dir= / frame= / look_from=)`, written just
+  after the step in guide.py, is that step as its Part shows it (wording, or a camera of its own for both its views; not for a
+  turned-over step or a `rest()` step); the Full Build keeps the step as written. `g.note(..., only_in='part')` is a card only the
+  Part shows ("Part 1 must be finished first"), `only_in='full'` one only the Full Build shows; each guide numbers its own steps.
+  A Part's spreadsheet (`step_text.py export <kit> <csv> steps-part-2.json`) is imported with `--only-this-part` (into
+  `step-text-part-2.json`, applied over the Full Build's wording and `in_part()`) or `--everywhere` (into `step-text.json`: the
+  Full Build and every guide with the step; a step with wording of its own in the Part keeps it, and the import says so). What a
+  Part cannot have on its own: different parts, moves or wires (those carry on into the steps after), or a step left out.
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-  (A Part's steps are made from the Full Build's: a change for one Part only, other than those four, is not built yet. Tell Lee
-  it would mean that Part no longer shares the step, before making it.)
-- A published Part guide carries the kit's whole model (later Parts' parts too), as the Full Build does; pruning it would
-  only save download, not keep anything private (the Full Build gives the whole model away). Not pruned unless Lee asks.
+- **A deconstruction guide** (the RCC's, planned) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+  `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
+  `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
+  Full Build's title page. Then, as a rule the build in reverse (rulebook section 11 and Lee's conventions there: parts may go in
+  unison, every step has its own wording, a part once off is gone for good):
+  - `g.remove(caption, ids)`: the parts leave and disappear. Step N shows them where they are with one red arrow per unit (parts the
+    Full Build put on together are one unit; two of a kind get an arrow each); Next plays them out the way the Full Build put them
+    in, reversed (to where they hovered, by that step's camera), and they are gone; Prev brings them back. A part the Full Build
+    did not move in, or one not in its seat, is pulled straight out the first free way. Parts riding on them go too, and so does a
+    lead whose ends both go; a lead left with one end on screen is refused (unplug it first). `path=` / `paths=` / `direction=`
+    and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release), `alone=[ids]` (taken apart on its own),
+    `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`.
+  - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
+    the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
+  - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later.
+  - `g.note(...)` as in a build; `put_away(ids)` for what is left of a sub-assembly taken apart on its own.
+  It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
+  parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
+  from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
+  left (the base), closer in. No Parts List unless asked for. Its card picture on the website would be its Completed View (the bare
+  base): Lee's call whether it should be its title page instead.
+- **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
+  pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
+  whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
+  published with a warning (run its script again). Each guide's model goes out cut down to the parts it shows (`only_parts`; the
+  RCC: Part 1 0.98 MB of 1.98), and `bundle.py` packs a Part the same way.
 - A new guide gets an entry in `guides.json` before its first publish (above); a new kit, an entry under `kits` and a folder
   laid out as the MRA's.
 

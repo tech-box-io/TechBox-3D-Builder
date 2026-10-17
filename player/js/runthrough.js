@@ -33,10 +33,43 @@ window._runthrough = () => {
     if (caution.hidden !== !view.caution) problems.push(`${tag} ${view.name}: the caution is ${view.caution ? 'missing' : 'shown'}`);
     if (view.parts && document.getElementById('partsview').hidden) problems.push(`${tag} ${view.name}: the parts list is not shown`);
   };
+  // Every part the steps name is in the model (a published guide's model holds only the parts that guide shows: publish.py).
+  const named = new Set();
+  for (const v of P.views) for (const id of [...(v.visible || []), ...(v.leaving || []), ...(v.moving || []), ...Object.keys(v.carry || {}),
+                                             ...Object.values(v.carry || {}).map(c => c.by)]) named.add(id);
+  for (const id of named) if (!st.parts.has(id)) problems.push(`the steps name ${id}, which is not in the model`);
+  // A deconstruction: a part taken off (`leaving`) was on screen, is gone, and is never shown again (Lee, 17 Oct 2026).
+  P.views.forEach((v, i) => {
+    for (const id of v.leaving || []) {
+      if (!(P.views[i - 1] && (P.views[i - 1].visible || []).includes(id))) problems.push(`${v.name}: ${id} is taken off but was not on screen`);
+      if (v.visible.includes(id)) problems.push(`${v.name}: ${id} is taken off but still shown`);
+      const again = P.views.slice(i + 1).find(w => w.kind !== 'card' && (w.visible || []).includes(id));
+      if (again) problems.push(`${v.name}: ${id} is taken off, and ${again.name} shows it again`);
+    }
+  });
   P.go(0, false); check(0, 'fwd');
   for (let i = 1; i < n; i++) { P.go(i, true); check(i, 'fwd'); }
   for (let i = n - 2; i >= 0; i--) { P.go(i, true); check(i, 'back'); }
   for (let i = 0; i < n; i += 3) { P.go(i, false); check(i, 'jump'); }
+  // ...and on the way: part of the way through, a part being taken off is still on screen and moving; then it has gone; and
+  // stepping back, it is on screen again on its way back.
+  P.views.forEach((v, i) => {
+    if (!(v.leaving || []).length || i === 0) return;
+    const before = P.views[i - 1];
+    const pose = id => { const o = st.parts.get(id); return o ? at(o.userData.pose, o.userData.sphere.center) : null; };
+    P.go(i - 1, false); P.frame(performance.now() + 1e6);
+    P.go(i, true); let t = performance.now(); P.frame(t + 400);
+    for (const id of v.leaving) {
+      const o = st.parts.get(id); if (!o) continue;
+      if (!o.visible) problems.push(`mid ${v.name}: ${id} has gone before it has left`);
+      else if ((v.moving || []).includes(id) && pose(id).distanceTo(at(before.offsets[id], o.userData.sphere.center)) < 0.5) problems.push(`mid ${v.name}: ${id} is not moving out`);
+    }
+    P.frame(t + 1e6);
+    for (const id of v.leaving) { const o = st.parts.get(id); if (o && o.visible) problems.push(`mid ${v.name}: ${id} is still shown once it has left`); }
+    P.go(i - 1, true); t = performance.now(); P.frame(t + 400);
+    for (const id of v.leaving) { const o = st.parts.get(id); if (o && !o.visible) problems.push(`mid back ${v.name}: ${id} is not on its way back`); }
+    P.frame(t + 1e6); check(i - 1, 'back');
+  });
   return {views: n, problems: problems.length, first: problems.slice(0, 12)};
 };
 

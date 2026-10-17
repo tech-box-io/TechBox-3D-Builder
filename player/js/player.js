@@ -64,6 +64,7 @@ function mixPose(a, b, k) {
 const pN = new THREE.Matrix4(), pC = new THREE.Vector3();
 function composePose(outer, inner, id) {
   if (!turn(outer) && !shift(outer).some(Boolean)) return inner || ZERO;
+  if (!stage.parts.has(id)) return inner || ZERO;   // (a part the model does not have: nothing to draw, nothing to break)
   const m = pN.copy(stage.poseMatrix(outer, pM)).multiply(stage.poseMatrix(inner || null, pM));
   const c = stage.parts.get(id).userData.sphere.center;
   pC.copy(c).applyMatrix4(m);
@@ -513,6 +514,7 @@ function alongPath(pts, t, stops) {
 function go(i, animate = true) {
   i = Math.max(0, Math.min(views.length - 1, i));
   const from = views[cur], to = views[i], sameView = i === cur;
+  const flying = new Set((anim && anim.leaving) || []);   // (parts still on their way out of a removal that is being played)
   // After the bench test is put away the build starts afresh: no part glides over from the view before (`cut`).
   if ((i === cur + 1 && to.cut) || (i === cur - 1 && from.cut)) animate = false;
   const forward = animate && i === cur + 1, backward = animate && i === cur - 1;
@@ -549,18 +551,36 @@ function go(i, animate = true) {
   }
   if (window.parent !== window) window.parent.postMessage({type: 'techbox-step', index: i, name: to.name, total: views.length}, '*');
 
-  stage.setVisible(flat(to) ? [] : to.visible);
+  // A part taken off in a deconstruction (`leaving` on Step Nc) stays on screen while it travels out, and goes at the end.
+  const leaving = forward && from.kind === 'hover' && to.kind === 'done' ? (to.leaving || []).filter(id => from.visible.includes(id)) : [];
+  stage.setVisible(flat(to) ? [] : leaving.length ? [...to.visible, ...leaving] : to.visible);
   const was = id => !flat(from) && from.kind !== 'start' && from.visible.includes(id) && animate;
   const start = {}, end = {}, ways = {};
   for (const id of to.visible) {
     end[id] = to.offsets[id] || ZERO;
     start[id] = was(id) ? (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
   }
+  for (const id of leaving) { end[id] = to.offsets[id] || ZERO; start[id] = (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO; }
   // seat the part along its path (may have more than one leg); a wiggle on the spot (`wiggle`) also plays as its step opens
   // (the wiggle plays however its step is reached: stepping forward or back, or jumping to it)
   let wayStops = null, wireVia = null;
   if ((forward && to.kind === 'done' && from.kind === 'hover') || (to.wiggle && !sameView)) {
     for (const id of to.moving) { ways[id] = ((to.paths && to.paths[id]) || to.path).slice(); ways[id][0] = start[id]; }   // from wherever it is now (a part may have a way of its own)
+  } else if (backward && from.kind === 'done' && to.kind === 'hover' && from.away) {
+    // Back from a deconstruction step (`away`): the parts come back the way they went, a part that was taken off from where its
+    // way out ends (or from where it had got to, if it was still on its way out).
+    wayStops = {};
+    for (const id of from.moving) {
+      if (!(id in end)) continue;
+      const way = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = way.length - 1, s = stopsFor(from, id);
+      if (!from.visible.includes(id)) start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : way[0];
+      way[0] = start[id]; way[n] = end[id];
+      ways[id] = way;
+      if (s) wayStops[id] = s.map(k => n - k).reverse();
+    }
+    for (const id of from.leaving || []) if (id in end && !(id in ways) && !from.visible.includes(id))   // (one that rode on another: it comes back with it)
+      start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : from.offsets[id] || end[id];
+    if (from.wire_via) { wireVia = {}; for (const id in from.wire_via) wireVia[id] = from.wire_via[id].slice().reverse(); }   // (a lead laid in stages: back through them)
   } else if (backward && from.kind === 'done' && to.kind === 'hover' && staged(from)) {
     // Back from a step whose wire goes in by stages (Steps 97 and 100: the extension past R4 and the jumper wires): the
     // part's way backwards, stop by stop, its wire back through the same routes and a riding plug back the way it came.
@@ -588,7 +608,7 @@ function go(i, animate = true) {
   const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
   const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
   const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
-  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);
@@ -608,6 +628,7 @@ function stepAnimation(now) {
   for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
     if (!(id in anim.end)) continue;
     const c = carry[id], was = before[id] && before[id].by === c.by ? before[id].pose : null;
+    if (!was && anim.ways[id]) continue;     // (a part with a way of its own that did not ride on it before: it follows its way, which ends where it rides)
     const via = back ? ((was && before[id].via) || []).slice().reverse() : c.via || [];
     if (was) liveOffsets[id] = composePose(liveOffsets[c.by], JSON.stringify(was) === JSON.stringify(c.pose) ? c.pose : throughPoses([was, ...via, c.pose], e), id);   // (it may be moved to a new place on its carrier)
     else if (anim.fresh.has(id)) liveOffsets[id] = composePose(liveOffsets[c.by], c.pose, id);        // new with its carrier: it rides from the start
@@ -620,7 +641,8 @@ function stepAnimation(now) {
   const beats = anim.dur ? Math.max(1, Math.round(anim.dur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
   let we = e;
   if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(k * beats)); we = (b + ease(k * beats - b)) / beats; }
-  drawWires(flat(anim.to) ? {} : anim.to, liveOffsets, anim.from, we, anim.wireVia);
+  const leads = anim.leaving.length && k < 1 && anim.to.leaving_wires ? {...anim.to, wires: {...anim.to.wires, ...anim.to.leaving_wires}} : anim.to;   // (a lead taken off goes with its parts)
+  drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia);
   if (anim.cam) {                            // swing around the target rather than cutting through the model
     const c = anim.cam;
     controls.target.lerpVectors(c.t0, c.t1, e);
@@ -635,7 +657,8 @@ function stepAnimation(now) {
     camera.lookAt(controls.target);
   }
   if (k >= 1) {
-    const view = anim.to; anim = null;
+    const view = anim.to, gone = anim.leaving.length > 0; anim = null;
+    if (gone) stage.setVisible(view.visible);   // (the parts taken off have gone)
     if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
     if (view.inset) buildInset(view);
   }

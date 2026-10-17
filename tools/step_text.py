@@ -3,9 +3,14 @@
     python3 tools/step_text.py export "MRA Build Instructions Prototype" "share/<folder>/MRA step text.csv"
     python3 tools/step_text.py import "MRA Build Instructions Prototype" "edited.csv"
     python3 tools/step_text.py export "RCC Build Instructions" "<csv>" steps-deconstruction.json   # a guide of its own in the kit
+    python3 tools/step_text.py export "RCC Build Instructions" "<csv>" steps-part-2.json           # a Part guide's wording
+    python3 tools/step_text.py import "RCC Build Instructions" "<csv>" steps-part-2.json --only-this-part   # (or --everywhere)
 
-The Full Build's wording is also its Parts' (they are cut from it: stepgen chapter()); a guide of its own (a deconstruction guide)
-has its own wording file, step-text-<name>.json.
+A Part guide is cut from the Full Build (stepgen chapter()), so its wording is the Full Build's unless the Part has its own
+(in_part() in guide.py, or edits imported --only-this-part, kept in step-text-<part>.json). Importing a Part's sheet asks which
+is meant: --only-this-part (the Full Build and the other guides keep their wording) or --everywhere (the Full Build's wording
+changes, and with it every guide that has the step; a step that has wording of its own in the Part keeps that, and is listed).
+A guide of its own (a deconstruction guide) has its own wording file, step-text-<name>.json.
 
 export writes one row per step (as the player's step list names it) and per note card, from the kit's steps.json: the
 instruction, the caution, a column for comments, and the step's key, a short code (text_key in steps.json, from the guide's
@@ -116,12 +121,40 @@ def read_rows(path, current):
     return best[0], best[1]
 
 
-def import_(kit, csv_path, steps_file='steps.json'):
+def part_files(kit):
+    """The steps files of the kit's Part guides (chapters.json)."""
+    path = Path(kit) / 'chapters.json'
+    return [c['file'] for c in json.loads(path.read_text(encoding='utf-8')).get('chapters', [])] if path.exists() else []
+
+
+def import_(kit, csv_path, steps_file='steps.json', scope=None):
     order = steps_of(kit, steps_file)
-    current = {key: (name, caption, caution) for name, _, caption, caution, key in order}
-    out_path = Path(kit) / text_file(steps_file)
+    current = {key: (name, caption, caution) for name, _, caption, caution, key in order}   # (as the sheet's guide shows them)
+    shared = None                                # (a Part's sheet imported --everywhere: the Full Build's wording is what changes)
+    if steps_file in part_files(kit):
+        if scope not in ('--only-this-part', '--everywhere'):
+            raise SystemExit(f'{steps_file} is a Part guide: say whether the edits are for this Part only (--only-this-part) or for '
+                             f'the Full Build and every guide that has those steps (--everywhere). Nothing was imported.')
+        if scope == '--everywhere':
+            shared = {key: (name, caption, caution) for name, _, caption, caution, key in steps_of(kit, 'steps.json')}
+            steps_file_out = 'steps.json'
+        else:
+            steps_file_out = steps_file
+    elif scope:
+        raise SystemExit(f'{scope}: only for a Part guide\'s sheet ({", ".join(part_files(kit)) or "this kit has no Parts"}). Nothing was imported.')
+    else:
+        steps_file_out = steps_file
+    out_path = Path(kit) / text_file(steps_file_out)
     kept = {e['key']: e for e in (json.loads(out_path.read_text(encoding='utf-8')).get('steps', []) if out_path.exists() else [])}
     rows, encoding = read_rows(csv_path, current)
+    if steps_file == 'steps.json' and part_files(kit):   # (a Part's sheet given as the Full Build's: its step names give it away)
+        pairs = {(r['key'].strip(), r['step'].strip()) for r in rows if r['key'].strip()}
+        if pairs and any(current.get(k, (None,))[0] != n for k, n in pairs):
+            for f in part_files(kit):
+                names = {key: name for name, _, _, _, key in steps_of(kit, f)}
+                if all(names.get(k) == n for k, n in pairs):
+                    raise SystemExit(f'This is the sheet of {f} (its step names are that Part\'s): import it with {f} and --only-this-part '
+                                     f'or --everywhere. Nothing was imported.')
     changed, notes, comments, done = [], [], [], {}
     for r in rows:
         key, step = r['key'].strip(), r['step'].strip() or '(no step)'
@@ -141,22 +174,32 @@ def import_(kit, csv_path, steps_file='steps.json'):
         done[key] = (text, caution_text)
         entry = dict(kept.get(key, {}), key=key, step=name)
         edited = False
+        base = shared.get(key, current[key]) if shared is not None else current[key]   # (the wording the edit replaces)
+        if shared is not None and ((text and text != caption and base[1] != caption) or (caution_text != caution and base[2] != caution)):
+            notes.append(f'{name}: has wording of its own in this Part; the Full Build\'s wording was changed, and this Part keeps its own '
+                         f'(import it --only-this-part as well to change it here too)')
         if not text:
             notes.append(f'{name}: the instruction was left empty; the current one is kept')
         elif text != caption:
             entry['caption'] = text
             edited = True
         if caution_text != caution:
-            entry.setdefault('was_caution', caution if 'caution' not in kept.get(key, {}) else kept[key].get('was_caution', ''))
+            prior = kept.get(key, {})                # (an earlier edit that is in use keeps the caution it was made against)
+            entry['was_caution'] = prior.get('was_caution', '') if 'caution' in prior and (prior['caution'] or '') == base[2] else base[2]
             entry['caution'] = caution_text
             edited = True
         if edited:
             kept[key] = entry
             changed.append(name)
+    if shared is not None:                       # (named as the Full Build's step list names them)
+        for e in kept.values():
+            if e['key'] in shared:
+                e['step'] = shared[e['key']][0]
     rank = {key: k for k, (_, _, _, _, key) in enumerate(order)}
     entries = sorted(kept.values(), key=lambda e: rank.get(e['key'], len(rank)))
     out_path.write_text(json.dumps(dict(note='Edited wording of the steps (tools/step_text.py), only what was edited; applied when '
-                                         'guide.py is run. key: the step\'s text_key in steps.json.', steps=entries),
+                                         'guide.py is run. key: the step\'s text_key in steps.json.'
+                                         + (' This Part\'s own wording, over the Full Build\'s.' if steps_file_out in part_files(kit) else ''), steps=entries),
                                     indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
     print(f'read {len(rows)} rows ({encoding})')
     print(f'{len(changed)} step(s) changed: {", ".join(changed) or "none"}')
@@ -168,6 +211,11 @@ def import_(kit, csv_path, steps_file='steps.json'):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) not in (4, 5) or sys.argv[1] not in ('export', 'import'):
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    flags = [a for a in sys.argv[1:] if a.startswith('--')]
+    if len(args) not in (3, 4) or args[0] not in ('export', 'import') or len(flags) > 1 or (flags and args[0] != 'import'):
         raise SystemExit(__doc__)
-    (export if sys.argv[1] == 'export' else import_)(*sys.argv[2:])        # (a 5th argument: a guide of its own, steps-<name>.json)
+    if args[0] == 'export':
+        export(*args[1:])                        # (a 4th argument: a Part's or a guide of its own's steps file, steps-<name>.json)
+    else:
+        import_(args[1], args[2], args[3] if len(args) > 3 else 'steps.json', flags[0] if flags else None)

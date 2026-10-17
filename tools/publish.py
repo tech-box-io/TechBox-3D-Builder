@@ -12,8 +12,9 @@ How it fits together:
 - The kit folder is where a guide is written and checked (guide.py -> steps.json, model.glb, parts/, and cards/<steps>.webp, the
   picture for its card on the website, made in the player with _dev.card()). The player is the one copy in player/.
 - A release is a frozen copy of exactly the files a learner's browser needs: the player (player.html becomes index.html), the
-  guide's steps (as steps.json, with the Review notes and other authoring data taken out), the kit's model (with the CAD's own
-  part, body and file names taken out), the logo and the part pictures its Parts List shows. Nothing else: no CAD, no guide.py,
+  guide's steps (as steps.json, with the Review notes and other authoring data taken out), the kit's model (cut down to the parts
+  that guide shows, so that a Part guide downloads only its own, and with the CAD's own part, body and file names taken out), the
+  logo and the part pictures its Parts List shows. Nothing else: no CAD, no guide.py,
   no colours file, no research. Releases are kept in releases/<guide>/r<N>/ with a record (release.json: when, why, the
   source's git commit, every file's checksum) and releases/<guide>/history.json. They never change and are never uploaded:
   tools/serve.py releases shows them on this computer only.
@@ -48,6 +49,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import site_pages  # noqa: E402
+from check_site import guide_parts, steps_stamp  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAYER = ROOT / 'player'
@@ -188,11 +190,121 @@ def published_model(src, dst, steps):
     Path(dst).write_bytes(published_model_bytes(src, steps))
 
 
+def only_parts(doc, rest, keep):
+    """The model with only the parts in `keep` (the assembly's children by name), as (doc, the bytes after the JSON chunk): every
+    node, mesh, material, accessor and buffer view no kept part uses is left out, and the binary chunk is packed again from the
+    kept views' bytes (still meshopt-compressed: nothing is decoded), so the file really is smaller. None if every part is kept."""
+    nodes = doc['nodes']
+    roots = doc['scenes'][doc.get('scene', 0)]['nodes']
+    if len(roots) != 1 or 'mesh' in nodes[roots[0]]:
+        raise SystemExit('only_parts: the model has no single assembly node (not made by build_model.py?)')
+    children = nodes[roots[0]].get('children', [])
+    kept_children = [k for k in children if nodes[k].get('name') in keep]
+    if len(kept_children) == len(children):
+        return None
+    for key in ('skins', 'animations', 'textures', 'images', 'samplers', 'cameras'):
+        if doc.get(key):
+            raise SystemExit(f'only_parts: the model has {key}, which build_model.py never writes: cannot leave parts out safely')
+    blen, btype = struct.unpack('<II', rest[:8])
+    if btype != 0x004E4942:
+        raise SystemExit('only_parts: the model has no binary chunk after its JSON')
+    blob = rest[8:8 + blen]
+
+    node_map, order = {}, []
+    def visit(k):                                # (depth first, parents before children: indices stay readable)
+        node_map[k] = len(order)
+        order.append(k)
+        for c in (kept_children if k == roots[0] else nodes[k].get('children', [])):
+            visit(c)
+    visit(roots[0])
+    mesh_map = {}
+    for k in order:
+        if 'mesh' in nodes[k] and nodes[k]['mesh'] not in mesh_map:
+            mesh_map[nodes[k]['mesh']] = len(mesh_map)
+    meshes = [doc['meshes'][m] for m in sorted(mesh_map, key=mesh_map.get)]
+    acc_map, mat_map = {}, {}
+    for mesh in meshes:
+        for prim in mesh['primitives']:
+            if prim.get('targets') or prim.get('extensions'):
+                raise SystemExit('only_parts: a mesh primitive has morph targets or extensions, which build_model.py never writes')
+            for a in list(prim['attributes'].values()) + ([prim['indices']] if 'indices' in prim else []):
+                acc_map.setdefault(a, len(acc_map))
+            if 'material' in prim:
+                mat_map.setdefault(prim['material'], len(mat_map))
+    accessors = [doc['accessors'][a] for a in sorted(acc_map, key=acc_map.get)]
+    view_map = {}
+    for acc in accessors:
+        if 'sparse' in acc:
+            raise SystemExit('only_parts: a sparse accessor, which build_model.py never writes')
+        if 'bufferView' in acc:
+            view_map.setdefault(acc['bufferView'], len(view_map))
+    packed, plain = bytearray(), 0
+    views = []
+    for v in sorted(view_map, key=view_map.get):
+        view = json.loads(json.dumps(doc['bufferViews'][v]))
+        ext = (view.get('extensions') or {}).get('EXT_meshopt_compression')
+        if ext is not None:                      # (the compressed bytes are in buffer 0, the BIN chunk; buffer 1 is their fallback)
+            if ext.get('buffer', 0) != 0 or view.get('buffer') != 1:
+                raise SystemExit('only_parts: a buffer view not laid out as build_model.py writes them')
+            data = blob[ext.get('byteOffset', 0):ext.get('byteOffset', 0) + ext['byteLength']]
+            ext['byteOffset'] = len(packed)
+            view['byteOffset'] = plain
+            plain += view['byteLength'] + (-view['byteLength'] % 4)
+        else:
+            if view.get('buffer', 0) != 0:
+                raise SystemExit('only_parts: a buffer view not laid out as build_model.py writes them')
+            data = blob[view.get('byteOffset', 0):view.get('byteOffset', 0) + view['byteLength']]
+            view['byteOffset'] = len(packed)
+        packed += data + b'\x00' * (-len(data) % 4)
+        views.append(view)
+
+    out = dict(doc)
+    new_nodes = []
+    for k in order:
+        node = dict(nodes[k])
+        kids = kept_children if k == roots[0] else node.get('children', [])
+        if kids:
+            node['children'] = [node_map[c] for c in kids]
+        else:
+            node.pop('children', None)
+        if 'mesh' in node:
+            node['mesh'] = mesh_map[node['mesh']]
+        new_nodes.append(node)
+    new_meshes = []
+    for mesh in meshes:
+        mesh = dict(mesh, primitives=[dict(p) for p in mesh['primitives']])
+        for prim in mesh['primitives']:
+            prim['attributes'] = {name: acc_map[a] for name, a in prim['attributes'].items()}
+            if 'indices' in prim:
+                prim['indices'] = acc_map[prim['indices']]
+            if 'material' in prim:
+                prim['material'] = mat_map[prim['material']]
+        new_meshes.append(mesh)
+    out['nodes'] = new_nodes
+    out['scenes'] = [dict(doc['scenes'][doc.get('scene', 0)], nodes=[0])]
+    out['scene'] = 0
+    out['meshes'] = new_meshes
+    out['materials'] = [doc['materials'][m] for m in sorted(mat_map, key=mat_map.get)]
+    out['accessors'] = [dict(a, bufferView=view_map[a['bufferView']]) if 'bufferView' in a else dict(a) for a in accessors]
+    out['bufferViews'] = views
+    buffers = json.loads(json.dumps(doc['buffers']))
+    buffers[0]['byteLength'] = len(packed)
+    if len(buffers) > 1:
+        buffers[1]['byteLength'] = plain
+    out['buffers'] = buffers
+    return out, struct.pack('<II', len(packed), 0x004E4942) + bytes(packed)
+
+
 def published_model_bytes(src, steps):
     """The model with the CAD's own names taken out: the player finds parts by the names of the assembly's direct children (the
     ids in steps.json) and keeps those, and the assembly's own name becomes "model"; every other node name goes, and the mesh
-    (body / file) names unless the guide names parts inside a part by them (steps.json mesh_names). Geometry is untouched."""
+    (body / file) names unless the guide names parts inside a part by them (steps.json mesh_names). Geometry is untouched, but
+    a part the guide never shows is left out (only_parts): a kit's guides share one model, and a Part guide (or any guide that
+    shows only some of the kit) then downloads only what it shows."""
     _, doc, rest = read_glb(src)
+    pruned = only_parts(doc, rest, guide_parts(steps))
+    if pruned:
+        doc, rest = pruned
     nodes = doc['nodes']
     roots = doc['scenes'][doc.get('scene', 0)]['nodes']
     assembly = roots[0] if len(roots) == 1 and 'mesh' not in nodes[roots[0]] else None
@@ -207,6 +319,11 @@ def published_model_bytes(src, steps):
         if not (prefixes and mesh.get('name', '').startswith(prefixes)):
             mesh.pop('name', None)
     doc['asset']['copyright'] = steps['meta'].get('copyright') or 'TechBox'
+    return glb_bytes(doc, rest)
+
+
+def glb_bytes(doc, rest):
+    """A GLB file from its JSON and the bytes after its JSON chunk (the binary chunk, header and all)."""
     text = json.dumps(doc, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
     text += b' ' * (-len(text) % 4)
     body = struct.pack('<II', len(text), 0x4E4F534A) + text + rest
@@ -217,7 +334,7 @@ def published_steps(steps, name, release, model_v):
     """The learner's copy of the steps: no Review notes, no authoring keys; the model named by its content, so a new model is
     fetched afresh and an unchanged one is not."""
     out = dict(steps)
-    out['meta'] = {k: v for k, v in steps['meta'].items() if k != 'review_notes'}
+    out['meta'] = {k: v for k, v in steps['meta'].items() if k not in ('review_notes', 'taken_from', 'full_build', 'run', 'chapter')}
     out['meta'].update(review_notes=False, guide=name, release=release)
     out['model'] = steps['model'].split('?')[0] + f'?v={model_v}'
     out['views'] = [{k: v for k, v in view.items() if k not in AUTHORING_KEYS} for view in steps['views']]
@@ -235,6 +352,34 @@ def needed_files(steps):
                 if item.get('picture') and item['picture'] not in files:
                     files.append(item['picture'])
     return files
+
+
+def taken_apart_warning(kit, entry, steps):
+    """For a deconstruction (stepgen take_apart(): meta.taken_from), a warning if the Full Build has changed since it was taken
+    apart from it, or None."""
+    if not steps['meta'].get('taken_from'):
+        return None
+    full = inside(kit, steps['meta'].get('full_build', 'steps.json'))
+    if full.is_file() and steps_stamp(json.load(open(full))) == steps['meta']['taken_from']:
+        return None
+    return (f'the Full Build has changed since {entry["steps"]} was taken apart from it: run {entry.get("script", "its script")} '
+            f'again (and publish it), so that its ways out and cameras follow the Full Build')
+
+
+def stale_deconstructions(guides, kit_name):
+    """[(guide, warning)] for each deconstruction of the kit made from an earlier Full Build."""
+    out = []
+    for n, e in guides.items():
+        if e['kit'] != kit_name:
+            continue
+        try:
+            folder = ROOT / e['folder']
+            w = taken_apart_warning(folder, e, json.load(open(inside(folder, e['steps']))))
+        except (OSError, ValueError, SystemExit):
+            continue
+        if w:
+            out.append((n, w))
+    return out
 
 
 def run_problems(kit, entry, steps):
@@ -340,6 +485,9 @@ def build_release(name, entry, note):
     elif (card_noted := drawn_from(card.with_suffix('.json'))) != version and (card_noted or card.stat().st_mtime < model.stat().st_mtime):
         warnings.append(f'the card picture was drawn from {"an earlier" if card_noted else "what may be an earlier"} model: '
                         f'make it again with _dev.card() (player.html?steps={entry["steps"]})')
+    stale = taken_apart_warning(kit, entry, steps)
+    if stale:
+        warnings.append(stale)
     reviews = sum(1 for v in steps['views'] if v.get('review'))
     if reviews:
         warnings.append(f'{reviews} view(s) carry Review notes; they are left out of the published copy (still in the kit)')
@@ -509,6 +657,9 @@ def main():
     if others:
         print(f'  WARNING: other guides of this kit have changed since their release on the website: {", ".join(others)}. Publish them '
               f'too (python3 tools/publish.py --kit {guides[name]["kit"]} --note "..."), so that the kit\'s guides stay in step.')
+    for n, w in stale_deconstructions(guides, guides[name]['kit']):
+        if n != name:
+            print(f'  WARNING: {n}: {w}')
     print(f'  Look first: {site_cmd} -> http://localhost:8797/{name}/   then: {check_cmd}')
     print('  Then commit site/, releases/, render.yaml and guides.json; it goes live when pushed to the branch Render deploys (only on Lee\'s word).')
 
@@ -559,6 +710,9 @@ def publish_kit(args, guides, site_cmd, check_cmd):
             print('  ' + line)
         for w in warnings:
             print('  WARNING: ' + w)
+    for n, w in stale_deconstructions(guides, args.kit):    # (one left unchanged on the website is still out of step)
+        if not any(name == n and final for name, final, _, _, _ in done):
+            print(f'  WARNING: {n}: {w}')
     if any(r and r['source']['uncommitted_changes'] for _, _, r, _, _ in done):
         print('  NOTE: the sources had uncommitted changes: commit the sources first, so that the releases name their commit')
     print(f'  Look first: {site_cmd} -> http://localhost:8797/<guide>/   then: {check_cmd}')
