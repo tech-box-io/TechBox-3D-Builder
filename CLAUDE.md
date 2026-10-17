@@ -147,8 +147,8 @@ names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part
 The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
 16 Oct 2026): the landing page `/` shows each kit that has a guide on the site (its Full Build's picture), `/kits/<kit>/`
 shows that kit's guides (Full Build, Part 1 ..., Deconstruction), and a guide's card opens the guide. Nothing is offered for
-download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View: in the player, after the guide is
-final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900; for a
+download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View (a deconstruction's is its title page,
+the finished model: Lee, 17 Oct 2026): in the player, after the guide is final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900; for a
 Part, `player.html?steps=steps-part-1.json`), with `cards/<steps file>.json`, the model it shows; publish copies it into the
 release (it warns when a guide has none, or one drawn from another model; `parts.html` notes its model in `parts/parts.json`
 the same way, and publish warns about part pictures drawn from another model).
@@ -279,8 +279,9 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
-  left (the base), closer in. No Parts List unless asked for. Its card picture on the website would be its Completed View (the bare
-  base): Lee's call whether it should be its title page instead.
+  left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its title page, the finished model
+  (Lee, 17 Oct 2026: `_dev.card()` does this for a guide made by `take_apart()`). Parts taken off fade out over the second half of
+  their last stage, leads with them (Lee, 17 Oct 2026), and fade in again when Prev brings them back.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is

@@ -17,15 +17,15 @@ const TONE_LIT = 1.38, TONE_SHADE = 0.9;     // linear multipliers: the two flat
 // that runs on beyond what the picture shows).
 function toonMaterial(color, {fade = false} = {}) {
   return new THREE.ShaderMaterial({
-    uniforms: {color: {value: color}, light: {value: LIGHT}, lit: {value: TONE_LIT}, shade: {value: TONE_SHADE}},
+    uniforms: {color: {value: color}, light: {value: LIGHT}, lit: {value: TONE_LIT}, shade: {value: TONE_SHADE}, opacity: {value: 1}},
     vertexShader: `${fade ? 'attribute float alpha; varying float vA;' : ''} varying vec3 vN;
       void main() { ${fade ? 'vA = alpha;' : ''} vN = normalize(mat3(modelMatrix) * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-    fragmentShader: `uniform vec3 color; uniform vec3 light; uniform float lit; uniform float shade; varying vec3 vN; ${fade ? 'varying float vA;' : ''}
+    fragmentShader: `uniform vec3 color; uniform vec3 light; uniform float lit; uniform float shade; uniform float opacity; varying vec3 vN; ${fade ? 'varying float vA;' : ''}
       void main() {
         float t = smoothstep(-0.02, 0.02, dot(normalize(vN), light));
         vec3 c = min(color * mix(shade, lit, t), vec3(1.0));
         // Encode to sRGB here (not via the renderer) so on-screen frames and off-screen snapshots get identical colours.
-        gl_FragColor = vec4(mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c)), ${fade ? 'vA' : '1.0'});
+        gl_FragColor = vec4(mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c)), ${fade ? 'vA' : 'opacity'});   // (opacity: a part fading, setFade)
       }`,
     polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
     ...(fade ? {transparent: true, depthWrite: false} : {}),
@@ -36,7 +36,7 @@ function toonMaterial(color, {fade = false} = {}) {
 // out by a fixed distance on screen, so the outline is as thin as the edge lines however near the camera is.
 function hullMaterial({fade = false} = {}) {
   return new THREE.ShaderMaterial({
-    uniforms: {width: {value: 0.9}, resolution: {value: new THREE.Vector2(1, 1)}},   // width in drawn pixels, to match the edge lines
+    uniforms: {width: {value: 0.9}, resolution: {value: new THREE.Vector2(1, 1)}, opacity: {value: 1}},   // width in drawn pixels, to match the edge lines
     vertexShader: `uniform float width; uniform vec2 resolution; ${fade ? 'attribute float alpha; varying float vA;' : ''}
       void main() {
         ${fade ? 'vA = alpha;' : ''}
@@ -46,7 +46,7 @@ function hullMaterial({fade = false} = {}) {
         if (len > 1e-6) p.xy += n / len / resolution * 2.0 * width * p.w;
         gl_Position = p;
       }`,
-    fragmentShader: `${fade ? 'varying float vA;' : ''} void main() { gl_FragColor = vec4(0.07, 0.07, 0.07, ${fade ? 'vA * vA * vA' : '1.0'}); }`,   // (fading faster than the wire, which it shows through)
+    fragmentShader: `uniform float opacity; ${fade ? 'varying float vA;' : ''} void main() { gl_FragColor = vec4(0.07, 0.07, 0.07, ${fade ? 'vA * vA * vA' : 'opacity * opacity * opacity'}); }`,   // (fading faster than the wire, which it shows through)
     side: THREE.BackSide,
     ...(fade ? {transparent: true, depthWrite: false} : {}),
   });
@@ -119,6 +119,32 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
     dirty = true;
   }
 
+  // A part fading out as it is taken off (or in again, coming back): drawn in see-through copies of its materials meanwhile,
+  // nearest surface only (the copies still write depth), and given its own materials back once the fade is over.
+  const fading = new Map();                    // part id -> [[object, its own material, the copy]]
+  function setFade(id, a) {
+    const top = parts.get(id); if (!top) return;
+    let list = fading.get(id);
+    if (a >= 1) {
+      if (list) { for (const [o, own, copy] of list) { o.material = own; copy.dispose(); } fading.delete(id); dirty = true; }
+      return;
+    }
+    if (!list) {
+      list = [];
+      top.traverse(o => {
+        if (!(o.isMesh || o.isLineSegments) || !o.material) return;
+        const own = o.material, copy = own.clone();
+        if (own.uniforms) for (const k of ['light', 'map']) if (own.uniforms[k]) copy.uniforms[k] = own.uniforms[k];   // (the one light; the decal's own picture)
+        copy.transparent = true;
+        list.push([o, own, copy]); o.material = copy;
+      });
+      fading.set(id, list);
+    }
+    for (const [, , copy] of list) { if (copy.uniforms && copy.uniforms.opacity) copy.uniforms.opacity.value = a; else copy.opacity = a; }
+    dirty = true;
+  }
+  const clearFades = () => { for (const id of [...fading.keys()]) setFade(id, 1); };
+
   // parts = the assembly's direct children; steps address them by name
   const assembly = root.children.length === 1 && !root.children[0].isMesh ? root.children[0] : root;
   const parts = new Map();
@@ -179,9 +205,9 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
     const g = new THREE.BufferGeometry().setFromPoints(corners);
     g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 0], 2));
     g.setIndex([0, 2, 1, 0, 3, 2]);                           // facing v x u
-    const mesh = new THREE.Mesh(g, new THREE.ShaderMaterial({uniforms: {map: {value: map}},
+    const mesh = new THREE.Mesh(g, new THREE.ShaderMaterial({uniforms: {map: {value: map}, opacity: {value: 1}},
       vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
-      fragmentShader: 'uniform sampler2D map; varying vec2 vUv; void main() { gl_FragColor = texture2D(map, vUv); }',
+      fragmentShader: 'uniform sampler2D map; uniform float opacity; varying vec2 vUv; void main() { vec4 c = texture2D(map, vUv); gl_FragColor = vec4(c.rgb, c.a * opacity); }',
       transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4}));
     mesh.raycast = () => {}; mesh.userData.decal = true; mesh.name = `${part.name} ${d.name || 'decal'}`;
     part.add(mesh);
@@ -448,7 +474,7 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
 
   const setLight = v => { LIGHT.copy(v).normalize(); dirty = true; };   // every material shares this one light direction
   return {THREE, renderer, scene, camera, controls, root, assembly, parts, materials, edgeMaterial, lineMaterial, world, worldFor, setWorld, toWorld, fromWorld, setHighlight, highlighted: () => picked,
-          setOffset, setPose, poseMatrix, setVisible, boundsOf, cameraPose, setLeadLines, setArrows, arrows, setWires, setMarks, wireGroup, setLight, invalidate, resize, frame, snapshot,
+          setOffset, setPose, poseMatrix, setVisible, setFade, clearFades, boundsOf, cameraPose, setLeadLines, setArrows, arrows, setWires, setMarks, wireGroup, setLight, invalidate, resize, frame, snapshot,
           onRender: fn => listeners.push(fn), get width() { return width; }, get height() { return height; },
           contextLost: () => renderer.getContext().isContextLost(),
           info: () => ({calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, lines: renderer.info.render.lines, pixelRatio})};

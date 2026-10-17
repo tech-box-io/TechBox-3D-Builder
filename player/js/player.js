@@ -144,7 +144,7 @@ function sampled(line, n, span = line.total) {
 // A wire changing route keeps each bit of itself the same distance from its first end, so what both routes share
 // (the run from a servo to the slot it passes through) stays put, and a longer route grows out of the wire's tip; unless the
 // route says `stretch` (see below).
-function drawWires(view, poses, from, k = 1, via = null) {
+function drawWires(view, poses, from, k = 1, via = null, alphas = null) {
   const list = [], marks = [];
   for (const id in view.wires || {}) {
     const def = wireDefs[id], route = routes[view.wires[id]], n = wireSamples[id], line = skinned(route, poses);
@@ -169,6 +169,7 @@ function drawWires(view, poses, from, k = 1, via = null) {
       pts = sampled(line, n);
       if (route.mark) { const A = endMove(route.a, route.a_ref, poses, mA); marks.push(route.mark.map(p => A ? pV.set(p[0], p[1], p[2]).applyMatrix4(A).toArray() : p)); }
     }
+    if (alphas && alphas[id] != null && alphas[id] < 1) fade = [-(1 - alphas[id]) * 1e6, alphas[id] * 1e6];   // (the whole lead see-through: a lead taken off with its parts)
     list.push({id, colour: def.colour, radius: def.radius, pts, fade});
   }
   stage.setWires(list); stage.setMarks(marks);
@@ -553,6 +554,7 @@ function go(i, animate = true) {
 
   // A part taken off in a deconstruction (`leaving` on Step Nc) stays on screen while it travels out, and goes at the end.
   const leaving = forward && from.kind === 'hover' && to.kind === 'done' ? (to.leaving || []).filter(id => from.visible.includes(id)) : [];
+  stage.clearFades();                        // (a fade cut short by this step)
   stage.setVisible(flat(to) ? [] : leaving.length ? [...to.visible, ...leaving] : to.visible);
   const was = id => !flat(from) && from.kind !== 'start' && from.visible.includes(id) && animate;
   const start = {}, end = {}, ways = {};
@@ -603,12 +605,24 @@ function go(i, animate = true) {
   const pose = poseFor(to, stage.width / stage.height);
   const stopsOf = id => wayStops ? wayStops[id] || null : stopsFor(to, id);
   const legs = Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1;
+  // Parts taken off fade out over the second half of their last stage (Lee, 17 Oct 2026); coming back, they fade in over the first
+  // half of the first. Their leads go with them.
+  let fade = null, fadeParts = [], fadeWires = [];
+  if (leaving.length) {
+    const k0 = (legs - 0.5) / legs;
+    fade = k => 1 - ease(Math.min(1, Math.max(0, (k - k0) / (1 - k0))));
+    fadeParts = leaving; fadeWires = Object.keys(to.leaving_wires || {});
+  } else if (backward && from.away && (from.leaving || []).length) {
+    const k1 = 0.5 / legs;
+    fade = k => ease(Math.min(1, Math.max(0, k / k1)));
+    fadeParts = from.leaving.filter(id => id in end); fadeWires = Object.keys(from.leaving_wires || {}).filter(w => (to.wires || {})[w] != null);
+  }
   // the model is turned over (or back) for a view of its underside: about the new view's target, as the camera moves
   const w0 = {q: worldLive.q.clone(), at: worldLive.at.clone()}, w1 = flat(to) ? w0 : stage.worldFor(to.camera);   // (from the turn on screen, which may be half done)
   const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
   const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
   const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
-  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fadeParts, fadeWires, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);
@@ -642,7 +656,13 @@ function stepAnimation(now) {
   let we = e;
   if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(k * beats)); we = (b + ease(k * beats - b)) / beats; }
   const leads = anim.leaving.length && k < 1 && anim.to.leaving_wires ? {...anim.to, wires: {...anim.to.wires, ...anim.to.leaving_wires}} : anim.to;   // (a lead taken off goes with its parts)
-  drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia);
+  let alphas = null;
+  if (anim.fade && k < 1) {                  // (parts taken off, fading out; or fading in again, coming back)
+    const a = anim.fade(k);
+    for (const id of anim.fadeParts) stage.setFade(id, a);
+    alphas = Object.fromEntries(anim.fadeWires.map(w => [w, a]));
+  }
+  drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia, alphas);
   if (anim.cam) {                            // swing around the target rather than cutting through the model
     const c = anim.cam;
     controls.target.lerpVectors(c.t0, c.t1, e);
@@ -657,8 +677,9 @@ function stepAnimation(now) {
     camera.lookAt(controls.target);
   }
   if (k >= 1) {
-    const view = anim.to, gone = anim.leaving.length > 0; anim = null;
+    const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade; anim = null;
     if (gone) stage.setVisible(view.visible);   // (the parts taken off have gone)
+    if (faded) stage.clearFades();
     if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
     if (view.inset) buildInset(view);
   }

@@ -79,12 +79,16 @@ window._runthrough = () => {
 //   _dev.show('Step 12')          go to that view as if "next" had been pressed on the one before, and finish the animation
 //   _dev.show('Step 12c', 0.5)    the same, stopped part of the way through the animation (0..1)
 //   _dev.look('NAUO45', [1, 0.6, 0.4], 2)   then put the camera on one part: direction to look from, and how wide (1 = tight)
-//   await _dev.card()             the guide's picture for its card on the website: its Completed View, 1440 x 900, saved through
-//                                 tools/serve.py into the kit's cards/<steps file>.webp (publish.py copies it into the release)
+//   await _dev.card()             the guide's picture for its card on the website: its Completed View (a deconstruction's: its
+//                                 title page, the finished model: Lee, 17 Oct 2026), 1440 x 900, saved through tools/serve.py
+//                                 into the kit's cards/<steps file>.webp (publish.py copies it into the release)
 window._dev = {
   async card() {
-    const P = window._player, i = P.views.findIndex(v => v.kind === 'end'), W = 1440, H = 900;
-    if (i < 0) throw new Error('this guide has no Completed View to picture');
+    const steps = (new URLSearchParams(location.search).get('steps') || 'steps.json').replace(/\.json$/, '');
+    const data = await fetch(`${steps}.json`, {cache: 'no-cache'}).then(x => x.json());
+    const P = window._player, W = 1440, H = 900, kind = data.meta.taken_from ? 'start' : 'end';   // (a deconstruction ends on the bare base)
+    const i = P.views.findIndex(v => v.kind === kind);
+    if (i < 0) throw new Error(`this guide has no ${kind === 'end' ? 'Completed View' : 'title page'} to picture`);
     const big = P.renderThumb(i, [2 * W, 2 * H]);              // (drawn large, then cut to the model with a margin, so every card is filled)
     const d = big.getContext('2d').getImageData(0, 0, big.width, big.height).data;
     let x0 = big.width, y0 = big.height, x1 = 0, y1 = 0;
@@ -92,7 +96,7 @@ window._dev = {
       const k = 4 * (y * big.width + x);
       if (d[k] < 245 || d[k + 1] < 245 || d[k + 2] < 245) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
     }
-    if (x1 < x0) throw new Error('the Completed View came out empty: nothing to picture');
+    if (x1 < x0) throw new Error('the picture came out empty: nothing to picture');
     let w = (x1 - x0) * 1.12, h = (y1 - y0) * 1.12;              // (a 6% margin all round, then widened or heightened to the card's shape)
     if (w / h < W / H) w = h * W / H; else h = w * H / W;
     const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, canvas = document.createElement('canvas');
@@ -101,10 +105,9 @@ window._dev = {
     ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H); ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(big, cx - w / 2, cy - h / 2, w, h, 0, 0, W, H);
     const blob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.9));
-    const steps = (new URLSearchParams(location.search).get('steps') || 'steps.json').replace(/\.json$/, '');
     const r = await fetch(`/__save/cards/${steps}.webp`, {method: 'POST', body: blob});
     if (!r.ok) throw new Error(`saving the card picture failed: ${r.status}`);
-    const model = (await fetch(`${steps}.json`, {cache: 'no-cache'}).then(x => x.json())).model.split('?v=')[1] || '';
+    const model = data.model.split('?v=')[1] || '';
     const n = await fetch(`/__save/cards/${steps}.json`, {method: 'POST', body: JSON.stringify({model, made: new Date().toISOString()})});   // (the model it shows: publish.py checks it)
     if (!n.ok) throw new Error(`saving the card's record failed: ${n.status}`);
     return `cards/${steps}.webp (${Math.round(blob.size / 1024)} kB)`;
