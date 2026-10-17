@@ -263,14 +263,15 @@ short_items = [outline(at, 743.827, 748.827, 1315.693, 1326.263, margin=0.15), t
                text('C1', at(747.98, 1329.43), 0.79, weight=700)]
 # (the 2-pin socket over the module's 3V3 / GND pins, NAUO70, is moved onto them by materials.json "adjust_mm": its pads go with it,
 # Lee, 16 Oct 2026)
-# The board's own holes for its pins (r 0.6 mm in the CAD) stay where the CAD has them, so they are covered in the board's white
-# (its top is always drawn lit: pure white) before the pads go on.
-move = json.load(open(HERE / 'materials.json')).get('adjust_mm', {}).get('NAUO70', [0.0, 0.0, 0.0])
+# The board's own holes for its pins (r 0.6 mm in the CAD), left empty where the CAD has them, are filled in the model itself
+# (materials.json "fill_holes", build_model.py), so that nothing of them shows, picked or not (Lee, 17 Oct 2026).
+spec = json.load(open(HERE / 'materials.json'))
+move = spec.get('adjust_mm', {}).get('NAUO70', [0.0, 0.0, 0.0])
 if not (isinstance(move, list) and len(move) == 3 and abs(move[1]) < 1e-9):
     raise SystemExit('silkscreen.py: materials.json adjust_mm NAUO70 must be a level move [x, 0, z] for the pads to follow it')
 dx, _, dz = move
-if dx or dz:
-    short_items += [dict(circle=[*at(740.36, z), 0.7], colour='#ffffff') for z in (1343.20, 1345.74)]
+if (dx or dz) and not spec.get('fill_holes', {}).get('NAUO26'):
+    print('WARNING silkscreen.py: the 2-pin socket NAUO70 is moved but materials.json fill_holes has no NAUO26 entry: its old holes will show')
 short_items += pads(at, [(740.36, z) for z in G3], 0) + pads(at, [(740.36 + dx, 1343.20 + dz), (740.36 + dx, 1345.74 + dz)], 1)
 lo, hi = at(739.20, 1341.76), at(748.32, 1335.88)          # the icon on the photo (line art, bulb up the board)
 s, t = fit_box(ICON, lo, hi)

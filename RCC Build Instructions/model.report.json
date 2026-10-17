@@ -2,10 +2,10 @@
  "summary": {
   "source": "rcc.glb",
   "source_bytes": 33164812,
-  "model_bytes": 1987600,
+  "model_bytes": 1986248,
   "triangles_in": 1409742,
-  "triangles_out": 236566,
-  "edge_segments": 112077,
+  "triangles_out": 236444,
+  "edge_segments": 112020,
   "meshes": 70,
   "parts_kept": 29,
   "parts_in_source": 46,
@@ -767,12 +767,12 @@
    "used_by": 1,
    "solids": 1,
    "tris_in": 3716,
-   "tris_out": 2042,
-   "edge_segments": 967,
+   "tris_out": 1920,
+   "edge_segments": 910,
    "colours": [
     "pcb_white"
    ],
-   "note": ""
+   "note": "2 holes filled (r 0.60, 0.60 mm)"
   },
   {
    "mesh": "Insolation",

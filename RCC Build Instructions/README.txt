@@ -1,6 +1,6 @@
 RCC Build Instructions (Remote Controlled Car, Full Build: controller, electronics test, chassis, wiring and power)
 
-FIRST DRAFT 15 Oct 2026, LEE'S FIRST AND SECOND ROUNDS 16 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP),
+FIRST DRAFT 15 Oct 2026, LEE'S FIRST AND SECOND ROUNDS 16 Oct 2026, THIRD ROUND 17 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP),
 TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-rcc_remote_controlled_car) and Lee's photos and L1
 drawing, in the same format as the MRA guide. Not for distribution. Lee has answered every Review note, so the guide shows
 none; the one open question is under QUESTIONS FOR LEE below.
@@ -18,16 +18,18 @@ THE BUILD (step numbers as since 16 Oct 2026: the guard and wheel steps are gone
   R-JS). The controller is then put aside.
 - Steps 5 - 15, the car's electronics tried on the bench, as on the MRA: the second Nano Board into the I/O module (USB socket at
   the power socket's end), the adapter board onto the module's side pins (U3 at the end away from the power socket), the second
-  radio module into U3; the left motor (wheel fitted) into LWh (U1) and the right into RWh (U2), brown to G; the 9V adapter onto
+  radio module into U3; the left motor (wheel fitted) into LWh (U1) and the right into RWh (U2), brown to G, each lead laid out
+  straight behind its motor first, its plug picked up, brought over its header and pushed down; the 9V adapter onto
   the 9V battery and its barrel plug straight into the power socket; the controller back, and its USB cable in; a Testing
   Checklist card (a placeholder); the battery and its 9V adapter unplugged and set aside as one; both motors unplugged and
   everything set aside.
 - Steps 16 - 24, the chassis: L1 engraved side down, L2 hooked over the notch at L1's flat end and swung down, L3 (both with the
   car upside down); in the hand, the two motors into L5 and L4 slid along their leads; the block lowered onto L1 the right way up,
-  the leads up out of L1's notches and straight back along it; the I/O module, with everything on it, slid in from the front along
+  the leads up out of L1's notches and straight back over it and past its rear edge; the I/O module, with everything on it, slid in from the front along
   the grooves in L5 and L4 to L2's fin; L7 and L6 slid in from the front with the car turned over (they go in under L1).
-- Steps 25 - 29, wiring and power: each motor plugged in again (LWh, RWh), the battery down into L3, the barrel plug in, and the
-  controller's USB cable in. The Completed View shows the car and the controller.
+- Steps 25 - 29, wiring and power: each motor plugged in again (LWh, RWh: lifted, carried over high, held over the header, in),
+  the battery down into L3, the barrel plug in, and the controller, turned round, back with its USB cable going in. The Completed
+  View shows the car and the controller.
   (Old to new: Steps 3 - 9 are now 1 - 7, 12 - 17 are 8 - 13, 18 - 32 are 15 - 29; Step 14 is new.)
 
 LEE'S FIRST ROUND (16 Oct 2026), done
@@ -69,6 +71,35 @@ LEE'S SECOND ROUND (16 Oct 2026), done
 - Every other step keeps its camera (checked against the steps before this round; where the shorter leads would have reframed a
   step, its camera is written out in guide.py as it was).
 
+LEE'S THIRD ROUND (17 Oct 2026), done
+- The player (every kit): a part picked by a click, or named on hover, is let go as soon as the view moves (a drag, a pinch, the
+  wheel, the view reset, the view still coasting after a drag), since its name would no longer point at it; a click stops a
+  coasting view first, so that what it picks stays under its name; while a step is opening a click picks nothing.
+- The adapter board's two holes where the 2-pin socket's pins used to be are filled in the model itself (materials.json
+  "fill_holes"), so no white circle or grey ring shows, picked or not (the painted-over discs are gone).
+- Steps 18 - 24: the motors' leads their full 115 mm again, straight back from the motors in the hand and, from Step 21c, up out of
+  L1's notches, straight back over L1 (1 mm above it) and on past its rear edge into space, plugs flat. L4 starts further out in
+  Step 20, beyond the plugs (135 mm, as in the first-round guide).
+- Steps 8, 9, 25 and 26, each plug in four beats, its tip turning a quarter turn each: lying back along its lead; picked up, tip
+  up; carried over, tip forward; held over its header, tip down; pushed in. Each stop has a smooth shape of its own, all lying
+  flat the same way, so the lead changes between like shapes; checked frame by frame: no lead or plug into any part, no wires
+  crossing over, the tightest bend at any stop about 6 mm round, in between about 3 mm for a moment.
+  On the bench (Steps 8, 9) each lead starts laid out straight behind its motor, held out level (55 mm, so that its plug is in
+  these close frames: at 115 mm it would start off the screen; it does not lie on the table, as the rulebook's laid-aside lead
+  would, since Lee asked for it straight to the rear). In the car (Steps 25, 26) the plugged leads are clear of L1 (the left one
+  went 2 mm into L1 by the notch) and as long as a smooth path needs (118 and 132 mm: lengths are representative, Lee); while
+  carried they are 76 - 142 mm, stretching evenly from shape to shape.
+- Step 24: Step 23's camera mirrored across L2's middle (the same height and distance, from the other side).
+- Step 29: the controller already turned round, as in the Completed View; the USB cable slides straight into it. Step 29's
+  camera follows the controller (its target moves 118 mm; the same corner and distance). Step 12 (the test) is as before.
+- The title page much closer in, from Lee's picture (solved by matching renders to it); the Completed View as close, the car and
+  controller centred (the USB cable's A end runs off the bottom, as in Lee's picture of the title page), and Step 29c now glides
+  into it (it used to cut). In a window where that cannot be shown (the title, a fixed size on the page, would cover the car, as
+  in the LMS's frame; or the frame is too narrow), the player takes the closest of three wider cameras that keeps the car and
+  controller in the frame and clear of the title, and in a frame taller than wide the whole model, as before. Checked at Lee's
+  window (his picture's camera), an LMS frame (1200 x 634), an iPad-sized frame (1024 x 604) and portrait (768 x 938).
+- Every other step keeps its camera (checked against the steps before this round).
+
 PUT RIGHT FROM THE PUBLISHED GUIDE
 - The car's Nano Board stays on the module (the published guide loses it at its Step 29) and has its USB socket at the power
   socket's end (the published pictures show it reversed).
@@ -88,9 +119,11 @@ WHAT CAME FROM WHERE
   controller board's print from Lee's photos (the TechBox logo traced from logo.webp); FRONT etched on L1, and the CAD's own "L1"
   turned the right way and moved onto FRONT's line, as in Lee's drawing (materials.json "move_engraving").
 - Wires (wire-paths.json, measured from the CAD's lead bodies): the CAD poses each motor's lead twice (loose, and plugged in) at
-  different lengths (68, 107 and 162 mm); here each lead is 115 mm plugged in (on the bench and in the car) and 58 mm in the
-  hand and lying on L1 (Steps 18 - 24), changing length only as it is plugged in. A plug laid aside lies flat (on the table on
-  the bench; on L1 behind the battery's hole in the car); in Steps 25 and 26 it is held 15 mm over its header, then pushed in. The 9V adapter's lead is the CAD's
+  different lengths (68, 107 and 162 mm); here each lead is 115 mm straight in the hand and over L1 (Steps 18 - 24), 55 mm
+  straight behind the motor on the bench (Steps 8, 9), and as long as a smooth path needs when plugged in (103 - 132 mm) and on
+  its way (44 - 142 mm): lengths are representative (Lee), and from one shape to the next the lead stretches evenly (`stretch`).
+  Every shape is a smooth curve (W.smooth), flat from just after the motor (W.ribbon twist), clear of every part; each stop of a
+  plug's way in has its own shape (motor_lead). A plug laid aside lies flat beyond L1's rear edge in the car. The 9V adapter's lead is the CAD's
   (about 30 mm) in the car, longer on the bench. The USB cable is drawn between the Mini-B end and the A end lying on the table beyond the controller's grips.
 
 QUESTIONS FOR LEE

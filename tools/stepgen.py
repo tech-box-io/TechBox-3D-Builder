@@ -587,10 +587,16 @@ class Guide:
         elevation=, zoom=) (zoom < 1 is closer), or exactly dict(dir=, target=, radius=, shift=) (shift: how far, in
         radii, the player moves the view sideways to leave room for the title; 0 for a camera taken from a screenshot).
         min_aspect: the narrowest frame (width / height) that camera suits; on narrower ones the player uses the finished
-        model's camera instead. hide: parts left off the title page (a cable end that would show without its cable).
+        model's camera instead, or otherwise=dict(dir=, target=, radius=, shift=) if given. otherwise=[camera, ...] (closest
+        first) instead: the generator works out where the parts reach on screen with each of them and with the finished
+        model's camera after them, and in each window the player takes the first that keeps the parts in the frame; on the
+        title page (its own camera then shift=0) moved aside just enough to clear the logo and title, which are a fixed size on
+        the page (clear_title=True: a punched-in camera from a screenshot taken in a large window, seen in a small one such as
+        the LMS's frame). The RCC's title page and Completed View.
+        hide: parts left off the title page (a cable end that would show without its cable).
         end_view: the same for the Completed View (the finished model's own camera is then the fallback).
         Either may also give poses={id: pose}: parts that view shows turned or moved from where the build leaves them (the RCC's
-        controller turned round on the title page and the Completed View: Lee, 16 Oct 2026). Parts riding on them go with them,
+        controller turned round, until it was turned in the build itself from Step 29 instead). Parts riding on them go with them,
         a camera the generator makes for that view (and a min_aspect fallback) frames them as posed (a camera given as dir= /
         target= / radius= is used as it is), and the Completed View then opens without gliding from the last step.
         parts_list: a function that takes the guide's parts list (one entry per kind of part: name, qty, ids, picture) and
@@ -725,6 +731,8 @@ class Guide:
         move:       ids that travel in this step (new parts appear hovering; parts already on screen move as a group).
         show:       new ids that appear already in position (the thing the moving part goes onto).
         appear:     new ids that appear where rest_at() put them: on screen, but neither moving nor yet in place.
+                    A part in both `move` and `appear` is on screen where its path starts as the step opens, rather than
+                    gliding in from further out as a new moving part does (a plug at the end of a lead laid out on the bench).
         against:    ids to test the motion against (default: everything in place so far that is not moving).
         direction:  hand-set approach axis, e.g. [0, 1, 0] = lowered from above. Default: computed from the CAD.
         hover:      hand-set hover distance in mm (default: see hover_distance).
@@ -783,7 +791,7 @@ class Guide:
         paths = {i: [list(map(float, p)) if not isinstance(p, dict) else p for p in way] for i, way in (paths or {}).items()}
         if paths and path is None:
             path = next(iter(paths.values()))
-        new = [i for i in show + move + appear if i not in self.placed]
+        new = list(dict.fromkeys(i for i in show + move + appear if i not in self.placed))
         riders = self._riders(new)
         if staged:
             self.in_hand += [i for i in show + move + list(riders) if i not in self.in_hand]
@@ -819,7 +827,7 @@ class Guide:
         anchors = []
         if lines_at is not None:
             on_screen = list(dict.fromkeys(stationary + list(lines_to or ()) + (self.in_hand if staged else self.placed + show)))
-            anchors = self._hand_lines(lines_at, move, [i for i in on_screen if i not in move], caption)
+            anchors = self._hand_lines(lines_at, move, [i for i in on_screen if i not in move], caption, waiting=set(appear) | set(riders))
         elif lines and move and stationary and np.linalg.norm(approach) > 1e-6:
             targets = list(lines_to) if lines_to is not None else stationary
             if axial == 'each':                       # one line per part, down the middle of where it grips
@@ -844,13 +852,34 @@ class Guide:
         out.update({i: self.riding[i] for i in appearing if i in self.riding and i not in self.placed})      # asked for by name in appear=
         return out
 
-    def _hand_lines(self, points, move, stationary, caption):
+    def _shown_pose(self, i, waiting=(), seen=()):
+        """Where a part waits as a step opens, if not at its seat: at its rest_at() pose, or carried by the part it rides with.
+        (Only a part still waiting, or appearing in this step: one a step has seated is at its seat, whatever it rode with or
+        rested at before.)"""
+        if (i not in self.parked and i not in waiting) or i in seen:
+            return None
+        if i in self.riding:
+            by, rel = self.riding[i]
+            return compose(self._shown_pose(by, waiting, (*seen, i)), rel, self._pivot(i))
+        return self.resting.get(i)
+
+    def _hand_lines(self, points, move, stationary, caption, waiting=()):
         anchors = hand_lines(points)
-        # A point that is on neither the moving part nor what it joins is almost always a typo or a point from another step.
-        meshes = [m for m in (self.model.union(list(move)), self.model.union(list(stationary))) if m is not None]
+        # A point that is on neither the moving part nor what it joins is almost always a typo or a point from another step. (The
+        # parts that stay put are taken where the step shows them: a part resting or riding away from its seat, such as the RCC's
+        # controller turned round for Step 29.)
+        posed = {i: self._shown_pose(i, set(waiting)) for i in stationary}
+        posed = {i: q for i, q in posed.items() if q is not None and (_rot(q) is not None or np.any(_shift(q)))}
+        meshes = [m for m in (self.model.union(list(move)), self.model.union([i for i in stationary if i not in posed])) if m is not None]
+
+        def gap(p):
+            d = min((float(m.nearest.on_surface([p])[1][0]) for m in meshes), default=np.inf)
+            for i, q in posed.items():
+                d = min(d, float(self.model.inst[i].nearest.on_surface([unapply_pose(q, p)])[1][0]))
+            return d
         for tip, mouth in anchors:
             for p in ((tip,) if np.array_equal(tip, mouth) else (tip, mouth)):
-                if meshes and min(float(m.nearest.on_surface([p])[1][0]) for m in meshes) > 3.0:
+                if (meshes or posed) and gap(p) > 3.0:
                     self.log.append(f"  WARNING: lead-line point {p.round(1).tolist()} is not on any part in this step ({caption[:40]})")
         return anchors
 
@@ -1105,8 +1134,10 @@ class Guide:
                 pose = hover.get(a.get('part', s['move'][0] if s['move'] else None))
                 arrows.append(dict(tail=np.round(apply_pose(pose, a['tail']), 2).tolist(), head=np.round(apply_pose(pose, a['head']), 2).tolist(),
                                    normal=_unit(turn_dir(pose, a.get('normal', [0, 1, 0]))).round(4).tolist(), **({'width': a['width']} if 'width' in a else {})))
+            stay = [i for i in s['move'] if i in s['appear']]               # (on screen where its path starts: see place())
             views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(hover), guides=s['guides'], labels=s['labels'], eye=s['eye'],
-                              wires=wires_in(wires, shown), carry=carry_hover, **({'arrows': arrows} if arrows else {}), **({'cut': True} if cut else {}), **common))
+                              wires=wires_in(wires, shown), carry=carry_hover, **({'arrows': arrows} if arrows else {}), **({'cut': True} if cut else {}),
+                              **({'still': stay} if stay else {}), **common))
             cut = False
             after = [i for i in s['appear_after'] if i not in visible]
             visible.extend(after)
@@ -1141,18 +1172,55 @@ class Guide:
         views[-1].update(visible=end_shown, wires=wires_in(wires, end_shown))
         hero_target, hero_radius = _fit(self.model, used, [{}])
         hero = dict(dir=_direction(self.hero_azimuth, 32).round(4).tolist(), target=hero_target.round(1).tolist(), radius=round(hero_radius, 1))
-        def special(sv, shown, offsets):
+        def given(c):
+            return dict(dir=_unit(c['dir']).round(4).tolist(), target=[round(float(x), 1) for x in c['target']], radius=round(float(c['radius']), 1),
+                        **({'shift': float(c['shift'])} if 'shift' in c else {}))
+
+        def reach(cam, shown, offsets, shifts):
+            """Where the parts reach on screen with this camera (landscape frame), moved aside by each of `shifts` radii as the
+            player moves a title page's camera for its title: the left and right edges and the top, in half frame heights from
+            the middle (left negative). For the player to choose, in each window, the closest of a view's cameras that keeps the
+            parts in the frame (and clear of the title)."""
+            f, side = -_unit(cam['dir']), _unit(np.cross(cam['dir'], [0.0, 1.0, 0.0]))
+            right, up = -side, np.cross(-side, f)
+            p = np.vstack([apply_pose(offsets.get(i), self.model.inst[i].vertices) for i in shown])
+            p = p[::max(1, len(p) // 150000)]
+            t, eye = np.tan(np.radians(self.cfg['fov'] / 2)), camera_eye(cam, self.cfg)
+            out = dict(s=[], l=[], r=[], t=[])
+            for k in shifts:
+                q = p - (eye + side * k * cam['radius'])
+                z = q @ f
+                u, v = (q @ right) / (z * t), (q @ up) / (z * t)
+                for key, val in (('s', k), ('l', u.min()), ('r', u.max()), ('t', v.max())):
+                    out[key].append(round(float(val), 3))
+            return out
+
+        def special(sv, shown, offsets, title=False):
             """A camera given for the title page or the Completed View (see __init__), or the finished model's (framing the parts
             as that view poses them, if it poses any)."""
             t, r = _fit(self.model, shown, [offsets]) if sv.get('poses') else (hero_target, hero_radius)
             base = dict(hero, target=t.round(1).tolist(), radius=round(r, 1))
             if 'dir' in sv:
-                return dict(dir=_unit(sv['dir']).round(4).tolist(), target=[round(float(x), 1) for x in sv['target']], radius=round(float(sv['radius']), 1),
-                            **({'shift': float(sv['shift'])} if 'shift' in sv else {}),
-                            **({'min_aspect': float(sv['min_aspect']), 'otherwise': base} if 'min_aspect' in sv else {}))
+                cam = given(sv)
+                if 'min_aspect' in sv:
+                    cam['min_aspect'] = float(sv['min_aspect'])
+                    if isinstance(sv.get('otherwise'), (list, tuple)):     # several, closest first, then the finished model's:
+                        shifts = [round(0.05 * k, 2) for k in range(31)] if title else [0.0]   # the player takes the first that fits
+                        if title and float(sv.get('shift', 0.0)) != 0.0:
+                            raise ValueError('start_view with a list of `otherwise` cameras: give its own camera shift=0 (the player works the shift out)')
+                        cam['otherwise'] = [given(c) for c in sv['otherwise']] + [base]
+                        for c in [cam] + cam['otherwise']:
+                            c['fit'] = reach(c, shown, offsets, shifts)
+                        if sv.get('clear_title'):
+                            cam['clear_title'] = True
+                    else:
+                        cam['otherwise'] = given(sv['otherwise']) if sv.get('otherwise') else base
+                elif sv.get('otherwise') or sv.get('clear_title'):
+                    raise ValueError('start_view / end_view: `otherwise` and `clear_title` need min_aspect')
+                return cam
             return dict(base, dir=_direction(sv.get('azimuth', self.hero_azimuth), sv.get('elevation', 32)).round(4).tolist(),
                         radius=round(r * sv.get('zoom', 1.0), 1)) if (sv.keys() - {'poses', 'hide'}) else base
-        views[0]['camera'] = special(self.start_view, start_shown, start_last)
+        views[0]['camera'] = special(self.start_view, start_shown, start_last, title=True)
         views[-1]['camera'] = special(self.end_view, end_shown, end_last)
         for v in views:
             if 'camera' not in v:

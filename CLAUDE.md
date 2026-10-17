@@ -58,9 +58,13 @@ docstrings of `Guide.place` and `Guide.seat`):
   the model turned over (work done with the kit upside down): the player turns the model, not the camera, so
   the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them.
   `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
-  screenshot, with the narrowest window it suits, `min_aspect`), can leave parts off them (`hide=`) and can show parts
-  turned or moved there (`poses={id: pose}`: the RCC's controller turned round beside the car; the Completed View then cuts in
-  rather than gliding from the last step).
+  screenshot, with the narrowest window it suits, `min_aspect`, and `otherwise=` for narrower ones; or `otherwise=[...]`, wider
+  cameras closest first: the generator notes where the parts reach on screen with each (`fit`), and the player takes the first
+  that keeps them in the frame, on the title page (`clear_title=True`) moved aside just enough to clear the title, which is a
+  fixed size on the page: the RCC's title page and Completed View, punched in yet right in the LMS's frame),
+  can leave parts off them (`hide=`) and can show parts turned or moved there (`poses={id: pose}`; the Completed View then cuts
+  in rather than gliding from the last step). The RCC's controller is instead turned in the build itself from Step 29
+  (`rest_at` + `carry`), so that the Completed View glides.
 - **Note cards** take line breaks: a caption with `\n` in it is shown as a list, ranged left (a checklist).
 - **A bench set-up before the build.** `g.put_away(ids)` takes parts off the screen; a later step brings them
   back as new parts (the MRA's electronics test, before the base). Declare their riding and resting for the
@@ -73,7 +77,13 @@ docstrings of `Guide.place` and `Guide.seat`):
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
   `cut_lead`), its turn split about evenly between stages: two routes twisted differently at the same length pinch the lead
-  as it blends between them (Steps 98 and 99).
+  as it blends between them (Steps 98 and 99). Or (the RCC's motor leads) give every stop of the plug a smooth shape of its own,
+  drawn with `W.smooth` (a spline through a few points, no corners), all lying flat the same way (`W.ribbon(twist=)`), with the
+  plug turning no more than a quarter turn per beat: the player blends shapes bit by bit along their length, and very unlike
+  shapes (one bending back, the next forward) or shapes twisted the opposite way fold or cross their wires as they blend. A lead
+  whose length does not matter says `stretch` (W.route): it then stretches evenly between shapes of different lengths instead of
+  growing out of its tip, and while it changes shape it is carried by its ends' moves only, not turned with its plug. A part in both `move` and `appear` is on screen where its path starts
+  as the step opens (a plug at the end of a lead laid out on the bench) instead of gliding in.
 - **Parts list.** `Guide(parts_list=fn)` puts Parts List pages after the title page, built from the parts the guide
   shows (so a guide for one part of the build lists that part's parts); `fn` groups them (the MRA's is in its guide.py).
   `g.part_picture(name, add=, poses=, wires=)` pictures a part whole (both ends of an extension wire and the wire between);
@@ -142,6 +152,11 @@ publish copies it into the release (it warns when a guide has none, or one older
     python3 tools/site_pages.py                              # the landing and kit pages again (publish does this by itself)
     /usr/bin/python3 tools/serve.py releases                 # every earlier release, on this computer only: http://localhost:8798/<guide>/r<N>/
 
+- **A local copy of the website**, for Lee between sessions and to look at before anything is published: publish every guide
+  with `--to "share/Website preview"` (a practice run: it writes only there, never `site/`, `releases/` or `render.yaml`, and needs
+  no commit), check it with `python3 tools/check_site.py "share/Website preview/site"`, serve it on 8797; `Open Website
+  Preview.command` (top folder) starts it by double-click. Make it again after each round, and for every guide after a player
+  change (a published copy keeps the player it was published with).
 - **Only the current release is on the website** (Lee, 16 Oct 2026). `site/` holds one copy per guide; every release ever
   published is kept in `releases/<guide>/r<N>/` with its record (`release.json`: when, Lee's reason, the source's git commit,
   every file's checksum) and `releases/<guide>/history.json`, in git but never uploaded (Render serves `site/` only).
@@ -247,6 +262,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     site/                      the website (Render serves this folder only): the current release of each published guide
     releases/                  every release ever published, frozen, with its record (never uploaded)
     render.yaml                the Render static site's configuration
+    Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
                                bundle.py, step_text.py, step_to_glb.py, cut_part.py; site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
@@ -287,7 +303,10 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid; with
   `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's).
   `"move_engraving"` moves a wood part's engraved code elsewhere on its face (and can turn it the right way up), for a part
-  the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead.
+  the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead. `"fill_holes"`
+  ({instance: [points on the holes' axes, assembly mm]}) fills round pin holes in a plate that nothing passes through any
+  more, in the mesh itself, so that neither hole nor line shows, picked or not (the RCC adapter board's two holes left empty
+  when its socket was moved; a painted-over disc showed a grey ring and stayed white when the board was picked).
 - The player renders only when something changes. Do not add per-frame work. (A close-up is drawn once as its view
   opens; the parts list's pictures load only when its page is shown; reading aloud uses the browser's own voice.)
 - Every step opens on its own camera (the player swings back to it whatever the viewer did). A camera Lee sends as a
@@ -296,6 +315,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   every view's camera against a copy of steps.json saved before the edit.
 - Controls stay real buttons, lists and tick boxes (keyboard and screen reader); on-screen text the student needs is
   in the page or in the announcement made as each step opens, never only in the 3D picture.
+- A part picked by a click (or named on hover) is let go as soon as the view moves (drag, pinch, wheel, the view reset):
+  its name is placed once on the page and would no longer point at it (Lee, 17 Oct 2026).
 - New colours go in `materials.json`'s palette, following the colour library in the rulebook. Colours with
   no published reference are listed under `_notes.unconfirmed` there; colours Lee has ruled on are under
   `_notes.decided` and are not to be changed back.

@@ -13,7 +13,7 @@ import json
 import numpy as np
 
 
-def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None):
+def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False):
     """A route as steps.json stores it.
 
     a, b: the part ids at the first and last point. The wire moves with them: the first part of its
@@ -28,6 +28,9 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
     fade: (from_mm, to_mm) along the wire from its first point: the wire fades out between the two, for a wire that
     runs on but is left out of the picture (the joysticks' wires while a joystick is in the hand). Draw the route a
     little past to_mm.
+    stretch: when the wire changes to or from this route, each bit of it keeps its share of the wire's length, not its
+    distance from the first end: a representative lead that is longer or shorter in its next shape then stretches evenly
+    instead of growing out of its tip (or bunching at it). For a lead whose length does not matter (the RCC's motor leads).
     """
     out = dict(pts=np.round(np.asarray(points, float), 2).tolist(), a=a, b=b)
     if b_from:
@@ -39,6 +42,8 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
         out['mark'] = np.round(np.asarray(mark, float), 2).tolist()
     if fade is not None:
         out['fade'] = [float(fade[0]), float(fade[1])]
+    if stretch:
+        out['stretch'] = True
     return out
 
 
@@ -117,12 +122,36 @@ def _about(axis, angle):
     return np.eye(3) + np.sin(angle) * K + (1 - np.cos(angle)) * K @ K
 
 
-def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_across=None):
+def smootherstep(t):
+    t = np.clip(np.asarray(t, float), 0.0, 1.0)
+    return t * t * t * (t * (6 * t - 15) + 10)
+
+
+def smooth(points, start_dir=None, end_dir=None, spacing=1.0):
+    """A smooth line through a few control points: a C2 cubic spline parameterised by chord length, its first and last
+    tangents along start_dir / end_dir when given (a natural end otherwise), resampled every `spacing` mm. No corners, so a
+    lead drawn this way bends evenly (rounded() joins straight runs with tight bends)."""
+    from scipy.interpolate import make_interp_spline
+    P = np.asarray(points, float)
+    u = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))])
+    left = [(1, _unit(start_dir))] if start_dir is not None else [(2, np.zeros(3))]
+    right = [(1, _unit(end_dir))] if end_dir is not None else [(2, np.zeros(3))]
+    dense = make_interp_spline(u, P, k=3, bc_type=(left, right))(np.linspace(0.0, u[-1], max(200, int(u[-1] / 0.1))))
+    return resample(dense, spacing)
+
+
+last_roll = 0.0                                          # the turn (radians) the last ribbon() gave its lead to meet end_across
+
+
+def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_across=None, twist=None, roll_near=None):
     """The n side-by-side conductors of a flat lead whose middle follows `points`.
 
     across: which way the lead is wide at its first point. Returns n lines; the first is the one furthest along
     -across. The lead is carried along without twisting, unless end_across says which way it must be wide at its
-    last point (to meet a plug): the twist needed is then spread evenly along its length.
+    last point (to meet a plug): the twist needed is then spread evenly along its length, or done between twist =
+    (from_mm, to_mm) along it, easing in and out (a lead that turns flat as it comes up out of a notch, then runs on flat).
+    roll_near: the twist (radians, as last_roll gives it) of the shape this lead changes from or to: the turn is then taken the
+    same way round (whole turns added), so that the conductors do not cross over each other as the player blends the two.
     end_pitch, fan_mm: the conductors spread to end_pitch over the last fan_mm (into a plug's contacts).
     """
     p = resample(points, 1.0)
@@ -140,7 +169,12 @@ def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_acro
         want = np.asarray(end_across, float)
         want = _unit(want - t[-1] * (want @ t[-1]))
         roll = np.arctan2(np.cross(sides[-1], want) @ t[-1], sides[-1] @ want)
-        sides = np.array([_about(t[k], roll * d[k] / d[-1]) @ sides[k] for k in range(len(p))])
+        if roll_near is not None:
+            roll += 2 * np.pi * np.round((roll_near - roll) / (2 * np.pi))
+        global last_roll
+        last_roll = float(roll)
+        frac = d / d[-1] if twist is None else smootherstep((d - twist[0]) / (twist[1] - twist[0]))
+        sides = np.array([_about(t[k], roll * frac[k]) @ sides[k] for k in range(len(p))])
     gap = np.full(len(p), float(pitch))
     if end_pitch is not None and fan_mm > 0:
         u = np.clip((d - (d[-1] - fan_mm)) / fan_mm, 0.0, 1.0)
@@ -218,9 +252,11 @@ def loose_lead(centre, across, plug_info, pitch=1.02, fan_mm=10.0):
     return lines, plug_pose(plug_info, lines[1][-1], lines[1][-1] - lines[1][-2], lines[2][-1] - lines[0][-1])
 
 
-def plugged_lead(centre, across, plug_info, pitch=1.02, fan_mm=30.0):
-    """A lead along `centre` (its middle wire, ending on the plug's middle contact) into its plug, seated."""
-    return ribbon(centre, across, pitch=pitch, n=3, end_pitch=plug_info['pitch'], fan_mm=fan_mm, end_across=plug_info['across'])
+def plugged_lead(centre, across, plug_info, pitch=1.02, fan_mm=30.0, end_across=None, roll_near=None):
+    """A lead along `centre` (its middle wire, ending on the plug's middle contact) into its plug, seated (or, with end_across,
+    into a plug that is turned so)."""
+    return ribbon(centre, across, pitch=pitch, n=3, end_pitch=plug_info['pitch'], fan_mm=fan_mm,
+                  end_across=plug_info['across'] if end_across is None else end_across, roll_near=roll_near)
 
 
 def cut_mark(ends, direction, size=2.2, overhang=2.0, edge_on=False):

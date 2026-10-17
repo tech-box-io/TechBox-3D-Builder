@@ -23,9 +23,12 @@ $('copyright').textContent = data.meta.copyright || '';
 document.title = `${data.meta.title} - ${data.meta.part}`;
 if (data.meta.logo) {                        // a logo file in the kit folder replaces the text badge (guide.py records its name)
   const img = new Image();
-  img.onload = () => { img.alt = 'TechBox'; $('logo').replaceChildren(img); $('logo').classList.add('image'); };
+  img.onload = () => { img.alt = 'TechBox'; $('logo').replaceChildren(img); $('logo').classList.add('image'); reposeTitle(); };
   img.src = data.meta.logo;
 }
+// The title page's camera depends on how wide the logo and title are (see cameraFor): look again once the logo and the fonts are in.
+function reposeTitle() { if (views[cur] && views[cur].kind === 'start' && views[cur].camera.clear_title) go(cur, false); }
+if (document.fonts) document.fonts.ready.then(reposeTitle);
 const flat = v => v.kind === 'card';         // a view with no model on screen: a note card, or the parts list (a card with `parts`)
 const stepCount = views.filter(v => /^Step \d+$/.test(v.name)).length;
 
@@ -89,7 +92,8 @@ const routes = (data.routes || []).map(r => {
   return {...r, s, len};
 });
 const wireSamples = {};                      // points along each wire: enough for its longest route
-for (const v of views) for (const id in v.wires || {}) wireSamples[id] = Math.max(wireSamples[id] || 0, Math.min(160, Math.max(12, Math.ceil(routes[v.wires[id]].len / 1.5))));
+for (const v of views) for (const [id, nos] of [...Object.entries(v.wires || {}).map(([id, no]) => [id, [no]]), ...Object.entries(v.wire_via || {})])
+  for (const no of nos) wireSamples[id] = Math.max(wireSamples[id] || 0, Math.min(160, Math.max(12, Math.ceil(routes[no].len / 1.5))));   // (in-between routes too)
 const ramp = s => { const t = Math.min(1, Math.max(0, (s - 0.1) / 0.8)); return t * t * (3 - 2 * t); };   // the ends stay with their parts
 const mA = new THREE.Matrix4(), mB = new THREE.Matrix4(), mR = new THREE.Matrix4();
 // How far the part at one end of a route has moved from where it was when the route was drawn (`ref`, normally its seat).
@@ -98,10 +102,14 @@ function endMove(part, ref, poses, out) {
   stage.poseMatrix(poses[part] || null, out);
   return ref ? out.multiply(stage.poseMatrix(ref, mR).invert()) : out;
 }
-// The route's centre line with its ends carried along by their parts: {pts, cum (distance along it), total}.
-function skinned(route, poses) {
+// The route's centre line with its ends carried along by their parts: {pts, cum (distance along it), total}. endsOnly: each part
+// carries the wire by the move of the wire's own end point, without turning it (a `stretch` lead changing from one shape to the
+// next: its shapes are drawn for each stop, its plug's turn already in them; turned along with the plug, a long lead folds).
+function skinned(route, poses, endsOnly = false) {
   const A = endMove(route.a, route.a_ref, poses, mA), B = endMove(route.b, route.b_ref, poses, mB), m = route.pts.length;
   const pts = new Float32Array(m * 3), cum = new Float32Array(m);
+  const moveOf = (M, p) => M ? (pV.set(p[0], p[1], p[2]).applyMatrix4(M), [pV.x - p[0], pV.y - p[1], pV.z - p[2]]) : null;
+  const dA = endsOnly && moveOf(A, route.pts[0]), dB = endsOnly && moveOf(B, route.pts[m - 1]);
   for (let i = 0; i < m; i++) {
     const p = route.pts[i];
     let x = p[0], y = p[1], z = p[2];
@@ -109,8 +117,11 @@ function skinned(route, poses) {
       // how much this point goes with the part at the far end: none at all before `b_from` mm (a lead held in a slot there)
       const u = route.b_from ? (route.s[i] * route.len - route.b_from) / Math.max(1e-6, route.len - route.b_from) : route.s[i];
       const wb = route.b ? ramp(u) : 0, wa = route.a ? 1 - wb : 0;
-      if (A && wa) { pV.set(p[0], p[1], p[2]).applyMatrix4(A); x += wa * (pV.x - p[0]); y += wa * (pV.y - p[1]); z += wa * (pV.z - p[2]); }
-      if (B && wb) { pV.set(p[0], p[1], p[2]).applyMatrix4(B); x += wb * (pV.x - p[0]); y += wb * (pV.y - p[1]); z += wb * (pV.z - p[2]); }
+      if (endsOnly) {
+        if (dA && wa) { x += wa * dA[0]; y += wa * dA[1]; z += wa * dA[2]; }
+        if (dB && wb) { x += wb * dB[0]; y += wb * dB[1]; z += wb * dB[2]; }
+      } else if (A && wa) { pV.set(p[0], p[1], p[2]).applyMatrix4(A); x += wa * (pV.x - p[0]); y += wa * (pV.y - p[1]); z += wa * (pV.z - p[2]); }
+      if (!endsOnly && B && wb) { pV.set(p[0], p[1], p[2]).applyMatrix4(B); x += wb * (pV.x - p[0]); y += wb * (pV.y - p[1]); z += wb * (pV.z - p[2]); }
     }
     pts[i * 3] = x; pts[i * 3 + 1] = y; pts[i * 3 + 2] = z;
     if (i) cum[i] = cum[i - 1] + Math.hypot(x - pts[i * 3 - 3], y - pts[i * 3 - 2], z - pts[i * 3 - 1]);
@@ -130,7 +141,8 @@ function sampled(line, n, span = line.total) {
 }
 // Draw the wires of `view` with parts at `poses`; with `from` and k < 1, part of the way from that view's routes.
 // A wire changing route keeps each bit of itself the same distance from its first end, so what both routes share
-// (the run from a servo to the slot it passes through) stays put, and a longer route grows out of the wire's tip.
+// (the run from a servo to the slot it passes through) stays put, and a longer route grows out of the wire's tip; unless the
+// route says `stretch` (see below).
 function drawWires(view, poses, from, k = 1, via = null) {
   const list = [], marks = [];
   for (const id in view.wires || {}) {
@@ -140,9 +152,12 @@ function drawWires(view, poses, from, k = 1, via = null) {
     if (changing) {                            // from the old route, through any in-between routes the view names, to the new one
       const way = [from.wires[id], ...(((via || view.wire_via) || {})[id] || []), view.wires[id]], legs = way.length - 1;   // (going back: `via`, the routes the step came through, the other way)
       const leg = Math.min(legs - 1, Math.floor(k * legs)), f = k * legs - leg;
-      const a = leg === 0 ? skinned(routes[way[0]], poses) : skinned(routes[way[leg]], poses), b = leg === legs - 1 ? line : skinned(routes[way[leg + 1]], poses);
-      const span = Math.max(a.total, b.total), pa = sampled(a, n, span);
-      pts = sampled(b, n, span);
+      // (a representative lead, `stretch`: each bit keeps its share of the length instead, so a longer or shorter shape
+      // stretches evenly rather than growing out of the tip; and it is carried by its ends' moves only, see skinned)
+      const even = !!(routes[way[leg]].stretch || routes[way[leg + 1]].stretch);
+      const a = skinned(routes[way[leg]], poses, even), b = leg === legs - 1 && !even ? line : skinned(routes[way[leg + 1]], poses, even);
+      const span = Math.max(a.total, b.total), pa = even ? sampled(a, n) : sampled(a, n, span);
+      pts = even ? sampled(b, n) : sampled(b, n, span);
       for (let i = 0; i < pts.length; i++) pts[i] = pa[i] + (pts[i] - pa[i]) * f;
       const fa = routes[way[leg]].fade, fb = routes[way[leg + 1]].fade;
       if (fa || fb) {                          // a faded end grows out to the whole wire (or back)
@@ -170,15 +185,46 @@ function applyState(view, poses) {
   for (const id of view.visible) stage.setPose(id, (poses || view.offsets)[id] || ZERO);
   drawWires(flat(view) ? {} : view, poses || view.offsets);
 }
+// The right edge of the title page's logo and words, in the picture's pixels (they are a fixed size on the page).
+function titleRight() {
+  const c = canvasEl.getBoundingClientRect(), range = document.createRange();
+  let r = 0;
+  for (const id of ['logo', 'title', 'subtitle', 'copyright']) {
+    const el = $(id);
+    if (!el || el.closest('[hidden]')) continue;
+    range.selectNodeContents(el);
+    const b = range.getBoundingClientRect();
+    if (b.width) r = Math.max(r, b.right - c.left);
+  }
+  return r;
+}
+// The camera a view takes in a frame of this shape, and (title page) how far it is moved aside. A camera framed for one shape of
+// window (the title page's, from a screenshot) says how narrow a frame it suits (min_aspect); then come its `otherwise`: one, or
+// a list, closest first, ending with the finished model's. With a list the generator notes where the parts reach on screen with
+// each camera (`fit`: left and right edges and top, in half frame heights, with the camera moved aside by each of fit.s radii),
+// and the player takes the first that keeps the parts in the frame, on the title page moved aside just enough to clear the logo
+// and title, which do not shrink with the window (clear_title: Lee, 17 Oct 2026, the title page punched in, and the LMS's frame).
+function cameraFor(view, aspect) {
+  const c = view.camera, list = [...(!c.min_aspect || aspect >= c.min_aspect ? [c] : []), ...[].concat(c.otherwise || [])];
+  if (!list.length) return {camera: c, shift: null};
+  if (!list.some(x => x.fit)) return {camera: list[0], shift: null};                   // (as before)
+  if (aspect < 1) return {camera: list[list.length - 1], shift: null};                   // (a frame taller than wide: the whole model)
+  const title = view.kind === 'start' && c.clear_title, m = 0.03;
+  const left = title ? (titleRight() + 16 - stage.width / 2) / (stage.height / 2) : m - aspect;
+  for (const cam of list) {
+    for (let k = 0; cam.fit && k < cam.fit.s.length && (title || k === 0); k++)
+      if (cam.fit.l[k] >= left && cam.fit.r[k] <= aspect - m && cam.fit.t[k] <= 1 - m) return {camera: cam, shift: cam.fit.s[k]};
+  }
+  return {camera: list[list.length - 1], shift: null};
+}
 function poseFor(view, aspect) {
-  // A camera framed for one shape of window (the title page's, from a screenshot) says how narrow a frame it suits; on a
-  // narrower one the guide's other camera is used, which the title-page shift below keeps clear of the title.
-  const camera = view.camera.min_aspect && aspect < view.camera.min_aspect ? view.camera.otherwise : view.camera;
+  const {camera, shift} = cameraFor(view, aspect);
   const pose = stage.cameraPose(camera, aspect);
   if (view.kind === 'start') {               // leave the left of the title page for the logo and title, as far as the frame has room to spare
     const dir = new THREE.Vector3(...camera.dir).normalize(), r = camera.radius;
     const spare = pose.position.distanceTo(pose.target) * Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * aspect - r;
-    const side = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(Math.max(0, Math.min((camera.shift ?? 0.6) * r, spare)));   // (shift: how far, in radii, the guide asks)
+    const by = shift != null ? shift * r : Math.max(0, Math.min((camera.shift ?? 0.6) * r, spare));   // (shift: how far, in radii, the guide asks)
+    const side = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(by);
     pose.target.add(side); pose.position.add(side);
   }
   return pose;
@@ -525,7 +571,7 @@ function go(i, animate = true) {
     if (from.wire_via) { wireVia = {}; for (const id in from.wire_via) wireVia[id] = from.wire_via[id].slice().reverse(); }
   }
   if (forward && to.kind === 'hover') {                               // a new part glides in from a little further out
-    for (const id of to.moving) if (!was(id)) start[id] = further(end[id]);
+    for (const id of to.moving) if (!was(id) && !(to.still || []).includes(id)) start[id] = further(end[id]);   // (`still`: on screen where it starts)
   }
   if (from.isolated && !to.isolated) for (const id of to.visible) start[id] = end[id];   // leaving a sub-assembly close-up: the model is simply there
   // Every step opens on its own camera, whatever the viewer has turned or zoomed to since (Lee, 14 Oct 2026): the camera
@@ -774,6 +820,7 @@ canvasEl.addEventListener('pointermove', e => {
   tip.hidden = true; clearTimeout(tipTimer);
   if (e.buttons || e.pointerType === 'touch') return;        // not while rotating
   tipTimer = setTimeout(() => {                               // only once the pointer rests, so it costs nothing while moving
+    if (anim || camSwing) return;                             // (not while a step opens or the view swings back: the part would slide away from its name)
     const name = nameUnder(e.clientX, e.clientY);
     if (!name) return;
     tip.textContent = name; tip.style.left = e.clientX + 14 + 'px'; tip.style.top = e.clientY + 14 + 'px'; tip.hidden = false;
@@ -782,18 +829,49 @@ canvasEl.addEventListener('pointermove', e => {
 canvasEl.addEventListener('pointerleave', () => { tip.hidden = true; clearTimeout(tipTimer); });
 // A click on a part (or a wire) picks it out, as in the published viewer: it is tinted and its name stays up until the
 // next click, or the next step. A click on nothing lets it go. (A drag still turns the view; Option-click is the pick tool.)
+// The name stays where the pointer was, so as soon as the view moves (a drag that turns, slides or pinches it, the wheel, the
+// view reset) the part is let go and a name shown on hover goes too: it would point at the wrong place (Lee, 17 Oct 2026).
 const chosen = $('chosen');
 function select(thing, x, y) {
   stage.setHighlight(thing && thing.object ? [thing.object] : []);
   chosen.hidden = !(thing && thing.name);
   if (thing && thing.name) { chosen.textContent = thing.name; chosen.style.left = x + 14 + 'px'; chosen.style.top = y + 14 + 'px'; }
 }
+function letGo() {
+  tip.hidden = true; clearTimeout(tipTimer);
+  if (!chosen.hidden || stage.highlighted().length) select(null);   // (only when something is picked: a drag calls this on every move)
+}
+// The view coasts on for a moment after a drag (and a click's own small wobble sets it going): a click stops it where it is,
+// so that the part it picks stays under its name; and whatever moves the view after that lets the part go.
+function stopCoasting() {
+  if (!controls) return;
+  const p = camera.position.clone(), t = controls.target.clone();
+  controls.enableDamping = false; controls.update(); controls.enableDamping = true;   // (spends what is left of the coast and clears it...)
+  camera.position.copy(p); controls.target.copy(t); controls.update();                // (...then puts the view back where it was)
+}
+if (controls) {
+  const lastP = camera.position.clone(), lastT = controls.target.clone();
+  controls.addEventListener('change', () => {
+    if (camera.position.distanceToSquared(lastP) + controls.target.distanceToSquared(lastT) > 0.01) letGo();   // (moved more than 0.1 mm)
+    lastP.copy(camera.position); lastT.copy(controls.target);
+  });
+}
 {
   let down = null;
-  canvasEl.addEventListener('pointerdown', e => { down = !e.altKey && e.button === 0 ? [e.clientX, e.clientY] : null; });
+  const pressed = new Map();                   // each pointer held on the picture (any button, any finger) -> where it went down
+  canvasEl.addEventListener('pointerdown', e => { pressed.set(e.pointerId, [e.clientX, e.clientY]); down = !e.altKey && e.button === 0 ? [e.clientX, e.clientY] : null; });
+  canvasEl.addEventListener('pointermove', e => {             // further than a click may move: the view is being turned, slid or pinched
+    const p = pressed.get(e.pointerId);
+    if (p && e.buttons && Math.hypot(e.clientX - p[0], e.clientY - p[1]) > 4) { down = null; letGo(); }
+  });
+  canvasEl.addEventListener('pointercancel', e => pressed.delete(e.pointerId));
+  canvasEl.addEventListener('wheel', letGo, {passive: true});   // zoom (a trackpad's scroll and pinch come as the wheel)
   canvasEl.addEventListener('pointerup', e => {
+    pressed.delete(e.pointerId);
     const from = down; down = null;
     if (!from || Math.hypot(e.clientX - from[0], e.clientY - from[1]) > 4) return;
+    if (anim || camSwing) return;              // (not while a step opens or the view swings back)
+    stopCoasting();
     select(thingUnder(e.clientX, e.clientY), e.clientX, e.clientY);
     tip.hidden = true;
   });
@@ -887,6 +965,7 @@ $('loading').remove();
 function resetView() {
   const view = views[cur];
   if (flat(view) || anim || !controls) return;   // (a step that is still opening is on its way to its own view already)
+  letGo();                                       // (the view is about to swing: a picked part's name would be left behind)
   if (controls) { controls.enableDamping = false; controls.update(); controls.enableDamping = true; }   // (drop any spin still running from a drag)
   const pose = poseFor(view, stage.width / stage.height);
   camSwing = {t0: performance.now(), p0: camera.position.clone(), t0v: controls.target.clone(), p1: pose.position.clone(), t1: pose.target.clone()};

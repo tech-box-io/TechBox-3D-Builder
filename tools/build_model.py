@@ -12,6 +12,8 @@ What it does, per mesh:
     disconnected solids (a Nano board is one mesh in the STEP export but ~270 solids);
   * simplifies the triangles to a tolerance in millimetres (purchased parts such as screws, servos
     and cables carry far more detail than a student can see);
+  * fills in round pin holes in a plate that nothing passes through any more ("fill_holes": the RCC adapter board's two
+    holes left empty when its socket was moved off them), so that neither the hole nor a line round it shows;
   * roughens laser-cut plates ("roughen_mm"): their edges shifted a fraction of a millimetre in the
     plate's plane, so that a cutting file traced from the published model comes out slightly wrong
     (a deterrent, not a guarantee: at 0.1 mm most joints would still fit);
@@ -326,6 +328,50 @@ def move_engraving(V, N, F, Vp, Fp, face_colour, delta, turn, ink, lift_mm=0.05)
     V, N = np.vstack([V, decal_v]), np.vstack([N, decal_n])
     F = np.vstack([F, first + np.arange(len(decal_v)).reshape(-1, 3)])
     return V, N, F, np.concatenate([face_colour, np.array([ink] * int(floor.sum()), dtype=object)])
+
+
+def fill_holes(V, N, F, points, reach_mm=1.0):
+    """Fill in round holes straight through a flat plate, so that nothing of them shows (materials.json "fill_holes").
+
+    The plate's thickness runs along an axis of the mesh's own frame (as engraved_faces and roughen assume); `points` lie on
+    the holes' axes (mm, the mesh's own frame). For each, the faces of the hole's wall (square to the plate, every corner
+    within reach_mm of the given point, round about their own middle) are taken out, and each of the hole's two rims is closed with a
+    fan of triangles to its middle, in the plane of its face and with that face's normal: across the rim the surface is then
+    flat, so feature_edges draws no line there, and the simplifier merges the patch into the face.
+    Returns V, N, F and each hole's radius (mm)."""
+    axis = int(np.argmin(np.ptp(V, axis=0)))
+    across = [k for k in range(3) if k != axis]
+    _, place = np.unique(np.round(V / 1e-3).astype(np.int64), axis=0, return_inverse=True)   # the CAD repeats a corner for each face
+    place = place.reshape(-1)
+    radii = []
+    for p in np.asarray(points, float):
+        fn = np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]])
+        fn /= np.maximum(np.linalg.norm(fn, axis=1), 1e-12)[:, None]
+        r = np.linalg.norm(V[F][:, :, across] - p[across], axis=2)        # (faces, 3) each corner's distance from the axis
+        wall = (r.max(1) < reach_mm) & (np.abs(fn[:, axis]) < 0.05)
+        ring = V[F[wall]][:, :, across].reshape(-1, 2)
+        rr = np.linalg.norm(ring - ring.mean(0), axis=1) if wall.any() else np.zeros(0)   # (about the wall's own middle)
+        if not wall.any() or np.ptp(rr) > 0.02 or np.ptp(V[F[wall]][:, :, axis]) < np.ptp(V[:, axis]) - 1e-3:
+            raise SystemExit(f'fill_holes: no round hole straight through the plate at {p.round(3).tolist()} (mesh mm)')
+        radii.append(float(rr.mean()))
+        F = F[~wall]
+        # the rims: the sides of the faces left that no other face shares, near the axis (each as its face runs it)
+        side = np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])
+        _, which, count = np.unique(np.sort(place[side], axis=1), axis=0, return_inverse=True, return_counts=True)
+        rim = side[(count[which.reshape(-1)] == 1) & (np.linalg.norm(V[side][:, :, across] - p[across], axis=2).max(1) < reach_mm)]
+        n = place.max() + 1
+        _, loop = connected_components(coo_matrix((np.ones(len(rim)), (place[rim[:, 0]], place[rim[:, 1]])), shape=(n, n)), directed=False)
+        loop = loop[place[rim[:, 0]]]
+        if len(np.unique(loop)) != 2:
+            raise SystemExit(f'fill_holes: the hole at {p.round(3).tolist()} has {len(np.unique(loop))} rims, not 2')
+        for L in np.unique(loop):
+            e = rim[loop == L]
+            middle = len(V)
+            V, N = np.vstack([V, V[np.unique(e)].mean(0)]), np.vstack([N, N[e[0, 0]]])   # (the face's own normal, at its corner on the rim)
+            place = np.append(place, n)
+            n += 1
+            F = np.vstack([F, np.column_stack([e[:, 1], e[:, 0], np.full(len(e), middle)])])   # each side turned round, to the middle
+    return V, N, F, radii
 
 
 def roughen(V, F, amount_mm, name, wavelength_mm=12.0, n_waves=16):
@@ -911,6 +957,43 @@ def build(kit_dir, keep='guide'):
         i = by_name[inst]
         R = pose_matrix(adjust[inst])[:3, :3] @ world0[i][:3, :3] if inst in adjust else world0[i][:3, :3]
         moves[nodes[i]['mesh']] = (R.T @ np.asarray(how['by'], float), float(how.get('turn', 0)))
+    # "fill_holes": {instance id: [[x, y, z], ...]}: round pin holes in a plate inside that part, filled in (see fill_holes); each
+    # point on a hole's axis, in assembly mm where the guide shows the part. Taken into the frame of the one flat mesh of the
+    # part whose box holds the point.
+    fills, parent = {}, {c: k for k, n in enumerate(nodes) for c in n.get('children', [])}
+
+    def seated(j):                                   # node j's world matrix with every adjust_mm on it and its parents applied
+        m, k = world0[j], j
+        while k is not None:
+            if nodes[k].get('name') in adjust:
+                m = pose_matrix(adjust[nodes[k]['name']]) @ m
+            k = parent.get(k)
+        return m
+    for inst, points in spec.get('fill_holes', {}).items():
+        if inst not in by_name or by_name[inst] in dropped:
+            continue
+        sub, todo = [], [by_name[inst]]
+        while todo:
+            j = todo.pop()
+            sub.append(j)
+            todo += nodes[j].get('children', [])
+        for point in points:
+            hits = []
+            for j in sub:
+                if 'mesh' not in nodes[j]:
+                    continue
+                acc = doc['accessors'][doc['meshes'][nodes[j]['mesh']]['primitives'][0]['attributes']['POSITION']]
+                lo, hi = np.asarray(acc['min'], float) * to_mm, np.asarray(acc['max'], float) * to_mm
+                q = (np.linalg.inv(seated(j)) @ np.append(np.asarray(point, float), 1.0))[:3]
+                side = np.sort(hi - lo)
+                if np.all(q >= lo - 1e-3) and np.all(q <= hi + 1e-3) and side[0] < 0.2 * side[1]:
+                    hits.append((j, q))
+            if len(hits) != 1:
+                raise SystemExit(f'materials.json fill_holes {inst}: {point} lies in {len(hits)} flat meshes of that part, not one')
+            j, q = hits[0]
+            if sum(1 for k in kept_nodes if nodes[k].get('mesh') == nodes[j]['mesh']) > 1:
+                raise SystemExit(f'materials.json fill_holes {inst}: the mesh at {point} is shared by other nodes, which would be filled too')
+            fills.setdefault(nodes[j]['mesh'], []).append(q)
     for mi in used_meshes:
         mesh = doc['meshes'][mi]
         if len(mesh['primitives']) != 1 or mesh['primitives'][0].get('mode', 4) != 4:
@@ -921,7 +1004,7 @@ def build(kit_dir, keep='guide'):
             omitted.add(mi)
             continue
         raw = [accessor(doc, blob, prim['attributes']['POSITION']), accessor(doc, blob, prim['attributes']['NORMAL']), accessor(doc, blob, prim['indices'])]
-        key = (mesh['name'], hashlib.md5(b''.join(np.ascontiguousarray(a).tobytes() for a in raw)).hexdigest(), mi if mi in moves else None)
+        key = (mesh['name'], hashlib.md5(b''.join(np.ascontiguousarray(a).tobytes() for a in raw)).hexdigest(), mi if mi in moves or mi in fills else None)
         if key in first_like:
             same_as[mi] = first_like[key]
             report[new_mesh_index[first_like[key]]]['used_by'] += 1
@@ -936,6 +1019,10 @@ def build(kit_dir, keep='guide'):
                     for value in np.asarray(region['box'], float)[:, axis]:
                         if V[:, axis].min() < value < V[:, axis].max():
                             V, N, F = cut_faces(V, N, F, axis, value)
+        filled = ''
+        if mi in fills:                               # pin holes nothing passes through any more, filled in (materials.json "fill_holes")
+            V, N, F, radii = fill_holes(V, N, F, fills[mi])
+            filled = f"{len(radii)} hole{'s' if len(radii) > 1 else ''} filled (r {', '.join(f'{r:.2f}' for r in radii)} mm)"
 
         Vp, remap = weld_positions(V)
         Fp = remap[F]
@@ -944,6 +1031,8 @@ def build(kit_dir, keep='guide'):
             comp_colour, note, skin = colour_components(rule, mats, Vp, Fp, labels, n_comp)
         else:
             comp_colour, note, skin = [rule.get('color')] * n_comp, '', np.zeros(n_comp, dtype=bool)
+        if filled:
+            note = (note + '; ' if note else '') + filled
         if any('across' in c for c in rule.get('components', [])):   # remember each lead for the continuity check
             lead_solids[mi] = [(c, comp_colour[c], Vp[labels == c]) for c in range(n_comp) if str(comp_colour[c]).startswith('wire_')]
         face_comp = labels[Fp[:, 0]]

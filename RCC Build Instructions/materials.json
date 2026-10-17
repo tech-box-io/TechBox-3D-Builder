@@ -542,6 +542,7 @@
     ],
     "adjusted": [
       "The adapter board's 2-pin socket over the I/O module's 3V3 and GND pins (NAUO70, inside NAUO26) is moved -0.25 mm along x and -0.94 mm along z: the CAD has its contacts 0.92 - 0.96 mm off those pins (its other sockets sit within 0.1 mm of theirs), so that it looked out of line with them (Lee, 16 Oct 2026, with a picture).",
+      "The adapter board's two holes for that socket's pins, left empty where the CAD has them, are filled in (fill_holes NAUO26, build_model.fill_holes): the moved pins pass through solid board under their pads, and white discs painted over the holes showed a grey ring and stayed white when the board was picked (Lee, 17 Oct 2026, with pictures).",
       "L1's engraved code (NAUO1) is turned half round on its face, in place, so that it reads upright from behind the car as in Lee's drawing (docs/research/rcc/cad_study.md 2.5): its pocket is filled in and the code drawn there instead (build_model.move_engraving)."
     ],
     "wires": "The CAD's lead bodies (NAUO31-38 and NAUO39 / NAUO40: each servo's one lead in its loose and its plugged pose; NAUO41 / NAUO42: the battery lead in both poses) are left out of the model: the player draws the leads itself, along the centre lines in wire-paths.json, so that they can move. The plug housings (BLS-3) and the barrel plug stay; one of each pair of poses is used.",
@@ -594,6 +595,9 @@
   ],
   "adjust_mm": {
     "NAUO70": [-0.25, 0.0, -0.94]
+  },
+  "fill_holes": {
+    "NAUO26": [[740.36, 930.178, 1343.2], [740.36, 930.178, 1345.74]]
   },
   "move_engraving": {
     "NAUO1": {

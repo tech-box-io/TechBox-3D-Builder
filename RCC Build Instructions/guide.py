@@ -14,6 +14,10 @@ steps for them; one part each, "Controller Board" and "Wheel Motor"); "9V Adapte
 leads; the 9V adapter and battery taken off as one before the motors are unplugged; the leads lie straight back along L1; the
 cameras of Steps 6, 7, 16, 23, 25 - 28 as he gave them (the step numbers here are the new ones: Steps 1 and 2, the guards, and
 Steps 10 and 11, the wheels, are gone, and a step is added before the motors are unplugged).
+
+Lee's second and third rounds (16, 17 Oct 2026): see the kit's README.txt (the leads smooth and their lengths representative, the
+adapter board's old holes filled, Step 24's camera Step 23's mirrored, the controller turned round from Step 29, the title page and
+the Completed View closer in).
 """
 import re
 import sys
@@ -169,103 +173,134 @@ def to_length(corners, length, radius=6.0):
 TABLE_Y = float(g.model.inst[MODULE].bounds[0][1])
 MOTOR_ON_BENCH = [0.0, round(TABLE_Y - float(g.model.inst[WHEEL_R].bounds[0][1]), 2), 0.0]
 BATTERY_ON_BENCH = [-18.0, round(TABLE_Y - float(g.model.inst[BATTERY].bounds[0][1]), 2), 0.0]
-LEAD_MM = 115.0                                                     # both motors' leads plugged in (the CAD draws them 110 / 165 mm: representative, Lee)
-LOOSE_MM = 58.0                                                     # ... and in the hand and lying on L1 (see motor_lead)
-HELD_MM = 15.0                                                      # how high a plug is held over its header before it is pushed down (Steps 25, 26)
+LEAD_MM = 115.0                                                     # a motor's lead laid out straight: in the hand, and back over L1 and past it
+BENCH_MM = 55.0                                                     # ... and laid out straight behind the motor on the bench (Steps 8, 9: see motor_lead)
+HELD_MM = 15.0                                                      # how high a plug is held over its header before it is pushed down (Steps 8, 9, 25, 26)
+DROP_MM = 12.0                                                      # the straight run of a plugged lead down into its plug
+OUT_X = 714.0                                                       # in the car a lead runs straight back out of its motor to here (inside L4's hole, 0.9 mm short of its rear face), then turns up
+Y_DECK = 909.23 + 0.5 + 1.0                                         # the middle of a lead running flat back over L1 (its top at y 909.23), 1 mm clear of it
 
 
-def fitted(make, length, lo=-20.0, hi=60.0):
-    """make(s): a line that grows longer with s. Returns the one whose length is `length` (s found by halving between lo and hi)."""
-    for _ in range(40):
-        mid = (lo + hi) / 2
-        lo, hi = (mid, hi) if W.length(make(mid)) < length else (lo, mid)
-    return make((lo + hi) / 2)
+def plug_at_end(plug, lines):
+    """The pose of a lead's plug on the end of its three wires."""
+    return W.plug_pose(plug, lines[1][-1], lines[1][-1] - lines[1][-2], lines[2][-1] - lines[0][-1])
 
 
-def lying_flat(line, across, plug, flat):
-    """A lead along `line` with its plug loose on the end, the lead turning (evenly along its length) to lie flat, wide along
-    `flat`, so that the plug lies flat. Returns (the three wires, the plug's pose)."""
-    lines = W.ribbon(line, across, pitch=1.02, n=3, end_pitch=plug['pitch'], fan_mm=10.0, end_across=flat)
-    return lines, W.plug_pose(plug, lines[1][-1], lines[1][-1] - lines[1][-2], lines[2][-1] - lines[0][-1])
+def deck_line(exit_, side, length=LEAD_MM, rise_x=(715.5, 702.0), jog=0.8):
+    """Straight back from the motor through L4's hole, up out of L1's notch (moving `jog` mm towards the notch's middle, so that
+    the lead can lie flat in it), then on straight back just over L1 and past its rear edge into space: `length` mm in all."""
+    x0, y0, z0 = exit_
+    xs = np.arange(x0, rise_x[1] - 1e-9, -0.25)
+    e = W.smootherstep((rise_x[0] - xs) / (rise_x[0] - rise_x[1]))
+    line = W.resample(np.c_[xs, y0 + e * (Y_DECK - y0), z0 + side * jog * e], 0.5)
+    return W.resample(W.join(line, W.straight(line[-1], [-1, 0, 0], length - W.length(line))), 1.0)
 
 
-FLAT = 1.4                                                          # mm from a surface to the middle of a plug lying flat on it (2.6 mm thick)
+def rise(start, radius, degrees):
+    """A bend of `radius` mm from heading -x up towards +y, `degrees` round (out of a notch, or up off the bench)."""
+    a = np.asarray(start, float)
+    th = np.radians(np.linspace(0.0, degrees, max(3, int(np.ceil(radius * np.radians(degrees) / 0.25)))))
+    return np.c_[a[0] - radius * np.sin(th), a[1] + radius - radius * np.cos(th), np.full_like(th, a[2])]
 
 
-def cut_lead(lines, plug, height, fan_mm=12.0):
-    """A plugged lead cut short where it comes straight down to its header `height` mm above it, the plug on the end in line with
-    it (the same wires, so that from there it only has to go on down). Returns (lines, the plug's pose)."""
-    lines = [np.asarray(l, float) for l in lines]
-    mid = lines[1]
-    y = plug['tops'][1][1] + height
-    k = max(i for i in range(1, len(mid)) if mid[i - 1][1] >= y >= mid[i][1])
-    f = (mid[k - 1][1] - y) / (mid[k - 1][1] - mid[k][1])
-    cut = [np.vstack([l[:k], l[k - 1] + (l[k] - l[k - 1]) * f]) for l in lines]
-    d = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(cut[1], axis=0), axis=1))])
-    u = np.clip((d - (d[-1] - fan_mm)) / fan_mm, 0.0, 1.0)
-    side = (cut[2] - cut[0]) / 2
-    grow = 1 + (plug['pitch'] / np.linalg.norm(side, axis=1)[:, None] - 1) * (u * u * (3 - 2 * u))[:, None]
-    cut = [cut[1] - side * grow, cut[1], cut[1] + side * grow]
-    return cut, W.plug_pose(plug, cut[1][-1], cut[1][-1] - cut[1][-2], cut[2][-1] - cut[0][-1])
+def plugged_line(exit_, top, controls, out_x, bend=(10.0, 70.0), held=0.0, raise_controls=()):
+    """A plugged lead's middle: out of the motor straight back to x = out_x, a bend up, then a smooth curve through `controls` to
+    DROP_MM over the plug's middle top and straight down into it. held: the plug held that many mm over its header instead, each
+    control point raised by raise_controls so that the lead stays smooth."""
+    a = np.asarray(exit_, float)
+    arc = rise([out_x, a[1], a[2]], *bend)
+    end = np.asarray(top, float) + [0.0, held + DROP_MM, 0.0]
+    cs = [np.asarray(c, float) + [0.0, raise_controls[i] if i < len(raise_controls) else 0.0, 0.0] for i, c in enumerate(controls)]
+    mid = W.smooth([arc[-1], *cs, end], start_dir=arc[-1] - arc[-2], end_dir=[0, -1, 0], spacing=0.5)
+    return W.resample(W.join(W.straight(a, [-1, 0, 0], a[0] - out_x), arc, mid, W.straight(end, [0, -1, 0], DROP_MM)), 1.0)
 
 
-def motor_lead(name, motor, plug_id, side, bench_over, plugged_over):
-    """Everything about one motor's lead. side: +1 for the right motor (+Z), -1 for the left. bench_over / plugged_over: the
-    corners its middle wire passes over on its way to its header, on the bench / in the car (it leaves the motor backwards, -X)."""
+def flat_lead(line, across, plug, twist=(3.0, 15.0)):
+    """A lead's three wires along `line`: leaving the motor on edge, turned flat (wide along its plug's G-to-S line, +Z) `twist` mm
+    out (3 - 15 mm for a lead that lies back over L1; 8 - 22 mm, once it is up out of L1's narrow notch, for one that rises
+    there), and into its plug (the RCC's motor leads in every shape, so that no two shapes are twisted the opposite way: blended
+    by the player from one to the next, such shapes cross their wires over)."""
+    return W.ribbon(line, across, pitch=1.02, n=3, end_pitch=plug['pitch'], fan_mm=10.0, end_across=plug['across'], twist=twist)
+
+
+def lead_into(head, top, heading, controls=(), run=6.0):
+    """A lead's middle: `head` (its first part, as it leaves the motor), then a smooth curve (through `controls`) into its plug's
+    top at `top`, coming into it along `heading` (the last `run` mm straight): the plug held with its tip along `heading`."""
+    head, top, heading = np.asarray(head, float), np.asarray(top, float), W._unit(heading)
+    mid = W.smooth([head[-1], *controls, top - heading * run], start_dir=head[-1] - head[-2], end_dir=heading, spacing=0.5)
+    return W.resample(W.join(head, mid, W.straight(top - heading * run, heading, run)), 1.0)
+
+
+def motor_lead(name, motor, plug_id, side, car, car_held, bench, bench_held):
+    """Everything about one motor's lead. side: +1 for the right motor (+Z), -1 for the left. car / bench: the points its middle
+    wire passes through on its way up and over to its header, in the car / on the bench (it leaves the motor backwards, -X);
+    car_held / bench_held: how far each is raised while the plug is held HELD_MM over its header.
+    A plug is brought to its header in four beats, its tip turning a quarter turn each (Lee, 17 Oct 2026: Steps 8, 9, 25, 26
+    "less angular and more smooth"): lying back along its lead; picked up, tip up; carried over, tip forward; held over its
+    header, tip down; pushed in. Each stop has a smooth shape of its own, all lying flat the same way, so that from stop to stop
+    the lead changes between two like shapes (the player blends them bit by bit along their length: very unlike shapes fold).
+    The lengths are representative (Lee, 16 and 17 Oct 2026: "I am not worried about the wires exact length ... you can lengthen
+    them as needed to create a smooth path"): each shape is drawn as it looks best, smooth, without corners, and clear of every
+    part, and the routes say `stretch`, so that from one shape to the next the lead stretches evenly (W.route)."""
     chain = paths['chains'][motor]
     plug = W.plug(paths['plugs'][plug_id], g_towards=[0, 0, 1])     # (S at +Z, G at -Z on U1 and U2, as printed "S V G")
     exit_, across, ids = np.asarray(chain['leaves_servo_at'], float), np.asarray(chain['across'], float), lead_wires(name, f'{name.title()} Wheel Motor')
     top = plug['tops'][1]
-    ends = dict(a=motor, b=plug_id)
+    z_out, z_in = exit_[2], top[2]
+    ends = dict(a=motor, b=plug_id, stretch=True)
     lead = dict(chain=chain, plug=plug, wires=ids, exit=exit_)
-    # On the bench: up over the module and down onto its header (the corners over the module moved back or forward until the
-    # lead is its own length), the plug first held upright over its header.
+
+    def stop(key, line, a_at=None, twist=(3.0, 15.0)):
+        lines = flat_lead(line, across, plug, twist)
+        lead[key + '_pose'] = plug_at_end(plug, lines)
+        lead[key] = routes(ids, lines, a_at=a_at, b_at=lead[key + '_pose'], **ends)
+        lead[key + '_mm'] = W.length(lines[1])
+
+    def rising(start, out_x, bend):                                  # straight back out of the motor, then a bend up
+        return W.join(W.straight(start, [-1, 0, 0], start[0] - out_x), rise([out_x, start[1], start[2]], *bend))
+    # On the bench (Steps 8, 9): first laid out straight behind the motor (Lee, 17 Oct 2026: "start with their wires extended
+    # straight to the rear"), BENCH_MM long so that its plug starts in Steps 8 and 9's close frames (at 115 mm it would start off
+    # the screen); then picked up, carried over, held over its header and in, as above.
     up = exit_ + MOTOR_ON_BENCH
-    over = lambda corners, s: [np.asarray(c, float) + [-s, 0.0, 0.0] for c in corners]
-    bench = W.plugged_lead(fitted(lambda s: W.rounded([up, up + [-6, 0, 0], *over(bench_over, s), [top[0], top[1] + 14, top[2]], top], radius=8), LEAD_MM), across, plug)
-    lead['bench_plugged'] = routes(ids, bench, a_at=MOTOR_ON_BENCH, **ends)
-    above, lead['bench_above_pose'] = cut_lead(bench, plug, 10.0)  # held upright over its header, the lead coming straight down to it
-    lead['bench_above'] = routes(ids, above, a_at=MOTOR_ON_BENCH, b_at=lead['bench_above_pose'], **ends)
-    # In the hand and on L1 the lead is LOOSE_MM long (115 mm plugged in): on L1 it runs out of the hole in L4, up out of L1's
-    # notch and straight back along L1, as the CAD's own loose lead does (Lee, 16 Oct 2026: "just let the wires extend straight
-    # back along their original path"), turning flat along its length so that its plug lies flat on L1 (the rulebook's laid-aside
-    # lead), the plug wholly on L1 by its curved rear edge. A 115 mm lead does not fit straight back on L1; the lengths are
-    # representative (Lee), and the rulebook lets a lead change length as it is plugged in. (It leaves the motor on edge, so it
-    # comes up out of the notch 0.8 mm higher and settles onto L1 as it turns.)
-    lead['loose_mm'] = LOOSE_MM
-    # In the hand (the motor into L5, L4 slid along the leads): straight back from the motor.
-    straight, lead['hand_pose'] = W.loose_lead(to_length([exit_, exit_ + [-LOOSE_MM, 0, 0]], LOOSE_MM), across, plug)
-    lead['hand'] = routes(ids, straight, b_at=lead['hand_pose'], **ends)
-    z, on_l1 = exit_[2], 909.23 + FLAT
-    deck = [exit_, [711.0, exit_[1], z], [707.0, on_l1 + 0.8, z], [680.0, on_l1, z], [560.0, on_l1, z]]
-    lying, lead['deck_pose'] = lying_flat(to_length(deck, LOOSE_MM, 5.0), across, plug, [0.0, 0.0, 1.0])
-    lead['deck'] = routes(ids, lying, b_at=lead['deck_pose'], **ends)
-    # Plugged in, in the car: out through L4, up behind it and over the module to its header.
-    plugged = W.plugged_lead(fitted(lambda s: W.rounded([exit_, [705.0, exit_[1], z], *over(plugged_over, s), [top[0], top[1] + 14, top[2]], top], radius=8), LEAD_MM),
-                             across, plug)
-    lead['plugged'] = routes(ids, plugged, **ends)
-    lead['plugged_mm'], lead['bench_mm'] = W.length(plugged[1]), W.length(bench[1])
-    # Carried over the module and held HELD_MM over its header, coming straight down to it (Steps 25 and 26 in three beats: lift,
-    # carry, push down; Lee, 16 Oct 2026: the move looked rapid): the plugged lead with its far part lifted HELD_MM - 5 mm (gently,
-    # over most of its length), cut short where it comes straight down to the held plug. The plugged lead is nearly taut over the
-    # module, so a plug held higher would need a longer lead than the plugged one (at 35 mm, 130 mm: the lead would visibly shrink
-    # back as it went in); at 15 mm the held lead is within 2 mm of the plugged one.
-    mid = np.asarray(plugged[1], float)
-    u = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(mid, axis=0), axis=1))])
-    u = np.clip((u / u[-1] - 0.1) / 0.75, 0.0, 1.0)
-    held, _ = cut_lead(W.plugged_lead(mid + np.outer(u * u * (3 - 2 * u), [0.0, HELD_MM - 5.0, 0.0]), across, plug), plug, HELD_MM)
-    lead['held_pose'] = W.plug_pose(plug, held[1][-1], held[1][-1] - held[1][-2], held[2][-1] - held[0][-1])
-    lead['held'] = routes(ids, held, b_at=lead['held_pose'], **ends)
-    lead['held_mm'] = W.length(held[1])
+    stop('bench_straight', to_length([up, up + [-BENCH_MM, 0, 0]], BENCH_MM), a_at=MOTOR_ON_BENCH)
+    stop('bench_lift', lead_into([up, up + [-12.0, 0, 0]], [up[0] - 33.0, up[1] + 17.0, z_out], [0, 1, 0]), a_at=MOTOR_ON_BENCH)
+    stop('bench_over', lead_into(rising(up, up[0] - 1.5, (14.0, 80.0)), [up[0] + 3.0, up[1] + 37.0, z_out + 0.45 * (z_in - z_out)], [1, 0, 0]), a_at=MOTOR_ON_BENCH)
+    stop('bench_held', plugged_line(up, top, bench, up[0] - 1.5, bend=(14.0, 80.0), held=HELD_MM, raise_controls=bench_held), a_at=MOTOR_ON_BENCH)
+    plugged = flat_lead(plugged_line(up, top, bench, up[0] - 1.5, bend=(14.0, 80.0)), across, plug)
+    lead['bench_plugged'], lead['bench_mm'] = routes(ids, plugged, a_at=MOTOR_ON_BENCH, **ends), W.length(plugged[1])
+    lead['bench_lengths'] = [lead[k + '_mm'] for k in ('bench_straight', 'bench_lift', 'bench_over', 'bench_held')] + [lead['bench_mm']]
+    # In the hand (Steps 18 - 20, the motor into L5, L4 slid along the leads): straight back from the motor, LEAD_MM long.
+    hand, lead['hand_pose'] = W.loose_lead(to_length([exit_, exit_ + [-LEAD_MM, 0, 0]], LEAD_MM), across, plug)
+    lead['hand'] = routes(ids, hand, b_at=lead['hand_pose'], **ends)
+    # On L1 (Steps 21c - 24): out through the hole in L4, up out of L1's notch and straight back along its original path over L1
+    # and on past L1's rear edge into space, its plug flat, LEAD_MM long (Lee, 17 Oct 2026: "their original length ... they can
+    # just extend back beyond the rear of L1 as long as they don't clip / interfere with L1's body"). It turns flat as it comes
+    # up out of the notch.
+    middle = deck_line(exit_, side)
+    stop('deck', middle)
+    # Plugged in, in the car (Steps 25c, 26c on): out through L4, a bend up behind it, then a smooth curve over the module, clear of
+    # L1 (Lee, 17 Oct 2026: it went into L1 by the notch), and straight down into its header; before that (Steps 25, 26) picked up
+    # off L1, carried over and held HELD_MM over its header.
+    stop('lift', lead_into(middle[middle[:, 0] >= 692.0], [668.0, 952.0, middle[-1][2]], [0, 1, 0]))
+    stop('over', lead_into(rising(exit_, OUT_X, (10.0, 70.0)), [724.0, 988.0, z_out + 0.45 * (z_in - z_out)], [1, 0, 0]), twist=(8.0, 22.0))   # (forward of where it rises: no doubling back)
+    stop('held', plugged_line(exit_, top, car, OUT_X, held=HELD_MM, raise_controls=car_held), twist=(8.0, 22.0))
+    plugged = flat_lead(plugged_line(exit_, top, car, OUT_X), across, plug, (8.0, 22.0))
+    lead['plugged'], lead['plugged_mm'] = routes(ids, plugged, **ends), W.length(plugged[1])
+    lead['car_lengths'] = [lead[k + '_mm'] for k in ('deck', 'lift', 'over', 'held')] + [lead['plugged_mm']]
     return lead
 
 
-RIGHT_LEAD = motor_lead('right', MOTOR_R, PLUG_R, 1, bench_over=[[702.0, 952.0, 1372.0], [712.0, 958.0, 1340.0]],
-                        plugged_over=[[699.0, 916.0, 1382.0], [704.0, 945.0, 1360.0], [722.0, 956.0, 1330.0]])
-LEFT_LEAD = motor_lead('left', MOTOR_L, PLUG_L, -1, bench_over=[[700.0, 950.0, 1300.0], [706.0, 958.0, 1316.0]],
-                       plugged_over=[[690.0, 912.0, 1292.35], [684.0, 935.0, 1296.0], [690.0, 952.0, 1308.0], [708.0, 958.0, 1318.0]])
+# (The points each lead passes through: chosen for even bends, of about 6 mm radius or more, and for clearance from every part.)
+RIGHT_LEAD = motor_lead('right', MOTOR_R, PLUG_R, 1,
+                        car=[[705.7, 928.7, 1378.7], [719.0, 963.2, 1350.4], [727.5, 970.1, 1330.1]], car_held=[5.6, 10.1, 14.0],
+                        bench=[[701.5, 966.8, 1381.9], [709.3, 980.3, 1362.3], [718.8, 982.2, 1342.6], [724.6, 978.4, 1331.0]], bench_held=[3.7, 7.3, 13.2, 15.0])
+LEFT_LEAD = motor_lead('left', MOTOR_L, PLUG_L, -1,
+                       car=[[699.9, 937.5, 1291.2], [699.0, 952.2, 1291.5], [712.7, 970.2, 1312.9]], car_held=[2.8, 10.3, 12.2],
+                       bench=[[700.5, 971.8, 1292.8], [701.0, 979.7, 1299.5], [708.0, 980.0, 1314.4]], bench_held=[2.5, 10.3, 14.8])
 for _lead in (RIGHT_LEAD, LEFT_LEAD):
-    g.log.append(f"  lead {_lead['wires'][0].split()[0]}: plugged in {_lead['plugged_mm']:.1f} mm in the car, {_lead['bench_mm']:.1f} mm on the bench, {_lead['loose_mm']:.1f} mm in the hand and on L1, {_lead['held_mm']:.1f} mm held over its header")
+    g.log.append(f"  lead {_lead['wires'][0].split()[0]}: {LEAD_MM:.0f} mm in the hand; in Steps 25 / 26 (on L1, lifted, carried over, held, in) "
+                 f"{' / '.join(f'{x:.0f}' for x in _lead['car_lengths'])} mm; in Steps 8 / 9 (laid out, lifted, carried over, held, in) "
+                 f"{' / '.join(f'{x:.0f}' for x in _lead['bench_lengths'])} mm")
 
 # --- the 9V adapter's lead: two wires from the clip on the battery to the barrel plug. The CAD has it out of the socket and in.
 # The clip and the plug each have a stub of each wire (6 mm and 3 mm long); the CAD's conductors start at the inner end of the
@@ -334,13 +369,23 @@ def usb_cable(plug=0.0):
 
 # ---------------------------------------------------------------- the build
 CONTROLLER = [BOARD, GUARD_LEFT, GUARD_RIGHT, CONTROLLER_NANO, CONTROLLER_RADIO, JOY_LEFT, JOY_RIGHT]
-# The title page and the Completed View show the controller, with its USB cable, turned round in place (180 degrees about the
-# vertical through the controller board's middle), so that it faces the other way beside the car (Lee, 16 Oct 2026: "facing the
-# wrong way"); the steps show it as the CAD has it.
+# From Step 29 the controller, with its USB cable, is turned round in place (180 degrees about the vertical through the controller
+# board's middle), so that it faces the other way beside the car, and the build leaves it so: the title page and the Completed View
+# show it that way (Lee, 16 Oct 2026: "facing the wrong way"; 17 Oct 2026: "Step 29 - the Controller should already be flipped
+# around for the USB installation"). Steps 1 - 4 and the test (Step 12) show it as the CAD has it.
 _lo, _hi = g.model.bounds([BOARD, GUARD_LEFT, GUARD_RIGHT])
-CONTROLLER_TURN = {i: turned([0, 1, 0], 180.0, ((_lo + _hi) / 2).round(2).tolist()) for i in CONTROLLER + [USB_B, USB_A]}
-g.start_view = dict(g.start_view, poses=CONTROLLER_TURN)
-g.end_view = dict(g.end_view, poses=CONTROLLER_TURN)
+CONTROLLER_POSE = turned([0, 1, 0], 180.0, ((_lo + _hi) / 2).round(2).tolist())
+# The title page and the Completed View, much closer in (Lee, 17 Oct 2026: "WAY too zoomed out", with a picture of the title page
+# as wanted, solved by matching renders to it). The title page's camera is the picture's; the Completed View has no title, so it is
+# the same camera with the car and controller centred, and Step 29c glides into it. Where a window cannot show that (the title,
+# a fixed size on the page, would cover the car in a small window such as the LMS's frame, or a narrow frame would cut the
+# controller off), the player takes the first of CLOSER (moved aside just enough to clear the title) that fits, and in the end
+# the whole finished model as before.
+START_DIR = [0.5552, 0.7053, -0.4409]
+CENTRED = [713.8, 911.6, 1199.7]                                    # (the car and controller centred in the frame, as in the picture)
+CLOSER = [dict(dir=START_DIR, target=CENTRED, radius=r) for r in (125.0, 145.0, 170.0)]
+g.start_view = dict(dir=START_DIR, target=[742.4, 911.6, 1235.8], radius=110.0, shift=0, min_aspect=1.0, clear_title=True, otherwise=CLOSER)
+g.end_view = dict(dir=START_DIR, target=CENTRED, radius=110.0, min_aspect=1.0, otherwise=CLOSER)
 
 # ================================================================ THE CONTROLLER (begin)
 # The guards come fitted to the controller board (Lee, 16 Oct 2026). The Nano Board and the radio module go straight down into
@@ -385,20 +430,24 @@ g.place('Press the other radio module into U3, so that it sticks out past the en
         lines_at=[[[745.06, 933.38, 1317.28], [745.06, 938.88, 1317.28]], [[747.56, 933.38, 1324.78], [747.56, 938.88, 1324.78]]])
 
 # The motors plugged in for the test (each comes with its wheel fitted: Lee, 16 Oct 2026): a motor stands beside the module, its
-# plug held over its header, and the plug is pushed straight down.
+# lead laid out straight behind it; its plug is picked up, carried over, held over its header and pushed straight down, four beats,
+# the lead keeping pace (see motor_lead) (Lee, 17 Oct 2026: "start with their wires extended straight to the rear instead of already bent
+# and so near the target header ... the wire paths are very angular instead of smooth").
 BROWN_TO_G = 'Very important: the brown wire goes on G, the pin on the same side as the left wheel.'   # (G is at the car's left on U1 and U2)
 # Steps 8 - 10 keep their corner, closer in on what each one does: the motor, its plug and the adapter board; the battery, the 9V
 # adapter and its barrel plug (Lee, 16 Oct 2026: "too far zoomed out ... even more zoomed in than Step 11").
 BENCH_DIR = [-0.5792, 0.5736, 0.5792]
-for motor, wheel, plug_id, lead, side, printed in ((MOTOR_L, WHEEL_L, PLUG_L, LEFT_LEAD, 'left', 'LWh'), (MOTOR_R, WHEEL_R, PLUG_R, RIGHT_LEAD, 'right', 'RWh')):
+for motor, wheel, plug_id, lead, side, printed, frame in ((MOTOR_L, WHEEL_L, PLUG_L, LEFT_LEAD, 'left', 'LWh', ([722.6, 945.0, 1306.1], 66.1)),
+                                                          (MOTOR_R, WHEEL_R, PLUG_R, RIGHT_LEAD, 'right', 'RWh', ([722.6, 945.0, 1363.9], 71.6))):
     g.rest_at([motor], MOTOR_ON_BENCH)
     g.carry([wheel], by=motor)
-    g.carry([plug_id], by=MODULE, pose=lead['bench_above_pose'], appear=False)
     g.place(f'Plug the {side} wheel motor into {printed} for the test. Remember brown to G, red to V, and orange to S.',
-            appear=[motor, plug_id], ride={plug_id: ZERO}, lines=False, wires=lead['bench_above'], wires_done=lead['bench_plugged'],
-            view_dir=BENCH_DIR, focus=[motor, wheel, plug_id, ADAPTER], focus_pad=1.1,
+            move=[plug_id], appear=[motor, plug_id],                                                # (the plug on screen at the end of its lead as the step opens)
+            path=[lead['bench_straight_pose'], lead['bench_lift_pose'], lead['bench_over_pose'], lead['bench_held_pose'], ZERO],
+            lines=False, wires=lead['bench_straight'], wires_done={w: [lead[k][w] for k in ('bench_lift', 'bench_over', 'bench_held', 'bench_plugged')] for w in lead['wires']},
+            view_dir=BENCH_DIR, frame=frame,                                                        # (their cameras as before: Lee, 16 Oct 2026)
             labels={motor: f'{side.title()} Wheel Motor'},                                          # (no LWh / RWh label: Lee)
-            caution=BROWN_TO_G if side == 'left' else None)     # (the leads are drawn 115 mm long: representative, Lee, 16 Oct 2026)
+            caution=BROWN_TO_G if side == 'left' else None)
 
 # Power: the battery stands on the table behind the module; the 9V adapter snaps onto it, and its barrel plug, held in line with
 # the power socket, goes straight in.
@@ -440,8 +489,10 @@ g.carry([BARREL], by=BATTERY, pose=[-c for c in BATTERY_ON_BENCH], appear=False)
 g.place('Unplug the 9V adapter from the power socket, and set the battery aside with the 9V adapter still on it.',
         appear=[BATTERY, CLIP, BARREL], ride={BATTERY: np.add(BATTERY_ON_BENCH, SET_ASIDE).tolist()}, lines=False, labels=[], eye=[BARREL],
         wires=bench_battery_lead(ZERO))
-g.put_away([BATTERY, CLIP, BARREL])
-g.place('Unplug both wheel motors from the adapter board.', ride={PLUG_L: lifted(ZERO, 40.0), PLUG_R: lifted(ZERO, 40.0)}, lines=False, eye=[PLUG_L],
+g.put_away([BATTERY, CLIP, BARREL, PLUG_L, PLUG_R])
+g.carry([PLUG_L, PLUG_R], by=MODULE, appear=False)                  # (plugged in by Steps 8 and 9; riding the module, they are lifted off together)
+g.place('Unplug both wheel motors from the adapter board.', appear=[PLUG_L, PLUG_R], ride={PLUG_L: lifted(ZERO, 40.0), PLUG_R: lifted(ZERO, 40.0)}, lines=False, eye=[PLUG_L],
+        wires={**LEFT_LEAD['bench_plugged'], **RIGHT_LEAD['bench_plugged']},
         caution='Set the controller, the battery, the wheel motors and the I/O module aside for now. You will use them again in a bit.')
 g.put_away([MODULE, CAR_NANO, ADAPTER, CAR_RADIO, MOTOR_L, MOTOR_R, WHEEL_L, WHEEL_R, PLUG_L, PLUG_R])
 # ================================================================ ELECTRONICS TEST (end)
@@ -476,14 +527,14 @@ g.put_away([])
 g.place('Push the right wheel motor into one end of L5, its mounting tab through the slot, its wheel outwards and its wire pointing away from L5.',
         move=[MOTOR_R], show=[L5], against=[L5], staged=True, wires=RIGHT_LEAD['hand'],
         labels={MOTOR_R: 'Right Wheel Motor', L5: 'L5'},
-        view_dir=[0.5792, 0.5736, 0.5792], frame=([651.1, 906.9, 1343.3], 126.9))       # (its camera as before: the leads are shorter now)
+        view_dir=[0.5792, 0.5736, 0.5792], frame=([651.1, 906.9, 1343.3], 126.9))       # (its camera as before)
 g.place('Push the left wheel motor into the other end of L5 the same way.', move=[MOTOR_L], against=[L5, MOTOR_R], staged=True, wires=LEFT_LEAD['hand'],
         labels={MOTOR_L: 'Left Wheel Motor'},
         view_dir=[0.5792, 0.5736, -0.5792], frame=([651.1, 906.9, 1338.4], 129.7))      # (its camera as before)
 L4_HOLES = [[714.62, 906.86, 1385.68], [714.62, 906.86, 1291.28]]   # the holes for the leads at the ends of L4
 g.place("Pass each motor's plug through the hole at its end of L4, then slide L4 along the wires onto the motors.", move=[L4], against=[L5, MOTOR_R, MOTOR_L],
-        staged=True, direction=[-1, 0, 0], hover=LOOSE_MM + 20.0, lines_at=L4_HOLES,   # (one step, as it is: Lee, 16 Oct 2026)
-        view_dir=[0.5792, 0.5736, -0.5792], frame=([651.1, 906.9, 1338.4], 129.7))      # (its camera as before: the leads are shorter now)
+        staged=True, direction=[-1, 0, 0], hover=LEAD_MM + 20.0, lines_at=L4_HOLES,    # (one step, as it is: Lee, 16 Oct 2026)
+        view_dir=[0.5792, 0.5736, -0.5792], frame=([651.1, 906.9, 1338.4], 129.7))      # (its camera as before)
 g.seat("Turn the car the right way up. Lower L4 and L5, with the motors, onto L1: their tabs go into the slots in L1 and over L2, and each motor's wire into the notch behind it.",
        [L5, MOTOR_R, MOTOR_L, L4], direction=[0, 1, 0],
        lines_at=[[740.7, 891.3, 1314.7], [713.8, 891.3, 1316.3], [713.7, 891.3, 1360.5], [740.6, 891.3, 1358.6]],   # (Lee's points, 16 Oct 2026)
@@ -498,27 +549,37 @@ g.place('Slide the I/O module, with everything on it, into the grooves in L5 and
         lines_at=[[[691.1, 917.7, z], [713.1, 917.7, z]] for z in (1312.6, 1364.4)])   # (the board's back corners, to the back of L4's grooves)
 # (L7 and L6 go on after the I/O module, as in the published guide: their heads hold it in. They slide in under L1, so the car is
 # shown turned over for them; their codes, under L1, show only from below. Lee, 16 Oct 2026: "perfect, no changes needed".)
+L2_MID_Z = 1338.48                                                  # L2's mid-plane (NAUO2 runs from z 1336.98 to 1339.98): the car is symmetric about it
+STEP23_CAMERA = dict(view_dir=[0.6103, -0.515, -0.6019], frame=([734.8, 938.1, 1330.3], 118.2))   # (Lee's picture, 16 Oct 2026)
+
+
+def mirrored(cam):
+    """The same camera from the other side of L2."""
+    (x, y, z), r = cam['frame']
+    return dict(view_dir=[cam['view_dir'][0], cam['view_dir'][1], -cam['view_dir'][2]], frame=([x, y, round(2 * L2_MID_Z - z, 1)], r))
+
+
 g.place("Turn the car over. Slide L7 in from the front, through the slots in L5 and L4, on the left wheel's side of L2.", move=[L7], labels={L7: 'L7'},
-        flip=True,
-        view_dir=[0.6103, -0.515, -0.6019], frame=([734.8, 938.1, 1330.3], 118.2), one_off_camera=True)   # (Lee's picture, 16 Oct 2026)
+        flip=True, one_off_camera=True, **STEP23_CAMERA)
 g.place("Slide L6 in the same way, on the right wheel's side of L2.", move=[L6], labels={L6: 'L6'}, flip=True,
-        view_dir=[0.5792, -0.5736, 0.5792], frame=([720.8, 911.5, 1338.4], 144.2))       # (its camera as before)
+        **mirrored(STEP23_CAMERA))                                  # (Step 23's camera, from the other side: Lee, 17 Oct 2026)
 # ================================================================ THE CHASSIS (end)
 
 # ================================================================ WIRING AND POWER (begin)
-# One plug per step: lifted off L1, carried over the module high enough to clear the plug already in (U1 and U2 are side by
-# side: the right plug passed through the left one on its way, Lee, 16 Oct 2026), lowered upright over its header and pushed
-# straight down; closer in than the steps around them, so that the wires show (Lee). Three beats, the lead keeping pace with the
-# plug stage by stage (lifted: the lead on L1, its end lifted with the plug; carried: held high over the header; in), so that
-# the move is not rushed (Lee, 16 Oct 2026: "a little rapid / doesn't look smooth").
+# One plug per step: picked up off the end of its lead (which runs back past L1) and turned upright, carried over the module high
+# enough to clear the plug already in and its lead (U1 and U2 are side by side: the right plug passed through the left one on its
+# way, Lee, 16 Oct 2026), lowered over its header and pushed straight down; closer in than the steps around them, so that the wires
+# show (Lee). Four beats, the lead keeping pace with the plug stop by stop, a smooth shape of its own at each stop (lifted, carried
+# over, held, in: motor_lead), so that the move is not rushed (Lee, 16 Oct 2026: "a little rapid / doesn't look smooth") and the
+# lead is smooth throughout (Lee, 17 Oct 2026: "less angular and more smooth").
 for plug_id, lead, side, printed in ((PLUG_L, LEFT_LEAD, 'left', 'LWh'), (PLUG_R, RIGHT_LEAD, 'right', 'RWh')):
     g.place(f"{'Turn the car the right way up. ' if side == 'left' else ''}Reconnect the {side} wheel motor to {printed}. Remember brown to G, red to V, and orange to S.",
             move=[plug_id],
-            path=[lead['deck_pose'], lifted(lead['deck_pose'], 60.0, forward=40.0), via(lifted(lead['held_pose'], 25.0)), lead['held_pose'], ZERO], lines=False,
-            # (up and forward, as the lead on L1 is straight; then across high, over the other plug and its lead, and down onto its header)
+            path=[lead['deck_pose'], lead['lift_pose'], lead['over_pose'], lead['held_pose'], ZERO], lines=False,
+            # (up and forward, as the lead behind it is straight; then across high, over the other plug and its lead, down over its header, in)
             labels={plug_id: f'{side.title()} Wheel Motor'},                                        # (no LWh / RWh label: Lee)
             view_dir=[-0.5792, 0.5736, -0.5792], frame=([675.8, 928.0, 1338.5], 93.3),     # (their closer cameras as before)
-            wires_done={w: [lead['deck'][w], lead['held'][w], lead['plugged'][w]] for w in lead['wires']}, caution=BROWN_TO_G if side == 'left' else None)
+            wires_done={w: [lead[k][w] for k in ('lift', 'over', 'held', 'plugged')] for w in lead['wires']}, caution=BROWN_TO_G if side == 'left' else None)
 # (Steps 27 and 28: Lee's picture, 16 Oct 2026, solved by matching renders to it; the model then let down 4% of the frame, so that
 # the battery clears the caption and its label has room above it: the picture was cut off just under the caption.)
 BATTERY_VIEW = dict(view_dir=[-0.6337, 0.5821, 0.5095], frame=([690.1, 926.7, 1346.5], 76.4))
@@ -527,9 +588,16 @@ g.place('Push the 9V battery, clip at the top, down through the square hole in L
 g.place("Plug the 9V adapter's barrel plug into the power socket on the I/O module.", move=[BARREL], path=[OUT_OF_SOCKET, ZERO],
         lines_at=[[696.29, 925.05, 1354.06]], labels={BARREL: '9V Adapter'}, wires_done=battery_in, **BATTERY_VIEW)
 # (Plugged in at the end, as the CAD has it: Lee, 16 Oct 2026, "fine for now".)
-g.place("Connect the USB cable to the controller's Nano Board.", move=[USB_B], show=CONTROLLER + [USB_A], direction=[-1, 0, 0], hover=USB_OUT,
-        lines_at=[[[694.92, 933.05, 1112.91], [689.42, 933.05, 1112.91]]], labels={USB_B: 'USB Cable'},
-        wires=usb_cable(USB_OUT), wires_done=usb_cable(), focus=CONTROLLER + [USB_B, USB_A], focus_pad=1.1, look_from=[1, 1, -1])
+# The controller comes back turned round (CONTROLLER_POSE), everything on it riding with the board, the USB cable's Mini-B end held
+# USB_OUT out of its socket; it slides straight in. (A moving part ends at its seat, so the plug rides instead: ride= ZERO.)
+USB_TIP, USB_MOUTH = [694.92, 933.05, 1112.91], [689.42, 933.05, 1112.91]   # (the plug's tip, as built; the socket's mouth)
+g.rest_at([BOARD], CONTROLLER_POSE)
+g.carry([GUARD_LEFT, GUARD_RIGHT, CONTROLLER_NANO, CONTROLLER_RADIO, JOY_LEFT, JOY_RIGHT, USB_A], by=BOARD)
+g.carry([USB_B], by=BOARD, pose=[-USB_OUT, 0.0, 0.0])
+g.place("Connect the USB cable to the controller's Nano Board.", appear=[BOARD], ride={USB_B: ZERO},
+        lines_at=[[apply_pose(CONTROLLER_POSE, np.add(USB_TIP, [-USB_OUT, 0.0, 0.0])).round(2).tolist(), apply_pose(CONTROLLER_POSE, USB_MOUTH).round(2).tolist()]],
+        lines_to=CONTROLLER + [USB_B],                                     # (so that the points are checked against the turned controller and plug)
+        labels={USB_B: 'USB Cable'}, wires=usb_cable(USB_OUT), wires_done=usb_cable(), focus=CONTROLLER + [USB_B, USB_A], focus_pad=1.1, look_from=[1, 1, -1])
 # ================================================================ WIRING AND POWER (end)
 
 g.build()
