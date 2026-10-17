@@ -140,18 +140,13 @@ def smooth(points, start_dir=None, end_dir=None, spacing=1.0):
     return resample(dense, spacing)
 
 
-last_roll = 0.0                                          # the turn (radians) the last ribbon() gave its lead to meet end_across
-
-
-def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_across=None, twist=None, roll_near=None):
+def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_across=None, twist=None):
     """The n side-by-side conductors of a flat lead whose middle follows `points`.
 
     across: which way the lead is wide at its first point. Returns n lines; the first is the one furthest along
     -across. The lead is carried along without twisting, unless end_across says which way it must be wide at its
     last point (to meet a plug): the twist needed is then spread evenly along its length, or done between twist =
     (from_mm, to_mm) along it, easing in and out (a lead that turns flat as it comes up out of a notch, then runs on flat).
-    roll_near: the twist (radians, as last_roll gives it) of the shape this lead changes from or to: the turn is then taken the
-    same way round (whole turns added), so that the conductors do not cross over each other as the player blends the two.
     end_pitch, fan_mm: the conductors spread to end_pitch over the last fan_mm (into a plug's contacts).
     """
     p = resample(points, 1.0)
@@ -169,10 +164,6 @@ def ribbon(points, across, pitch=1.27, n=3, end_pitch=None, fan_mm=0.0, end_acro
         want = np.asarray(end_across, float)
         want = _unit(want - t[-1] * (want @ t[-1]))
         roll = np.arctan2(np.cross(sides[-1], want) @ t[-1], sides[-1] @ want)
-        if roll_near is not None:
-            roll += 2 * np.pi * np.round((roll_near - roll) / (2 * np.pi))
-        global last_roll
-        last_roll = float(roll)
         frac = d / d[-1] if twist is None else smootherstep((d - twist[0]) / (twist[1] - twist[0]))
         sides = np.array([_about(t[k], roll * frac[k]) @ sides[k] for k in range(len(p))])
     gap = np.full(len(p), float(pitch))
@@ -252,11 +243,9 @@ def loose_lead(centre, across, plug_info, pitch=1.02, fan_mm=10.0):
     return lines, plug_pose(plug_info, lines[1][-1], lines[1][-1] - lines[1][-2], lines[2][-1] - lines[0][-1])
 
 
-def plugged_lead(centre, across, plug_info, pitch=1.02, fan_mm=30.0, end_across=None, roll_near=None):
-    """A lead along `centre` (its middle wire, ending on the plug's middle contact) into its plug, seated (or, with end_across,
-    into a plug that is turned so)."""
-    return ribbon(centre, across, pitch=pitch, n=3, end_pitch=plug_info['pitch'], fan_mm=fan_mm,
-                  end_across=plug_info['across'] if end_across is None else end_across, roll_near=roll_near)
+def plugged_lead(centre, across, plug_info, pitch=1.02, fan_mm=30.0):
+    """A lead along `centre` (its middle wire, ending on the plug's middle contact) into its plug, seated."""
+    return ribbon(centre, across, pitch=pitch, n=3, end_pitch=plug_info['pitch'], fan_mm=fan_mm, end_across=plug_info['across'])
 
 
 def cut_mark(ends, direction, size=2.2, overhang=2.0, edge_on=False):

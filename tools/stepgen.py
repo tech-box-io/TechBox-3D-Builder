@@ -589,7 +589,9 @@ class Guide:
         min_aspect: the narrowest frame (width / height) that camera suits; on narrower ones the player uses the finished
         model's camera instead, or otherwise=dict(dir=, target=, radius=, shift=) if given. otherwise=[camera, ...] (closest
         first) instead: the generator works out where the parts reach on screen with each of them and with the finished
-        model's camera after them, and in each window the player takes the first that keeps the parts in the frame; on the
+        model's camera after them, and in each window the player takes the first that keeps the parts within the frame's
+        left, right and top edges (the bottom may cut a cable off, as Lee's picture of the RCC's title page does; the
+        website's card picture needs the bottom too); on the
         title page (its own camera then shift=0) moved aside just enough to clear the logo and title, which are a fixed size on
         the page (clear_title=True: a punched-in camera from a screenshot taken in a large window, seen in a small one such as
         the LMS's frame). The RCC's title page and Completed View.
@@ -1178,20 +1180,20 @@ class Guide:
 
         def reach(cam, shown, offsets, shifts):
             """Where the parts reach on screen with this camera (landscape frame), moved aside by each of `shifts` radii as the
-            player moves a title page's camera for its title: the left and right edges and the top, in half frame heights from
-            the middle (left negative). For the player to choose, in each window, the closest of a view's cameras that keeps the
+            player moves a title page's camera for its title: the left and right edges, the top and the bottom, in half frame
+            heights from the middle (left and bottom negative). For the player to choose, in each window, the closest of a view's cameras that keeps the
             parts in the frame (and clear of the title)."""
             f, side = -_unit(cam['dir']), _unit(np.cross(cam['dir'], [0.0, 1.0, 0.0]))
             right, up = -side, np.cross(-side, f)
             p = np.vstack([apply_pose(offsets.get(i), self.model.inst[i].vertices) for i in shown])
             p = p[::max(1, len(p) // 150000)]
             t, eye = np.tan(np.radians(self.cfg['fov'] / 2)), camera_eye(cam, self.cfg)
-            out = dict(s=[], l=[], r=[], t=[])
+            out = dict(s=[], l=[], r=[], t=[], b=[])
             for k in shifts:
                 q = p - (eye + side * k * cam['radius'])
                 z = q @ f
                 u, v = (q @ right) / (z * t), (q @ up) / (z * t)
-                for key, val in (('s', k), ('l', u.min()), ('r', u.max()), ('t', v.max())):
+                for key, val in (('s', k), ('l', u.min()), ('r', u.max()), ('t', v.max()), ('b', v.min())):
                     out[key].append(round(float(val), 3))
             return out
 

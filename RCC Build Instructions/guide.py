@@ -218,8 +218,8 @@ def plugged_line(exit_, top, controls, out_x, bend=(10.0, 70.0), held=0.0, raise
 def flat_lead(line, across, plug, twist=(3.0, 15.0)):
     """A lead's three wires along `line`: leaving the motor on edge, turned flat (wide along its plug's G-to-S line, +Z) `twist` mm
     out (3 - 15 mm for a lead that lies back over L1; 8 - 22 mm, once it is up out of L1's narrow notch, for one that rises
-    there), and into its plug (the RCC's motor leads in every shape, so that no two shapes are twisted the opposite way: blended
-    by the player from one to the next, such shapes cross their wires over)."""
+    there), and into its plug (the RCC's motor leads in every shape of a plug's way in, so that no two such shapes are twisted the
+    opposite way: blended by the player from one to the next, such shapes cross their wires over; in the hand they stay on edge)."""
     return W.ribbon(line, across, pitch=1.02, n=3, end_pitch=plug['pitch'], fan_mm=10.0, end_across=plug['across'], twist=twist)
 
 
@@ -235,9 +235,9 @@ def motor_lead(name, motor, plug_id, side, car, car_held, bench, bench_held):
     """Everything about one motor's lead. side: +1 for the right motor (+Z), -1 for the left. car / bench: the points its middle
     wire passes through on its way up and over to its header, in the car / on the bench (it leaves the motor backwards, -X);
     car_held / bench_held: how far each is raised while the plug is held HELD_MM over its header.
-    A plug is brought to its header in four beats, its tip turning a quarter turn each (Lee, 17 Oct 2026: Steps 8, 9, 25, 26
-    "less angular and more smooth"): lying back along its lead; picked up, tip up; carried over, tip forward; held over its
-    header, tip down; pushed in. Each stop has a smooth shape of its own, all lying flat the same way, so that from stop to stop
+    A plug is brought to its header in four beats, its tip turning no more than a quarter turn in each (Lee, 17 Oct 2026: Steps 8,
+    9, 25, 26 "less angular and more smooth"): lying back along its lead; picked up, tip up; carried over, tip forward; held over
+    its header, tip down; pushed in. Each stop has a smooth shape of its own, all lying flat the same way, so that from stop to stop
     the lead changes between two like shapes (the player blends them bit by bit along their length: very unlike shapes fold).
     The lengths are representative (Lee, 16 and 17 Oct 2026: "I am not worried about the wires exact length ... you can lengthen
     them as needed to create a smooth path"): each shape is drawn as it looks best, smooth, without corners, and clear of every
@@ -383,7 +383,7 @@ CONTROLLER_POSE = turned([0, 1, 0], 180.0, ((_lo + _hi) / 2).round(2).tolist())
 # the whole finished model as before.
 START_DIR = [0.5552, 0.7053, -0.4409]
 CENTRED = [713.8, 911.6, 1199.7]                                    # (the car and controller centred in the frame, as in the picture)
-CLOSER = [dict(dir=START_DIR, target=CENTRED, radius=r) for r in (125.0, 145.0, 170.0)]
+CLOSER = [dict(dir=START_DIR, target=CENTRED, radius=r) for r in (125.0, 145.0, 170.0, 195.0)]
 g.start_view = dict(dir=START_DIR, target=[742.4, 911.6, 1235.8], radius=110.0, shift=0, min_aspect=1.0, clear_title=True, otherwise=CLOSER)
 g.end_view = dict(dir=START_DIR, target=CENTRED, radius=110.0, min_aspect=1.0, otherwise=CLOSER)
 

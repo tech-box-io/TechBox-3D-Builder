@@ -3,7 +3,7 @@ RCC Build Instructions (Remote Controlled Car, Full Build: controller, electroni
 FIRST DRAFT 15 Oct 2026, LEE'S FIRST AND SECOND ROUNDS 16 Oct 2026, THIRD ROUND 17 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP),
 TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-rcc_remote_controlled_car) and Lee's photos and L1
 drawing, in the same format as the MRA guide. Not for distribution. Lee has answered every Review note, so the guide shows
-none; the one open question is under QUESTIONS FOR LEE below.
+none; the open questions are under QUESTIONS FOR LEE below.
 
 HOW TO OPEN (Mac)
 1. Double-click "Open Prototype.command". A Terminal window opens and the prototype opens in your browser (port 8796, so it can
@@ -80,24 +80,28 @@ LEE'S THIRD ROUND (17 Oct 2026), done
 - Steps 18 - 24: the motors' leads their full 115 mm again, straight back from the motors in the hand and, from Step 21c, up out of
   L1's notches, straight back over L1 (1 mm above it) and on past its rear edge into space, plugs flat. L4 starts further out in
   Step 20, beyond the plugs (135 mm, as in the first-round guide).
-- Steps 8, 9, 25 and 26, each plug in four beats, its tip turning a quarter turn each: lying back along its lead; picked up, tip
-  up; carried over, tip forward; held over its header, tip down; pushed in. Each stop has a smooth shape of its own, all lying
-  flat the same way, so the lead changes between like shapes; checked frame by frame: no lead or plug into any part, no wires
-  crossing over, the tightest bend at any stop about 6 mm round, in between about 3 mm for a moment.
+- Steps 8, 9, 25 and 26, each plug in four beats, its tip turning no more than a quarter turn in each: lying back along its lead;
+  picked up, tip up; carried over, tip forward; held over its header, tip down; pushed in. Each stop has a smooth shape of its
+  own, all lying flat the same way, so the lead changes between like shapes; checked frame by frame: no lead or plug into any
+  part, no wires crossing over; at the stops the middle wire bends no tighter than about 7 mm round (the outer wires about 5 mm),
+  in between about 3 mm for a moment.
   On the bench (Steps 8, 9) each lead starts laid out straight behind its motor, held out level (55 mm, so that its plug is in
   these close frames: at 115 mm it would start off the screen; it does not lie on the table, as the rulebook's laid-aside lead
   would, since Lee asked for it straight to the rear). In the car (Steps 25, 26) the plugged leads are clear of L1 (the left one
-  went 2 mm into L1 by the notch) and as long as a smooth path needs (118 and 132 mm: lengths are representative, Lee); while
-  carried they are 76 - 142 mm, stretching evenly from shape to shape.
+  went 2 mm into L1 by the notch) and as long as a smooth path needs (118 and 132 mm: lengths are representative, Lee); at the
+  stops on the way they are 79 - 142 mm, stretching evenly from shape to shape.
 - Step 24: Step 23's camera mirrored across L2's middle (the same height and distance, from the other side).
 - Step 29: the controller already turned round, as in the Completed View; the USB cable slides straight into it. Step 29's
   camera follows the controller (its target moves 118 mm; the same corner and distance). Step 12 (the test) is as before.
 - The title page much closer in, from Lee's picture (solved by matching renders to it); the Completed View as close, the car and
   controller centred (the USB cable's A end runs off the bottom, as in Lee's picture of the title page), and Step 29c now glides
   into it (it used to cut). In a window where that cannot be shown (the title, a fixed size on the page, would cover the car, as
-  in the LMS's frame; or the frame is too narrow), the player takes the closest of three wider cameras that keeps the car and
-  controller in the frame and clear of the title, and in a frame taller than wide the whole model, as before. Checked at Lee's
-  window (his picture's camera), an LMS frame (1200 x 634), an iPad-sized frame (1024 x 604) and portrait (768 x 938).
+  in the LMS's frame; or the frame is too narrow), the player takes the closest of four wider cameras, then the whole model, that
+  keeps the car and controller within the frame's sides and top and clear of the title (moved aside just enough); in a frame taller
+  than wide, or where nothing clears the title (frames about 1.0 - 1.3 times as wide as high, e.g. 800 x 640), the whole model as
+  before, which the title may overlap; in a window up to 600 px wide the title sits above the model. Checked at Lee's window (his
+  picture's camera), an LMS frame (1200 x 634), an iPad-sized frame (1024 x 604, in a desktop browser: an iPad has no Arial Narrow,
+  so its title is wider and it gets a wider camera) and portrait (768 x 938). The website's card picture shows the whole model.
 - Every other step keeps its camera (checked against the steps before this round).
 
 PUT RIGHT FROM THE PUBLISHED GUIDE
@@ -121,12 +125,19 @@ WHAT CAME FROM WHERE
 - Wires (wire-paths.json, measured from the CAD's lead bodies): the CAD poses each motor's lead twice (loose, and plugged in) at
   different lengths (68, 107 and 162 mm); here each lead is 115 mm straight in the hand and over L1 (Steps 18 - 24), 55 mm
   straight behind the motor on the bench (Steps 8, 9), and as long as a smooth path needs when plugged in (103 - 132 mm) and on
-  its way (44 - 142 mm): lengths are representative (Lee), and from one shape to the next the lead stretches evenly (`stretch`).
-  Every shape is a smooth curve (W.smooth), flat from just after the motor (W.ribbon twist), clear of every part; each stop of a
-  plug's way in has its own shape (motor_lead). A plug laid aside lies flat beyond L1's rear edge in the car. The 9V adapter's lead is the CAD's
+  its way (44 - 142 mm at its stops): lengths are representative (Lee), and from one shape to the next the lead stretches evenly
+  (`stretch`). The shapes of a plug's way in are smooth curves (W.smooth) or straight runs, flat from just after the motor
+  (W.ribbon twist), clear of every part, each stop its own (motor_lead); in the hand (Steps 18 - 20) the lead stays on edge. A plug
+  laid aside lies flat beyond L1's rear edge in the car. The 9V adapter's lead is the CAD's
   (about 30 mm) in the car, longer on the bench. The USB cable is drawn between the Mini-B end and the A end lying on the table beyond the controller's grips.
 
 QUESTIONS FOR LEE
+ To confirm (done so in the third round, 17 Oct 2026, as the best reading of what Lee asked): the bench leads in Steps 8 and 9
+ start 55 mm long, held out level behind the motor (at 115 mm the plug would start off the close frames); the leads change length
+ between shapes and stretch evenly; each plug goes in four beats (picked up, carried over, held over its header, in); the
+ Completed View is as close as the title page, centred, the USB cable's A end running off the bottom as in Lee's picture of the
+ title page (the website's card shows the whole model); the wider cameras the title page and the Completed View fall back to in
+ small windows.
  Open: which way round do L3, L4, L5 (nearly symmetric) and L6 / L7 go? If it matters, the captions can say "code facing the
  front" or "code facing out", as on the MRA. And which face of the real L4 carries its code (the CAD's faces L5)?
  Answered 16 Oct 2026 (the Review notes are gone from the guide): power for the test is the 9V battery for the car and USB for

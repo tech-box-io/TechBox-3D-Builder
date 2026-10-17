@@ -193,7 +193,7 @@ function titleRight() {
     const el = $(id);
     if (!el || el.closest('[hidden]')) continue;
     range.selectNodeContents(el);
-    const b = range.getBoundingClientRect();
+    const b = id === 'logo' ? el.getBoundingClientRect() : range.getBoundingClientRect();   // (the logo's own box: the text badge is padded)
     if (b.width) r = Math.max(r, b.right - c.left);
   }
   return r;
@@ -201,24 +201,27 @@ function titleRight() {
 // The camera a view takes in a frame of this shape, and (title page) how far it is moved aside. A camera framed for one shape of
 // window (the title page's, from a screenshot) says how narrow a frame it suits (min_aspect); then come its `otherwise`: one, or
 // a list, closest first, ending with the finished model's. With a list the generator notes where the parts reach on screen with
-// each camera (`fit`: left and right edges and top, in half frame heights, with the camera moved aside by each of fit.s radii),
-// and the player takes the first that keeps the parts in the frame, on the title page moved aside just enough to clear the logo
-// and title, which do not shrink with the window (clear_title: Lee, 17 Oct 2026, the title page punched in, and the LMS's frame).
-function cameraFor(view, aspect) {
+// each camera (`fit`: left and right edges, top and bottom, in half frame heights, with the camera moved aside by each of fit.s
+// radii), and the player takes the first that keeps the parts within the frame's left, right and top edges (`whole`: the bottom
+// too, for the website's card picture; the guide's own may cut a cable off at the bottom, as Lee's picture of the RCC's title
+// page does), on the title page moved aside just enough to clear the logo and title, which do not shrink with the window
+// (clear_title: the RCC's title page punched in, as Lee asked on 17 Oct 2026, yet right in the LMS's frame; for Lee to confirm).
+// In a window up to 600 px wide the title sits above the model, not beside it.
+function cameraFor(view, aspect, whole = false) {
   const c = view.camera, list = [...(!c.min_aspect || aspect >= c.min_aspect ? [c] : []), ...[].concat(c.otherwise || [])];
   if (!list.length) return {camera: c, shift: null};
   if (!list.some(x => x.fit)) return {camera: list[0], shift: null};                   // (as before)
   if (aspect < 1) return {camera: list[list.length - 1], shift: null};                   // (a frame taller than wide: the whole model)
-  const title = view.kind === 'start' && c.clear_title, m = 0.03;
+  const title = view.kind === 'start' && c.clear_title && !matchMedia('(max-width: 600px)').matches, m = 0.03;
   const left = title ? (titleRight() + 16 - stage.width / 2) / (stage.height / 2) : m - aspect;
   for (const cam of list) {
     for (let k = 0; cam.fit && k < cam.fit.s.length && (title || k === 0); k++)
-      if (cam.fit.l[k] >= left && cam.fit.r[k] <= aspect - m && cam.fit.t[k] <= 1 - m) return {camera: cam, shift: cam.fit.s[k]};
+      if (cam.fit.l[k] >= left && cam.fit.r[k] <= aspect - m && cam.fit.t[k] <= 1 - m && (!whole || cam.fit.b[k] >= m - 1)) return {camera: cam, shift: cam.fit.s[k]};
   }
   return {camera: list[list.length - 1], shift: null};
 }
-function poseFor(view, aspect) {
-  const {camera, shift} = cameraFor(view, aspect);
+function poseFor(view, aspect, whole = false) {
+  const {camera, shift} = cameraFor(view, aspect, whole);
   const pose = stage.cameraPose(camera, aspect);
   if (view.kind === 'start') {               // leave the left of the title page for the logo and title, as far as the frame has room to spare
     const dir = new THREE.Vector3(...camera.dir).normalize(), r = camera.radius;
@@ -729,7 +732,7 @@ function renderThumb(i, size) {               // (size [w, h]: a picture of that
     applyState(view); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view));
     if (!flat(view)) stage.setWorld(stage.worldFor(view.camera));
     turn = stage.world.matrixWorld.clone();
-    const pose = poseFor({...view, kind: view.kind === 'start' ? 'end' : view.kind}, W / H);
+    const pose = poseFor({...view, kind: view.kind === 'start' ? 'end' : view.kind}, W / H, !!size);   // (the card: the whole model)
     c.position.copy(pose.position); c.lookAt(pose.target); c.updateMatrixWorld(true);
     return () => {
       const now = views[cur]; applyState(now, liveOffsets); stage.setLeadLines(anim ? [] : leadLines(now)); stage.setArrows(anim ? [] : arrowsOf(now));

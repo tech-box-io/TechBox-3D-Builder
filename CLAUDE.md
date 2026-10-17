@@ -60,8 +60,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
   screenshot, with the narrowest window it suits, `min_aspect`, and `otherwise=` for narrower ones; or `otherwise=[...]`, wider
   cameras closest first: the generator notes where the parts reach on screen with each (`fit`), and the player takes the first
-  that keeps them in the frame, on the title page (`clear_title=True`) moved aside just enough to clear the title, which is a
-  fixed size on the page: the RCC's title page and Completed View, punched in yet right in the LMS's frame),
+  that keeps them within the frame's sides and top (the card picture: the bottom too), on the title page (`clear_title=True`)
+  moved aside just enough to clear the title, which is a fixed size on the page: the RCC's title page and Completed View, punched
+  in yet right in the LMS's frame),
   can leave parts off them (`hide=`) and can show parts turned or moved there (`poses={id: pose}`; the Completed View then cuts
   in rather than gliding from the last step). The RCC's controller is instead turned in the build itself from Step 29
   (`rest_at` + `carry`), so that the Completed View glides.
