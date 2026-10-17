@@ -11,7 +11,10 @@
   {
    "name": "Nano Board",
    "quantity": 2,
-   "image": "Nano-Board.png"
+   "image": "Nano-Board.png",
+   "also": [
+    "Nano-Board-car.png"
+   ]
   },
   {
    "name": "Radio Module",

@@ -627,6 +627,7 @@ class Guide:
         self.log = []
         self.listed_extra = []                  # kit parts listed by hand (see list_part)
         self.pictured = {}                      # name -> how its picture is laid out (see part_picture)
+        self.piece_pictures = {}                # name -> [pictures of one piece of it each, where its pieces look different] (part_picture)
         materials = self.kit_dir / 'materials.json'
         spec = json.load(open(materials)) if materials.exists() else {}
         self.palette = spec.get('palette', {})
@@ -667,12 +668,23 @@ class Guide:
         ids = list(ids)
         self.listed_extra.append(dict(name=name, ids=ids[:1], qty=int(qty), **({'with': ids[1:]} if ids[1:] else {}), **({'wires': wires} if wires else {}), _after=after))
 
-    def part_picture(self, name, add=(), poses=None, wires=()):
+    def part_picture(self, name, add=(), poses=None, wires=(), piece=None, file=None):
         """How the parts list pictures the part called `name`, when its first piece alone is not the whole part: `add` more
         pieces (the far plug of an extension wire), `poses` {id: pose} to lay the pieces out (as in a step), and `wires`
-        [dict(colour, radius, pts)] drawn between them (pts in mm, as laid out)."""
+        [dict(colour, radius, pts)] drawn between them (pts in mm, as laid out).
+        piece: a second picture, of that piece of the part, for a kind of part whose pieces look different (the RCC's car Nano
+        Board, with a blue dot where the controller's has a white one); parts.html saves it as parts/<file>.png (file: a name
+        for it, made into a file name as part names are) and the parts.json entry lists it under "also" ({ids, picture}), for
+        the guide's parts_list function to show where that piece is listed. The parts list's own rows (and the LMS's) stay one
+        per kind of part."""
         wires = [dict(colour=self.palette.get(w['colour'], w['colour']), radius=float(w['radius']), pts=np.round(np.asarray(w['pts'], float), 2).tolist()) for w in wires]
-        self.pictured[name] = dict(add=list(add), poses={i: pose_out(p) for i, p in (poses or {}).items()}, wires=wires)
+        how = dict(add=list(add), poses={i: pose_out(p) for i, p in (poses or {}).items()}, wires=wires)
+        if piece is None:
+            self.pictured[name] = how
+        else:
+            if not re.sub(r'[^A-Za-z0-9]+', '', file or ''):
+                raise ValueError(f'part_picture({name!r}, piece={piece!r}) needs a file= name (with letters or digits) for its picture')
+            self.piece_pictures.setdefault(name, []).append(dict(how, piece=piece, file=file))
 
     def wire(self, wire_id, colour, radius=0.6, name=None):
         """Declare a flexible wire. colour is a palette name from materials.json or #rrggbb; radius in mm; name is
@@ -1199,6 +1211,32 @@ class Guide:
         slug = lambda name: re.sub(r'[^A-Za-z0-9]+', '-', name.strip()).strip('-')     # (the file names parts.html saves the pictures under)
         for p in parts:
             p['picture'] = f"parts/{slug(p['name'])}.png"
+            fitted_to = lambda i: [c for c, parent in self.part_of.items() if parent == i and c in used]
+            for how in self.piece_pictures.get(p['name'], []):   # a second picture, of one piece that looks different (see part_picture)
+                if how['piece'] not in p['ids']:              # (a guide for one part of the build may not show that piece)
+                    self.log.append(f"  part_picture({p['name']!r}, piece={how['piece']!r}): that piece is not shown here, so it has no picture of its own")
+                    continue
+                p.setdefault('also', []).append(dict(ids=[how['piece']], picture=f"parts/{slug(how['file'])}.png",
+                                                     **({'with': list(dict.fromkeys(fitted_to(how['piece']) + how['add']))} if fitted_to(how['piece']) or how['add'] else {}),
+                                                     **({'poses': how['poses']} if how['poses'] else {}), **({'wires': how['wires']} if how['wires'] else {})))
+            covered = {i for a in p.get('also', []) for i in a['ids']}
+            if covered and p['ids'][0] in covered:            # the main picture (parts.html draws the first id) must be of a piece with no picture of its own
+                main = next((i for i in p['ids'] if i not in covered), None)
+                if main is None:
+                    raise SystemExit(f"part_picture: every {p['name']} piece has a picture of its own; leave one to the main picture")
+                old = p['ids'][0]
+                p['ids'] = [main] + [i for i in p['ids'] if i != main]
+                if p.get('with'):
+                    p['with'] = [c for c in p['with'] if c not in fitted_to(old)]
+                p['with'] = list(dict.fromkeys(fitted_to(main) + p.get('with', [])))
+                if not p['with']:
+                    del p['with']
+        for name in set(self.piece_pictures) - {p['name'] for p in parts}:
+            self.log.append(f"  part_picture({name!r}, piece=...): no part called {name!r} in this guide's parts list")
+        files = [p['picture'] for p in parts] + [a['picture'] for p in parts for a in p.get('also', [])]
+        low = [f.lower() for f in files]                     # (the Mac's disk does not tell Nano-Board.png from nano-board.png)
+        if len(low) != len(set(low)):
+            raise SystemExit(f'two parts list pictures would share a file: {sorted(f for f in files if low.count(f.lower()) > 1)}')
         if self.parts_list:                                 # the parts list, on pages of its own after the title page
             for k, page in enumerate(self.parts_list(parts)):
                 views.insert(1 + k, dict(name=page['name'], kind='card', caption=page['name'], parts=page['groups'], visible=[], offsets={}, camera=hero))

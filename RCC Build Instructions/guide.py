@@ -81,7 +81,8 @@ PART_GROUPS = [
 
 def parts_list(parts):
     """The parts list's pages for the parts this guide shows (see Guide(parts_list=)): a part whose pieces belong to two bands
-    (a Nano Board on the controller and one in the car) is listed in each, with the number that band takes."""
+    (a Nano Board on the controller and one in the car) is listed in each, with the number that band takes, and with the
+    picture of the pieces that band takes where they have one of their own (the car's Nano Board, with its blue dot)."""
     natural = lambda p: [int(t) if t.isdigit() else t for t in re.split(r'(\d+)', p['name'])]
     pages, used = {}, set()
     for page, title, icon, colour, halo, wanted in PART_GROUPS:
@@ -90,14 +91,16 @@ def parts_list(parts):
             ids = [i for i in p['ids'] if i not in used and wanted(p['name'], i)]
             if ids:
                 used.update(ids)
-                items.append((p, round(p['qty'] * len(ids) / len(p['ids']))))
+                own = next((a['picture'] for a in p.get('also', []) if set(ids) <= set(a['ids'])), p['picture'])
+                items.append((dict(p, picture=own), round(p['qty'] * len(ids) / len(p['ids']))))
         if icon == 'wood':
             items.sort(key=lambda t: natural(t[0]))
         if not items:
             continue
         if icon == 'wood':
             title = f"{title} ({items[0][0]['name']}{' - ' + items[-1][0]['name'] if len(items) > 1 else ''})"
-        for p, _ in items:
+        for shown, _ in items:                                       # (the parts list entry itself, which parts.json keeps)
+            p = next(q for q in parts if q['name'] == shown['name'])
             p['group'] = f"{p['group']} / {title}" if p.get('group') else title
         pages.setdefault(page, []).append(dict(title=title, icon=icon, colour=colour, halo=halo,
                                                items=[dict(name=p['name'], qty=qty, picture=p['picture']) for p, qty in items]))
@@ -120,6 +123,9 @@ g = Guide(HERE, title='Remote Controlled Car (RCC)',   # ("Remote": Lee, 16 Oct 
           codes=CODES, hero_azimuth=135,                            # the finished car from the front, on its left (the controller's) side, above
           parts_list=parts_list,
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
+# The two Nano Boards look alike but for the dot on the processor (white on the controller's, blue on the car's: materials.json
+# "stickers"), so the car's has a picture of its own where the parts list shows it (Lee, 16 Oct 2026).
+g.part_picture('Nano Board', piece=CAR_NANO, file='Nano Board car')
 
 # ---------------------------------------------------------------- wires
 # The CAD's lead bodies are left out of the model (materials.json "omit"); the leads are drawn from wire-paths.json. A wheel

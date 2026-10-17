@@ -75,6 +75,10 @@ docstrings of `Guide.place` and `Guide.seat`):
 - **Parts list.** `Guide(parts_list=fn)` puts Parts List pages after the title page, built from the parts the guide
   shows (so a guide for one part of the build lists that part's parts); `fn` groups them (the MRA's is in its guide.py).
   `g.part_picture(name, add=, poses=, wires=)` pictures a part whole (both ends of an extension wire and the wire between);
+  `g.part_picture(name, piece=, file=)` gives one piece of a kind its own second picture, for pieces that look different (the
+  RCC's car Nano Board, blue dot against the controller's white): parts.html saves it under `file` made into a file name as
+  part names are (`parts/Nano-Board-car.png`), the parts.json entry lists it under `also`, and the guide's `parts_list` shows it
+  where that piece is listed (rows stay one per kind; the main picture is always of a piece without its own);
   `g.list_part()` lists a kit part whose CAD pieces are hover-only (the breadboard wires). `Guide(review_notes=False)` hides
   the Review notes and their switch once a guide is past review. `Guide(hover_names={id: name})` names a part more exactly
   on hover and click than the parts list does (the MRA's Left / Right Joystick, "Joystick x2" in the list). In the step list

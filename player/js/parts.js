@@ -70,26 +70,40 @@ function render(part) {
 }
 
 const toBlob = canvas => new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-const results = [];
+const results = [], extras = [];
+function tile(blob, alt, caption, file) {
+  const figure = document.createElement('figure');
+  const img = new Image(); img.src = URL.createObjectURL(blob); img.alt = alt;
+  const cap = document.createElement('figcaption'); cap.textContent = caption;
+  const link = document.createElement('a'); link.href = img.src; link.download = file; link.textContent = file;
+  figure.append(img, cap, link); $('gallery').appendChild(figure);
+}
 for (const part of list.parts) {
   const canvas = render(part);
   if (!canvas) continue;
   const file = slug(part.name) + '.png';
   const blob = await toBlob(canvas);
-  results.push({name: part.name, qty: part.qty, file, blob});
-  const tile = document.createElement('figure');
-  const img = new Image(); img.src = URL.createObjectURL(blob); img.alt = part.name;
-  const cap = document.createElement('figcaption'); cap.textContent = part.qty > 1 ? `${part.name}  ×${part.qty}` : part.name;
-  const link = document.createElement('a'); link.href = img.src; link.download = file; link.textContent = file;
-  tile.append(img, cap, link); $('gallery').appendChild(tile);
+  const also = [];
+  // a second picture of one piece of it, where its pieces look different (the RCC's car Nano Board, with its blue dot): the
+  // same view, that piece instead of the first (stepgen's part_picture(piece=))
+  for (const a of part.also || []) {
+    const other = render({...part, ids: a.ids, with: a.with || [], poses: a.poses || {}, wires: a.wires || [], picture_ids: []});
+    if (!other) continue;
+    const extra = {file: a.picture.split('/').pop(), blob: await toBlob(other)};
+    extras.push(extra); also.push(extra.file);
+  }
+  results.push({name: part.name, qty: part.qty, file, blob, also});
+  tile(blob, part.name, part.qty > 1 ? `${part.name}  ×${part.qty}` : part.name, file);
+  for (const e of extras.filter(e => also.includes(e.file))) tile(e.blob, part.name, `${part.name} (${e.file})`, e.file);
 }
-const manifest = {kit: list.meta.title, part: list.meta.part, image_size: SIZE, parts: results.map(r => ({name: r.name, quantity: r.qty, image: r.file}))};
+const manifest = {kit: list.meta.title, part: list.meta.part, image_size: SIZE,
+                  parts: results.map(r => ({name: r.name, quantity: r.qty, image: r.file, ...(r.also.length ? {also: r.also} : {})}))};
 const csv = 'name,quantity,image\n' + results.map(r => `"${r.name.replace(/"/g, '""')}",${r.qty},${r.file}`).join('\n') + '\n';
 
 // ---- save into the kit folder (local server) or hand over a zip (anywhere else)
 async function saveToFolder() {
   const put = (path, body) => fetch('/__save/parts/' + path, {method: 'POST', body}).then(r => { if (!r.ok) throw new Error(r.status); });
-  for (const r of results) await put(r.file, r.blob);
+  for (const r of [...results, ...extras]) await put(r.file, r.blob);
   await put('parts.json', JSON.stringify(manifest, null, 1));
   await put('parts.csv', csv);
 }
@@ -112,14 +126,14 @@ async function zip(files) {                  // stored (no compression): PNGs ar
   return new Blob([...chunks, ...central, new Uint8Array(end.buffer)], {type: 'application/zip'});
 }
 $('zip').onclick = async () => {
-  const blob = await zip([...results.map(r => ({name: r.file, blob: r.blob})), {name: 'parts.json', blob: new Blob([JSON.stringify(manifest, null, 1)])}, {name: 'parts.csv', blob: new Blob([csv])}]);
+  const blob = await zip([...[...results, ...extras].map(r => ({name: r.file, blob: r.blob})), {name: 'parts.json', blob: new Blob([JSON.stringify(manifest, null, 1)])}, {name: 'parts.csv', blob: new Blob([csv])}]);
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = slug(`${list.meta.title} ${list.meta.part} parts`) + '.zip'; a.click();
 };
-$('status').textContent = `${results.length} part images at ${SIZE} × ${SIZE} px${TRANSPARENT ? ', transparent background' : ''}.`;
+$('status').textContent = `${results.length + extras.length} part images at ${SIZE} × ${SIZE} px${TRANSPARENT ? ', transparent background' : ''}.`;
 // Only the standard pictures are written to the kit folder; a trial size or background is a preview.
 if (params.has('size') || params.has('bg')) $('status').textContent += ' Preview only, not saved to the parts folder; use the zip button.';
 else if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
   try { await saveToFolder(); $('status').textContent += ' Saved to the parts folder (with parts.json and parts.csv).'; }
   catch (e) { $('status').textContent += ' Could not save to the folder from here; use the zip button.'; }
 }
-window._parts = {results: results.map(r => ({name: r.name, qty: r.qty, file: r.file, bytes: r.blob.size})), manifest};
+window._parts = {results: results.map(r => ({name: r.name, qty: r.qty, file: r.file, bytes: r.blob.size})), extras: extras.map(e => ({file: e.file, bytes: e.blob.size})), manifest};

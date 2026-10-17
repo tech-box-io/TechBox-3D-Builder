@@ -37,7 +37,8 @@ LEE'S FIRST ROUND (16 Oct 2026), done
   module's 3V3 / GND pins moved 0.94 mm to sit on them; the wheel motors' leads brown / red / orange (the MRA's orange) and their
   cases outlined at the rounded corners; the 9V adapter's two wires start and end at the ends of its stubs on the clip and the plug.
 - Guide: guards fitted to the controller board and wheels to the wheel motors (no steps; one part each in the parts list); the
-  controller's band of the parts list holds 1 Nano Board, 1 radio module, 2 joysticks; wood bands blue-grey as the MRA's; no
+  controller's band of the parts list holds 1 Nano Board, 1 radio module, 2 joysticks (the car's Nano Board, in the Electronics
+  band, has its own picture with its blue dot: parts/Nano-Board-car.png); wood bands blue-grey as the MRA's; no
   labels on H1 / H2, NRF24L01, L-JS / R-JS, U3, LWh / RWh; hover names Left / Right Joystick and Left / Right Wheel Motor as their
   labels; "9V Adapter" for the battery clip; Step 10's arrow turned to the camera; the battery and barrel plug set down so the plug
   goes straight in (bench and car); the new Step 14 (battery and adapter off as one); the leads up out of L1's notches (they ran
@@ -94,8 +95,7 @@ QUESTIONS FOR LEE (also on the steps as Review notes; step numbers as now)
 17. (Answered 16 Oct 2026: the title is "Remote Controlled Car (RCC)".)
 18. Which way round do L3, L4, L5 (nearly symmetric) and L6 / L7 go? If it matters, the captions can say "code facing the front"
     or "code facing out", as on the MRA. And which face of the real L4 carries its code (the CAD's faces L5)?
-19. The parts list shows one Nano Board picture (the controller's, with its white dot) in both bands: give the car's its own
-    picture with the blue dot?
+19. (Answered 16 Oct: yes, the car's Nano Board has its own picture with the blue dot, in the Electronics band.)
 
 CAD POINTS (docs/research/rcc/cad_study.md section 4)
 The joystick overlaps the controller board and sits in the guard's floor; the controller board is modelled 2.6 mm thick; the

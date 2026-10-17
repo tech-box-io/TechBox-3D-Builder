@@ -29,6 +29,14 @@
    ],
    "qty": 2,
    "picture": "parts/Nano-Board.png",
+   "also": [
+    {
+     "ids": [
+      "NANO_CAR"
+     ],
+     "picture": "parts/Nano-Board-car.png"
+    }
+   ],
    "group": "Controller / Electronics"
   },
   {
