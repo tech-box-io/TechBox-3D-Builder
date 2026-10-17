@@ -205,7 +205,7 @@ function titleRight() {
 // radii), and the player takes the first that keeps the parts within the frame's left, right and top edges (`whole`: the bottom
 // too, for the website's card picture; the guide's own may cut a cable off at the bottom, as Lee's picture of the RCC's title
 // page does), on the title page moved aside just enough to clear the logo and title, which do not shrink with the window
-// (clear_title: the RCC's title page punched in, as Lee asked on 17 Oct 2026, yet right in the LMS's frame; for Lee to confirm).
+// (clear_title: the RCC's title page punched in, as Lee asked on 17 Oct 2026, yet right in the LMS's frame).
 // In a window up to 600 px wide the title sits above the model, not beside it.
 function cameraFor(view, aspect, whole = false) {
   const c = view.camera, list = [...(!c.min_aspect || aspect >= c.min_aspect ? [c] : []), ...[].concat(c.otherwise || [])];

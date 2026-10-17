@@ -190,9 +190,19 @@ publish copies it into the release (it warns when a guide has none, or one older
   be deleted in Render's dashboard. **A new LMS address** (a staging host, a new domain) goes into `guides.json`
   `embed_origins` (lower case, `https://`, no path), then `python3 tools/site_pages.py` (it rewrites render.yaml's rules and
   `assets/frame-guard.js`), commit, push: no guide needs publishing again.
+- **The first deploy, in stages** (so that Render, the domain and the headers are tried with no guide online): create the GitHub
+  repository private and empty (no README, licence or .gitignore), push `main`; push the site as it is, with no guide in it, to
+  `live` (`git push origin main:live`: its landing page says "No guides are published yet"); in Render, New > Blueprint from this
+  repository, branch `live`, Render's GitHub App limited to this repository; read the build log (`python3 --version`, then
+  check_site's OK); add the CNAME `models` at tech-box.io's DNS (DreamHost) to the onrender.com host Render shows; check the headers
+  (render.yaml's curl loop, on every kind of path, a few times over some minutes: one Cache-Control, an ETag or Last-Modified, .js
+  as JavaScript, a 404 for a missing page); only then publish the guides for real and push them to `live`, on Lee's word. Push
+  with `git -c pack.threads=1 push` on this Mac (memory). As set up, the raw CAD meshes (mra.glb, rcc.glb, nano-mra.glb: exact,
+  unroughened) go to the private repository, since a guide cannot be regenerated without them; keeping them out of GitHub
+  instead means taking them out of the history before the first push (Lee's call).
 - **Before the first LMS link goes out:** the custom domain verified, then `renderSubdomainPolicy: disabled` in render.yaml (the
   onrender.com address closed); render.yaml's curl loop answers the same over a few minutes; a real embed from the LMS plays on an
-  iPad (Safari) and a Chromebook; a frame from any other site stays blank. Locally, `serve.py site` sends render.yaml's headers,
+  iPad (Safari: iOS 16.4 or later, for the player's import map) and a Chromebook; a frame from any other site stays blank. Locally, `serve.py site` sends render.yaml's headers,
   so a frame from `http://127.0.0.1:<port>` is refused by the header just as a foreign site would be.
 - **The embed** (one guide per LMS page, the address with its closing slash, no `?step=`):
   `<iframe src="https://models.tech-box.io/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"

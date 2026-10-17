@@ -132,7 +132,7 @@ WHAT CAME FROM WHERE
   (about 30 mm) in the car, longer on the bench. The USB cable is drawn between the Mini-B end and the A end lying on the table beyond the controller's grips.
 
 QUESTIONS FOR LEE
- To confirm (done so in the third round, 17 Oct 2026, as the best reading of what Lee asked): the bench leads in Steps 8 and 9
+ Confirmed (Lee, 17 Oct 2026: "Everything looks correct as it is"), as done in the third round: the bench leads in Steps 8 and 9
  start 55 mm long, held out level behind the motor (at 115 mm the plug would start off the close frames); the leads change length
  between shapes and stretch evenly; each plug goes in four beats (picked up, carried over, held over its header, in); the
  Completed View is as close as the title page, centred, the USB cable's A end running off the bottom as in Lee's picture of the

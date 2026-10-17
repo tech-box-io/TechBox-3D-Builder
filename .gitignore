@@ -15,7 +15,39 @@
 *.stl
 *.3mf
 *.dxf
+# Other CAD and laser-cutting formats a new kit may bring (the cutting files are what the wood's roughening protects)
+*.slddrw
+*.SLDDRW
+*.f3z
+*.sat
+*.jt
+*.ipt
+*.iam
+*.prt
+*.dwg
+*.3dm
+*.obj
+*.fbx
+*.ai
+*.eps
+*.cdr
+*.lbrn
+*.lbrn2
+# Videos, archives, phone photos (they can carry the place they were taken)
 MRA_Videos/
+*_Videos/
+*.mov
+*.MOV
+*.mp4
+*.m4v
+*.zip
+*.heic
+*.HEIC
+# Anything holding a key or token (a Render deploy hook, an API key), never committed
+.env
+.env.*
+*.pem
+*.key
 share/
 thumbs/
 !docs/research/**/thumbs/
@@ -24,9 +56,10 @@ __pycache__/
 *.pyc
 .DS_Store
 .claude/settings.local.json
+.claude/worktrees/
 # The repository's own data lives in .git.nosync (kept out of iCloud sync); .git is a pointer file to it.
 .git.nosync/
 # publish.py's lock and unfinished copies
 releases/.lock
 site/.*
-releases/*/.*.tmp/
+releases/**/.*.tmp

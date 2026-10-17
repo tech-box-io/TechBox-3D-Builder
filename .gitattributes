@@ -1,0 +1,3 @@
+# No line-ending conversion, ever: published releases are checked byte for byte against their recorded checksums (check_site.py,
+# also on Render), and the .command launchers must keep LF line endings. Diffs still work as usual.
+* -text
