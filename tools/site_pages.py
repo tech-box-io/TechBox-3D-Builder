@@ -15,6 +15,7 @@ Content-Security-Policy rules, between its "BEGIN guide framing" and "END guide 
 and /<guide>/*), and never a Content-Security-Policy on /* (Render picks one value at random when two rules with the same
 header name match a path). Only the standard library.
 """
+import datetime
 import html
 import json
 import re
@@ -25,7 +26,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'
 SOURCE_ASSETS = Path(__file__).resolve().parent / 'site_assets'      # the TechBox wordmark, copied from the LMS
-YEAR = 2026
+YEAR = datetime.date.today().year                                    # (as the page is made; the page itself puts in the year it is read, below)
 NAME = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
 ORIGIN = re.compile(r'^https://[a-z0-9-]+(\.[a-z0-9-]+)+(:[0-9]{1,5})?$')
 RESERVED = ('kits', 'assets')
@@ -171,7 +172,8 @@ def page(title, body):
 <div><h4>Support for Educators</h4><p><a class="mail" href="mailto:support@tech-box.io">support@tech-box.io</a></p><p>Mon–Fri, 8–6 ET</p></div>
 <div><h4>Connect</h4><div class="social">{social}</div></div>
 </div>
-<div class="base"><p>© {YEAR} TechBox. All rights reserved.</p><nav aria-label="Policies"><a href="https://tech-box.io/policies/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><a href="https://tech-box.io/policies/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></nav></div>
+<div class="base"><p>© <span data-year>{YEAR}</span> TechBox. All rights reserved.</p><nav aria-label="Policies"><a href="https://tech-box.io/policies/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><a href="https://tech-box.io/policies/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></nav></div>
+<script>document.querySelectorAll('[data-year]').forEach(function (e) {{ e.textContent = new Date().getFullYear(); }});</script>
 </div></footer>
 </body></html>
 """

@@ -162,6 +162,25 @@ def model_problems(path):
     return out
 
 
+def rough_problems(kit, model):
+    """Why a kit's model would give away the exact shapes of its laser-cut parts: every mesh in the colour of a materials.json
+    rule with "roughen_mm" must have been roughened (model.report.json, written by build_model.py with the model); a kit with no
+    such rule must say that it has no laser-cut parts ("no_laser_cut_parts": true), so that a new kit cannot go out unroughened
+    by being left out."""
+    spec = json.load(open(kit / 'materials.json'))
+    woods = {r['color'] for r in spec.get('rules', []) if r.get('roughen_mm') and r.get('color')}
+    if not woods:
+        return [] if spec.get('no_laser_cut_parts') is True else [
+            'materials.json has no rule with "roughen_mm": the laser-cut parts would go out with their exact shapes; add it to the '
+            'wood rule (as the MRA and RCC have), or set "no_laser_cut_parts": true if the kit has none']
+    report = kit / 'model.report.json'
+    if not report.is_file() or report.stat().st_mtime < model.stat().st_mtime - 60:
+        return ['model.report.json is missing or older than the model: run tools/build_model.py on the kit']
+    rows = json.load(open(report)).get('meshes', [])
+    bare = [m['mesh'] for m in rows if woods & set(m.get('colours', [])) and 'edges roughened' not in m.get('note', '')]
+    return [f'{len(bare)} laser-cut mesh(es) in {", ".join(sorted(woods))} not roughened: {", ".join(bare[:5])}{" ..." if len(bare) > 5 else ""}'] if bare else []
+
+
 def published_model(src, dst, steps):
     """The model with the CAD's own names taken out: the player finds parts by the names of the assembly's direct children (the
     ids in steps.json) and keeps those, and the assembly's own name becomes "model"; every other node name goes, and the mesh
@@ -232,6 +251,9 @@ def build_release(name, entry, note):
     problems = model_problems(model)
     if problems:
         raise SystemExit(f'{name}: {files[0]} is not a guide model: {"; ".join(problems)}')
+    problems = rough_problems(kit, model)
+    if problems:
+        raise SystemExit(f'{name}: not published: {"; ".join(problems)}')
     stamp = steps['model'].partition('?v=')[2]
     if stamp.isdigit() and int(stamp) != int(model.stat().st_mtime):
         raise SystemExit(f'{name}: {entry["steps"]} and {files[0]} are from different runs (the model changed after the steps were written): '

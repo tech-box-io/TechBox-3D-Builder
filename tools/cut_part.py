@@ -17,6 +17,10 @@ import numpy as np
 from glbio import node_matrix, read_glb
 
 
+COMPONENT = {5120: 1, 5121: 1, 5122: 2, 5123: 2, 5125: 4, 5126: 4}          # glTF component types, bytes each
+PER_TYPE = {'SCALAR': 1, 'VEC2': 2, 'VEC3': 3, 'VEC4': 4, 'MAT2': 4, 'MAT3': 9, 'MAT4': 16}
+
+
 def world(doc, name):
     """The named node's index and its world matrix (the export's own units)."""
     nodes = doc['nodes']
@@ -56,15 +60,21 @@ def main():
     data, accessors, materials = bytearray(), {}, {}
 
     def copy_accessor(index):
+        """The accessor and only its own bytes (an export may keep every mesh's data in one view: copying the whole view
+        would carry the rest of the assembly along)."""
         if index not in accessors:
             acc = doc['accessors'][index]
             view = doc['bufferViews'][acc['bufferView']]
-            start = view.get('byteOffset', 0)
+            size = COMPONENT[acc['componentType']] * PER_TYPE[acc['type']]
+            stride = view.get('byteStride', size)
+            start = view.get('byteOffset', 0) + acc.get('byteOffset', 0)
+            length = stride * (acc['count'] - 1) + size if acc['count'] else 0
             while len(data) % 4:
                 data.append(0)
-            out['bufferViews'].append({**{k: v for k, v in view.items() if k not in ('buffer', 'byteOffset')}, 'buffer': 0, 'byteOffset': len(data)})
-            data.extend(blob[start:start + view['byteLength']])
-            out['accessors'].append(dict(acc, bufferView=len(out['bufferViews']) - 1))
+            out['bufferViews'].append({**{k: v for k, v in view.items() if k not in ('buffer', 'byteOffset', 'byteLength')},
+                                       'buffer': 0, 'byteOffset': len(data), 'byteLength': length})
+            data.extend(blob[start:start + length])
+            out['accessors'].append({**{k: v for k, v in acc.items() if k != 'byteOffset'}, 'bufferView': len(out['bufferViews']) - 1})
             accessors[index] = len(out['accessors']) - 1
         return accessors[index]
 

@@ -62,7 +62,10 @@ def walk(folder):
     return sorted(files), problems
 
 
-def check_model(path):
+GUIDE_TYPES = ('.html', '.js', '.glb', '.png', '.webp', '.jpg', '.svg')   # (and steps.json, vendor/three/LICENSE)
+
+
+def check_model(path, steps=None):
     raw = Path(path).read_bytes()
     if raw[:4] != b'glTF' or len(raw) < 20:
         return ['not a binary glTF file']
@@ -77,6 +80,21 @@ def check_model(path):
         out.append(f'{len(raw) / 1e6:.1f} MB, too big for a guide model')
     if any('name' in m for m in doc.get('meshes', [])) and not doc.get('asset', {}).get('copyright'):
         out.append('still carries the CAD\'s names (not a published copy)')
+    # (publish.py names only the assembly, "model", and the parts under it, and keeps a mesh's name only where the guide names a
+    # part inside a part by it: any other name is the CAD's own, a body or file name)
+    nodes, scenes = doc.get('nodes', []), doc.get('scenes', [])
+    roots = scenes[doc.get('scene', 0)].get('nodes', []) if scenes else []
+    if len(roots) == 1 and nodes[roots[0]].get('name') == 'model':
+        parts = set(nodes[roots[0]].get('children', []))
+        stray = [n['name'] for k, n in enumerate(nodes) if 'name' in n and k != roots[0] and k not in parts]
+        if stray:
+            out.append(f'{len(stray)} node(s) keep a CAD name (e.g. {stray[0]!r}): not a published copy')
+    else:
+        out.append('its assembly is not named "model": not a published copy')
+    prefixes = tuple(((steps or {}).get('mesh_names') or {}).keys())
+    named = [m['name'] for m in doc.get('meshes', []) if 'name' in m and not (prefixes and m['name'].startswith(prefixes))]
+    if named:
+        out.append(f'{len(named)} mesh(es) keep a CAD name (e.g. {named[0]!r}): not a published copy')
     return out
 
 
@@ -141,7 +159,10 @@ def check_guide(name, folder, releases):
             errors.append(f'steps.json names {f}, which is not in the folder')
     model = steps.get('model', '').split('?')[0]
     if model in files:
-        errors += [f'{model}: {p}' for p in check_model(folder / model)]
+        errors += [f'{model}: {p}' for p in check_model(folder / model, steps)]
+    for f in files:                                  # (only what a learner's browser needs: never a source, a note or a CAD file)
+        if not (f == 'steps.json' or f == 'vendor/three/LICENSE' or Path(f).suffix.lower() in GUIDE_TYPES):
+            errors.append(f'{f}: not a kind of file a guide holds (only {", ".join(GUIDE_TYPES)}, steps.json and the three.js licence)')
     if 'index.html' in files:
         page = (folder / 'index.html').read_text()
         if "import('./js/player.js?v=' + Date.now())" in page:

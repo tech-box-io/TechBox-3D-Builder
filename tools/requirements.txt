@@ -6,3 +6,7 @@ pillow==12.3.0
 rtree==1.4.1
 scipy==1.18.1
 trimesh==5.1.1
+# (not imported by the tools themselves, but installed alongside and picked up by trimesh when present: pinned, so that a fresh
+# environment builds the same models)
+fast_simplification==0.2.0
+networkx==3.7

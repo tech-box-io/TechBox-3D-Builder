@@ -166,7 +166,8 @@ publish copies it into the release (it warns when a guide has none, or one older
 - **What goes out** is only what a learner's browser needs: the player (as `index.html`), the steps (without Review notes or
   `text_key`), the kit's `model.glb` (without the CAD's own body and file names; the part ids stay, as the player needs them),
   the logo and the part pictures the Parts List shows. Never the CAD, `guide.py`, `materials.json`, wire paths, `decals.json`
-  (the printing travels inside the model as shapes) or research.
+  (the printing travels inside the model as shapes) or research. `check_site.py` refuses any other kind of file in a guide's
+  folder (only .html, .js, .glb, .png, .webp, .jpg, .svg, steps.json and the three.js licence) and a CAD name left in its model.
 - **What the model gives away** (told to Lee, 16 Oct 2026): a 3D guide has to send the part shapes to the browser; anyone who
   opens a guide can save the model. Only the STEP and editable CAD stay private. So the laser-cut wood is **roughened** in every
   model (Lee, 16 Oct 2026): `materials.json` `"roughen_mm": 0.1` on the wood rule makes `build_model.py` move each vertex of a
@@ -175,7 +176,9 @@ publish copies it into the release (it warns when a guide has none, or one older
   at 0.1 mm a slot's width changes by 0.04 - 0.14 mm, within laser and plywood tolerances, so most traced joints would still
   fit (an independent review, 16 Oct 2026; told to Lee). Making traced joints reliably fail would take 0.3 - 0.5 mm per slot or
   tab, which can show as gaps or parts passing into each other in close-ups: Lee's call. The collision tests and cameras use the
-  exact CAD, not the model, so they are unaffected. Checkpoints made before 16 Oct 2026 15:49 (share/) carry the exact geometry.
+  exact CAD, not the model, so they are unaffected. `publish.py` refuses to publish a kit whose laser-cut meshes (the colour of a
+  rule with `roughen_mm`) are not all roughened (`model.report.json`), or whose materials.json has no `roughen_mm` rule at all
+  unless it says `"no_laser_cut_parts": true`: a new kit cannot go out with exact shapes by leaving it out. Checkpoints made before 16 Oct 2026 15:49 (share/) carry the exact geometry.
 - **The order:** commit the checked sources; publish; look at it (`serve.py site`, and `_runthrough()` on `/<guide>/`); run
   `check_site.py`; commit `site/`, `releases/`, `render.yaml` and `guides.json`. Then, **only on Lee's word**, put it live:
   `git push origin main:live` (Render
