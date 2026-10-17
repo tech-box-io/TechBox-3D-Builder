@@ -1,9 +1,9 @@
 RCC Build Instructions (Remote Controlled Car, Full Build: controller, electronics test, chassis, wiring and power)
 
-FIRST DRAFT 15 Oct 2026, LEE'S FIRST ROUND 16 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP),
+FIRST DRAFT 15 Oct 2026, LEE'S FIRST AND SECOND ROUNDS 16 Oct 2026. Build instructions generated from Lee's STEP (RCC_Assembly_v1.STEP),
 TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-rcc_remote_controlled_car) and Lee's photos and L1
-drawing, in the same format as the MRA guide. Not for distribution. Questions for Lee are yellow Review notes on their steps
-(switched on for this draft).
+drawing, in the same format as the MRA guide. Not for distribution. Lee has answered every Review note, so the guide shows
+none; the one open question is under QUESTIONS FOR LEE below.
 
 HOW TO OPEN (Mac)
 1. Double-click "Open Prototype.command". A Terminal window opens and the prototype opens in your browser (port 8796, so it can
@@ -48,6 +48,27 @@ LEE'S FIRST ROUND (16 Oct 2026), done
   down 4% so the battery clears the caption and its label fits above it); Steps 25 and 26 closer in. Every other step keeps its
   camera (Steps 8 - 11 included, where the content changed).
 
+LEE'S SECOND ROUND (16 Oct 2026), done
+- The answers above; cautions on Steps 3 and 4 (the joystick's pins into the top row of L-JS / R-JS).
+- Step 6: a third red line, from the adapter's 2-pin socket onto the 3V3 / GND pins (Lee's point); the socket's solder pads
+  moved with it (silkscreen.py reads the move from materials.json), the board's old holes covered in its white.
+- Steps 8 - 10 closer in (the motor, its plug and the adapter board; the battery, the 9V adapter and its plug), closer than
+  Step 11; Step 10's "9V Adapter" leader starts on the clip's top, clear of the arrow.
+- The battery's slate band runs down to the body's first seam (twice as deep).
+- Step 21: Lee's four red lines (the tab tips of L5 and L4 into L1's slots). Steps 18 - 24: the motors' leads are 58 mm in the
+  hand and lying on L1 (115 mm plugged in), and in Step 21c they run straight back along L1 from their notches, each plug lying
+  flat on L1 behind the battery's hole, with no kink in towards the middle (a 115 mm lead does not fit straight back on L1;
+  at 58 mm the plug lies flat wholly on L1; lengths are representative: Lee). L4 hovers further out in Step 20,
+  clear of the plugs.
+- Steps 25 and 26 in three beats (lifted up and forward off L1; carried high over the module and the other plug, then lowered to
+  hold 15 mm over the header; pushed down), the lead keeping pace with the plug; the right plug passes about 10 mm clear of the
+  left plug and its lead (it used to be one rushed move). Step 25 had the same rush, so it has the same three beats.
+- The title page and the Completed View show the controller turned round (180 degrees about the vertical), facing the other
+  way beside the car; the steps show it as built. Both are framed afresh to fit the turned controller and its cable, and the
+  Completed View cuts in from the last step rather than swinging the controller round.
+- Every other step keeps its camera (checked against the steps before this round; where the shorter leads would have reframed a
+  step, its camera is written out in guide.py as it was).
+
 PUT RIGHT FROM THE PUBLISHED GUIDE
 - The car's Nano Board stays on the module (the published guide loses it at its Step 29) and has its USB socket at the power
   socket's end (the published pictures show it reversed).
@@ -59,7 +80,7 @@ PUT RIGHT FROM THE PUBLISHED GUIDE
 
 WHAT CAME FROM WHERE
 - Colours: materials.json and colour-atlas-rcc.json (the MRA's atlas for the parts the two kits share, TechBox's RCC Cadasio
-  project where its colours suit). Colours waiting for Lee are under _notes.unconfirmed in materials.json.
+  project where its colours suit). Lee confirmed every colour as drafted (16 Oct 2026): materials.json _notes.decided.
 - Reused from the MRA, as Lee asked: the Nano Board (both RCC Nanos are the MRA's export of the Nano model, nano-mra.glb, cut by
   tools/cut_part.py: the CAD's own car Nano is a plainer model, and the RCC's export of the controller's has sliver triangles), the I/O module with its colours and printed legend, the joysticks, the Mini-B plug and the
   USB cable's A end (usb-a-end.glb), the servo plug colours.
@@ -67,35 +88,22 @@ WHAT CAME FROM WHERE
   controller board's print from Lee's photos (the TechBox logo traced from logo.webp); FRONT etched on L1, and the CAD's own "L1"
   turned the right way and moved onto FRONT's line, as in Lee's drawing (materials.json "move_engraving").
 - Wires (wire-paths.json, measured from the CAD's lead bodies): the CAD poses each motor's lead twice (loose, and plugged in) at
-  different lengths (68, 107 and 162 mm); here each lead is drawn 115 mm long throughout, on the bench and in the car. A plug
-  laid aside lies flat (on the table on the bench; on L1 behind the battery's hole in the car). The 9V adapter's lead is the CAD's
+  different lengths (68, 107 and 162 mm); here each lead is 115 mm plugged in (on the bench and in the car) and 58 mm in the
+  hand and lying on L1 (Steps 18 - 24), changing length only as it is plugged in. A plug laid aside lies flat (on the table on
+  the bench; on L1 behind the battery's hole in the car); in Steps 25 and 26 it is held 15 mm over its header, then pushed in. The 9V adapter's lead is the CAD's
   (about 30 mm) in the car, longer on the bench. The USB cable is drawn between the Mini-B end and the A end lying on the table beyond the controller's grips.
 
-QUESTIONS FOR LEE (also on the steps as Review notes; step numbers as now)
- 1. Power for the test: the 9V battery for the car and USB for the controller, as drafted? Or USB for both (two cables)?
- 2. TechBox's RCC Testing Checklist, word for word (Step 13 has a placeholder). Which joystick drives which wheel? Does the
-    FS90R's stop trim need setting in the test?
- 3. (Answered 16 Oct 2026: the wheels come fitted to the wheel motors.)
- 4. L2 in one step with the hook-and-swing (as drafted) or two?
- 5. L4 and the plugs: one step (as drafted) or a step per plug through L4?
- 6. The barrel plug at the end: plugged in (as drafted) or left out with a caution?
- 7. Colours still open: the FS90R case (blue as published, or black?), the radio boards (black, as drafted, or green), the wheels,
-    the plug housings, silver or gold pins, the white boards. And is the RCC's I/O module the same board as the MRA's (its
-    printing is carried over on that assumption)? (Answered 16 Oct: the signal wire is orange; the battery is the Amazon Basics.)
- 8. (Answered 16 Oct: "Controller Board" with its guards, "9V Adapter", the rest as drafted.)
- 9. The car's Nano Board: USB socket at the power socket's end (as drafted; the published pictures show it the other way)?
-10. The joysticks: the CAD's joystick board overlaps the controller board by 4 mm, so it clips the board as it is set down. How
-    does it really sit, and do its pins go into the top row of L-JS / R-JS?
-11. (Answered 16 Oct: the guards come fitted to the controller board.)
-12. L1's etching: FRONT at the front-left corner and L1 at the front-right, as in the drawing, on the top face (as drafted)?
-13. L6 / L7: their codes are on the parts under L1, so they cannot be read from above. Engrave them on the heads instead?
-14. Lead lengths: how long is the FS90R's lead (drawn 115 mm), and the 9V adapter's?
-15. Section cards with your two photos (the controller's and the adapter's pin names) before Steps 1 and 6?
-16. Should the Completed View show the controller with its USB cable in (as drafted and as published)?
-17. (Answered 16 Oct 2026: the title is "Remote Controlled Car (RCC)".)
-18. Which way round do L3, L4, L5 (nearly symmetric) and L6 / L7 go? If it matters, the captions can say "code facing the front"
-    or "code facing out", as on the MRA. And which face of the real L4 carries its code (the CAD's faces L5)?
-19. (Answered 16 Oct: yes, the car's Nano Board has its own picture with the blue dot, in the Electronics band.)
+QUESTIONS FOR LEE
+ Open: which way round do L3, L4, L5 (nearly symmetric) and L6 / L7 go? If it matters, the captions can say "code facing the
+ front" or "code facing out", as on the MRA. And which face of the real L4 carries its code (the CAD's faces L5)?
+ Answered 16 Oct 2026 (the Review notes are gone from the guide): power for the test is the 9V battery for the car and USB for
+ the controller; the Testing Checklist's wording comes from the curriculum later (Step 13 keeps its placeholder); the wheels
+ come fitted to the motors and the guards to the controller board; L2's hook-and-swing in one step, L4 and its plugs in one step,
+ the barrel plug plugged in at the end, L7 / L6 as they are (codes under L1); every colour as drafted; the car's Nano the right
+ way round; the I/O module is the MRA's board; names as now; the joysticks sit as in the CAD, with a caution that their pins go
+ into the top row of L-JS / R-JS; FRONT / L1 etched as drawn; no section cards; lead lengths are representative; the Completed
+ View shows the controller with its USB cable in; the car's Nano Board has its own blue-dot picture; the title is "Remote
+ Controlled Car (RCC)".
 
 CAD POINTS (docs/research/rcc/cad_study.md section 4)
 The joystick overlaps the controller board and sits in the guard's floor; the controller board is modelled 2.6 mm thick; the

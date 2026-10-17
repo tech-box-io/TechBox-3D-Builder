@@ -261,7 +261,17 @@ short_o = [736.0, A_TOP, 1348.56]
 at = frame(short_o, A_U, A_V)
 short_items = [outline(at, 743.827, 748.827, 1315.693, 1326.263, margin=0.15), text('U3', at(743.09, 1316.19), 0.72, weight=700),
                text('C1', at(747.98, 1329.43), 0.79, weight=700)]
-short_items += pads(at, [(740.36, z) for z in G3], 0) + pads(at, [(740.36, 1343.20), (740.36, 1345.74)], 1)
+# (the 2-pin socket over the module's 3V3 / GND pins, NAUO70, is moved onto them by materials.json "adjust_mm": its pads go with it,
+# Lee, 16 Oct 2026)
+# The board's own holes for its pins (r 0.6 mm in the CAD) stay where the CAD has them, so they are covered in the board's white
+# (its top is always drawn lit: pure white) before the pads go on.
+move = json.load(open(HERE / 'materials.json')).get('adjust_mm', {}).get('NAUO70', [0.0, 0.0, 0.0])
+if not (isinstance(move, list) and len(move) == 3 and abs(move[1]) < 1e-9):
+    raise SystemExit('silkscreen.py: materials.json adjust_mm NAUO70 must be a level move [x, 0, z] for the pads to follow it')
+dx, _, dz = move
+if dx or dz:
+    short_items += [dict(circle=[*at(740.36, z), 0.7], colour='#ffffff') for z in (1343.20, 1345.74)]
+short_items += pads(at, [(740.36, z) for z in G3], 0) + pads(at, [(740.36 + dx, 1343.20 + dz), (740.36 + dx, 1345.74 + dz)], 1)
 lo, hi = at(739.20, 1341.76), at(748.32, 1335.88)          # the icon on the photo (line art, bulb up the board)
 s, t = fit_box(ICON, lo, hi)
 short_items += logo_items(ICON, s, t)

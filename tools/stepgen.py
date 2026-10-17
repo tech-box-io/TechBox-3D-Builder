@@ -589,6 +589,10 @@ class Guide:
         min_aspect: the narrowest frame (width / height) that camera suits; on narrower ones the player uses the finished
         model's camera instead. hide: parts left off the title page (a cable end that would show without its cable).
         end_view: the same for the Completed View (the finished model's own camera is then the fallback).
+        Either may also give poses={id: pose}: parts that view shows turned or moved from where the build leaves them (the RCC's
+        controller turned round on the title page and the Completed View: Lee, 16 Oct 2026). Parts riding on them go with them,
+        a camera the generator makes for that view (and a min_aspect fallback) frames them as posed (a camera given as dir= /
+        target= / radius= is used as it is), and the Completed View then opens without gliding from the last step.
         parts_list: a function that takes the guide's parts list (one entry per kind of part: name, qty, ids, picture) and
         returns its pages, [dict(name='Parts List', groups=[dict(title, icon, colour, halo, items=[dict(name, tag, qty,
         picture)])])]: shown after the title page, as the published guides do. Only the parts this guide shows are listed,
@@ -1119,23 +1123,37 @@ class Guide:
             views.append(dict(name=f'Step {n}c', kind='done', visible=shown_done, offsets=poses_out(done), wires=wires_in(wires, shown_done), carry=carry_done,
                               **({'wire_via': wire_via} if wire_via else {}), **({'inset': inset} if inset else {}), **common))
         last, carry_last = with_riders(dict(parked), visible)
-        views.append(dict(name='Completed View', kind='end', visible=list(visible), offsets=poses_out(last), wires=wires_in(wires, visible), carry=carry_last))
+
+        def posed(sv):
+            """Where the title page / the Completed View shows each part: as the build leaves it, but for its own poses (and
+            the parts riding on those, which go with them)."""
+            turns = dict(sv.get('poses') or {})
+            for i, c in carry_last.items():
+                if c['by'] in turns and i not in turns:
+                    turns[i] = turns[c['by']]
+            return {**last, **{i: compose(pose, last.get(i), self._pivot(i)) for i, pose in turns.items() if i in used}}
+        start_last, end_last = posed(self.start_view), posed(self.end_view)
+        views.append(dict(name='Completed View', kind='end', visible=list(visible), offsets=poses_out(end_last), wires=wires_in(wires, visible), carry=carry_last,
+                          **({'cut': True} if self.end_view.get('poses') else {})))     # (a part turned for the view: no glide from the last step)
         start_shown = [i for i in used if i not in self.start_view.get('hide', ())]
-        views[0].update(visible=start_shown, wires=wires_in(wires, start_shown), offsets=poses_out(last), carry=carry_last)
+        views[0].update(visible=start_shown, wires=wires_in(wires, start_shown), offsets=poses_out(start_last), carry=carry_last)
         end_shown = [i for i in visible if i not in self.end_view.get('hide', ())]
         views[-1].update(visible=end_shown, wires=wires_in(wires, end_shown))
         hero_target, hero_radius = _fit(self.model, used, [{}])
         hero = dict(dir=_direction(self.hero_azimuth, 32).round(4).tolist(), target=hero_target.round(1).tolist(), radius=round(hero_radius, 1))
-        def special(sv):
-            """A camera given for the title page or the Completed View (see __init__), or the finished model's."""
+        def special(sv, shown, offsets):
+            """A camera given for the title page or the Completed View (see __init__), or the finished model's (framing the parts
+            as that view poses them, if it poses any)."""
+            t, r = _fit(self.model, shown, [offsets]) if sv.get('poses') else (hero_target, hero_radius)
+            base = dict(hero, target=t.round(1).tolist(), radius=round(r, 1))
             if 'dir' in sv:
                 return dict(dir=_unit(sv['dir']).round(4).tolist(), target=[round(float(x), 1) for x in sv['target']], radius=round(float(sv['radius']), 1),
                             **({'shift': float(sv['shift'])} if 'shift' in sv else {}),
-                            **({'min_aspect': float(sv['min_aspect']), 'otherwise': hero} if 'min_aspect' in sv else {}))
-            return dict(hero, dir=_direction(sv.get('azimuth', self.hero_azimuth), sv.get('elevation', 32)).round(4).tolist(),
-                        radius=round(hero_radius * sv.get('zoom', 1.0), 1)) if sv else hero
-        views[0]['camera'] = special(self.start_view)
-        views[-1]['camera'] = special(self.end_view)
+                            **({'min_aspect': float(sv['min_aspect']), 'otherwise': base} if 'min_aspect' in sv else {}))
+            return dict(base, dir=_direction(sv.get('azimuth', self.hero_azimuth), sv.get('elevation', 32)).round(4).tolist(),
+                        radius=round(r * sv.get('zoom', 1.0), 1)) if (sv.keys() - {'poses', 'hide'}) else base
+        views[0]['camera'] = special(self.start_view, start_shown, start_last)
+        views[-1]['camera'] = special(self.end_view, end_shown, end_last)
         for v in views:
             if 'camera' not in v:
                 v['camera'] = hero

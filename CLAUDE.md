@@ -58,7 +58,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   the model turned over (work done with the kit upside down): the player turns the model, not the camera, so
   the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them.
   `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
-  screenshot, with the narrowest window it suits, `min_aspect`) and can leave parts off them (`hide=`).
+  screenshot, with the narrowest window it suits, `min_aspect`), can leave parts off them (`hide=`) and can show parts
+  turned or moved there (`poses={id: pose}`: the RCC's controller turned round beside the car; the Completed View then cuts in
+  rather than gliding from the last step).
 - **Note cards** take line breaks: a caption with `\n` in it is shown as a list, ranged left (a checklist).
 - **A bench set-up before the build.** `g.put_away(ids)` takes parts off the screen; a later step brings them
   back as new parts (the MRA's electronics test, before the base). Declare their riding and resting for the

@@ -179,13 +179,13 @@
         {
           "box": [
             [-34, 45.6, -1],
-            [-6, 52.6, 18.2]
+            [-6, 59.59, 18.2]
           ],
           "color": "battery_slate",
           "cut": true
         }
       ],
-      "_about": "9 V battery (NAUO14), 5 solids, in the colours of an Amazon Basics 9 V (Lee, 16 Oct 2026, from his photo; no lettering): the body amber, its top face (own y up to 45.6: the battery's top is at own y 45.26, its bottom at 89.2) near-black and a band 7 mm deep round its top (own y 45.6 - 52.6) slate grey (cut: the battery's sides are a few long triangles, so they are cut along the band's edges first), the two terminals silver"
+      "_about": "9 V battery (NAUO14), 5 solids, in the colours of an Amazon Basics 9 V (Lee, 16 Oct 2026, from his photo; no lettering): the body amber, its top face (own y up to 45.6: the battery's top is at own y 45.26, its bottom at 89.2) near-black and a band round its top down to the body's first seam (own y 45.6 - 59.59, 14 mm: Lee, 16 Oct 2026) slate grey (cut: the battery's sides are a few long triangles, so they are cut along the band's edges first), the two terminals silver"
     },
     {
       "match": "^DC_Adaptor$",
@@ -511,22 +511,22 @@
     }
   ],
   "_notes": {
-    "unconfirmed": [
-      "FS90R wheel motors (NAUO17 / NAUO18): blue #0073b3 with a darker blue label #00639a and a light grey spline #c6c1bc, as TechBox's published RCC guide shows them (palette servo_fs90r, servo_fs90r_label, servo_fs90r_spline). No text source states the real colour; Feetech's own FS90R may be black with a white label. Lee to rule from the kit's motor (one palette change).",
-      "nRF24L01 radio boards (NAUO10 / NAUO11): black #1e1616 as published (the modules also come green); chip #191919, crystal and pins silver, small parts tan #a5936d.",
-      "Wheels (NAUO8 / NAUO9): rim #1e1616, tyre #2d2926 (published #191919 / #272727). Black, but check the kit's wheels.",
-      "9V adapter (the battery clip, NAUO15): housing black, snaps silver, its two lead stubs red #ef3340 and black #2d2926 (the house pre-wired lead colours), red on the conductor the CAD takes to the barrel plug's red stub. The barrel plug: grip and tip ring black, sleeve silver, stubs red / black as the published guide has them.",
-      "Servo plug housings BLS-3 (NAUO19-22): #404040 (palette plug_grey) like the MRA's servo plugs, contacts silver; or house Dupont black #1e1616.",
-      "Header pins silver #a6a9aa (house, and Lee's MRA ruling), though Lee's controller photo shows gold pins on L-JS / R-JS and gold-looking pins on U1 / U2 (the published guide has gold #d3aa21 / #f2c22e).",
-      "Both TechBox boards (controller NAUO30, adapter NAUO26) white #f4f4f4 (palette pcb_white) with black print (decals.json): near-white clips to page white on a lit face, so the board reads by its black edges, as in Lee's photos. Their C1 cans silver on a black base.",
-      "The car's Nano (NAUO86): coloured by rules (board navy, chips IC black with silver legs, pins and USB shell silver, header spacers black) because it is a plainer model than the controller's Nano; see car_nano.",
-      "The I/O module (NAUO23) keeps the MRA's colours and silkscreen: is the RCC kit's module the same board as the MRA's?",
-      "Wherever the atlas shows SolidWorks' default grey #e4e4e4 (pads and print on the Nano and joystick boards), nobody has coloured that solid in Cadasio yet (as on the MRA).",
-      "47 uF capacitor on the I/O module: kept as a silver can; the Cadasio projects have it all near-black (as on the MRA).",
-      "USB cable: the STEP files have no colours (SolidWorks' default only). Drawn black (#1e1616) with silver metal and a white tongue in the A end, as on the MRA."
-    ],
+    "unconfirmed": [],
+    "_unconfirmed_about": "Empty since 16 Oct 2026: Lee confirmed every colour as drafted (\"the colors are fine for everything as is, unless I give direct commentary\"); the entries moved to decided",
     "decided": [
-      "2026-10-16 (Lee, RCC): the 9 V battery in the colours of an Amazon Basics 9 V, without its lettering: amber body (battery_amber #de9d00), slate grey band round the top (battery_slate #5d6675), near-black top face (battery_top #2e2e30), silver terminals (colours read off Lee's photo).",
+      "2026-10-16 (Lee, RCC): FS90R wheel motors (NAUO17 / NAUO18) blue #0073b3 with a darker blue label #00639a and a light grey spline #c6c1bc, as TechBox's published RCC guide shows them (palette servo_fs90r, servo_fs90r_label, servo_fs90r_spline).",
+      "2026-10-16 (Lee, RCC): nRF24L01 radio boards (NAUO10 / NAUO11) black #1e1616 as published; chip #191919, crystal and pins silver, small parts tan #a5936d.",
+      "2026-10-16 (Lee, RCC): Wheels (NAUO8 / NAUO9): rim #1e1616, tyre #2d2926 (published #191919 / #272727).",
+      "2026-10-16 (Lee, RCC): 9V adapter (the battery clip, NAUO15): housing black, snaps silver, its two lead stubs red #ef3340 and black #2d2926 (the house pre-wired lead colours), red on the conductor the CAD takes to the barrel plug's red stub. The barrel plug: grip and tip ring black, sleeve silver, stubs red / black as the published guide has them.",
+      "2026-10-16 (Lee, RCC): Servo plug housings BLS-3 (NAUO19-22) #404040 (palette plug_grey) like the MRA's servo plugs, contacts silver.",
+      "2026-10-16 (Lee, RCC): Header pins silver #a6a9aa (house, and Lee's MRA ruling), although Lee's controller photo shows gold pins on L-JS / R-JS and U1 / U2 (the published guide has gold #d3aa21 / #f2c22e).",
+      "2026-10-16 (Lee, RCC): Both TechBox boards (controller NAUO30, adapter NAUO26) white #f4f4f4 (palette pcb_white) with black print (decals.json): near-white clips to page white on a lit face, so the board reads by its black edges, as in Lee's photos. Their C1 cans silver on a black base.",
+      "2026-10-16 (Lee, RCC): The car's Nano (NAUO86): coloured by rules (board navy, chips IC black with silver legs, pins and USB shell silver, header spacers black) because it is a plainer model than the controller's Nano; see car_nano.",
+      "2026-10-16 (Lee, RCC): The I/O module (NAUO23) is the MRA's board and keeps the MRA's colours and silkscreen.",
+      "2026-10-16 (Lee, RCC): Wherever the atlas shows SolidWorks' default grey #e4e4e4 (pads and print on the Nano and joystick boards), it stays: nobody has coloured that solid in Cadasio (as on the MRA).",
+      "2026-10-16 (Lee, RCC): 47 uF capacitor on the I/O module: a silver can (the Cadasio projects have it all near-black, as on the MRA).",
+      "2026-10-16 (Lee, RCC): USB cable: black (#1e1616) with silver metal and a white tongue in the A end, as on the MRA (the STEP files have no colours).",
+      "2026-10-16 (Lee, RCC): the 9 V battery in the colours of an Amazon Basics 9 V, without its lettering: amber body (battery_amber #de9d00), slate grey band round the top, down to the first seam in the body (battery_slate #5d6675; Lee, later the same day), near-black top face (battery_top #2e2e30), silver terminals (colours read off Lee's photo).",
       "2026-10-16 (Lee, RCC): the wheel motors' signal wire is orange, the MRA's servo orange (lead_orange #ff9d07), on the motors' lead stubs and on the leads the player draws: brown, red, orange.",
       "2026-10-16 (Lee, RCC): a small dot sticker on each Nano Board's processor, as on the MRA's motors: white on the controller's, blue on the car's (stickers, 3.5 mm).",
       "2026-10-16 (Lee, RCC): the radio modules' antenna trace is gold, as on the real module (Lee's photo): drawn as printing on the CAD's black antenna sheet (decals.json, from silkscreen.py), colour read off the photo.",
