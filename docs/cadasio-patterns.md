@@ -226,8 +226,10 @@ joysticks and the module at once; or in phases, the joysticks pulled off the wir
 the build makes on the bench (the electronics test: motors plugged in, then out again) has no counterpart. The fade of a part
 taken off: slower and smoother, as Cadasio's (below, section 13).
 
-**Lee, 2026-10-18 (first round on the MRA's draft):** a screw and the part it held come off in one step, in sequence: the screw
-slides out and fades, then the part slides out and fades (a stack of plates on one screw: the screw, then each plate in turn).
+**Lee, 2026-10-18 (first round on the MRA's draft):** where a screw and the part it held come off in the same step (Lee named the
+MRA's A12, A13, A11, A5 and the A1 - A3 lever), they go in sequence: the screw slides out and fades, then the part slides out and
+fades (a stack of plates on one screw: the screw, then each plate in turn). Elsewhere a screw keeps its own step before its part, as
+in the build (R6's screw before A10 and A11 are lifted, in Lee's own order); whether every such pair should be merged is open.
 A screw that the model hides from the step's camera gets an eye. With the cover (B8) off, the electronics come out where they
 are, before the housing around them: the breadboard wires off both ends, the I/O module out of its slots, the Nano Board out of
 the module; then each joystick with its walls, the walls off it in the hand. So the guide ends on the base carrier, R1, as the

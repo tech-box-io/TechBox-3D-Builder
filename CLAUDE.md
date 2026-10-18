@@ -297,7 +297,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   held off in one step, one after the other: the screw out and gone, then the part (Lee, 18 Oct 2026). An `alone=` view shows
   what rides on its parts too. The arrow of parts spread apart (six screws round a plate) starts on the one nearest their middle.
   The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
-  no electronics test; each screw step a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
+  no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
   Board come out before the joysticks' walls), and it ends on R1. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part

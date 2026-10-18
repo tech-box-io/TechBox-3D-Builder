@@ -524,10 +524,9 @@ function alongPath(pts, t, stops) {
 function awayTiming(view, moveDur) {
   const ids = view.moving || [], overlap = Math.min(FADE_OVERLAP_MS, moveDur / 4);
   const wayOf = id => ((view.paths && view.paths[id]) || view.path), stopsOf = id => stopsFor(view, id) || wayOf(id).map((_, k) => k);
-  const legs = Math.max(1, ...ids.map(id => stopsOf(id).length - 1)), beat = moveDur / legs;
   const moveFrom = {}, restAt = {};
   for (const id of ids) {
-    const way = wayOf(id), s = stopsOf(id);
+    const way = wayOf(id), s = stopsOf(id), beat = moveDur / Math.max(1, s.length - 1);   // (each way's stops share the whole motion)
     let first = -1, last = -1;
     for (let b = 0; b < s.length - 1; b++) if (way.slice(s[b] + 1, s[b + 1] + 1).some(p => poseGap(way[s[b]], p) > 1e-3)) { if (first < 0) first = b; last = b; }
     moveFrom[id] = first < 0 ? 0 : first * beat; restAt[id] = last < 0 ? 0 : (last + 1) * beat;
@@ -550,6 +549,11 @@ function go(i, animate = true) {
   // After the bench test is put away the build starts afresh: no part glides over from the view before (`cut`).
   if ((i === cur + 1 && to.cut) || (i === cur - 1 && from.cut)) animate = false;
   const forward = animate && i === cur + 1, backward = animate && i === cur - 1;
+  // Turned round half-way through a deconstruction step (Prev while its parts are still going, or Next while Prev brings them
+  // back): the step plays the other way from the very point it had reached, rather than starting again (where each part is, how
+  // far it has faded, which part of a screw-then-part step is moving).
+  const prev = anim, turnAround = !!(prev && prev.dur && prev.to === from && prev.src === to && (backward ? from.away : forward && to.away));
+  const elapsed = turnAround ? Math.min(performance.now() - prev.t0, prev.dur) : 0;
   cur = i;
   camSwing = null;
   sel.value = i;
@@ -591,28 +595,31 @@ function go(i, animate = true) {
   const start = {}, end = {}, ways = {};
   for (const id of to.visible) {
     end[id] = to.offsets[id] || ZERO;
-    start[id] = was(id) ? (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
+    start[id] = was(id) ? (!turnAround && liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
   }
-  for (const id of leaving) { end[id] = to.offsets[id] || ZERO; start[id] = (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO; }
+  for (const id of leaving) { end[id] = to.offsets[id] || ZERO; start[id] = (!turnAround && liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO; }
+  // A way starts from where the part is now; where the way begins by waiting (a part whose turn comes after a screw's), it waits there.
+  const fromHere = (way, here) => { const w = way.slice(), w0 = JSON.stringify(w[0]); for (let k = 1; k < w.length - 1 && JSON.stringify(w[k]) === w0; k++) w[k] = here; w[0] = here; return w; };
   // seat the part along its path (may have more than one leg); a wiggle on the spot (`wiggle`) also plays as its step opens
   // (the wiggle plays however its step is reached: stepping forward or back, or jumping to it)
   let wayStops = null, wireVia = null;
   if ((forward && to.kind === 'done' && from.kind === 'hover') || (to.wiggle && !sameView)) {
-    for (const id of to.moving) { ways[id] = ((to.paths && to.paths[id]) || to.path).slice(); ways[id][0] = start[id]; }   // from wherever it is now (a part may have a way of its own)
+    for (const id of to.moving) ways[id] = fromHere((to.paths && to.paths[id]) || to.path, start[id]);   // from wherever it is now (a part may have a way of its own)
   } else if (backward && from.kind === 'done' && to.kind === 'hover' && from.away) {
     // Back from a deconstruction step (`away`): the parts come back the way they went, a part that was taken off from where its
     // way out ends (or from where it had got to, if it was still on its way out).
     wayStops = {};
     for (const id of from.moving) {
       if (!(id in end)) continue;
-      const way = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = way.length - 1, s = stopsFor(from, id);
-      if (!from.visible.includes(id)) start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : way[0];
-      way[0] = start[id]; way[n] = end[id];
+      const back = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = back.length - 1, s = stopsFor(from, id);
+      if (!from.visible.includes(id)) start[id] = !turnAround && flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : back[0];
+      const way = fromHere(back, start[id]);
+      way[n] = end[id];
       ways[id] = way;
       if (s) wayStops[id] = s.map(k => n - k).reverse();
     }
     for (const id of from.leaving || []) if (id in end && !(id in ways) && !from.visible.includes(id))   // (one that rode on another: it comes back with it)
-      start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : from.offsets[id] || end[id];
+      start[id] = !turnAround && flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : from.offsets[id] || end[id];
     if (from.wire_via) { wireVia = {}; for (const id in from.wire_via) wireVia[id] = from.wire_via[id].slice().reverse(); }   // (a lead laid in stages: back through them)
   } else if (backward && from.kind === 'done' && to.kind === 'hover' && staged(from)) {
     // Back from a step whose wire goes in by stages (Steps 97 and 100: the extension past R4 and the jumper wires): the
@@ -656,7 +663,7 @@ function go(i, animate = true) {
   const w0 = {q: worldLive.q.clone(), at: worldLive.at.clone()}, w1 = flat(to) ? w0 : stage.worldFor(to.camera);   // (from the turn on screen, which may be half done)
   const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
   const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
-  anim = {t0: performance.now(), dur, moveAt, moveDur, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+  anim = {t0: performance.now() - (turnAround ? Math.max(0, dur - elapsed) : 0), dur, moveAt, moveDur, src: from, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);

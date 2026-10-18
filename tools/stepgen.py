@@ -1025,14 +1025,17 @@ class Guide:
                 ways[i] = [now(i) if now(i) is not None else ZERO, _shifted(now(i) or ZERO, d * reach)]
             notes.append(f'pulled out along {d.astype(int).tolist()}')
         # a way the Full Build gave, now walked the other way: is it still clear of what stays? (the order may not be the exact reverse)
+        turn = {i: gi for gi, g in enumerate(in_turn or []) for i in g}   # (with in_turn=, the groups still to go are still there)
         for key in {m['index'] for m in moves.values()}:
             group = [i for i, m in moves.items() if m['index'] == key]
             way = ways[group[0]]
-            if all(_rot(p) is None for p in way) and seated and not _moved(way[0]):   # (tested from the seat: not for a part lifted off with others)
+            first = min(turn.get(i, 0) for i in group)
+            still = seated + [j for j in movers if turn.get(j, -1) > first and not _moved(now(j)) and j not in self.riding]
+            if all(_rot(p) is None for p in way) and still and not _moved(way[0]):   # (tested from the seat: not for a part lifted off with others)
                 v = _shift(way[-1]) - _shift(way[0])
                 reach = min(float(np.linalg.norm(v)), max(25.0, 0.8 * float(np.linalg.norm(self.model.union(group).extents))) + 5)   # (as free_directions tests)
                 then = [j for j in moves[group[0]]['stationary'] if j in self.model.inst]   # (what the Full Build tested it against)
-                if (np.linalg.norm(v) > 1e-6 and blocked(self.model.union(group), self.model.union(seated), _unit(v), reach, self.cfg)
+                if (np.linalg.norm(v) > 1e-6 and blocked(self.model.union(group), self.model.union(still), _unit(v), reach, self.cfg)
                         and not (then and blocked(self.model.union(group), self.model.union(then), _unit(v), reach, self.cfg))):   # (blocked by the order, not by the way)
                     review = ((review + ' ') if review else '') + f'Taken off the way the Full Build put it on ({moves[group[0]]["name"]}), it passes through a part that is still there: check the order, or give a way by hand.'
                     self.log.append(f'  WARNING: {caption[:40]}: the way out of {moves[group[0]]["name"]} passes through a part still there')
@@ -1076,6 +1079,9 @@ class Guide:
                         after[w] = r
                         if m['wire_via'].get(w):
                             wire_via[w] = list(reversed(m['wire_via'][w]))
+        if in_turn and len(in_turn) > 1 and (wire_via or any(r is not None and r != self.wire_state.get(w) for w, r in after.items())):
+            raise ValueError(f'{how}({caption[:30]!r}): in_turn= where a lead changes route: its stages would not keep pace with its own '
+                             f'group (take that part off in a step of its own)')
         lead_off = []
         for w, r in self.wire_state.items():
             if r is None or w in after:

@@ -5,8 +5,8 @@ it). First draft (Lee, 18 Oct 2026): the Full Build in reverse (rulebook section
   - no electronics test: each motor is unplugged and taken out once, where the build put it in (the bench test's plugging in and
     unplugging, and its USB cable, have no counterpart).
 It opens on the Full Build's title page and ends on what is left, R1 (Lee's first round, 18 Oct 2026: the electronics come out of
-the controller before the joysticks' walls, so the base is the last to go). A screw and the part it held go in one step, one after
-the other: the screw out and gone, then the part (in_turn=, Lee's first round).
+the controller before the joysticks' walls, so the base is the last to go). Where Lee asked, a screw and the part it held go in one
+step, one after the other: the screw out and gone, then the part (in_turn=: A12, A13, A11, A5, the lever); elsewhere, as the build.
 
 Sub-assemblies the Full Build put together in the hand (the T1 / T2 block, the claw, the arm's links, the joysticks in their walls)
 are lifted off the way they went on and taken apart on their own (alone=). Steps of the Full Build that moved only a plug on its lead
