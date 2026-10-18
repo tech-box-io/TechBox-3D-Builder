@@ -6,6 +6,10 @@ const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
 const ACCENT = '#7fdbff';                    // label underline, leader and anchor ring
 const STEP_MS = 800;                         // every transition, as in the published guides
+// A part taken off fades out once it has slid out, over a beat of its own, as the published take-aparts do (Lee, 18 Oct 2026:
+// slower and smoother than a fade inside the slide); it starts a little before the slide comes to rest, so nothing waits.
+const FADE_MS = 800, FADE_OVERLAP_MS = 150;
+const fadeCurve = u => 0.5 + 0.5 * Math.cos(Math.PI * Math.min(1, Math.max(0, u)));   // 1 -> 0, gently at both ends
 
 // Always the latest steps (the model URL inside carries its own version). ?steps= may name another steps file in this folder, nothing else.
 const stepsFile = /^[\w.-]+\.json$/.test(params.get('steps') || '') ? params.get('steps') : 'steps.json';
@@ -303,6 +307,7 @@ function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = nul
 }
 // The "look here" eye, drawn in a 100 x 56 box.
 const EYE = {outline: 'M0 28C18 4 82 4 100 28 82 52 18 52 0 28Z', circles: [[50, 28, 17, '#fff'], [50, 28, 11, '#111'], [56, 23, 4.5, '#fff']]};
+const EYE_PAD = 6;                           // the white box round the eye (as round a label: Lee, 18 Oct 2026, the eye alone had too little contrast)
 const showLabels = params.get('labels') !== '0';
 const labelsOf = view => showLabels ? (view.labels || []) : (view.labels || []).filter(l => /^\d+x$/.test(l.text));   // quantities always show
 // Every label sits on a white box, which cannot be seen in white space and keeps the text readable where a label has to
@@ -320,6 +325,7 @@ function buildCallouts(view) {
     const leader = make('line', {stroke: ACCENT, 'stroke-width': stroke, 'stroke-linecap': 'round'});
     const ring = it.ring === false ? null : make('circle', {r: size * 0.36, fill: 'none', stroke: ACCENT, 'stroke-width': stroke, 'stroke-dasharray': `${size * 0.2} ${size * 0.13}`});   // (no ring on a label for an exact spot, such as a pin)
     if (it.eye) {
+      make('rect', {x: it.x - EYE_PAD, y: it.y - EYE_PAD, width: it.w + 2 * EYE_PAD, height: it.h + 2 * EYE_PAD, rx: 6, fill: BACKING});
       const g = make('g', {transform: `translate(${it.x} ${it.y}) scale(${it.w / 100})`});
       const p = document.createElementNS(NS, 'path'); p.setAttribute('d', EYE.outline); p.setAttribute('fill', '#111'); g.appendChild(p);
       for (const [cx, cy, r, fill] of EYE.circles) { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r); c.setAttribute('fill', fill); g.appendChild(c); }
@@ -364,7 +370,7 @@ function buildInset(view) {
   const ratio = Math.min(2, devicePixelRatio || 1), picked = stage.highlighted();
   const shown = view.visible.filter(id => !(I.hide || []).includes(id));
   const {canvas, camera: cam} = stage.snapshot(Math.round(w * ratio), Math.round(h * ratio), {setup: c => {
-    stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows([]);
+    stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows(I.arrows ? arrowsOf(view).filter(a => I.arrows === true || I.arrows.includes(a.part)) : []);   // (arrows: [parts] whose arrow it shows: one seen only here)
     const at = stage.toWorld(I.target), d = new THREE.Vector3(...I.dir).normalize().applyQuaternion(stage.world.quaternion);
     const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);   // the picture is turned as the main view is
     up.addScaledVector(d, -up.dot(d)); if (up.lengthSq() < 1e-6) up.set(0, 0, 1);
@@ -512,6 +518,30 @@ function alongPath(pts, t, stops) {
   return mixPose(pts[from + i], pts[from + i + 1], gaps[i] ? Math.min(1, d / gaps[i]) : 1);
 }
 
+// A view taking parts off, played forwards over moveDur ms of motion: when each part's way starts and comes to rest, and when it
+// starts to fade out (FADE_OVERLAP_MS before it rests, so nothing waits); a part riding on another, and a lead, go with what
+// carries them. dur: the whole, the last fade included.
+function awayTiming(view, moveDur) {
+  const ids = view.moving || [], overlap = Math.min(FADE_OVERLAP_MS, moveDur / 4);
+  const wayOf = id => ((view.paths && view.paths[id]) || view.path), stopsOf = id => stopsFor(view, id) || wayOf(id).map((_, k) => k);
+  const moveFrom = {}, restAt = {};
+  for (const id of ids) {
+    const way = wayOf(id), s = stopsOf(id), beat = moveDur / Math.max(1, s.length - 1);   // (each way's stops share the whole motion)
+    let first = -1, last = -1;
+    for (let b = 0; b < s.length - 1; b++) if (way.slice(s[b] + 1, s[b + 1] + 1).some(p => poseGap(way[s[b]], p) > 1e-3)) { if (first < 0) first = b; last = b; }
+    moveFrom[id] = first < 0 ? 0 : first * beat; restAt[id] = last < 0 ? 0 : (last + 1) * beat;
+  }
+  const carrier = id => { for (let c = id, n = 0; n < 8; n++) { if (c in restAt) return c; c = view.carry && view.carry[c] && view.carry[c].by; if (!c) break; } return null; };
+  const fadeAt = {}, wireFadeAt = {};
+  for (const id of new Set([...ids, ...(view.leaving || [])])) { const c = carrier(id); fadeAt[id] = Math.max(0, (c ? restAt[c] : moveDur) - overlap); if (c && !(id in moveFrom)) { moveFrom[id] = moveFrom[c]; restAt[id] = restAt[c]; } }
+  for (const [w, no] of Object.entries(view.leaving_wires || {})) {
+    const ends = [routes[no].a, routes[no].b].filter(e => e && e in fadeAt);
+    wireFadeAt[w] = ends.length ? Math.max(...ends.map(e => fadeAt[e])) : Math.max(0, moveDur - overlap);
+  }
+  const dur = Math.max(moveDur, ...Object.values(fadeAt).map(a => a + FADE_MS), ...Object.values(wireFadeAt).map(a => a + FADE_MS));
+  return {moveFrom, restAt, fadeAt, wireFadeAt, dur};
+}
+
 function go(i, animate = true) {
   i = Math.max(0, Math.min(views.length - 1, i));
   const from = views[cur], to = views[i], sameView = i === cur;
@@ -519,6 +549,11 @@ function go(i, animate = true) {
   // After the bench test is put away the build starts afresh: no part glides over from the view before (`cut`).
   if ((i === cur + 1 && to.cut) || (i === cur - 1 && from.cut)) animate = false;
   const forward = animate && i === cur + 1, backward = animate && i === cur - 1;
+  // Turned round half-way through a deconstruction step (Prev while its parts are still going, or Next while Prev brings them
+  // back): the step plays the other way from the very point it had reached, rather than starting again (where each part is, how
+  // far it has faded, which part of a screw-then-part step is moving).
+  const prev = anim, turnAround = !!(prev && prev.dur && prev.to === from && prev.src === to && (backward ? from.away : forward && to.away));
+  const elapsed = turnAround ? Math.min(performance.now() - prev.t0, prev.dur) : 0;
   cur = i;
   camSwing = null;
   sel.value = i;
@@ -560,28 +595,31 @@ function go(i, animate = true) {
   const start = {}, end = {}, ways = {};
   for (const id of to.visible) {
     end[id] = to.offsets[id] || ZERO;
-    start[id] = was(id) ? (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
+    start[id] = was(id) ? (!turnAround && liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO : end[id];
   }
-  for (const id of leaving) { end[id] = to.offsets[id] || ZERO; start[id] = (liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO; }
+  for (const id of leaving) { end[id] = to.offsets[id] || ZERO; start[id] = (!turnAround && liveOffsets && liveOffsets[id]) || from.offsets[id] || ZERO; }
+  // A way starts from where the part is now; where the way begins by waiting (a part whose turn comes after a screw's), it waits there.
+  const fromHere = (way, here) => { const w = way.slice(), w0 = JSON.stringify(w[0]); for (let k = 1; k < w.length - 1 && JSON.stringify(w[k]) === w0; k++) w[k] = here; w[0] = here; return w; };
   // seat the part along its path (may have more than one leg); a wiggle on the spot (`wiggle`) also plays as its step opens
   // (the wiggle plays however its step is reached: stepping forward or back, or jumping to it)
   let wayStops = null, wireVia = null;
   if ((forward && to.kind === 'done' && from.kind === 'hover') || (to.wiggle && !sameView)) {
-    for (const id of to.moving) { ways[id] = ((to.paths && to.paths[id]) || to.path).slice(); ways[id][0] = start[id]; }   // from wherever it is now (a part may have a way of its own)
+    for (const id of to.moving) ways[id] = fromHere((to.paths && to.paths[id]) || to.path, start[id]);   // from wherever it is now (a part may have a way of its own)
   } else if (backward && from.kind === 'done' && to.kind === 'hover' && from.away) {
     // Back from a deconstruction step (`away`): the parts come back the way they went, a part that was taken off from where its
     // way out ends (or from where it had got to, if it was still on its way out).
     wayStops = {};
     for (const id of from.moving) {
       if (!(id in end)) continue;
-      const way = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = way.length - 1, s = stopsFor(from, id);
-      if (!from.visible.includes(id)) start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : way[0];
-      way[0] = start[id]; way[n] = end[id];
+      const back = ((from.paths && from.paths[id]) || from.path).slice().reverse(), n = back.length - 1, s = stopsFor(from, id);
+      if (!from.visible.includes(id)) start[id] = !turnAround && flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : back[0];
+      const way = fromHere(back, start[id]);
+      way[n] = end[id];
       ways[id] = way;
       if (s) wayStops[id] = s.map(k => n - k).reverse();
     }
     for (const id of from.leaving || []) if (id in end && !(id in ways) && !from.visible.includes(id))   // (one that rode on another: it comes back with it)
-      start[id] = flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : from.offsets[id] || end[id];
+      start[id] = !turnAround && flying.has(id) && liveOffsets && liveOffsets[id] ? liveOffsets[id] : from.offsets[id] || end[id];
     if (from.wire_via) { wireVia = {}; for (const id in from.wire_via) wireVia[id] = from.wire_via[id].slice().reverse(); }   // (a lead laid in stages: back through them)
   } else if (backward && from.kind === 'done' && to.kind === 'hover' && staged(from)) {
     // Back from a step whose wire goes in by stages (Steps 97 and 100: the extension past R4 and the jumper wires): the
@@ -605,24 +643,27 @@ function go(i, animate = true) {
   const pose = poseFor(to, stage.width / stage.height);
   const stopsOf = id => wayStops ? wayStops[id] || null : stopsFor(to, id);
   const legs = Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1;
-  // Parts taken off fade out over the second half of their last stage (Lee, 17 Oct 2026); coming back, they fade in over the first
-  // half of the first. Their leads go with them.
-  let fade = null, fadeParts = [], fadeWires = [];
-  if (leaving.length) {
-    const k0 = (legs - 0.5) / legs;
-    fade = k => 1 - ease(Math.min(1, Math.max(0, (k - k0) / (1 - k0))));
-    fadeParts = leaving; fadeWires = Object.keys(to.leaving_wires || {});
-  } else if (backward && from.away && (from.leaving || []).length) {
-    const k1 = 0.5 / legs;
-    fade = k => ease(Math.min(1, Math.max(0, k / k1)));
-    fadeParts = from.leaving.filter(id => id in end); fadeWires = Object.keys(from.leaving_wires || {}).filter(w => (to.wires || {})[w] != null);
+  // Parts taken off slide out, then fade out over a beat of their own (FADE_MS), each once its own way has come to rest (a screw,
+  // then the part it held); coming back, the same played backwards: each fades in where its way out ended, then slides back.
+  // Their leads go with them.
+  let fade = null;
+  const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
+  const moveDur = playing ? STEP_MS * legs : 0;
+  let moveAt = 0, dur = moveDur;
+  const away = playing && leaving.length ? to : playing && backward && from.away && (from.leaving || []).length ? from : null;
+  if (away) {
+    const T = awayTiming(away, moveDur), out = away === to;
+    const parts = out ? leaving : from.leaving.filter(id => id in end);
+    const wires = out ? Object.keys(to.leaving_wires || {}) : Object.keys(from.leaving_wires || {}).filter(w => (to.wires || {})[w] != null);
+    fade = {out, parts: Object.fromEntries(parts.map(id => [id, T.fadeAt[id]])), wires: Object.fromEntries(wires.map(w => [w, T.wireFadeAt[w]]))};
+    dur = T.dur;
+    if (!out) moveAt = dur - moveDur;                                 // (backwards: the whole played the other way round)
   }
   // the model is turned over (or back) for a view of its underside: about the new view's target, as the camera moves
   const w0 = {q: worldLive.q.clone(), at: worldLive.at.clone()}, w1 = flat(to) ? w0 : stage.worldFor(to.camera);   // (from the turn on screen, which may be half done)
   const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
   const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
-  const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
-  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fadeParts, fadeWires, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+  anim = {t0: performance.now() - (turnAround ? Math.max(0, dur - elapsed) : 0), dur, moveAt, moveDur, src: from, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);
@@ -634,10 +675,12 @@ const worldLive = {q: new THREE.Quaternion(), at: new THREE.Vector3()};   // how
 function turnWorld(q, at) { worldLive.q.copy(q); worldLive.at.copy(at); stage.setWorld(worldLive); }
 function stepAnimation(now) {
   if (!anim) return false;
-  const k = anim.dur ? Math.min(1, Math.max(0, (now - anim.t0) / anim.dur)) : 1, e = ease(k);   // a frame can be stamped just before the click
+  const t = Math.max(0, now - anim.t0);      // (a frame can be stamped just before the click)
+  const k = anim.dur ? Math.min(1, t / anim.dur) : 1;   // the whole: the motion, and a fade before or after it
+  const km = anim.moveDur ? Math.min(1, Math.max(0, (t - anim.moveAt) / anim.moveDur)) : 1, e = ease(km);   // the motion
   if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, e), aW.lerpVectors(w.at0, w.at1, e)); }
   liveOffsets = {};
-  for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], k, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
+  for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], km, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
   const carry = anim.to.carry || {}, before = (anim.from && anim.from.carry) || {}, back = !!anim.wireVia;
   for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
     if (!(id in anim.end)) continue;
@@ -652,15 +695,15 @@ function stepAnimation(now) {
   // A wire that passes through as many routes as the moving part has stops keeps pace with it, stop by stop (the
   // servo extension wire onto row 10); any other wire changes route over the whole step.
   const wireVia = anim.wireVia || anim.to.wire_via;
-  const beats = anim.dur ? Math.max(1, Math.round(anim.dur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
+  const beats = anim.moveDur ? Math.max(1, Math.round(anim.moveDur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
   let we = e;
-  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(k * beats)); we = (b + ease(k * beats - b)) / beats; }
+  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(km * beats)); we = (b + ease(km * beats - b)) / beats; }
   const leads = anim.leaving.length && k < 1 && anim.to.leaving_wires ? {...anim.to, wires: {...anim.to.wires, ...anim.to.leaving_wires}} : anim.to;   // (a lead taken off goes with its parts)
   let alphas = null;
-  if (anim.fade && k < 1) {                  // (parts taken off, fading out; or fading in again, coming back)
-    const a = anim.fade(k);
-    for (const id of anim.fadeParts) stage.setFade(id, a);
-    alphas = Object.fromEntries(anim.fadeWires.map(w => [w, a]));
+  if (anim.fade && k < 1) {                  // (parts taken off, fading out; or fading in again, coming back: the same, backwards)
+    const f = anim.fade, alpha = at => fadeCurve(((f.out ? t : anim.dur - t) - at) / FADE_MS);
+    for (const id in f.parts) stage.setFade(id, alpha(f.parts[id]));
+    alphas = Object.fromEntries(Object.entries(f.wires).map(([w, at]) => [w, alpha(at)]));
   }
   drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia, alphas);
   if (anim.cam) {                            // swing around the target rather than cutting through the model
@@ -699,7 +742,7 @@ function drawCalloutsOn(ctx, view, cam, W, H) {
     const y = it.eye ? it.y + it.h / 2 : it.y + it.h, x = Math.abs(ax - it.x) < Math.abs(ax - (it.x + it.w)) ? it.x : it.x + it.w;
     ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(ax, ay); ctx.stroke();
     if (it.ring !== false) { ctx.beginPath(); ctx.arc(ax, ay, size * 0.36, 0, Math.PI * 2); ctx.stroke(); }
-    if (it.eye) { ctx.save(); ctx.translate(it.x, it.y); ctx.scale(it.w / 100, it.w / 100); ctx.fillStyle = '#111'; ctx.fill(new Path2D(EYE.outline)); for (const [cx, cy, r, fill] of EYE.circles) { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); } ctx.restore(); ctx.fillStyle = '#111'; }
+    if (it.eye) { ctx.fillStyle = BACKING; ctx.fillRect(it.x - EYE_PAD, it.y - EYE_PAD, it.w + 2 * EYE_PAD, it.h + 2 * EYE_PAD); ctx.save(); ctx.translate(it.x, it.y); ctx.scale(it.w / 100, it.w / 100); ctx.fillStyle = '#111'; ctx.fill(new Path2D(EYE.outline)); for (const [cx, cy, r, fill] of EYE.circles) { ctx.fillStyle = fill; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill(); } ctx.restore(); ctx.fillStyle = '#111'; }
     else { ctx.fillStyle = BACKING; ctx.fillRect(it.x - 2, it.y + 2, it.w + 4, it.h - 2); ctx.fillStyle = '#111'; ctx.beginPath(); ctx.moveTo(it.x, it.y + it.h); ctx.lineTo(it.x + it.w, it.y + it.h); ctx.stroke(); ctx.fillText(it.text, it.x + pad, it.y + it.h - 9); }
   }
 }
@@ -1038,4 +1081,5 @@ $('resetview').onclick = resetView;
 if (controls) controls.addEventListener('start', () => { camSwing = null; });
 const frame = now => stage.frame(now, stepAnimation(now) || swingCamera(now));
 (function tick(now) { requestAnimationFrame(tick); frame(now); })(performance.now());
-window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; }};   // handle for tests and debugging
+window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; },
+                  get timing() { return anim ? {dur: anim.dur, moveAt: anim.moveAt, moveDur: anim.moveDur, fade: anim.fade} : null; }, awayTiming};   // handle for tests and debugging

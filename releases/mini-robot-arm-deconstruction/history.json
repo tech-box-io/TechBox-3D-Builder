@@ -1,0 +1,16 @@
+{
+ "guide": "mini-robot-arm-deconstruction",
+ "log": [
+  {
+   "when": "2026-10-18T19:49:02",
+   "action": "published",
+   "release": "r1",
+   "note": "For the live site, Lee's word, 18 Oct 2026: the Full Build (current player) and the Deconstruction (first release)",
+   "source": {
+    "commit": "af9f05ec598c1a9279d27cb5c49010954afd0b7d",
+    "uncommitted_changes": false
+   },
+   "was": null
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "guide": "mini-robot-arm-deconstruction",
+ "release": "r1",
+ "published": "2026-10-18T19:49:02",
+ "note": "For the live site, Lee's word, 18 Oct 2026: the Full Build (current player) and the Deconstruction (first release)",
+ "kit": "MRA Build Instructions Prototype",
+ "steps": "steps-deconstruction.json",
+ "title": "Mini Robot Arm (MRA)",
+ "part": "Deconstruction",
+ "views": 148,
+ "source": {
+  "commit": "af9f05ec598c1a9279d27cb5c49010954afd0b7d",
+  "uncommitted_changes": false
+ },
+ "steps_content": "fc73a2586523d367f779530ffc86b253ecd93df3c730e91244752940e6cd5a76",
+ "files": {
+  "card.webp": "21b3b597c066fd4169902e421bdfcebc9f4a0cecc3ec322ac0ae1ce6f2b3c541",
+  "index.html": "2e439c0c27fc19060471845ede14ae2e6c5634dc5d481403b430fbcb9867105d",
+  "js/core.js": "032e609a07cd3870befe3168d2a6272f0e6ea4496882ffb51a61b97c10351d38",
+  "js/player.js": "b028bd98403b059d8b792252f1e056adb53f143390b4922da61f601b91752485",
+  "logo.webp": "1243e10bb7c3c08cf087858e5a5f80682c295f569e3cc14679b8791094259ee1",
+  "model.glb": "9bc4d13768928b4b216ef698c2afd2237e279cd85c1c89947d32a68426d70988",
+  "steps.json": "d69d5ad59ef4ad8924933d706e333c674b72a8c19e849ccfe2df2ea3a29ac9ef",
+  "vendor/three/LICENSE": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+  "vendor/three/addons/controls/OrbitControls.js": "5a44a9e86a2a0fb11933eed69bc2cd33c76a496854c1aed6ed776efa87d7b064",
+  "vendor/three/addons/libs/meshopt_decoder.module.js": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468",
+  "vendor/three/addons/lines/Line2.js": "f926f3c903983abbf10e7a30dc5908df71dc6a20117eb67f0f758344d4a76f93",
+  "vendor/three/addons/lines/LineGeometry.js": "b7e1952c8891dc7840a9119ce03eeb547825663c831851bd73baf305d4c61c46",
+  "vendor/three/addons/lines/LineMaterial.js": "eed69bd471547ca0d15e0e87722530317d5d514f533585948086515c5f308234",
+  "vendor/three/addons/lines/LineSegments2.js": "5009e85ffbd09e86003509f7d1001642cfe7594d42192facdde516fcd4418d24",
+  "vendor/three/addons/lines/LineSegmentsGeometry.js": "59419cee5eccbaacfab5939871308ee262a63761815f72ff49cbd217fd84fdb7",
+  "vendor/three/addons/loaders/GLTFLoader.js": "d073b438e6a07e1359741dd5d6c76c953420cc0d4fd84eb1bdde94315540e6a3",
+  "vendor/three/addons/utils/BufferGeometryUtils.js": "9be041e96308775d00e2695cc607645b9a9b64fd7c0e759dd8f7c00a8d92becb",
+  "vendor/three/three.module.min.js": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+ }
+}
