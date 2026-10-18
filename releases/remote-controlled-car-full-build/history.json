@@ -1,0 +1,16 @@
+{
+ "guide": "remote-controlled-car-full-build",
+ "log": [
+  {
+   "when": "2026-10-18T09:11:54",
+   "action": "published",
+   "release": "r1",
+   "note": "First release: the Full Build as reviewed, for embed and iPad testing (Lee, 18 Oct 2026)",
+   "source": {
+    "commit": "254d7e1df537625fb4f49e9766e72e79d1bc5ce5",
+    "uncommitted_changes": false
+   },
+   "was": null
+  }
+ ]
+}
