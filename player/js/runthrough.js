@@ -51,35 +51,40 @@ window._runthrough = () => {
   for (let i = 1; i < n; i++) { P.go(i, true); check(i, 'fwd'); }
   for (let i = n - 2; i >= 0; i--) { P.go(i, true); check(i, 'back'); }
   for (let i = 0; i < n; i += 3) { P.go(i, false); check(i, 'jump'); }
-  // ...and on the way: part of the way through, a part being taken off is still on screen, moving, and not yet fading; once it
-  // has slid out it fades (half-way through its fade, about half see-through); then it has gone; and stepping back, it fades in
-  // again before it moves.
+  // ...and on the way: while its own way plays, a part being taken off is on screen, moving and not yet fading; once it has slid
+  // out it fades (half-way through its fade, about half see-through), each part at its own time (a screw, then the part it held);
+  // then it has gone; and stepping back, the same backwards: each fades in again where its way out ended, then moves back.
+  const FADE = 800;
   const alpha = id => { let a = 1; const o = st.parts.get(id); if (o) o.traverse(m => { if (m.isMesh && !m.userData.hull && m.material) { const x = m.material.uniforms && m.material.uniforms.opacity ? m.material.uniforms.opacity.value : m.material.opacity; if (x < a) a = x; } }); return a; };
+  const run = (t, checks) => { checks.sort((a, b) => a[0] - b[0]); for (const [ms, fn] of checks) { P.frame(t + ms); fn(); } };
   P.views.forEach((v, i) => {
     if (!(v.leaving || []).length || i === 0) return;
     const before = P.views[i - 1];
     const pose = id => { const o = st.parts.get(id); return o ? at(o.userData.pose, o.userData.sphere.center) : null; };
     P.go(i - 1, false); P.frame(performance.now() + 1e6);
-    P.go(i, true); let t = performance.now(); const T = P.timing; P.frame(t + 400);
+    P.go(i, true); let t = performance.now(); const T = P.timing;
+    if (!T || !T.fade) { problems.push(`${v.name}: parts taken off, but no fade`); P.frame(t + 1e6); return; }
+    const A = P.awayTiming(v, T.moveDur), checks = [];
+    if (T.dur < Math.max(0, ...Object.values(A.restAt)) + 500) problems.push(`${v.name}: no fade of its own after the slide (${T.dur} ms in all)`);
     for (const id of v.leaving) {
       const o = st.parts.get(id); if (!o) continue;
-      if (!o.visible) problems.push(`mid ${v.name}: ${id} has gone before it has left`);
-      else if ((v.moving || []).includes(id) && pose(id).distanceTo(at(before.offsets[id], o.userData.sphere.center)) < 0.5) problems.push(`mid ${v.name}: ${id} is not moving out`);
-      else if (alpha(id) < 0.99) problems.push(`mid ${v.name}: ${id} fades while it is still sliding out`);
+      const mid = (A.moveFrom[id] + A.restAt[id]) / 2;
+      if ((v.moving || []).includes(id) && A.restAt[id] > A.moveFrom[id]) checks.push([mid, () => {
+        if (!o.visible) problems.push(`mid ${v.name}: ${id} has gone before it has left`);
+        else if (pose(id).distanceTo(at(before.offsets[id], o.userData.sphere.center)) < 0.5) problems.push(`mid ${v.name}: ${id} is not moving out`);
+        else if (mid < A.fadeAt[id] && alpha(id) < 0.99) problems.push(`mid ${v.name}: ${id} fades while it is still sliding out`);
+      }]);
+      checks.push([A.fadeAt[id] + FADE / 2, () => { const a = alpha(id); if (o.visible && (a < 0.25 || a > 0.75)) problems.push(`mid fade ${v.name}: ${id} at opacity ${a.toFixed(2)}`); else if (!o.visible) problems.push(`mid fade ${v.name}: ${id} has gone before it has faded`); }]);
     }
-    if (!T || T.dur < T.moveDur + 500) problems.push(`${v.name}: no fade of its own after the slide (${T ? T.dur : 0} ms in all)`);
-    else {
-      P.frame(t + T.dur - 400);
-      for (const id of v.leaving) { const a = alpha(id); if (st.parts.get(id) && (a < 0.25 || a > 0.75)) problems.push(`mid fade ${v.name}: ${id} at opacity ${a.toFixed(2)}`); }
-    }
+    run(t, checks);
     P.frame(t + 1e6);
     for (const id of v.leaving) { const o = st.parts.get(id); if (o && o.visible) problems.push(`mid ${v.name}: ${id} is still shown once it has left`); }
-    P.go(i - 1, true); t = performance.now(); P.frame(t + 400);
-    for (const id of v.leaving) {
-      const o = st.parts.get(id); if (!o) continue;
+    P.go(i - 1, true); t = performance.now();
+    run(t, v.leaving.filter(id => st.parts.get(id)).map(id => [T.dur - A.fadeAt[id] - FADE / 2, () => {
+      const o = st.parts.get(id), a = alpha(id);
       if (!o.visible) problems.push(`mid back ${v.name}: ${id} is not on its way back`);
-      else if (alpha(id) > 0.75 || alpha(id) < 0.25) problems.push(`mid back ${v.name}: ${id} at opacity ${alpha(id).toFixed(2)}, not fading in`);
-    }
+      else if (a < 0.25 || a > 0.75) problems.push(`mid back ${v.name}: ${id} at opacity ${a.toFixed(2)}, not fading in`);
+    }]));
     P.frame(t + 1e6); check(i - 1, 'back');
   });
   return {views: n, problems: problems.length, first: problems.slice(0, 12)};

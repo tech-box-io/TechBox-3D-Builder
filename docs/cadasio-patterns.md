@@ -117,7 +117,9 @@ Section 14 says what the in-house player does today against each rule.
 - **Size:** text about 4% of the view height; rule about 8% of the view width; leader typically 19% of the view height at about 35 degrees.
 
 **Eye icon**
-- One black eye glyph, about 8% of the view's width, with the same blue leader and ring. One per step, two at most.
+- One black eye glyph, about 8% of the view's width, with the same blue leader and ring. One per step, two at most. **In-house
+  (Lee, 2026-10-18):** it sits on a white box, as the labels do, so that it stands out over the model (on its own it had too
+  little contrast where it fell over dark parts).
 - The usual cue on `Step N` when the thing to act on is *not* shown by a hovering part with lead lines (79% of such views): the loose wire to pick up, a pre-wired module to pick up, a feature to notice on a card. And as the "check this" cue on a result view (wires through a notch, a tab locked in its slot).
 - Every `Step N` carries at least one cue (423 of 425), and usually exactly one kind: lead lines, an eye, an arrow or an inset.
 - Sits in the nearest white space, 15-35% of the view height from its target.
@@ -223,6 +225,14 @@ reverse, with two exceptions: wires that went on one at a time may come off toge
 joysticks and the module at once; or in phases, the joysticks pulled off the wires, then the wires off the module), and a test
 the build makes on the bench (the electronics test: motors plugged in, then out again) has no counterpart. The fade of a part
 taken off: slower and smoother, as Cadasio's (below, section 13).
+
+**Lee, 2026-10-18 (first round on the MRA's draft):** a screw and the part it held come off in one step, in sequence: the screw
+slides out and fades, then the part slides out and fades (a stack of plates on one screw: the screw, then each plate in turn).
+A screw that the model hides from the step's camera gets an eye. With the cover (B8) off, the electronics come out where they
+are, before the housing around them: the breadboard wires off both ends, the I/O module out of its slots, the Nano Board out of
+the module; then each joystick with its walls, the walls off it in the hand. So the guide ends on the base carrier, R1, as the
+published take-aparts end on the base (above). A sub-assembly taken apart in the hand is seen the way the build showed it,
+from above where the build did; Lee asked for the claw's C3 from above (the build had turned it over).
 
 ## 12. Numeric defaults
 

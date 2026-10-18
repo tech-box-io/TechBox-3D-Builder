@@ -66,7 +66,7 @@ What the browser loads:
 What they are generated from:
   mra.glb                       the 3D model converted from the STEP export (full detail)
   guide.py                      the build, in order: which part goes on next, the caption, any hand-set motion, the wires
-  deconstruction.py             the deconstruction (first draft 18 Oct 2026): the Full Build taken apart in reverse, made from steps.json
+  deconstruction.py             the deconstruction (18 Oct 2026, with Lee's first round): the Full Build taken apart, down to R1, made from steps.json
   materials.json                colours and how much detail to keep, per part
   colour-atlas-mra.json         the colour of every solid in TechBox's Cadasio project for this kit
   wire-paths.json               the centre line of every wire in the CAD, the plugs and the leads

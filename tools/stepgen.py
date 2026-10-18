@@ -907,7 +907,9 @@ class Guide:
           wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
               drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
-          alone=[ids]: the step shown with only these parts on screen (a sub-assembly taken apart on its own)."""
+          in_turn=[[ids], [ids], ...]: the parts leave one group after another, each its own way, each fading out once it has
+              slid out (a screw, then the part it held: Lee, 18 Oct 2026); Prev brings them back the other way round.
+          alone=[ids]: the step shown with only these parts on screen (a sub-assembly taken apart on its own), and what rides on them."""
         return self._takeoff('remove', caption, ids, **how)
 
     def unplug(self, caption, ids, ride_on=None, **how):
@@ -932,7 +934,7 @@ class Guide:
 
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
-                 alone=None, flip=False, wire_via=None, units=None, wires_here=None):
+                 alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
         units_given = units
@@ -954,6 +956,8 @@ class Guide:
         leave = ids + riders(ids) if how == 'remove' else []
         if alone is not None and any(i not in alone for i in ids):
             raise ValueError(f'{how}(): alone= must include the parts it moves')
+        if alone is not None:                         # (what rides on the parts shown is shown with them: a joystick's wire caps)
+            alone = list(alone) + [i for i in riders(alone) if i not in alone]
 
         def now(i, seen=()):
             if i in self.riding and i not in seen:
@@ -991,7 +995,9 @@ class Guide:
                         level = lambda q: _rot(q) is None or np.allclose(_rot(q), np.eye(3), atol=1e-6)   # or, if it has only slid, there)
                         if m.get('camera') and level(carrier) and level(then):
                             cam = copy.deepcopy(m['camera'])
-                            cam['target'] = (np.asarray(cam['target'], float) + _shift(carrier) - _shift(then)).round(1).tolist()
+                            for key in ('target', 'pivot'):           # (a turned-over view turns about the sub-assembly where it is now)
+                                if key in cam:
+                                    cam[key] = (np.asarray(cam[key], float) + _shift(carrier) - _shift(then)).round(1).tolist()
                             moves[i] = dict(m, camera=cam)
                         else:
                             moves[i] = dict(m, camera=None)
@@ -1033,6 +1039,21 @@ class Guide:
         for i, way in ways.items():                   # (a way by hand may pass through poses without pausing: via())
             if i not in stops and any(isinstance(p, via) for p in way):
                 stops[i] = sorted({0, len(way) - 1, *[k for k, p in enumerate(way) if not isinstance(p, via)]})
+        if in_turn:                                   # one group after another (a screw, then the part it held: Lee, 18 Oct 2026):
+            groups = [list(dict.fromkeys(g)) for g in in_turn]   # each waits where it is until the group before has come to rest
+            listed = [i for g in groups for i in g]
+            if sorted(listed) != sorted(movers):
+                raise ValueError(f'{how}({caption[:30]!r}): in_turn= must list each part that moves once ({sorted(movers)}), not {listed}')
+            beats = lambda i: len(stops[i]) - 1 if i in stops else len(ways[i]) - 1
+            each = [max(beats(i) for i in g) for g in groups]
+            for gi, g in enumerate(groups):
+                before, after = sum(each[:gi]), sum(each[gi + 1:])
+                for i in g:
+                    w, n = ways[i], len(ways[i]) - 1
+                    st = stops.get(i, list(range(n + 1)))
+                    wait = each[gi] - (len(st) - 1) + after
+                    ways[i] = [w[0]] * before + list(w) + [w[-1]] * wait
+                    stops[i] = list(range(before)) + [before + k for k in st] + [before + n + j for j in range(1, wait + 1)]
         final = {i: w[-1] for i, w in ways.items()}
 
         # where the unplugged plugs ride from now on, and what the leads do
@@ -1293,6 +1314,11 @@ class Guide:
         long as they travel (20 - 115 mm), its face towards the camera (rulebook section 11, the published take-aparts' sizes)."""
         a = np.mean([apply_pose(here.get(i), self._pivot(i)) for i in unit], axis=0)
         b = np.mean([apply_pose(there.get(i), self._pivot(i)) for i in unit], axis=0)
+        inside = lambda i: bool(np.all(np.abs(unapply_pose(here.get(i), a[None])[0] - self._pivot(i)) <= self.model.inst[i].extents / 2 + 2.0))
+        if len(unit) > 1 and not any(inside(i) for i in unit):   # (parts spread out, as six screws round a plate: the arrow starts on the
+            near = min(unit, key=lambda i: float(np.linalg.norm(apply_pose(here.get(i), self._pivot(i)) - a)))   # one nearest their middle,
+            unit = [near]                                                                                       # not in the space between)
+            a, b = apply_pose(here.get(near), self._pivot(near)), apply_pose(there.get(near), self._pivot(near))
         reach = float(np.linalg.norm(b - a))
         if reach < 1.0:
             return None

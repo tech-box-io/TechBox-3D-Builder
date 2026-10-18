@@ -1,16 +1,18 @@
-"""Mini Robot Arm (MRA), deconstruction: the finished arm taken apart, down to the I/O module. A guide of its own
+"""Mini Robot Arm (MRA), deconstruction: the finished arm taken apart, down to R1. A guide of its own
 (steps-deconstruction.json), made from the Full Build as guide.py last wrote it (run that first, and this again after any change to
 it). First draft (Lee, 18 Oct 2026): the Full Build in reverse (rulebook section 11), with two exceptions of Lee's:
   - the eight breadboard wires come off the joysticks and the I/O module all at once;
   - no electronics test: each motor is unplugged and taken out once, where the build put it in (the bench test's plugging in and
     unplugging, and its USB cable, have no counterpart).
-It opens on the Full Build's title page and ends on what is left, the I/O module, the Nano Board taken out of it last.
+It opens on the Full Build's title page and ends on what is left, R1 (Lee's first round, 18 Oct 2026: the electronics come out of
+the controller before the joysticks' walls, so the base is the last to go). A screw and the part it held go in one step, one after
+the other: the screw out and gone, then the part (in_turn=, Lee's first round).
 
 Sub-assemblies the Full Build put together in the hand (the T1 / T2 block, the claw, the arm's links, the joysticks in their walls)
 are lifted off the way they went on and taken apart on their own (alone=). Steps of the Full Build that moved only a plug on its lead
 (into a slot, a hook or a hole) are walked back from the Full Build's own record of them: its poses and its lead's stages.
-The I/O module and the joysticks, still wired together, are set down on the table in front of the base as they come out of the
-controller (the module where the Full Build had it while the controller was built), so that B3, B4 and the base can come apart."""
+With B8 off, the breadboard wires come off the joysticks and the I/O module where they are, then the module slides out of the
+controller and the Nano Board out of it (in the hand), then the joysticks come out with their walls and out of them (in the hand)."""
 import json
 import sys
 from pathlib import Path
@@ -42,6 +44,7 @@ COUPLER, EXTENSION_PLUG, ROW10_PLUG = 'NAUO91', 'NAUO92', 'NAUO85'
 T1_LOWER, T2_SOLID_DOWN, T2_SLOT_DOWN, T1_UPPER = 'NAUO41', 'NAUO42', 'NAUO43', 'NAUO44'
 USB_B, USB_A = 'USB_B', 'USB_A'
 JUMPER_CAPS = ['NAUO%d' % i for i in range(95, 111)]
+BASE_SCREWS_HIDDEN = ['NAUO47']                                     # (the base screw R1 - R6 hide from Step 29's camera: an eye on it)
 
 # ---------------------------------------------------------------- the Full Build, as guide.py last wrote it
 FULL = json.loads((HERE / 'steps.json').read_text(encoding='utf-8'))
@@ -159,17 +162,18 @@ g.remove('Pull C1 and C2 out of their slots in C3.', [C1, C2], alone=IN_C3 + [C1
 assert VIEW['Step 78c']['carry'][CLAW_PLUG]['pose'] == VIEW['Step 94']['carry'][CLAW_PLUG]['pose']   # (the plug is where Step 78 left it)
 path, stages, last = walked_back('Step 78', CLAW_PLUG, 'claw', carrier_pose=where(CLAW_MOTOR), pivot=g._pivot(CLAW_PLUG))
 g.lift("Pull the claw motor's wire back out of the hole in the end of C3.", [CLAW_PLUG], path=path, ride_on=CLAW_MOTOR,
-       wire_via=stages, wires=last, alone=IN_C3, **camera_of('Step 78', moved=where(C3)))
+       wire_via=stages, wires=last, alone=IN_C3, view_dir=[-0.5792, 0.5736, -0.5792])   # (from above C3: Lee, 18 Oct 2026)
 g.remove('Push the claw motor back out of C3.', [CLAW_MOTOR, CLAW_HORN], alone=IN_C3)
 g.put_away([C3])
 
 # ================================================================ ARM: the forearm links (A10 - A13)
-g.remove('Unscrew the 10mm screw that holds A13 and A10 to A8, and lift A13 off.', [A13_SCREW, A13], units=[[A13_SCREW, A13]])
+g.remove('Unscrew the 6mm screw that holds A12 to A10, then lift A12 off.', [A12_SCREW, A12], in_turn=[[A12_SCREW], [A12]],
+         **camera_of('Step 75'))
+g.remove('Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.', [A13_SCREW, A13], in_turn=[[A13_SCREW], [A13]])
 g.remove('Unscrew the 6mm screw in the lobe of R6, from outside R6.', [R6_A11_SCREW])
-LINKS = [A10, A11, A11_SCREW, A12, A12_SCREW]
-g.lift('Lift A10, A11 and A12 out from behind the lobe of R6.', LINKS)
-g.remove('Unscrew the 6mm screw that holds A12 to A10, and lift A12 off.', [A12_SCREW, A12], units=[[A12_SCREW, A12]], alone=LINKS)
-g.remove('Unscrew the 6mm screw that holds A11 to A10, and lift A11 off.', [A11_SCREW, A11], units=[[A11_SCREW, A11]], alone=[A10, A11, A11_SCREW])
+LINKS = [A10, A11, A11_SCREW]
+g.lift('Lift A10 and A11 out from behind the lobe of R6.', LINKS)
+g.remove('Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.', [A11_SCREW, A11], in_turn=[[A11_SCREW], [A11]], alone=LINKS)
 g.put_away([A10])
 
 # ================================================================ SHOULDER MOTOR
@@ -184,7 +188,7 @@ g.remove('Take the shoulder motor out of R6, angling its servo horn back out thr
 g.remove('Unscrew the 6mm screw that holds A5 to A7, and the 10mm screw that holds A1 - A3 to A4.', [A5_A7_SCREW, LEVER_A4_SCREW])
 FOREARM = [A4, A5, A5_A4_SCREW]
 g.lift('Lift A4 and A5 off together.', FOREARM)
-g.remove('Unscrew the 6mm screw that holds A5 to A4, and lift A5 off.', [A5_A4_SCREW, A5], units=[[A5_A4_SCREW, A5]], alone=FOREARM)
+g.remove('Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.', [A5_A4_SCREW, A5], in_turn=[[A5_A4_SCREW], [A5]], alone=FOREARM)
 g.put_away([A4])
 
 # ================================================================ ELBOW MOTOR
@@ -198,7 +202,8 @@ g.remove('Take the elbow motor out of R5, angling its servo horn back out throug
 # ================================================================ ARM: the lever (A1 - A3) and the upper arm (A6 - A9)
 LEVER = [A1, A2, A3, LEVER_SCREW]
 g.lift('Slide A1 - A3 back up from between R5 and A7.', LEVER)
-g.remove('Unscrew the 10mm screw from A1 - A3, and lift A3 and A2 off A1.', [LEVER_SCREW, A3, A2], units=[[LEVER_SCREW, A3, A2]], alone=LEVER)
+g.remove('Unscrew the 10mm screw from A1 - A3, then lift A3 off, then A2, leaving A1.', [LEVER_SCREW, A3, A2],
+         in_turn=[[LEVER_SCREW], [A3], [A2]], units=[[LEVER_SCREW, A3, A2]], alone=LEVER)   # (all three go the same way: one arrow)
 g.put_away([A1])
 g.remove('Unscrew the 6mm screw that holds A7 to R2. Reach it through the opening in R5.', [PIVOT_SCREW])
 UPPER = [A6, A7, A9_NEAR_A7, A7_SCREW, A8, A9_NEAR_A8, A8_SCREW]
@@ -211,39 +216,34 @@ g.remove('Pull that A9 out of its slot too.', [A9_NEAR_A7], alone=[A6, A7, A9_NE
 g.remove('Pull A7 off the last two tabs on A6.', [A7], alone=[A6, A7])
 g.put_away([A6])
 
-# ================================================================ THE I/O MODULE OUT OF THE CONTROLLER
-# (On the table in front of the base, where the Full Build had it while the controller was built; the joysticks, still wired to it,
-# are set down beside it as they come out of their walls, as they lie beside it on the bench, their undersides on the table.)
-MODULE_ASIDE = VIEW['Step 34']['offsets'][MODULE]
-JOY_ASIDE = [MODULE_ASIDE[0], -29.8, MODULE_ASIDE[2]]
+# ================================================================ THE CONTROLLER'S ELECTRONICS (Lee, 18 Oct 2026: they come out before the walls)
+MODULE_ASIDE = VIEW['Step 34']['offsets'][MODULE]                    # (on the table in front of the base, as the Full Build had it)
 g.unplug('Unplug the base motor from Row 5.', [BASE_PLUG])
-g.lift('Slide the I/O module back out of the slots in B6, and set it down on the table in front of the base.', [MODULE],
-       path=full_way_back('Step 39', MODULE, then=[MODULE_ASIDE]))
+BENCH_ROUTES = {w: r for side in ('left', 'right') for w, r in leads('Step 11c', side).items()}   # (the wires' own shapes, tied to their caps
+g.remove('Lift B8 off B5 - B7.', [B8], wires=BENCH_ROUTES)                                        # as on the bench, so that they go with them)
+ENDS_ON = lambda part: [cap for cap in JUMPER_CAPS if g.riding[cap][0] == part]   # (an arrow at each joystick's four ends and at the module's eight)
+g.remove('Unplug the eight breadboard wires from the joysticks and the I/O module.', JUMPER_CAPS,
+         units=[ENDS_ON(JOY_LEFT), ENDS_ON(JOY_RIGHT), ENDS_ON(MODULE)])
+g.lift('Slide the I/O module back out of the slots in B6.', [MODULE], path=full_way_back('Step 39', MODULE, then=[MODULE_ASIDE]))
+g.remove('Lift the Nano Board out of the I/O module.', [NANO], alone=[MODULE, NANO])
+g.put_away([MODULE])                                                # (what is left of a sub-assembly taken apart in the hand)
 
-# ================================================================ CONTROLLER (the joysticks stay wired to the module)
-g.remove('Lift B8 off B5 - B7.', [B8])
-RIGHT = [JOY_RIGHT, B6_RIGHT, B7]                                     # (the joystick first: the walls ride on it once lifted off)
-g.lift("Hold the left joystick's wires up out of the way, then lift B6 and B7 off B3 with the right joystick between them.", RIGHT,
-       wires=leads('Step 37', 'left'))
-IN_HAND_RIGHT = leads('Step 35', 'right')                            # (its wires shown running on, fading out, as the Full Build did)
-g.remove('Pull B7 off the right joystick.', [B7], alone=RIGHT, wires_here=IN_HAND_RIGHT)
-g.remove('Pull B6 off the right joystick.', [B6_RIGHT], alone=[JOY_RIGHT, B6_RIGHT], direction=[0, 0, -1], hover=40.0, wires_here=IN_HAND_RIGHT,
-         **camera_of('Step 35', moved=where(JOY_RIGHT)))
-BENCH_ROUTES = lambda prefix: leads('Step 11c', prefix)              # (as the bench test had them: from cap to cap, so they go with the caps)
-g.lift("Lay the right joystick on the table beside the I/O module, and lay the left joystick's wires back down.", [JOY_RIGHT],
-       path=[via([JOY_ASIDE[0], 80.0, JOY_ASIDE[2]]), JOY_ASIDE], wires={**leads('Step 37c', 'left'), **BENCH_ROUTES('right')})
-LEFT = [JOY_LEFT, B5, B6_LEFT]
+# ================================================================ THE JOYSTICKS AND THEIR WALLS
+RIGHT = [B6_RIGHT, B7, JOY_RIGHT]                                     # (B6 first, as the Full Build: the others ride on it once lifted off)
+g.lift('Lift B6 and B7 off B3 with the right joystick between them.', RIGHT)
+g.remove('Pull B7 off the right joystick.', [B7], alone=RIGHT)
+g.remove('Pull the right joystick out of B6.', [JOY_RIGHT], alone=[B6_RIGHT, JOY_RIGHT])
+g.put_away([B6_RIGHT])
+LEFT = [B5, B6_LEFT, JOY_LEFT]
 g.lift('Lift B5 and B6 off B3 with the left joystick between them.', LEFT)
-IN_HAND_LEFT = leads('Step 32', 'left')
-g.remove('Pull B6 off the left joystick.', [B6_LEFT], alone=LEFT, wires_here=IN_HAND_LEFT)
-g.remove('Pull B5 off the left joystick.', [B5], alone=[JOY_LEFT, B5], direction=[0, 0, -1], hover=40.0, wires_here=IN_HAND_LEFT,
-         **camera_of('Step 32', moved=where(JOY_LEFT)))
-g.lift('Lay the left joystick on the table beside the I/O module too.', [JOY_LEFT],
-       path=[via([JOY_ASIDE[0], 80.0, JOY_ASIDE[2]]), JOY_ASIDE], wires=BENCH_ROUTES('left'))
-g.remove('Pull B4 and B3 out of B2.', [B4, B3])
+g.remove('Pull B6 off the left joystick.', [B6_LEFT], alone=LEFT)
+g.remove('Pull the left joystick out of B5.', [JOY_LEFT], alone=[B5, JOY_LEFT])
+g.put_away([B5])
+g.remove('Pull B4 out of B2.', [B4])
+g.remove('Pull B3 out of B2.', [B3])
 
-# ================================================================ BASE
-g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS)
+# ================================================================ BASE (R1 is left)
+g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS, eye=BASE_SCREWS_HIDDEN)   # (an eye on the one behind R1 - R6: Lee)
 g.remove('Lift R1 - R6 and B2 off B1.', [B1])
 g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2])
 path, stages, last = walked_back('Step 25', BASE_PLUG, 'base')
@@ -255,13 +255,5 @@ g.remove('Lift R4 off R1.', [R4])
 g.remove('Lift R3 off R1.', [R3])
 g.remove('Slide R2 up off the base motor.', [R2])
 g.remove('Turn the base motor and angle its servo horn back out through the slot in R1.', [BASE_MOTOR, BASE_HORN])
-g.remove('Put R1 away: the base is taken apart.', [R1], direction=[0, 1, 0], hover=50.0)
-
-# ================================================================ ELECTRONICS (the build's first steps, without the test)
-JOYSTICK_ENDS = [cap for cap in JUMPER_CAPS if g.riding[cap][0] in (JOY_LEFT, JOY_RIGHT)]
-g.remove('Unplug the eight breadboard wires from the joysticks and the I/O module.', JUMPER_CAPS,
-         units=[JOYSTICK_ENDS, [cap for cap in JUMPER_CAPS if cap not in JOYSTICK_ENDS]])
-g.remove('Put the two joysticks away.', [JOY_LEFT, JOY_RIGHT], direction=[0, 1, 0], hover=40.0, units=[[JOY_LEFT], [JOY_RIGHT]])
-g.remove('Lift the Nano Board out of the I/O module.', [NANO])
 
 g.build()

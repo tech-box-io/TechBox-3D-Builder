@@ -272,7 +272,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     did not move in, or one not in its seat, is pulled straight out the first free way. Parts riding on them go too, and so does a
     lead whose ends both go; a lead left with one end on screen is refused (unplug it first). `path=` / `paths=` / `direction=`
     and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release), `alone=[ids]` (taken apart on its own),
-    `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`; `units=[[ids], ...]` (the arrows by
+    `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`; `in_turn=[[ids], ...]` (in order, each
+    group once the one before has slid out and faded); `units=[[ids], ...]` (the arrows by
     hand: the MRA's eight breadboard wires, one arrow at each end); `wires_here={id: route}` (leads as drawn on this step only: a
     joystick's wires fading out in the hand). Two of a kind get an arrow each only if they do not touch (a motor and its horn,
     named alike, are one). A sub-assembly taken apart in the hand after sliding off (not turned) keeps the Full Build's in-hand
@@ -291,10 +292,13 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its title page, the finished model
   (Lee, 17 Oct 2026: `_dev.card()` does this for a guide made by `take_apart()`). Parts taken off slide out, then fade out over a
   beat of their own (800 ms, starting just before the slide comes to rest), leads with them, as Cadasio does (Lee, 18 Oct 2026:
-  slower and smoother than the fade inside the slide of 17 Oct); Prev fades them in first, where their way out ended, then slides
-  them back. The MRA's (`deconstruction.py`): the Full Build reversed except where Lee said (the eight breadboard wires at once;
-  no electronics test); the I/O module and the joysticks, still wired, are set down on the table in front of the base as they
-  come out of the controller, and the guide ends on the I/O module, the Nano Board out last. Run it after every Full Build change.
+  slower and smoother than the fade inside the slide of 17 Oct), each part once its own way has come to rest; Prev plays the whole
+  backwards (each fades in where its way out ended, then slides back). `in_turn=[[screw], [part]]` takes a screw and the part it
+  held off in one step, one after the other: the screw out and gone, then the part (Lee, 18 Oct 2026). An `alone=` view shows
+  what rides on its parts too. The arrow of parts spread apart (six screws round a plate) starts on the one nearest their middle.
+  The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
+  no electronics test; each screw step a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
+  Board come out before the joysticks' walls), and it ends on R1. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
