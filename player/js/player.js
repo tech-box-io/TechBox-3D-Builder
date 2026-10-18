@@ -6,6 +6,10 @@ const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
 const ACCENT = '#7fdbff';                    // label underline, leader and anchor ring
 const STEP_MS = 800;                         // every transition, as in the published guides
+// A part taken off fades out once it has slid out, over a beat of its own, as the published take-aparts do (Lee, 18 Oct 2026:
+// slower and smoother than a fade inside the slide); it starts a little before the slide comes to rest, so nothing waits.
+const FADE_MS = 800, FADE_OVERLAP_MS = 150;
+const fadeCurve = u => 0.5 + 0.5 * Math.cos(Math.PI * Math.min(1, Math.max(0, u)));   // 1 -> 0, gently at both ends
 
 // Always the latest steps (the model URL inside carries its own version). ?steps= may name another steps file in this folder, nothing else.
 const stepsFile = /^[\w.-]+\.json$/.test(params.get('steps') || '') ? params.get('steps') : 'steps.json';
@@ -605,24 +609,27 @@ function go(i, animate = true) {
   const pose = poseFor(to, stage.width / stage.height);
   const stopsOf = id => wayStops ? wayStops[id] || null : stopsFor(to, id);
   const legs = Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1;
-  // Parts taken off fade out over the second half of their last stage (Lee, 17 Oct 2026); coming back, they fade in over the first
-  // half of the first. Their leads go with them.
+  // Parts taken off slide out, then fade out over a beat of their own (FADE_MS); coming back, they fade in where their way out
+  // ended, then slide back. Their leads go with them.
   let fade = null, fadeParts = [], fadeWires = [];
-  if (leaving.length) {
-    const k0 = (legs - 0.5) / legs;
-    fade = k => 1 - ease(Math.min(1, Math.max(0, (k - k0) / (1 - k0))));
+  const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
+  const moveDur = playing ? STEP_MS * legs : 0, overlap = Math.min(FADE_OVERLAP_MS, moveDur / 4);
+  let moveAt = 0, dur = moveDur;
+  if (playing && leaving.length) {
+    const at = moveDur - overlap;
+    fade = t => fadeCurve((t - at) / FADE_MS);
     fadeParts = leaving; fadeWires = Object.keys(to.leaving_wires || {});
-  } else if (backward && from.away && (from.leaving || []).length) {
-    const k1 = 0.5 / legs;
-    fade = k => ease(Math.min(1, Math.max(0, k / k1)));
+    dur = at + FADE_MS;
+  } else if (playing && backward && from.away && (from.leaving || []).length) {
+    fade = t => 1 - fadeCurve(t / FADE_MS);
     fadeParts = from.leaving.filter(id => id in end); fadeWires = Object.keys(from.leaving_wires || {}).filter(w => (to.wires || {})[w] != null);
+    moveAt = FADE_MS - overlap; dur = moveAt + moveDur;
   }
   // the model is turned over (or back) for a view of its underside: about the new view's target, as the camera moves
   const w0 = {q: worldLive.q.clone(), at: worldLive.at.clone()}, w1 = flat(to) ? w0 : stage.worldFor(to.camera);   // (from the turn on screen, which may be half done)
   const moved = w0.q.angleTo(w1.q) > 1e-6 || (w1.q.angleTo(ONE) > 1e-6 && w0.at.distanceTo(w1.at) > 1e-3);   // turned, or turned about another point
   const turning = moved && animate && !flat(from) && from.kind !== 'start';   // (after a card the model is simply the other way up)
-  const playing = animate || Object.keys(ways).length > 0;   // (a jump is at once, except for a wiggle, which still plays)
-  anim = {t0: performance.now(), dur: playing ? STEP_MS * legs : 0, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fadeParts, fadeWires, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
+  anim = {t0: performance.now(), dur, moveAt, moveDur, start, end, ways, stops: Object.fromEntries(Object.keys(ways).map(id => [id, stopsOf(id)])), wireVia, to, leaving, fade, fadeParts, fadeWires, fresh: new Set(to.visible.filter(id => !was(id))), from: flat(from) || from.kind === 'start' || (from.isolated && !to.isolated) || !animate ? null : from,
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);
@@ -634,10 +641,12 @@ const worldLive = {q: new THREE.Quaternion(), at: new THREE.Vector3()};   // how
 function turnWorld(q, at) { worldLive.q.copy(q); worldLive.at.copy(at); stage.setWorld(worldLive); }
 function stepAnimation(now) {
   if (!anim) return false;
-  const k = anim.dur ? Math.min(1, Math.max(0, (now - anim.t0) / anim.dur)) : 1, e = ease(k);   // a frame can be stamped just before the click
+  const t = Math.max(0, now - anim.t0);      // (a frame can be stamped just before the click)
+  const k = anim.dur ? Math.min(1, t / anim.dur) : 1;   // the whole: the motion, and a fade before or after it
+  const km = anim.moveDur ? Math.min(1, Math.max(0, (t - anim.moveAt) / anim.moveDur)) : 1, e = ease(km);   // the motion
   if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, e), aW.lerpVectors(w.at0, w.at1, e)); }
   liveOffsets = {};
-  for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], k, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
+  for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], km, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
   const carry = anim.to.carry || {}, before = (anim.from && anim.from.carry) || {}, back = !!anim.wireVia;
   for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
     if (!(id in anim.end)) continue;
@@ -652,13 +661,13 @@ function stepAnimation(now) {
   // A wire that passes through as many routes as the moving part has stops keeps pace with it, stop by stop (the
   // servo extension wire onto row 10); any other wire changes route over the whole step.
   const wireVia = anim.wireVia || anim.to.wire_via;
-  const beats = anim.dur ? Math.max(1, Math.round(anim.dur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
+  const beats = anim.moveDur ? Math.max(1, Math.round(anim.moveDur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
   let we = e;
-  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(k * beats)); we = (b + ease(k * beats - b)) / beats; }
+  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(km * beats)); we = (b + ease(km * beats - b)) / beats; }
   const leads = anim.leaving.length && k < 1 && anim.to.leaving_wires ? {...anim.to, wires: {...anim.to.wires, ...anim.to.leaving_wires}} : anim.to;   // (a lead taken off goes with its parts)
   let alphas = null;
   if (anim.fade && k < 1) {                  // (parts taken off, fading out; or fading in again, coming back)
-    const a = anim.fade(k);
+    const a = anim.fade(t);
     for (const id of anim.fadeParts) stage.setFade(id, a);
     alphas = Object.fromEntries(anim.fadeWires.map(w => [w, a]));
   }
@@ -1038,4 +1047,5 @@ $('resetview').onclick = resetView;
 if (controls) controls.addEventListener('start', () => { camSwing = null; });
 const frame = now => stage.frame(now, stepAnimation(now) || swingCamera(now));
 (function tick(now) { requestAnimationFrame(tick); frame(now); })(performance.now());
-window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; }};   // handle for tests and debugging
+window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; },
+                  get timing() { return anim ? {dur: anim.dur, moveAt: anim.moveAt, moveDur: anim.moveDur} : null; }};   // handle for tests and debugging

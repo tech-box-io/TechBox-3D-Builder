@@ -51,23 +51,35 @@ window._runthrough = () => {
   for (let i = 1; i < n; i++) { P.go(i, true); check(i, 'fwd'); }
   for (let i = n - 2; i >= 0; i--) { P.go(i, true); check(i, 'back'); }
   for (let i = 0; i < n; i += 3) { P.go(i, false); check(i, 'jump'); }
-  // ...and on the way: part of the way through, a part being taken off is still on screen and moving; then it has gone; and
-  // stepping back, it is on screen again on its way back.
+  // ...and on the way: part of the way through, a part being taken off is still on screen, moving, and not yet fading; once it
+  // has slid out it fades (half-way through its fade, about half see-through); then it has gone; and stepping back, it fades in
+  // again before it moves.
+  const alpha = id => { let a = 1; const o = st.parts.get(id); if (o) o.traverse(m => { if (m.isMesh && !m.userData.hull && m.material) { const x = m.material.uniforms && m.material.uniforms.opacity ? m.material.uniforms.opacity.value : m.material.opacity; if (x < a) a = x; } }); return a; };
   P.views.forEach((v, i) => {
     if (!(v.leaving || []).length || i === 0) return;
     const before = P.views[i - 1];
     const pose = id => { const o = st.parts.get(id); return o ? at(o.userData.pose, o.userData.sphere.center) : null; };
     P.go(i - 1, false); P.frame(performance.now() + 1e6);
-    P.go(i, true); let t = performance.now(); P.frame(t + 400);
+    P.go(i, true); let t = performance.now(); const T = P.timing; P.frame(t + 400);
     for (const id of v.leaving) {
       const o = st.parts.get(id); if (!o) continue;
       if (!o.visible) problems.push(`mid ${v.name}: ${id} has gone before it has left`);
       else if ((v.moving || []).includes(id) && pose(id).distanceTo(at(before.offsets[id], o.userData.sphere.center)) < 0.5) problems.push(`mid ${v.name}: ${id} is not moving out`);
+      else if (alpha(id) < 0.99) problems.push(`mid ${v.name}: ${id} fades while it is still sliding out`);
+    }
+    if (!T || T.dur < T.moveDur + 500) problems.push(`${v.name}: no fade of its own after the slide (${T ? T.dur : 0} ms in all)`);
+    else {
+      P.frame(t + T.dur - 400);
+      for (const id of v.leaving) { const a = alpha(id); if (st.parts.get(id) && (a < 0.25 || a > 0.75)) problems.push(`mid fade ${v.name}: ${id} at opacity ${a.toFixed(2)}`); }
     }
     P.frame(t + 1e6);
     for (const id of v.leaving) { const o = st.parts.get(id); if (o && o.visible) problems.push(`mid ${v.name}: ${id} is still shown once it has left`); }
     P.go(i - 1, true); t = performance.now(); P.frame(t + 400);
-    for (const id of v.leaving) { const o = st.parts.get(id); if (o && !o.visible) problems.push(`mid back ${v.name}: ${id} is not on its way back`); }
+    for (const id of v.leaving) {
+      const o = st.parts.get(id); if (!o) continue;
+      if (!o.visible) problems.push(`mid back ${v.name}: ${id} is not on its way back`);
+      else if (alpha(id) > 0.75 || alpha(id) < 0.25) problems.push(`mid back ${v.name}: ${id} at opacity ${alpha(id).toFixed(2)}, not fading in`);
+    }
     P.frame(t + 1e6); check(i - 1, 'back');
   });
   return {views: n, problems: problems.length, first: problems.slice(0, 12)};
@@ -118,10 +130,8 @@ window._dev = {
     if (i < 0) throw new Error('no view called ' + name);
     P.go(Math.max(0, i - 1), false); P.frame(performance.now() + 1e6);
     P.go(i, true);
-    const t = performance.now(), v = P.views[i];
-    const stops = id => v.paths && v.paths[id] ? (v.path_stops && v.path_stops[id]) || v.paths[id] : v.stops || v.path;   // (as the player counts them)
-    const beats = (v.kind === 'done' || v.wiggle) && v.moving && v.moving.length ? Math.max(1, ...v.moving.map(id => stops(id).length - 1)) : 1;
-    const at = k == null ? 1e6 : k * 800 * beats;
+    const t = performance.now(), v = P.views[i], T = P.timing;     // (the whole animation: the motion, and a fade after it)
+    const at = k == null ? 1e6 : k * (T ? T.dur : 0);
     P.frame(t + at); P.stage.invalidate(); P.frame(t + at);
     return {index: i, kind: v.kind, caption: v.caption, moving: v.moving, lines: (v.guides || []).length, labels: (v.labels || []).map(l => l.text), review: v.review || null};
   },

@@ -904,7 +904,9 @@ class Guide:
               drawn where it is now). eye=[ids or dict(anchor=...)], labels=[...] (none by default), caution=, review=, inset= (on Step N:
               the catch to release).
           view_dir= / frame= / look_from=, new_camera=True: a camera chosen for this step instead of the Full Build's; flip=True.
-          wires={id: route or None}: leads that change route (or go) as the step completes.
+          wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
+              drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
+          units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
           alone=[ids]: the step shown with only these parts on screen (a sub-assembly taken apart on its own)."""
         return self._takeoff('remove', caption, ids, **how)
 
@@ -915,18 +917,25 @@ class Guide:
         has an eye on each plug (rulebook section 11), no arrow. Other options as remove()'s."""
         return self._takeoff('unplug', caption, ids, ride_on=ride_on, **how)
 
-    def lift(self, caption, ids, to=None, **how):
+    def lift(self, caption, ids, to=None, ride_on=None, **how):
         """Move parts off and set them down beside the model, still wired (after take_apart(); a module lifted off the housing, to be
-        unplugged later): to = the pose they end at, or {id: pose}; or path= / paths= for the way there. They stay on screen, and go
-        as one: the parts after the first ride on the first from then on (list a plug that is in one of its sockets with it, so that
-        it goes along, and a later unplug() takes it out from there; the log warns of a plug left behind). Other options as remove()'s."""
-        return self._takeoff('lift', caption, ids, to=to, **how)
+        unplugged later): to = the pose they end at, or {id: pose}; or path= / paths= for the way there; or neither: the way the Full
+        Build brought them in, reversed, to where they hovered (a group the Full Build lowered into place, lifted off again to be
+        taken apart on its own: alone=). They stay on screen, and go as one: the parts after the first ride on the first from then
+        on; or, with ride_on=, each rides on that part again where it ends (plugs moved on their leads, back on their motor: a
+        Full Build step that moved only a plug on its lead, walked back; a pose on the way given with via() is passed through at the
+        pace the Full Build moved such a plug, stage by stage with its lead). List a plug that is in one of its sockets with them,
+        so that it goes along, and a later unplug() takes it out from there; the log warns of a plug left behind. Other options as
+        remove()'s, and wire_via={id: [route, ...]}: routes a lead passes through on the way, one per stage of the way (its last
+        route is given in wires=)."""
+        return self._takeoff('lift', caption, ids, to=to, ride_on=ride_on, **how)
 
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
-                 alone=None, flip=False):
+                 alone=None, flip=False, wire_via=None, units=None, wires_here=None):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
+        units_given = units
         ids = list(dict.fromkeys(ids))
         missing = [i for i in ids if i not in self.placed]
         if missing:
@@ -961,9 +970,7 @@ class Guide:
             start = now(i)
             if hand is not None:
                 ways[i] = [start if start is not None else ZERO] + [p if isinstance(p, dict) else list(map(float, p)) for p in hand]
-            elif how == 'lift':
-                if to is None:
-                    raise ValueError('lift(): to= (where they are set down) or path=')
+            elif how == 'lift' and to is not None:
                 ways[i] = [start if start is not None else ZERO, to.get(i) if isinstance(to, dict) and not ('t' in to or 'r' in to) else to]
             elif direction is not None:
                 d = _unit(direction)
@@ -980,7 +987,14 @@ class Guide:
                     carrier = now(in_seat_on) if in_seat_on is not None else None
                     ways[i] = [compose(carrier, p, self._pivot(i)) if carrier is not None else p for p in reversed(m['way'])]
                     if in_seat_on is not None and _moved(carrier) and json.dumps(pose_out(carrier) if carrier is not None else None) != json.dumps(m['offsets'].get(in_seat_on)):
-                        moves[i] = dict(m, camera=None)   # (its carrier has moved since: the Full Build's camera looks elsewhere)
+                        then = m['offsets'].get(in_seat_on)   # (its carrier has moved since: the Full Build's camera looks elsewhere,
+                        level = lambda q: _rot(q) is None or np.allclose(_rot(q), np.eye(3), atol=1e-6)   # or, if it has only slid, there)
+                        if m.get('camera') and level(carrier) and level(then):
+                            cam = copy.deepcopy(m['camera'])
+                            cam['target'] = (np.asarray(cam['target'], float) + _shift(carrier) - _shift(then)).round(1).tolist()
+                            moves[i] = dict(m, camera=cam)
+                        else:
+                            moves[i] = dict(m, camera=None)
                     if m.get('stops'):
                         n = len(m['way']) - 1
                         stops[i] = sorted(n - k for k in m['stops'])
@@ -1008,7 +1022,7 @@ class Guide:
         for key in {m['index'] for m in moves.values()}:
             group = [i for i, m in moves.items() if m['index'] == key]
             way = ways[group[0]]
-            if all(_rot(p) is None for p in way) and seated:
+            if all(_rot(p) is None for p in way) and seated and not _moved(way[0]):   # (tested from the seat: not for a part lifted off with others)
                 v = _shift(way[-1]) - _shift(way[0])
                 reach = min(float(np.linalg.norm(v)), max(25.0, 0.8 * float(np.linalg.norm(self.model.union(group).extents))) + 5)   # (as free_directions tests)
                 then = [j for j in moves[group[0]]['stationary'] if j in self.model.inst]   # (what the Full Build tested it against)
@@ -1030,7 +1044,10 @@ class Guide:
                     by = moves[i]['rode']['by']
                 if by is not None and by in self.placed and by not in movers:
                     ride_after[i] = by
-        after, wire_via = dict(wires or {}), {}
+        after, wire_via = dict(wires or {}), {w: list(rs) for w, rs in (wire_via or {}).items()}   # (stages given by hand: a lead moved on its way)
+        for w in wire_via:
+            if w not in after:
+                raise ValueError(f'{how}({caption[:30]!r}): wire_via for {w} needs its last route in wires=')
         if how == 'unplug':
             for i, m in moves.items():
                 for w, r in m['wires'].items():
@@ -1052,14 +1069,23 @@ class Guide:
                 raise ValueError(f'{how}({caption[:30]!r}): the lead {w} would be left on {other} with nothing at its other end: unplug it '
                                  f'first, take both its ends off together, or say wires={{{w!r}: None}}')
         units = []                                    # one arrow per unit that leaves: parts that came in together the same way
-        if arrows is None and how != 'unplug':
+        if units_by_hand := units_given:
+            stray = [i for u in units_by_hand for i in u if i not in movers]
+            if stray:
+                raise ValueError(f'{how}({caption[:30]!r}): units= names parts that do not move: {stray}')
+            units = [list(u) for u in units_by_hand]
+        elif arrows is None and how != 'unplug':
             keyed = {}                                # (a unit: what the Full Build moved in together, what is pulled out together, one way by hand)
             for i in movers:
                 key = ('build', moves[i]['index']) if i in moves else ('out',) if i in computed else ('own', i) if i in (paths or {}) else ('hand',)
                 keyed.setdefault(key, []).append(i)
             joined = lambda a, b: any({a, b} <= {r.get('a'), r.get('b')} for r in self.wire_state.values() if r)   # (the two ends of one cable)
+            def touching(a, b):                       # (a motor and its servo horn, named alike, are one unit; two screws are two)
+                A, B = self.model.inst[a].bounds, self.model.inst[b].bounds
+                return bool(np.all(A[0] <= B[1] + 0.5) and np.all(B[0] <= A[1] + 0.5))
             for group in keyed.values():
-                if len(group) == 2 and self.names.get(group[0]) and self.names.get(group[0]) == self.names.get(group[1]) and not joined(*group):
+                if (len(group) == 2 and self.names.get(group[0]) and self.names.get(group[0]) == self.names.get(group[1]) and not joined(*group)
+                        and not touching(*group)):
                     units += [[group[0]], [group[1]]]         # (two of a kind: an arrow on each, as the published guides do)
                 else:
                     units.append(group)
@@ -1077,18 +1103,22 @@ class Guide:
                 self.log.append(f'  NOTE: {caption[:40]}: the Full Build put this on in a sub-assembly view ({m["name"]}); its camera frames that')
             if flip and not camera.get('flip'):          # (turned over here, though not in the Full Build: a turned-over view from its side)
                 look_from, camera = camera['dir'], None
-        if how == 'lift':                             # (they go as one: the others ride on the first from now on)
-            ride_after.update({i: movers[0] for i in movers[1:]})
+        if how == 'lift':                             # (they go as one: the others ride on the first from now on, or all on ride_on)
+            if ride_on is not None and ride_on in self.placed and ride_on not in movers:
+                ride_after.update({i: ride_on for i in movers})
+            else:
+                ride_after.update({i: movers[0] for i in movers[1:]})
             plugs = [j for j in staying if j in seated and any(m.get('rode') for m in came.get(j, []))]   # (a plug the Full Build plugged in)
-            for j in plugs:
+            for j in plugs:                           # (tested in the seat: a mover that is not in its seat now cannot hold a plug in it)
                 b = self.model.inst[j].bounds
-                if any(np.all(b[0] <= self.model.inst[i].bounds[1] + 1.0) and np.all(self.model.inst[i].bounds[0] <= b[1] + 1.0) for i in movers if i in self.model.inst):
+                if any(np.all(b[0] <= self.model.inst[i].bounds[1] + 1.0) and np.all(self.model.inst[i].bounds[0] <= b[1] + 1.0) for i in movers
+                       if i in self.model.inst and not _moved(now(i)) and i not in self.riding):
                     self.log.append(f'  WARNING: {caption[:40]}: {self.names.get(j, j)} looks plugged into a part that is lifted, and stays behind: list it with them')
         self.steps.append(dict(kind='takeoff', how=how, caption=caption, caution=caution, review=review, ids=ids, movers=movers, leave=leave,
                                ways=ways, stops=stops, ride_after=ride_after, wires_after=after, wire_via=wire_via, lead_off=lead_off, units=units,
                                arrows=list(arrows) if arrows else [], eye=eye_list, labels=label_list, camera=camera, view_dir=view_dir,
                                frame=frame, look_from=look_from, flip=bool(flip), inset=dict(inset) if inset else None,
-                               alone=list(alone) if alone is not None else None))
+                               alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {})))
         # the guide's state from here on
         for i in leave:
             self.placed.remove(i)
@@ -1475,12 +1505,19 @@ class Guide:
         parked, wires, riding = {}, {}, {}               # poses of parts lying aside; current route of each wire; parts riding with another
 
         def with_riders(poses, shown):
-            """Add where each riding part is, given where its carrier is; returns (poses, the `carry` entry for the view)."""
+            """Add where each riding part is, given where its carrier is; returns (poses, the `carry` entry for the view). A carrier
+            that rides on another is placed first (a plug on the claw motor, riding on C3 once the claw is lifted off)."""
             carry = {}
+
+            def place(i, seen=()):
+                by, rel = riding[i]
+                if by in riding and by in shown and by not in carry and by not in seen:
+                    place(by, (*seen, i))
+                poses[i] = compose(poses.get(by), rel, self._pivot(i))
+                carry[i] = dict(by=by, pose=pose_out(rel))
             for i, (by, rel) in riding.items():
-                if i in shown and by in shown:
-                    poses[i] = compose(poses.get(by), rel, self._pivot(i))
-                    carry[i] = dict(by=by, pose=pose_out(rel))
+                if i in shown and by in shown and i not in carry:
+                    place(i)
             return poses, carry
         first_view = []                                  # the index of each step's first view (for the Part guides, chapter())
         for si, s in enumerate(self.steps):
@@ -1553,7 +1590,7 @@ class Guide:
                 common = dict(caption=s['caption'], text_key=s['text_key'], review=s['review'], camera=camera, _step=si,
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}))
                 views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=[], labels=s['labels'], eye=s['eye'],
-                                  wires=wires_in(wires, shown), carry=carry_here, moving=[], path=[ZERO, ZERO], **({'arrows': arrows} if arrows else {}),
+                                  wires=wires_in({**wires, **s['wires_here']}, shown), carry=carry_here, moving=[], path=[ZERO, ZERO], **({'arrows': arrows} if arrows else {}),
                                   **({'inset': inset} if inset else {}), **({'cut': True} if cut else {}), **common))
                 cut = False
                 going = [i for i in s['leave'] if i in shown]
@@ -1569,7 +1606,13 @@ class Guide:
                 visible[:] = [i for i in visible if i not in s['leave']]
                 left = [i for i in shown if i not in s['leave']]
                 held = {i: k for i, k in s['stops'].items() if len(k) < len(s['ways'][i])}
-                views.append(dict(name=f'Step {n}c', kind='done', visible=left, offsets=poses_out(there), wires=wires_in(wires, left),
+                for i, by in s['ride_after'].items():             # (a plug moved on its lead, riding on its motor before and after: it rides
+                    way = s['ways'][i]                            # through the move, as the Full Build moved it, its stages at an even pace)
+                    if by in s['movers'] or by not in shown or (carry_here.get(i) or {}).get('by') != by or len(s['stops'].get(i, range(len(way)))) > 2:
+                        continue
+                    rel = lambda p: pose_out(relative_pose(there.get(by), p, self._pivot(i)))
+                    carry_there[i] = dict(by=by, pose=rel(there[i]), **({'via': [rel(p) for p in way[1:-1]]} if len(way) > 2 else {}))
+                views.append(dict(name=f'Step {n}c', kind='done', visible=left, offsets=poses_out(there), wires=wires_in({**wires, **s['wires_here']}, left),
                                   carry={i: c for i, c in carry_there.items() if i in shown}, moving=list(s['movers']), path=[ZERO, ZERO],
                                   paths={i: [pose_out(p) for p in way] for i, way in s['ways'].items()}, **({'path_stops': held} if held else {}),
                                   **({'leaving': going} if going else {}), **({'leaving_wires': lead_routes} if lead_routes else {}),

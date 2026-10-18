@@ -217,6 +217,13 @@ inseparable units, and so past their two arrows a frame, which the generator not
 refitted for storage, as LAC does). Still open: whether "disconnected" means each plug (a lead unplugged at one end dangles from
 its other end until that end's part goes, as the published guides do, and as the in-house generator does) or fully free.
 
+**Lee, 2026-10-18 (the MRA's deconstruction):** its title page shows the finished model (the Full Build's), not an empty screen;
+its Completed View shows only what is left (the I/O module: the Nano Board comes out last). As a first draft it is the build in
+reverse, with two exceptions: wires that went on one at a time may come off together (the eight breadboard wires, off the
+joysticks and the module at once; or in phases, the joysticks pulled off the wires, then the wires off the module), and a test
+the build makes on the bench (the electronics test: motors plugged in, then out again) has no counterpart. The fade of a part
+taken off: slower and smoother, as Cadasio's (below, section 13).
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |
@@ -258,7 +265,7 @@ its other end until that end's part goes, as the published guides do, and as the
 | Printing a fastener size | Never done. The nearest device is a bare quantity ("64x"). | Leave it off the canvas; put it in the tooltip and the caption. |
 | Quantity cue | Four forms: "2x" in blue, "64X", "64x", "3x" inside a picture. | "Nx" with the eye icon. |
 | Deconstruction wire granularity | LAC: one wire per step. PMG: whole bundles. LSM: mixed. | Per module bundle (the newest guide). |
-| Removal: three beats or two | Three (cue, slide, gone) in LSM and most of LAC; two in most of PMG. | Three. **Decided (Lee, 2026-10-17): with a fade.** The cue on Step N; Next plays the part out (800 ms a stage), fading out over the second half of the last stage (so it slides while it fades, Cadasio's two-beat form, with no resting pulled-out frame); its leads fade with it. Prev brings it back fading in. (Parts appearing in a build still do not fade in.) |
+| Removal: three beats or two | Three (cue, slide, gone) in LSM and most of LAC; two in most of PMG. | Three. **Decided (Lee, 2026-10-17): with a fade.** The cue on Step N; Next plays the part out (800 ms a stage), fading out over the second half of the last stage (so it slides while it fades, Cadasio's two-beat form, with no resting pulled-out frame); its leads fade with it. Prev brings it back fading in. (Parts appearing in a build still do not fade in.) **Changed (Lee, 2026-10-18: "the fade on Cadasio seems smoother / less abrupt, and slower"):** the part slides out (800 ms a stage), then fades out over a beat of its own (800 ms, on a cosine curve, from 150 ms before the slide comes to rest), as the published take-aparts slide (Transition) and then fade (Step Nc); its leads fade with it. Prev fades it in where its way out ended, then slides it back. |
 | Label size and font | 3em Arial (LAC, most guides) vs 2.5em (older LSM); PMG falls back to the viewer's default font. | 3em-equivalent, Arial bold. |
 | Pin-name case | Capitals everywhere except eight PMG labels ("clk", "dio", "s8", "s9"). | Capitals for pins, lower case for breadboard holes. |
 | Second stage: own step or Transition | Both occur; a new viewpoint goes with 5 of 7 own-step cases. | Transition if one view shows both stages; own step if the camera must move. |

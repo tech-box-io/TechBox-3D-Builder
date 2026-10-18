@@ -115,6 +115,7 @@ Run from this folder. The Python environment is `.venv.nosync` (the Desktop is i
 `python3 -m venv .venv.nosync && .venv.nosync/bin/pip install -r tools/requirements.txt`.
 
     .venv.nosync/bin/python "MRA Build Instructions Prototype/guide.py"            # after editing guide.py
+    .venv.nosync/bin/python "MRA Build Instructions Prototype/deconstruction.py"   # then the deconstruction, made from the Full Build
     .venv.nosync/bin/python tools/build_model.py "MRA Build Instructions Prototype" # after editing materials.json or replacing the CAD
     .venv.nosync/bin/python "MRA Build Instructions Prototype/silkscreen.py"       # after editing the module's printing (then build_model)
     /usr/bin/python3 tools/serve.py "MRA Build Instructions Prototype" 8791         # local server; then open http://localhost:8791/player.html
@@ -142,7 +143,7 @@ than the kit's `steps.json`.) Checkpoints are for review; learners get the websi
 
 Learners open the guides on TechBox's website, `https://models.tech-box.io` (a Render static site; TechBox's own LMS,
 `https://edu.tech-box.io`, embeds a guide by iframe). One fixed address per guide: `https://models.tech-box.io/<guide>/`, the
-names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part-1` ..., `remote-controlled-car-full-build`,
+names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part-1` ..., `mini-robot-arm-deconstruction`, `remote-controlled-car-full-build`,
 `remote-controlled-car-part-1` ..., `remote-controlled-car-deconstruction`). An address in the LMS must never change.
 The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
 16 Oct 2026): the landing page `/` shows each kit that has a guide on the site (its Full Build's picture), `/kits/<kit>/`
@@ -260,7 +261,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-- **A deconstruction guide** (the RCC's, planned) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+- **A deconstruction guide** (the MRA's, first draft 18 Oct 2026; the RCC's, planned) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
   `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
   Full Build's title page. Then, as a rule the build in reverse (rulebook section 11 and Lee's conventions there: parts may go in
@@ -271,17 +272,29 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     did not move in, or one not in its seat, is pulled straight out the first free way. Parts riding on them go too, and so does a
     lead whose ends both go; a lead left with one end on screen is refused (unplug it first). `path=` / `paths=` / `direction=`
     and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release), `alone=[ids]` (taken apart on its own),
-    `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`.
+    `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`; `units=[[ids], ...]` (the arrows by
+    hand: the MRA's eight breadboard wires, one arrow at each end); `wires_here={id: route}` (leads as drawn on this step only: a
+    joystick's wires fading out in the hand). Two of a kind get an arrow each only if they do not touch (a motor and its horn,
+    named alike, are one). A sub-assembly taken apart in the hand after sliding off (not turned) keeps the Full Build's in-hand
+    cameras, moved with it.
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
     the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
-  - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later.
+  - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the
+    Full Build's way in, reversed (a group lifted off to be taken apart in the hand). With `ride_on=` each part rides on that part
+    again where it ends: a Full Build step that moved only a plug on its lead (into a slot, a hook, a hole), walked back with its
+    poses as `via()` and its lead's stages as `wire_via={wire: [route, ...]}` (last route in `wires=`); the player then moves the
+    plug as the Full Build did, at an even pace with its lead (the MRA's `walked_back()`).
   - `g.note(...)` as in a build; `put_away(ids)` for what is left of a sub-assembly taken apart on its own.
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
   left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its title page, the finished model
-  (Lee, 17 Oct 2026: `_dev.card()` does this for a guide made by `take_apart()`). Parts taken off fade out over the second half of
-  their last stage, leads with them (Lee, 17 Oct 2026), and fade in again when Prev brings them back.
+  (Lee, 17 Oct 2026: `_dev.card()` does this for a guide made by `take_apart()`). Parts taken off slide out, then fade out over a
+  beat of their own (800 ms, starting just before the slide comes to rest), leads with them, as Cadasio does (Lee, 18 Oct 2026:
+  slower and smoother than the fade inside the slide of 17 Oct); Prev fades them in first, where their way out ended, then slides
+  them back. The MRA's (`deconstruction.py`): the Full Build reversed except where Lee said (the eight breadboard wires at once;
+  no electronics test); the I/O module and the joysticks, still wired, are set down on the table in front of the base as they
+  come out of the controller, and the guide ends on the I/O module, the Nano Board out last. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
