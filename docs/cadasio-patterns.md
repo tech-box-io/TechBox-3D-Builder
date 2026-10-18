@@ -201,6 +201,11 @@ Section 14 says what the in-house player does today against each rule.
 - **Same skeleton as a build** (`Start`, numbered pairs from 1, `Completed View`), with no section cards and no text labels. Starts on the finished model, ends showing only what is left assembled.
 - **`Step N` changes nothing in the model**: the part is still seated and carries every cue. Pressing Next plays the removal to its end without a further click: the part travels out along the arrow and disappears. The pulled-out state is never a resting frame, and removed parts are not left on screen.
 - **One red arrow per moving unit, never lead lines** (LSM 24, LAC 22, PMG 31 arrow showings; lead lines only where hardware is refitted for storage).
+  **In-house (Lee, 2026-10-18):** smaller than the published ones (15 - 40 mm, sized to the part: a screw's is about 17 mm), where
+  the camera can see it, never pointing at the camera (an eye on the part instead), and on the part that matters (the joystick,
+  not the walls it carries). A plug moved on its lead gets an eye, not an arrow; several ends at once, an eye each. A part hidden
+  from the step's camera gets a close-up from the other side, punched in, with its frame and lead line. Two steps on one
+  sub-assembly in the hand keep one camera.
 - **The part leaves along its build hover path, reversed**, to the pose it hovered at in the build.
 - **A two-stage joint is undone inside one step**: small unhook or tilt first, then the long pull.
 - **Wires are unplugged by swapping** the routed model for a loose one (eye icon on the plug to pull), never by animating the route.

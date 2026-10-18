@@ -97,13 +97,25 @@ window._runthrough = () => {
 //   _dev.show('Step 12c', 0.5)    the same, stopped part of the way through the animation (0..1)
 //   _dev.look('NAUO45', [1, 0.6, 0.4], 2)   then put the camera on one part: direction to look from, and how wide (1 = tight)
 //   await _dev.card()             the guide's picture for its card on the website: its Completed View (a deconstruction's: its
-//                                 title page, the finished model: Lee, 17 Oct 2026), 1440 x 900, saved through tools/serve.py
+//                                 Full Build's card, copied: Lee, 18 Oct 2026; make that first), 1440 x 900, saved through tools/serve.py
 //                                 into the kit's cards/<steps file>.webp (publish.py copies it into the release)
 window._dev = {
   async card() {
     const steps = (new URLSearchParams(location.search).get('steps') || 'steps.json').replace(/\.json$/, '');
     const data = await fetch(`${steps}.json`, {cache: 'no-cache'}).then(x => x.json());
-    const P = window._player, W = 1440, H = 900, kind = data.meta.taken_from ? 'start' : 'end';   // (a deconstruction ends on the bare base)
+    if (data.meta.taken_from) {                                    // a deconstruction's card is its Full Build's (Lee, 18 Oct 2026: one picture for both)
+      const full = (data.meta.full_build || 'steps.json').replace(/\.json$/, '');
+      const pic = await fetch(`cards/${full}.webp`, {cache: 'no-cache'}), rec = await fetch(`cards/${full}.json`, {cache: 'no-cache'});
+      if (!pic.ok || !rec.ok) throw new Error(`make the Full Build's card first (cards/${full}.webp: _dev.card() on player.html)`);
+      const blob = await pic.blob(), model = (await rec.json()).model;
+      if (model !== (data.model.split('?v=')[1] || '')) throw new Error(`the Full Build's card shows another model: make it again first`);
+      for (const [name, body] of [[`${steps}.webp`, blob], [`${steps}.json`, JSON.stringify({model, made: new Date().toISOString(), from: `cards/${full}.webp`})]]) {
+        const r = await fetch(`/__save/cards/${name}`, {method: 'POST', body});
+        if (!r.ok) throw new Error(`saving cards/${name} failed: ${r.status}`);
+      }
+      return `cards/${steps}.webp: the Full Build's card (${Math.round(blob.size / 1024)} kB)`;
+    }
+    const P = window._player, W = 1440, H = 900, kind = 'end';
     const i = P.views.findIndex(v => v.kind === kind);
     if (i < 0) throw new Error(`this guide has no ${kind === 'end' ? 'Completed View' : 'title page'} to picture`);
     const big = P.renderThumb(i, [2 * W, 2 * H]);              // (drawn large, then cut to the model with a margin, so every card is filled)

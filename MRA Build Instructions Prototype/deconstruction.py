@@ -44,7 +44,7 @@ COUPLER, EXTENSION_PLUG, ROW10_PLUG = 'NAUO91', 'NAUO92', 'NAUO85'
 T1_LOWER, T2_SOLID_DOWN, T2_SLOT_DOWN, T1_UPPER = 'NAUO41', 'NAUO42', 'NAUO43', 'NAUO44'
 USB_B, USB_A = 'USB_B', 'USB_A'
 JUMPER_CAPS = ['NAUO%d' % i for i in range(95, 111)]
-BASE_SCREWS_HIDDEN = ['NAUO47']                                     # (the base screw R1 - R6 hide from Step 29's camera: an eye on it)
+BASE_SCREWS_HIDDEN = ['NAUO47']                                     # (the base screw R1 - R6 hide from the screws step's camera: a close-up of it)
 
 # ---------------------------------------------------------------- the Full Build, as guide.py last wrote it
 FULL = json.loads((HERE / 'steps.json').read_text(encoding='utf-8'))
@@ -132,16 +132,16 @@ g.unplug('Unplug the elbow motor from Row 6.', [ELBOW_PLUG])
 # the L-shaped slot in R4 (the Full Build's Step 97, walked back); then the extension wire pulled off the claw motor's plug (96).
 JOIN = [CLAW_PLUG, COUPLER, EXTENSION_PLUG, ROW10_PLUG]
 g.lift('Lift the join back up from behind R4, and the servo extension wire up out of the L-shaped slot in R4.', JOIN,
-       paths={i: riding_back('Step 97', i) for i in JOIN}, ride_on=CLAW_MOTOR, units=[JOIN],
+       paths={i: riding_back('Step 97', i) for i in JOIN}, ride_on=CLAW_MOTOR, arrows=[], eye=[COUPLER],
        wire_via={w: [ROUTES[n] for n in nos][::-1] for w, nos in VIEW['Step 97c']['wire_via'].items()},
        wires={**leads('Step 97', 'extension'), **leads('Step 97', 'claw')}, **camera_of('Step 97'))
 g.remove("Pull the servo extension wire off the claw motor's plug.", [COUPLER, EXTENSION_PLUG, ROW10_PLUG],
-         paths={i: [VIEW['Step 96']['carry'][i]['pose']] for i in (COUPLER, EXTENSION_PLUG, ROW10_PLUG)}, units=[[COUPLER, EXTENSION_PLUG, ROW10_PLUG]],
-         **camera_of('Step 96'))
+         paths={i: [VIEW['Step 96']['carry'][i]['pose']] for i in (COUPLER, EXTENSION_PLUG, ROW10_PLUG)}, units=[[COUPLER, EXTENSION_PLUG]],
+         **camera_of('Step 96'))                                    # (the arrow on the join; the plug at the wire's far end goes with it)
 for step, caption in (('Step 95', "Pull the claw motor's plug back out of the bottom hole in A6."),
                       ('Step 94', 'Then pull it back out of the top hole in A6.')):
     path, stages, last = walked_back(step, CLAW_PLUG, 'claw')
-    g.lift(caption, [CLAW_PLUG], path=path, ride_on=CLAW_MOTOR, wire_via=stages, wires=last, **camera_of(step))
+    g.lift(caption, [CLAW_PLUG], path=path, ride_on=CLAW_MOTOR, wire_via=stages, wires=last, arrows=[], eye=[CLAW_PLUG], **camera_of(step))   # (an eye on the plug, no arrow, as an unplug: Lee, 18 Oct 2026)
 
 # ================================================================ CLAW
 g.remove('Unscrew the two 6mm screws that hold A12 and A13 to C1.', [A12_C1_SCREW, A13_C1_SCREW])
@@ -162,7 +162,8 @@ g.remove('Pull C1 and C2 out of their slots in C3.', [C1, C2], alone=IN_C3 + [C1
 assert VIEW['Step 78c']['carry'][CLAW_PLUG]['pose'] == VIEW['Step 94']['carry'][CLAW_PLUG]['pose']   # (the plug is where Step 78 left it)
 path, stages, last = walked_back('Step 78', CLAW_PLUG, 'claw', carrier_pose=where(CLAW_MOTOR), pivot=g._pivot(CLAW_PLUG))
 g.lift("Pull the claw motor's wire back out of the hole in the end of C3.", [CLAW_PLUG], path=path, ride_on=CLAW_MOTOR,
-       wire_via=stages, wires=last, alone=IN_C3, view_dir=[-0.5792, 0.5736, -0.5792])   # (from above C3: Lee, 18 Oct 2026)
+       wire_via=stages, wires=last, alone=IN_C3, view_dir=[-0.5792, 0.5736, -0.5792],   # (from above C3: Lee, 18 Oct 2026)
+       arrows=[], eye=[CLAW_PLUG])
 g.remove('Push the claw motor back out of C3.', [CLAW_MOTOR, CLAW_HORN], alone=IN_C3)
 g.put_away([C3])
 
@@ -179,7 +180,7 @@ g.put_away([A10])
 # ================================================================ SHOULDER MOTOR
 path, stages, last = walked_back('Step 67', SHOULDER_PLUG, 'shoulder')
 g.lift("Take the shoulder motor's wire out of the hook-shaped slot in R6.", [SHOULDER_PLUG], path=path, ride_on=SHOULDER_MOTOR,
-       wire_via=stages, wires=last, **camera_of('Step 67'))
+       wire_via=stages, wires=last, arrows=[], eye=[SHOULDER_PLUG], **camera_of('Step 67'))
 g.remove('Unscrew the two 10mm screws that hold R7 to R6.', R7_SCREWS)
 g.remove("Slide R7 back up the shoulder motor's wire and off over its plug.", [R7])
 g.remove('Take the shoulder motor out of R6, angling its servo horn back out through the opening.', [SHOULDER_MOTOR, SHOULDER_HORN])
@@ -194,7 +195,7 @@ g.put_away([A4])
 # ================================================================ ELBOW MOTOR
 path, stages, last = walked_back('Step 57', ELBOW_PLUG, 'elbow')
 g.lift("Take the elbow motor's wire out of the hook-shaped slot in R5.", [ELBOW_PLUG], path=path, ride_on=ELBOW_MOTOR,
-       wire_via=stages, wires=last, **camera_of('Step 57'))
+       wire_via=stages, wires=last, arrows=[], eye=[ELBOW_PLUG], **camera_of('Step 57'))
 g.remove('Unscrew the two 10mm screws that hold R8 to R5.', R8_SCREWS)
 g.remove("Slide R8 back up the elbow motor's wire and off over its plug.", [R8])
 g.remove('Take the elbow motor out of R5, angling its servo horn back out through the opening.', [ELBOW_MOTOR, ELBOW_HORN])
@@ -217,38 +218,42 @@ g.remove('Pull A7 off the last two tabs on A6.', [A7], alone=[A6, A7])
 g.put_away([A6])
 
 # ================================================================ THE CONTROLLER'S ELECTRONICS (Lee, 18 Oct 2026: they come out before the walls)
-MODULE_ASIDE = VIEW['Step 34']['offsets'][MODULE]                    # (on the table in front of the base, as the Full Build had it)
 g.unplug('Unplug the base motor from Row 5.', [BASE_PLUG])
 BENCH_ROUTES = {w: r for side in ('left', 'right') for w, r in leads('Step 11c', side).items()}   # (the wires' own shapes, tied to their caps
 g.remove('Lift B8 off B5 - B7.', [B8], wires=BENCH_ROUTES)                                        # as on the bench, so that they go with them)
-ENDS_ON = lambda part: [cap for cap in JUMPER_CAPS if g.riding[cap][0] == part]   # (an arrow at each joystick's four ends and at the module's eight)
-g.remove('Unplug the eight breadboard wires from the joysticks and the I/O module.', JUMPER_CAPS,
-         units=[ENDS_ON(JOY_LEFT), ENDS_ON(JOY_RIGHT), ENDS_ON(MODULE)])
-g.lift('Slide the I/O module back out of the slots in B6.', [MODULE], path=full_way_back('Step 39', MODULE, then=[MODULE_ASIDE]))
-g.remove('Lift the Nano Board out of the I/O module.', [NANO], alone=[MODULE, NANO])
+ENDS_ON = lambda part: [cap for cap in JUMPER_CAPS if g.riding[cap][0] == part]
+middle = lambda caps: sorted(caps, key=lambda c: tuple(g._pivot(c).round(1)))[len(caps) // 2]
+g.remove('Unplug the eight breadboard wires from the joysticks and the I/O module.', JUMPER_CAPS, arrows=[],
+         eye=[middle(ENDS_ON(JOY_LEFT)), middle(ENDS_ON(JOY_RIGHT)), middle(ENDS_ON(MODULE))])   # (an eye on each end, no arrows: Lee)
+g.lift('Slide the I/O module back out of the slots in B6.', [MODULE])   # (the way it went in, reversed, by the Full Build's camera for it)
+g.remove('Lift the Nano Board out of the I/O module.', [NANO], alone=[MODULE, NANO], view_dir=VIEW['Step 1']['camera']['dir'])
 g.put_away([MODULE])                                                # (what is left of a sub-assembly taken apart in the hand)
 
 # ================================================================ THE JOYSTICKS AND THEIR WALLS
 RIGHT = [B6_RIGHT, B7, JOY_RIGHT]                                     # (B6 first, as the Full Build: the others ride on it once lifted off)
-g.lift('Lift B6 and B7 off B3 with the right joystick between them.', RIGHT)
+g.lift('Lift B6 and B7 off B3 with the right joystick between them.', RIGHT, units=[[JOY_RIGHT]])   # (the arrow on the joystick: Lee)
 g.remove('Pull B7 off the right joystick.', [B7], alone=RIGHT)
-g.remove('Pull the right joystick out of B6.', [JOY_RIGHT], alone=[B6_RIGHT, JOY_RIGHT])
+g.remove('Pull the right joystick out of B6.', [JOY_RIGHT], alone=[B6_RIGHT, JOY_RIGHT], keep_camera=True)   # (as the step before: Lee)
 g.put_away([B6_RIGHT])
 LEFT = [B5, B6_LEFT, JOY_LEFT]
-g.lift('Lift B5 and B6 off B3 with the left joystick between them.', LEFT)
+g.lift('Lift B5 and B6 off B3 with the left joystick between them.', LEFT, units=[[JOY_LEFT]])
 g.remove('Pull B6 off the left joystick.', [B6_LEFT], alone=LEFT)
-g.remove('Pull the left joystick out of B5.', [JOY_LEFT], alone=[B5, JOY_LEFT])
+g.remove('Pull the left joystick out of B5.', [JOY_LEFT], alone=[B5, JOY_LEFT], keep_camera=True)
 g.put_away([B5])
 g.remove('Pull B4 out of B2.', [B4])
 g.remove('Pull B3 out of B2.', [B3])
 
 # ================================================================ BASE (R1 is left)
-g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS, eye=BASE_SCREWS_HIDDEN)   # (an eye on the one behind R1 - R6: Lee)
+HIDDEN_HEAD = [round(float(x), 1) for x in (g.model.inst[BASE_SCREWS_HIDDEN[0]].bounds.mean(0) * [1, 0, 1]
+                                            + [0, g.model.inst[BASE_SCREWS_HIDDEN[0]].bounds[1][1] - 1.0, 0])]   # (its head)
+g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS, keep_camera=True,   # (B3's camera, kept: Lee)
+         inset=dict(target=HIDDEN_HEAD, dir=[0.5792, 0.5736, -0.5792], radius=14.0, mark=4.5,   # (the sixth screw, seen from the other side)
+                    alt='The sixth screw, at the far corner, behind R1 - R6'))
 g.remove('Lift R1 - R6 and B2 off B1.', [B1])
 g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2])
 path, stages, last = walked_back('Step 25', BASE_PLUG, 'base')
 g.lift("Take the base motor's wire out of the L-shaped slot in R4.", [BASE_PLUG], path=path, ride_on=BASE_MOTOR,
-       wire_via=stages, wires=last, **camera_of('Step 25'))
+       wire_via=stages, wires=last, arrows=[], eye=[BASE_PLUG], **camera_of('Step 25'))
 g.remove("Take R6 off. Keep the base motor's wire clear of it.", [R6])
 g.remove('Take R5 off the other side.', [R5])
 g.remove('Lift R4 off R1.', [R4])

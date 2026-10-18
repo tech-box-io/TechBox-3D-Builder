@@ -148,8 +148,8 @@ names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part
 The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
 16 Oct 2026): the landing page `/` shows each kit that has a guide on the site (its Full Build's picture), `/kits/<kit>/`
 shows that kit's guides (Full Build, Part 1 ..., Deconstruction), and a guide's card opens the guide. Nothing is offered for
-download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View (a deconstruction's is its title page,
-the finished model: Lee, 17 Oct 2026): in the player, after the guide is final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900; for a
+download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View (a deconstruction's is its Full
+Build's card, the same picture: Lee, 18 Oct 2026; make the Full Build's first): in the player, after the guide is final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900; for a
 Part, `player.html?steps=steps-part-1.json`), with `cards/<steps file>.json`, the model it shows; publish copies it into the
 release (it warns when a guide has none, or one drawn from another model; `parts.html` notes its model in `parts/parts.json`
 the same way, and publish warns about part pictures drawn from another model).
@@ -274,10 +274,15 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release), `alone=[ids]` (taken apart on its own),
     `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`; `in_turn=[[ids], ...]` (in order, each
     group once the one before has slid out and faded); `units=[[ids], ...]` (the arrows by
-    hand: the MRA's eight breadboard wires, one arrow at each end); `wires_here={id: route}` (leads as drawn on this step only: a
-    joystick's wires fading out in the hand). Two of a kind get an arrow each only if they do not touch (a motor and its horn,
-    named alike, are one). A sub-assembly taken apart in the hand after sliding off (not turned) keeps the Full Build's in-hand
-    cameras, moved with it.
+    hand: an arrow on the joystick, not the walls it carries); `wires_here={id: route}` (leads as drawn on this step only);
+    `keep_camera=True` (the step before's camera: two steps on one sub-assembly). Two of a kind get an arrow each only if they do
+    not touch (a motor and its horn, named alike, are one). A sub-assembly taken apart in the hand after sliding off (not turned)
+    keeps the Full Build's in-hand cameras, moved with it. Arrows (Lee, 18 Oct 2026: smaller than the published ones): sized to the
+    part, 15 - 40 mm long and 1.6 - 3.2 mm thick; along the longest stage of its way (the module's slide, not the nudge before it);
+    moved on along it until the camera can see it; and one that would point at the camera becomes an eye on the part. A plug moved
+    on its lead (walked back) has an eye, no arrow, as an unplug; several things at once can have an eye each (the eight breadboard
+    wires: one at each joystick's ends and one at the module's). A part the camera cannot see gets a close-up from the other side
+    (`inset=`, punched in, a red box on it: the base screw behind R1 - R6), not an eye.
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
     the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
   - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the
@@ -289,8 +294,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
-  left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its title page, the finished model
-  (Lee, 17 Oct 2026: `_dev.card()` does this for a guide made by `take_apart()`). Parts taken off slide out, then fade out over a
+  left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its Full Build's card (Lee, 18 Oct
+  2026: `_dev.card()` copies it for a guide made by `take_apart()`); its title page is the Full Build's. Parts taken off slide out, then fade out over a
   beat of their own (800 ms, starting just before the slide comes to rest), leads with them, as Cadasio does (Lee, 18 Oct 2026:
   slower and smoother than the fade inside the slide of 17 Oct), each part once its own way has come to rest; Prev plays the whole
   backwards (each fades in where its way out ended, then slides back). `in_turn=[[screw], [part]]` takes a screw and the part it
