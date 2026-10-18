@@ -370,7 +370,7 @@ function buildInset(view) {
   const ratio = Math.min(2, devicePixelRatio || 1), picked = stage.highlighted();
   const shown = view.visible.filter(id => !(I.hide || []).includes(id));
   const {canvas, camera: cam} = stage.snapshot(Math.round(w * ratio), Math.round(h * ratio), {setup: c => {
-    stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows([]);
+    stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows(I.arrows ? arrowsOf(view).filter(a => I.arrows === true || I.arrows.includes(a.part)) : []);   // (arrows: [parts] whose arrow it shows: one seen only here)
     const at = stage.toWorld(I.target), d = new THREE.Vector3(...I.dir).normalize().applyQuaternion(stage.world.quaternion);
     const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);   // the picture is turned as the main view is
     up.addScaledVector(d, -up.dot(d)); if (up.lengthSq() < 1e-6) up.set(0, 0, 1);

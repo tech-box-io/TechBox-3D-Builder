@@ -96572,7 +96572,8 @@
       0.0,
       0.7071
      ],
-     "width": 2.7
+     "width": 2.7,
+     "part": "NAUO44"
     }
    ],
    "caption": "Take the T1 / T2 block apart. Pull the top T1 off the two T2.",
@@ -96705,7 +96706,8 @@
       0.0,
       0.7071
      ],
-     "width": 2.77
+     "width": 2.77,
+     "part": "NAUO43"
     }
    ],
    "caption": "Slide the upper T2 up and out of the other T2.",
@@ -96836,7 +96838,8 @@
       0.0,
       0.7071
      ],
-     "width": 2.46
+     "width": 2.46,
+     "part": "NAUO42"
     }
    ],
    "caption": "Pull the last T2 out of the plus-shaped slot in the lower T1.",
@@ -97366,14 +97369,15 @@
      "head": [
       69.46,
       121.04,
-      244.21
+      262.82
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.86
+     "width": 3.72,
+     "part": "USB_B"
     }
    ],
    "cut": true,
@@ -103027,12 +103031,12 @@
     {
      "tail": [
       103.88,
-      164.6,
+      176.6,
       146.66
      ],
      "head": [
-      88.88,
-      164.6,
+      73.88,
+      176.6,
       146.66
      ],
      "normal": [
@@ -103040,7 +103044,8 @@
       0.943,
       -0.3328
      ],
-     "width": 1.6
+     "width": 3.2,
+     "part": "NAUO91"
     }
    ],
    "caption": "Pull the servo extension wire off the claw motor's plug.",
@@ -106586,7 +106591,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 1.74,
+     "part": "NAUO77"
     },
     {
      "tail": [
@@ -106604,7 +106610,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 1.74,
+     "part": "NAUO78"
     }
    ],
    "caption": "Unscrew the two 6mm screws that hold A12 and A13 to C1.",
@@ -107663,7 +107670,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 1.74,
+     "part": "NAUO79"
     }
    ],
    "caption": "Unscrew the 6mm screw that holds A5 to C2.",
@@ -108692,7 +108700,7 @@
       146.24
      ],
      "head": [
-      435.89,
+      455.89,
       185.04,
       146.24
      ],
@@ -108701,7 +108709,8 @@
       0.7037,
       -0.7105
      ],
-     "width": 3.2
+     "width": 4.8,
+     "part": "NAUO34"
     }
    ],
    "caption": "Slide the claw out from between A5 and A12 / A13.",
@@ -109739,7 +109748,7 @@
      ],
      "head": [
       434.98,
-      150.65,
+      141.63,
       156.07
      ],
      "normal": [
@@ -109747,7 +109756,8 @@
       0.0,
       0.7071
      ],
-     "width": 1.8
+     "width": 2.71,
+     "part": "NAUO76"
     }
    ],
    "caption": "Take the claw apart. Unscrew the 10mm screw from C9.",
@@ -110335,7 +110345,8 @@
       -0.7037,
       0.0
      ],
-     "width": 2.99
+     "width": 2.99,
+     "part": "NAUO38"
     }
    ],
    "caption": "Slide C8 out from between C6 and C9.",
@@ -110895,7 +110906,8 @@
       0.0,
       0.7071
      ],
-     "width": 2.88
+     "width": 2.88,
+     "part": "NAUO40"
     }
    ],
    "caption": "Pull C9 off the ends of C1 and C2.",
@@ -111427,7 +111439,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.07
+     "width": 3.07,
+     "part": "NAUO39"
     }
    ],
    "caption": "Pull C7 off the servo horn.",
@@ -111923,7 +111936,7 @@
      ],
      "head": [
       422.55,
-      155.7,
+      146.15,
       147.08
      ],
      "normal": [
@@ -111931,7 +111944,8 @@
       0.0,
       0.7071
      ],
-     "width": 1.91
+     "width": 2.87,
+     "part": "NAUO74"
     },
     {
      "tail": [
@@ -111941,7 +111955,7 @@
      ],
      "head": [
       446.85,
-      155.44,
+      145.88,
       147.06
      ],
      "normal": [
@@ -111949,7 +111963,8 @@
       0.0,
       0.7071
      ],
-     "width": 1.91
+     "width": 2.87,
+     "part": "NAUO75"
     }
    ],
    "caption": "Unscrew the two 16mm screws that hold C6 to C3.",
@@ -112416,7 +112431,8 @@
       0.0,
       0.7071
      ],
-     "width": 2.96
+     "width": 2.96,
+     "part": "NAUO35"
     }
    ],
    "caption": "Lift C6 off C4 and C5.",
@@ -112828,7 +112844,7 @@
      ],
      "head": [
       425.67,
-      159.11,
+      149.73,
       131.05
      ],
      "normal": [
@@ -112836,7 +112852,8 @@
       0.0,
       0.7071
      ],
-     "width": 1.88
+     "width": 2.81,
+     "part": "NAUO36"
     },
     {
      "tail": [
@@ -112846,7 +112863,7 @@
      ],
      "head": [
       425.67,
-      159.08,
+      149.7,
       157.22
      ],
      "normal": [
@@ -112854,7 +112871,8 @@
       0.0,
       0.7071
      ],
-     "width": 1.88
+     "width": 2.82,
+     "part": "NAUO37"
     }
    ],
    "caption": "Pull C4 and C5 out of their slots in C3.",
@@ -113237,7 +113255,8 @@
       -0.0086,
       -0.7029
      ],
-     "width": 2.31
+     "width": 2.31,
+     "part": "NAUO32"
     },
     {
      "tail": [
@@ -113255,7 +113274,8 @@
       -0.0086,
       -0.7029
      ],
-     "width": 2.31
+     "width": 2.31,
+     "part": "NAUO33"
     }
    ],
    "caption": "Pull C1 and C2 out of their slots in C3.",
@@ -114086,7 +114106,8 @@
       0.0,
       -0.7071
      ],
-     "width": 2.43
+     "width": 2.43,
+     "part": "NAUO72"
     }
    ],
    "caption": "Push the claw motor back out of C3.",
@@ -114699,14 +114720,15 @@
      "head": [
       239.11,
       238.69,
-      191.58
+      209.13
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 3.2,
+     "part": "NAUO65"
     },
     {
      "tail": [
@@ -114724,7 +114746,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO27"
     }
    ],
    "cut": true,
@@ -115667,14 +115690,15 @@
      "head": [
       228.94,
       221.29,
-      192.23
+      209.13
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.8
+     "width": 3.2,
+     "part": "NAUO71"
     },
     {
      "tail": [
@@ -115692,7 +115716,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO28"
     }
    ],
    "caption": "Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.",
@@ -116630,14 +116655,15 @@
      "head": [
       139.41,
       179.84,
-      194.58
+      212.28
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 3.2,
+     "part": "NAUO70"
     }
    ],
    "caption": "Unscrew the 6mm screw in the lobe of R6, from outside R6.",
@@ -117551,7 +117577,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO26"
     }
    ],
    "caption": "Lift A10 and A11 out from behind the lobe of R6.",
@@ -118132,14 +118159,15 @@
      "head": [
       193.11,
       319.13,
-      191.58
+      209.28
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 3.2,
+     "part": "NAUO64"
     },
     {
      "tail": [
@@ -118157,7 +118185,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO25"
     }
    ],
    "caption": "Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.",
@@ -119627,7 +119656,8 @@
       -0.2045,
       0.0
      ],
-     "width": 1.8
+     "width": 1.8,
+     "part": "NAUO68"
     },
     {
      "tail": [
@@ -119645,7 +119675,8 @@
       -0.2045,
       0.0
      ],
-     "width": 1.8
+     "width": 1.8,
+     "part": "NAUO69"
     }
    ],
    "caption": "Unscrew the two 10mm screws that hold R7 to R6.",
@@ -120554,21 +120585,22 @@
    "arrows": [
     {
      "tail": [
-      170.28,
-      162.28,
-      183.74
+      170.3,
+      171.8,
+      179.7
      ],
      "head": [
-      170.28,
-      162.28,
-      203.73
+      170.3,
+      171.8,
+      199.69
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 2.0
+     "width": 2.0,
+     "part": "NAUO16"
     }
    ],
    "caption": "Slide R7 back up the shoulder motor's wire and off over its plug.",
@@ -121470,7 +121502,8 @@
       0.7037,
       0.0
      ],
-     "width": 2.02
+     "width": 2.02,
+     "part": "NAUO66"
     }
    ],
    "caption": "Take the shoulder motor out of R6, angling its servo horn back out through the opening.",
@@ -122530,7 +122563,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 1.74,
+     "part": "NAUO63"
     },
     {
      "tail": [
@@ -122548,7 +122582,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.8
+     "width": 1.8,
+     "part": "NAUO62"
     }
    ],
    "caption": "Unscrew the 6mm screw that holds A5 to A7, and the 10mm screw that holds A1 - A3 to A4.",
@@ -123375,7 +123410,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO21"
     }
    ],
    "caption": "Lift A4 and A5 off together.",
@@ -123903,14 +123939,15 @@
      "head": [
       197.05,
       315.7,
-      101.17
+      78.55
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 1.74
+     "width": 3.2,
+     "part": "NAUO57"
     },
     {
      "tail": [
@@ -123928,7 +123965,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO22"
     }
    ],
    "caption": "Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.",
@@ -125239,7 +125277,8 @@
       -0.2045,
       0.0
      ],
-     "width": 1.8
+     "width": 1.8,
+     "part": "NAUO60"
     },
     {
      "tail": [
@@ -125257,7 +125296,8 @@
       -0.2045,
       0.0
      ],
-     "width": 1.8
+     "width": 1.8,
+     "part": "NAUO61"
     }
    ],
    "caption": "Unscrew the two 10mm screws that hold R8 to R5.",
@@ -126060,21 +126100,22 @@
    "arrows": [
     {
      "tail": [
-      170.28,
-      162.28,
-      97.46
+      170.3,
+      171.8,
+      101.5
      ],
      "head": [
-      170.28,
-      162.28,
-      77.47
+      170.3,
+      171.8,
+      81.51
      ],
      "normal": [
       0.7105,
       0.7037,
       0.0
      ],
-     "width": 2.0
+     "width": 2.0,
+     "part": "NAUO17"
     }
    ],
    "caption": "Slide R8 back up the elbow motor's wire and off over its plug.",
@@ -126870,7 +126911,8 @@
       0.7037,
       0.0
      ],
-     "width": 2.19
+     "width": 2.19,
+     "part": "NAUO58"
     }
    ],
    "caption": "Take the elbow motor out of R5, angling its servo horn back out through the opening.",
@@ -127788,7 +127830,8 @@
       0.0,
       -0.5765
      ],
-     "width": 2.87
+     "width": 2.87,
+     "part": "NAUO18"
     }
    ],
    "caption": "Slide A1 - A3 back up from between R5 and A7.",
@@ -128604,7 +128647,8 @@
       0.7037,
       0.0
      ],
-     "width": 2.84
+     "width": 2.84,
+     "part": "NAUO56"
     }
    ],
    "caption": "Unscrew the 10mm screw from A1 - A3, then lift A3 off, then A2, leaving A1.",
@@ -129986,7 +130030,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO29"
     }
    ],
    "caption": "Lift A6 - A9 up off R2.",
@@ -130593,7 +130638,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.91
+     "width": 1.91,
+     "part": "NAUO54"
     }
    ],
    "caption": "Unscrew the 16mm screw that holds A8 to the A9 beside it.",
@@ -130801,16 +130847,7 @@
    },
    "guides": [],
    "labels": [],
-   "eye": [
-    {
-     "id": "NAUO31",
-     "anchor": [
-      205.5,
-      202.7,
-      152.3
-     ]
-    }
-   ],
+   "eye": [],
    "wires": {},
    "carry": {
     "NAUO23": {
@@ -130866,6 +130903,27 @@
      0.0,
      0.0
     ]
+   ],
+   "arrows": [
+    {
+     "tail": [
+      201.34,
+      276.95,
+      150.98
+     ],
+     "head": [
+      189.25,
+      287.86,
+      150.98
+     ],
+     "normal": [
+      0.0437,
+      0.0484,
+      0.9979
+     ],
+     "width": 1.63,
+     "part": "NAUO31"
+    }
    ],
    "caption": "Pull that A9 out of its cross-shaped slot in A6.",
    "text_key": "T3670EAE0",
@@ -131118,7 +131176,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO24"
     }
    ],
    "caption": "Pull A8 off its two tabs on A6.",
@@ -131344,7 +131403,8 @@
       0.7037,
       0.0
      ],
-     "width": 1.91
+     "width": 1.91,
+     "part": "NAUO53"
     }
    ],
    "caption": "Unscrew the 16mm screw that holds A7 to the other A9.",
@@ -131492,16 +131552,7 @@
    },
    "guides": [],
    "labels": [],
-   "eye": [
-    {
-     "id": "NAUO30",
-     "anchor": [
-      197.5,
-      193.8,
-      139.3
-     ]
-    }
-   ],
+   "eye": [],
    "wires": {},
    "carry": {
     "NAUO23": {
@@ -131533,6 +131584,27 @@
      0.0,
      0.0
     ]
+   ],
+   "arrows": [
+    {
+     "tail": [
+      193.34,
+      268.09,
+      138.01
+     ],
+     "head": [
+      181.25,
+      279.0,
+      138.01
+     ],
+     "normal": [
+      0.0437,
+      0.0484,
+      0.9979
+     ],
+     "width": 1.63,
+     "part": "NAUO30"
+    }
    ],
    "caption": "Pull that A9 out of its slot too.",
    "text_key": "TD0478466",
@@ -131701,7 +131773,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO23"
     }
    ],
    "caption": "Pull A7 off the last two tabs on A6.",
@@ -132864,7 +132937,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO8"
     }
    ],
    "caption": "Lift B8 off B5 - B7.",
@@ -134208,15 +134282,16 @@
      ],
      "head": [
       70.03,
-      113.22,
-      210.32
+      113.23,
+      210.72
      ],
      "normal": [
       -0.957,
       0.2899,
       -0.0136
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO82"
     }
    ],
    "caption": "Slide the I/O module back out of the slots in B6.",
@@ -134580,15 +134655,16 @@
      ],
      "head": [
       69.46,
-      154.89,
-      219.97
+      154.98,
+      219.96
      ],
      "normal": [
       -0.7262,
       -0.036,
       -0.6866
      ],
-     "width": 2.04
+     "width": 2.05,
+     "part": "NAUO126"
     }
    ],
    "caption": "Lift the Nano Board out of the I/O module.",
@@ -134843,7 +134919,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.17
+     "width": 3.17,
+     "part": "NAUO81"
     }
    ],
    "cut": true,
@@ -135107,7 +135184,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.18
+     "width": 3.18,
+     "part": "NAUO7"
     }
    ],
    "caption": "Pull B7 off the right joystick.",
@@ -135270,14 +135348,15 @@
      "head": [
       5.56,
       213.08,
-      205.0
+      205.01
      ],
      "normal": [
       -0.7105,
       0.7037,
       0.0
      ],
-     "width": 2.17
+     "width": 2.17,
+     "part": "NAUO81"
     }
    ],
    "caption": "Pull the right joystick out of B6.",
@@ -135477,7 +135556,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.17
+     "width": 3.17,
+     "part": "NAUO80"
     }
    ],
    "cut": true,
@@ -135738,7 +135818,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO5"
     }
    ],
    "caption": "Pull B6 off the left joystick.",
@@ -135901,14 +135982,15 @@
      "head": [
       5.56,
       213.08,
-      160.0
+      160.01
      ],
      "normal": [
       -0.7105,
       0.7037,
       0.0
      ],
-     "width": 2.17
+     "width": 2.17,
+     "part": "NAUO80"
     }
    ],
    "caption": "Pull the left joystick out of B5.",
@@ -136105,7 +136187,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO3"
     }
    ],
    "cut": true,
@@ -136356,7 +136439,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO9"
     }
    ],
    "caption": "Pull B3 out of B2.",
@@ -136596,7 +136680,26 @@
      ],
      "head": [
       209.16,
-      113.53,
+      133.29,
+      99.69
+     ],
+     "normal": [
+      0.7071,
+      0.0,
+      -0.7071
+     ],
+     "width": 3.48,
+     "part": "NAUO47"
+    },
+    {
+     "tail": [
+      104.07,
+      98.53,
+      99.69
+     ],
+     "head": [
+      104.07,
+      133.29,
       99.69
      ],
      "normal": [
@@ -136604,7 +136707,46 @@
       0.0,
       0.7071
      ],
-     "width": 1.6
+     "width": 3.48,
+     "part": "NAUO48"
+    },
+    {
+     "tail": [
+      -20.84,
+      98.53,
+      99.69
+     ],
+     "head": [
+      -20.84,
+      133.29,
+      99.69
+     ],
+     "normal": [
+      -0.7071,
+      0.0,
+      0.7071
+     ],
+     "width": 3.48,
+     "part": "NAUO49"
+    },
+    {
+     "tail": [
+      -20.84,
+      98.53,
+      181.99
+     ],
+     "head": [
+      -20.84,
+      133.29,
+      181.99
+     ],
+     "normal": [
+      -0.7071,
+      0.0,
+      0.7071
+     ],
+     "width": 3.48,
+     "part": "NAUO50"
     },
     {
      "tail": [
@@ -136614,7 +136756,7 @@
      ],
      "head": [
       104.07,
-      115.91,
+      133.29,
       181.99
      ],
      "normal": [
@@ -136622,13 +136764,33 @@
       0.0,
       0.7071
      ],
-     "width": 1.74
+     "width": 3.48,
+     "part": "NAUO51"
+    },
+    {
+     "tail": [
+      209.16,
+      98.53,
+      181.99
+     ],
+     "head": [
+      209.16,
+      133.29,
+      181.99
+     ],
+     "normal": [
+      -0.7071,
+      0.0,
+      0.7071
+     ],
+     "width": 3.48,
+     "part": "NAUO52"
     }
    ],
    "inset": {
     "target": [
      209.2,
-     95.5,
+     111.5,
      99.7
     ],
     "dir": [
@@ -136636,10 +136798,12 @@
      0.5736,
      -0.5792
     ],
-    "radius": 14.0,
+    "radius": 24.0,
     "hide": [],
-    "mark": 4.5,
-    "alt": "The sixth screw, at the far corner, behind R1 - R6"
+    "alt": "The sixth screw, at the far corner, behind R1 - R6",
+    "arrows": [
+     "NAUO47"
+    ]
    },
    "caption": "Unscrew the six 6mm screws that hold B2 to B1.",
    "text_key": "TCCE908A9",
@@ -136969,7 +137133,8 @@
       0.0,
       0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO1"
     }
    ],
    "caption": "Lift R1 - R6 and B2 off B1.",
@@ -137211,21 +137376,22 @@
    "arrows": [
     {
      "tail": [
-      94.16,
-      92.03,
-      190.34
+      163.6,
+      89.9,
+      150.3
      ],
      "head": [
-      94.16,
-      92.03,
-      230.34
+      163.6,
+      89.9,
+      190.3
      ],
      "normal": [
       -0.7105,
       -0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO2"
     }
    ],
    "caption": "Slide B2 out from between the servo horn and R5 / R6.",
@@ -137812,7 +137978,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO14"
     }
    ],
    "caption": "Take R6 off. Keep the base motor's wire clear of it.",
@@ -138042,7 +138209,8 @@
       0.7037,
       0.0
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO15"
     }
    ],
    "caption": "Take R5 off the other side.",
@@ -138270,7 +138438,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO13"
     }
    ],
    "caption": "Lift R4 off R1.",
@@ -138496,7 +138665,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO12"
     }
    ],
    "caption": "Lift R3 off R1.",
@@ -138720,7 +138890,8 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2
+     "width": 3.2,
+     "part": "NAUO11"
     }
    ],
    "caption": "Slide R2 up off the base motor.",
@@ -138934,15 +139105,16 @@
      ],
      "head": [
       163.68,
-      146.72,
-      137.31
+      167.34,
+      136.95
      ],
      "normal": [
       0.701,
       0.0125,
       0.713
      ],
-     "width": 2.06
+     "width": 4.13,
+     "part": "NAUO45"
     }
    ],
    "caption": "Turn the base motor and angle its servo horn back out through the slot in R1.",

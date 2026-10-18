@@ -122,7 +122,7 @@ g.put_away([T1_LOWER])                                              # (what is l
 
 # ================================================================ POWER AND THE MOTORS' PLUGS
 A_ON_THE_TABLE = VIEW['Completed View']['offsets'][USB_A]
-g.remove('Unplug the power cable from the Nano Board.', [USB_B, USB_A], units=[[USB_B]],
+g.remove('Unplug the power cable from the Nano Board.', [USB_B, USB_A], units=[[USB_B]], arrow_scale=2.0,
          paths={USB_A: [dict(A_ON_THE_TABLE, t=[A_ON_THE_TABLE['t'][0], A_ON_THE_TABLE['t'][1] + 30.0, A_ON_THE_TABLE['t'][2]])]})   # (its other end lifted off the table with it)
 g.unplug('Unplug the servo extension wire from Row 10.', [ROW10_PLUG])
 g.unplug('Unplug the shoulder motor from Row 9.', [SHOULDER_PLUG])
@@ -137,6 +137,7 @@ g.lift('Lift the join back up from behind R4, and the servo extension wire up ou
        wires={**leads('Step 97', 'extension'), **leads('Step 97', 'claw')}, **camera_of('Step 97'))
 g.remove("Pull the servo extension wire off the claw motor's plug.", [COUPLER, EXTENSION_PLUG, ROW10_PLUG],
          paths={i: [VIEW['Step 96']['carry'][i]['pose']] for i in (COUPLER, EXTENSION_PLUG, ROW10_PLUG)}, units=[[COUPLER, EXTENSION_PLUG]],
+         arrow_style={COUPLER: dict(scale=2.0, shift=[0.0, 12.0, 0.0])},   # (twice the size, raised clear of the wires: Lee)
          **camera_of('Step 96'))                                    # (the arrow on the join; the plug at the wire's far end goes with it)
 for step, caption in (('Step 95', "Pull the claw motor's plug back out of the bottom hole in A6."),
                       ('Step 94', 'Then pull it back out of the top hole in A6.')):
@@ -147,16 +148,16 @@ for step, caption in (('Step 95', "Pull the claw motor's plug back out of the bo
 g.remove('Unscrew the two 6mm screws that hold A12 and A13 to C1.', [A12_C1_SCREW, A13_C1_SCREW])
 g.remove('Unscrew the 6mm screw that holds A5 to C2.', [A5_C2_SCREW])
 CLAW_PARTS = list(VIEW['Step 90']['moving'])                          # (C3 first: the rest ride on it once it is lifted off)
-g.lift('Slide the claw out from between A5 and A12 / A13.', CLAW_PARTS)
+g.lift('Slide the claw out from between A5 and A12 / A13.', CLAW_PARTS, arrow_scale=1.5)   # (Lee's third round, 18 Oct 2026)
 CLAW = CLAW_PARTS + [CLAW_PLUG]
 without = lambda *gone: [i for i in CLAW if i not in gone]
-g.remove('Take the claw apart. Unscrew the 10mm screw from C9.', [C8_SCREW], alone=CLAW)
+g.remove('Take the claw apart. Unscrew the 10mm screw from C9.', [C8_SCREW], alone=CLAW, arrow_scale=1.5)
 g.remove('Slide C8 out from between C6 and C9.', [C8], alone=without(C8_SCREW))
 g.remove('Pull C9 off the ends of C1 and C2.', [C9], alone=without(C8_SCREW, C8))
 g.remove('Pull C7 off the servo horn.', [C7], alone=without(C8_SCREW, C8, C9))
-g.remove('Unscrew the two 16mm screws that hold C6 to C3.', C6_SCREWS, alone=without(C8_SCREW, C8, C9, C7))
+g.remove('Unscrew the two 16mm screws that hold C6 to C3.', C6_SCREWS, alone=without(C8_SCREW, C8, C9, C7), arrow_scale=1.5)
 g.remove('Lift C6 off C4 and C5.', [C6], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS))
-g.remove('Pull C4 and C5 out of their slots in C3.', [C4, C5], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS, C6))
+g.remove('Pull C4 and C5 out of their slots in C3.', [C4, C5], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS, C6), arrow_scale=1.5)
 IN_C3 = [C3, CLAW_MOTOR, CLAW_HORN, CLAW_PLUG]
 g.remove('Pull C1 and C2 out of their slots in C3.', [C1, C2], alone=IN_C3 + [C1, C2])
 assert VIEW['Step 78c']['carry'][CLAW_PLUG]['pose'] == VIEW['Step 94']['carry'][CLAW_PLUG]['pose']   # (the plug is where Step 78 left it)
@@ -169,12 +170,14 @@ g.put_away([C3])
 
 # ================================================================ ARM: the forearm links (A10 - A13)
 g.remove('Unscrew the 6mm screw that holds A12 to A10, then lift A12 off.', [A12_SCREW, A12], in_turn=[[A12_SCREW], [A12]],
-         **camera_of('Step 75'))
-g.remove('Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.', [A13_SCREW, A13], in_turn=[[A13_SCREW], [A13]])
-g.remove('Unscrew the 6mm screw in the lobe of R6, from outside R6.', [R6_A11_SCREW])
+         arrow_style={A12_SCREW: dict(like=A12)}, **camera_of('Step 75'))   # (the screw's arrow as big as A12's: Lee)
+g.remove('Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.', [A13_SCREW, A13], in_turn=[[A13_SCREW], [A13]],
+         arrow_style={A13_SCREW: dict(like=A13)})
+g.remove('Unscrew the 6mm screw in the lobe of R6, from outside R6.', [R6_A11_SCREW], arrow_style={R6_A11_SCREW: dict(like=A11)})
 LINKS = [A10, A11, A11_SCREW]
 g.lift('Lift A10 and A11 out from behind the lobe of R6.', LINKS)
-g.remove('Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.', [A11_SCREW, A11], in_turn=[[A11_SCREW], [A11]], alone=LINKS)
+g.remove('Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.', [A11_SCREW, A11], in_turn=[[A11_SCREW], [A11]], alone=LINKS,
+         arrow_style={A11_SCREW: dict(like=A11)})
 g.put_away([A10])
 
 # ================================================================ SHOULDER MOTOR
@@ -182,14 +185,17 @@ path, stages, last = walked_back('Step 67', SHOULDER_PLUG, 'shoulder')
 g.lift("Take the shoulder motor's wire out of the hook-shaped slot in R6.", [SHOULDER_PLUG], path=path, ride_on=SHOULDER_MOTOR,
        wire_via=stages, wires=last, arrows=[], eye=[SHOULDER_PLUG], **camera_of('Step 67'))
 g.remove('Unscrew the two 10mm screws that hold R7 to R6.', R7_SCREWS)
-g.remove("Slide R7 back up the shoulder motor's wire and off over its plug.", [R7])
+near_top = lambda part, z: [round(float(g.model.inst[part].bounds.mean(0)[0]), 1), round(float(g.model.inst[part].bounds[1][1]) - 3.0, 1), z]
+g.remove("Slide R7 back up the shoulder motor's wire and off over its plug.", [R7],
+         arrow_style={R7: dict(at=near_top(R7, round(float(g.model.inst[R7].bounds[1][2]) + 2.0, 1)))})   # (on its top part, clear of the wire: Lee)
 g.remove('Take the shoulder motor out of R6, angling its servo horn back out through the opening.', [SHOULDER_MOTOR, SHOULDER_HORN])
 
 # ================================================================ ARM: A4 and A5
 g.remove('Unscrew the 6mm screw that holds A5 to A7, and the 10mm screw that holds A1 - A3 to A4.', [A5_A7_SCREW, LEVER_A4_SCREW])
 FOREARM = [A4, A5, A5_A4_SCREW]
 g.lift('Lift A4 and A5 off together.', FOREARM)
-g.remove('Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.', [A5_A4_SCREW, A5], in_turn=[[A5_A4_SCREW], [A5]], alone=FOREARM)
+g.remove('Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.', [A5_A4_SCREW, A5], in_turn=[[A5_A4_SCREW], [A5]], alone=FOREARM,
+         arrow_style={A5_A4_SCREW: dict(like=A5)})
 g.put_away([A4])
 
 # ================================================================ ELBOW MOTOR
@@ -197,7 +203,8 @@ path, stages, last = walked_back('Step 57', ELBOW_PLUG, 'elbow')
 g.lift("Take the elbow motor's wire out of the hook-shaped slot in R5.", [ELBOW_PLUG], path=path, ride_on=ELBOW_MOTOR,
        wire_via=stages, wires=last, arrows=[], eye=[ELBOW_PLUG], **camera_of('Step 57'))
 g.remove('Unscrew the two 10mm screws that hold R8 to R5.', R8_SCREWS)
-g.remove("Slide R8 back up the elbow motor's wire and off over its plug.", [R8])
+g.remove("Slide R8 back up the elbow motor's wire and off over its plug.", [R8],
+         arrow_style={R8: dict(at=near_top(R8, round(float(g.model.inst[R8].bounds[0][2]) - 2.0, 1)))})
 g.remove('Take the elbow motor out of R5, angling its servo horn back out through the opening.', [ELBOW_MOTOR, ELBOW_HORN])
 
 # ================================================================ ARM: the lever (A1 - A3) and the upper arm (A6 - A9)
@@ -210,10 +217,11 @@ g.remove('Unscrew the 6mm screw that holds A7 to R2. Reach it through the openin
 UPPER = [A6, A7, A9_NEAR_A7, A7_SCREW, A8, A9_NEAR_A8, A8_SCREW]
 g.lift('Lift A6 - A9 up off R2.', UPPER)
 g.remove('Unscrew the 16mm screw that holds A8 to the A9 beside it.', [A8_SCREW], alone=UPPER)
-g.remove('Pull that A9 out of its cross-shaped slot in A6.', [A9_NEAR_A8], alone=[A6, A7, A9_NEAR_A7, A7_SCREW, A8, A9_NEAR_A8])
+g.remove('Pull that A9 out of its cross-shaped slot in A6.', [A9_NEAR_A8], alone=[A6, A7, A9_NEAR_A7, A7_SCREW, A8, A9_NEAR_A8],
+         arrow_style={A9_NEAR_A8: dict(keep=True)})   # (an arrow, though it comes towards the camera: Lee)
 g.remove('Pull A8 off its two tabs on A6.', [A8], alone=[A6, A7, A9_NEAR_A7, A7_SCREW, A8])
 g.remove('Unscrew the 16mm screw that holds A7 to the other A9.', [A7_SCREW], alone=[A6, A7, A9_NEAR_A7, A7_SCREW])
-g.remove('Pull that A9 out of its slot too.', [A9_NEAR_A7], alone=[A6, A7, A9_NEAR_A7])
+g.remove('Pull that A9 out of its slot too.', [A9_NEAR_A7], alone=[A6, A7, A9_NEAR_A7], arrow_style={A9_NEAR_A7: dict(keep=True)})
 g.remove('Pull A7 off the last two tabs on A6.', [A7], alone=[A6, A7])
 g.put_away([A6])
 
@@ -246,11 +254,16 @@ g.remove('Pull B3 out of B2.', [B3])
 # ================================================================ BASE (R1 is left)
 HIDDEN_HEAD = [round(float(x), 1) for x in (g.model.inst[BASE_SCREWS_HIDDEN[0]].bounds.mean(0) * [1, 0, 1]
                                             + [0, g.model.inst[BASE_SCREWS_HIDDEN[0]].bounds[1][1] - 1.0, 0])]   # (its head)
+OTHER_SIDE = [0.5792, 0.5736, -0.5792]                              # (the far corner, seen from the other side)
 g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS, keep_camera=True,   # (B3's camera, kept: Lee)
-         inset=dict(target=HIDDEN_HEAD, dir=[0.5792, 0.5736, -0.5792], radius=14.0, mark=4.5,   # (the sixth screw, seen from the other side)
+         units=[[i] for i in BASE_SCREWS], arrow_scale=2.0,   # (an arrow on each screw, twice the size: Lee)
+         arrow_style={BASE_SCREWS_HIDDEN[0]: dict(face=OTHER_SIDE, like=BASE_SCREWS[1])},   # (the hidden one's faces the close-up; as big as the rest)
+         inset=dict(target=[HIDDEN_HEAD[0], HIDDEN_HEAD[1] + 16.0, HIDDEN_HEAD[2]], dir=OTHER_SIDE, radius=24.0, arrows=BASE_SCREWS_HIDDEN,
                     alt='The sixth screw, at the far corner, behind R1 - R6'))
 g.remove('Lift R1 - R6 and B2 off B1.', [B1])
-g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2])
+HORN_AXIS = g.model.inst[BASE_HORN].bounds.mean(0)                  # (B2's round cut-out is round it: 9.5 mm across the middle)
+g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2],   # (the arrow at the cut-out's far edge, on B2's underside: Lee)
+         arrow_style={B2: dict(at=[round(float(HORN_AXIS[0]), 1), round(float(g.model.inst[B2].bounds[0][1]) - 0.6, 1), round(float(HORN_AXIS[2]) + 9.5, 1)])})
 path, stages, last = walked_back('Step 25', BASE_PLUG, 'base')
 g.lift("Take the base motor's wire out of the L-shaped slot in R4.", [BASE_PLUG], path=path, ride_on=BASE_MOTOR,
        wire_via=stages, wires=last, arrows=[], eye=[BASE_PLUG], **camera_of('Step 25'))
@@ -259,6 +272,6 @@ g.remove('Take R5 off the other side.', [R5])
 g.remove('Lift R4 off R1.', [R4])
 g.remove('Lift R3 off R1.', [R3])
 g.remove('Slide R2 up off the base motor.', [R2])
-g.remove('Turn the base motor and angle its servo horn back out through the slot in R1.', [BASE_MOTOR, BASE_HORN])
+g.remove('Turn the base motor and angle its servo horn back out through the slot in R1.', [BASE_MOTOR, BASE_HORN], arrow_scale=2.0)
 
 g.build()

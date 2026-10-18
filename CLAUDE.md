@@ -282,7 +282,10 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     moved on along it until the camera can see it; and one that would point at the camera becomes an eye on the part. A plug moved
     on its lead (walked back) has an eye, no arrow, as an unplug; several things at once can have an eye each (the eight breadboard
     wires: one at each joystick's ends and one at the module's). A part the camera cannot see gets a close-up from the other side
-    (`inset=`, punched in, a red box on it: the base screw behind R1 - R6), not an eye.
+    (`inset=`, with its own arrow in it: `inset=dict(..., arrows=[ids])` and that arrow's `face=` towards the close-up), not an eye.
+    By hand, per step (Lee's third round, 18 Oct 2026): `arrow_scale=k` (every arrow of the step), `arrow_style={id: dict(scale=,
+    like=id2 (as big as id2's own arrow: a screw's as its part's), at=[x, y, z] (where its tail is: the top of R7, the edge of B2's
+    cut-out), shift=[dx, dy, dz] (raised clear of wires), face=, keep=True (an arrow even towards the camera: the A9s))}`.
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
     the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
   - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the

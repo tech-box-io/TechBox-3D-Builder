@@ -205,7 +205,12 @@ Section 14 says what the in-house player does today against each rule.
   the camera can see it, never pointing at the camera (an eye on the part instead), and on the part that matters (the joystick,
   not the walls it carries). A plug moved on its lead gets an eye, not an arrow; several ends at once, an eye each. A part hidden
   from the step's camera gets a close-up from the other side, punched in, with its frame and lead line. Two steps on one
-  sub-assembly in the hand keep one camera.
+  sub-assembly in the hand keep one camera. **Lee's third round (2026-10-18):** a screw taken off with its part has an arrow as
+  big as the part's; several screws, an arrow on each (the close-up has the hidden one's, not a red box); an arrow sits where
+  it reads (the top of R7 and R8, clear of the lead through them; above wires; at the edge of B2's cut-out round the servo horn,
+  to say where it comes away from); the A9s keep their arrows though they come towards the camera; small parts' arrows are
+  scaled up where Lee asked (twice for the USB plug, the extension's join, the six base screws and the base motor; half again
+  for the claw and its C8 screw, C6 screws, C4 and C5).
 - **The part leaves along its build hover path, reversed**, to the pose it hovered at in the build.
 - **A two-stage joint is undone inside one step**: small unhook or tilt first, then the long pull.
 - **Wires are unplugged by swapping** the routed model for a loose one (eye icon on the plug to pull), never by animating the route.

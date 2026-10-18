@@ -905,6 +905,9 @@ class Guide:
               the catch to release).
           view_dir= / frame= / look_from=, new_camera=True: a camera chosen for this step instead of the Full Build's; flip=True;
               keep_camera=True: the step before's camera, kept (two steps on one sub-assembly in the hand: Lee, 18 Oct 2026).
+          arrow_scale=k: every arrow of the step k times its size; arrow_style={id: dict(scale=, like=id2, at=[x, y, z],
+              shift=[dx, dy, dz], face=[x, y, z], keep=True)}: the arrow of the unit with that part, by hand (_arrow_out); like=id2:
+              as big as id2's own arrow (a screw's as its part's, Lee's third round).
           wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
               drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
@@ -935,7 +938,8 @@ class Guide:
 
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
-                 alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None, keep_camera=False):
+                 alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None, keep_camera=False,
+                 arrow_scale=1.0, arrow_style=None):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
         units_given = units
@@ -1146,7 +1150,8 @@ class Guide:
                                ways=ways, stops=stops, ride_after=ride_after, wires_after=after, wire_via=wire_via, lead_off=lead_off, units=units,
                                arrows=list(arrows) if arrows else [], eye=eye_list, labels=label_list, camera=camera, view_dir=view_dir,
                                frame=frame, look_from=look_from, flip=bool(flip), inset=dict(inset) if inset else None,
-                               alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {}), keep_camera=bool(keep_camera)))
+                               alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {}), keep_camera=bool(keep_camera),
+                               arrow_scale=float(arrow_scale), arrow_style={i: dict(v) for i, v in (arrow_style or {}).items()}))
         # the guide's state from here on
         for i in leave:
             self.placed.remove(i)
@@ -1316,14 +1321,25 @@ class Guide:
                      wires, wires_done, lines_at is not None, riders=riders, ride=ride, stops=stops, frame=frame, look_from=look_from, flip=flip, view_dir=view_dir, paths=paths,
                      caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single)
 
-    def _arrow_out(self, unit, here, stage, camera, shown=()):
+    @staticmethod
+    def _arrow_dims(reach, size):
+        """An arrow's length and thickness for a part `size` mm across that travels `reach` mm (Lee, 18 Oct 2026: smaller than the
+        published 20 - 115 mm)."""
+        length = float(np.clip(0.25 * reach + 0.2 * size, 15.0, 40.0))
+        return length, float(np.clip(0.1 * length, 1.6, 3.2))
+
+    def _arrow_out(self, unit, here, stage, camera, shown=(), style=None):
         """A red arrow for parts leaving together (a deconstruction step): from just outside them, along the way they first go (the
         longest stage of a way in stages: the I/O module's slide out of its slots, not the nudge before it), its face towards the
         camera (rulebook section 11). stage: {id: (pose, pose)}, that stage. One that would point almost at the camera comes back
         marked end_on (the step gets an eye on the part instead: Lee, 18 Oct 2026, an arrow on an elbow motor coming straight out).
         Sized to the parts (Lee, 18 Oct 2026: the published 20 - 115 mm were too big on screws and plates): 15 - 40 mm long, 1.6 - 3.2
         mm thick. Where the model hides it from the camera, it is moved on along its way, 4 mm at a time, until it can be seen (Lee:
-        an arrow under the motor's wires, or behind R5)."""
+        an arrow under the motor's wires, or behind R5). style (by hand, Lee's third round): scale (its length and thickness times
+        this), dims (length, thickness: as another part's arrow), at (where its tail is, assembly mm), shift (moved by this, mm), face
+        (the way its face looks, for a close-up seen from another side), keep (an arrow even if it points at the camera). Placed by
+        hand, it is not moved on to be seen."""
+        style = style or {}
         a = np.mean([apply_pose(here.get(i), self._pivot(i)) for i in unit], axis=0)
         move = lambda i: apply_pose(stage[i][1], self._pivot(i)) - apply_pose(stage[i][0], self._pivot(i))
         b = a + np.mean([move(i) for i in unit], axis=0)
@@ -1341,14 +1357,16 @@ class Guide:
         if reach < 1.0:
             return None
         d = (b - a) / reach
-        if abs(float(d @ _unit(camera['dir']))) > 0.8:
+        if abs(float(d @ _unit(camera['dir']))) > 0.8 and not style.get('keep'):
             return dict(end_on=True)
         pts = np.vstack([apply_pose(here.get(i), _sample(np.asarray(self.model.inst[i].vertices), 3000)) for i in unit])
-        size = float(np.linalg.norm(pts.max(0) - pts.min(0)))
-        length = float(np.clip(0.25 * reach + 0.2 * size, 15.0, 40.0))
-        width = float(np.clip(0.1 * length, 1.6, 3.2))
-        tail = a + d * (float(((pts - a) @ d).max()) + 2.0)
-        if shown:                                     # (moved on until the camera can see it)
+        whole = np.vstack([apply_pose(here.get(i), np.asarray(self.model.inst[i].vertices)) for i in unit])
+        length, width = style.get('dims') or self._arrow_dims(reach, float(np.linalg.norm(whole.max(0) - whole.min(0))))
+        length, width = length * float(style.get('scale', 1.0)), width * float(style.get('scale', 1.0))
+        tail = np.asarray(style['at'], float) if style.get('at') is not None else a + d * (float(((pts - a) @ d).max()) + 2.0)
+        tail = tail + np.asarray(style.get('shift', [0.0, 0.0, 0.0]), float)
+        by_hand = any(style.get(k) is not None for k in ('at', 'shift', 'face'))
+        if shown and not by_hand:                     # (moved on until the camera can see it)
             eye = camera_eye(camera, self.cfg)
 
             def box(i):                               # (the part's box where it is, for a quick test before the mesh's own)
@@ -1383,7 +1401,7 @@ class Guide:
                     break
             tail = best[1]
         head = tail + d * length
-        view = np.asarray(camera['dir'], float)
+        view = np.asarray(style['face'] if style.get('face') is not None else camera['dir'], float)
         face = view - (view @ d) * d
         if np.linalg.norm(face) < 0.2:
             face = np.cross(d, [0.0, 1.0, 0.0]) if abs(d[1]) < 0.9 else np.cross(d, [1.0, 0.0, 0.0])
@@ -1667,13 +1685,27 @@ class Guide:
                     legs = list(zip(at[:-1], at[1:]))
                     k, m = max(legs, key=lambda l: float(np.linalg.norm(apply_pose(way[l[1]], c) - apply_pose(way[l[0]], c))))
                     return way[k], way[m]
+                def dims_of(j):                                            # (the size of j's own arrow: for a screw's, as its part's)
+                    if j in s['ways']:
+                        p0, p1 = stage(j)
+                    else:                                                  # (its own move in the Full Build, not a group's it rode in)
+                        recs = self.taken['came'][j]
+                        way = next((r for r in reversed(recs) if r['group'] == [j]), recs[-1])['way']
+                        p0, p1 = way[0], way[-1]
+                    reach = float(np.linalg.norm(apply_pose(p1, self._pivot(j)) - apply_pose(p0, self._pivot(j))))
+                    v = np.asarray(self.model.inst[j].vertices)
+                    return self._arrow_dims(reach, float(np.linalg.norm(v.max(0) - v.min(0))))
                 arrows, eyes = [], []
                 for unit in s['units']:
-                    a = self._arrow_out(unit, here, {i: stage(i) for i in unit}, camera, shown)
+                    style = dict(next((s['arrow_style'][i] for i in unit if i in s['arrow_style']), {}))
+                    style.setdefault('scale', s['arrow_scale'])
+                    if style.get('like'):
+                        style['dims'] = dims_of(style['like'])
+                    a = self._arrow_out(unit, here, {i: stage(i) for i in unit}, camera, shown, style)
                     if a and a.pop('end_on', False):                       # (it would point at the camera: an eye on the part instead)
                         eyes.append(dict(id=unit[0]))
                     elif a:
-                        arrows.append(a)
+                        arrows.append(dict(a, part=unit[0]))                 # (the part it is on: a close-up may show only that one's)
                 s['eye'] = s['eye'] + [e for e in eyes if all(e['id'] != x.get('id') for x in s['eye'])]
                 for item in s['labels'] + s['eye']:                        # leaders end on a spot this camera can see
                     if 'id' in item and 'anchor' not in item:
@@ -1686,7 +1718,7 @@ class Guide:
                 if s.get('inset'):                                         # (on Step N here: the catch to release before the part comes off)
                     I = s['inset']
                     inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
-                                 hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption') if k in I})
+                                 hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption', 'arrows') if k in I})
                 common = dict(caption=s['caption'], text_key=s['text_key'], review=s['review'], camera=camera, _step=si,
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}))
                 views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=[], labels=s['labels'], eye=s['eye'],
