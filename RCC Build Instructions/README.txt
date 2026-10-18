@@ -159,8 +159,9 @@ THE DECONSTRUCTION (first draft 18 Oct 2026, from Lee's notes on the trial versi
 Made from the Full Build as guide.py last wrote it: run guide.py first, then deconstruction.py. It opens on the Full Build's title
 page, ends on L1, and its card on the website is the Full Build's. 22 steps:
 - Steps 1 - 5, the controller on its own (the car hidden): the USB cable unplugged (seen a little wider than the close-ups, so the
-  whole cable shows; one arrow, on the Mini-B plug, raised clear of the cable; none on the A end); the right joystick, the left
-  joystick, the radio module and the Nano Board, each by the Full Build's camera for it, turned round with the controller.
+  whole cable shows; one arrow, on the Mini-B plug's body, clear of the cable; none on the A end); the right joystick, the left
+  joystick, the radio module and the Nano Board, by one camera (the Full Build's for the right joystick, turned round with the
+  controller). Each run on a sub-assembly on its own keeps one camera (Lee's rule).
 - Steps 6 - 8: the barrel plug unplugged; the battery lifted out of L1 with its 9V adapter; the adapter taken off the battery on
   its own.
 - Steps 9 - 10: the wheel motors unplugged (right, then left), each plug back behind L1 the way it went in (four beats).

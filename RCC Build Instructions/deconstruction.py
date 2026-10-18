@@ -71,15 +71,17 @@ A_END = VIEW['Completed View']['offsets'].get(USB_A) or [0.0, 0.0, 0.0]
 g.remove("Unplug the USB cable from the controller's Nano Board.", USB, alone=CONTROLLER + USB,
          units=[[USB_B]],                                           # (one arrow, on the Mini-B plug: none on the A end, lifted with it)
          paths={USB_A: [compose([0.0, 25.0, 0.0], A_END)]},
-         arrow_style={USB_B: dict(shift=[0.0, 9.0, 0.0])},           # (raised clear of the cable, which runs on along the plug's way out)
-         view_dir=VIEW['Step 29']['camera']['dir'], frame=([748.0, 928.0, 1126.0], 100.0))   # (Step 29's corner, wider than the controller's
+         arrow_style={USB_B: dict(at=[737.0, 940.5, 1129.23])},     # (on the plug's body, just above it, clear of the cable, which runs on
+                                                                    # along the plug's way out: Lee)
+         view_dir=VIEW['Step 29']['camera']['dir'], frame=([748.0, 928.0, 1126.0], 112.0))   # (Step 29's corner, wider than the controller's
                                                                     # close-ups, so that the whole cable shows: Lee)
 g.remove('Pull the right joystick back out of R-JS, then lift it out of its pocket.', [JOY_RIGHT], alone=CONTROLLER, **turned_camera('Step 4'))
+# (one camera for the run on the controller: Lee's rule, two steps on one sub-assembly in the hand keep one camera)
 g.remove('Pull the left joystick back out of L-JS, then lift it out of its pocket.', [JOY_LEFT], alone=[i for i in CONTROLLER if i != JOY_RIGHT],
-         **turned_camera('Step 3'))
+         keep_camera=True)
 LEFT_ON_BOARD = [BOARD, GUARD_LEFT, GUARD_RIGHT, CONTROLLER_NANO, CONTROLLER_RADIO]
-g.remove('Lift the radio module out of its socket.', [CONTROLLER_RADIO], alone=LEFT_ON_BOARD, **turned_camera('Step 2'))
-g.remove('Lift the Nano Board out of H1 and H2.', [CONTROLLER_NANO], alone=LEFT_ON_BOARD[:4], **turned_camera('Step 1'))
+g.remove('Lift the radio module out of its socket.', [CONTROLLER_RADIO], alone=LEFT_ON_BOARD, keep_camera=True)
+g.remove('Lift the Nano Board out of H1 and H2.', [CONTROLLER_NANO], alone=LEFT_ON_BOARD[:4], keep_camera=True)
 g.put_away([BOARD])                                                 # (what is left of the controller: the board with its guards)
 
 # ================================================================ POWER
@@ -100,8 +102,8 @@ g.remove('Slide L7 out.', [L7])
 g.lift('Turn the car the right way up. Slide the I/O module forward, out of the grooves in L4 and L5.', [MODULE])
 MODULE_SET = [MODULE, CAR_NANO, ADAPTER, CAR_RADIO]
 g.remove('Lift the radio module out of U3 on the adapter board.', [CAR_RADIO], alone=MODULE_SET)   # (Lee: the module on its own)
-g.remove('Lift the adapter board off the pins along the side of the I/O module.', [ADAPTER], alone=MODULE_SET[:3])
-g.remove('Lift the Nano Board out of the I/O module.', [CAR_NANO], alone=MODULE_SET[:2])
+g.remove('Lift the adapter board off the pins along the side of the I/O module.', [ADAPTER], alone=MODULE_SET[:3], keep_camera=True)
+g.remove('Lift the Nano Board out of the I/O module.', [CAR_NANO], alone=MODULE_SET[:2], keep_camera=True)
 g.put_away([MODULE])
 
 # ================================================================ L4, L5 AND THE MOTORS
@@ -110,14 +112,15 @@ g.put_away([MODULE])
 BLOCK = [L5, MOTOR_R, MOTOR_L, L4]
 UP = VIEW['Step 21']['path'][0]                                     # (where the Full Build held the block over L1)
 IN_HAND = {p: compose(UP, VIEW['Step 21']['carry'][p]['pose'], g._pivot(p)) for p in (PLUG_R, PLUG_L)}
-g.lift('Lift L4 and L5, with the wheel motors, off L1.', BLOCK + [PLUG_R, PLUG_L], paths={p: [pose] for p, pose in IN_HAND.items()},
+g.lift("Lift L4 and L5, with the wheel motors, off L1, bringing each motor's wire up out of its notch.", BLOCK + [PLUG_R, PLUG_L], paths={p: [pose] for p, pose in IN_HAND.items()},
        units=[[L5, MOTOR_R, MOTOR_L, L4]], wires={**leads('Step 21', 'right'), **leads('Step 21', 'left')})
 IN_L5 = BLOCK + [WHEEL_R, WHEEL_L, PLUG_R, PLUG_L]
 g.remove("Slide L4 back off along the motors' wires, each plug passing back through its hole in L4.", [L4], alone=IN_L5)
 # (each motor out of L5 the way the Full Build pushed it in, reversed, its plug, which rides on L5 since the lift, going with it)
 for step, motor, plug, caption, shown in (('Step 19', MOTOR_L, PLUG_L, 'Pull the left wheel motor out of L5.', [L5, MOTOR_R, MOTOR_L, PLUG_R, PLUG_L]),
                                           ('Step 18', MOTOR_R, PLUG_R, 'Pull the right wheel motor out of L5.', [L5, MOTOR_R, PLUG_R])):
-    g.remove(caption, [motor, plug], alone=shown, units=[[motor]], paths={plug: [compose(VIEW[step]['path'][0], where(plug), g._pivot(plug))]})
+    g.remove(caption, [motor, plug], alone=shown, units=[[motor]], paths={plug: [compose(VIEW[step]['path'][0], where(plug), g._pivot(plug))]},
+             keep_camera=True)                                      # (as Step 18's: one camera for the run in the hand)
 g.put_away([L5])
 
 # ================================================================ L3 AND L2 (L1 is left)

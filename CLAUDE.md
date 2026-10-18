@@ -313,8 +313,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
   Board come out before the joysticks' walls), and it ends on R1. Run it after every Full Build change.
   The RCC's (`deconstruction.py`, 22 steps, Lee's order of 18 Oct 2026): the controller first, on its own (its USB cable, one arrow
-  on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's cameras turned
-  round with the controller); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged
+  on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's camera for
+  the right joystick turned round with the controller, one camera for the run); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged
   (the Full Build's four beats, reversed) before L6, L7 and the I/O module; the module taken apart on its own; L4 and L5 lifted
   off L1 with the motors, the leads straightened back as in the hand so that L4 slides off over the plugs, the motors out of L5;
   L3 and L2; it ends on L1. Run it after every Full Build change.
