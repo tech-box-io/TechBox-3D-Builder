@@ -155,8 +155,25 @@ sockets are solid blocks (every plug-in direction is set by hand in guide.py); t
 0.3 mm as it slides in; the adapter's 2-pin socket sat 0.9 mm off the module's 3V3 / GND pins (moved: materials.json adjust_mm); there is no car USB cable (a Mini-B plug in
 the car's Nano would run into the battery).
 
+THE DECONSTRUCTION (first draft 18 Oct 2026, from Lee's notes on the trial version; deconstruction.py -> steps-deconstruction.json)
+Made from the Full Build as guide.py last wrote it: run guide.py first, then deconstruction.py. It opens on the Full Build's title
+page, ends on L1, and its card on the website is the Full Build's. 22 steps:
+- Steps 1 - 5, the controller on its own (the car hidden): the USB cable unplugged (seen a little wider than the close-ups, so the
+  whole cable shows; one arrow, on the Mini-B plug, raised clear of the cable; none on the A end); the right joystick, the left
+  joystick, the radio module and the Nano Board, each by the Full Build's camera for it, turned round with the controller.
+- Steps 6 - 8: the barrel plug unplugged; the battery lifted out of L1 with its 9V adapter; the adapter taken off the battery on
+  its own.
+- Steps 9 - 10: the wheel motors unplugged (right, then left), each plug back behind L1 the way it went in (four beats).
+- Steps 11 - 13: L6 and L7 slid out (the car turned over), then the I/O module slid forward out of its grooves.
+- Steps 14 - 16, the I/O module on its own: the radio module, the adapter board, the Nano Board.
+- Steps 17 - 20: L4 and L5 lifted off L1 with the motors (the leads straightened back as they were in the hand, so that L4 can slide
+  off over the plugs); L4 slid off along the wires; the left and then the right motor pulled out of L5. (Lee wrote "R4 and R5":
+  taken as L4 and L5, the RCC's parts that hold the motors.)
+- Steps 21 - 22: L3 off L2, then L2 swung up and unhooked (L1 turned over, as in the build). L1 is left.
+
 FILES
   guide.py                      the build, in order (edit here, then run it: see CLAUDE.md "Commands" with this folder's name)
+  deconstruction.py             the deconstruction, made from the Full Build (run guide.py first)
   materials.json, colour-atlas-rcc.json   colours and detail
   wire-paths.json               the leads' centre lines and the plugs, measured from the CAD
   silkscreen.py -> decals.json  the printing on the boards, the radios' gold antenna and FRONT on L1

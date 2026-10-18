@@ -246,6 +246,14 @@ the module; then each joystick with its walls, the walls off it in the hand. So 
 published take-aparts end on the base (above). A sub-assembly taken apart in the hand is seen the way the build showed it,
 from above where the build did; Lee asked for the claw's C3 from above (the build had turned it over).
 
+**Lee, 2026-10-18 (the RCC's deconstruction):** a sub-assembly that comes off is taken apart on its own, the rest hidden, close in,
+then the guide returns to the main model: the controller (first: its USB cable, seen a little wider so that the cable shows, then
+the joysticks, the radio module and the Nano Board), the 9V battery with its adapter (the adapter off the battery), the I/O module
+(the radio module, the adapter board, the Nano Board). A lead is unplugged before the parts that hold it in come out (the wheel
+motors before L6, L7 and the I/O module). A cable unplugged and removed has one arrow, on the plug that is pulled, clear of the
+cable, and none on its far end. Wood that holds a part (the motors' L4 and L5) comes off that part in the hand, and the guide ends
+on the base (L1). Its card is the Full Build's (as the MRA's).
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |

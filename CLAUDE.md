@@ -116,6 +116,7 @@ Run from this folder. The Python environment is `.venv.nosync` (the Desktop is i
 
     .venv.nosync/bin/python "MRA Build Instructions Prototype/guide.py"            # after editing guide.py
     .venv.nosync/bin/python "MRA Build Instructions Prototype/deconstruction.py"   # then the deconstruction, made from the Full Build
+    .venv.nosync/bin/python "RCC Build Instructions/deconstruction.py"            # (the RCC's, likewise, after its guide.py)
     .venv.nosync/bin/python tools/build_model.py "MRA Build Instructions Prototype" # after editing materials.json or replacing the CAD
     .venv.nosync/bin/python "MRA Build Instructions Prototype/silkscreen.py"       # after editing the module's printing (then build_model)
     /usr/bin/python3 tools/serve.py "MRA Build Instructions Prototype" 8791         # local server; then open http://localhost:8791/player.html
@@ -265,7 +266,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-- **A deconstruction guide** (the MRA's, first draft 18 Oct 2026; the RCC's, planned) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
   `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
   Full Build's title page. Then, as a rule the build in reverse (rulebook section 11 and Lee's conventions there: parts may go in
@@ -311,6 +312,12 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
   no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
   Board come out before the joysticks' walls), and it ends on R1. Run it after every Full Build change.
+  The RCC's (`deconstruction.py`, 22 steps, Lee's order of 18 Oct 2026): the controller first, on its own (its USB cable, one arrow
+  on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's cameras turned
+  round with the controller); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged
+  (the Full Build's four beats, reversed) before L6, L7 and the I/O module; the module taken apart on its own; L4 and L5 lifted
+  off L1 with the motors, the leads straightened back as in the hand so that L4 slides off over the plugs, the motors out of L5;
+  L3 and L2; it ends on L1. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is

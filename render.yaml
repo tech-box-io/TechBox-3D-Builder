@@ -73,4 +73,10 @@ services:
       - path: /remote-controlled-car-full-build/*
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"
+      - path: /remote-controlled-car-deconstruction
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /remote-controlled-car-deconstruction/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
       # END guide framing

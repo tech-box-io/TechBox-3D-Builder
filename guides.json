@@ -8,6 +8,7 @@
   "guides": {
     "mini-robot-arm-full-build": {"kit": "mini-robot-arm", "steps": "steps.json", "label": "Full Build"},
     "mini-robot-arm-deconstruction": {"kit": "mini-robot-arm", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
-    "remote-controlled-car-full-build": {"kit": "remote-controlled-car", "steps": "steps.json", "label": "Full Build"}
+    "remote-controlled-car-full-build": {"kit": "remote-controlled-car", "steps": "steps.json", "label": "Full Build"},
+    "remote-controlled-car-deconstruction": {"kit": "remote-controlled-car", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"}
   }
 }
