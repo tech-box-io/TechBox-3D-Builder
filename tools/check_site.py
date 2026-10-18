@@ -28,6 +28,9 @@ TOP_FILES = ('index.html', '404.html', 'robots.txt')
 TOP_DIRS = ('assets', 'kits')
 ASSETS = ('site.css', 'techbox-wordmark-white.svg', 'frame-guard.js')
 IGNORED = ('.DS_Store',)                     # (Finder's; never committed, so never deployed)
+ICLOUD_COPY = re.compile(r'(^|/)([^/]+) \d+(\.[^/.]+)?$')   # ("index 2.html": iCloud's copy of a file it saw replaced; the Desktop syncs)
+icloud_note = lambda f: (f'{f}: a copy iCloud made of {re.sub(r" \d+(?=(\.[^/.]+)?$)", "", f)} (this folder is on the iCloud-synced Desktop), '
+                         'not part of the release: publishing the guide again (or --restore of its release) removes it')
 MODEL_GENERATOR = 'TechBox build_model.py'
 MODEL_LIMIT = 15_000_000
 IMPORT = re.compile(r"""(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+)(['"])([^'"]+)\1""")
@@ -179,7 +182,7 @@ def check_guide(name, folder, releases):
     for f in sorted(expected - set(files)):
         errors.append(f'{f} is missing (the release has it)')
     for f in sorted(set(files) - expected):
-        errors.append(f'{f} is not part of {release}')
+        errors.append(icloud_note(f) if ICLOUD_COPY.search(f) else f'{f} is not part of {release}')
     for f in sorted(expected & set(files)):
         if sha256(folder / f) != record['files'][f]:
             errors.append(f'{f} differs from {release} as published')
@@ -198,6 +201,8 @@ def check_guide(name, folder, releases):
     if model in files:
         errors += [f'{model}: {p}' for p in check_model(folder / model, steps)]
     for f in files:                                  # (only what a learner's browser needs: never a source, a note or a CAD file)
+        if f not in expected and ICLOUD_COPY.search(f):
+            continue                                 # (said above)
         if not (f == 'steps.json' or f == 'vendor/three/LICENSE' or Path(f).suffix.lower() in GUIDE_TYPES):
             errors.append(f'{f}: not a kind of file a guide holds (only {", ".join(GUIDE_TYPES)}, steps.json and the three.js licence)')
     if 'index.html' in files:
@@ -355,7 +360,8 @@ def check(site=SITE):
         elif p.name.startswith('.'):
             errors.append(f'site/{p.name}: hidden files and unfinished copies must not be published')
         elif p.is_file() and p.name not in TOP_FILES:
-            errors.append(f'site/{p.name}: not a file the site needs at its top level')
+            errors.append(f'site/{p.name}: ' + ('a copy iCloud made of a site page (this folder is on the iCloud-synced Desktop): move it out of site/'
+                                                if ICLOUD_COPY.search(p.name) else 'not a file the site needs at its top level'))
         elif p.is_dir() and p.name not in guides and p.name not in TOP_DIRS:
             errors.append(f'site/{p.name}/: not a guide in guides.json')
     for name in guides:

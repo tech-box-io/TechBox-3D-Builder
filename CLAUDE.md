@@ -168,6 +168,10 @@ the same way, and publish warns about part pictures drawn from another model).
   no commit), check it with `python3 tools/check_site.py "share/Website preview/site"`, serve it on 8797; `Open Website
   Preview.command` (top folder) starts it by double-click. Make it again after each round, and for every guide after a player
   change (a published copy keeps the player it was published with).
+- **iCloud** (the Desktop is synced, `site/` and `share/` with it): `publish.py` updates a guide's folder where it is, file by
+  file (an unchanged file is not touched, anything not in the release is removed and listed), and never swaps the folder for a
+  new one: swapped folders left iCloud's copies beside them ("index 2.html", "js 2/": 18 Oct 2026), which `check_site.py`
+  refuses, naming them as iCloud copies. Publishing the guide again (or `--restore` of its release) clears any that remain.
 - **Only the current release is on the website** (Lee, 16 Oct 2026). `site/` holds one copy per guide; every release ever
   published is kept in `releases/<guide>/r<N>/` with its record (`release.json`: when, Lee's reason, the source's git commit,
   every file's checksum) and `releases/<guide>/history.json`, in git but never uploaded (Render serves `site/` only).

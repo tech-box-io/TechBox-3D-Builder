@@ -528,18 +528,53 @@ def build_release(name, entry, note):
     return final, record, warnings
 
 
+ICLOUD_COPY = re.compile(r'(^|/)[^/]+ \d+(\.[^/.]+)?/?$')   # ("index 2.html", "js 2/": iCloud's copy of a file or folder it saw replaced)
+
+
 def put_on_site(name, release_dir):
-    """Make site/<guide>/ an exact copy of a release (less its record), replacing what was there."""
+    """Make site/<guide>/ an exact copy of a release (less its record), where it is, file by file: a file that is already the same
+    is left alone, a changed one is written over, a new one is added, and anything else in the folder (an earlier release's file,
+    an emptied folder, a copy iCloud made) is removed and listed. The folder is never swapped for a new one: this folder is on the
+    iCloud-synced Desktop, and a folder replaced by another of the same name left iCloud's copies of it beside the new one
+    ("js 2/", "steps 2.json", "index 2.html": 18 Oct 2026), which check_site.py then refused. Names starting with "." are left
+    alone (Finder's .DS_Store; check_site.py reports any other)."""
     errors = verify_release(release_dir)
     if errors:
         raise SystemExit(f'{release_dir} does not match its record, so it is not put on the site: {"; ".join(errors[:5])}')
-    SITE.mkdir(parents=True, exist_ok=True)
-    target, tmp, old = SITE / name, SITE / f'.{name}.tmp', SITE / f'.{name}.old'
-    shutil.copytree(release_dir, tmp, ignore=shutil.ignore_patterns('release.json', '.*'))
-    if target.exists():
-        target.rename(old)
-    tmp.rename(target)
-    shutil.rmtree(old, ignore_errors=True)
+    target = SITE / name
+    if target.is_symlink() or (target.exists() and not target.is_dir()):
+        raise SystemExit(f'{target} is not a folder: move it away first')
+    ours = lambda rel: not any(part.startswith('.') for part in Path(rel).parts)
+    want = {q.relative_to(release_dir).as_posix(): q for q in sorted(release_dir.rglob('*'))
+            if q.is_file() and q.name != 'release.json' and ours(q.relative_to(release_dir))}
+    target.mkdir(parents=True, exist_ok=True)
+    for rel, src in want.items():
+        dst = target / rel
+        if dst.is_symlink():
+            dst.unlink()
+        elif dst.is_dir():                                          # (a folder where the release has a file)
+            shutil.rmtree(dst)
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if dst.is_file() and dst.stat().st_size == src.stat().st_size and sha256(dst) == sha256(src):
+            continue                                                # (the same already: not touched, so nothing for iCloud to sync)
+        shutil.copy2(src, dst)                                      # (written over where it is)
+    removed, keep_dirs = [], {Path(rel).parent.as_posix() for rel in want}
+    keep_dirs |= {parent.as_posix() for rel in want for parent in Path(rel).parents}
+    for q in sorted(target.rglob('*'), key=lambda q: len(q.parts), reverse=True):   # (deepest first, so a folder it empties goes too)
+        rel = q.relative_to(target).as_posix()
+        if not ours(rel):
+            continue
+        if (q.is_file() or q.is_symlink()) and rel not in want:
+            q.unlink()
+            removed.append(rel)
+        elif q.is_dir() and not q.is_symlink() and rel not in keep_dirs and not any(q.iterdir()):
+            q.rmdir()
+            removed.append(rel + '/')
+    copies = [r for r in removed if ICLOUD_COPY.search(r)]
+    if copies:
+        print(f'  removed {len(copies)} iCloud cop{"y" if len(copies) == 1 else "ies"} from site/{name}/ (left by an earlier publish): '
+              f'{", ".join(copies[:6])}{" ..." if len(copies) > 6 else ""}')
+    return removed
 
 
 def changes(name, new_dir, before):
