@@ -262,8 +262,8 @@ g.remove('Unscrew the six 6mm screws that hold B2 to B1.', BASE_SCREWS, keep_cam
                     alt='The sixth screw, at the far corner, behind R1 - R6'))
 g.remove('Lift R1 - R6 and B2 off B1.', [B1])
 HORN_AXIS = g.model.inst[BASE_HORN].bounds.mean(0)                  # (B2's round cut-out is round it: 9.5 mm across the middle)
-g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2],   # (the arrow at the cut-out's far edge, on B2's underside: Lee)
-         arrow_style={B2: dict(at=[round(float(HORN_AXIS[0]), 1), round(float(g.model.inst[B2].bounds[0][1]) - 0.6, 1), round(float(HORN_AXIS[2]) + 9.5, 1)])})
+g.remove('Slide B2 out from between the servo horn and R5 / R6.', [B2],   # (the arrow at the cut-out's far edge, 6 mm off B2's underside, clear of it: Lee)
+         arrow_style={B2: dict(at=[round(float(HORN_AXIS[0]), 1), round(float(g.model.inst[B2].bounds[0][1]) - 6.0, 1), round(float(HORN_AXIS[2]) + 9.5, 1)])})
 path, stages, last = walked_back('Step 25', BASE_PLUG, 'base')
 g.lift("Take the base motor's wire out of the L-shaped slot in R4.", [BASE_PLUG], path=path, ride_on=BASE_MOTOR,
        wire_via=stages, wires=last, arrows=[], eye=[BASE_PLUG], **camera_of('Step 25'))
