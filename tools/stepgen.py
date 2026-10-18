@@ -1337,8 +1337,9 @@ class Guide:
         mm thick. Where the model hides it from the camera, it is moved on along its way, 4 mm at a time, until it can be seen (Lee:
         an arrow under the motor's wires, or behind R5). style (by hand, Lee's third round): scale (its length and thickness times
         this), dims (length, thickness: as another part's arrow), at (where its tail is, assembly mm), shift (moved by this, mm), face
-        (the way its face looks, for a close-up seen from another side), keep (an arrow even if it points at the camera). Placed by
-        hand, it is not moved on to be seen."""
+        (the way its face looks, for a close-up seen from another side), keep (an arrow even if it points at the camera), stage (which
+        stage of the way it points along, 0 the first: a joystick pulled back out of its socket before it is lifted; Lee, 18 Oct
+        2026). Placed by hand, it is not moved on to be seen."""
         style = style or {}
         a = np.mean([apply_pose(here.get(i), self._pivot(i)) for i in unit], axis=0)
         move = lambda i: apply_pose(stage[i][1], self._pivot(i)) - apply_pose(stage[i][0], self._pivot(i))
@@ -1677,13 +1678,13 @@ class Guide:
                                         f"lying aside (new_camera=True, or alone=)")
                 eye = camera_eye(camera, self.cfg)
 
-                def stage(i):                                              # (the longest stage of its way: the slide, not a nudge first)
-                    way = s['ways'].get(i)
+                def stage(i, which=None):                                  # (the longest stage of its way: the slide, not a nudge first;
+                    way = s['ways'].get(i)                                 # or, by hand, stage `which`: a joystick pulled out of its socket)
                     if not way:
                         return here.get(i), there.get(i)
                     c, at = self._pivot(i), list(s['stops'].get(i, range(len(way))))
                     legs = list(zip(at[:-1], at[1:]))
-                    k, m = max(legs, key=lambda l: float(np.linalg.norm(apply_pose(way[l[1]], c) - apply_pose(way[l[0]], c))))
+                    k, m = legs[which] if which is not None else max(legs, key=lambda l: float(np.linalg.norm(apply_pose(way[l[1]], c) - apply_pose(way[l[0]], c))))
                     return way[k], way[m]
                 def dims_of(j):                                            # (the size of j's own arrow: for a screw's, as its part's)
                     if j in s['ways']:
@@ -1701,7 +1702,7 @@ class Guide:
                     style.setdefault('scale', s['arrow_scale'])
                     if style.get('like'):
                         style['dims'] = dims_of(style['like'])
-                    a = self._arrow_out(unit, here, {i: stage(i) for i in unit}, camera, shown, style)
+                    a = self._arrow_out(unit, here, {i: stage(i, style.get('stage')) for i in unit}, camera, shown, style)
                     if a and a.pop('end_on', False):                       # (it would point at the camera: an eye on the part instead)
                         eyes.append(dict(id=unit[0]))
                     elif a:
