@@ -33,6 +33,8 @@
 *.cdr
 *.lbrn
 *.lbrn2
+# The PMG's CAD export is over GitHub's 100 MB limit: the kit uses pmg-guide.glb, cut from it by make_source.py (its STEP's checksum is in cad-sources.sha256)
+PMG Build Instructions/pmg.glb
 # Videos, archives, phone photos (they can carry the place they were taken)
 MRA_Videos/
 *_Videos/

@@ -1,0 +1,301 @@
+# PMG CAD: top-level instances (pmg.glb, converted from 'PMG Full 3D Cadasio Build.STEP' on 19 Oct 2026)
+
+Assembly mm, Y up (the GLB's metres x 1000). Read from the GLB header only (accessor min/max through the node transforms). Script: kept in docs/research/pmg/scripts/tree.py.
+
+assembly node PMG Full 3D Cadasio Build top-level 296
+- **NAUO1**: size [53.3, 24.6, 59.0] at [673.6, 889.4, 1299.3]; 67 meshes, 247740 verts: smt_resistor222_a x8, led x5, MINI USB CONTACT x5, cap106C x4, Samtec-TLW-104-01-F-S_N x4, Samtec-TLW-104-01-F-S_R x4 ...
+- **NAUO2**: size [18.0, 18.6, 45.0] at [673.0, 937.3, 1306.2]; 1 meshes, 296070 verts: nano_Varsayılan
+- **NAUO3**: size [18.0, 18.6, 45.0] at [673.0, 907.6, 1306.2]; 1 meshes, 296070 verts: nano_Varsayılan
+- **NAUO4**: size [16.4, 28.8, 13.5] at [641.2, 948.9, 1317.7]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO5**: size [16.4, 28.8, 13.5] at [641.2, 948.9, 1303.6]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO6**: size [16.4, 28.8, 13.5] at [641.2, 948.9, 1289.6]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO7**: size [16.4, 28.8, 13.5] at [641.2, 948.9, 1275.8]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO8**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1290.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO9**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1290.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO10**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1293.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO11**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1298.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO12**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1295.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO13**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1293.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO14**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1298.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO15**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1295.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO16**: size [1.8, 8.0, 1.8] at [641.4, 938.6, 1273.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO17**: size [1.8, 8.0, 1.8] at [641.4, 938.6, 1275.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO18**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1289.7]; 1 meshes, 348 verts: Wire Cap
+- **NAUO19**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1287.2]; 1 meshes, 348 verts: Wire Cap
+- **NAUO20**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1301.1]; 1 meshes, 348 verts: Wire Cap
+- **NAUO21**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1303.7]; 1 meshes, 348 verts: Wire Cap
+- **NAUO22**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1315.2]; 1 meshes, 348 verts: Wire Cap
+- **NAUO23**: size [1.8, 8.0, 1.8] at [641.4, 938.5, 1317.7]; 1 meshes, 348 verts: Wire Cap
+- **NAUO24**: size [13.4, 44.4, 18.8] at [647.5, 912.3, 1282.0]; 1 meshes, 10451 verts: Part36^PMG Full 3D Cadasio Build
+- **NAUO25**: size [18.4, 44.4, 16.3] at [650.0, 912.3, 1283.3]; 1 meshes, 11186 verts: Part37^PMG Full 3D Cadasio Build
+- **NAUO26**: size [13.4, 44.4, 7.4] at [647.5, 912.3, 1290.2]; 1 meshes, 10141 verts: Part38^PMG Full 3D Cadasio Build
+- **NAUO27**: size [18.5, 44.4, 5.1] at [650.0, 912.3, 1291.4]; 1 meshes, 10565 verts: Part39^PMG Full 3D Cadasio Build
+- **NAUO28**: size [13.6, 44.4, 6.9] at [647.5, 912.3, 1298.3]; 1 meshes, 10050 verts: Part40^PMG Full 3D Cadasio Build
+- **NAUO29**: size [18.4, 44.4, 9.1] at [650.0, 912.3, 1299.8]; 1 meshes, 10683 verts: Part41^PMG Full 3D Cadasio Build
+- **NAUO30**: size [13.5, 44.4, 18.1] at [647.5, 912.3, 1306.8]; 1 meshes, 11593 verts: Part42^PMG Full 3D Cadasio Build
+- **NAUO31**: size [18.4, 44.4, 20.7] at [650.0, 912.3, 1308.1]; 1 meshes, 12247 verts: Part43^PMG Full 3D Cadasio Build
+- **NAUO32**: size [1.8, 1.8, 8.0] at [658.6, 928.8, 1241.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO33**: size [1.8, 1.8, 8.0] at [658.6, 926.4, 1241.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO34**: size [1.8, 1.8, 8.0] at [658.6, 924.0, 1241.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO35**: size [1.8, 1.8, 8.0] at [658.6, 921.6, 1241.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO36**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1305.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO37**: size [1.8, 8.0, 1.8] at [656.1, 886.1, 1305.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO38**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1303.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO39**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1305.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO40**: size [4.2, 39.3, 58.1] at [657.2, 909.8, 1274.9]; 1 meshes, 16636 verts: Part44^PMG Full 3D Cadasio Build
+- **NAUO41**: size [5.5, 37.0, 60.6] at [660.7, 908.7, 1276.2]; 1 meshes, 16612 verts: Part45^PMG Full 3D Cadasio Build
+- **NAUO42**: size [4.8, 34.5, 60.6] at [657.9, 907.4, 1276.2]; 1 meshes, 14821 verts: Part46^PMG Full 3D Cadasio Build
+- **NAUO43**: size [6.4, 32.0, 60.6] at [656.2, 906.2, 1276.2]; 1 meshes, 17344 verts: Part47^PMG Full 3D Cadasio Build
+- **NAUO44**: size [17.7, 32.0, 131.9] at [649.4, 923.8, 1405.6]; 18 meshes, 235328 verts: 8x female rounded header x8, 1088AS x4, MAX7219--3DModel-STEP-56544_Défaut x4, PCB, 90 5xHeader Pins
+- **NAUO45**: size [1.8, 1.8, 8.0] at [648.1, 928.8, 1472.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO46**: size [1.8, 1.8, 8.0] at [648.1, 926.2, 1472.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO47**: size [1.8, 1.8, 8.0] at [648.1, 923.7, 1472.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO48**: size [1.8, 1.8, 8.0] at [648.1, 921.1, 1472.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO49**: size [1.8, 1.8, 8.0] at [648.1, 918.6, 1472.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO50**: size [1.8, 8.0, 1.8] at [653.6, 886.1, 1311.0]; 1 meshes, 348 verts: Wire Cap
+- **NAUO51**: size [1.8, 8.0, 1.8] at [656.1, 886.1, 1311.0]; 1 meshes, 348 verts: Wire Cap
+- **NAUO52**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1318.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO53**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1315.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO54**: size [1.8, 8.0, 1.8] at [658.6, 886.1, 1310.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO55**: size [25.0, 44.2, 175.6] at [659.9, 912.2, 1398.2]; 1 meshes, 48751 verts: Part48^PMG Full 3D Cadasio Build
+- **NAUO56**: size [22.9, 40.1, 175.3] at [659.0, 910.2, 1398.0]; 1 meshes, 48361 verts: Part49^PMG Full 3D Cadasio Build
+- **NAUO57**: size [21.1, 34.5, 175.4] at [658.1, 907.4, 1398.0]; 1 meshes, 48007 verts: Part50^PMG Full 3D Cadasio Build
+- **NAUO58**: size [22.5, 31.6, 169.0] at [658.7, 905.9, 1399.7]; 1 meshes, 44078 verts: Part51^PMG Full 3D Cadasio Build
+- **NAUO59**: size [22.7, 29.1, 165.5] at [658.9, 904.7, 1400.5]; 1 meshes, 41398 verts: Part52^PMG Full 3D Cadasio Build
+- **NAUO60**: size [109.6, 3.3, 139.4] at [518.2, 898.7, 1290.5]; 1 meshes, 1036 verts: H6
+- **NAUO61**: size [3.1, 30.9, 139.4] at [541.1, 915.6, 1290.5]; 1 meshes, 1164 verts: H8
+- **NAUO62**: size [71.2, 78.0, 3.0] at [558.1, 967.1, 1310.0]; 1 meshes, 1470 verts: H11v2
+- **NAUO63**: size [3.1, 20.9, 145.8] at [461.9, 898.7, 1290.5]; 1 meshes, 458 verts: H1
+- **NAUO64**: size [78.6, 3.0, 145.7] at [560.7, 932.6, 1290.5]; 1 meshes, 1090 verts: H10
+- **NAUO65**: size [136.9, 49.8, 3.0] at [525.4, 912.8, 1358.7]; 1 meshes, 2694 verts: H2
+- **NAUO66**: size [136.9, 49.8, 3.3] at [525.4, 912.8, 1222.2]; 1 meshes, 3554 verts: H3
+- **NAUO67**: size [137.8, 3.4, 139.4] at [532.3, 901.7, 1290.5]; 1 meshes, 1288 verts: H5
+- **NAUO68**: size [109.6, 3.3, 139.4] at [518.1, 895.7, 1290.5]; 1 meshes, 324 verts: H7
+- **NAUO69**: size [130.4, 3.4, 31.0] at [528.6, 914.9, 1340.4]; 1 meshes, 1110 verts: H9
+- **NAUO70**: size [130.4, 3.4, 31.0] at [528.6, 914.9, 1307.2]; 1 meshes, 1110 verts: H9
+- **NAUO71**: size [130.4, 3.4, 31.0] at [528.6, 914.9, 1273.8]; 1 meshes, 1110 verts: H9
+- **NAUO72**: size [130.4, 3.4, 31.0] at [528.6, 914.9, 1240.5]; 1 meshes, 1110 verts: H9
+- **NAUO73**: size [3.0, 80.9, 145.7] at [588.9, 928.2, 1290.5]; 1 meshes, 1100 verts: H4v2
+- **NAUO74**: size [38.5, 45.1, 73.7] at [560.0, 984.2, 1290.5]; 1 meshes, 818 verts: H14
+- **NAUO75**: size [39.1, 33.5, 63.5] at [581.6, 967.0, 1290.5]; 1 meshes, 1300 verts: H13v2
+- **NAUO76**: size [29.1, 17.1, 13.5] at [506.7, 905.1, 1241.8]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO77**: size [71.2, 78.0, 3.0] at [558.1, 966.7, 1271.0]; 1 meshes, 1782 verts: H12v2
+- **NAUO78**: size [24.6, 59.0, 53.3] at [605.8, 932.5, 1290.5]; 70 meshes, 297900 verts: smt_resistor222_a x8, led x5, MINI USB CONTACT x5, cap106C x4, Samtec-TLW-104-01-F-S_N x4, Samtec-TLW-104-01-F-S_R x4 ...
+- **NAUO79**: size [24.0, 25.6, 47.5] at [563.4, 981.9, 1293.5]; 1 meshes, 3864 verts: Display TM1637_По умолчанию
+- **NAUO80**: size [11.2, 24.0, 47.5] at [660.4, 925.3, 1220.3]; 1 meshes, 3864 verts: Display TM1637_По умолчанию
+- **NAUO81**: size [30.6, 32.9, 131.9] at [532.5, 955.9, 1289.1]; 18 meshes, 235328 verts: 8x female rounded header x8, 1088AS x4, MAX7219--3DModel-STEP-56544_Défaut x4, PCB, 90 5xHeader Pins
+- **NAUO82**: size [30.6, 32.9, 131.9] at [532.5, 955.9, 1145.8]; 18 meshes, 235328 verts: 8x female rounded header x8, 1088AS x4, MAX7219--3DModel-STEP-56544_Défaut x4, PCB, 90 5xHeader Pins
+- **NAUO83**: size [29.1, 17.1, 13.5] at [506.8, 905.3, 1274.3]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO84**: size [29.1, 17.1, 13.5] at [506.7, 905.5, 1306.9]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO85**: size [29.1, 17.1, 13.5] at [506.6, 904.1, 1339.4]; 7 meshes, 13548 verts: Socket_Blok x4, Board^Big Button Module_По умолчанию, Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_По умолчанию, Push_Button_Cap.step_По умолчанию
+- **NAUO86**: size [8.1, 2.6, 1.8] at [516.7, 906.3, 1244.2]; 1 meshes, 348 verts: Wire Cap
+- **NAUO87**: size [8.1, 2.6, 1.8] at [516.5, 906.4, 1241.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO88**: size [8.1, 2.6, 1.8] at [516.8, 906.7, 1276.7]; 1 meshes, 348 verts: Wire Cap
+- **NAUO89**: size [8.1, 2.6, 1.8] at [516.8, 906.5, 1274.2]; 1 meshes, 348 verts: Wire Cap
+- **NAUO90**: size [8.1, 2.6, 1.8] at [516.4, 906.6, 1309.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO91**: size [8.1, 2.6, 1.8] at [516.4, 906.7, 1306.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO92**: size [8.1, 2.6, 1.8] at [516.2, 905.4, 1339.3]; 1 meshes, 348 verts: Wire Cap
+- **NAUO93**: size [8.1, 2.6, 1.8] at [516.4, 905.3, 1341.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO94**: size [24.6, 59.0, 53.3] at [605.8, 1037.2, 1290.6]; 70 meshes, 297900 verts: smt_resistor222_a x8, led x5, MINI USB CONTACT x5, cap106C x4, Samtec-TLW-104-01-F-S_N x4, Samtec-TLW-104-01-F-S_R x4 ...
+- **NAUO95**: size [8.0, 1.8, 1.8] at [602.5, 938.5, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO96**: size [8.0, 1.8, 1.8] at [602.5, 941.1, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO97**: size [8.0, 1.8, 1.8] at [602.5, 941.1, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO98**: size [8.0, 1.8, 1.8] at [602.5, 936.0, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO99**: size [8.0, 1.8, 1.8] at [602.5, 938.5, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO100**: size [8.0, 1.8, 1.8] at [602.5, 936.0, 1305.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO101**: size [8.0, 1.8, 1.8] at [602.5, 933.4, 1305.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO102**: size [8.0, 1.8, 1.8] at [602.5, 933.4, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO103**: size [8.0, 1.8, 1.8] at [600.3, 1038.1, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO104**: size [8.0, 1.8, 1.8] at [602.5, 1043.2, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO105**: size [8.0, 1.8, 1.8] at [602.5, 1040.7, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO106**: size [8.0, 1.8, 1.8] at [602.5, 1045.7, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO107**: size [8.0, 1.8, 1.8] at [602.5, 1045.7, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO108**: size [8.0, 1.8, 1.8] at [602.5, 1038.1, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO109**: size [8.0, 1.8, 1.8] at [602.5, 1043.2, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO110**: size [8.0, 1.8, 1.8] at [602.5, 1040.7, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO111**: size [8.0, 1.8, 1.8] at [602.5, 928.5, 1305.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO112**: size [8.0, 1.8, 1.8] at [602.5, 926.0, 1305.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO113**: size [8.0, 1.8, 1.8] at [602.5, 925.9, 1307.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO114**: size [8.0, 1.8, 1.8] at [602.5, 926.0, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO115**: size [8.0, 1.8, 1.8] at [602.5, 920.9, 1305.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO116**: size [8.0, 1.8, 1.8] at [602.5, 920.9, 1307.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO117**: size [8.0, 1.8, 1.8] at [602.5, 920.9, 1310.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO118**: size [8.0, 1.8, 1.8] at [602.5, 916.0, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO119**: size [8.0, 1.8, 1.8] at [602.5, 913.4, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO120**: size [8.0, 1.8, 1.8] at [602.5, 1033.2, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO121**: size [8.0, 1.8, 1.8] at [602.5, 1030.6, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO122**: size [8.0, 1.8, 1.8] at [602.5, 1030.6, 1308.0]; 1 meshes, 348 verts: Wire Cap
+- **NAUO123**: size [8.0, 1.8, 1.8] at [602.5, 1030.6, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO124**: size [8.0, 1.8, 1.8] at [602.5, 1025.5, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO125**: size [8.0, 1.8, 1.8] at [602.5, 1025.6, 1308.0]; 1 meshes, 348 verts: Wire Cap
+- **NAUO126**: size [8.0, 1.8, 1.8] at [602.5, 1025.6, 1310.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO127**: size [8.0, 1.8, 1.8] at [602.5, 1020.6, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO128**: size [8.0, 1.8, 1.8] at [602.5, 1018.1, 1305.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO129**: size [24.0, 25.6, 47.5] at [563.7, 982.2, 1373.4]; 1 meshes, 3864 verts: Display TM1637_По умолчанию
+- **NAUO130**: size [2.5, 2.5, 8.0] at [564.6, 986.0, 1394.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO131**: size [2.5, 2.5, 8.0] at [561.5, 982.3, 1394.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO132**: size [2.5, 2.5, 8.0] at [563.0, 984.2, 1394.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO133**: size [2.5, 2.5, 8.0] at [559.9, 980.5, 1394.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO134**: size [2.5, 2.5, 8.0] at [537.1, 959.6, 1222.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO135**: size [2.5, 2.5, 8.0] at [535.4, 957.6, 1222.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO136**: size [2.5, 2.5, 8.0] at [533.8, 955.7, 1222.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO137**: size [2.5, 2.5, 8.0] at [532.0, 953.9, 1222.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO138**: size [2.5, 2.5, 8.0] at [530.4, 951.9, 1222.8]; 1 meshes, 348 verts: Wire Cap
+- **NAUO139**: size [2.5, 2.5, 8.0] at [536.9, 959.7, 1079.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO140**: size [2.5, 2.5, 8.0] at [535.4, 957.8, 1079.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO141**: size [2.5, 2.5, 8.0] at [533.7, 955.8, 1079.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO142**: size [2.5, 2.5, 8.0] at [532.1, 953.8, 1079.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO143**: size [2.5, 2.5, 8.0] at [530.4, 951.9, 1079.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO144**: size [133.6, 17.4, 48.3] at [587.5, 898.8, 1267.3]; 1 meshes, 36569 verts: Part53^PMG Full 3D Cadasio Build
+- **NAUO145**: size [138.9, 17.5, 50.4] at [589.9, 898.9, 1266.2]; 1 meshes, 38019 verts: Part54^PMG Full 3D Cadasio Build
+- **NAUO146**: size [95.4, 151.2, 68.3] at [568.3, 972.1, 1277.0]; 1 meshes, 64814 verts: Part55^PMG Full 3D Cadasio Build
+- **NAUO147**: size [93.7, 150.3, 65.3] at [567.3, 972.3, 1273.5]; 1 meshes, 67582 verts: Part56^PMG Full 3D Cadasio Build
+- **NAUO148**: size [95.1, 45.7, 69.5] at [568.2, 919.2, 1276.4]; 1 meshes, 40825 verts: Part57^PMG Full 3D Cadasio Build
+- **NAUO149**: size [93.4, 45.8, 66.8] at [567.1, 918.8, 1272.7]; 1 meshes, 39139 verts: Part58^PMG Full 3D Cadasio Build
+- **NAUO150**: size [133.5, 17.9, 18.1] at [587.5, 899.1, 1284.9]; 1 meshes, 32239 verts: Part59^PMG Full 3D Cadasio Build
+- **NAUO151**: size [138.6, 18.1, 20.4] at [589.9, 899.2, 1283.7]; 1 meshes, 33251 verts: Part60^PMG Full 3D Cadasio Build
+- **NAUO152**: size [94.6, 43.2, 38.7] at [568.0, 917.6, 1291.7]; 1 meshes, 36899 verts: Part61^PMG Full 3D Cadasio Build
+- **NAUO153**: size [95.7, 42.5, 34.9] at [568.5, 917.9, 1288.6]; 1 meshes, 35001 verts: Part62^PMG Full 3D Cadasio Build
+- **NAUO154**: size [99.7, 146.3, 39.4] at [570.5, 970.7, 1286.5]; 1 meshes, 60238 verts: Part66^PMG Full 3D Cadasio Build
+- **NAUO155**: size [98.5, 148.8, 43.5] at [570.0, 970.6, 1289.4]; 1 meshes, 63933 verts: Part65^PMG Full 3D Cadasio Build
+- **NAUO156**: size [134.1, 17.9, 18.7] at [587.3, 899.1, 1303.7]; 1 meshes, 32009 verts: Part63^PMG Full 3D Cadasio Build
+- **NAUO157**: size [138.9, 17.8, 17.5] at [589.8, 899.0, 1301.2]; 1 meshes, 32991 verts: Part64^PMG Full 3D Cadasio Build
+- **NAUO158**: size [92.3, 38.6, 11.8] at [567.9, 917.3, 1311.3]; 1 meshes, 29353 verts: Part67^PMG Full 3D Cadasio Build
+- **NAUO159**: size [92.3, 40.0, 13.3] at [566.5, 917.8, 1310.3]; 1 meshes, 29522 verts: Part68^PMG Full 3D Cadasio Build
+- **NAUO160**: size [100.8, 145.5, 12.2] at [570.7, 968.5, 1314.6]; 1 meshes, 56422 verts: Part69^PMG Full 3D Cadasio Build
+- **NAUO161**: size [98.1, 145.4, 19.3] at [569.4, 968.6, 1314.6]; 1 meshes, 57462 verts: Part70^PMG Full 3D Cadasio Build
+- **NAUO162**: size [133.8, 16.2, 48.5] at [587.3, 898.2, 1319.7]; 1 meshes, 36733 verts: Part71^PMG Full 3D Cadasio Build
+- **NAUO163**: size [139.1, 16.5, 43.4] at [589.7, 898.4, 1319.5]; 1 meshes, 36667 verts: Part72^PMG Full 3D Cadasio Build
+- **NAUO164**: size [90.4, 37.2, 34.9] at [565.6, 915.5, 1327.2]; 1 meshes, 30610 verts: Part73^PMG Full 3D Cadasio Build
+- **NAUO165**: size [90.4, 40.0, 36.4] at [565.3, 914.1, 1323.0]; 1 meshes, 31112 verts: Part74^PMG Full 3D Cadasio Build
+- **NAUO166**: size [94.2, 144.9, 35.0] at [567.5, 966.3, 1327.3]; 1 meshes, 58876 verts: Part75^PMG Full 3D Cadasio Build
+- **NAUO167**: size [92.8, 144.1, 35.9] at [566.5, 966.7, 1322.3]; 1 meshes, 57822 verts: Part76^PMG Full 3D Cadasio Build
+- **NAUO168**: size [52.7, 9.2, 60.2] at [632.9, 926.4, 1276.0]; 1 meshes, 20687 verts: Part77^PMG Full 3D Cadasio Build
+- **NAUO169**: size [52.7, 9.6, 60.2] at [632.9, 923.2, 1276.0]; 1 meshes, 19879 verts: Part78^PMG Full 3D Cadasio Build
+- **NAUO170**: size [52.7, 8.3, 62.7] at [632.9, 922.4, 1277.2]; 1 meshes, 20355 verts: Part79^PMG Full 3D Cadasio Build
+- **NAUO171**: size [52.7, 10.8, 65.2] at [632.9, 921.2, 1278.5]; 1 meshes, 20319 verts: Part80^PMG Full 3D Cadasio Build
+- **NAUO172**: size [52.8, 108.3, 61.7] at [632.9, 982.1, 1275.3]; 1 meshes, 47245 verts: Part81^PMG Full 3D Cadasio Build
+- **NAUO173**: size [52.7, 105.7, 60.3] at [632.9, 978.4, 1276.0]; 1 meshes, 45254 verts: Part82^PMG Full 3D Cadasio Build
+- **NAUO174**: size [52.7, 112.9, 62.8] at [632.9, 977.6, 1277.3]; 1 meshes, 47950 verts: Part83^PMG Full 3D Cadasio Build
+- **NAUO175**: size [56.0, 112.0, 65.4] at [631.2, 976.5, 1278.5]; 1 meshes, 48931 verts: Part84^PMG Full 3D Cadasio Build
+- **NAUO176**: size [82.7, 40.1, 247.0] at [577.6, 940.3, 1185.0]; 1 meshes, 71577 verts: Part85^PMG Full 3D Cadasio Build
+- **NAUO177**: size [90.0, 46.8, 253.8] at [579.7, 935.0, 1184.1]; 1 meshes, 73859 verts: Part86^PMG Full 3D Cadasio Build
+- **NAUO178**: size [94.6, 39.1, 251.5] at [580.4, 937.0, 1180.4]; 1 meshes, 74482 verts: Part87^PMG Full 3D Cadasio Build
+- **NAUO179**: size [90.4, 43.9, 249.7] at [576.6, 932.5, 1181.2]; 1 meshes, 73276 verts: Part88^PMG Full 3D Cadasio Build
+- **NAUO180**: size [120.4, 70.0, 119.2] at [596.6, 925.2, 1255.2]; 1 meshes, 55699 verts: Part90^PMG Full 3D Cadasio Build
+- **NAUO181**: size [119.4, 68.1, 117.1] at [594.5, 924.2, 1253.1]; 1 meshes, 56584 verts: Part91^PMG Full 3D Cadasio Build
+- **NAUO182**: size [126.2, 66.2, 121.6] at [596.2, 923.2, 1252.0]; 1 meshes, 58144 verts: Part92^PMG Full 3D Cadasio Build
+- **NAUO183**: size [128.1, 64.4, 121.3] at [595.4, 922.3, 1255.8]; 1 meshes, 55227 verts: Part93^PMG Full 3D Cadasio Build
+- **NAUO184**: size [129.4, 62.4, 124.2] at [594.5, 921.3, 1257.0]; 1 meshes, 58629 verts: Part94^PMG Full 3D Cadasio Build
+- **NAUO185**: size [80.3, 69.8, 110.5] at [576.6, 993.8, 1253.8]; 1 meshes, 47193 verts: Part95^PMG Full 3D Cadasio Build
+- **NAUO186**: size [82.8, 74.1, 118.1] at [576.2, 994.0, 1252.1]; 1 meshes, 52087 verts: Part96^PMG Full 3D Cadasio Build
+- **NAUO187**: size [79.6, 78.5, 111.4] at [572.9, 994.3, 1250.5]; 1 meshes, 47711 verts: Part97^PMG Full 3D Cadasio Build
+- **NAUO188**: size [86.5, 73.1, 113.6] at [574.6, 989.8, 1249.3]; 1 meshes, 50257 verts: Part98^PMG Full 3D Cadasio Build
+- **NAUO189**: size [95.4, 72.7, 114.8] at [576.9, 987.6, 1248.8]; 1 meshes, 52752 verts: Part99^PMG Full 3D Cadasio Build
+- **NAUO190**: size [84.6, 45.0, 106.3] at [578.8, 937.7, 1255.5]; 1 meshes, 44052 verts: Part100^PMG Full 3D Cadasio Build
+- **NAUO191**: size [84.4, 42.2, 106.3] at [576.6, 937.4, 1258.8]; 1 meshes, 46245 verts: Part101^PMG Full 3D Cadasio Build
+- **NAUO192**: size [86.3, 36.0, 105.2] at [576.3, 938.3, 1253.5]; 1 meshes, 45106 verts: Part102^PMG Full 3D Cadasio Build
+- **NAUO193**: size [89.1, 42.3, 106.6] at [576.0, 933.3, 1253.0]; 1 meshes, 46322 verts: Part103^PMG Full 3D Cadasio Build
+- **NAUO194**: size [90.9, 43.7, 104.8] at [575.3, 931.0, 1253.7]; 1 meshes, 45476 verts: Part104^PMG Full 3D Cadasio Build
+- **NAUO195**: size [50.6, 58.9, 105.9] at [589.2, 957.3, 1357.8]; 1 meshes, 36548 verts: Part105^PMG Full 3D Cadasio Build
+- **NAUO196**: size [53.2, 60.7, 105.4] at [589.0, 954.5, 1357.5]; 1 meshes, 37964 verts: Part106^PMG Full 3D Cadasio Build
+- **NAUO197**: size [52.1, 58.4, 102.5] at [586.9, 953.8, 1358.5]; 1 meshes, 37228 verts: Part107^PMG Full 3D Cadasio Build
+- **NAUO198**: size [52.7, 55.9, 99.8] at [585.7, 953.2, 1359.6]; 1 meshes, 34865 verts: Part108^PMG Full 3D Cadasio Build
+- **NAUO199**: size [1.8, 1.8, 8.0] at [713.2, 894.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO200**: size [1.8, 1.8, 8.0] at [711.5, 894.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO201**: size [1.8, 1.8, 8.0] at [709.7, 894.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO202**: size [1.8, 1.8, 8.0] at [708.0, 894.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO203**: size [1.8, 1.8, 12.0] at [713.2, 894.5, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO204**: size [1.8, 1.8, 12.0] at [711.5, 894.5, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO205**: size [1.8, 1.8, 12.0] at [709.7, 894.5, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO206**: size [1.8, 1.8, 12.0] at [708.0, 894.5, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO207**: size [1.2, 1.2, 58.2] at [708.0, 894.5, 1305.0]; 1 meshes, 172 verts: Copy of Copy of Part15^PMG Full 3D Cadasio Build
+- **NAUO208**: size [1.2, 1.2, 58.2] at [709.7, 894.5, 1305.0]; 1 meshes, 172 verts: Copy of Copy of Part16^PMG Full 3D Cadasio Build
+- **NAUO209**: size [1.2, 1.2, 58.2] at [711.5, 894.5, 1305.0]; 1 meshes, 172 verts: Copy of Copy of Part18^PMG Full 3D Cadasio Build
+- **NAUO210**: size [1.2, 1.2, 58.2] at [713.2, 894.5, 1305.0]; 1 meshes, 172 verts: Copy of Copy of Part17^PMG Full 3D Cadasio Build
+- **NAUO211**: size [1.8, 1.8, 8.0] at [720.2, 894.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO212**: size [1.8, 1.8, 8.0] at [718.5, 894.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO213**: size [1.8, 1.8, 8.0] at [716.7, 894.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO214**: size [1.8, 1.8, 8.0] at [715.0, 894.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO215**: size [1.8, 1.8, 12.0] at [720.2, 894.4, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO216**: size [1.8, 1.8, 12.0] at [718.5, 894.4, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO217**: size [1.8, 1.8, 12.0] at [716.7, 894.4, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO218**: size [1.8, 1.8, 12.0] at [715.0, 894.4, 1273.9]; 1 meshes, 946 verts: Wire Cap V2
+- **NAUO219**: size [1.2, 1.2, 58.2] at [715.0, 894.4, 1305.0]; 1 meshes, 172 verts: Copy (2) of Copy of Part15^PMG Full 3D Cadasio Build
+- **NAUO220**: size [1.2, 1.2, 58.2] at [716.7, 894.4, 1305.0]; 1 meshes, 172 verts: Copy (2) of Copy of Part16^PMG Full 3D Cadasio Build
+- **NAUO221**: size [1.2, 1.2, 58.2] at [718.5, 894.4, 1305.0]; 1 meshes, 172 verts: Copy (2) of Copy of Part18^PMG Full 3D Cadasio Build
+- **NAUO222**: size [1.2, 1.2, 58.2] at [720.2, 894.4, 1305.0]; 1 meshes, 172 verts: Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build
+- **NAUO223**: size [1.8, 1.8, 8.0] at [720.2, 901.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO224**: size [1.8, 1.8, 8.0] at [721.8, 901.5, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO225**: size [1.8, 1.8, 8.0] at [718.5, 901.6, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO226**: size [1.8, 1.8, 8.0] at [716.7, 901.6, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO227**: size [1.8, 1.8, 8.0] at [715.0, 901.6, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO228**: size [1.8, 1.8, 8.0] at [713.2, 901.6, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO229**: size [1.8, 1.8, 8.0] at [711.5, 901.6, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO230**: size [1.8, 1.8, 8.0] at [722.0, 901.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO231**: size [1.8, 1.8, 8.0] at [723.7, 901.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO232**: size [1.8, 1.8, 8.0] at [725.5, 901.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO233**: size [1.8, 1.8, 8.0] at [727.2, 901.5, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO234**: size [1.8, 1.8, 8.0] at [729.0, 901.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO235**: size [1.8, 1.8, 8.0] at [730.7, 901.4, 1333.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO236**: size [1.8, 1.8, 8.0] at [720.1, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO237**: size [1.8, 1.8, 8.0] at [718.3, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO238**: size [1.8, 1.8, 8.0] at [716.6, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO239**: size [1.8, 1.8, 8.0] at [714.8, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO240**: size [1.8, 1.8, 8.0] at [713.1, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO241**: size [1.8, 1.8, 8.0] at [723.6, 901.5, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO242**: size [1.8, 1.8, 8.0] at [725.3, 901.5, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO243**: size [1.8, 1.8, 8.0] at [727.1, 901.5, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO244**: size [1.8, 1.8, 8.0] at [728.8, 901.5, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO245**: size [1.8, 1.8, 8.0] at [730.6, 901.4, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO246**: size [1.8, 1.8, 8.0] at [711.3, 901.6, 1275.9]; 1 meshes, 348 verts: Wire Cap
+- **NAUO247**: size [7.9, 1.3, 58.9] at [730.6, 901.4, 1304.7]; 1 meshes, 172 verts: Part125^PMG Full 3D Cadasio Build
+- **NAUO248**: size [1.4, 1.3, 58.8] at [728.9, 901.5, 1304.8]; 1 meshes, 172 verts: Part126^PMG Full 3D Cadasio Build
+- **NAUO249**: size [1.4, 1.3, 58.8] at [727.1, 901.5, 1304.8]; 1 meshes, 172 verts: Part127^PMG Full 3D Cadasio Build
+- **NAUO250**: size [1.4, 1.3, 58.8] at [725.4, 901.5, 1304.8]; 1 meshes, 172 verts: Part128^PMG Full 3D Cadasio Build
+- **NAUO251**: size [1.4, 1.3, 58.8] at [723.6, 901.5, 1304.8]; 1 meshes, 172 verts: Part129^PMG Full 3D Cadasio Build
+- **NAUO252**: size [1.4, 1.3, 58.8] at [721.9, 901.5, 1304.8]; 1 meshes, 172 verts: Part130^PMG Full 3D Cadasio Build
+- **NAUO253**: size [1.4, 1.3, 58.8] at [718.4, 901.6, 1304.8]; 1 meshes, 172 verts: Part132^PMG Full 3D Cadasio Build
+- **NAUO254**: size [1.4, 1.3, 58.8] at [720.1, 901.5, 1304.8]; 1 meshes, 172 verts: Part134^PMG Full 3D Cadasio Build
+- **NAUO255**: size [1.4, 1.3, 58.8] at [716.6, 901.6, 1304.8]; 1 meshes, 172 verts: Part133^PMG Full 3D Cadasio Build
+- **NAUO256**: size [1.4, 1.3, 58.8] at [714.9, 901.6, 1304.8]; 1 meshes, 172 verts: Part135^PMG Full 3D Cadasio Build
+- **NAUO257**: size [1.4, 1.3, 58.8] at [713.1, 901.6, 1304.8]; 1 meshes, 172 verts: Part136^PMG Full 3D Cadasio Build
+- **NAUO258**: size [1.4, 1.3, 58.8] at [711.4, 901.6, 1304.8]; 1 meshes, 172 verts: Part137^PMG Full 3D Cadasio Build
+- **NAUO259**: size [2.5, 2.5, 8.0] at [564.4, 985.7, 1314.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO260**: size [2.5, 2.5, 8.0] at [562.8, 983.9, 1314.4]; 1 meshes, 348 verts: Wire Cap
+- **NAUO261**: size [2.5, 2.5, 8.0] at [561.3, 982.0, 1314.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO262**: size [2.5, 2.5, 8.0] at [559.7, 980.2, 1314.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO263**: size [53.5, 60.1, 17.6] at [590.5, 957.9, 1313.6]; 1 meshes, 23800 verts: Part138^PMG Full 3D Cadasio Build
+- **NAUO264**: size [53.9, 59.8, 22.8] at [589.1, 955.2, 1316.2]; 1 meshes, 25392 verts: Part139^PMG Full 3D Cadasio Build
+- **NAUO265**: size [59.3, 57.5, 22.7] at [590.2, 954.0, 1318.6]; 1 meshes, 24387 verts: Part140^PMG Full 3D Cadasio Build
+- **NAUO266**: size [60.6, 55.5, 17.9] at [589.3, 953.1, 1318.7]; 1 meshes, 25073 verts: Part141^PMG Full 3D Cadasio Build
+- **NAUO267**: size [30.6, 32.9, 131.9] at [532.5, 1041.7, 1288.1]; 18 meshes, 235328 verts: 8x female rounded header x8, 1088AS x4, MAX7219--3DModel-STEP-56544_Défaut x4, PCB, 90 5xHeader Pins
+- **NAUO268**: size [2.5, 2.5, 8.0] at [536.9, 1045.5, 1221.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO269**: size [2.5, 2.5, 8.0] at [535.3, 1043.5, 1221.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO270**: size [2.5, 2.5, 8.0] at [533.7, 1041.5, 1221.5]; 1 meshes, 348 verts: Wire Cap
+- **NAUO271**: size [2.6, 2.7, 8.1] at [532.0, 1039.7, 1221.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO272**: size [2.5, 2.5, 8.0] at [530.5, 1037.8, 1221.6]; 1 meshes, 348 verts: Wire Cap
+- **NAUO273**: size [120.4, 156.0, 105.4] at [596.5, 968.1, 1262.2]; 1 meshes, 64737 verts: Part147^PMG Full 3D Cadasio Build
+- **NAUO274**: size [124.6, 154.0, 106.1] at [596.9, 967.1, 1265.2]; 1 meshes, 64857 verts: Part148^PMG Full 3D Cadasio Build
+- **NAUO275**: size [126.2, 152.0, 107.1] at [596.2, 966.1, 1261.8]; 1 meshes, 61249 verts: Part149^PMG Full 3D Cadasio Build
+- **NAUO276**: size [129.8, 148.3, 127.4] at [594.7, 964.3, 1255.4]; 1 meshes, 64308 verts: Part151^PMG Full 3D Cadasio Build
+- **NAUO277**: size [64.3, 22.6, 41.5] at [622.9, 885.8, 1353.3]; 1 meshes, 20642 verts: Copy of Part23^PMG Full 3D Cadasio Build
+- **NAUO278**: size [15.9, 8.5, 49.7] at [596.7, 876.8, 1398.9]; 1 meshes, 8678 verts: USB Cable end
+- **NAUO279**: size [24.0, 7.5, 19.9] at [667.0, 894.9, 1331.7]; 1 meshes, 3594 verts: USB Right Angle
+- **NAUO280**: size [8.6, 49.7, 15.9] at [627.1, 944.3, 1322.5]; 1 meshes, 8678 verts: USB Cable end
+- **NAUO281**: size [7.5, 19.9, 24.0] at [611.4, 1004.6, 1297.1]; 1 meshes, 3594 verts: USB Right Angle
+- **NAUO282**: size [7.5, 19.9, 24.0] at [611.2, 900.1, 1297.0]; 1 meshes, 3594 verts: USB Right Angle
+- **NAUO283**: size [49.7, 8.6, 15.9] at [655.8, 884.6, 1315.7]; 1 meshes, 8678 verts: USB Cable end
+- **NAUO284**: size [20.2, 30.8, 15.7] at [619.2, 984.6, 1316.9]; 1 meshes, 8820 verts: Part152^PMG Full 3D Cadasio Build
+- **NAUO285**: size [22.1, 13.2, 9.0] at [619.9, 888.9, 1313.5]; 1 meshes, 7056 verts: Part153^PMG Full 3D Cadasio Build
+- **NAUO286**: size [42.2, 106.9, 174.3] at [627.6, 981.6, 1394.5]; 1 meshes, 56938 verts: Part154^PMG Full 3D Cadasio Build
+- **NAUO287**: size [42.3, 103.8, 172.4] at [627.7, 977.3, 1396.1]; 1 meshes, 58647 verts: Part155^PMG Full 3D Cadasio Build
+- **NAUO288**: size [42.3, 103.8, 176.5] at [627.7, 974.7, 1393.1]; 1 meshes, 57193 verts: Part156^PMG Full 3D Cadasio Build
+- **NAUO289**: size [46.6, 102.6, 187.7] at [625.8, 971.7, 1398.7]; 1 meshes, 61409 verts: Part157^PMG Full 3D Cadasio Build
+- **NAUO290**: size [42.2, 10.8, 181.6] at [627.6, 913.8, 1395.6]; 1 meshes, 46842 verts: Part164^PMG Full 3D Cadasio Build
+- **NAUO291**: size [42.2, 11.7, 172.8] at [627.6, 924.7, 1393.7]; 1 meshes, 44451 verts: Part159^PMG Full 3D Cadasio Build
+- **NAUO292**: size [42.3, 106.0, 184.7] at [627.7, 965.7, 1397.2]; 1 meshes, 60788 verts: Part158^PMG Full 3D Cadasio Build
+- **NAUO293**: size [42.2, 21.0, 175.4] at [627.6, 916.4, 1397.3]; 1 meshes, 48912 verts: Part160^PMG Full 3D Cadasio Build
+- **NAUO294**: size [42.4, 19.5, 179.4] at [627.7, 916.7, 1394.4]; 1 meshes, 49381 verts: Part161^PMG Full 3D Cadasio Build
+- **NAUO295**: size [42.2, 7.1, 179.1] at [627.6, 918.9, 1394.4]; 1 meshes, 50432 verts: Part162^PMG Full 3D Cadasio Build
+- **NAUO296**: size [94.7, 46.0, 248.7] at [577.2, 929.6, 1181.7]; 1 meshes, 73809 verts: Part163^PMG Full 3D Cadasio Build

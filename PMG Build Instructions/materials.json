@@ -1,0 +1,1342 @@
+{
+ "_about": "Colour and detail rules for the PMG's 3D model (tools/build_model.py). Rules are tried top to bottom against each CAD mesh name; the first match wins. A mesh whose rule names no colour takes its colours from the atlas: the MRA's for the parts the kits share (the I/O module, the Nano). The source is pmg-guide.glb, the CAD cut down by make_source.py (one copy of each part, where it sits built; the I/O module turned the published way up; the MRA's Nano as NANO; the four button caps renamed by colour). First draft 19 Oct 2026, from docs/research/pmg/reuse_plan.md.",
+ "source": "pmg-guide.glb",
+ "source_scale_to_mm": 1000,
+ "palette": {
+  "edge": "#111111",
+  "wood": "#deb887",
+  "steel": "#a6a9aa",
+  "black_plastic": "#1e1616",
+  "white_plastic": "#f5f5f6",
+  "pcb_blue": "#224bbe",
+  "pcb_navy": "#000f41",
+  "pcb_black": "#1e1616",
+  "pin": "#a6a9aa",
+  "pin_silver": "#a6a9aa",
+  "metal_can": "#a6a9aa",
+  "ic_black": "#191919",
+  "header_black": "#181818",
+  "header_yellow": "#ffff80",
+  "plug_grey": "#404040",
+  "cap_tan": "#a5936d",
+  "wire_brown": "#7c5a30",
+  "wire_red": "#ef3340",
+  "wire_orange": "#ff851b",
+  "wire_yellow": "#ffdc00",
+  "wire_green": "#3d9970",
+  "wire_blue": "#0074d9",
+  "wire_purple": "#a75294",
+  "wire_grey": "#737980",
+  "wire_white": "#f2f2f2",
+  "grey": "#a6a9aa",
+  "ink": "#1e1616",
+  "lead_brown": "#975100",
+  "lead_red": "#bd291f",
+  "lead_orange": "#ff9d07",
+  "sticker_white": "#ffffff",
+  "sticker_black": "#1a1a1a",
+  "sticker_blue": "#0074d9",
+  "cable_black": "#2d2926",
+  "sticker_off_black": "#181818",
+  "jumper_cap": "#404040",
+  "cap_black": "#1e1616",
+  "cap_yellow": "#ffdc00",
+  "cap_white": "#f5f5f6",
+  "cap_blue": "#0074d9",
+  "led_white": "#ffffff",
+  "led_face": "#1e1616"
+ },
+ "defaults": {
+  "color": "grey",
+  "edge_angle": 40,
+  "simplify_mm": 0.04,
+  "edge_min_size_mm": 0.0
+ },
+ "rules": [
+  {
+   "match": "^USB Right Angle$",
+   "color": "black_plastic",
+   "components": [
+    {
+     "rank": [
+      1,
+      2
+     ],
+     "color": "pin"
+    }
+   ],
+   "simplify_mm": 0.03,
+   "max_tris": 3000,
+   "outline": true,
+   "_about": "the USB cable's right-angle Mini-B end (NAUO282), 3 solids: overmould black, the plug's shell and its insert silver (as the MRA's straight Mini-B: plug silver, the rest black). Not in the MRA or RCC: their Mini-B end is straight (docs/research/pmg/reuse_plan.md 2.3)."
+  },
+  {
+   "match": "^USB Cable end$",
+   "color": "black_plastic",
+   "components": [
+    {
+     "rank": 1,
+     "color": "pin"
+    },
+    {
+     "rank": 2,
+     "color": "white_plastic"
+    },
+    {
+     "rank": [
+      3,
+      4
+     ],
+     "color": "pin"
+    }
+   ],
+   "simplify_mm": 0.03,
+   "max_tris": 4000,
+   "outline": true,
+   "_about": "the USB cable's A end (NAUO283): the same mesh as the MRA's usb-a-end.glb (vertices identical), the MRA's ^USBCableend$ rule renamed: overmould black, shell and contacts silver, tongue white"
+  },
+  {
+   "match": "^H([1-9]|1[0-4])(v2)?$",
+   "color": "wood",
+   "simplify_mm": 0,
+   "roughen_mm": 0.1,
+   "engraving": "ink",
+   "_about": "the laser-cut wood, H1 - H14 (four H9 keys; H4v2, H11v2, H12v2, H13v2): roughened as every kit's wood (publish.py requires it)"
+  },
+  {
+   "match": "^Wire Cap( V2)?$",
+   "color": "jumper_cap",
+   "_about": "jumper wire caps (the 34 the STEP has on the built parts' pins, and the 8 make_source.py copies onto V4 - V7 and the buttons' GND pins): #404040 as the MRA's (its atlas; the PMG Cadasio has them #000000, the rulebook's Dupont housings #1e1616)"
+  },
+  {
+   "match": "^Board\\^Big Button Module",
+   "color": "pcb_navy",
+   "simplify_mm": 0.02,
+   "_about": "the button modules' boards (rulebook: PMG button boards #000f41)"
+  },
+  {
+   "match": "^Socket_Blok$",
+   "color": "pin",
+   "components": [
+    {
+     "rank": 1,
+     "color": "header_black"
+    }
+   ],
+   "_about": "a button module's header pin (rank 0, the bent pin, silver: Lee's pins-silver ruling; Cadasio #c6c1bc) and its black spacer (rank 1; Cadasio #1a1a1a). The CAD has four per module, two of them the same pin in the same place."
+  },
+  {
+   "match": "^Tactal Switch",
+   "color": "black_plastic",
+   "simplify_mm": 0.05,
+   "max_tris": 3000,
+   "edge_min_size_mm": 1.5,
+   "_about": "the 12 x 12 mm tactile switch (21 solids: the body and 20 small marks 0.25 mm thick on it), all black (Cadasio #1e1e1e)"
+  },
+  {
+   "match": "^Push_Button_Cap black$",
+   "color": "cap_black",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "outline": true,
+   "_about": "NAUO76 (D4); renamed by make_source.py (the four caps are one mesh in the CAD)"
+  },
+  {
+   "match": "^Push_Button_Cap yellow$",
+   "color": "cap_yellow",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "outline": true,
+   "_about": "NAUO83 (D5)"
+  },
+  {
+   "match": "^Push_Button_Cap white$",
+   "color": "cap_white",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "outline": true,
+   "_about": "NAUO84 (D6)"
+  },
+  {
+   "match": "^Push_Button_Cap blue$",
+   "color": "cap_blue",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "outline": true,
+   "_about": "NAUO85 (D7)"
+  },
+  {
+   "match": "^Push_Button_Cap",
+   "color": "cap_black",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "outline": true,
+   "_about": "a cap not renamed: should not happen with pmg-guide.glb"
+  },
+  {
+   "match": "^Display TM1637",
+   "color": "pin",
+   "components": [
+    {
+     "rank": 0,
+     "color": "pcb_blue"
+    },
+    {
+     "rank": 1,
+     "color": "led_face"
+    },
+    {
+     "rank": 2,
+     "color": "ic_black"
+    },
+    {
+     "thin": [
+      0,
+      0.02
+     ],
+     "color": "led_white"
+    }
+   ],
+   "regions": [
+    {
+     "box": [
+      [
+       -13.7,
+       -6.45,
+       1.35
+      ],
+      [
+       15.7,
+       6.45,
+       8.25
+      ]
+     ],
+     "color": "led_face"
+    },
+    {
+     "box": [
+      [
+       -13.7,
+       -6.45,
+       8.45
+      ],
+      [
+       15.7,
+       6.45,
+       8.55
+      ]
+     ],
+     "color": "led_face"
+    }
+   ],
+   "simplify_mm": 0.02,
+   "_about": "the TM1637 4-digit display (NAUO79), one mesh of 41 solids, the same solids as TechBox's Cadasio model: rank 0 the board, which in this CAD includes the display block, blue #224bbe (rulebook); rank 1 a black shell 0.1 mm over the block (Cadasio #000000); the two boxes make the block itself black under it (its sides and top; not the segments' pockets' rims, 8.25 - 8.45); rank 2 the TM1637 chip under the board; the 30 flat segment and colon pieces (0 thick, own z 8.3, in pockets of the block) white; the 4 bent pins and their 4 stubs silver."
+  },
+  {
+   "match": "^PCB$",
+   "color": "pcb_blue",
+   "simplify_mm": 0.03,
+   "max_tris": 6000,
+   "edge_min_size_mm": 1.0,
+   "_about": "the LED matrix's board (Cadasio #234bbf ~ the house display blue)"
+  },
+  {
+   "match": "^8x female rounded header$",
+   "color": "header_black",
+   "simplify_mm": 0.05,
+   "max_tris": 1500,
+   "edge_min_size_mm": 1.5,
+   "_about": "the eight 8-way sockets between the matrix board and its four LED blocks (11,951 vertices each, all but hidden): kept light"
+  },
+  {
+   "match": "^1088AS$",
+   "color": "pin",
+   "components": [
+    {
+     "rank": 0,
+     "color": "led_white"
+    },
+    {
+     "thin": [
+      0,
+      0.02
+     ],
+     "color": "ink"
+    }
+   ],
+   "regions": [
+    {
+     "box": [
+      [
+       -0.5,
+       -0.15,
+       -32.3
+      ],
+      [
+       32.3,
+       0.01,
+       0.5
+      ]
+     ],
+     "color": "led_face"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -30.9
+      ],
+      [
+       3.1,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -27.0
+      ],
+      [
+       3.1,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -23.0
+      ],
+      [
+       3.1,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -19.0
+      ],
+      [
+       3.1,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -15.0
+      ],
+      [
+       3.1,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -11.0
+      ],
+      [
+       3.1,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -7.1
+      ],
+      [
+       3.1,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       0.9,
+       -0.15,
+       -3.1
+      ],
+      [
+       3.1,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -30.9
+      ],
+      [
+       7.1,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -27.0
+      ],
+      [
+       7.1,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -23.0
+      ],
+      [
+       7.1,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -19.0
+      ],
+      [
+       7.1,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -15.0
+      ],
+      [
+       7.1,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -11.0
+      ],
+      [
+       7.1,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -7.1
+      ],
+      [
+       7.1,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       4.9,
+       -0.15,
+       -3.1
+      ],
+      [
+       7.1,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -30.9
+      ],
+      [
+       11.0,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -27.0
+      ],
+      [
+       11.0,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -23.0
+      ],
+      [
+       11.0,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -19.0
+      ],
+      [
+       11.0,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -15.0
+      ],
+      [
+       11.0,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -11.0
+      ],
+      [
+       11.0,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -7.1
+      ],
+      [
+       11.0,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       8.8,
+       -0.15,
+       -3.1
+      ],
+      [
+       11.0,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -30.9
+      ],
+      [
+       15.0,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -27.0
+      ],
+      [
+       15.0,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -23.0
+      ],
+      [
+       15.0,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -19.0
+      ],
+      [
+       15.0,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -15.0
+      ],
+      [
+       15.0,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -11.0
+      ],
+      [
+       15.0,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -7.1
+      ],
+      [
+       15.0,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       12.8,
+       -0.15,
+       -3.1
+      ],
+      [
+       15.0,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -30.9
+      ],
+      [
+       19.0,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -27.0
+      ],
+      [
+       19.0,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -23.0
+      ],
+      [
+       19.0,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -19.0
+      ],
+      [
+       19.0,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -15.0
+      ],
+      [
+       19.0,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -11.0
+      ],
+      [
+       19.0,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -7.1
+      ],
+      [
+       19.0,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       16.8,
+       -0.15,
+       -3.1
+      ],
+      [
+       19.0,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -30.9
+      ],
+      [
+       23.0,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -27.0
+      ],
+      [
+       23.0,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -23.0
+      ],
+      [
+       23.0,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -19.0
+      ],
+      [
+       23.0,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -15.0
+      ],
+      [
+       23.0,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -11.0
+      ],
+      [
+       23.0,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -7.1
+      ],
+      [
+       23.0,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       20.8,
+       -0.15,
+       -3.1
+      ],
+      [
+       23.0,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -30.9
+      ],
+      [
+       26.9,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -27.0
+      ],
+      [
+       26.9,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -23.0
+      ],
+      [
+       26.9,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -19.0
+      ],
+      [
+       26.9,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -15.0
+      ],
+      [
+       26.9,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -11.0
+      ],
+      [
+       26.9,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -7.1
+      ],
+      [
+       26.9,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       24.7,
+       -0.15,
+       -3.1
+      ],
+      [
+       26.9,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -30.9
+      ],
+      [
+       30.9,
+       0.01,
+       -28.7
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -27.0
+      ],
+      [
+       30.9,
+       0.01,
+       -24.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -23.0
+      ],
+      [
+       30.9,
+       0.01,
+       -20.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -19.0
+      ],
+      [
+       30.9,
+       0.01,
+       -16.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -15.0
+      ],
+      [
+       30.9,
+       0.01,
+       -12.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -11.0
+      ],
+      [
+       30.9,
+       0.01,
+       -8.8
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -7.1
+      ],
+      [
+       30.9,
+       0.01,
+       -4.9
+      ]
+     ],
+     "color": "led_white"
+    },
+    {
+     "box": [
+      [
+       28.7,
+       -0.15,
+       -3.1
+      ],
+      [
+       30.9,
+       0.01,
+       -0.9
+      ]
+     ],
+     "color": "led_white"
+    }
+   ],
+   "simplify_mm": 0.03,
+   "max_tris": 8000,
+   "_about": "an 8 x 8 LED block (4 per matrix), 79 solids: the body white (Cadasio #ffffff sides), its face (own y -0.1 to 0) black (Cadasio TOP MASK #1a1a1a), the 64 dots white (each by a box: one column is welded into the body in this export), the 16 legs silver, the \"1088AS\" print on its side (flat pieces) black"
+  },
+  {
+   "match": "^MAX7219",
+   "color": "ic_black",
+   "simplify_mm": 0.02,
+   "_about": "the four MAX7219 driver chips"
+  },
+  {
+   "match": "^90 5xHeader Pins$",
+   "color": "pin",
+   "components": [
+    {
+     "rank": 0,
+     "color": "header_black"
+    }
+   ],
+   "simplify_mm": 0.02,
+   "_about": "the matrix's 5-way right-angle input header (VCC GND DIN CS CLK): plastic black, pins silver"
+  },
+  {
+   "match": "^nano_",
+   "simplify_mm": 0.06,
+   "edge_min_size_mm": 2.0,
+   "max_tris": 16000,
+   "atlas_colours": {
+    "#cccccc": "pin"
+   },
+   "_about": "the Nano Board (NANO): the MRA's export of the Nano model (mra.glb NAUO126, grafted by make_source.py), the MRA's rule and atlas"
+  },
+  {
+   "match": "^Shield_Arduino",
+   "color": "pcb_navy",
+   "simplify_mm": 0.02
+  },
+  {
+   "match": "^Samtec-TLW-",
+   "color": "pin",
+   "components": [
+    {
+     "rank": 1,
+     "color": "header_yellow",
+     "skin": true
+    }
+   ],
+   "simplify_mm": 0.02
+  },
+  {
+   "match": "^47uf CAP",
+   "color": "metal_can",
+   "components": [
+    {
+     "thin": [
+      0,
+      0.05
+     ],
+     "color": "black_plastic"
+    }
+   ],
+   "edge_min_size_mm": 2,
+   "simplify_mm": 0.02
+  },
+  {
+   "match": "^cap106C",
+   "simplify_mm": 0.015,
+   "edge_min_size_mm": 1.5
+  },
+  {
+   "match": "^(m7 diode|smt_resistor|nano - reg|blm21|reset core)",
+   "edge_min_size_mm": 1.5,
+   "simplify_mm": 0.015
+  },
+  {
+   "match": "^reset shell",
+   "simplify_mm": 0.015
+  },
+  {
+   "match": "^led$",
+   "simplify_mm": 0.015,
+   "edge_min_size_mm": 1.0
+  }
+ ],
+ "atlas": "colour-atlas-pmg.json",
+ "decals": "decals.json",
+ "_notes": {
+  "reused": "The I/O module (NAUO78) is the MRA's board (all 36 meshes the same, placed by one rigid turn); the Nano Board is the MRA's model (NANO, grafted by make_source.py); the USB A end and the jumper caps are the MRA's meshes. Their rules and atlas entries are the MRA's.",
+  "published_not_step": "The STEP is an earlier save than the CAD of TechBox's published Cadasio guide: make_source.py turns the I/O module the published way up (USB end at the top) and adds the caps for the buttons' third wire (VCC to V, GND to G). Questions for Lee.",
+  "wires": "The CAD's jumper wire and USB cable bodies are not in pmg-guide.glb: the player draws them (guide.py).",
+  "unconfirmed": [
+   "Button cap colours black / yellow / white / blue as TechBox's Cadasio (D4 - D7).",
+   "Jumper caps #404040 as the MRA (Cadasio PMG #000000).",
+   "The right-angle USB Mini-B end (the PMG's own; the MRA's is straight) coloured as the MRA's.",
+   "LED blocks white-sided with a black face and white dots, as the Cadasio.",
+   "TM1637 display: blue board, black face, white segments, as the Cadasio."
+  ]
+ }
+}

@@ -401,6 +401,13 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                parts, same coordinates), or into the breadboard holes the guide names; the Nano and USB A end are the MRA's;
                                the stems are drawn from Cadasio's box until their CAD comes. docs/research/lsm/cad_study.md has the
                                sub-millimetre corrections. Server on port 8805 ("Open Prototype.command").
+    PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
+                               decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses). pmg.glb (167 MB, from "PMG Full 3D Cadasio
+                               Build.STEP": the engineer's pose copies of most parts; kept out of git, over GitHub's limit) is cut down by the kit's
+                               make_source.py to pmg-guide.glb (one copy of each part, built; the source both tools read; the MRA's Nano grafted in)
+                               and cad-geometry.json (every other copy as a pose, the jumper caps, the USB cable's ends). The STEP is older than the
+                               published Cadasio guide's model, which the draft follows (three wires per button, the I/O module USB end up:
+                               README.txt). Research: docs/research/pmg/. Server on port 8792 ("Open Prototype.command").
 
 ## Conventions in the code
 

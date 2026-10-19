@@ -1,0 +1,13282 @@
+[
+{
+"cad_id": "5f90e2d9-7d2c-7c51-bce2-bcaa6384e486",
+"name": "Big Button Module-1",
+"idx": 33,
+"hidden": false,
+"nsolids": 11,
+"min": [
+633.0,
+934.5,
+1310.99
+],
+"max": [
+649.38,
+963.25,
+1324.5
+],
+"best": "NAUO4",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO5",
+14.1
+],
+[
+"NAUO6",
+28.1
+]
+]
+},
+{
+"cad_id": "8efa7ab9-4b7a-83e1-70d3-3fe8b1f21c56",
+"name": "Big Button Module-10",
+"idx": 335,
+"hidden": false,
+"nsolids": 11,
+"min": [
+492.18,
+896.92,
+1300.17
+],
+"max": [
+521.26,
+913.98,
+1313.68
+],
+"best": "NAUO84",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO90",
+30.57
+],
+[
+"NAUO91",
+30.62
+]
+]
+},
+{
+"cad_id": "98317897-243e-0a38-6766-cf19120d786a",
+"name": "Big Button Module-11",
+"idx": 336,
+"hidden": false,
+"nsolids": 11,
+"min": [
+492.04,
+895.52,
+1332.68
+],
+"max": [
+521.11,
+912.58,
+1346.18
+],
+"best": "NAUO85",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO92",
+30.56
+],
+[
+"NAUO93",
+30.81
+]
+]
+},
+{
+"cad_id": "90886635-dbd0-e71d-1558-a7744f43a73e",
+"name": "Big Button Module-2",
+"idx": 55,
+"hidden": false,
+"nsolids": 11,
+"min": [
+633.02,
+934.5,
+1296.89
+],
+"max": [
+649.4,
+963.25,
+1310.4
+],
+"best": "NAUO5",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO6",
+14.0
+],
+[
+"NAUO4",
+14.1
+]
+]
+},
+{
+"cad_id": "88c69c5b-0668-e224-4bf8-6afb9b0dd736",
+"name": "Big Button Module-3",
+"idx": 56,
+"hidden": false,
+"nsolids": 11,
+"min": [
+633.02,
+934.5,
+1282.89
+],
+"max": [
+649.4,
+963.25,
+1296.4
+],
+"best": "NAUO6",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO7",
+13.87
+],
+[
+"NAUO5",
+14.0
+]
+]
+},
+{
+"cad_id": "f086154f-44d7-9256-ab5d-931f774f1766",
+"name": "Big Button Module-4",
+"idx": 57,
+"hidden": false,
+"nsolids": 11,
+"min": [
+632.99,
+934.5,
+1269.02
+],
+"max": [
+649.37,
+963.25,
+1282.53
+],
+"best": "NAUO7",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO6",
+13.87
+],
+[
+"NAUO5",
+27.87
+]
+]
+},
+{
+"cad_id": "14647e11-f258-7fe7-ad5a-c93393fa26b6",
+"name": "Big Button Module-5",
+"idx": 254,
+"hidden": false,
+"nsolids": 11,
+"min": [
+492.2,
+896.52,
+1235.0
+],
+"max": [
+521.28,
+913.58,
+1248.51
+],
+"best": "NAUO76",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO87",
+30.71
+],
+[
+"NAUO86",
+30.93
+]
+]
+},
+{
+"cad_id": "05af1647-353a-c65d-22a4-3326bc23f0aa",
+"name": "Big Button Module-9",
+"idx": 333,
+"hidden": false,
+"nsolids": 11,
+"min": [
+492.3,
+896.79,
+1267.56
+],
+"max": [
+521.38,
+913.85,
+1281.06
+],
+"best": "NAUO83",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO89",
+30.89
+],
+[
+"NAUO88",
+30.93
+]
+]
+},
+{
+"cad_id": "73d9e53b-f04c-8a38-b9cc-b1fbb16b1dd0",
+"name": "Copy (2) of Copy of Part15^PMG Full 3D Cadasio Build-2",
+"idx": 728,
+"hidden": false,
+"nsolids": 1,
+"min": [
+714.36,
+893.82,
+1275.93
+],
+"max": [
+715.61,
+895.07,
+1334.12
+],
+"best": "NAUO219",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy (2) of Copy of Part15^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO210",
+1.75
+],
+[
+"NAUO220",
+1.75
+]
+]
+},
+{
+"cad_id": "633cda93-52ed-f7c4-5f2c-b8a0dd304297",
+"name": "Copy (2) of Copy of Part16^PMG Full 3D Cadasio Build-2",
+"idx": 729,
+"hidden": false,
+"nsolids": 1,
+"min": [
+716.11,
+893.8,
+1275.93
+],
+"max": [
+717.36,
+895.05,
+1334.12
+],
+"best": "NAUO220",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy (2) of Copy of Part16^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO219",
+1.75
+],
+[
+"NAUO221",
+1.76
+]
+]
+},
+{
+"cad_id": "0117ccb8-8e52-0fd0-1603-85533a39a1c8",
+"name": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build-2",
+"idx": 731,
+"hidden": false,
+"nsolids": 1,
+"min": [
+719.61,
+893.77,
+1275.93
+],
+"max": [
+720.86,
+895.02,
+1334.12
+],
+"best": "NAUO222",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO221",
+1.76
+],
+[
+"NAUO220",
+3.5
+]
+]
+},
+{
+"cad_id": "527aef50-29f5-bd94-6f13-313013d4d933",
+"name": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build-3",
+"idx": 1021,
+"hidden": false,
+"nsolids": 1,
+"min": [
+721.35,
+893.75,
+1275.93
+],
+"max": [
+722.6,
+895.0,
+1334.12
+],
+"best": "NAUO222",
+"box_err": 1.74,
+"rot_err": 0.0,
+"trans_err": 1.74,
+"glb_kind": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO221",
+3.5
+],
+[
+"NAUO220",
+5.24
+]
+]
+},
+{
+"cad_id": "0a2ad05d-0b77-701d-7536-9f832d02073b",
+"name": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build-4",
+"idx": 1022,
+"hidden": false,
+"nsolids": 1,
+"min": [
+723.09,
+893.73,
+1275.93
+],
+"max": [
+724.34,
+894.98,
+1334.12
+],
+"best": "NAUO222",
+"box_err": 3.48,
+"rot_err": 0.0,
+"trans_err": 3.48,
+"glb_kind": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO221",
+5.24
+],
+[
+"NAUO220",
+6.98
+]
+]
+},
+{
+"cad_id": "0772e613-3ca7-43cc-98b6-8ca9e5be4a35",
+"name": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build-5",
+"idx": 1023,
+"hidden": false,
+"nsolids": 1,
+"min": [
+724.83,
+893.72,
+1275.93
+],
+"max": [
+726.08,
+894.97,
+1334.12
+],
+"best": "NAUO222",
+"box_err": 5.22,
+"rot_err": 0.0,
+"trans_err": 5.22,
+"glb_kind": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO221",
+6.98
+],
+[
+"NAUO248",
+7.7
+]
+]
+},
+{
+"cad_id": "dbf02dab-28d0-5a24-fb5b-819cb6f84139",
+"name": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build-6",
+"idx": 1024,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.57,
+893.7,
+1275.93
+],
+"max": [
+727.82,
+894.95,
+1334.12
+],
+"best": "NAUO222",
+"box_err": 6.96,
+"rot_err": 0.0,
+"trans_err": 6.96,
+"glb_kind": "Copy (2) of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO248",
+7.72
+],
+[
+"NAUO249",
+7.73
+]
+]
+},
+{
+"cad_id": "6233c848-1106-8b79-3502-88664ebea799",
+"name": "Copy (2) of Copy of Part18^PMG Full 3D Cadasio Build-2",
+"idx": 730,
+"hidden": false,
+"nsolids": 1,
+"min": [
+717.86,
+893.79,
+1275.93
+],
+"max": [
+719.11,
+895.04,
+1334.12
+],
+"best": "NAUO221",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy (2) of Copy of Part18^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO220",
+1.75
+],
+[
+"NAUO222",
+1.75
+]
+]
+},
+{
+"cad_id": "a0f49dd4-1291-4894-75d9-eb19914aecd6",
+"name": "Copy of Copy of Part15^PMG Full 3D Cadasio Build-1",
+"idx": 695,
+"hidden": false,
+"nsolids": 1,
+"min": [
+707.36,
+893.89,
+1275.93
+],
+"max": [
+708.61,
+895.14,
+1334.12
+],
+"best": "NAUO207",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy of Copy of Part15^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO208",
+1.75
+],
+[
+"NAUO209",
+3.51
+]
+]
+},
+{
+"cad_id": "4e1ffcf5-8029-a88c-5262-ad4195edf1f1",
+"name": "Copy of Copy of Part16^PMG Full 3D Cadasio Build-1",
+"idx": 696,
+"hidden": false,
+"nsolids": 1,
+"min": [
+709.11,
+893.87,
+1275.93
+],
+"max": [
+710.36,
+895.12,
+1334.12
+],
+"best": "NAUO208",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy of Copy of Part16^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO207",
+1.75
+],
+[
+"NAUO209",
+1.76
+]
+]
+},
+{
+"cad_id": "fb2b6dfe-de13-c52f-0e68-a6bdee6229af",
+"name": "Copy of Copy of Part17^PMG Full 3D Cadasio Build-1",
+"idx": 698,
+"hidden": false,
+"nsolids": 1,
+"min": [
+712.61,
+893.84,
+1275.93
+],
+"max": [
+713.86,
+895.09,
+1334.12
+],
+"best": "NAUO210",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy of Copy of Part17^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO219",
+1.75
+],
+[
+"NAUO209",
+1.76
+]
+]
+},
+{
+"cad_id": "8ab6a228-4bee-1e87-2cb4-2a3afe98193a",
+"name": "Copy of Copy of Part18^PMG Full 3D Cadasio Build-1",
+"idx": 697,
+"hidden": false,
+"nsolids": 1,
+"min": [
+710.86,
+893.85,
+1275.93
+],
+"max": [
+712.11,
+895.1,
+1334.12
+],
+"best": "NAUO209",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy of Copy of Part18^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO208",
+1.75
+],
+[
+"NAUO210",
+1.75
+]
+]
+},
+{
+"cad_id": "2c859de2-6493-7944-1c8a-85abb8edd9b3",
+"name": "Copy of Part23^PMG Full 3D Cadasio Build-1",
+"idx": 972,
+"hidden": false,
+"nsolids": 1,
+"min": [
+590.4,
+874.06,
+1332.39
+],
+"max": [
+655.04,
+897.17,
+1374.07
+],
+"best": "NAUO277",
+"box_err": 0.69,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Copy of Part23^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO283",
+63.33
+],
+[
+"NAUO1",
+71.25
+]
+]
+},
+{
+"cad_id": "a4f35b9c-01aa-3337-0449-26e99e77e583",
+"name": "Display TM1637-1",
+"idx": 300,
+"hidden": false,
+"nsolids": 41,
+"min": [
+551.62,
+1054.84,
+1270.46
+],
+"max": [
+575.47,
+1080.29,
+1317.96
+],
+"best": "NAUO94",
+"box_err": 75.82,
+"rot_err": 2.0,
+"trans_err": 28.0,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO103",
+82.45
+],
+[
+"NAUO104",
+84.71
+]
+]
+},
+{
+"cad_id": "ebe90820-487e-3124-d880-532b0e37bec7",
+"name": "Display TM1637-2",
+"idx": 316,
+"hidden": false,
+"nsolids": 41,
+"min": [
+551.52,
+969.16,
+1269.72
+],
+"max": [
+575.37,
+994.61,
+1317.22
+],
+"best": "NAUO79",
+"box_err": 0.16,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+"others": [
+[
+"NAUO74",
+29.65
+],
+[
+"NAUO75",
+34.19
+]
+]
+},
+{
+"cad_id": "cc8a019d-9c45-c7c4-2813-379fa71ffb41",
+"name": "Display TM1637-4",
+"idx": 321,
+"hidden": false,
+"nsolids": 41,
+"min": [
+654.78,
+913.28,
+1196.55
+],
+"max": [
+665.98,
+937.28,
+1244.05
+],
+"best": "NAUO80",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+"others": [
+[
+"NAUO32",
+61.06
+],
+[
+"NAUO33",
+61.07
+]
+]
+},
+{
+"cad_id": "a1475935-dced-be4e-0a40-4296ad83c9d7",
+"name": "Display TM1637-5",
+"idx": 428,
+"hidden": false,
+"nsolids": 41,
+"min": [
+551.52,
+1017.6,
+1269.72
+],
+"max": [
+575.37,
+1043.05,
+1317.22
+],
+"best": "NAUO79",
+"box_err": 48.6,
+"rot_err": 0.0,
+"trans_err": 48.44,
+"glb_kind": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+"others": [
+[
+"NAUO281",
+71.47
+],
+[
+"NAUO74",
+72.31
+]
+]
+},
+{
+"cad_id": "4f46c9ee-bdf6-c5b9-b5a9-c9d073ebfcbf",
+"name": "Display TM1637-6",
+"idx": 1297,
+"hidden": false,
+"nsolids": 41,
+"min": [
+550.39,
+981.56,
+1269.72
+],
+"max": [
+567.82,
+1007.71,
+1317.22
+],
+"best": "NAUO79",
+"box_err": 19.33,
+"rot_err": 0.3558,
+"trans_err": 13.82,
+"glb_kind": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+"others": [
+[
+"NAUO74",
+36.62
+],
+[
+"NAUO75",
+49.25
+]
+]
+},
+{
+"cad_id": "617eda65-4053-575a-417b-2b1b74310a86",
+"name": "Display TM1637-7",
+"idx": 1298,
+"hidden": false,
+"nsolids": 41,
+"min": [
+552.08,
+970.56,
+1269.72
+],
+"max": [
+569.5,
+996.71,
+1317.22
+],
+"best": "NAUO79",
+"box_err": 9.25,
+"rot_err": 0.3558,
+"trans_err": 2.82,
+"glb_kind": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+"others": [
+[
+"NAUO74",
+29.14
+],
+[
+"NAUO75",
+42.48
+]
+]
+},
+{
+"cad_id": "ac060f25-3eb0-f2ee-4c75-1bee8b7b06d8",
+"name": "Ensamblaje_Shield_NANO-1",
+"idx": 23,
+"hidden": false,
+"nsolids": 185,
+"min": [
+646.91,
+877.1,
+1269.82
+],
+"max": [
+700.25,
+901.71,
+1328.85
+],
+"best": "NAUO1",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO3",
+53.58
+],
+[
+"NAUO171",
+54.54
+]
+]
+},
+{
+"cad_id": "c51418e9-d3a7-a269-a1d8-a46743e5d51f",
+"name": "Ensamblaje_Shield_NANO-2",
+"idx": 302,
+"hidden": false,
+"nsolids": 185,
+"min": [
+593.48,
+901.07,
+1263.88
+],
+"max": [
+618.09,
+960.1,
+1317.22
+],
+"best": "NAUO78",
+"box_err": 1.92,
+"rot_err": 2.0,
+"trans_err": 38.19,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO264",
+56.18
+],
+[
+"NAUO75",
+62.01
+]
+]
+},
+{
+"cad_id": "d982b08b-c97f-48ea-c62a-6d71bf54a8ff",
+"name": "Ensamblaje_Shield_NANO-3",
+"idx": 345,
+"hidden": false,
+"nsolids": 185,
+"min": [
+593.48,
+1003.4,
+1264.04
+],
+"max": [
+618.09,
+1062.43,
+1317.38
+],
+"best": "NAUO94",
+"box_err": 4.27,
+"rot_err": 2.0,
+"trans_err": 40.54,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO281",
+67.54
+],
+[
+"NAUO74",
+69.06
+]
+]
+},
+{
+"cad_id": "47489663-fdc3-5141-021e-f41ebf64645d",
+"name": "G11 to GND^PMG Full 3D Cadasio Build-4",
+"idx": 1051,
+"hidden": false,
+"nsolids": 1,
+"min": [
+644.09,
+890.13,
+1310.3
+],
+"max": [
+654.32,
+927.92,
+1364.31
+],
+"best": "NAUO3",
+"box_err": 50.24,
+"rot_err": 1.0,
+"trans_err": 1287.54,
+"glb_kind": "nano_Varsay\u0131lan",
+"others": [
+[
+"NAUO2",
+50.25
+],
+[
+"NAUO279",
+51.98
+]
+]
+},
+{
+"cad_id": "0aebbed5-f549-e74b-3860-36829c8030bc",
+"name": "H10-1",
+"idx": 194,
+"hidden": false,
+"nsolids": 4,
+"min": [
+521.45,
+931.08,
+1217.64
+],
+"max": [
+600.03,
+934.08,
+1363.34
+],
+"best": "NAUO64",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H10",
+"others": [
+[
+"NAUO191",
+71.04
+],
+[
+"NAUO68",
+73.58
+]
+]
+},
+{
+"cad_id": "4a0d7f79-3531-0b63-e286-4417bf06e209",
+"name": "H1-1",
+"idx": 193,
+"hidden": false,
+"nsolids": 3,
+"min": [
+460.35,
+888.28,
+1217.57
+],
+"max": [
+463.41,
+909.15,
+1363.37
+],
+"best": "NAUO63",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H1",
+"others": [
+[
+"NAUO61",
+89.28
+],
+[
+"NAUO81",
+98.14
+]
+]
+},
+{
+"cad_id": "bd852f27-cd7c-a029-f7d3-6c2c277879f2",
+"name": "H11v2-1",
+"idx": 192,
+"hidden": false,
+"nsolids": 4,
+"min": [
+522.52,
+928.08,
+1308.46
+],
+"max": [
+593.74,
+1006.1,
+1311.46
+],
+"best": "NAUO62",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H11v2",
+"others": [
+[
+"NAUO77",
+38.94
+],
+[
+"NAUO263",
+50.3
+]
+]
+},
+{
+"cad_id": "4cfcef81-aa41-e763-d154-dd9d862d7d49",
+"name": "H11v2-2",
+"idx": 264,
+"hidden": false,
+"nsolids": 4,
+"min": [
+522.52,
+1013.51,
+1308.46
+],
+"max": [
+593.74,
+1091.52,
+1311.46
+],
+"best": "NAUO62",
+"box_err": 85.43,
+"rot_err": 0.0,
+"trans_err": 85.43,
+"glb_kind": "H11v2",
+"others": [
+[
+"NAUO77",
+85.86
+],
+[
+"NAUO94",
+98.0
+]
+]
+},
+{
+"cad_id": "a4d5a649-794d-93e1-3b29-83bc8d3b57e5",
+"name": "H12v2-1",
+"idx": 291,
+"hidden": false,
+"nsolids": 4,
+"min": [
+522.52,
+1013.51,
+1269.52
+],
+"max": [
+593.74,
+1091.52,
+1272.52
+],
+"best": "NAUO62",
+"box_err": 85.43,
+"rot_err": 0.0,
+"trans_err": 85.43,
+"glb_kind": "H11v2",
+"others": [
+[
+"NAUO77",
+85.86
+],
+[
+"NAUO94",
+98.0
+]
+]
+},
+{
+"cad_id": "81188272-1798-0950-1486-49b49ce6e403",
+"name": "H12v2-2",
+"idx": 295,
+"hidden": false,
+"nsolids": 4,
+"min": [
+522.52,
+927.65,
+1269.52
+],
+"max": [
+593.74,
+1005.67,
+1272.52
+],
+"best": "NAUO77",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H12v2",
+"others": [
+[
+"NAUO62",
+38.95
+],
+[
+"NAUO263",
+60.55
+]
+]
+},
+{
+"cad_id": "e9e24490-1fb5-8655-fc83-00aa62dc3065",
+"name": "H13v2-1",
+"idx": 247,
+"hidden": false,
+"nsolids": 4,
+"min": [
+562.1,
+950.29,
+1258.74
+],
+"max": [
+601.16,
+983.74,
+1322.24
+],
+"best": "NAUO75",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO74",
+33.35
+],
+[
+"NAUO79",
+34.18
+]
+]
+},
+{
+"cad_id": "46368ce6-76d4-6135-7cbe-9ba9de6803f5",
+"name": "H14-1",
+"idx": 243,
+"hidden": false,
+"nsolids": 7,
+"min": [
+540.68,
+961.61,
+1253.66
+],
+"max": [
+579.23,
+1006.73,
+1327.32
+],
+"best": "NAUO74",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H14",
+"others": [
+[
+"NAUO79",
+29.65
+],
+[
+"NAUO75",
+33.35
+]
+]
+},
+{
+"cad_id": "5a6b84a4-02a2-db9b-903f-add688ca34eb",
+"name": "H14-2",
+"idx": 263,
+"hidden": false,
+"nsolids": 7,
+"min": [
+540.68,
+1047.03,
+1253.66
+],
+"max": [
+579.23,
+1092.16,
+1327.32
+],
+"best": "NAUO94",
+"box_err": 66.15,
+"rot_err": 1.0,
+"trans_err": 46.78,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO74",
+85.44
+],
+[
+"NAUO267",
+86.07
+]
+]
+},
+{
+"cad_id": "34964af4-3d3d-ac01-4905-1835d7771efc",
+"name": "H2-1",
+"idx": 195,
+"hidden": false,
+"nsolids": 3,
+"min": [
+456.96,
+887.89,
+1357.17
+],
+"max": [
+593.88,
+937.69,
+1360.17
+],
+"best": "NAUO65",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H2",
+"others": [
+[
+"NAUO69",
+64.65
+],
+[
+"NAUO165",
+86.43
+]
+]
+},
+{
+"cad_id": "7b07cc38-a084-30e8-9c9e-86ed754450a7",
+"name": "H3-1",
+"idx": 196,
+"hidden": false,
+"nsolids": 3,
+"min": [
+456.96,
+887.89,
+1220.59
+],
+"max": [
+593.88,
+937.7,
+1223.85
+],
+"best": "NAUO66",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H3",
+"others": [
+[
+"NAUO72",
+64.68
+],
+[
+"NAUO150",
+94.58
+]
+]
+},
+{
+"cad_id": "ecec663d-ade0-0713-1bd2-193ebdbe61b8",
+"name": "H4v2-1",
+"idx": 230,
+"hidden": false,
+"nsolids": 3,
+"min": [
+587.35,
+887.79,
+1217.64
+],
+"max": [
+590.35,
+968.65,
+1363.34
+],
+"best": "NAUO73",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H4v2",
+"others": [
+[
+"NAUO61",
+97.68
+],
+[
+"NAUO81",
+104.32
+]
+]
+},
+{
+"cad_id": "4e7b7d8c-f2d6-ff19-27c7-c165f9c0dd64",
+"name": "H5-1",
+"idx": 197,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.38,
+899.97,
+1220.82
+],
+"max": [
+601.14,
+903.39,
+1360.17
+],
+"best": "NAUO67",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H5",
+"others": [
+[
+"NAUO60",
+42.26
+],
+[
+"NAUO68",
+42.32
+]
+]
+},
+{
+"cad_id": "75c64eb7-736a-6e6a-a58e-6a1a8232b788",
+"name": "H6-1",
+"idx": 190,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.37,
+897.06,
+1220.82
+],
+"max": [
+572.96,
+900.39,
+1360.17
+],
+"best": "NAUO60",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H6",
+"others": [
+[
+"NAUO68",
+3.03
+],
+[
+"NAUO67",
+42.26
+]
+]
+},
+{
+"cad_id": "8b9b846b-59f1-afb7-67a8-09ebac9928a2",
+"name": "H7-1",
+"idx": 198,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.36,
+894.06,
+1220.82
+],
+"max": [
+572.92,
+897.39,
+1360.17
+],
+"best": "NAUO68",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H7",
+"others": [
+[
+"NAUO60",
+3.03
+],
+[
+"NAUO67",
+42.32
+]
+]
+},
+{
+"cad_id": "286d6ff7-3055-040f-9be9-ad3ce4576fe6",
+"name": "H8-1",
+"idx": 191,
+"hidden": false,
+"nsolids": 3,
+"min": [
+539.58,
+900.15,
+1220.82
+],
+"max": [
+542.68,
+931.05,
+1360.17
+],
+"best": "NAUO61",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H8",
+"others": [
+[
+"NAUO81",
+67.8
+],
+[
+"NAUO63",
+89.28
+]
+]
+},
+{
+"cad_id": "78c18a01-c9b1-fd3f-cc7e-868354c16cf8",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-1",
+"idx": 154,
+"hidden": false,
+"nsolids": 500,
+"min": [
+640.55,
+907.81,
+1369.01
+],
+"max": [
+658.26,
+939.81,
+1500.89
+],
+"best": "NAUO44",
+"box_err": 29.36,
+"rot_err": 2.0,
+"trans_err": 51.94,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO59",
+68.06
+],
+[
+"NAUO58",
+72.32
+]
+]
+},
+{
+"cad_id": "84437462-07c0-6c63-e8d4-2991ff6a58d5",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-4",
+"idx": 322,
+"hidden": false,
+"nsolids": 500,
+"min": [
+517.17,
+939.42,
+1223.16
+],
+"max": [
+547.78,
+972.35,
+1355.04
+],
+"best": "NAUO81",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO61",
+67.8
+],
+[
+"NAUO64",
+76.24
+]
+]
+},
+{
+"cad_id": "bc066c92-62fa-e655-636b-2e17f03c82a2",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-6",
+"idx": 327,
+"hidden": false,
+"nsolids": 500,
+"min": [
+517.17,
+939.44,
+1079.84
+],
+"max": [
+547.78,
+972.36,
+1211.72
+],
+"best": "NAUO82",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO267",
+142.34
+],
+[
+"NAUO81",
+143.32
+]
+]
+},
+{
+"cad_id": "2e9155f1-0a88-411f-7434-f9f88907596f",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-7",
+"idx": 926,
+"hidden": false,
+"nsolids": 500,
+"min": [
+517.17,
+1025.28,
+1220.27
+],
+"max": [
+547.78,
+1058.2,
+1352.15
+],
+"best": "NAUO267",
+"box_err": 1.91,
+"rot_err": 0.0,
+"trans_err": 1.9,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO81",
+85.85
+],
+[
+"NAUO187",
+96.45
+]
+]
+},
+{
+"cad_id": "4fc7a690-4e14-2ad4-b860-fd7a96284ad6",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-8",
+"idx": 1064,
+"hidden": false,
+"nsolids": 500,
+"min": [
+516.35,
+961.26,
+1224.56
+],
+"max": [
+540.83,
+995.75,
+1356.44
+],
+"best": "NAUO81",
+"box_err": 28.75,
+"rot_err": 0.3008,
+"trans_err": 40.31,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO267",
+69.37
+],
+[
+"NAUO61",
+84.29
+]
+]
+},
+{
+"cad_id": "79e42c57-8ff5-39ef-8466-614ad39da925",
+"name": "LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-9",
+"idx": 1065,
+"hidden": false,
+"nsolids": 500,
+"min": [
+515.68,
+940.84,
+1224.54
+],
+"max": [
+540.16,
+975.33,
+1356.42
+],
+"best": "NAUO81",
+"box_err": 10.68,
+"rot_err": 0.3008,
+"trans_err": 19.89,
+"glb_kind": "8x female rounded header",
+"others": [
+[
+"NAUO61",
+63.87
+],
+[
+"NAUO64",
+86.92
+]
+]
+},
+{
+"cad_id": "c5dd0bde-c1e2-671b-6a4f-8dc4639b9b56",
+"name": "nano-1",
+"idx": 27,
+"hidden": false,
+"nsolids": 293,
+"min": [
+664.01,
+927.99,
+1283.72
+],
+"max": [
+682.01,
+946.61,
+1328.72
+],
+"best": "NAUO2",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "nano_Varsay\u0131lan",
+"others": [
+[
+"NAUO3",
+29.66
+],
+[
+"NAUO42",
+45.9
+]
+]
+},
+{
+"cad_id": "a9a83ac2-2209-fe6a-a177-9298958cb22f",
+"name": "nano-2",
+"idx": 30,
+"hidden": false,
+"nsolids": 293,
+"min": [
+664.01,
+898.33,
+1283.72
+],
+"max": [
+682.01,
+916.96,
+1328.72
+],
+"best": "NAUO3",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "nano_Varsay\u0131lan",
+"others": [
+[
+"NAUO2",
+29.66
+],
+[
+"NAUO43",
+45.66
+]
+]
+},
+{
+"cad_id": "f2b2b3e4-698a-22dd-aaaa-2c63f54f8428",
+"name": "nano-3",
+"idx": 1313,
+"hidden": false,
+"nsolids": 293,
+"min": [
+664.01,
+883.09,
+1283.72
+],
+"max": [
+682.01,
+901.71,
+1328.72
+],
+"best": "NAUO3",
+"box_err": 15.25,
+"rot_err": 0.0,
+"trans_err": 15.24,
+"glb_kind": "nano_Varsay\u0131lan",
+"others": [
+[
+"NAUO1",
+42.23
+],
+[
+"NAUO2",
+44.9
+]
+]
+},
+{
+"cad_id": "e844d043-6373-3432-bef0-0233592f35c1",
+"name": "nano-4",
+"idx": 1314,
+"hidden": false,
+"nsolids": 293,
+"min": [
+599.47,
+914.97,
+1280.98
+],
+"max": [
+618.09,
+959.97,
+1298.98
+],
+"best": "NAUO78",
+"box_err": 40.31,
+"rot_err": 1.0,
+"trans_err": 31.85,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO280",
+42.58
+],
+[
+"NAUO25",
+42.98
+]
+]
+},
+{
+"cad_id": "8832e9e7-63bc-d4f7-797b-5a77458b87fc",
+"name": "nano-5",
+"idx": 1315,
+"hidden": false,
+"nsolids": 293,
+"min": [
+599.47,
+1017.3,
+1281.14
+],
+"max": [
+618.09,
+1062.3,
+1299.14
+],
+"best": "NAUO94",
+"box_err": 38.33,
+"rot_err": 1.0,
+"trans_err": 34.2,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO124",
+58.63
+],
+[
+"NAUO107",
+58.64
+]
+]
+},
+{
+"cad_id": "85c1e3f3-c2d0-87ad-e150-74b2194747cf",
+"name": "Part100^PMG Full 3D Cadasio Build-1",
+"idx": 609,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.47,
+941.34,
+1202.41
+],
+"max": [
+615.19,
+960.18,
+1273.73
+],
+"best": "NAUO192",
+"box_err": 49.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+52.33
+],
+[
+"NAUO193",
+52.67
+]
+]
+},
+{
+"cad_id": "bab03ec9-cc6c-3e2b-9276-f14831373e2e",
+"name": "Part101^PMG Full 3D Cadasio Build-1",
+"idx": 612,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.82,
+941.57,
+1203.41
+],
+"max": [
+612.83,
+958.24,
+1271.21
+],
+"best": "NAUO192",
+"box_err": 53.55,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO193",
+55.34
+],
+[
+"NAUO194",
+55.86
+]
+]
+},
+{
+"cad_id": "0c5e488a-941f-9a58-1767-d043ae64bbdf",
+"name": "Part102^PMG Full 3D Cadasio Build-1",
+"idx": 615,
+"hidden": false,
+"nsolids": 1,
+"min": [
+533.18,
+939.39,
+1201.84
+],
+"max": [
+617.17,
+956.32,
+1276.21
+],
+"best": "NAUO192",
+"box_err": 45.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO193",
+46.71
+],
+[
+"NAUO194",
+47.24
+]
+]
+},
+{
+"cad_id": "be1ff9e9-8f79-e298-e573-78f8885e726c",
+"name": "Part103^PMG Full 3D Cadasio Build-1",
+"idx": 620,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.4,
+944.03,
+1205.12
+],
+"max": [
+615.58,
+954.51,
+1276.19
+],
+"best": "NAUO192",
+"box_err": 46.93,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+50.0
+],
+[
+"NAUO193",
+51.43
+]
+]
+},
+{
+"cad_id": "fa224513-469c-1f59-3f32-e84ad7e0d48a",
+"name": "Part104^PMG Full 3D Cadasio Build-1",
+"idx": 623,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.8,
+946.0,
+1207.47
+],
+"max": [
+614.91,
+952.49,
+1276.2
+],
+"best": "NAUO192",
+"box_err": 48.09,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+52.1
+],
+[
+"NAUO193",
+53.75
+]
+]
+},
+{
+"cad_id": "375e93e4-d05b-fa06-305e-7f3d82ef3ba5",
+"name": "Part105^PMG Full 3D Cadasio Build-1",
+"idx": 626,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.69,
+933.35,
+1274.95
+],
+"max": [
+617.69,
+1034.79,
+1371.3
+],
+"best": "NAUO196",
+"box_err": 75.14,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part106^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO175",
+75.66
+],
+[
+"NAUO195",
+77.21
+]
+]
+},
+{
+"cad_id": "873bc09c-52e1-30c1-186c-24503937e559",
+"name": "Part106^PMG Full 3D Cadasio Build-1",
+"idx": 629,
+"hidden": false,
+"nsolids": 1,
+"min": [
+562.15,
+936.3,
+1274.96
+],
+"max": [
+615.15,
+1032.95,
+1370.46
+],
+"best": "NAUO196",
+"box_err": 70.77,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part106^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO195",
+72.84
+],
+[
+"NAUO197",
+74.12
+]
+]
+},
+{
+"cad_id": "e0a91c12-a558-1615-ee01-f5d634c56b7c",
+"name": "Part107^PMG Full 3D Cadasio Build-1",
+"idx": 632,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.61,
+935.16,
+1272.46
+],
+"max": [
+616.24,
+1031.11,
+1369.01
+],
+"best": "NAUO196",
+"box_err": 72.04,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part106^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO175",
+74.01
+],
+[
+"NAUO195",
+74.11
+]
+]
+},
+{
+"cad_id": "657d0492-11ba-2e03-c4c5-3d4486011be3",
+"name": "Part108^PMG Full 3D Cadasio Build-1",
+"idx": 635,
+"hidden": false,
+"nsolids": 1,
+"min": [
+559.06,
+936.51,
+1269.99
+],
+"max": [
+618.51,
+1029.27,
+1367.27
+],
+"best": "NAUO196",
+"box_err": 70.96,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part106^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO195",
+73.03
+],
+[
+"NAUO197",
+74.31
+]
+]
+},
+{
+"cad_id": "47290b21-00fd-32ff-ba12-7aad93845bd4",
+"name": "Part113^PMG Full 3D Cadasio Build-1",
+"idx": 652,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.77,
+1029.78,
+1304.14
+],
+"max": [
+616.68,
+1071.94,
+1336.57
+],
+"best": "NAUO105",
+"box_err": 57.2,
+"rot_err": 1.0,
+"trans_err": 1311.31,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO106",
+57.2
+],
+[
+"NAUO109",
+57.2
+]
+]
+},
+{
+"cad_id": "9acf0a03-36d4-044c-c381-b63393cc0e59",
+"name": "Part114^PMG Full 3D Cadasio Build-1",
+"idx": 655,
+"hidden": false,
+"nsolids": 1,
+"min": [
+562.33,
+1029.93,
+1304.82
+],
+"max": [
+612.35,
+1070.11,
+1337.73
+],
+"best": "NAUO103",
+"box_err": 54.93,
+"rot_err": 1.0,
+"trans_err": 1311.31,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO94",
+56.13
+],
+[
+"NAUO105",
+57.19
+]
+]
+},
+{
+"cad_id": "2e760ac8-7b86-5401-b2e2-a81475937090",
+"name": "Part115^PMG Full 3D Cadasio Build-1",
+"idx": 659,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.78,
+1029.23,
+1307.33
+],
+"max": [
+611.66,
+1068.35,
+1336.88
+],
+"best": "NAUO103",
+"box_err": 56.91,
+"rot_err": 1.0,
+"trans_err": 1311.31,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO94",
+57.82
+],
+[
+"NAUO105",
+59.17
+]
+]
+},
+{
+"cad_id": "01fc00b4-022f-fea5-e60f-ff98b2850623",
+"name": "Part116^PMG Full 3D Cadasio Build-1",
+"idx": 661,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.76,
+1025.41,
+1309.85
+],
+"max": [
+617.94,
+1066.74,
+1339.79
+],
+"best": "NAUO103",
+"box_err": 65.47,
+"rot_err": 1.0,
+"trans_err": 1311.31,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO105",
+65.47
+],
+[
+"NAUO106",
+65.47
+]
+]
+},
+{
+"cad_id": "ca293535-b539-17c0-38b5-c7f351931b68",
+"name": "Part117^PMG Full 3D Cadasio Build-1",
+"idx": 665,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.78,
+927.1,
+1304.6
+],
+"max": [
+617.63,
+1072.11,
+1341.7
+],
+"best": "NAUO167",
+"box_err": 71.83,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part76^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO166",
+73.63
+],
+[
+"NAUO161",
+75.28
+]
+]
+},
+{
+"cad_id": "795b91f6-b2f2-3bbc-a6c0-7b1fbc029fc9",
+"name": "Part118^PMG Full 3D Cadasio Build-1",
+"idx": 669,
+"hidden": false,
+"nsolids": 1,
+"min": [
+562.32,
+925.27,
+1304.68
+],
+"max": [
+617.27,
+1070.18,
+1355.27
+],
+"best": "NAUO167",
+"box_err": 68.86,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part76^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO166",
+70.66
+],
+[
+"NAUO161",
+72.31
+]
+]
+},
+{
+"cad_id": "deef5209-fba7-d729-bd07-7ce0bd3ac30d",
+"name": "Part119^PMG Full 3D Cadasio Build-1",
+"idx": 672,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.76,
+925.05,
+1306.21
+],
+"max": [
+618.35,
+1068.3,
+1349.56
+],
+"best": "NAUO167",
+"box_err": 65.16,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part76^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO166",
+66.96
+],
+[
+"NAUO161",
+68.61
+]
+]
+},
+{
+"cad_id": "b8443af7-44a2-86fc-89cf-a9b6cd667078",
+"name": "Part120^PMG Full 3D Cadasio Build-1",
+"idx": 676,
+"hidden": false,
+"nsolids": 1,
+"min": [
+559.24,
+920.16,
+1309.5
+],
+"max": [
+613.23,
+1066.45,
+1347.14
+],
+"best": "NAUO167",
+"box_err": 65.39,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part76^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO166",
+67.2
+],
+[
+"NAUO161",
+68.85
+]
+]
+},
+{
+"cad_id": "e9d76d75-8c1f-2140-e12a-727a3c68eacf",
+"name": "Part121^PMG Full 3D Cadasio Build-1",
+"idx": 678,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.81,
+890.13,
+1302.7
+],
+"max": [
+659.22,
+1072.02,
+1340.94
+],
+"best": "NAUO155",
+"box_err": 74.64,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO146",
+75.51
+],
+[
+"NAUO154",
+76.64
+]
+]
+},
+{
+"cad_id": "5f959b8a-3555-5af9-03f3-66d44d4bdedf",
+"name": "Part122^PMG Full 3D Cadasio Build-1",
+"idx": 680,
+"hidden": false,
+"nsolids": 1,
+"min": [
+562.33,
+890.13,
+1304.89
+],
+"max": [
+659.26,
+1070.14,
+1336.47
+],
+"best": "NAUO155",
+"box_err": 72.04,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO154",
+74.04
+],
+[
+"NAUO160",
+74.58
+]
+]
+},
+{
+"cad_id": "b483021e-77c1-9e0e-71d5-250e46a4939f",
+"name": "Part123^PMG Full 3D Cadasio Build-1",
+"idx": 682,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.53,
+890.13,
+1305.0
+],
+"max": [
+656.81,
+1068.27,
+1342.66
+],
+"best": "NAUO155",
+"box_err": 68.05,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO154",
+70.05
+],
+[
+"NAUO160",
+70.59
+]
+]
+},
+{
+"cad_id": "e8a8b6b7-c5ab-df6d-83ea-6dc7ab866a4f",
+"name": "Part124^PMG Full 3D Cadasio Build-1",
+"idx": 684,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.92,
+890.13,
+1305.13
+],
+"max": [
+654.36,
+1066.6,
+1351.81
+],
+"best": "NAUO155",
+"box_err": 66.72,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO161",
+68.32
+],
+[
+"NAUO160",
+70.38
+]
+]
+},
+{
+"cad_id": "7de12a6d-5e11-536c-8a12-16b1b150df1e",
+"name": "Part125^PMG Full 3D Cadasio Build-1",
+"idx": 853,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.68,
+900.79,
+1275.29
+],
+"max": [
+734.61,
+902.09,
+1334.2
+],
+"best": "NAUO247",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part125^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO248",
+8.25
+],
+[
+"NAUO249",
+10.0
+]
+]
+},
+{
+"cad_id": "107c7ce4-2e5c-b5ff-9067-1ea5b2893317",
+"name": "Part126^PMG Full 3D Cadasio Build-1",
+"idx": 856,
+"hidden": false,
+"nsolids": 1,
+"min": [
+728.18,
+900.82,
+1275.36
+],
+"max": [
+729.61,
+902.09,
+1334.14
+],
+"best": "NAUO248",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part126^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO249",
+1.76
+],
+[
+"NAUO250",
+3.51
+]
+]
+},
+{
+"cad_id": "ed12510c-2af8-0e90-98d4-959cc93801b1",
+"name": "Part127^PMG Full 3D Cadasio Build-1",
+"idx": 860,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.43,
+900.84,
+1275.37
+],
+"max": [
+727.86,
+902.11,
+1334.14
+],
+"best": "NAUO249",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part127^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO248",
+1.76
+],
+[
+"NAUO250",
+1.76
+]
+]
+},
+{
+"cad_id": "2d888a3e-506c-452f-cf2b-82c24ef579f0",
+"name": "Part128^PMG Full 3D Cadasio Build-1",
+"idx": 863,
+"hidden": false,
+"nsolids": 1,
+"min": [
+724.68,
+900.86,
+1275.38
+],
+"max": [
+726.11,
+902.12,
+1334.15
+],
+"best": "NAUO250",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part128^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO251",
+1.75
+],
+[
+"NAUO249",
+1.75
+]
+]
+},
+{
+"cad_id": "5786bb21-2e59-cda6-e7e8-09f5f26af738",
+"name": "Part129^PMG Full 3D Cadasio Build-1",
+"idx": 868,
+"hidden": false,
+"nsolids": 1,
+"min": [
+722.93,
+900.87,
+1275.38
+],
+"max": [
+724.36,
+902.14,
+1334.15
+],
+"best": "NAUO251",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part129^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO252",
+1.75
+],
+[
+"NAUO250",
+1.76
+]
+]
+},
+{
+"cad_id": "4f4a4b5a-5015-2008-96f3-c849bde8d5df",
+"name": "Part130^PMG Full 3D Cadasio Build-1",
+"idx": 871,
+"hidden": false,
+"nsolids": 1,
+"min": [
+721.18,
+900.89,
+1275.39
+],
+"max": [
+722.61,
+902.16,
+1334.16
+],
+"best": "NAUO252",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part130^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO251",
+1.76
+],
+[
+"NAUO254",
+1.76
+]
+]
+},
+{
+"cad_id": "2281c282-7bbd-730f-9c86-a5d90a4a8ef0",
+"name": "Part132^PMG Full 3D Cadasio Build-1",
+"idx": 880,
+"hidden": false,
+"nsolids": 1,
+"min": [
+717.68,
+900.93,
+1275.4
+],
+"max": [
+719.11,
+902.19,
+1334.17
+],
+"best": "NAUO253",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part132^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO254",
+1.75
+],
+[
+"NAUO255",
+1.75
+]
+]
+},
+{
+"cad_id": "7ddd71af-373f-3e7d-ccad-82ed378781c3",
+"name": "Part133^PMG Full 3D Cadasio Build-1",
+"idx": 883,
+"hidden": false,
+"nsolids": 1,
+"min": [
+715.93,
+900.94,
+1275.4
+],
+"max": [
+717.36,
+902.21,
+1334.17
+],
+"best": "NAUO255",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part133^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO256",
+1.75
+],
+[
+"NAUO253",
+1.76
+]
+]
+},
+{
+"cad_id": "5d1fe68f-1176-c5c3-876f-5f438b034e7e",
+"name": "Part134^PMG Full 3D Cadasio Build-1",
+"idx": 887,
+"hidden": false,
+"nsolids": 1,
+"min": [
+719.43,
+900.91,
+1275.39
+],
+"max": [
+720.86,
+902.18,
+1334.16
+],
+"best": "NAUO254",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part134^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO252",
+1.75
+],
+[
+"NAUO253",
+1.76
+]
+]
+},
+{
+"cad_id": "4b3ddc94-922b-6e62-bbcd-d901a19fb327",
+"name": "Part135^PMG Full 3D Cadasio Build-1",
+"idx": 891,
+"hidden": false,
+"nsolids": 1,
+"min": [
+714.18,
+900.96,
+1275.41
+],
+"max": [
+715.61,
+902.23,
+1334.18
+],
+"best": "NAUO256",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part135^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO255",
+1.76
+],
+[
+"NAUO257",
+1.76
+]
+]
+},
+{
+"cad_id": "903cf78a-ed4a-0c85-cd79-f67b6152fceb",
+"name": "Part136^PMG Full 3D Cadasio Build-1",
+"idx": 897,
+"hidden": false,
+"nsolids": 1,
+"min": [
+712.43,
+900.98,
+1275.41
+],
+"max": [
+713.86,
+902.25,
+1334.19
+],
+"best": "NAUO257",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part136^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO256",
+1.76
+],
+[
+"NAUO258",
+1.76
+]
+]
+},
+{
+"cad_id": "9718ef79-9ea0-f2dc-bdb2-3dcd50725ef5",
+"name": "Part137^PMG Full 3D Cadasio Build-1",
+"idx": 900,
+"hidden": false,
+"nsolids": 1,
+"min": [
+710.68,
+901.0,
+1275.42
+],
+"max": [
+712.11,
+902.26,
+1334.19
+],
+"best": "NAUO258",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part137^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO257",
+1.76
+],
+[
+"NAUO256",
+3.51
+]
+]
+},
+{
+"cad_id": "50fe0377-0077-d1d9-78c9-aed8c1dd457f",
+"name": "Part138^PMG Full 3D Cadasio Build-1",
+"idx": 911,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.71,
+933.13,
+1274.95
+],
+"max": [
+619.04,
+986.37,
+1338.37
+],
+"best": "NAUO75",
+"box_err": 35.96,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO74",
+48.2
+],
+[
+"NAUO264",
+50.15
+]
+]
+},
+{
+"cad_id": "b60b7245-92ff-22b3-06e7-aab3f9dca53f",
+"name": "Part139^PMG Full 3D Cadasio Build-1",
+"idx": 914,
+"hidden": false,
+"nsolids": 1,
+"min": [
+562.12,
+936.49,
+1274.96
+],
+"max": [
+620.68,
+984.86,
+1334.67
+],
+"best": "NAUO75",
+"box_err": 33.83,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+48.28
+],
+[
+"NAUO265",
+50.87
+]
+]
+},
+{
+"cad_id": "65fa3d9c-d75d-0250-d289-5eaeee3bb54b",
+"name": "Part140^PMG Full 3D Cadasio Build-1",
+"idx": 918,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.58,
+934.6,
+1272.43
+],
+"max": [
+620.83,
+982.96,
+1336.56
+],
+"best": "NAUO75",
+"box_err": 35.19,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO74",
+52.45
+],
+[
+"NAUO264",
+53.02
+]
+]
+},
+{
+"cad_id": "0c123705-16f9-0a11-f7a5-8e71188d71d0",
+"name": "Part141^PMG Full 3D Cadasio Build-1",
+"idx": 922,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.97,
+936.51,
+1269.98
+],
+"max": [
+623.01,
+981.27,
+1333.28
+],
+"best": "NAUO75",
+"box_err": 36.12,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+55.06
+],
+[
+"NAUO74",
+56.52
+]
+]
+},
+{
+"cad_id": "230ecdae-c915-54b0-3a1c-2f0b4a6d92cd",
+"name": "Part142^PMG Full 3D Cadasio Build-1",
+"idx": 941,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.22,
+1024.85,
+1213.2
+],
+"max": [
+621.09,
+1052.23,
+1308.98
+],
+"best": "NAUO185",
+"box_err": 87.15,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO94",
+89.73
+],
+[
+"NAUO186",
+91.25
+]
+]
+},
+{
+"cad_id": "6c7d075b-52ce-b97f-a6a5-b99a86710ee3",
+"name": "Part143^PMG Full 3D Cadasio Build-1",
+"idx": 944,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.49,
+1028.9,
+1208.56
+],
+"max": [
+625.26,
+1044.55,
+1306.17
+],
+"best": "NAUO185",
+"box_err": 97.07,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO94",
+99.35
+],
+[
+"NAUO186",
+101.16
+]
+]
+},
+{
+"cad_id": "53c3baac-17c7-257e-1739-69d35cf7c7f6",
+"name": "Part144^PMG Full 3D Cadasio Build-1",
+"idx": 947,
+"hidden": false,
+"nsolids": 1,
+"min": [
+533.06,
+1021.17,
+1207.6
+],
+"max": [
+624.52,
+1042.17,
+1311.14
+],
+"best": "NAUO185",
+"box_err": 86.66,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+90.76
+],
+[
+"NAUO188",
+93.95
+]
+]
+},
+{
+"cad_id": "0fe80a2c-9d39-2027-9427-ae7c2b6c6efe",
+"name": "Part145^PMG Full 3D Cadasio Build-1",
+"idx": 950,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.31,
+1019.99,
+1212.78
+],
+"max": [
+625.52,
+1040.34,
+1306.17
+],
+"best": "NAUO185",
+"box_err": 85.81,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+89.9
+],
+[
+"NAUO188",
+93.1
+]
+]
+},
+{
+"cad_id": "0cde8690-f786-ca8e-5ae2-68536b44dec0",
+"name": "Part146^PMG Full 3D Cadasio Build-1",
+"idx": 953,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.72,
+1013.99,
+1211.13
+],
+"max": [
+623.28,
+1038.53,
+1306.17
+],
+"best": "NAUO185",
+"box_err": 77.71,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+81.81
+],
+[
+"NAUO188",
+85.0
+]
+]
+},
+{
+"cad_id": "cc9d719e-300d-db3c-fd43-792468eb9db7",
+"name": "Part147^PMG Full 3D Cadasio Build-1",
+"idx": 957,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.24,
+890.13,
+1209.34
+],
+"max": [
+656.73,
+1046.25,
+1315.31
+],
+"best": "NAUO273",
+"box_err": 0.64,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part147^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO274",
+7.01
+],
+[
+"NAUO275",
+7.73
+]
+]
+},
+{
+"cad_id": "3b3c4cc8-f4b8-6e71-7925-6aef58c32b03",
+"name": "Part148^PMG Full 3D Cadasio Build-1",
+"idx": 960,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.53,
+890.13,
+1212.05
+],
+"max": [
+659.28,
+1044.23,
+1318.4
+],
+"best": "NAUO274",
+"box_err": 0.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part148^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO275",
+5.53
+],
+[
+"NAUO273",
+7.32
+]
+]
+},
+{
+"cad_id": "16346357-57c4-90c7-4277-a49cf217ff82",
+"name": "Part149^PMG Full 3D Cadasio Build-1",
+"idx": 963,
+"hidden": false,
+"nsolids": 1,
+"min": [
+533.04,
+890.13,
+1208.06
+],
+"max": [
+659.24,
+1042.14,
+1315.73
+],
+"best": "NAUO275",
+"box_err": 0.71,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part149^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO274",
+5.36
+],
+[
+"NAUO273",
+7.78
+]
+]
+},
+{
+"cad_id": "18617c85-ce92-f14c-865a-1efc788d9052",
+"name": "Part150^PMG Full 3D Cadasio Build-1",
+"idx": 966,
+"hidden": false,
+"nsolids": 1,
+"min": [
+528.18,
+890.13,
+1200.84
+],
+"max": [
+659.27,
+1040.35,
+1317.07
+],
+"best": "NAUO275",
+"box_err": 12.03,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part149^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO273",
+14.09
+],
+[
+"NAUO276",
+14.73
+]
+]
+},
+{
+"cad_id": "d79df058-e4d7-52ca-49f6-fbd00a6f5a0d",
+"name": "Part151^PMG Full 3D Cadasio Build-1",
+"idx": 969,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.75,
+890.13,
+1190.39
+],
+"max": [
+659.67,
+1038.61,
+1319.23
+],
+"best": "NAUO276",
+"box_err": 2.02,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part151^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO275",
+28.78
+],
+[
+"NAUO273",
+30.84
+]
+]
+},
+{
+"cad_id": "08ce4383-9cef-9b61-d2b5-1d36e9f67c8c",
+"name": "Part152^PMG Full 3D Cadasio Build-1",
+"idx": 980,
+"hidden": false,
+"nsolids": 1,
+"min": [
+608.18,
+1014.7,
+1222.49
+],
+"max": [
+629.34,
+1078.23,
+1272.14
+],
+"best": "NAUO94",
+"box_err": 47.74,
+"rot_err": 1.0,
+"trans_err": 1292.03,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO74",
+86.3
+],
+[
+"NAUO281",
+93.43
+]
+]
+},
+{
+"cad_id": "99d77a20-5430-d24c-488d-321d15f91e1f",
+"name": "Part153^PMG Full 3D Cadasio Build-1",
+"idx": 981,
+"hidden": false,
+"nsolids": 1,
+"min": [
+608.93,
+881.89,
+1243.46
+],
+"max": [
+642.2,
+974.21,
+1272.04
+],
+"best": "NAUO78",
+"box_err": 66.01,
+"rot_err": 1.0,
+"trans_err": 1291.93,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO24",
+72.16
+],
+[
+"NAUO25",
+73.42
+]
+]
+},
+{
+"cad_id": "69a890fc-8976-3372-fdb3-7ec825a6b4f7",
+"name": "Part154^PMG Full 3D Cadasio Build-1",
+"idx": 989,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+928.83,
+1271.59
+],
+"max": [
+649.91,
+1045.16,
+1364.31
+],
+"best": "NAUO175",
+"box_err": 66.85,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part84^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO174",
+70.58
+],
+[
+"NAUO172",
+73.65
+]
+]
+},
+{
+"cad_id": "a0f6fe36-c2f9-c437-9d7c-4e9bf751aa97",
+"name": "Part155^PMG Full 3D Cadasio Build-1",
+"idx": 992,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+926.4,
+1269.1
+],
+"max": [
+649.63,
+1045.17,
+1364.31
+],
+"best": "NAUO175",
+"box_err": 68.1,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part84^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO174",
+71.83
+],
+[
+"NAUO172",
+74.9
+]
+]
+},
+{
+"cad_id": "01f610e8-4f77-c94b-24fe-ca3df422ea75",
+"name": "Part156^PMG Full 3D Cadasio Build-1",
+"idx": 994,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+923.86,
+1272.59
+],
+"max": [
+650.76,
+1045.29,
+1364.31
+],
+"best": "NAUO175",
+"box_err": 66.35,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part84^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO174",
+70.08
+],
+[
+"NAUO172",
+73.15
+]
+]
+},
+{
+"cad_id": "5b7f9e60-a010-56ac-ccb9-53d501e695b2",
+"name": "Part157^PMG Full 3D Cadasio Build-1",
+"idx": 996,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+921.2,
+1274.59
+],
+"max": [
+652.6,
+1050.11,
+1364.18
+],
+"best": "NAUO175",
+"box_err": 65.16,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part84^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO174",
+68.89
+],
+[
+"NAUO172",
+71.96
+]
+]
+},
+{
+"cad_id": "79d26b2e-ea01-0627-2c5d-1b416aa00a59",
+"name": "Part158^PMG Full 3D Cadasio Build-1",
+"idx": 998,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+918.66,
+1271.71
+],
+"max": [
+654.22,
+1052.64,
+1364.18
+],
+"best": "NAUO175",
+"box_err": 66.6,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part84^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO174",
+70.33
+],
+[
+"NAUO172",
+73.4
+]
+]
+},
+{
+"cad_id": "93857edf-f136-bbf2-7254-857bd8a262c2",
+"name": "Part159^PMG Full 3D Cadasio Build-1",
+"idx": 1000,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+928.93,
+1272.43
+],
+"max": [
+649.55,
+942.86,
+1364.31
+],
+"best": "NAUO171",
+"box_err": 66.64,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part80^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO170",
+70.34
+],
+[
+"NAUO78",
+73.0
+]
+]
+},
+{
+"cad_id": "486331a0-8daf-cb80-ca0f-ca540b96d4bc",
+"name": "Part160^PMG Full 3D Cadasio Build-1",
+"idx": 1002,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+926.33,
+1269.86
+],
+"max": [
+649.36,
+942.9,
+1364.31
+],
+"best": "NAUO171",
+"box_err": 67.93,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part80^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO78",
+69.08
+],
+[
+"NAUO170",
+71.63
+]
+]
+},
+{
+"cad_id": "b4f7a5ed-be44-bae2-4d15-ce0d4e089703",
+"name": "Part161^PMG Full 3D Cadasio Build-1",
+"idx": 1004,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+923.86,
+1274.96
+],
+"max": [
+649.14,
+942.82,
+1364.31
+],
+"best": "NAUO171",
+"box_err": 65.38,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part80^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO170",
+69.08
+],
+[
+"NAUO78",
+69.23
+]
+]
+},
+{
+"cad_id": "ea0fd5b9-d17e-86c7-3eb6-78b0096d811a",
+"name": "Part162^PMG Full 3D Cadasio Build-1",
+"idx": 1006,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+921.32,
+1274.94
+],
+"max": [
+651.56,
+947.76,
+1364.18
+],
+"best": "NAUO78",
+"box_err": 64.99,
+"rot_err": 1.0,
+"trans_err": 1291.93,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO171",
+65.19
+],
+[
+"NAUO170",
+68.89
+]
+]
+},
+{
+"cad_id": "89c37d86-ad11-84e4-70a2-16c769966a8f",
+"name": "Part163^PMG Full 3D Cadasio Build-1",
+"idx": 1008,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.69,
+905.99,
+1057.31
+],
+"max": [
+625.8,
+952.67,
+1306.08
+],
+"best": "NAUO296",
+"box_err": 1.95,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part163^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO179",
+8.89
+],
+[
+"NAUO177",
+11.79
+]
+]
+},
+{
+"cad_id": "0121cc47-ba2e-2b64-48f3-cde269e04d44",
+"name": "Part164^PMG Full 3D Cadasio Build-1",
+"idx": 1011,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+918.78,
+1274.95
+],
+"max": [
+652.71,
+950.3,
+1364.18
+],
+"best": "NAUO78",
+"box_err": 64.98,
+"rot_err": 1.0,
+"trans_err": 1291.93,
+"glb_kind": "smt_resistor222_a",
+"others": [
+[
+"NAUO171",
+65.19
+],
+[
+"NAUO195",
+67.71
+]
+]
+},
+{
+"cad_id": "8ca4d643-dc4a-befa-0f6f-9a508bcc9481",
+"name": "Part166^PMG Full 3D Cadasio Build-1",
+"idx": 1081,
+"hidden": false,
+"nsolids": 5,
+"min": [
+526.86,
+937.57,
+1196.76
+],
+"max": [
+617.08,
+984.3,
+1276.33
+],
+"best": "NAUO192",
+"box_err": 48.28,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+49.93
+],
+[
+"NAUO191",
+50.32
+]
+]
+},
+{
+"cad_id": "9b926c27-a743-c9af-66ed-304117db572c",
+"name": "Part168^PMG Full 3D Cadasio Build-1",
+"idx": 1111,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.78,
+890.13,
+1272.59
+],
+"max": [
+656.74,
+934.56,
+1291.41
+],
+"best": "NAUO24",
+"box_err": 3.75,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part36^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO25",
+3.86
+],
+[
+"NAUO26",
+19.65
+]
+]
+},
+{
+"cad_id": "4e2f156c-3443-641d-57f0-69ebfd8598da",
+"name": "Part169^PMG Full 3D Cadasio Build-1",
+"idx": 1129,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.55,
+890.12,
+1277.57
+],
+"max": [
+654.25,
+934.56,
+1291.41
+],
+"best": "NAUO25",
+"box_err": 7.31,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part37^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO24",
+7.38
+],
+[
+"NAUO26",
+12.18
+]
+]
+},
+{
+"cad_id": "b63b1509-3620-6abe-2a8f-aac0e2743bad",
+"name": "Part170^PMG Full 3D Cadasio Build-1",
+"idx": 1143,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.79,
+890.13,
+1286.52
+],
+"max": [
+656.74,
+934.54,
+1293.95
+],
+"best": "NAUO26",
+"box_err": 3.75,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part38^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO27",
+3.77
+],
+[
+"NAUO28",
+10.45
+]
+]
+},
+{
+"cad_id": "a7d59eec-96c2-7a38-b4a7-71ddc3df86e9",
+"name": "Part171^PMG Full 3D Cadasio Build-1",
+"idx": 1146,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.77,
+890.12,
+1291.42
+],
+"max": [
+654.24,
+934.5,
+1293.93
+],
+"best": "NAUO26",
+"box_err": 7.34,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part38^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO27",
+7.51
+],
+[
+"NAUO28",
+10.05
+]
+]
+},
+{
+"cad_id": "0e5987fb-50ba-3c67-b530-8034494eefd8",
+"name": "Part172^PMG Full 3D Cadasio Build-1",
+"idx": 1150,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.64,
+890.13,
+1295.24
+],
+"max": [
+656.74,
+934.52,
+1301.8
+],
+"best": "NAUO28",
+"box_err": 3.75,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part40^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO29",
+3.81
+],
+[
+"NAUO27",
+9.54
+]
+]
+},
+{
+"cad_id": "72c5111b-1e17-ad06-bc3f-ec5616eb24e3",
+"name": "Part173^PMG Full 3D Cadasio Build-1",
+"idx": 1154,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.72,
+890.12,
+1295.23
+],
+"max": [
+654.28,
+934.5,
+1306.79
+],
+"best": "NAUO28",
+"box_err": 7.33,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part40^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO29",
+7.34
+],
+[
+"NAUO30",
+12.4
+]
+]
+},
+{
+"cad_id": "cc0952b6-a3d7-3f63-d8aa-79bf9cb30d8e",
+"name": "Part174^PMG Full 3D Cadasio Build-1",
+"idx": 1157,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.79,
+890.13,
+1297.78
+],
+"max": [
+656.74,
+934.53,
+1315.88
+],
+"best": "NAUO30",
+"box_err": 3.7,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part42^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO31",
+3.88
+],
+[
+"NAUO29",
+16.11
+]
+]
+},
+{
+"cad_id": "3a5ba9c8-b417-a0dc-175c-76ee562d5381",
+"name": "Part175^PMG Full 3D Cadasio Build-1",
+"idx": 1161,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.15,
+890.12,
+1297.76
+],
+"max": [
+654.25,
+934.5,
+1320.97
+],
+"best": "NAUO31",
+"box_err": 7.04,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part43^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO30",
+7.61
+],
+[
+"NAUO29",
+23.76
+]
+]
+},
+{
+"cad_id": "dfb4eb34-add6-a1c0-7f2b-fef8748b3ce8",
+"name": "Part176^PMG Full 3D Cadasio Build-1",
+"idx": 1164,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.37,
+890.12,
+1238.31
+],
+"max": [
+654.29,
+907.88,
+1291.46
+],
+"best": "NAUO144",
+"box_err": 7.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part53^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO145",
+7.62
+],
+[
+"NAUO151",
+51.59
+]
+]
+},
+{
+"cad_id": "0dbfa7d3-0249-5956-b45e-deb12128cc68",
+"name": "Part177^PMG Full 3D Cadasio Build-1",
+"idx": 1169,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.71,
+890.13,
+1243.2
+],
+"max": [
+656.75,
+907.41,
+1291.41
+],
+"best": "NAUO144",
+"box_err": 3.75,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part53^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO145",
+4.1
+],
+[
+"NAUO151",
+44.22
+]
+]
+},
+{
+"cad_id": "6b7c0be7-150b-793f-8091-ecf6cc1ff113",
+"name": "Part178^PMG Full 3D Cadasio Build-1",
+"idx": 1175,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.28,
+890.12,
+1270.6
+],
+"max": [
+654.24,
+908.16,
+1293.93
+],
+"best": "NAUO151",
+"box_err": 7.31,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part60^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO150",
+7.77
+],
+[
+"NAUO157",
+24.73
+]
+]
+},
+{
+"cad_id": "5250b82a-ae26-baac-ab25-2a62ab0e0ee6",
+"name": "Part179^PMG Full 3D Cadasio Build-1",
+"idx": 1178,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.26,
+890.13,
+1295.24
+],
+"max": [
+656.75,
+907.96,
+1312.9
+],
+"best": "NAUO156",
+"box_err": 3.65,
+"rot_err": 2.0,
+"trans_err": 1220.74,
+"glb_kind": "Part63^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO157",
+5.27
+],
+[
+"NAUO150",
+22.22
+]
+]
+},
+{
+"cad_id": "dabfb4b0-7ff9-0ad2-7299-3701f20390b2",
+"name": "Part180^PMG Full 3D Cadasio Build-1",
+"idx": 1182,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.16,
+890.12,
+1294.47
+],
+"max": [
+654.25,
+908.34,
+1307.66
+],
+"best": "NAUO157",
+"box_err": 7.35,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part64^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO156",
+8.16
+],
+[
+"NAUO150",
+21.17
+]
+]
+},
+{
+"cad_id": "f0bdca11-4062-6968-eea4-5266cc661ae9",
+"name": "Part181^PMG Full 3D Cadasio Build-1",
+"idx": 1187,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.02,
+890.12,
+1297.3
+],
+"max": [
+654.26,
+907.03,
+1337.54
+],
+"best": "NAUO163",
+"box_err": 7.38,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part72^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO162",
+10.58
+],
+[
+"NAUO156",
+35.25
+]
+]
+},
+{
+"cad_id": "7e3d8b0e-db6a-e0cf-7996-a4de57597c72",
+"name": "Part182^PMG Full 3D Cadasio Build-1",
+"idx": 1391,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.38,
+897.37,
+1238.41
+],
+"max": [
+614.92,
+922.66,
+1271.21
+],
+"best": "NAUO153",
+"box_err": 51.03,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO149",
+51.89
+],
+[
+"NAUO152",
+54.75
+]
+]
+},
+{
+"cad_id": "3daf7835-448e-4f06-69f2-9c2071f2793f",
+"name": "Part183^PMG Full 3D Cadasio Build-1",
+"idx": 1395,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.28,
+896.87,
+1269.97
+],
+"max": [
+617.99,
+925.2,
+1272.95
+],
+"best": "NAUO153",
+"box_err": 49.08,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO158",
+50.1
+],
+[
+"NAUO159",
+50.5
+]
+]
+},
+{
+"cad_id": "40617b8b-81f2-0b49-c84d-a797beabf4e0",
+"name": "Part184^PMG Full 3D Cadasio Build-1",
+"idx": 1400,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.13,
+897.12,
+1269.97
+],
+"max": [
+620.54,
+927.76,
+1305.04
+],
+"best": "NAUO153",
+"box_err": 17.3,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+17.64
+],
+[
+"NAUO159",
+44.55
+]
+]
+},
+{
+"cad_id": "12a01b4e-87b2-5395-ef14-5321e0cc56b9",
+"name": "Part185^PMG Full 3D Cadasio Build-1",
+"idx": 1404,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.02,
+897.26,
+1269.97
+],
+"max": [
+623.66,
+930.29,
+1338.07
+],
+"best": "NAUO148",
+"box_err": 40.29,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part57^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+41.71
+],
+[
+"NAUO149",
+44.19
+]
+]
+},
+{
+"cad_id": "7ea31f83-9b3d-5e63-249f-7187c85011e2",
+"name": "Part186^PMG Full 3D Cadasio Build-1",
+"idx": 1408,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.08,
+897.15,
+1270.14
+],
+"max": [
+623.45,
+1032.61,
+1337.49
+],
+"best": "NAUO155",
+"box_err": 38.31,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO146",
+42.61
+],
+[
+"NAUO147",
+45.16
+]
+]
+},
+{
+"cad_id": "44946492-2ead-3215-0834-bf99c79983bd",
+"name": "Part187^PMG Full 3D Cadasio Build-1",
+"idx": 1412,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.16,
+897.07,
+1270.13
+],
+"max": [
+624.61,
+1030.05,
+1305.05
+],
+"best": "NAUO154",
+"box_err": 20.45,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO155",
+22.89
+],
+[
+"NAUO161",
+42.56
+]
+]
+},
+{
+"cad_id": "53250ac5-0a93-16bd-8beb-1554f533826f",
+"name": "Part188^PMG Full 3D Cadasio Build-1",
+"idx": 1416,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.28,
+897.11,
+1269.72
+],
+"max": [
+626.08,
+1027.51,
+1272.4
+],
+"best": "NAUO154",
+"box_err": 52.12,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO160",
+58.7
+],
+[
+"NAUO155",
+59.12
+]
+]
+},
+{
+"cad_id": "7a85141a-6f7b-539b-17be-0d60748c51c6",
+"name": "Part189^PMG Full 3D Cadasio Build-1",
+"idx": 1420,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.38,
+896.98,
+1238.32
+],
+"max": [
+622.38,
+1025.0,
+1271.38
+],
+"best": "NAUO154",
+"box_err": 49.91,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO147",
+50.92
+],
+[
+"NAUO155",
+55.35
+]
+]
+},
+{
+"cad_id": "f0f95c7c-7d87-c9ba-04c4-af5e02f3f5ac",
+"name": "Part190^PMG Full 3D Cadasio Build-1",
+"idx": 1466,
+"hidden": false,
+"nsolids": 1,
+"min": [
+557.75,
+933.87,
+1274.84
+],
+"max": [
+621.65,
+999.14,
+1364.75
+],
+"best": "NAUO198",
+"box_err": 51.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part108^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO197",
+51.36
+],
+[
+"NAUO196",
+53.13
+]
+]
+},
+{
+"cad_id": "02096323-f76e-af1a-6c9f-b158e1748765",
+"name": "Part191^PMG Full 3D Cadasio Build-1",
+"idx": 1470,
+"hidden": false,
+"nsolids": 1,
+"min": [
+557.07,
+936.0,
+1274.86
+],
+"max": [
+619.01,
+996.83,
+1362.07
+],
+"best": "NAUO74",
+"box_err": 51.47,
+"rot_err": 2.0,
+"trans_err": 1253.66,
+"glb_kind": "H14",
+"others": [
+[
+"NAUO198",
+53.7
+],
+[
+"NAUO75",
+55.35
+]
+]
+},
+{
+"cad_id": "7cdd0e67-b919-67cb-3459-dd301b8b14d5",
+"name": "Part192^PMG Full 3D Cadasio Build-1",
+"idx": 1474,
+"hidden": false,
+"nsolids": 1,
+"min": [
+556.38,
+936.41,
+1272.39
+],
+"max": [
+619.84,
+994.53,
+1358.04
+],
+"best": "NAUO75",
+"box_err": 49.4,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO74",
+53.07
+],
+[
+"NAUO198",
+58.51
+]
+]
+},
+{
+"cad_id": "0055e3d9-0e1b-4e93-1c42-54071c614844",
+"name": "Part193^PMG Full 3D Cadasio Build-1",
+"idx": 1478,
+"hidden": false,
+"nsolids": 1,
+"min": [
+555.69,
+936.47,
+1269.92
+],
+"max": [
+619.71,
+992.23,
+1355.93
+],
+"best": "NAUO75",
+"box_err": 47.4,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO74",
+53.22
+],
+[
+"NAUO198",
+60.43
+]
+]
+},
+{
+"cad_id": "6c640110-9236-0d69-5da2-1ef1d22d3397",
+"name": "Part194^PMG Full 3D Cadasio Build-1",
+"idx": 1509,
+"hidden": false,
+"nsolids": 1,
+"min": [
+559.44,
+933.25,
+1274.72
+],
+"max": [
+618.11,
+988.14,
+1332.57
+],
+"best": "NAUO75",
+"box_err": 34.59,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+47.59
+],
+[
+"NAUO74",
+48.94
+]
+]
+},
+{
+"cad_id": "a31746bc-e1d2-9955-e7f7-adf9d667ed2b",
+"name": "Part195^PMG Full 3D Cadasio Build-1",
+"idx": 1513,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.75,
+935.62,
+1274.9
+],
+"max": [
+620.16,
+985.83,
+1332.13
+],
+"best": "NAUO75",
+"box_err": 35.38,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+47.1
+],
+[
+"NAUO265",
+49.69
+]
+]
+},
+{
+"cad_id": "dac16ad9-2994-1219-615b-298208761112",
+"name": "Part196^PMG Full 3D Cadasio Build-1",
+"idx": 1517,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.01,
+936.34,
+1272.4
+],
+"max": [
+621.55,
+983.6,
+1330.74
+],
+"best": "NAUO75",
+"box_err": 35.56,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+50.16
+],
+[
+"NAUO265",
+52.75
+]
+]
+},
+{
+"cad_id": "293eb4a3-3b61-259a-3e22-fb4b594ff32c",
+"name": "Part197^PMG Full 3D Cadasio Build-1",
+"idx": 1521,
+"hidden": false,
+"nsolids": 1,
+"min": [
+557.37,
+936.4,
+1269.88
+],
+"max": [
+622.3,
+981.24,
+1330.17
+],
+"best": "NAUO75",
+"box_err": 35.41,
+"rot_err": 2.0,
+"trans_err": 1282.87,
+"glb_kind": "H13v2",
+"others": [
+[
+"NAUO264",
+53.65
+],
+[
+"NAUO265",
+56.24
+]
+]
+},
+{
+"cad_id": "10433407-4c1c-e713-f28e-63141b221121",
+"name": "Part198^PMG Full 3D Cadasio Build-1",
+"idx": 1542,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.33,
+941.5,
+1181.28
+],
+"max": [
+613.57,
+1046.14,
+1273.85
+],
+"best": "NAUO187",
+"box_err": 49.05,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO189",
+53.21
+],
+[
+"NAUO188",
+53.38
+]
+]
+},
+{
+"cad_id": "ce9280a2-88a7-820c-0986-20d003976968",
+"name": "Part199^PMG Full 3D Cadasio Build-1",
+"idx": 1546,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.7,
+941.53,
+1183.08
+],
+"max": [
+612.06,
+1044.19,
+1271.28
+],
+"best": "NAUO187",
+"box_err": 47.45,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO189",
+51.62
+],
+[
+"NAUO188",
+51.78
+]
+]
+},
+{
+"cad_id": "c234d6f4-cb65-a79a-aab5-bb13337682eb",
+"name": "Part200^PMG Full 3D Cadasio Build-1",
+"idx": 1550,
+"hidden": false,
+"nsolids": 1,
+"min": [
+533.07,
+941.56,
+1180.88
+],
+"max": [
+614.97,
+1042.25,
+1276.23
+],
+"best": "NAUO187",
+"box_err": 44.11,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO189",
+48.27
+],
+[
+"NAUO188",
+48.43
+]
+]
+},
+{
+"cad_id": "2b84fdb6-1cc1-0ca2-decf-b85f351fb72c",
+"name": "Part201^PMG Full 3D Cadasio Build-1",
+"idx": 1554,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.44,
+946.42,
+1181.72
+],
+"max": [
+613.61,
+1040.3,
+1276.29
+],
+"best": "NAUO187",
+"box_err": 38.28,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO189",
+41.01
+],
+[
+"NAUO188",
+41.17
+]
+]
+},
+{
+"cad_id": "2bbfa337-c84b-f8ac-05d0-77c4c40d4ca8",
+"name": "Part202^PMG Full 3D Cadasio Build-1",
+"idx": 1558,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.8,
+948.97,
+1182.49
+],
+"max": [
+615.42,
+1038.36,
+1276.31
+],
+"best": "NAUO187",
+"box_err": 38.63,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO188",
+39.77
+],
+[
+"NAUO189",
+40.45
+]
+]
+},
+{
+"cad_id": "d08b7f21-ad81-bb04-c3b9-032a763e0a01",
+"name": "Part203^PMG Full 3D Cadasio Build-1",
+"idx": 1572,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.66,
+941.5,
+1198.93
+],
+"max": [
+614.18,
+963.81,
+1273.84
+],
+"best": "NAUO192",
+"box_err": 47.36,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+50.43
+],
+[
+"NAUO193",
+50.98
+]
+]
+},
+{
+"cad_id": "e68cda10-55c0-3e92-cc02-62e7e7a88760",
+"name": "Part204^PMG Full 3D Cadasio Build-1",
+"idx": 1576,
+"hidden": false,
+"nsolids": 1,
+"min": [
+528.79,
+941.47,
+1200.5
+],
+"max": [
+612.39,
+961.42,
+1271.33
+],
+"best": "NAUO192",
+"box_err": 51.91,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO193",
+53.85
+],
+[
+"NAUO194",
+54.37
+]
+]
+},
+{
+"cad_id": "b25e2b0f-de7b-b0ab-aad3-23bdcb2d4737",
+"name": "Part205^PMG Full 3D Cadasio Build-1",
+"idx": 1580,
+"hidden": false,
+"nsolids": 1,
+"min": [
+527.92,
+941.49,
+1202.4
+],
+"max": [
+614.85,
+959.03,
+1276.34
+],
+"best": "NAUO192",
+"box_err": 45.35,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+48.42
+],
+[
+"NAUO193",
+49.55
+]
+]
+},
+{
+"cad_id": "307fa680-f090-1a15-4959-6c65e553c298",
+"name": "Part206^PMG Full 3D Cadasio Build-1",
+"idx": 1584,
+"hidden": false,
+"nsolids": 1,
+"min": [
+527.06,
+946.43,
+1202.88
+],
+"max": [
+614.27,
+956.65,
+1276.31
+],
+"best": "NAUO192",
+"box_err": 45.63,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+50.61
+],
+[
+"NAUO193",
+51.34
+]
+]
+},
+{
+"cad_id": "7bb81329-6b0a-ef22-c6e1-1ee12590a5a8",
+"name": "Part207^PMG Full 3D Cadasio Build-1",
+"idx": 1588,
+"hidden": false,
+"nsolids": 1,
+"min": [
+526.19,
+949.02,
+1204.89
+],
+"max": [
+614.07,
+955.14,
+1276.24
+],
+"best": "NAUO192",
+"box_err": 47.64,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part102^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO190",
+53.74
+],
+[
+"NAUO191",
+54.31
+]
+]
+},
+{
+"cad_id": "6949089b-6fe2-8d3e-21d1-a5cfde7f5f32",
+"name": "Part37^PMG Full 3D Cadasio Build-1",
+"idx": 103,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.71,
+890.12,
+1275.09
+],
+"max": [
+659.22,
+934.56,
+1291.41
+],
+"best": "NAUO25",
+"box_err": 0.15,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part37^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO24",
+7.5
+],
+[
+"NAUO26",
+15.9
+]
+]
+},
+{
+"cad_id": "49445e5d-c081-1929-2920-80eec6784b45",
+"name": "Part39^PMG Full 3D Cadasio Build-1",
+"idx": 109,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.68,
+890.12,
+1288.81
+],
+"max": [
+659.23,
+934.52,
+1293.95
+],
+"best": "NAUO27",
+"box_err": 0.05,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part39^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO26",
+7.54
+],
+[
+"NAUO28",
+11.91
+]
+]
+},
+{
+"cad_id": "927ccf75-8036-05ab-8fe9-d428499aad00",
+"name": "Part41^PMG Full 3D Cadasio Build-1",
+"idx": 115,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.81,
+890.12,
+1295.21
+],
+"max": [
+659.23,
+934.52,
+1304.29
+],
+"best": "NAUO29",
+"box_err": 0.04,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part41^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO28",
+7.4
+],
+[
+"NAUO27",
+12.32
+]
+]
+},
+{
+"cad_id": "bbc2cb10-f65f-2fe0-28eb-6f0f75d8358a",
+"name": "Part43^PMG Full 3D Cadasio Build-1",
+"idx": 121,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.63,
+890.12,
+1297.78
+],
+"max": [
+659.16,
+934.53,
+1318.55
+],
+"best": "NAUO31",
+"box_err": 0.2,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part43^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO30",
+7.4
+],
+[
+"NAUO29",
+20.12
+]
+]
+},
+{
+"cad_id": "e2e49f3e-1018-e23a-aa4c-a6d7391557a1",
+"name": "Part44^PMG Full 3D Cadasio Build-1",
+"idx": 140,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.05,
+890.13,
+1245.86
+],
+"max": [
+659.4,
+929.55,
+1303.95
+],
+"best": "NAUO40",
+"box_err": 0.24,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part44^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO41",
+6.04
+],
+[
+"NAUO42",
+7.41
+]
+]
+},
+{
+"cad_id": "2a45c0e6-4fbf-37b6-7864-2d60941899f2",
+"name": "Part45^PMG Full 3D Cadasio Build-1",
+"idx": 144,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.85,
+890.13,
+1245.87
+],
+"max": [
+663.58,
+927.31,
+1306.51
+],
+"best": "NAUO41",
+"box_err": 0.3,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part45^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO42",
+5.52
+],
+[
+"NAUO40",
+6.03
+]
+]
+},
+{
+"cad_id": "8f364b69-5944-c637-28b6-d54c80cb2b30",
+"name": "Part46^PMG Full 3D Cadasio Build-1",
+"idx": 147,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.45,
+890.13,
+1245.87
+],
+"max": [
+660.32,
+924.61,
+1306.54
+],
+"best": "NAUO42",
+"box_err": 0.09,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part46^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO43",
+4.14
+],
+[
+"NAUO41",
+5.39
+]
+]
+},
+{
+"cad_id": "274a0e3e-f80a-fc06-78f2-836e6ec6c65c",
+"name": "Part47^PMG Full 3D Cadasio Build-1",
+"idx": 150,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.99,
+890.13,
+1245.87
+],
+"max": [
+659.35,
+922.18,
+1306.58
+],
+"best": "NAUO43",
+"box_err": 0.13,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part47^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO42",
+4.15
+],
+[
+"NAUO41",
+9.54
+]
+]
+},
+{
+"cad_id": "5531170b-463c-05d1-b568-43c379c42dee",
+"name": "Part54^PMG Full 3D Cadasio Build-1",
+"idx": 460,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.46,
+890.12,
+1240.97
+],
+"max": [
+659.22,
+907.6,
+1291.41
+],
+"best": "NAUO145",
+"box_err": 0.27,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part54^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO144",
+7.58
+],
+[
+"NAUO151",
+47.57
+]
+]
+},
+{
+"cad_id": "58f5c6e7-f0d6-86dc-a233-c71cd8d7ab3f",
+"name": "Part55^PMG Full 3D Cadasio Build-1",
+"idx": 463,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.64,
+896.7,
+1243.42
+],
+"max": [
+623.84,
+1024.99,
+1273.88
+],
+"best": "NAUO154",
+"box_err": 45.84,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO147",
+49.72
+],
+[
+"NAUO155",
+51.28
+]
+]
+},
+{
+"cad_id": "bc4c5a01-3821-24d4-9e82-a47fce06cad7",
+"name": "Part56^PMG Full 3D Cadasio Build-1",
+"idx": 467,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.42,
+897.04,
+1240.86
+],
+"max": [
+620.89,
+1024.98,
+1276.37
+],
+"best": "NAUO147",
+"box_err": 44.71,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part56^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO154",
+46.22
+],
+[
+"NAUO146",
+51.2
+]
+]
+},
+{
+"cad_id": "4541a292-28ba-e8de-f8d2-0da7df2abaff",
+"name": "Part57^PMG Full 3D Cadasio Build-1",
+"idx": 470,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.64,
+897.44,
+1243.51
+],
+"max": [
+614.71,
+922.66,
+1273.72
+],
+"best": "NAUO153",
+"box_err": 47.29,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO149",
+50.68
+],
+[
+"NAUO152",
+51.02
+]
+]
+},
+{
+"cad_id": "ce499363-8e0f-9f29-9369-95657f0a39a5",
+"name": "Part58^PMG Full 3D Cadasio Build-1",
+"idx": 474,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.42,
+897.63,
+1240.98
+],
+"max": [
+614.86,
+922.65,
+1276.2
+],
+"best": "NAUO149",
+"box_err": 45.69,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part58^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO153",
+47.52
+],
+[
+"NAUO152",
+51.24
+]
+]
+},
+{
+"cad_id": "1ef20c15-52b7-3cae-739d-a225ecac5a17",
+"name": "Part59^PMG Full 3D Cadasio Build-1",
+"idx": 477,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.74,
+890.13,
+1275.67
+],
+"max": [
+656.75,
+908.13,
+1293.95
+],
+"best": "NAUO150",
+"box_err": 3.77,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part59^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO151",
+3.78
+],
+[
+"NAUO157",
+19.23
+]
+]
+},
+{
+"cad_id": "0c916101-3d31-b30e-6c7d-50f675492bfd",
+"name": "Part60^PMG Full 3D Cadasio Build-1",
+"idx": 480,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.77,
+890.12,
+1273.54
+],
+"max": [
+659.23,
+907.56,
+1293.95
+],
+"best": "NAUO151",
+"box_err": 1.07,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part60^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO150",
+7.48
+],
+[
+"NAUO157",
+20.33
+]
+]
+},
+{
+"cad_id": "686265d8-9bbf-bd86-ec4d-0e95df0a5aec",
+"name": "Part61^PMG Full 3D Cadasio Build-1",
+"idx": 483,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.74,
+897.29,
+1272.47
+],
+"max": [
+617.78,
+925.2,
+1277.71
+],
+"best": "NAUO153",
+"box_err": 43.19,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO158",
+46.88
+],
+[
+"NAUO159",
+47.29
+]
+]
+},
+{
+"cad_id": "b1061f27-b074-3237-ed0f-bc5e3409d466",
+"name": "Part62^PMG Full 3D Cadasio Build-1",
+"idx": 486,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.7,
+897.41,
+1273.46
+],
+"max": [
+616.25,
+925.2,
+1276.2
+],
+"best": "NAUO153",
+"box_err": 45.95,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO158",
+47.27
+],
+[
+"NAUO159",
+47.67
+]
+]
+},
+{
+"cad_id": "5d86a13d-6768-24b2-444b-da32a69a953a",
+"name": "Part63^PMG Full 3D Cadasio Build-1",
+"idx": 489,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.29,
+908.02,
+1128.11
+],
+"max": [
+654.43,
+925.95,
+1147.68
+],
+"best": "NAUO66",
+"box_err": 116.2,
+"rot_err": 0.0,
+"trans_err": 126.94,
+"glb_kind": "H3",
+"others": [
+[
+"NAUO72",
+117.12
+],
+[
+"NAUO150",
+148.38
+]
+]
+},
+{
+"cad_id": "468c53bd-4312-e8aa-6bbe-0558760650d7",
+"name": "Part64^PMG Full 3D Cadasio Build-1",
+"idx": 496,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.31,
+890.12,
+1291.59
+],
+"max": [
+659.21,
+908.14,
+1310.06
+],
+"best": "NAUO157",
+"box_err": 1.31,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part64^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO156",
+7.75
+],
+[
+"NAUO151",
+19.03
+]
+]
+},
+{
+"cad_id": "80119c6c-41d1-407b-b414-3b7c447d3331",
+"name": "Part65^PMG Full 3D Cadasio Build-1",
+"idx": 499,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.74,
+896.88,
+1271.27
+],
+"max": [
+621.62,
+1027.53,
+1277.53
+],
+"best": "NAUO154",
+"box_err": 45.2,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO155",
+52.2
+],
+[
+"NAUO161",
+54.89
+]
+]
+},
+{
+"cad_id": "02f07265-02a3-6680-0448-23ec26a1b5cb",
+"name": "Part66^PMG Full 3D Cadasio Build-1",
+"idx": 502,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.7,
+897.48,
+1273.41
+],
+"max": [
+623.63,
+1027.51,
+1276.87
+],
+"best": "NAUO154",
+"box_err": 47.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO155",
+54.26
+],
+[
+"NAUO160",
+54.99
+]
+]
+},
+{
+"cad_id": "d3e93718-df27-43dc-c41d-4f04a70a0b09",
+"name": "Part67^PMG Full 3D Cadasio Build-1",
+"idx": 505,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.26,
+897.14,
+1272.47
+],
+"max": [
+621.36,
+927.74,
+1309.92
+],
+"best": "NAUO153",
+"box_err": 17.34,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+17.68
+],
+[
+"NAUO165",
+42.48
+]
+]
+},
+{
+"cad_id": "568f222d-bff2-c44a-6298-79f10c3c8387",
+"name": "Part68^PMG Full 3D Cadasio Build-1",
+"idx": 510,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.31,
+897.2,
+1274.95
+],
+"max": [
+618.88,
+928.37,
+1308.19
+],
+"best": "NAUO153",
+"box_err": 16.43,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part62^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+16.76
+],
+[
+"NAUO159",
+38.66
+]
+]
+},
+{
+"cad_id": "8ee70ac8-cd6f-1d35-888f-78b7820a8aec",
+"name": "Part69^PMG Full 3D Cadasio Build-1",
+"idx": 513,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.26,
+896.33,
+1272.0
+],
+"max": [
+624.3,
+1030.07,
+1310.69
+],
+"best": "NAUO154",
+"box_err": 20.04,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO155",
+22.49
+],
+[
+"NAUO167",
+42.22
+]
+]
+},
+{
+"cad_id": "a3e40eda-fa95-5b05-271f-e152097034e1",
+"name": "Part70^PMG Full 3D Cadasio Build-1",
+"idx": 516,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.31,
+897.13,
+1274.89
+],
+"max": [
+620.97,
+1030.07,
+1307.71
+],
+"best": "NAUO154",
+"box_err": 20.45,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part66^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO155",
+22.89
+],
+[
+"NAUO161",
+36.75
+]
+]
+},
+{
+"cad_id": "6a98255d-e9ea-6634-3d19-3baf422c494a",
+"name": "Part71^PMG Full 3D Cadasio Build-1",
+"idx": 519,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.36,
+890.13,
+1297.77
+],
+"max": [
+656.75,
+906.74,
+1342.65
+],
+"best": "NAUO163",
+"box_err": 3.82,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part72^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO162",
+4.87
+],
+[
+"NAUO156",
+42.68
+]
+]
+},
+{
+"cad_id": "645431cb-b108-c475-7d01-6bb74ad852be",
+"name": "Part72^PMG Full 3D Cadasio Build-1",
+"idx": 522,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.13,
+890.12,
+1297.78
+],
+"max": [
+659.22,
+906.62,
+1339.96
+],
+"best": "NAUO163",
+"box_err": 1.86,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part72^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO162",
+8.68
+],
+[
+"NAUO156",
+38.64
+]
+]
+},
+{
+"cad_id": "25f27cbc-9686-99db-bf83-b7102316f748",
+"name": "Part73^PMG Full 3D Cadasio Build-1",
+"idx": 525,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.36,
+897.38,
+1272.47
+],
+"max": [
+621.28,
+930.28,
+1342.45
+],
+"best": "NAUO148",
+"box_err": 43.86,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part57^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+47.03
+],
+[
+"NAUO149",
+47.76
+]
+]
+},
+{
+"cad_id": "8253a913-c26d-5939-f78d-c0bb715fb795",
+"name": "Part74^PMG Full 3D Cadasio Build-1",
+"idx": 528,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.11,
+897.38,
+1274.54
+],
+"max": [
+620.4,
+931.04,
+1340.98
+],
+"best": "NAUO148",
+"box_err": 43.4,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part57^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO152",
+43.79
+],
+[
+"NAUO165",
+45.28
+]
+]
+},
+{
+"cad_id": "07cc224c-cf29-28d1-0f5e-2c0fc11b64fd",
+"name": "Part75^PMG Full 3D Cadasio Build-1",
+"idx": 531,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.36,
+896.88,
+1272.62
+],
+"max": [
+622.11,
+1032.61,
+1342.55
+],
+"best": "NAUO155",
+"box_err": 44.66,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO146",
+46.11
+],
+[
+"NAUO147",
+48.66
+]
+]
+},
+{
+"cad_id": "4483cd31-766d-7cee-00c8-12b5ed183b38",
+"name": "Part76^PMG Full 3D Cadasio Build-1",
+"idx": 534,
+"hidden": false,
+"nsolids": 1,
+"min": [
+520.11,
+896.69,
+1275.1
+],
+"max": [
+620.82,
+1032.61,
+1340.04
+],
+"best": "NAUO155",
+"box_err": 39.65,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part65^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO167",
+43.8
+],
+[
+"NAUO146",
+45.91
+]
+]
+},
+{
+"cad_id": "f118f1c9-78a7-6fcc-6765-be8a3c28d11f",
+"name": "Part77^PMG Full 3D Cadasio Build-1",
+"idx": 536,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+927.96,
+1245.86
+],
+"max": [
+659.23,
+935.31,
+1276.33
+],
+"best": "NAUO169",
+"box_err": 44.59,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part78^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO168",
+44.61
+],
+[
+"NAUO170",
+48.34
+]
+]
+},
+{
+"cad_id": "593d788b-bdbf-e94f-5751-ee4499eff9df",
+"name": "Part78^PMG Full 3D Cadasio Build-1",
+"idx": 539,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+925.78,
+1245.87
+],
+"max": [
+659.22,
+937.8,
+1276.21
+],
+"best": "NAUO169",
+"box_err": 44.77,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part78^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO168",
+44.79
+],
+[
+"NAUO170",
+48.52
+]
+]
+},
+{
+"cad_id": "7d281121-6e7b-af07-8597-38d65d133f3f",
+"name": "Part79^PMG Full 3D Cadasio Build-1",
+"idx": 542,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+922.73,
+1245.87
+],
+"max": [
+659.36,
+937.79,
+1273.71
+],
+"best": "NAUO169",
+"box_err": 48.52,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part78^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO168",
+48.54
+],
+[
+"NAUO170",
+52.27
+]
+]
+},
+{
+"cad_id": "a0e37227-82a2-055a-a3e8-7d94221959c1",
+"name": "Part80^PMG Full 3D Cadasio Build-1",
+"idx": 545,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+920.83,
+1245.87
+],
+"max": [
+659.28,
+937.76,
+1271.24
+],
+"best": "NAUO169",
+"box_err": 52.23,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part78^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO168",
+52.25
+],
+[
+"NAUO7",
+55.97
+]
+]
+},
+{
+"cad_id": "1b4c4c7d-3517-7450-8d60-a4149cb3fab5",
+"name": "Part81^PMG Full 3D Cadasio Build-1",
+"idx": 549,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+928.05,
+1245.86
+],
+"max": [
+659.29,
+1037.52,
+1276.37
+],
+"best": "NAUO173",
+"box_err": 44.7,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part82^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO172",
+45.39
+],
+[
+"NAUO174",
+48.46
+]
+]
+},
+{
+"cad_id": "58cc40b7-e008-5370-a0e0-ceb958c01de1",
+"name": "Part82^PMG Full 3D Cadasio Build-1",
+"idx": 552,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+925.68,
+1245.87
+],
+"max": [
+659.28,
+1040.1,
+1276.36
+],
+"best": "NAUO173",
+"box_err": 44.72,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part82^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO172",
+45.41
+],
+[
+"NAUO174",
+48.48
+]
+]
+},
+{
+"cad_id": "d93adec4-9e26-6573-0039-824dd55436a6",
+"name": "Part83^PMG Full 3D Cadasio Build-1",
+"idx": 555,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+923.25,
+1245.87
+],
+"max": [
+659.29,
+1040.1,
+1273.87
+],
+"best": "NAUO173",
+"box_err": 48.45,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part82^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO172",
+49.15
+],
+[
+"NAUO174",
+52.22
+]
+]
+},
+{
+"cad_id": "1da2b123-a3e0-9e0b-8c54-677a8bd1b199",
+"name": "Part84^PMG Full 3D Cadasio Build-1",
+"idx": 558,
+"hidden": false,
+"nsolids": 1,
+"min": [
+606.51,
+920.65,
+1244.24
+],
+"max": [
+659.54,
+1040.08,
+1271.41
+],
+"best": "NAUO173",
+"box_err": 51.33,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part82^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO172",
+52.02
+],
+[
+"NAUO174",
+55.09
+]
+]
+},
+{
+"cad_id": "c7257eda-b40b-c5db-b5cd-bf009344cac0",
+"name": "Part85^PMG Full 3D Cadasio Build-1",
+"idx": 561,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.15,
+920.27,
+1061.27
+],
+"max": [
+619.57,
+960.39,
+1308.55
+],
+"best": "NAUO176",
+"box_err": 0.95,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part85^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO177",
+11.99
+],
+[
+"NAUO179",
+14.79
+]
+]
+},
+{
+"cad_id": "102d9991-c36b-372a-8f46-8189ddc4b3b2",
+"name": "Part86^PMG Full 3D Cadasio Build-1",
+"idx": 566,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.62,
+911.03,
+1056.7
+],
+"max": [
+624.89,
+958.47,
+1311.03
+],
+"best": "NAUO177",
+"box_err": 0.91,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part86^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO179",
+7.76
+],
+[
+"NAUO296",
+10.77
+]
+]
+},
+{
+"cad_id": "77d8a39e-4e65-e913-6e6c-8efa8563918f",
+"name": "Part87^PMG Full 3D Cadasio Build-1",
+"idx": 569,
+"hidden": false,
+"nsolids": 1,
+"min": [
+532.99,
+917.19,
+1054.3
+],
+"max": [
+628.02,
+956.66,
+1306.15
+],
+"best": "NAUO178",
+"box_err": 0.63,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part87^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO179",
+9.1
+],
+[
+"NAUO177",
+11.21
+]
+]
+},
+{
+"cad_id": "6ff0079a-1285-3222-cd3a-8b3c04b184a4",
+"name": "Part88^PMG Full 3D Cadasio Build-1",
+"idx": 572,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.32,
+910.26,
+1056.06
+],
+"max": [
+621.84,
+954.55,
+1306.08
+],
+"best": "NAUO179",
+"box_err": 0.55,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part88^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO177",
+6.95
+],
+[
+"NAUO296",
+7.03
+]
+]
+},
+{
+"cad_id": "16367c90-f25f-a411-5b4d-38399366364c",
+"name": "Part90^PMG Full 3D Cadasio Build-1",
+"idx": 578,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.4,
+890.13,
+1195.27
+],
+"max": [
+656.84,
+960.23,
+1314.88
+],
+"best": "NAUO180",
+"box_err": 0.58,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part90^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO181",
+4.6
+],
+[
+"NAUO182",
+8.82
+]
+]
+},
+{
+"cad_id": "d85d7100-ad35-2335-4b54-14061530e5af",
+"name": "Part91^PMG Full 3D Cadasio Build-1",
+"idx": 581,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.7,
+890.13,
+1194.34
+],
+"max": [
+654.25,
+958.37,
+1311.61
+],
+"best": "NAUO181",
+"box_err": 0.26,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part91^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO180",
+4.14
+],
+[
+"NAUO182",
+8.29
+]
+]
+},
+{
+"cad_id": "65e21b02-556b-5011-b8f5-e5ad5773ba99",
+"name": "Part92^PMG Full 3D Cadasio Build-1",
+"idx": 584,
+"hidden": false,
+"nsolids": 1,
+"min": [
+532.97,
+890.13,
+1191.0
+],
+"max": [
+659.26,
+956.43,
+1312.81
+],
+"best": "NAUO182",
+"box_err": 0.32,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part92^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO183",
+5.85
+],
+[
+"NAUO181",
+8.43
+]
+]
+},
+{
+"cad_id": "820542bc-8f55-8a82-4f05-7a2e23aacddf",
+"name": "Part93^PMG Full 3D Cadasio Build-1",
+"idx": 587,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.28,
+890.13,
+1194.89
+],
+"max": [
+659.5,
+954.63,
+1316.49
+],
+"best": "NAUO183",
+"box_err": 0.39,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part93^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO184",
+3.85
+],
+[
+"NAUO182",
+5.79
+]
+]
+},
+{
+"cad_id": "cd3c5a39-d256-5129-388a-403fa8d27a54",
+"name": "Part94^PMG Full 3D Cadasio Build-1",
+"idx": 590,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.67,
+890.13,
+1194.55
+],
+"max": [
+659.24,
+952.72,
+1319.08
+],
+"best": "NAUO184",
+"box_err": 0.52,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part94^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO183",
+4.18
+],
+[
+"NAUO182",
+8.48
+]
+]
+},
+{
+"cad_id": "15ba0704-dc1b-5ea0-5ab7-67c653f8f8fd",
+"name": "Part95^PMG Full 3D Cadasio Build-1",
+"idx": 593,
+"hidden": false,
+"nsolids": 1,
+"min": [
+536.46,
+958.87,
+1198.29
+],
+"max": [
+616.87,
+1028.76,
+1309.09
+],
+"best": "NAUO185",
+"box_err": 0.43,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part95^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+8.83
+],
+[
+"NAUO188",
+10.41
+]
+]
+},
+{
+"cad_id": "38a27eba-9130-13ae-118e-599bd42e2f0e",
+"name": "Part96^PMG Full 3D Cadasio Build-1",
+"idx": 596,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.82,
+956.95,
+1192.49
+],
+"max": [
+617.72,
+1031.16,
+1311.26
+],
+"best": "NAUO186",
+"box_err": 0.96,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part96^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO188",
+9.42
+],
+[
+"NAUO185",
+10.22
+]
+]
+},
+{
+"cad_id": "261ee2dc-fa3e-119e-649f-c1ea8cd065bd",
+"name": "Part97^PMG Full 3D Cadasio Build-1",
+"idx": 599,
+"hidden": false,
+"nsolids": 1,
+"min": [
+533.12,
+955.04,
+1194.09
+],
+"max": [
+612.84,
+1033.92,
+1306.85
+],
+"best": "NAUO187",
+"box_err": 1.56,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part97^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+8.52
+],
+[
+"NAUO188",
+11.48
+]
+]
+},
+{
+"cad_id": "35d11188-d3f5-e896-d917-87adf9954ef4",
+"name": "Part98^PMG Full 3D Cadasio Build-1",
+"idx": 602,
+"hidden": false,
+"nsolids": 1,
+"min": [
+531.38,
+953.24,
+1192.44
+],
+"max": [
+618.5,
+1026.39,
+1306.26
+],
+"best": "NAUO188",
+"box_err": 0.95,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part98^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO186",
+8.52
+],
+[
+"NAUO189",
+10.5
+]
+]
+},
+{
+"cad_id": "872789b8-8b59-c9e1-a5e0-12e179275d28",
+"name": "Part99^PMG Full 3D Cadasio Build-1",
+"idx": 605,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.12,
+951.21,
+1191.04
+],
+"max": [
+624.72,
+1024.06,
+1306.26
+],
+"best": "NAUO189",
+"box_err": 0.55,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Part99^PMG Full 3D Cadasio Build",
+"others": [
+[
+"NAUO188",
+11.41
+],
+[
+"NAUO186",
+19.19
+]
+]
+},
+{
+"cad_id": "db258685-073e-546a-39b1-04f53721a6e1",
+"name": "PMG_PianoKey_Aug25-1",
+"idx": 211,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.42,
+913.15,
+1324.94
+],
+"max": [
+593.81,
+916.56,
+1355.9
+],
+"best": "NAUO69",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H9",
+"others": [
+[
+"NAUO70",
+33.27
+],
+[
+"NAUO65",
+64.64
+]
+]
+},
+{
+"cad_id": "8b195320-f671-3bcf-a491-2fcf6e679252",
+"name": "PMG_PianoKey_Aug25-2",
+"idx": 216,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.42,
+913.15,
+1291.68
+],
+"max": [
+593.81,
+916.56,
+1322.64
+],
+"best": "NAUO70",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H9",
+"others": [
+[
+"NAUO69",
+33.27
+],
+[
+"NAUO71",
+33.35
+]
+]
+},
+{
+"cad_id": "6c1a5aac-bdc8-a115-3a48-74b4afda4cd1",
+"name": "PMG_PianoKey_Aug25-3",
+"idx": 219,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.42,
+913.15,
+1258.34
+],
+"max": [
+593.81,
+916.56,
+1289.3
+],
+"best": "NAUO71",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H9",
+"others": [
+[
+"NAUO72",
+33.34
+],
+[
+"NAUO70",
+33.35
+]
+]
+},
+{
+"cad_id": "29f4c4fa-bef4-9f76-1044-eacb87373e10",
+"name": "PMG_PianoKey_Aug25-4",
+"idx": 222,
+"hidden": false,
+"nsolids": 3,
+"min": [
+463.42,
+913.15,
+1225.01
+],
+"max": [
+593.81,
+916.56,
+1255.96
+],
+"best": "NAUO72",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "H9",
+"others": [
+[
+"NAUO71",
+33.34
+],
+[
+"NAUO66",
+64.67
+]
+]
+},
+{
+"cad_id": "f137f48b-9142-b561-ef83-0cc9f8e9ece5",
+"name": "S1 to DIN^PMG Full 3D Cadasio Build-5",
+"idx": 1054,
+"hidden": false,
+"nsolids": 1,
+"min": [
+645.3,
+890.13,
+1310.24
+],
+"max": [
+659.37,
+926.79,
+1364.31
+],
+"best": "NAUO279",
+"box_err": 48.91,
+"rot_err": 1.0,
+"trans_err": 1336.81,
+"glb_kind": "USB Right Angle",
+"others": [
+[
+"NAUO3",
+49.09
+],
+[
+"NAUO2",
+49.1
+]
+]
+},
+{
+"cad_id": "4e70aa1c-64cf-5fc5-b46e-c49068519789",
+"name": "S12 to CS^PMG Full 3D Cadasio Build-6",
+"idx": 1057,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.3,
+890.13,
+1315.06
+],
+"max": [
+659.36,
+924.26,
+1364.18
+],
+"best": "NAUO279",
+"box_err": 42.97,
+"rot_err": 1.0,
+"trans_err": 1336.81,
+"glb_kind": "USB Right Angle",
+"others": [
+[
+"NAUO3",
+48.9
+],
+[
+"NAUO2",
+48.91
+]
+]
+},
+{
+"cad_id": "debdf465-36a2-4b9f-d96f-04ab019d3ac1",
+"name": "S13 to CLK^PMG Full 3D Cadasio Build-7",
+"idx": 1060,
+"hidden": false,
+"nsolids": 1,
+"min": [
+646.82,
+890.13,
+1317.3
+],
+"max": [
+659.31,
+921.47,
+1364.18
+],
+"best": "NAUO279",
+"box_err": 40.99,
+"rot_err": 1.0,
+"trans_err": 1336.81,
+"glb_kind": "USB Right Angle",
+"others": [
+[
+"NAUO3",
+47.23
+],
+[
+"NAUO2",
+47.24
+]
+]
+},
+{
+"cad_id": "3a398e78-b7bf-d2de-da5b-6ed8da749d9e",
+"name": "USB Cable end-1",
+"idx": 973,
+"hidden": false,
+"nsolids": 5,
+"min": [
+588.72,
+872.55,
+1374.07
+],
+"max": [
+604.62,
+881.1,
+1423.77
+],
+"best": "NAUO278",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "USB Cable end",
+"others": [
+[
+"NAUO277",
+93.96
+],
+[
+"NAUO279",
+100.21
+]
+]
+},
+{
+"cad_id": "31d1d337-f7c4-b5c5-e42a-8aad882891ba",
+"name": "USB Cable end-2",
+"idx": 976,
+"hidden": false,
+"nsolids": 5,
+"min": [
+622.81,
+965.0,
+1216.89
+],
+"max": [
+631.36,
+1014.71,
+1232.79
+],
+"best": "NAUO7",
+"box_err": 71.89,
+"rot_err": 1.0,
+"trans_err": 121.54,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO24",
+82.79
+],
+[
+"NAUO6",
+85.76
+]
+]
+},
+{
+"cad_id": "4b366c9c-710c-57b8-89ac-6b38545a5add",
+"name": "USB Cable end-3",
+"idx": 979,
+"hidden": false,
+"nsolids": 5,
+"min": [
+642.2,
+880.3,
+1238.04
+],
+"max": [
+691.9,
+888.85,
+1253.94
+],
+"best": "NAUO283",
+"box_err": 69.69,
+"rot_err": 0.0,
+"trans_err": 69.69,
+"glb_kind": "USB Cable end",
+"others": [
+[
+"NAUO24",
+72.3
+],
+[
+"NAUO25",
+73.18
+]
+]
+},
+{
+"cad_id": "85e05b06-6206-e0e4-7640-93b256be024c",
+"name": "USB Right Angle-1",
+"idx": 974,
+"hidden": false,
+"nsolids": 3,
+"min": [
+655.04,
+891.12,
+1321.78
+],
+"max": [
+679.04,
+898.62,
+1341.64
+],
+"best": "NAUO279",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "USB Right Angle",
+"others": [
+[
+"NAUO52",
+35.56
+],
+[
+"NAUO53",
+38.1
+]
+]
+},
+{
+"cad_id": "b673d207-4dfe-d3a3-400f-cd9fe9e647c7",
+"name": "USB Right Angle-2",
+"idx": 977,
+"hidden": false,
+"nsolids": 3,
+"min": [
+607.76,
+1056.8,
+1272.14
+],
+"max": [
+615.26,
+1076.66,
+1296.14
+],
+"best": "NAUO107",
+"box_err": 43.64,
+"rot_err": 2.0,
+"trans_err": 26.64,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+45.77
+],
+[
+"NAUO110",
+48.31
+]
+]
+},
+{
+"cad_id": "a9f65d67-537d-cbaa-7801-64f8cd06d0f2",
+"name": "USB Right Angle-3",
+"idx": 978,
+"hidden": false,
+"nsolids": 3,
+"min": [
+607.43,
+953.01,
+1272.04
+],
+"max": [
+614.93,
+972.87,
+1296.04
+],
+"best": "NAUO7",
+"box_err": 40.49,
+"rot_err": 2.0,
+"trans_err": 37.94,
+"glb_kind": "Socket_Blok",
+"others": [
+[
+"NAUO5",
+40.52
+],
+[
+"NAUO6",
+40.52
+]
+]
+},
+{
+"cad_id": "a4828648-064e-630a-9a37-bc8ecd6ba1c8",
+"name": "V11 to VCC^PMG Full 3D Cadasio Build-3",
+"idx": 1048,
+"hidden": false,
+"nsolids": 1,
+"min": [
+642.97,
+890.13,
+1310.22
+],
+"max": [
+656.8,
+930.5,
+1364.31
+],
+"best": "NAUO279",
+"box_err": 51.38,
+"rot_err": 1.0,
+"trans_err": 1336.81,
+"glb_kind": "USB Right Angle",
+"others": [
+[
+"NAUO3",
+52.78
+],
+[
+"NAUO2",
+52.79
+]
+]
+},
+{
+"cad_id": "ca4be0b0-ea7d-fea8-641d-2da9470a6ad2",
+"name": "Wire Cap V2-1",
+"idx": 691,
+"hidden": false,
+"nsolids": 2,
+"min": [
+712.35,
+893.58,
+1267.93
+],
+"max": [
+714.12,
+895.35,
+1279.93
+],
+"best": "NAUO203",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO218",
+1.75
+],
+[
+"NAUO204",
+1.76
+]
+]
+},
+{
+"cad_id": "75f31ab7-564d-9ab2-6fd1-b68a733d66cb",
+"name": "Wire Cap V2-10",
+"idx": 1018,
+"hidden": false,
+"nsolids": 2,
+"min": [
+722.83,
+893.48,
+1267.93
+],
+"max": [
+724.6,
+895.24,
+1279.93
+],
+"best": "NAUO215",
+"box_err": 3.49,
+"rot_err": 0.0,
+"trans_err": 3.48,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO216",
+5.23
+],
+[
+"NAUO217",
+6.99
+]
+]
+},
+{
+"cad_id": "b630b022-9fa2-270c-4ed1-571fe4c72bab",
+"name": "Wire Cap V2-11",
+"idx": 1019,
+"hidden": false,
+"nsolids": 2,
+"min": [
+724.57,
+893.46,
+1267.93
+],
+"max": [
+726.34,
+895.22,
+1279.93
+],
+"best": "NAUO215",
+"box_err": 5.23,
+"rot_err": 0.0,
+"trans_err": 5.22,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO216",
+6.97
+],
+[
+"NAUO217",
+8.73
+]
+]
+},
+{
+"cad_id": "31088c78-a8d3-20bf-5767-6a3efef8b5c1",
+"name": "Wire Cap V2-12",
+"idx": 1020,
+"hidden": false,
+"nsolids": 2,
+"min": [
+726.31,
+893.44,
+1267.93
+],
+"max": [
+728.08,
+895.21,
+1279.93
+],
+"best": "NAUO215",
+"box_err": 6.96,
+"rot_err": 0.0,
+"trans_err": 6.96,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO216",
+8.72
+],
+[
+"NAUO217",
+10.46
+]
+]
+},
+{
+"cad_id": "9914467f-a028-138a-d1ef-d6c8555ea297",
+"name": "Wire Cap V2-2",
+"idx": 692,
+"hidden": false,
+"nsolids": 2,
+"min": [
+710.6,
+893.6,
+1267.93
+],
+"max": [
+712.37,
+895.36,
+1279.93
+],
+"best": "NAUO204",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO203",
+1.76
+],
+[
+"NAUO205",
+1.76
+]
+]
+},
+{
+"cad_id": "57c96346-9416-529c-01be-b1df9ef89671",
+"name": "Wire Cap V2-3",
+"idx": 693,
+"hidden": false,
+"nsolids": 2,
+"min": [
+708.85,
+893.61,
+1267.93
+],
+"max": [
+710.62,
+895.38,
+1279.93
+],
+"best": "NAUO205",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO206",
+1.75
+],
+[
+"NAUO204",
+1.76
+]
+]
+},
+{
+"cad_id": "8695abd9-840b-3476-1ac4-f5f6f8b19c70",
+"name": "Wire Cap V2-4",
+"idx": 694,
+"hidden": false,
+"nsolids": 2,
+"min": [
+707.1,
+893.63,
+1267.93
+],
+"max": [
+708.87,
+895.4,
+1279.93
+],
+"best": "NAUO206",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO205",
+1.75
+],
+[
+"NAUO204",
+3.51
+]
+]
+},
+{
+"cad_id": "ac95a941-e3d5-eefa-6d29-7c9871d571b0",
+"name": "Wire Cap V2-5",
+"idx": 724,
+"hidden": false,
+"nsolids": 2,
+"min": [
+719.35,
+893.51,
+1267.93
+],
+"max": [
+721.12,
+895.28,
+1279.93
+],
+"best": "NAUO215",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO216",
+1.76
+],
+[
+"NAUO217",
+3.5
+]
+]
+},
+{
+"cad_id": "6f8126ab-1b7c-79a4-3fb9-53d9497d514b",
+"name": "Wire Cap V2-6",
+"idx": 725,
+"hidden": false,
+"nsolids": 2,
+"min": [
+717.6,
+893.53,
+1267.93
+],
+"max": [
+719.37,
+895.29,
+1279.93
+],
+"best": "NAUO216",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO215",
+1.76
+],
+[
+"NAUO217",
+1.76
+]
+]
+},
+{
+"cad_id": "150bde14-28b5-a5a2-aa01-43bc7be85e33",
+"name": "Wire Cap V2-7",
+"idx": 726,
+"hidden": false,
+"nsolids": 2,
+"min": [
+715.85,
+893.54,
+1267.93
+],
+"max": [
+717.62,
+895.31,
+1279.93
+],
+"best": "NAUO217",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO218",
+1.75
+],
+[
+"NAUO216",
+1.76
+]
+]
+},
+{
+"cad_id": "8794dbe3-bfd7-30e4-a874-ce2f57920afa",
+"name": "Wire Cap V2-8",
+"idx": 727,
+"hidden": false,
+"nsolids": 2,
+"min": [
+714.1,
+893.56,
+1267.93
+],
+"max": [
+715.87,
+895.33,
+1279.93
+],
+"best": "NAUO218",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO203",
+1.75
+],
+[
+"NAUO217",
+1.75
+]
+]
+},
+{
+"cad_id": "572eedaf-4fc1-732e-bb71-a6dbbdbd9fc2",
+"name": "Wire Cap V2-9",
+"idx": 1017,
+"hidden": false,
+"nsolids": 2,
+"min": [
+721.09,
+893.49,
+1267.93
+],
+"max": [
+722.86,
+895.26,
+1279.93
+],
+"best": "NAUO215",
+"box_err": 1.74,
+"rot_err": 0.0,
+"trans_err": 1.74,
+"glb_kind": "Wire Cap V2",
+"others": [
+[
+"NAUO216",
+3.5
+],
+[
+"NAUO217",
+5.24
+]
+]
+},
+{
+"cad_id": "43e8629c-a519-1467-5d49-869775a72dee",
+"name": "Wire Cap-1",
+"idx": 64,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.75,
+882.12,
+1289.91
+],
+"max": [
+654.5,
+890.12,
+1291.66
+],
+"best": "NAUO8",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO10",
+2.52
+],
+[
+"NAUO9",
+4.97
+]
+]
+},
+{
+"cad_id": "99a19be1-d7cc-6c20-dd77-d300f6f53fc9",
+"name": "Wire Cap-10",
+"idx": 82,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.56,
+1272.4
+],
+"max": [
+642.31,
+942.56,
+1274.15
+],
+"best": "NAUO16",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO17",
+2.51
+],
+[
+"NAUO19",
+13.88
+]
+]
+},
+{
+"cad_id": "417382ce-0383-9a21-57cb-148633742045",
+"name": "Wire Cap-104",
+"idx": 452,
+"hidden": false,
+"nsolids": 1,
+"min": [
+535.68,
+958.47,
+1075.53
+],
+"max": [
+538.14,
+960.94,
+1083.53
+],
+"best": "NAUO139",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO140",
+1.94
+],
+[
+"NAUO141",
+3.91
+]
+]
+},
+{
+"cad_id": "7e25f794-d612-fa06-e30a-8054026c49ca",
+"name": "Wire Cap-105",
+"idx": 453,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.12,
+956.54,
+1075.53
+],
+"max": [
+536.59,
+959.01,
+1083.53
+],
+"best": "NAUO140",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO139",
+1.94
+],
+[
+"NAUO141",
+1.98
+]
+]
+},
+{
+"cad_id": "98ae929f-e728-b10b-a330-72487fc52995",
+"name": "Wire Cap-106",
+"idx": 454,
+"hidden": false,
+"nsolids": 1,
+"min": [
+532.48,
+954.58,
+1075.56
+],
+"max": [
+534.94,
+957.04,
+1083.56
+],
+"best": "NAUO141",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO140",
+1.98
+],
+[
+"NAUO142",
+2.01
+]
+]
+},
+{
+"cad_id": "3620737a-1e37-c39f-ae4b-1b396cefdf75",
+"name": "Wire Cap-107",
+"idx": 455,
+"hidden": false,
+"nsolids": 1,
+"min": [
+530.82,
+952.58,
+1075.6
+],
+"max": [
+533.29,
+955.04,
+1083.6
+],
+"best": "NAUO142",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO143",
+1.88
+],
+[
+"NAUO141",
+2.01
+]
+]
+},
+{
+"cad_id": "d48d969f-1318-b906-a278-502fb78f76b6",
+"name": "Wire Cap-108",
+"idx": 456,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.2,
+950.71,
+1075.64
+],
+"max": [
+531.66,
+953.18,
+1083.64
+],
+"best": "NAUO143",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO142",
+1.88
+],
+[
+"NAUO141",
+3.88
+]
+]
+},
+{
+"cad_id": "031dce20-e694-2757-db72-404adf710830",
+"name": "Wire Cap-109",
+"idx": 687,
+"hidden": false,
+"nsolids": 1,
+"min": [
+712.35,
+893.58,
+1329.37
+],
+"max": [
+714.12,
+895.35,
+1337.37
+],
+"best": "NAUO199",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO214",
+1.75
+],
+[
+"NAUO200",
+1.76
+]
+]
+},
+{
+"cad_id": "402c47f8-44c4-c946-fa04-f8f63d3e5d84",
+"name": "Wire Cap-11",
+"idx": 84,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.56,
+1274.91
+],
+"max": [
+642.31,
+942.56,
+1276.66
+],
+"best": "NAUO17",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO16",
+2.51
+],
+[
+"NAUO19",
+11.37
+]
+]
+},
+{
+"cad_id": "72e0dd09-0fa6-5bf5-2363-cd3fe75ff813",
+"name": "Wire Cap-110",
+"idx": 688,
+"hidden": false,
+"nsolids": 1,
+"min": [
+710.6,
+893.6,
+1329.37
+],
+"max": [
+712.37,
+895.36,
+1337.37
+],
+"best": "NAUO200",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO199",
+1.76
+],
+[
+"NAUO201",
+1.76
+]
+]
+},
+{
+"cad_id": "a12129ec-82cd-fa0d-049d-fd27196d5675",
+"name": "Wire Cap-111",
+"idx": 689,
+"hidden": false,
+"nsolids": 1,
+"min": [
+708.85,
+893.61,
+1329.37
+],
+"max": [
+710.62,
+895.38,
+1337.37
+],
+"best": "NAUO201",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO202",
+1.75
+],
+[
+"NAUO200",
+1.76
+]
+]
+},
+{
+"cad_id": "72605969-1488-1da9-8460-ed2c923ea5f9",
+"name": "Wire Cap-112",
+"idx": 690,
+"hidden": false,
+"nsolids": 1,
+"min": [
+707.1,
+893.63,
+1329.37
+],
+"max": [
+708.87,
+895.4,
+1337.37
+],
+"best": "NAUO202",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO201",
+1.75
+],
+[
+"NAUO200",
+3.51
+]
+]
+},
+{
+"cad_id": "df8c1e93-a832-57aa-08ae-71712de3997e",
+"name": "Wire Cap-113",
+"idx": 720,
+"hidden": false,
+"nsolids": 1,
+"min": [
+719.35,
+893.51,
+1329.37
+],
+"max": [
+721.12,
+895.28,
+1337.37
+],
+"best": "NAUO211",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO212",
+1.76
+],
+[
+"NAUO213",
+3.5
+]
+]
+},
+{
+"cad_id": "921f47c1-58b5-845f-ce8c-fce3384e6af9",
+"name": "Wire Cap-114",
+"idx": 721,
+"hidden": false,
+"nsolids": 1,
+"min": [
+717.6,
+893.53,
+1329.37
+],
+"max": [
+719.37,
+895.29,
+1337.37
+],
+"best": "NAUO212",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO211",
+1.76
+],
+[
+"NAUO213",
+1.76
+]
+]
+},
+{
+"cad_id": "f225f2b3-d495-d915-dd06-bb7624c9e2ed",
+"name": "Wire Cap-115",
+"idx": 722,
+"hidden": false,
+"nsolids": 1,
+"min": [
+715.85,
+893.54,
+1329.37
+],
+"max": [
+717.62,
+895.31,
+1337.37
+],
+"best": "NAUO213",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO214",
+1.75
+],
+[
+"NAUO212",
+1.76
+]
+]
+},
+{
+"cad_id": "f3c13684-137e-0601-a966-33a21f593062",
+"name": "Wire Cap-116",
+"idx": 723,
+"hidden": false,
+"nsolids": 1,
+"min": [
+714.1,
+893.56,
+1329.37
+],
+"max": [
+715.87,
+895.33,
+1337.37
+],
+"best": "NAUO214",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO199",
+1.75
+],
+[
+"NAUO213",
+1.75
+]
+]
+},
+{
+"cad_id": "d5e3a034-0002-3f03-545f-46e5a14fb64f",
+"name": "Wire Cap-117",
+"idx": 784,
+"hidden": false,
+"nsolids": 1,
+"min": [
+719.34,
+900.65,
+1329.41
+],
+"max": [
+721.13,
+902.42,
+1337.42
+],
+"best": "NAUO223",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO230",
+1.75
+],
+[
+"NAUO225",
+1.75
+]
+]
+},
+{
+"cad_id": "8e6bb723-d506-400f-d88c-d94bba684bc3",
+"name": "Wire Cap-118",
+"idx": 786,
+"hidden": false,
+"nsolids": 1,
+"min": [
+720.91,
+900.65,
+1271.89
+],
+"max": [
+722.7,
+902.42,
+1279.89
+],
+"best": "NAUO224",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO236",
+1.76
+],
+[
+"NAUO241",
+1.76
+]
+]
+},
+{
+"cad_id": "9698cba2-2d50-396b-3412-7362535b4353",
+"name": "Wire Cap-119",
+"idx": 789,
+"hidden": false,
+"nsolids": 1,
+"min": [
+717.59,
+900.67,
+1329.41
+],
+"max": [
+719.38,
+902.44,
+1337.42
+],
+"best": "NAUO225",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO226",
+1.75
+],
+[
+"NAUO223",
+1.75
+]
+]
+},
+{
+"cad_id": "1f082f16-33ae-11e9-1284-bbc23660a208",
+"name": "Wire Cap-12",
+"idx": 87,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.52,
+1288.78
+],
+"max": [
+642.31,
+942.52,
+1290.53
+],
+"best": "NAUO18",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO19",
+2.5
+],
+[
+"NAUO20",
+11.48
+]
+]
+},
+{
+"cad_id": "a402edf2-42fc-84bc-2f97-f84161afe92b",
+"name": "Wire Cap-120",
+"idx": 790,
+"hidden": false,
+"nsolids": 1,
+"min": [
+715.84,
+900.68,
+1329.42
+],
+"max": [
+717.63,
+902.45,
+1337.43
+],
+"best": "NAUO226",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO225",
+1.75
+],
+[
+"NAUO227",
+1.76
+]
+]
+},
+{
+"cad_id": "ff9a6913-0c18-613e-1c5b-4d8b06ace97b",
+"name": "Wire Cap-121",
+"idx": 791,
+"hidden": false,
+"nsolids": 1,
+"min": [
+714.09,
+900.7,
+1329.43
+],
+"max": [
+715.88,
+902.47,
+1337.43
+],
+"best": "NAUO227",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO226",
+1.76
+],
+[
+"NAUO228",
+1.76
+]
+]
+},
+{
+"cad_id": "f6ac6775-d2c9-cf98-f658-707bfa6e18d5",
+"name": "Wire Cap-122",
+"idx": 792,
+"hidden": false,
+"nsolids": 1,
+"min": [
+712.34,
+900.72,
+1329.43
+],
+"max": [
+714.13,
+902.49,
+1337.44
+],
+"best": "NAUO228",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO227",
+1.76
+],
+[
+"NAUO229",
+1.76
+]
+]
+},
+{
+"cad_id": "bc5030ce-26dd-94fe-6fe9-cfaa79e9226c",
+"name": "Wire Cap-123",
+"idx": 793,
+"hidden": false,
+"nsolids": 1,
+"min": [
+710.59,
+900.74,
+1329.44
+],
+"max": [
+712.38,
+902.51,
+1337.44
+],
+"best": "NAUO229",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO228",
+1.76
+],
+[
+"NAUO227",
+3.5
+]
+]
+},
+{
+"cad_id": "dd73f478-740a-bbcb-8087-26bdc734aaca",
+"name": "Wire Cap-124",
+"idx": 794,
+"hidden": false,
+"nsolids": 1,
+"min": [
+721.09,
+900.63,
+1329.4
+],
+"max": [
+722.88,
+902.4,
+1337.41
+],
+"best": "NAUO230",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO223",
+1.75
+],
+[
+"NAUO231",
+1.76
+]
+]
+},
+{
+"cad_id": "5289a453-981b-aaad-c8b1-ddba5154971a",
+"name": "Wire Cap-125",
+"idx": 795,
+"hidden": false,
+"nsolids": 1,
+"min": [
+722.84,
+900.61,
+1329.4
+],
+"max": [
+724.63,
+902.38,
+1337.4
+],
+"best": "NAUO231",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO230",
+1.76
+],
+[
+"NAUO232",
+1.76
+]
+]
+},
+{
+"cad_id": "5deff085-13fa-9aa2-9527-88e107984b61",
+"name": "Wire Cap-126",
+"idx": 796,
+"hidden": false,
+"nsolids": 1,
+"min": [
+724.59,
+900.6,
+1329.39
+],
+"max": [
+726.38,
+902.37,
+1337.4
+],
+"best": "NAUO232",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO231",
+1.76
+],
+[
+"NAUO233",
+1.76
+]
+]
+},
+{
+"cad_id": "7b199b49-aa39-d1b9-0783-e8972f5de5b6",
+"name": "Wire Cap-128",
+"idx": 798,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.34,
+900.58,
+1329.39
+],
+"max": [
+728.13,
+902.35,
+1337.39
+],
+"best": "NAUO233",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO232",
+1.76
+],
+[
+"NAUO234",
+1.76
+]
+]
+},
+{
+"cad_id": "d037cf40-8496-09cc-b535-ba619abc7084",
+"name": "Wire Cap-129",
+"idx": 799,
+"hidden": false,
+"nsolids": 1,
+"min": [
+728.09,
+900.56,
+1329.38
+],
+"max": [
+729.88,
+902.33,
+1337.39
+],
+"best": "NAUO234",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO233",
+1.76
+],
+[
+"NAUO235",
+1.76
+]
+]
+},
+{
+"cad_id": "6b6aac24-c539-4f38-3005-11726cbfc2c5",
+"name": "Wire Cap-13",
+"idx": 88,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.54,
+1286.28
+],
+"max": [
+642.31,
+942.54,
+1288.03
+],
+"best": "NAUO19",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO18",
+2.5
+],
+[
+"NAUO17",
+11.37
+]
+]
+},
+{
+"cad_id": "89703984-84aa-46d3-7cf7-7c977dba7ee2",
+"name": "Wire Cap-130",
+"idx": 800,
+"hidden": false,
+"nsolids": 1,
+"min": [
+729.84,
+900.55,
+1329.38
+],
+"max": [
+731.63,
+902.32,
+1337.38
+],
+"best": "NAUO235",
+"box_err": 0.02,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO234",
+1.76
+],
+[
+"NAUO233",
+3.5
+]
+]
+},
+{
+"cad_id": "cd6697aa-b7c8-5355-e982-746aa2e1b0e0",
+"name": "Wire Cap-131",
+"idx": 823,
+"hidden": false,
+"nsolids": 1,
+"min": [
+719.16,
+900.67,
+1271.89
+],
+"max": [
+720.95,
+902.44,
+1279.9
+],
+"best": "NAUO236",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO224",
+1.76
+],
+[
+"NAUO237",
+1.76
+]
+]
+},
+{
+"cad_id": "01f81294-3ede-7f40-421d-affa0aca74b3",
+"name": "Wire Cap-132",
+"idx": 824,
+"hidden": false,
+"nsolids": 1,
+"min": [
+717.41,
+900.68,
+1271.9
+],
+"max": [
+719.2,
+902.45,
+1279.9
+],
+"best": "NAUO237",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO236",
+1.76
+],
+[
+"NAUO238",
+1.76
+]
+]
+},
+{
+"cad_id": "b7044438-ff15-3bcd-0fbf-7b92e9d82a72",
+"name": "Wire Cap-133",
+"idx": 825,
+"hidden": false,
+"nsolids": 1,
+"min": [
+715.66,
+900.7,
+1271.9
+],
+"max": [
+717.45,
+902.47,
+1279.91
+],
+"best": "NAUO238",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO237",
+1.76
+],
+[
+"NAUO239",
+1.76
+]
+]
+},
+{
+"cad_id": "3ee5b2b6-cba3-8bb3-2789-b6abd68de7a6",
+"name": "Wire Cap-134",
+"idx": 826,
+"hidden": false,
+"nsolids": 1,
+"min": [
+713.91,
+900.72,
+1271.91
+],
+"max": [
+715.7,
+902.49,
+1279.91
+],
+"best": "NAUO239",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO238",
+1.76
+],
+[
+"NAUO240",
+1.76
+]
+]
+},
+{
+"cad_id": "a692e7fc-adce-02fb-3259-607fd87f92e8",
+"name": "Wire Cap-135",
+"idx": 827,
+"hidden": false,
+"nsolids": 1,
+"min": [
+712.16,
+900.74,
+1271.91
+],
+"max": [
+713.95,
+902.51,
+1279.92
+],
+"best": "NAUO240",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO239",
+1.76
+],
+[
+"NAUO246",
+1.76
+]
+]
+},
+{
+"cad_id": "2c22ca4b-998b-b59f-9ce0-9e9bbbcb135e",
+"name": "Wire Cap-136",
+"idx": 828,
+"hidden": false,
+"nsolids": 1,
+"min": [
+722.66,
+900.63,
+1271.88
+],
+"max": [
+724.45,
+902.4,
+1279.89
+],
+"best": "NAUO241",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO242",
+1.75
+],
+[
+"NAUO224",
+1.76
+]
+]
+},
+{
+"cad_id": "497331d4-52ad-efe9-e6bc-80a9201a8253",
+"name": "Wire Cap-137",
+"idx": 829,
+"hidden": false,
+"nsolids": 1,
+"min": [
+724.41,
+900.61,
+1271.87
+],
+"max": [
+726.2,
+902.38,
+1279.88
+],
+"best": "NAUO242",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO241",
+1.75
+],
+[
+"NAUO243",
+1.76
+]
+]
+},
+{
+"cad_id": "bc303c37-97e9-316e-9034-7a0cd8a5f61f",
+"name": "Wire Cap-138",
+"idx": 830,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.16,
+900.6,
+1271.87
+],
+"max": [
+727.95,
+902.37,
+1279.88
+],
+"best": "NAUO243",
+"box_err": 0.02,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO242",
+1.75
+],
+[
+"NAUO244",
+1.75
+]
+]
+},
+{
+"cad_id": "6b213570-477f-3c20-3874-5654a3fa8481",
+"name": "Wire Cap-139",
+"idx": 831,
+"hidden": false,
+"nsolids": 1,
+"min": [
+727.91,
+900.58,
+1271.86
+],
+"max": [
+729.7,
+902.35,
+1279.87
+],
+"best": "NAUO244",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO243",
+1.76
+],
+[
+"NAUO245",
+1.76
+]
+]
+},
+{
+"cad_id": "a2d793f1-ebb6-93c2-9a5e-76cb09067fe2",
+"name": "Wire Cap-14",
+"idx": 91,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.52,
+1300.26
+],
+"max": [
+642.31,
+942.52,
+1302.01
+],
+"best": "NAUO20",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO21",
+2.53
+],
+[
+"NAUO18",
+11.48
+]
+]
+},
+{
+"cad_id": "b36f35df-6148-02bf-476d-1f26258b4afe",
+"name": "Wire Cap-140",
+"idx": 832,
+"hidden": false,
+"nsolids": 1,
+"min": [
+729.66,
+900.56,
+1271.86
+],
+"max": [
+731.45,
+902.33,
+1279.86
+],
+"best": "NAUO245",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO244",
+1.76
+],
+[
+"NAUO243",
+3.5
+]
+]
+},
+{
+"cad_id": "eab70129-0988-2acd-ccfb-e4fd08a69161",
+"name": "Wire Cap-141",
+"idx": 894,
+"hidden": false,
+"nsolids": 1,
+"min": [
+710.41,
+900.75,
+1271.92
+],
+"max": [
+712.2,
+902.52,
+1279.92
+],
+"best": "NAUO246",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO240",
+1.76
+],
+[
+"NAUO239",
+3.5
+]
+]
+},
+{
+"cad_id": "488a146f-2c29-e357-fbb3-7f6d36b91881",
+"name": "Wire Cap-142",
+"idx": 903,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.12,
+984.49,
+1310.5
+],
+"max": [
+565.59,
+986.95,
+1318.5
+],
+"best": "NAUO259",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+1.85
+],
+[
+"NAUO261",
+3.69
+]
+]
+},
+{
+"cad_id": "ac49abd1-35bf-60ff-0a6d-a1552d03d04a",
+"name": "Wire Cap-143",
+"idx": 905,
+"hidden": false,
+"nsolids": 1,
+"min": [
+561.58,
+982.65,
+1310.38
+],
+"max": [
+564.05,
+985.12,
+1318.38
+],
+"best": "NAUO260",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO261",
+1.84
+],
+[
+"NAUO259",
+1.85
+]
+]
+},
+{
+"cad_id": "21918660-a3b7-c6e9-48d6-32d253b1be9c",
+"name": "Wire Cap-144",
+"idx": 906,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.04,
+980.81,
+1310.57
+],
+"max": [
+562.5,
+983.28,
+1318.57
+],
+"best": "NAUO261",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+1.85
+],
+[
+"NAUO262",
+1.86
+]
+]
+},
+{
+"cad_id": "ab9ec749-2bad-a48c-422d-e69f23482f39",
+"name": "Wire Cap-145",
+"idx": 907,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.49,
+978.97,
+1310.65
+],
+"max": [
+560.96,
+981.43,
+1318.65
+],
+"best": "NAUO262",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO261",
+1.86
+],
+[
+"NAUO260",
+3.7
+]
+]
+},
+{
+"cad_id": "f31a49fe-83b0-04eb-9f10-8412e3541649",
+"name": "Wire Cap-146",
+"idx": 931,
+"hidden": false,
+"nsolids": 1,
+"min": [
+535.73,
+1044.28,
+1215.77
+],
+"max": [
+538.19,
+1046.75,
+1223.77
+],
+"best": "NAUO268",
+"box_err": 1.87,
+"rot_err": 0.0,
+"trans_err": 1.87,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO269",
+2.03
+],
+[
+"NAUO270",
+4.05
+]
+]
+},
+{
+"cad_id": "962a0587-146f-618a-a68e-b66555b9bd83",
+"name": "Wire Cap-147",
+"idx": 932,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.09,
+1042.33,
+1215.77
+],
+"max": [
+536.56,
+1044.8,
+1223.77
+],
+"best": "NAUO269",
+"box_err": 1.87,
+"rot_err": 0.0,
+"trans_err": 1.87,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO268",
+1.95
+],
+[
+"NAUO270",
+2.09
+]
+]
+},
+{
+"cad_id": "e57ce05d-836a-ce2c-d3a2-a96dc0aee968",
+"name": "Wire Cap-148",
+"idx": 938,
+"hidden": false,
+"nsolids": 1,
+"min": [
+532.46,
+1040.39,
+1215.77
+],
+"max": [
+534.93,
+1042.85,
+1223.77
+],
+"best": "NAUO270",
+"box_err": 1.78,
+"rot_err": 0.0,
+"trans_err": 1.77,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO269",
+1.89
+],
+[
+"NAUO271",
+2.17
+]
+]
+},
+{
+"cad_id": "0caea62e-e490-2d6d-99ef-d3ffb7e1aa4d",
+"name": "Wire Cap-149",
+"idx": 939,
+"hidden": false,
+"nsolids": 1,
+"min": [
+530.83,
+1038.44,
+1215.77
+],
+"max": [
+533.29,
+1040.91,
+1223.77
+],
+"best": "NAUO270",
+"box_err": 1.81,
+"rot_err": 0.0,
+"trans_err": 1.8,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO272",
+1.88
+],
+[
+"NAUO271",
+2.09
+]
+]
+},
+{
+"cad_id": "bc0e49cd-2818-3a39-a176-410a36fdf3ad",
+"name": "Wire Cap-15",
+"idx": 93,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.52,
+1302.79
+],
+"max": [
+642.31,
+942.52,
+1304.54
+],
+"best": "NAUO21",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO20",
+2.53
+],
+[
+"NAUO22",
+11.57
+]
+]
+},
+{
+"cad_id": "f52209c9-6e39-38c1-785d-2c9d1a3d2b16",
+"name": "Wire Cap-150",
+"idx": 940,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.2,
+1036.5,
+1215.77
+],
+"max": [
+531.66,
+1038.96,
+1223.77
+],
+"best": "NAUO272",
+"box_err": 1.89,
+"rot_err": 0.0,
+"trans_err": 1.87,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO271",
+2.26
+],
+[
+"NAUO270",
+3.75
+]
+]
+},
+{
+"cad_id": "c5b8c697-924c-0a63-aa48-2bd540120219",
+"name": "Wire Cap-151",
+"idx": 1025,
+"hidden": false,
+"nsolids": 1,
+"min": [
+721.09,
+893.49,
+1329.37
+],
+"max": [
+722.86,
+895.26,
+1337.37
+],
+"best": "NAUO211",
+"box_err": 1.74,
+"rot_err": 0.0,
+"trans_err": 1.74,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO212",
+3.5
+],
+[
+"NAUO213",
+5.24
+]
+]
+},
+{
+"cad_id": "122faf3f-5ba5-617e-85f0-e5553485936b",
+"name": "Wire Cap-152",
+"idx": 1026,
+"hidden": false,
+"nsolids": 1,
+"min": [
+722.83,
+893.48,
+1329.37
+],
+"max": [
+724.6,
+895.24,
+1337.37
+],
+"best": "NAUO211",
+"box_err": 3.49,
+"rot_err": 0.0,
+"trans_err": 3.48,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO212",
+5.23
+],
+[
+"NAUO213",
+6.99
+]
+]
+},
+{
+"cad_id": "b4337e05-ca84-0756-05bd-547bf33e8f51",
+"name": "Wire Cap-153",
+"idx": 1027,
+"hidden": false,
+"nsolids": 1,
+"min": [
+724.57,
+893.46,
+1329.37
+],
+"max": [
+726.34,
+895.22,
+1337.37
+],
+"best": "NAUO211",
+"box_err": 5.23,
+"rot_err": 0.0,
+"trans_err": 5.22,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO212",
+6.97
+],
+[
+"NAUO235",
+7.11
+]
+]
+},
+{
+"cad_id": "95dd5e7e-fc96-4027-0c14-1b6f411771f8",
+"name": "Wire Cap-154",
+"idx": 1028,
+"hidden": false,
+"nsolids": 1,
+"min": [
+726.31,
+893.44,
+1329.37
+],
+"max": [
+728.08,
+895.21,
+1337.37
+],
+"best": "NAUO211",
+"box_err": 6.96,
+"rot_err": 0.0,
+"trans_err": 6.96,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO235",
+7.12
+],
+[
+"NAUO234",
+7.14
+]
+]
+},
+{
+"cad_id": "77950379-9041-2350-9c70-f00e5ee1ee3c",
+"name": "Wire Cap-155",
+"idx": 1066,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.84,
+982.48,
+1219.74
+],
+"max": [
+532.08,
+984.73,
+1227.74
+],
+"best": "NAUO134",
+"box_err": 24.27,
+"rot_err": 0.3008,
+"trans_err": 23.71,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+26.21
+],
+[
+"NAUO136",
+28.16
+]
+]
+},
+{
+"cad_id": "eeea24b9-3aac-3351-e8bc-abaa7b7b58a8",
+"name": "Wire Cap-156",
+"idx": 1077,
+"hidden": false,
+"nsolids": 1,
+"min": [
+528.97,
+980.1,
+1219.74
+],
+"max": [
+531.21,
+982.34,
+1227.74
+],
+"best": "NAUO134",
+"box_err": 21.88,
+"rot_err": 0.3008,
+"trans_err": 21.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+23.83
+],
+[
+"NAUO136",
+25.79
+]
+]
+},
+{
+"cad_id": "e394d54e-1d64-c3c8-64c4-8f4ba79d11b7",
+"name": "Wire Cap-157",
+"idx": 1078,
+"hidden": false,
+"nsolids": 1,
+"min": [
+528.1,
+977.71,
+1219.74
+],
+"max": [
+530.34,
+979.95,
+1227.74
+],
+"best": "NAUO134",
+"box_err": 19.49,
+"rot_err": 0.3008,
+"trans_err": 18.94,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+21.44
+],
+[
+"NAUO136",
+23.4
+]
+]
+},
+{
+"cad_id": "676add86-ba5a-750c-61a3-90d73c291ed0",
+"name": "Wire Cap-158",
+"idx": 1079,
+"hidden": false,
+"nsolids": 1,
+"min": [
+527.23,
+975.32,
+1219.74
+],
+"max": [
+529.48,
+977.57,
+1227.74
+],
+"best": "NAUO134",
+"box_err": 17.1,
+"rot_err": 0.3008,
+"trans_err": 16.55,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+19.05
+],
+[
+"NAUO136",
+21.0
+]
+]
+},
+{
+"cad_id": "aa8a21d7-31eb-d762-ba85-954ad8077bfd",
+"name": "Wire Cap-159",
+"idx": 1080,
+"hidden": false,
+"nsolids": 1,
+"min": [
+526.36,
+972.94,
+1219.74
+],
+"max": [
+528.61,
+975.18,
+1227.74
+],
+"best": "NAUO134",
+"box_err": 14.72,
+"rot_err": 0.3008,
+"trans_err": 14.17,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+16.67
+],
+[
+"NAUO136",
+18.63
+]
+]
+},
+{
+"cad_id": "8f95b734-f00e-ef1e-aec2-9674b30c85ed",
+"name": "Wire Cap-16",
+"idx": 95,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.53,
+1314.36
+],
+"max": [
+642.31,
+942.53,
+1316.11
+],
+"best": "NAUO22",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+2.51
+],
+[
+"NAUO21",
+11.57
+]
+]
+},
+{
+"cad_id": "ad2dd40c-c66c-e374-d87c-d31a4ba2b9e5",
+"name": "Wire Cap-160",
+"idx": 1100,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.25,
+882.13,
+1289.91
+],
+"max": [
+657.0,
+890.13,
+1291.66
+],
+"best": "NAUO9",
+"box_err": 2.47,
+"rot_err": 0.0,
+"trans_err": 2.47,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO8",
+2.5
+],
+[
+"NAUO10",
+2.52
+]
+]
+},
+{
+"cad_id": "531d8977-671c-5303-b885-a3381007fc23",
+"name": "Wire Cap-161",
+"idx": 1108,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.25,
+882.13,
+1292.45
+],
+"max": [
+657.0,
+890.13,
+1294.2
+],
+"best": "NAUO13",
+"box_err": 2.48,
+"rot_err": 0.0,
+"trans_err": 2.49,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO10",
+2.51
+],
+[
+"NAUO12",
+2.53
+]
+]
+},
+{
+"cad_id": "88db7763-c601-6f07-0306-3c19c3a7503f",
+"name": "Wire Cap-162",
+"idx": 1109,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.25,
+882.13,
+1294.99
+],
+"max": [
+657.0,
+890.13,
+1296.74
+],
+"best": "NAUO12",
+"box_err": 2.46,
+"rot_err": 0.0,
+"trans_err": 2.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO15",
+2.5
+],
+[
+"NAUO14",
+2.52
+]
+]
+},
+{
+"cad_id": "e49f7fc2-06b0-e184-c256-b3d90ef604fd",
+"name": "Wire Cap-163",
+"idx": 1110,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.25,
+882.13,
+1297.53
+],
+"max": [
+657.0,
+890.13,
+1299.28
+],
+"best": "NAUO11",
+"box_err": 2.46,
+"rot_err": 0.0,
+"trans_err": 2.47,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO14",
+2.5
+],
+[
+"NAUO12",
+2.55
+]
+]
+},
+{
+"cad_id": "12b346d3-058f-a73a-eda0-64b53eff4bf1",
+"name": "Wire Cap-164",
+"idx": 1115,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.49,
+934.56,
+1277.4
+],
+"max": [
+642.24,
+942.56,
+1279.15
+],
+"best": "NAUO17",
+"box_err": 2.49,
+"rot_err": 0.0,
+"trans_err": 2.5,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO16",
+5.0
+],
+[
+"NAUO19",
+8.88
+]
+]
+},
+{
+"cad_id": "0b8f4c10-ea05-4ad0-43d7-f1266fb9b694",
+"name": "Wire Cap-165",
+"idx": 1126,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.53,
+934.5,
+1291.27
+],
+"max": [
+642.28,
+942.5,
+1293.02
+],
+"best": "NAUO18",
+"box_err": 2.49,
+"rot_err": 0.0,
+"trans_err": 2.49,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO19",
+4.99
+],
+[
+"NAUO20",
+8.99
+]
+]
+},
+{
+"cad_id": "faa7032e-7c60-485d-b209-31b6f5bcc72d",
+"name": "Wire Cap-166",
+"idx": 1127,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.53,
+934.5,
+1305.27
+],
+"max": [
+642.28,
+942.5,
+1307.02
+],
+"best": "NAUO21",
+"box_err": 2.48,
+"rot_err": 0.0,
+"trans_err": 2.48,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO20",
+5.01
+],
+[
+"NAUO22",
+9.09
+]
+]
+},
+{
+"cad_id": "aa87bac2-7164-ac77-a238-35973ca91594",
+"name": "Wire Cap-167",
+"idx": 1128,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.5,
+934.5,
+1319.37
+],
+"max": [
+642.25,
+942.5,
+1321.12
+],
+"best": "NAUO23",
+"box_err": 2.5,
+"rot_err": 0.0,
+"trans_err": 2.5,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO22",
+5.01
+],
+[
+"NAUO21",
+16.58
+]
+]
+},
+{
+"cad_id": "14f1d66c-c499-47e3-df78-9415d2dad236",
+"name": "Wire Cap-168",
+"idx": 1134,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.4,
+905.01,
+1238.24
+],
+"max": [
+520.57,
+907.75,
+1240.05
+],
+"best": "NAUO87",
+"box_err": 2.62,
+"rot_err": 0.0193,
+"trans_err": 2.43,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO86",
+5.18
+],
+[
+"NAUO76",
+30.66
+]
+]
+},
+{
+"cad_id": "5eb24a38-f6be-c146-0f59-5b529ec8f817",
+"name": "Wire Cap-169",
+"idx": 1140,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.3,
+905.25,
+1270.79
+],
+"max": [
+520.47,
+907.99,
+1272.6
+],
+"best": "NAUO89",
+"box_err": 2.66,
+"rot_err": 0.0193,
+"trans_err": 2.47,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO88",
+5.18
+],
+[
+"NAUO86",
+27.69
+]
+]
+},
+{
+"cad_id": "53c9dded-88c1-3561-d5c4-a829dd9207f2",
+"name": "Wire Cap-17",
+"idx": 96,
+"hidden": false,
+"nsolids": 1,
+"min": [
+640.56,
+934.53,
+1316.87
+],
+"max": [
+642.31,
+942.53,
+1318.62
+],
+"best": "NAUO23",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO22",
+2.51
+],
+[
+"NAUO21",
+14.08
+]
+]
+},
+{
+"cad_id": "0a877d1c-5319-30b8-faa3-cca5a297e3e9",
+"name": "Wire Cap-170",
+"idx": 1141,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.18,
+905.38,
+1303.41
+],
+"max": [
+520.35,
+908.12,
+1305.22
+],
+"best": "NAUO91",
+"box_err": 2.65,
+"rot_err": 0.0193,
+"trans_err": 2.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO90",
+5.15
+],
+[
+"NAUO88",
+27.76
+]
+]
+},
+{
+"cad_id": "f1fca1a0-8b17-3c75-4fac-811a262efba3",
+"name": "Wire Cap-171",
+"idx": 1142,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.04,
+903.98,
+1335.92
+],
+"max": [
+520.21,
+906.72,
+1337.72
+],
+"best": "NAUO92",
+"box_err": 2.66,
+"rot_err": 0.0193,
+"trans_err": 2.47,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO93",
+5.17
+],
+[
+"NAUO90",
+27.7
+]
+]
+},
+{
+"cad_id": "5c7cc10f-f953-a81f-1d4c-d0f7098bff46",
+"name": "Wire Cap-172",
+"idx": 1203,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1031.11,
+1272.38
+],
+"max": [
+606.51,
+1032.86,
+1274.13
+],
+"best": "NAUO124",
+"box_err": 32.27,
+"rot_err": 2.0,
+"trans_err": 33.84,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.28
+],
+[
+"NAUO110",
+32.28
+]
+]
+},
+{
+"cad_id": "f843f50d-41e2-64ae-bca0-2d771f426351",
+"name": "Wire Cap-173",
+"idx": 1211,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1028.57,
+1272.38
+],
+"max": [
+606.51,
+1030.32,
+1274.13
+],
+"best": "NAUO124",
+"box_err": 32.27,
+"rot_err": 2.0,
+"trans_err": 33.84,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.28
+],
+[
+"NAUO110",
+32.28
+]
+]
+},
+{
+"cad_id": "7fd77b5b-1903-7dbe-a468-30ea2c8a9f07",
+"name": "Wire Cap-174",
+"idx": 1212,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1026.03,
+1272.38
+],
+"max": [
+606.51,
+1027.78,
+1274.13
+],
+"best": "NAUO124",
+"box_err": 32.27,
+"rot_err": 2.0,
+"trans_err": 33.84,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.28
+],
+[
+"NAUO110",
+32.28
+]
+]
+},
+{
+"cad_id": "b5430619-29ec-201a-896f-3f0df146de5f",
+"name": "Wire Cap-175",
+"idx": 1213,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1023.49,
+1272.38
+],
+"max": [
+606.51,
+1025.24,
+1274.13
+],
+"best": "NAUO124",
+"box_err": 32.27,
+"rot_err": 2.0,
+"trans_err": 33.84,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.28
+],
+[
+"NAUO110",
+32.28
+]
+]
+},
+{
+"cad_id": "326c6b8a-d2de-a0f3-6960-875fdf77ae7c",
+"name": "Wire Cap-176",
+"idx": 1259,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+928.78,
+1272.22
+],
+"max": [
+606.51,
+930.53,
+1273.97
+],
+"best": "NAUO101",
+"box_err": 32.33,
+"rot_err": 2.0,
+"trans_err": 33.9,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.34
+],
+[
+"NAUO115",
+32.34
+]
+]
+},
+{
+"cad_id": "b88e9640-c083-9969-f59d-e37c11d26e28",
+"name": "Wire Cap-177",
+"idx": 1269,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+926.24,
+1272.22
+],
+"max": [
+606.51,
+927.99,
+1273.97
+],
+"best": "NAUO101",
+"box_err": 32.33,
+"rot_err": 2.0,
+"trans_err": 33.9,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.34
+],
+[
+"NAUO115",
+32.34
+]
+]
+},
+{
+"cad_id": "47e6fc82-3e8d-365a-913c-8021fd44ea58",
+"name": "Wire Cap-178",
+"idx": 1270,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+923.7,
+1272.22
+],
+"max": [
+606.51,
+925.45,
+1273.97
+],
+"best": "NAUO101",
+"box_err": 32.33,
+"rot_err": 2.0,
+"trans_err": 33.9,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.34
+],
+[
+"NAUO115",
+32.34
+]
+]
+},
+{
+"cad_id": "3ed1832e-999b-71a7-ce88-fcfe1a4e45a5",
+"name": "Wire Cap-179",
+"idx": 1271,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+921.16,
+1272.22
+],
+"max": [
+606.51,
+922.91,
+1273.97
+],
+"best": "NAUO101",
+"box_err": 32.33,
+"rot_err": 2.0,
+"trans_err": 33.9,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.34
+],
+[
+"NAUO115",
+32.34
+]
+]
+},
+{
+"cad_id": "6b71558d-ebc0-6155-f9fa-8a5de943f1e8",
+"name": "Wire Cap-18",
+"idx": 125,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+927.92,
+1237.86
+],
+"max": [
+659.47,
+929.67,
+1245.86
+],
+"best": "NAUO32",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO33",
+2.39
+],
+[
+"NAUO34",
+4.81
+]
+]
+},
+{
+"cad_id": "e7456a1f-d516-7304-7e8c-733435546cd8",
+"name": "Wire Cap-180",
+"idx": 1457,
+"hidden": false,
+"nsolids": 1,
+"min": [
+557.29,
+997.41,
+1311.22
+],
+"max": [
+559.47,
+999.59,
+1319.22
+],
+"best": "NAUO259",
+"box_err": 13.07,
+"rot_err": 2.0,
+"trans_err": 13.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+14.9
+],
+[
+"NAUO261",
+16.75
+]
+]
+},
+{
+"cad_id": "6cf63a1c-a438-4277-8fa1-6b03783628d9",
+"name": "Wire Cap-181",
+"idx": 1463,
+"hidden": false,
+"nsolids": 1,
+"min": [
+556.6,
+995.11,
+1311.22
+],
+"max": [
+558.78,
+997.29,
+1319.22
+],
+"best": "NAUO259",
+"box_err": 10.77,
+"rot_err": 2.0,
+"trans_err": 11.16,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+12.61
+],
+[
+"NAUO261",
+14.45
+]
+]
+},
+{
+"cad_id": "ce9fb144-32d8-087d-8a1f-5a0f4c0c624a",
+"name": "Wire Cap-182",
+"idx": 1464,
+"hidden": false,
+"nsolids": 1,
+"min": [
+555.92,
+992.81,
+1311.22
+],
+"max": [
+558.1,
+994.99,
+1319.22
+],
+"best": "NAUO259",
+"box_err": 8.47,
+"rot_err": 2.0,
+"trans_err": 8.87,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+10.3
+],
+[
+"NAUO261",
+12.14
+]
+]
+},
+{
+"cad_id": "3328338d-5ebc-daeb-d8b9-ac1e5603ac8d",
+"name": "Wire Cap-183",
+"idx": 1465,
+"hidden": false,
+"nsolids": 1,
+"min": [
+555.23,
+990.52,
+1311.22
+],
+"max": [
+557.41,
+992.69,
+1319.22
+],
+"best": "NAUO260",
+"box_err": 8.02,
+"rot_err": 2.0,
+"trans_err": 8.4,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO259",
+8.33
+],
+[
+"NAUO261",
+9.86
+]
+]
+},
+{
+"cad_id": "424d3e69-0a30-9e6e-7250-4f0b43751ac2",
+"name": "Wire Cap-184",
+"idx": 1482,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.98,
+986.42,
+1311.22
+],
+"max": [
+561.16,
+988.6,
+1319.22
+],
+"best": "NAUO260",
+"box_err": 3.91,
+"rot_err": 2.0,
+"trans_err": 7.16,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO259",
+4.58
+],
+[
+"NAUO261",
+5.76
+]
+]
+},
+{
+"cad_id": "c1576b56-9548-b84c-ea57-901cc5226b34",
+"name": "Wire Cap-185",
+"idx": 1506,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.29,
+984.12,
+1311.22
+],
+"max": [
+560.47,
+986.3,
+1319.22
+],
+"best": "NAUO261",
+"box_err": 3.46,
+"rot_err": 2.0,
+"trans_err": 7.35,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+3.73
+],
+[
+"NAUO259",
+5.26
+]
+]
+},
+{
+"cad_id": "785591ea-2187-7b69-2edc-71caaf80b991",
+"name": "Wire Cap-186",
+"idx": 1507,
+"hidden": false,
+"nsolids": 1,
+"min": [
+557.6,
+981.82,
+1311.22
+],
+"max": [
+559.78,
+984.0,
+1319.22
+],
+"best": "NAUO261",
+"box_err": 2.88,
+"rot_err": 2.0,
+"trans_err": 7.35,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO262",
+3.0
+],
+[
+"NAUO260",
+4.42
+]
+]
+},
+{
+"cad_id": "e87d9a9a-2968-942e-7e7b-8b2929a9ad99",
+"name": "Wire Cap-187",
+"idx": 1508,
+"hidden": false,
+"nsolids": 1,
+"min": [
+556.91,
+979.52,
+1311.22
+],
+"max": [
+559.09,
+981.7,
+1319.22
+],
+"best": "NAUO262",
+"box_err": 2.01,
+"rot_err": 2.0,
+"trans_err": 7.43,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO261",
+3.56
+],
+[
+"NAUO260",
+5.11
+]
+]
+},
+{
+"cad_id": "f5d96092-9763-6beb-7834-a4ecdcb76a28",
+"name": "Wire Cap-188",
+"idx": 1562,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.17,
+962.06,
+1220.04
+],
+"max": [
+531.41,
+964.3,
+1228.04
+],
+"best": "NAUO135",
+"box_err": 5.79,
+"rot_err": 2.0,
+"trans_err": 6.77,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO134",
+7.02
+],
+[
+"NAUO136",
+7.75
+]
+]
+},
+{
+"cad_id": "31106747-e3fa-8338-b97c-66cdb193641b",
+"name": "Wire Cap-189",
+"idx": 1568,
+"hidden": false,
+"nsolids": 1,
+"min": [
+528.3,
+959.67,
+1220.04
+],
+"max": [
+530.54,
+961.92,
+1228.04
+],
+"best": "NAUO136",
+"box_err": 5.35,
+"rot_err": 2.0,
+"trans_err": 6.76,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+6.25
+],
+[
+"NAUO137",
+7.14
+]
+]
+},
+{
+"cad_id": "3ee7c75a-1ecb-0b40-1149-6c4596caac60",
+"name": "Wire Cap-19",
+"idx": 126,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+925.53,
+1237.87
+],
+"max": [
+659.47,
+927.28,
+1245.87
+],
+"best": "NAUO33",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO32",
+2.39
+],
+[
+"NAUO34",
+2.42
+]
+]
+},
+{
+"cad_id": "cf439b38-142c-b5e6-e124-dbe7fc7fd4e7",
+"name": "Wire Cap-190",
+"idx": 1569,
+"hidden": false,
+"nsolids": 1,
+"min": [
+527.43,
+957.29,
+1220.04
+],
+"max": [
+529.67,
+959.53,
+1228.04
+],
+"best": "NAUO137",
+"box_err": 4.76,
+"rot_err": 2.0,
+"trans_err": 6.73,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO136",
+5.49
+],
+[
+"NAUO138",
+6.77
+]
+]
+},
+{
+"cad_id": "91b02fdf-5236-38ac-6904-3af12a0d1920",
+"name": "Wire Cap-191",
+"idx": 1570,
+"hidden": false,
+"nsolids": 1,
+"min": [
+526.56,
+954.9,
+1220.04
+],
+"max": [
+528.8,
+957.14,
+1228.04
+],
+"best": "NAUO138",
+"box_err": 4.38,
+"rot_err": 2.0,
+"trans_err": 6.73,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO137",
+4.57
+],
+[
+"NAUO136",
+6.36
+]
+]
+},
+{
+"cad_id": "331c1b44-5941-9075-0f6b-462c3dd168fc",
+"name": "Wire Cap-192",
+"idx": 1571,
+"hidden": false,
+"nsolids": 1,
+"min": [
+525.69,
+952.51,
+1220.04
+],
+"max": [
+527.93,
+954.76,
+1228.04
+],
+"best": "NAUO138",
+"box_err": 3.84,
+"rot_err": 2.0,
+"trans_err": 6.73,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO137",
+5.43
+],
+[
+"NAUO136",
+7.22
+]
+]
+},
+{
+"cad_id": "4ddf7e03-256c-3772-113b-0d4ca4ffdb1b",
+"name": "Wire Cap-2",
+"idx": 67,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+882.12,
+1289.91
+],
+"max": [
+659.47,
+890.12,
+1291.66
+],
+"best": "NAUO9",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO13",
+2.54
+],
+[
+"NAUO8",
+4.97
+]
+]
+},
+{
+"cad_id": "b80430be-b368-cb27-2d07-44eeb01ede17",
+"name": "Wire Cap-20",
+"idx": 128,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+923.11,
+1237.87
+],
+"max": [
+659.47,
+924.86,
+1245.87
+],
+"best": "NAUO34",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO33",
+2.42
+],
+[
+"NAUO35",
+2.43
+]
+]
+},
+{
+"cad_id": "844a7eca-cba3-1258-dfa7-048a72c35b51",
+"name": "Wire Cap-21",
+"idx": 130,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+920.68,
+1237.87
+],
+"max": [
+659.47,
+922.43,
+1245.87
+],
+"best": "NAUO35",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO34",
+2.43
+],
+[
+"NAUO33",
+4.85
+]
+]
+},
+{
+"cad_id": "6388af54-cd5e-bd48-ba32-0b28daeebce2",
+"name": "Wire Cap-22",
+"idx": 132,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.74,
+882.13,
+1304.99
+],
+"max": [
+654.49,
+890.13,
+1306.74
+],
+"best": "NAUO36",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO37",
+2.5
+],
+[
+"NAUO38",
+4.98
+]
+]
+},
+{
+"cad_id": "8a2b485b-1233-7ff3-5472-ded0527eefa0",
+"name": "Wire Cap-23",
+"idx": 134,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.24,
+882.13,
+1304.99
+],
+"max": [
+656.99,
+890.13,
+1306.74
+],
+"best": "NAUO37",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO39",
+2.49
+],
+[
+"NAUO36",
+2.5
+]
+]
+},
+{
+"cad_id": "ac9af36a-c4b8-99c4-0641-4eebe0c5a57b",
+"name": "Wire Cap-24",
+"idx": 135,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.72,
+882.13,
+1302.45
+],
+"max": [
+659.47,
+890.13,
+1304.2
+],
+"best": "NAUO38",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO37",
+2.54
+],
+[
+"NAUO39",
+2.55
+]
+]
+},
+{
+"cad_id": "e3bee8c8-f25c-fd4c-afaf-7640a0aefa2a",
+"name": "Wire Cap-25",
+"idx": 136,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.73,
+882.13,
+1305.0
+],
+"max": [
+659.48,
+890.13,
+1306.75
+],
+"best": "NAUO39",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO37",
+2.49
+],
+[
+"NAUO38",
+2.55
+]
+]
+},
+{
+"cad_id": "c18c3226-b739-268b-c377-9932aa5a8f78",
+"name": "Wire Cap-26",
+"idx": 155,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.33,
+918.53,
+1364.18
+],
+"max": [
+649.08,
+920.28,
+1372.18
+],
+"best": "NAUO52",
+"box_err": 56.03,
+"rot_err": 1.0,
+"trans_err": 54.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+56.69
+],
+[
+"NAUO53",
+58.57
+]
+]
+},
+{
+"cad_id": "91857bac-21d6-bd7e-b547-e1d26d5f2a3d",
+"name": "Wire Cap-27",
+"idx": 156,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.33,
+921.07,
+1364.18
+],
+"max": [
+649.08,
+922.82,
+1372.18
+],
+"best": "NAUO52",
+"box_err": 56.03,
+"rot_err": 1.0,
+"trans_err": 54.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+56.69
+],
+[
+"NAUO53",
+58.57
+]
+]
+},
+{
+"cad_id": "90cb8560-966c-04b6-418f-539095583310",
+"name": "Wire Cap-28",
+"idx": 158,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.33,
+923.61,
+1364.31
+],
+"max": [
+649.08,
+925.36,
+1372.31
+],
+"best": "NAUO52",
+"box_err": 56.15,
+"rot_err": 1.0,
+"trans_err": 54.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+56.82
+],
+[
+"NAUO53",
+58.69
+]
+]
+},
+{
+"cad_id": "adb9863a-2db5-8fef-e73f-8a6f422a46ec",
+"name": "Wire Cap-29",
+"idx": 160,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.33,
+926.15,
+1364.31
+],
+"max": [
+649.08,
+927.9,
+1372.31
+],
+"best": "NAUO52",
+"box_err": 56.15,
+"rot_err": 1.0,
+"trans_err": 54.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+56.82
+],
+[
+"NAUO53",
+58.69
+]
+]
+},
+{
+"cad_id": "5b8b8509-9272-8768-9302-277b18137871",
+"name": "Wire Cap-3",
+"idx": 69,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.74,
+882.12,
+1292.43
+],
+"max": [
+654.49,
+890.12,
+1294.18
+],
+"best": "NAUO10",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO8",
+2.52
+],
+[
+"NAUO15",
+2.55
+]
+]
+},
+{
+"cad_id": "7cea28ca-1fb0-2107-459d-b8433cbca965",
+"name": "Wire Cap-30",
+"idx": 162,
+"hidden": false,
+"nsolids": 1,
+"min": [
+647.33,
+928.69,
+1364.31
+],
+"max": [
+649.08,
+930.44,
+1372.31
+],
+"best": "NAUO52",
+"box_err": 56.15,
+"rot_err": 1.0,
+"trans_err": 54.46,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO23",
+56.82
+],
+[
+"NAUO53",
+58.69
+]
+]
+},
+{
+"cad_id": "f4ca704f-c512-3a08-09f6-696a99ba6b6e",
+"name": "Wire Cap-31",
+"idx": 164,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.75,
+882.13,
+1310.11
+],
+"max": [
+654.5,
+890.13,
+1311.86
+],
+"best": "NAUO50",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO51",
+2.48
+],
+[
+"NAUO53",
+4.98
+]
+]
+},
+{
+"cad_id": "5a12f305-de6e-98e2-361e-ad8305eabba0",
+"name": "Wire Cap-32",
+"idx": 165,
+"hidden": false,
+"nsolids": 1,
+"min": [
+655.23,
+882.13,
+1310.09
+],
+"max": [
+656.98,
+890.13,
+1311.84
+],
+"best": "NAUO51",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO50",
+2.48
+],
+[
+"NAUO54",
+2.52
+]
+]
+},
+{
+"cad_id": "cad42f59-ae09-1042-101a-19e79643ba79",
+"name": "Wire Cap-33",
+"idx": 166,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.74,
+882.13,
+1317.53
+],
+"max": [
+659.49,
+890.13,
+1319.28
+],
+"best": "NAUO52",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO53",
+2.54
+],
+[
+"NAUO50",
+7.42
+]
+]
+},
+{
+"cad_id": "2c1e4e40-b948-3e70-5e7b-d091aa6f3a6a",
+"name": "Wire Cap-34",
+"idx": 167,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.73,
+882.13,
+1314.99
+],
+"max": [
+659.48,
+890.13,
+1316.74
+],
+"best": "NAUO53",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO52",
+2.54
+],
+[
+"NAUO51",
+4.9
+]
+]
+},
+{
+"cad_id": "c3b63582-b075-bfbb-17ad-da59e6b25f7e",
+"name": "Wire Cap-35",
+"idx": 168,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.75,
+882.13,
+1310.06
+],
+"max": [
+659.5,
+890.13,
+1311.81
+],
+"best": "NAUO54",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO51",
+2.52
+],
+[
+"NAUO53",
+4.93
+]
+]
+},
+{
+"cad_id": "8d7e920e-a760-481a-7ef8-c01dbd1b515d",
+"name": "Wire Cap-36",
+"idx": 337,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.66,
+905.03,
+1243.29
+],
+"max": [
+520.8,
+907.61,
+1245.04
+],
+"best": "NAUO86",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO87",
+2.56
+],
+[
+"NAUO89",
+30.03
+]
+]
+},
+{
+"cad_id": "738cf612-4e4c-3477-2065-54d8b8053b77",
+"name": "Wire Cap-37",
+"idx": 338,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.44,
+905.06,
+1240.73
+],
+"max": [
+520.58,
+907.64,
+1242.48
+],
+"best": "NAUO87",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO86",
+2.56
+],
+[
+"NAUO76",
+30.71
+]
+]
+},
+{
+"cad_id": "fc679464-6ed7-6073-bc0f-302efa7ddde5",
+"name": "Wire Cap-38",
+"idx": 339,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.76,
+905.38,
+1275.84
+],
+"max": [
+520.9,
+907.96,
+1277.59
+],
+"best": "NAUO88",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO89",
+2.52
+],
+[
+"NAUO91",
+30.09
+]
+]
+},
+{
+"cad_id": "0f4de871-8d39-6a80-92c9-45a47cdf2b89",
+"name": "Wire Cap-39",
+"idx": 340,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.72,
+905.22,
+1273.32
+],
+"max": [
+520.86,
+907.8,
+1275.07
+],
+"best": "NAUO89",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO88",
+2.52
+],
+[
+"NAUO86",
+30.03
+]
+]
+},
+{
+"cad_id": "0024d339-2818-253f-119c-1ba834babbbf",
+"name": "Wire Cap-4",
+"idx": 70,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.71,
+882.12,
+1297.54
+],
+"max": [
+659.46,
+890.12,
+1299.29
+],
+"best": "NAUO11",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO12",
+2.56
+],
+[
+"NAUO38",
+4.91
+]
+]
+},
+{
+"cad_id": "af71f997-57d9-ce78-b61d-21974ed110f4",
+"name": "Wire Cap-40",
+"idx": 341,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.28,
+905.34,
+1308.42
+],
+"max": [
+520.42,
+907.91,
+1310.17
+],
+"best": "NAUO90",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO91",
+2.5
+],
+[
+"NAUO92",
+30.02
+]
+]
+},
+{
+"cad_id": "7b601224-9e31-f379-03f3-3ea418503405",
+"name": "Wire Cap-41",
+"idx": 342,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.33,
+905.42,
+1305.93
+],
+"max": [
+520.47,
+908.0,
+1307.68
+],
+"best": "NAUO91",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO90",
+2.5
+],
+[
+"NAUO88",
+30.09
+]
+]
+},
+{
+"cad_id": "3d4bc59d-e34d-9f75-8b75-c5c43c6e473b",
+"name": "Wire Cap-42",
+"idx": 343,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.13,
+904.09,
+1338.44
+],
+"max": [
+520.27,
+906.67,
+1340.19
+],
+"best": "NAUO92",
+"box_err": 0.01,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO93",
+2.52
+],
+[
+"NAUO90",
+30.03
+]
+]
+},
+{
+"cad_id": "d22da2c2-e8fa-e3c6-9342-73ecccf812b7",
+"name": "Wire Cap-43",
+"idx": 344,
+"hidden": false,
+"nsolids": 1,
+"min": [
+512.38,
+903.99,
+1340.95
+],
+"max": [
+520.52,
+906.56,
+1342.7
+],
+"best": "NAUO93",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO92",
+2.51
+],
+[
+"NAUO85",
+30.81
+]
+]
+},
+{
+"cad_id": "3b9a8d9e-19d1-3672-ae53-adeb3851f536",
+"name": "Wire Cap-44",
+"idx": 347,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+923.7,
+1269.72
+],
+"max": [
+606.51,
+925.45,
+1271.47
+],
+"best": "NAUO101",
+"box_err": 34.83,
+"rot_err": 2.0,
+"trans_err": 36.4,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.84
+],
+[
+"NAUO115",
+34.84
+]
+]
+},
+{
+"cad_id": "476dbe28-9d8a-9c37-96e2-50d01896caa0",
+"name": "Wire Cap-46",
+"idx": 350,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+921.15,
+1274.7
+],
+"max": [
+606.51,
+922.9,
+1276.45
+],
+"best": "NAUO101",
+"box_err": 29.85,
+"rot_err": 2.0,
+"trans_err": 31.42,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.86
+],
+[
+"NAUO115",
+29.86
+]
+]
+},
+{
+"cad_id": "1437bdbf-9a21-fe5b-ce6c-c7602d5919a4",
+"name": "Wire Cap-47",
+"idx": 352,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+921.16,
+1269.71
+],
+"max": [
+606.51,
+922.91,
+1271.46
+],
+"best": "NAUO101",
+"box_err": 34.84,
+"rot_err": 2.0,
+"trans_err": 36.41,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.85
+],
+[
+"NAUO115",
+34.85
+]
+]
+},
+{
+"cad_id": "7d1d886f-5223-8af2-4cbd-1828c003f395",
+"name": "Wire Cap-48",
+"idx": 354,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+926.25,
+1269.74
+],
+"max": [
+606.51,
+928.0,
+1271.49
+],
+"best": "NAUO101",
+"box_err": 34.81,
+"rot_err": 2.0,
+"trans_err": 36.38,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.82
+],
+[
+"NAUO115",
+34.82
+]
+]
+},
+{
+"cad_id": "04ae25a6-db50-c17b-6153-b077bb85eeca",
+"name": "Wire Cap-49",
+"idx": 355,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+923.7,
+1274.69
+],
+"max": [
+606.51,
+925.45,
+1276.44
+],
+"best": "NAUO101",
+"box_err": 29.86,
+"rot_err": 2.0,
+"trans_err": 31.42,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.87
+],
+[
+"NAUO115",
+29.87
+]
+]
+},
+{
+"cad_id": "afaf76fc-b716-d8d5-9b50-aa4aab3bfb87",
+"name": "Wire Cap-5",
+"idx": 71,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.71,
+882.12,
+1294.98
+],
+"max": [
+659.46,
+890.12,
+1296.73
+],
+"best": "NAUO12",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO13",
+2.53
+],
+[
+"NAUO11",
+2.56
+]
+]
+},
+{
+"cad_id": "02a71c9e-8802-bbd2-e431-770014057c7b",
+"name": "Wire Cap-50",
+"idx": 356,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+926.24,
+1274.7
+],
+"max": [
+606.51,
+927.99,
+1276.45
+],
+"best": "NAUO101",
+"box_err": 29.85,
+"rot_err": 2.0,
+"trans_err": 31.41,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.86
+],
+[
+"NAUO115",
+29.86
+]
+]
+},
+{
+"cad_id": "88049506-8bc8-9d76-4ba6-f840ff2355b0",
+"name": "Wire Cap-51",
+"idx": 360,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+928.77,
+1274.72
+],
+"max": [
+606.51,
+930.52,
+1276.47
+],
+"best": "NAUO101",
+"box_err": 29.83,
+"rot_err": 2.0,
+"trans_err": 31.39,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.84
+],
+[
+"NAUO115",
+29.84
+]
+]
+},
+{
+"cad_id": "3b709b29-3819-7abc-46cf-27ca7e842d73",
+"name": "Wire Cap-52",
+"idx": 361,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+928.78,
+1269.72
+],
+"max": [
+606.51,
+930.53,
+1271.47
+],
+"best": "NAUO101",
+"box_err": 34.83,
+"rot_err": 2.0,
+"trans_err": 36.39,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.84
+],
+[
+"NAUO115",
+34.84
+]
+]
+},
+{
+"cad_id": "c841322e-2632-c1fe-d726-f95302a4f4e9",
+"name": "Wire Cap-53",
+"idx": 364,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1031.11,
+1269.89
+],
+"max": [
+606.51,
+1032.86,
+1271.64
+],
+"best": "NAUO124",
+"box_err": 34.76,
+"rot_err": 2.0,
+"trans_err": 36.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.77
+],
+[
+"NAUO110",
+34.77
+]
+]
+},
+{
+"cad_id": "4d82f1e4-d5b1-4fe9-1777-2050f0ea1ee6",
+"name": "Wire Cap-54",
+"idx": 365,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1026.01,
+1274.86
+],
+"max": [
+606.51,
+1027.76,
+1276.61
+],
+"best": "NAUO124",
+"box_err": 29.79,
+"rot_err": 2.0,
+"trans_err": 31.36,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.8
+],
+[
+"NAUO110",
+29.8
+]
+]
+},
+{
+"cad_id": "5dfdeac3-91ca-47b7-55f3-623f28186b2e",
+"name": "Wire Cap-55",
+"idx": 366,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1028.55,
+1269.88
+],
+"max": [
+606.51,
+1030.3,
+1271.63
+],
+"best": "NAUO124",
+"box_err": 34.77,
+"rot_err": 2.0,
+"trans_err": 36.34,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.78
+],
+[
+"NAUO110",
+34.78
+]
+]
+},
+{
+"cad_id": "78a27ed5-7d94-9168-66cd-63945a3bc560",
+"name": "Wire Cap-57",
+"idx": 368,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1023.5,
+1269.88
+],
+"max": [
+606.51,
+1025.25,
+1271.63
+],
+"best": "NAUO124",
+"box_err": 34.77,
+"rot_err": 2.0,
+"trans_err": 36.34,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.78
+],
+[
+"NAUO110",
+34.78
+]
+]
+},
+{
+"cad_id": "75b18bfe-c2ef-3881-776c-e13b9676aaa5",
+"name": "Wire Cap-58",
+"idx": 369,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1023.48,
+1274.87
+],
+"max": [
+606.51,
+1025.23,
+1276.62
+],
+"best": "NAUO124",
+"box_err": 29.78,
+"rot_err": 2.0,
+"trans_err": 31.35,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.79
+],
+[
+"NAUO110",
+29.79
+]
+]
+},
+{
+"cad_id": "f9d8f548-ea0b-0a3a-ecaf-bbb1b7f0451b",
+"name": "Wire Cap-59",
+"idx": 370,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1031.1,
+1274.85
+],
+"max": [
+606.51,
+1032.85,
+1276.6
+],
+"best": "NAUO124",
+"box_err": 29.8,
+"rot_err": 2.0,
+"trans_err": 31.37,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.81
+],
+[
+"NAUO110",
+29.81
+]
+]
+},
+{
+"cad_id": "42bfd096-3b0c-776b-1e24-6862399c6fa4",
+"name": "Wire Cap-6",
+"idx": 72,
+"hidden": false,
+"nsolids": 1,
+"min": [
+657.73,
+882.12,
+1292.45
+],
+"max": [
+659.48,
+890.12,
+1294.2
+],
+"best": "NAUO13",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO12",
+2.53
+],
+[
+"NAUO9",
+2.54
+]
+]
+},
+{
+"cad_id": "06528ffa-416f-5ace-89ac-be293f21a1f9",
+"name": "Wire Cap-60",
+"idx": 371,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1026.01,
+1269.89
+],
+"max": [
+606.51,
+1027.76,
+1271.64
+],
+"best": "NAUO124",
+"box_err": 34.76,
+"rot_err": 2.0,
+"trans_err": 36.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.77
+],
+[
+"NAUO110",
+34.77
+]
+]
+},
+{
+"cad_id": "3bf1d51f-78cd-28c3-a8f7-088829ca5015",
+"name": "Wire Cap-61",
+"idx": 372,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1028.55,
+1274.86
+],
+"max": [
+606.51,
+1030.3,
+1276.61
+],
+"best": "NAUO124",
+"box_err": 29.79,
+"rot_err": 2.0,
+"trans_err": 31.36,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.8
+],
+[
+"NAUO110",
+29.8
+]
+]
+},
+{
+"cad_id": "fb13823b-a809-9199-091c-1ad754132a9b",
+"name": "Wire Cap-62",
+"idx": 382,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+933.73,
+1274.7
+],
+"max": [
+606.51,
+935.48,
+1276.45
+],
+"best": "NAUO101",
+"box_err": 29.85,
+"rot_err": 2.0,
+"trans_err": 31.41,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.86
+],
+[
+"NAUO115",
+29.86
+]
+]
+},
+{
+"cad_id": "8d1e62fc-7398-6b53-f28f-082e4d3dd98c",
+"name": "Wire Cap-63",
+"idx": 384,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+936.24,
+1274.71
+],
+"max": [
+606.51,
+937.99,
+1276.46
+],
+"best": "NAUO101",
+"box_err": 29.84,
+"rot_err": 2.0,
+"trans_err": 31.41,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.85
+],
+[
+"NAUO115",
+29.85
+]
+]
+},
+{
+"cad_id": "47777d41-82f5-7f3d-dd60-2b6265a9566c",
+"name": "Wire Cap-64",
+"idx": 385,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+936.29,
+1272.21
+],
+"max": [
+606.51,
+938.04,
+1273.96
+],
+"best": "NAUO101",
+"box_err": 32.34,
+"rot_err": 2.0,
+"trans_err": 33.9,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.35
+],
+[
+"NAUO115",
+32.35
+]
+]
+},
+{
+"cad_id": "fb8e3a42-e034-60a5-ee19-793466625991",
+"name": "Wire Cap-65",
+"idx": 386,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+936.27,
+1269.74
+],
+"max": [
+606.51,
+938.02,
+1271.49
+],
+"best": "NAUO101",
+"box_err": 34.81,
+"rot_err": 2.0,
+"trans_err": 36.38,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.82
+],
+[
+"NAUO115",
+34.82
+]
+]
+},
+{
+"cad_id": "23ed6952-bd90-bc2a-b939-50ca448aa2ec",
+"name": "Wire Cap-66",
+"idx": 387,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+941.32,
+1274.71
+],
+"max": [
+606.51,
+943.07,
+1276.46
+],
+"best": "NAUO101",
+"box_err": 29.84,
+"rot_err": 2.0,
+"trans_err": 31.4,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.85
+],
+[
+"NAUO115",
+29.85
+]
+]
+},
+{
+"cad_id": "6861265a-7568-34ad-8963-bf58ed7ed4b6",
+"name": "Wire Cap-67",
+"idx": 388,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+941.32,
+1272.23
+],
+"max": [
+606.51,
+943.07,
+1273.98
+],
+"best": "NAUO101",
+"box_err": 32.32,
+"rot_err": 2.0,
+"trans_err": 33.89,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+32.33
+],
+[
+"NAUO115",
+32.33
+]
+]
+},
+{
+"cad_id": "6693e54f-cb34-6fbe-4d9d-e003ea69aae7",
+"name": "Wire Cap-68",
+"idx": 389,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+941.32,
+1269.71
+],
+"max": [
+606.51,
+943.07,
+1271.46
+],
+"best": "NAUO101",
+"box_err": 34.84,
+"rot_err": 2.0,
+"trans_err": 36.4,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+34.85
+],
+[
+"NAUO115",
+34.85
+]
+]
+},
+{
+"cad_id": "8a9cc8db-ab49-e83e-19fa-f17689e5de04",
+"name": "Wire Cap-69",
+"idx": 390,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+946.26,
+1274.69
+],
+"max": [
+606.51,
+948.01,
+1276.44
+],
+"best": "NAUO101",
+"box_err": 29.86,
+"rot_err": 2.0,
+"trans_err": 31.43,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.87
+],
+[
+"NAUO115",
+29.87
+]
+]
+},
+{
+"cad_id": "e313d5b5-f900-365d-4857-fbbf8b603561",
+"name": "Wire Cap-7",
+"idx": 73,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.75,
+882.12,
+1297.51
+],
+"max": [
+654.5,
+890.12,
+1299.26
+],
+"best": "NAUO14",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO15",
+2.53
+],
+[
+"NAUO11",
+4.96
+]
+]
+},
+{
+"cad_id": "57c78317-4be2-a3b0-193a-e1c55d4e3486",
+"name": "Wire Cap-70",
+"idx": 391,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+948.8,
+1274.7
+],
+"max": [
+606.51,
+950.55,
+1276.45
+],
+"best": "NAUO101",
+"box_err": 29.85,
+"rot_err": 2.0,
+"trans_err": 31.42,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO112",
+29.86
+],
+[
+"NAUO115",
+29.86
+]
+]
+},
+{
+"cad_id": "0d5fff6c-1a10-7251-9fe7-a4a81634d502",
+"name": "Wire Cap-71",
+"idx": 400,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1036.02,
+1274.87
+],
+"max": [
+606.51,
+1037.77,
+1276.62
+],
+"best": "NAUO124",
+"box_err": 29.78,
+"rot_err": 2.0,
+"trans_err": 31.35,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.79
+],
+[
+"NAUO110",
+29.79
+]
+]
+},
+{
+"cad_id": "b5f5d1c9-b0f5-ceb8-f914-f55a0edde189",
+"name": "Wire Cap-72",
+"idx": 401,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1038.6,
+1274.86
+],
+"max": [
+606.51,
+1040.35,
+1276.61
+],
+"best": "NAUO124",
+"box_err": 29.79,
+"rot_err": 2.0,
+"trans_err": 31.36,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.8
+],
+[
+"NAUO110",
+29.8
+]
+]
+},
+{
+"cad_id": "d925b937-5aa7-3742-451e-d60e76077ad3",
+"name": "Wire Cap-73",
+"idx": 402,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1038.6,
+1272.37
+],
+"max": [
+606.51,
+1040.35,
+1274.12
+],
+"best": "NAUO124",
+"box_err": 32.28,
+"rot_err": 2.0,
+"trans_err": 33.85,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.29
+],
+[
+"NAUO110",
+32.29
+]
+]
+},
+{
+"cad_id": "3536aca1-05fb-25fc-92d1-a5e0ed78f19a",
+"name": "Wire Cap-74",
+"idx": 403,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1038.58,
+1269.89
+],
+"max": [
+606.51,
+1040.33,
+1271.64
+],
+"best": "NAUO124",
+"box_err": 34.76,
+"rot_err": 2.0,
+"trans_err": 36.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.77
+],
+[
+"NAUO110",
+34.77
+]
+]
+},
+{
+"cad_id": "d3922068-a2d4-2f7e-25e4-6bf567c4765c",
+"name": "Wire Cap-75",
+"idx": 404,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1043.68,
+1274.88
+],
+"max": [
+606.51,
+1045.43,
+1276.63
+],
+"best": "NAUO124",
+"box_err": 29.77,
+"rot_err": 2.0,
+"trans_err": 31.34,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.78
+],
+[
+"NAUO110",
+29.78
+]
+]
+},
+{
+"cad_id": "0235f12a-edfc-83d0-6efc-10de4bf1f14b",
+"name": "Wire Cap-76",
+"idx": 405,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1043.66,
+1272.38
+],
+"max": [
+606.51,
+1045.41,
+1274.13
+],
+"best": "NAUO124",
+"box_err": 32.27,
+"rot_err": 2.0,
+"trans_err": 33.84,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+32.28
+],
+[
+"NAUO110",
+32.28
+]
+]
+},
+{
+"cad_id": "966ebc99-0d8a-e154-e8f2-efcff5015f4c",
+"name": "Wire Cap-77",
+"idx": 406,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1043.67,
+1269.88
+],
+"max": [
+606.51,
+1045.42,
+1271.63
+],
+"best": "NAUO124",
+"box_err": 34.77,
+"rot_err": 2.0,
+"trans_err": 36.33,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+34.78
+],
+[
+"NAUO110",
+34.78
+]
+]
+},
+{
+"cad_id": "0e88b9ad-ad04-0336-93c8-e452677a97f8",
+"name": "Wire Cap-78",
+"idx": 407,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1048.61,
+1274.86
+],
+"max": [
+606.51,
+1050.36,
+1276.61
+],
+"best": "NAUO124",
+"box_err": 29.79,
+"rot_err": 2.0,
+"trans_err": 31.36,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.8
+],
+[
+"NAUO110",
+29.8
+]
+]
+},
+{
+"cad_id": "292a6b21-c8ba-e29e-ffde-d952b00d3a85",
+"name": "Wire Cap-79",
+"idx": 408,
+"hidden": false,
+"nsolids": 1,
+"min": [
+598.51,
+1051.14,
+1274.85
+],
+"max": [
+606.51,
+1052.89,
+1276.6
+],
+"best": "NAUO124",
+"box_err": 29.8,
+"rot_err": 2.0,
+"trans_err": 31.37,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO107",
+29.81
+],
+[
+"NAUO110",
+29.81
+]
+]
+},
+{
+"cad_id": "f36db2ac-65bc-956d-bde3-4a202e7434d5",
+"name": "Wire Cap-8",
+"idx": 74,
+"hidden": false,
+"nsolids": 1,
+"min": [
+652.75,
+882.12,
+1294.98
+],
+"max": [
+654.5,
+890.12,
+1296.73
+],
+"best": "NAUO15",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO14",
+2.53
+],
+[
+"NAUO10",
+2.55
+]
+]
+},
+{
+"cad_id": "a15ee722-cbf0-e021-e5e3-dd44975648b0",
+"name": "Wire Cap-80",
+"idx": 419,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.26,
+1070.08,
+1311.21
+],
+"max": [
+565.73,
+1072.54,
+1319.21
+],
+"best": "NAUO103",
+"box_err": 42.0,
+"rot_err": 1.0,
+"trans_err": 40.72,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+44.26
+],
+[
+"NAUO105",
+44.26
+]
+]
+},
+{
+"cad_id": "2581cd37-0505-c172-f091-621b67f54c54",
+"name": "Wire Cap-81",
+"idx": 422,
+"hidden": false,
+"nsolids": 1,
+"min": [
+561.73,
+1068.25,
+1311.21
+],
+"max": [
+564.19,
+1070.72,
+1319.21
+],
+"best": "NAUO103",
+"box_err": 43.54,
+"rot_err": 1.0,
+"trans_err": 42.25,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+45.8
+],
+[
+"NAUO105",
+45.8
+]
+]
+},
+{
+"cad_id": "51da9f64-911b-b4c7-d577-b5739c11a270",
+"name": "Wire Cap-82",
+"idx": 423,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.17,
+1066.4,
+1311.21
+],
+"max": [
+562.64,
+1068.86,
+1319.21
+],
+"best": "NAUO103",
+"box_err": 45.1,
+"rot_err": 1.0,
+"trans_err": 43.81,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+47.36
+],
+[
+"NAUO105",
+47.36
+]
+]
+},
+{
+"cad_id": "cf8a6ec6-dd3f-477f-426e-d3e48fa0aac3",
+"name": "Wire Cap-83",
+"idx": 424,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.64,
+1064.57,
+1311.22
+],
+"max": [
+561.11,
+1067.04,
+1319.22
+],
+"best": "NAUO103",
+"box_err": 46.62,
+"rot_err": 1.0,
+"trans_err": 45.34,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+48.88
+],
+[
+"NAUO105",
+48.88
+]
+]
+},
+{
+"cad_id": "466070ae-8daf-9296-c1a1-e99ce3ab1f47",
+"name": "Wire Cap-84",
+"idx": 431,
+"hidden": false,
+"nsolids": 1,
+"min": [
+563.09,
+1032.93,
+1311.22
+],
+"max": [
+565.55,
+1035.4,
+1319.22
+],
+"best": "NAUO103",
+"box_err": 42.18,
+"rot_err": 1.0,
+"trans_err": 40.89,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+44.44
+],
+[
+"NAUO105",
+44.44
+]
+]
+},
+{
+"cad_id": "770d0e54-442f-a38e-6686-5ecc973d849e",
+"name": "Wire Cap-85",
+"idx": 432,
+"hidden": false,
+"nsolids": 1,
+"min": [
+561.54,
+1031.09,
+1311.22
+],
+"max": [
+564.01,
+1033.56,
+1319.22
+],
+"best": "NAUO103",
+"box_err": 43.73,
+"rot_err": 1.0,
+"trans_err": 42.44,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO104",
+45.99
+],
+[
+"NAUO105",
+45.99
+]
+]
+},
+{
+"cad_id": "eefd98cb-ddd5-e27a-fde3-d0a9f6961e96",
+"name": "Wire Cap-86",
+"idx": 433,
+"hidden": false,
+"nsolids": 1,
+"min": [
+560.0,
+1029.25,
+1311.22
+],
+"max": [
+562.46,
+1031.72,
+1319.22
+],
+"best": "NAUO259",
+"box_err": 44.78,
+"rot_err": 0.0,
+"trans_err": 44.77,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO103",
+45.27
+],
+[
+"NAUO260",
+46.61
+]
+]
+},
+{
+"cad_id": "10105406-78aa-748c-d562-4531be720c95",
+"name": "Wire Cap-87",
+"idx": 434,
+"hidden": false,
+"nsolids": 1,
+"min": [
+558.46,
+1027.42,
+1311.22
+],
+"max": [
+560.92,
+1029.88,
+1319.22
+],
+"best": "NAUO259",
+"box_err": 42.94,
+"rot_err": 0.0,
+"trans_err": 42.93,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO260",
+44.78
+],
+[
+"NAUO261",
+46.62
+]
+]
+},
+{
+"cad_id": "4125a294-eddb-8110-db07-25daa16328ef",
+"name": "Wire Cap-88",
+"idx": 436,
+"hidden": false,
+"nsolids": 1,
+"min": [
+535.86,
+958.33,
+1218.77
+],
+"max": [
+538.32,
+960.79,
+1226.77
+],
+"best": "NAUO134",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO135",
+1.95
+],
+[
+"NAUO136",
+3.91
+]
+]
+},
+{
+"cad_id": "9159e162-536b-c25b-93d2-c9dc4db1a44c",
+"name": "Wire Cap-89",
+"idx": 437,
+"hidden": false,
+"nsolids": 1,
+"min": [
+534.22,
+956.38,
+1218.81
+],
+"max": [
+536.68,
+958.84,
+1226.81
+],
+"best": "NAUO135",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO134",
+1.95
+],
+[
+"NAUO136",
+1.96
+]
+]
+},
+{
+"cad_id": "5b126aa3-c32d-f8aa-287b-9125ef4fa585",
+"name": "Wire Cap-90",
+"idx": 438,
+"hidden": false,
+"nsolids": 1,
+"min": [
+532.58,
+954.43,
+1218.8
+],
+"max": [
+535.04,
+956.9,
+1226.8
+],
+"best": "NAUO136",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO137",
+1.79
+],
+[
+"NAUO135",
+1.96
+]
+]
+},
+{
+"cad_id": "c54d688e-4ea8-c515-3b01-c51ea17577ff",
+"name": "Wire Cap-91",
+"idx": 439,
+"hidden": false,
+"nsolids": 1,
+"min": [
+530.79,
+952.64,
+1218.76
+],
+"max": [
+533.25,
+955.11,
+1226.76
+],
+"best": "NAUO137",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO136",
+1.79
+],
+[
+"NAUO138",
+2.01
+]
+]
+},
+{
+"cad_id": "f95f5de9-676c-24dd-fd90-73cd35c877a3",
+"name": "Wire Cap-93",
+"idx": 441,
+"hidden": false,
+"nsolids": 1,
+"min": [
+529.2,
+950.63,
+1218.77
+],
+"max": [
+531.66,
+953.1,
+1226.77
+],
+"best": "NAUO138",
+"box_err": 0.0,
+"rot_err": 0.0,
+"trans_err": 0.0,
+"glb_kind": "Wire Cap",
+"others": [
+[
+"NAUO137",
+2.01
+],
+[
+"NAUO136",
+3.8
+]
+]
+}
+]

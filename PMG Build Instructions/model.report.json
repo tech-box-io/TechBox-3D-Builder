@@ -1,0 +1,725 @@
+{
+ "summary": {
+  "source": "pmg-guide.glb",
+  "source_bytes": 16654696,
+  "model_bytes": 1440216,
+  "triangles_in": 825974,
+  "triangles_out": 185779,
+  "edge_segments": 113077,
+  "meshes": 52,
+  "parts_kept": 69,
+  "parts_in_source": 69,
+  "materials": [
+   "edge",
+   "ink",
+   "wood",
+   "pcb_navy",
+   "header_black",
+   "pin",
+   "black_plastic",
+   "cap_black",
+   "#181818",
+   "#a6a9aa",
+   "#c0c0c0",
+   "header_yellow",
+   "metal_can",
+   "#a5926d",
+   "#cccecc",
+   "#a5936d",
+   "#d8d8d8",
+   "#191919",
+   "ic_black",
+   "led_face",
+   "led_white",
+   "pcb_blue",
+   "cap_yellow",
+   "cap_white",
+   "cap_blue",
+   "jumper_cap",
+   "white_plastic",
+   "#000f41",
+   "#d3d6d3",
+   "#e4e4e4",
+   "#efefef"
+  ],
+  "wire_colour_breaks": []
+ },
+ "meshes": [
+  {
+   "mesh": "H6",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 872,
+   "tris_out": 872,
+   "edge_segments": 323,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1040,
+   "tris_out": 1040,
+   "edge_segments": 337,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H11v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1228,
+   "tris_out": 1228,
+   "edge_segments": 624,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 392,
+   "tris_out": 392,
+   "edge_segments": 173,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H10",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 964,
+   "tris_out": 964,
+   "edge_segments": 362,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2368,
+   "tris_out": 2368,
+   "edge_segments": 1147,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H3",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 3184,
+   "tris_out": 3184,
+   "edge_segments": 1489,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1064,
+   "tris_out": 1064,
+   "edge_segments": 496,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H7",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 240,
+   "tris_out": 240,
+   "edge_segments": 101,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H9",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 992,
+   "tris_out": 992,
+   "edge_segments": 340,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm (2 sliver corners eased)"
+  },
+  {
+   "mesh": "H4v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 916,
+   "tris_out": 916,
+   "edge_segments": 478,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H14",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 680,
+   "tris_out": 680,
+   "edge_segments": 314,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "H13v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1156,
+   "tris_out": 1156,
+   "edge_segments": 418,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "Board^Big Button Module_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "pcb_navy"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Socket_Blok",
+   "used_by": 16,
+   "solids": 2,
+   "tris_in": 156,
+   "tris_out": 96,
+   "edge_segments": 70,
+   "colours": [
+    "header_black",
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Tactal Switch - THRU(12mmx12mmx8mm)-Blue.stp_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+   "used_by": 4,
+   "solids": 21,
+   "tris_in": 11168,
+   "tris_out": 1690,
+   "edge_segments": 530,
+   "colours": [
+    "black_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Push_Button_Cap black",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 5596,
+   "tris_out": 890,
+   "edge_segments": 299,
+   "colours": [
+    "cap_black"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "H12v2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1528,
+   "tris_out": 1528,
+   "edge_segments": 699,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "Shield_Arduino NANO",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 6220,
+   "tris_out": 2162,
+   "edge_segments": 1019,
+   "colours": [
+    "pcb_navy"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "User Library-PJ-002AH_Body",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 994,
+   "tris_out": 534,
+   "edge_segments": 329,
+   "colours": [
+    "#181818"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "User Library-PJ-002AH_Pad",
+   "used_by": 1,
+   "solids": 4,
+   "tris_in": 1108,
+   "tris_out": 352,
+   "edge_segments": 182,
+   "colours": [
+    "#a6a9aa",
+    "#c0c0c0"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Samtec-TLW-103-01-F-S",
+   "used_by": 2,
+   "solids": 2,
+   "tris_in": 692,
+   "tris_out": 692,
+   "edge_segments": 544,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "280 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-SSW-115-01-F-S",
+   "used_by": 2,
+   "solids": 1,
+   "tris_in": 1332,
+   "tris_out": 1332,
+   "edge_segments": 972,
+   "colours": [
+    "#181818"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "47uf CAP Dcase",
+   "used_by": 1,
+   "solids": 15,
+   "tris_in": 9528,
+   "tris_out": 2777,
+   "edge_segments": 889,
+   "colours": [
+    "black_plastic",
+    "metal_can"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "m7 diode",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2528,
+   "tris_out": 634,
+   "edge_segments": 381,
+   "colours": [
+    "#a5926d"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "smt_resistor222_a",
+   "used_by": 3,
+   "solids": 1,
+   "tris_in": 4060,
+   "tris_out": 388,
+   "edge_segments": 109,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "nano - reg",
+   "used_by": 1,
+   "solids": 9,
+   "tris_in": 4097,
+   "tris_out": 1455,
+   "edge_segments": 646,
+   "colours": [
+    "#181818",
+    "#a6a9aa",
+    "#cccecc"
+   ],
+   "note": "atlas match 100%; 2318 faces under a skin recoloured"
+  },
+  {
+   "mesh": "cap106C",
+   "used_by": 2,
+   "solids": 8,
+   "tris_in": 6743,
+   "tris_out": 1244,
+   "edge_segments": 316,
+   "colours": [
+    "#a5936d",
+    "#a6a9aa",
+    "#cccecc"
+   ],
+   "note": "atlas match 100%; 3691 faces under a skin recoloured"
+  },
+  {
+   "mesh": "led",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1870,
+   "tris_out": 440,
+   "edge_segments": 99,
+   "colours": [
+    "#a6a9aa",
+    "#d8d8d8"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "reset core",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1900,
+   "tris_out": 532,
+   "edge_segments": 198,
+   "colours": [
+    "#191919"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "reset shell",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1064,
+   "tris_out": 402,
+   "edge_segments": 251,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "blm21",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1674,
+   "tris_out": 312,
+   "edge_segments": 90,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_N",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 920,
+   "tris_out": 920,
+   "edge_segments": 724,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "372 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_R",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 908,
+   "tris_out": 908,
+   "edge_segments": 750,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "360 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_B",
+   "used_by": 4,
+   "solids": 2,
+   "tris_in": 920,
+   "tris_out": 920,
+   "edge_segments": 724,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "372 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-104-01-F-S_W",
+   "used_by": 2,
+   "solids": 2,
+   "tris_in": 906,
+   "tris_out": 906,
+   "edge_segments": 755,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "358 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_B",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1800,
+   "tris_out": 1800,
+   "edge_segments": 1508,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "708 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_R",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1768,
+   "tris_out": 1768,
+   "edge_segments": 1588,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "676 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Samtec-TLW-108-01-F-S_N",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1844,
+   "tris_out": 1843,
+   "edge_segments": 1464,
+   "colours": [
+    "header_yellow",
+    "pin"
+   ],
+   "note": "750 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Display TM1637_\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e",
+   "used_by": 1,
+   "solids": 41,
+   "tris_in": 3256,
+   "tris_out": 2162,
+   "edge_segments": 1943,
+   "colours": [
+    "ic_black",
+    "led_face",
+    "led_white",
+    "pcb_blue",
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "PCB",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 20652,
+   "tris_out": 5372,
+   "edge_segments": 2524,
+   "colours": [
+    "pcb_blue"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.048
+  },
+  {
+   "mesh": "90 5xHeader Pins",
+   "used_by": 1,
+   "solids": 11,
+   "tris_in": 1504,
+   "tris_out": 856,
+   "edge_segments": 655,
+   "colours": [
+    "header_black",
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "1088AS",
+   "used_by": 4,
+   "solids": 79,
+   "tris_in": 26976,
+   "tris_out": 11400,
+   "edge_segments": 10731,
+   "colours": [
+    "ink",
+    "led_face",
+    "led_white",
+    "pin"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.048
+  },
+  {
+   "mesh": "8x female rounded header",
+   "used_by": 8,
+   "solids": 1,
+   "tris_in": 14462,
+   "tris_out": 2196,
+   "edge_segments": 895,
+   "colours": [
+    "header_black"
+   ],
+   "note": "",
+   "tolerance_relaxed_to_mm": 0.4
+  },
+  {
+   "mesh": "MAX7219--3DModel-STEP-56544_D\u00e9faut",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 964,
+   "tris_out": 844,
+   "edge_segments": 524,
+   "colours": [
+    "ic_black"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Push_Button_Cap yellow",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 5596,
+   "tris_out": 890,
+   "edge_segments": 299,
+   "colours": [
+    "cap_yellow"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Push_Button_Cap white",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 5596,
+   "tris_out": 890,
+   "edge_segments": 299,
+   "colours": [
+    "cap_white"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Push_Button_Cap blue",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 5596,
+   "tris_out": 890,
+   "edge_segments": 299,
+   "colours": [
+    "cap_blue"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Wire Cap",
+   "used_by": 42,
+   "solids": 1,
+   "tris_in": 316,
+   "tris_out": 128,
+   "edge_segments": 76,
+   "colours": [
+    "jumper_cap"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "USB Right Angle",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 3592,
+   "tris_out": 1162,
+   "edge_segments": 539,
+   "colours": [
+    "black_plastic",
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "USB Cable end",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 8128,
+   "tris_out": 3095,
+   "edge_segments": 1761,
+   "colours": [
+    "black_plastic",
+    "pin",
+    "white_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "nano_Varsay\u0131lan",
+   "used_by": 1,
+   "solids": 273,
+   "tris_in": 380001,
+   "tris_out": 34193,
+   "edge_segments": 14541,
+   "colours": [
+    "#000f41",
+    "#181818",
+    "#191919",
+    "#a5936d",
+    "#a6a9aa",
+    "#d3d6d3",
+    "#e4e4e4",
+    "#efefef",
+    "pin"
+   ],
+   "note": "atlas match 100%; 141247 faces under a skin recoloured"
+  }
+ ]
+}

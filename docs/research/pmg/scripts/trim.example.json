@@ -1,0 +1,40 @@
+{
+ "_about": "PROPOSAL for 'PMG Build Instructions/trim.json' (read by trim_source.py): the parts the PMG Full Build shows, one copy each, where each sits when the game is built. Every other position the engineer modelled is a pose of these (docs/research/pmg/reuse_poses.json). Wire and cable bodies are left out: the player draws them from wire-paths.json, measured from the full pmg.glb first. Remove 'base' when this file sits in the kit folder.",
+ "base": "../../../../PMG Build Instructions",
+ "source": "pmg.glb",
+ "out": "pmg-guide.glb",
+ "keep": [
+  "NAUO78",
+  "NAUO76", "NAUO83", "NAUO84", "NAUO85",
+  "NAUO79",
+  "NAUO81",
+  "NAUO60", "NAUO61", "NAUO62", "NAUO63", "NAUO64", "NAUO65", "NAUO66", "NAUO67", "NAUO68",
+  "NAUO69", "NAUO70", "NAUO71", "NAUO72", "NAUO73", "NAUO74", "NAUO75", "NAUO77",
+  "NAUO282", "NAUO278",
+  "NAUO95", "NAUO96", "NAUO97", "NAUO98", "NAUO99", "NAUO100", "NAUO101", "NAUO102",
+  "NAUO111", "NAUO112", "NAUO113", "NAUO114", "NAUO115", "NAUO116", "NAUO117", "NAUO118", "NAUO119",
+  "NAUO86", "NAUO87", "NAUO88", "NAUO89", "NAUO90", "NAUO91", "NAUO92", "NAUO93",
+  "NAUO259", "NAUO260", "NAUO261", "NAUO262",
+  "NAUO134", "NAUO135", "NAUO136", "NAUO137", "NAUO138"
+ ],
+ "_keep_about": "NAUO78 the I/O module on H4; NAUO76 / 83 / 84 / 85 the buttons in the case (black, yellow, white, blue caps: D4 - D7); NAUO79 the 4-digit display on its brackets; NAUO81 the LED matrix in the case; NAUO60 - 75 and 77 the wood, H1 - H14 with four H9 keys (69 - 72); NAUO282 the right-angle Mini-B end plugged into the Nano on NAUO78; NAUO278 the USB A end (where it rests is the guide's choice); 34 jumper caps on the built parts' pins: 17 on NAUO78 (95 - 102, 111 - 119), 8 on the buttons (86 - 93), 4 on the display (259 - 262), 5 on the matrix (134 - 138).",
+ "drop": {
+  "NAUO78": ["NAUO301"]
+ },
+ "_drop_about": "NAUO301 is the plain Nano model (34 meshes, 213,141 vertices) that the I/O module's CAD carries inside it, the same as the RCC's car Nano NAUO86. The guide fits the MRA's Nano model instead (graft NANO below, or extra_parts).",
+ "rename": {
+  "NAUO76": {"Push_Button_Cap.step_По умолчанию": "Push_Button_Cap black"},
+  "NAUO83": {"Push_Button_Cap.step_По умолчанию": "Push_Button_Cap yellow"},
+  "NAUO84": {"Push_Button_Cap.step_По умолчанию": "Push_Button_Cap white"},
+  "NAUO85": {"Push_Button_Cap.step_По умолчанию": "Push_Button_Cap blue"}
+ },
+ "_rename_about": "the four caps are one mesh in the CAD (byte for byte): build_model.py shares identical geometry under one name, so without a name each, all four would take one colour. Colours from TechBox's PMG Cadasio project, matched by place.",
+ "graft": {
+  "NANO": {
+   "glb": "../MRA Build Instructions Prototype/mra.glb",
+   "node": "NAUO126",
+   "pose": {"t": [490.546, 1077.982, 1360.501], "r": [0.57735, 0.57735, -0.57735, 120.0], "at": [0, 0, 0]}
+  }
+ },
+ "_graft_about": "the MRA's Nano Board (mra.glb NAUO126, the export the RCC also uses) carried by the transform that takes the MRA's I/O module onto NAUO78 (exact on all 36 of the module's meshes): it lands in the module's sockets, its board where the CAD's own plain Nano board is (to 0.01 mm). Named NANO: pmg.glb already has a part called NAUO126 (a jumper cap). Leave this out and use materials.json extra_parts instead if preferred (docs/research/pmg/reuse_plan.md 2.2)."
+}

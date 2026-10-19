@@ -1,0 +1,113 @@
+{
+ "kit": "Piano Memory Game (PMG)",
+ "part": "Full Build",
+ "image_size": 500,
+ "model": "20bdcec81efb",
+ "parts": [
+  {
+   "name": "Nano I/O Module",
+   "quantity": 1,
+   "image": "Nano-I-O-Module.png"
+  },
+  {
+   "name": "Nano Board",
+   "quantity": 1,
+   "image": "Nano-Board.png"
+  },
+  {
+   "name": "Push Button",
+   "quantity": 4,
+   "image": "Push-Button.png"
+  },
+  {
+   "name": "4-Digit Display",
+   "quantity": 1,
+   "image": "4-Digit-Display.png"
+  },
+  {
+   "name": "Dot Matrix Display",
+   "quantity": 1,
+   "image": "Dot-Matrix-Display.png"
+  },
+  {
+   "name": "Breadboard Wire (F-F)",
+   "quantity": 21,
+   "image": "Breadboard-Wire-F-F.png"
+  },
+  {
+   "name": "USB Cable",
+   "quantity": 1,
+   "image": "USB-Cable.png"
+  },
+  {
+   "name": "H1",
+   "quantity": 1,
+   "image": "H1.png"
+  },
+  {
+   "name": "H2",
+   "quantity": 1,
+   "image": "H2.png"
+  },
+  {
+   "name": "H3",
+   "quantity": 1,
+   "image": "H3.png"
+  },
+  {
+   "name": "H4",
+   "quantity": 1,
+   "image": "H4.png"
+  },
+  {
+   "name": "H5",
+   "quantity": 1,
+   "image": "H5.png"
+  },
+  {
+   "name": "H6",
+   "quantity": 1,
+   "image": "H6.png"
+  },
+  {
+   "name": "H7",
+   "quantity": 1,
+   "image": "H7.png"
+  },
+  {
+   "name": "H8",
+   "quantity": 1,
+   "image": "H8.png"
+  },
+  {
+   "name": "H9",
+   "quantity": 4,
+   "image": "H9.png"
+  },
+  {
+   "name": "H10",
+   "quantity": 1,
+   "image": "H10.png"
+  },
+  {
+   "name": "H11",
+   "quantity": 1,
+   "image": "H11.png"
+  },
+  {
+   "name": "H12",
+   "quantity": 1,
+   "image": "H12.png"
+  },
+  {
+   "name": "H13",
+   "quantity": 1,
+   "image": "H13.png"
+  },
+  {
+   "name": "H14",
+   "quantity": 1,
+   "image": "H14.png"
+  }
+ ]
+}
