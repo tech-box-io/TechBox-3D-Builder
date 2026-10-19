@@ -1,0 +1,93 @@
+{
+ "kit": "LCD Alarm Clock (LAC)",
+ "part": "Full Build",
+ "image_size": 500,
+ "model": "24d041d7fa95",
+ "parts": [
+  {
+   "name": "Breadboard",
+   "quantity": 1,
+   "image": "Breadboard.png"
+  },
+  {
+   "name": "F3",
+   "quantity": 1,
+   "image": "F3.png"
+  },
+  {
+   "name": "Nano Board",
+   "quantity": 1,
+   "image": "Nano-Board.png"
+  },
+  {
+   "name": "Resistor",
+   "quantity": 2,
+   "image": "Resistor.png"
+  },
+  {
+   "name": "Real Time Clock",
+   "quantity": 1,
+   "image": "Real-Time-Clock.png"
+  },
+  {
+   "name": "Breadboard Wire (M-M)",
+   "quantity": 8,
+   "image": "Breadboard-Wire-M-M.png"
+  },
+  {
+   "name": "Breadboard Wire (M-F)",
+   "quantity": 4,
+   "image": "Breadboard-Wire-M-F.png"
+  },
+  {
+   "name": "F4",
+   "quantity": 1,
+   "image": "F4.png"
+  },
+  {
+   "name": "Rocker Switch",
+   "quantity": 1,
+   "image": "Rocker-Switch.png"
+  },
+  {
+   "name": "Potentiometer",
+   "quantity": 1,
+   "image": "Potentiometer.png"
+  },
+  {
+   "name": "F1",
+   "quantity": 1,
+   "image": "F1.png"
+  },
+  {
+   "name": "Alarm Buzzer",
+   "quantity": 1,
+   "image": "Alarm-Buzzer.png"
+  },
+  {
+   "name": "LCD Screen",
+   "quantity": 1,
+   "image": "LCD-Screen.png"
+  },
+  {
+   "name": "USB Cable",
+   "quantity": 1,
+   "image": "USB-Cable.png"
+  },
+  {
+   "name": "F7",
+   "quantity": 2,
+   "image": "F7.png"
+  },
+  {
+   "name": "F9",
+   "quantity": 1,
+   "image": "F9.png"
+  },
+  {
+   "name": "F8",
+   "quantity": 1,
+   "image": "F8.png"
+  }
+ ]
+}

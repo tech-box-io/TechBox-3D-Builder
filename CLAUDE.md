@@ -388,6 +388,11 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                wire-paths.json, silkscreen.py -> decals.json, nano-mra.glb = the MRA's export of the Nano model, for both
                                of the RCC's Nano Boards (tools/cut_part.py), usb-a-end.glb). Research: docs/research/rcc/.
                                Commands as for the MRA with the folder name changed (server on port 8796: "Open Prototype.command").
+    LAC Build Instructions/    the LCD Alarm Clock (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lac.json, wire-paths.json,
+                               lac.glb from "LAC Full Build.STEP" (the engineer's export, every part in several posed copies), cut down by the
+                               kit's trim_source.py to lac-guide.glb (the parts the guide uses: the source both tools read); nano-mra.glb and
+                               usb-a-end.glb (the MRA's), f4.glb (F4 seated: the STEP has it only lying beside the base). The STEP has no
+                               F2, F5, F6 yet (README.txt). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
 
 ## Conventions in the code
 

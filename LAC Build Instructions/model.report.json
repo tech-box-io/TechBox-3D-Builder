@@ -1,0 +1,496 @@
+{
+ "summary": {
+  "source": "lac-guide.glb",
+  "source_bytes": 7431252,
+  "model_bytes": 1470156,
+  "triangles_in": 723280,
+  "triangles_out": 133321,
+  "edge_segments": 65670,
+  "meshes": 33,
+  "parts_kept": 55,
+  "parts_in_source": 55,
+  "materials": [
+   "edge",
+   "#000000",
+   "#0074d9",
+   "#ff0e00",
+   "#ffffff",
+   "ink",
+   "wood",
+   "#191919",
+   "#84694b",
+   "#a0a0a0",
+   "#a6a9aa",
+   "#c4c5c4",
+   "#f4e5a7",
+   "pin",
+   "#a36315",
+   "#855e42",
+   "#1e1616",
+   "#181818",
+   "#2d2926",
+   "#ef3340",
+   "#1a7e26",
+   "#c0c0c0",
+   "#404040",
+   "grey",
+   "#cad1ed",
+   "#aaaaaa",
+   "#0064d8",
+   "#e1e1e1",
+   "#e6e6e6",
+   "#cccccc",
+   "backing_grey",
+   "#000f41",
+   "#a5936d",
+   "#d3d6d3",
+   "#e4e4e4",
+   "#efefef",
+   "black_plastic",
+   "white_plastic"
+  ],
+  "wire_colour_breaks": []
+ },
+ "meshes": [
+  {
+   "mesh": "Breadboard",
+   "used_by": 1,
+   "solids": 133,
+   "tris_in": 56640,
+   "tris_out": 22370,
+   "edge_segments": 18419,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#ff0e00",
+    "#ffffff"
+   ],
+   "note": "atlas match 99%"
+  },
+  {
+   "mesh": "F3",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 2419,
+   "tris_out": 2419,
+   "edge_segments": 1037,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "HW-84 v7",
+   "used_by": 1,
+   "solids": 75,
+   "tris_in": 19018,
+   "tris_out": 7518,
+   "edge_segments": 3649,
+   "colours": [
+    "#0074d9",
+    "#191919",
+    "#84694b",
+    "#a0a0a0",
+    "#a6a9aa",
+    "#c4c5c4",
+    "#f4e5a7"
+   ],
+   "note": "atlas match 87%"
+  },
+  {
+   "mesh": "CR2025-50003LC",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 14152,
+   "tris_out": 3292,
+   "edge_segments": 1485,
+   "colours": [
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LAC Resistor 1",
+   "used_by": 2,
+   "solids": 6,
+   "tris_in": 9914,
+   "tris_out": 2191,
+   "edge_segments": 222,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#a36315",
+    "#ff0e00"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Resistor stem 3",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 1172,
+   "tris_out": 252,
+   "edge_segments": 35,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "F1",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 1964,
+   "tris_out": 1964,
+   "edge_segments": 998,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LAC Potentiometer",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 11368,
+   "tris_out": 3976,
+   "edge_segments": 1706,
+   "colours": [
+    "#855e42",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "LAC Nut",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 10834,
+   "tris_out": 2167,
+   "edge_segments": 471,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LAC Knob",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 4440,
+   "tris_out": 1690,
+   "edge_segments": 1021,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Wire Cap V2",
+   "used_by": 28,
+   "solids": 2,
+   "tris_in": 1104,
+   "tris_out": 262,
+   "edge_segments": 118,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "F7",
+   "used_by": 2,
+   "solids": 3,
+   "tris_in": 1528,
+   "tris_out": 1528,
+   "edge_segments": 744,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "F8",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 1331,
+   "tris_out": 1331,
+   "edge_segments": 373,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "F9",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 1692,
+   "tris_out": 1692,
+   "edge_segments": 637,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "Rocker Switch",
+   "used_by": 1,
+   "solids": 7,
+   "tris_in": 4723,
+   "tris_out": 1246,
+   "edge_segments": 592,
+   "colours": [
+    "#181818",
+    "#1e1616",
+    "#ffffff"
+   ],
+   "note": "atlas match 86%"
+  },
+  {
+   "mesh": "Piezo Buzzer",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 11650,
+   "tris_out": 3653,
+   "edge_segments": 1532,
+   "colours": [
+    "#1e1616",
+    "#2d2926",
+    "#ef3340"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "LCD2004 IIC_I2C, 20x4.STEP",
+   "used_by": 1,
+   "solids": 39,
+   "tris_in": 46972,
+   "tris_out": 9856,
+   "edge_segments": 3445,
+   "colours": [
+    "#1a7e26",
+    "#1e1616",
+    "#a6a9aa",
+    "#c0c0c0"
+   ],
+   "note": "atlas match 49%"
+  },
+  {
+   "mesh": "Kol_kov_ li_ta p__m_ kr_tk_ - 2,54mm_16.STEP",
+   "used_by": 1,
+   "solids": 33,
+   "tris_in": 10642,
+   "tris_out": 3534,
+   "edge_segments": 1714,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 97%"
+  },
+  {
+   "mesh": "SO16W.STEP",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 3840,
+   "tris_out": 1162,
+   "edge_segments": 637,
+   "colours": [
+    "#404040"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "SMD rezistory_0603.STEP",
+   "used_by": 10,
+   "solids": 1,
+   "tris_in": 2414,
+   "tris_out": 238,
+   "edge_segments": 137,
+   "colours": [
+    "grey"
+   ],
+   "note": "atlas match 0% (too low, fell back to rules)"
+  },
+  {
+   "mesh": "SMD rezistory_1206.STEP",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2514,
+   "tris_out": 264,
+   "edge_segments": 145,
+   "colours": [
+    "#cad1ed"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "SMD rezistory_0805.STEP",
+   "used_by": 7,
+   "solids": 1,
+   "tris_in": 2224,
+   "tris_out": 316,
+   "edge_segments": 150,
+   "colours": [
+    "grey"
+   ],
+   "note": "atlas match 0% (too low, fell back to rules)"
+  },
+  {
+   "mesh": "Kol_kov_ li_ta _hlov_ R2 kr_tk_ - 2,54mm_4.STEP",
+   "used_by": 1,
+   "solids": 9,
+   "tris_in": 2874,
+   "tris_out": 990,
+   "edge_segments": 480,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa",
+    "#aaaaaa",
+    "#cad1ed"
+   ],
+   "note": "atlas match 89%"
+  },
+  {
+   "mesh": "TRIMR - 10K, BOURNS 3362P-103LF.STEP",
+   "used_by": 1,
+   "solids": 4,
+   "tris_in": 14058,
+   "tris_out": 1872,
+   "edge_segments": 990,
+   "colours": [
+    "#0064d8",
+    "#e1e1e1"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "SOT23-3.STEP",
+   "used_by": 1,
+   "solids": 4,
+   "tris_in": 2458,
+   "tris_out": 292,
+   "edge_segments": 130,
+   "colours": [
+    "#e6e6e6"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Part10^LCD V1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "#cccccc"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Wire Cap",
+   "used_by": 4,
+   "solids": 1,
+   "tris_in": 316,
+   "tris_out": 132,
+   "edge_segments": 78,
+   "colours": [
+    "#1e1616"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "USB Right Angle",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 3592,
+   "tris_out": 1157,
+   "edge_segments": 535,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Paper",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "backing_grey"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Washer",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 6900,
+   "tris_out": 1068,
+   "edge_segments": 412,
+   "colours": [
+    "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "nano_Varsay\u0131lan",
+   "used_by": 1,
+   "solids": 273,
+   "tris_in": 380001,
+   "tris_out": 34193,
+   "edge_segments": 14541,
+   "colours": [
+    "#000f41",
+    "#181818",
+    "#191919",
+    "#a5936d",
+    "#a6a9aa",
+    "#d3d6d3",
+    "#e4e4e4",
+    "#efefef",
+    "pin"
+   ],
+   "note": "atlas match 100%; 141247 faces under a skin recoloured"
+  },
+  {
+   "mesh": "USBCableend",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 8128,
+   "tris_out": 3099,
+   "edge_segments": 1767,
+   "colours": [
+    "black_plastic",
+    "pin",
+    "white_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "F4",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 1590,
+   "tris_out": 1590,
+   "edge_segments": 822,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  }
+ ]
+}

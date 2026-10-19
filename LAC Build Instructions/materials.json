@@ -1,0 +1,216 @@
+{
+  "_about": "Colour and detail rules for the LAC's 3D model. Edit here, then run: python tools/build_model.py \"LAC Build Instructions\". Rules are tried top to bottom against each CAD mesh name; the first match wins. A mesh whose rule names no colour takes its colours from the \"atlas\" file (colour-atlas-lac.json): the MRA's atlas for the Nano Board the two kits share, and TechBox's own LAC Cadasio project for the rest. A rule that does name a colour is a TechBox decision or a house-library colour that overrides it (see _notes). First draft, 19 Oct 2026.",
+  "source": "lac-guide.glb",
+  "source_scale_to_mm": 1000,
+  "palette": {
+    "edge": "#111111",
+    "wood": "#deb887",
+    "steel": "#a6a9aa",
+    "black_plastic": "#1e1616",
+    "white_plastic": "#f5f5f6",
+    "pin": "#a6a9aa",
+    "ink": "#1e1616",
+    "grey": "#a6a9aa",
+    "backing_grey": "#aaaaaa",
+    "cable_black": "#2d2926",
+    "jumper_black": "#2d2926",
+    "jumper_green": "#10cc62",
+    "jumper_purple": "#611b6c",
+    "jumper_blue": "#0074d9",
+    "jumper_white": "#cccccc",
+    "jumper_dark_red": "#800000",
+    "jumper_orange": "#ff851b",
+    "jumper_yellow": "#eac80d",
+    "jumper_teal": "#13a3a3",
+    "lead_red": "#ef3340",
+    "lead_tan": "#b28362",
+    "lead_black": "#2d2926"
+  },
+  "defaults": {
+    "color": "grey",
+    "edge_angle": 40,
+    "simplify_mm": 0.04,
+    "edge_min_size_mm": 0.0
+  },
+  "rules": [
+    {
+      "match": "^(Part\\d+\\^(LAC Full Build|LAC Wire Cables)|Copy of Part\\d+\\^LAC Full Build)$",
+      "omit": true,
+      "_about": "the CAD's own wire bodies (the jumpers, the switch's, potentiometer's and buzzer's leads, the LCD's wires and the USB cable, in every pose the CAD has them): the player draws every wire itself, along the centre lines in wire-paths.json, so that it can move. Not the Dupont caps on their ends (Wire Cap / Wire Cap V2), which are parts."
+    },
+    {
+      "match": "^Part6\\^LAC Resistor 1\\.SLDPRT$",
+      "omit": true,
+      "_about": "each resistor's two straight legs: the CAD carries the legs both straight (as bought) and bent (Resistor stem 3, as they go into the breadboard), one over the other; the guide shows them bent"
+    },
+    {
+      "match": "^nano_",
+      "simplify_mm": 0.06,
+      "edge_min_size_mm": 2.0,
+      "max_tris": 16000,
+      "atlas_colours": {
+        "#cccccc": "pin"
+      },
+      "_about": "the Nano Board: the MRA's export of the same Nano model (nano-mra.glb, extra part NANO), with the MRA's rule and atlas entry"
+    },
+    {
+      "match": "^USBCableend$",
+      "color": "black_plastic",
+      "components": [
+        {
+          "rank": 1,
+          "color": "pin"
+        },
+        {
+          "rank": 2,
+          "color": "white_plastic"
+        },
+        {
+          "rank": [
+            3,
+            4
+          ],
+          "color": "pin"
+        }
+      ],
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "the USB cable's A end (extra part USB_A, the MRA's usb-a-end.glb, the same model as the LAC CAD's own A end NAUO121): overmould black, shell and contacts silver, tongue white. The MRA's rule."
+    },
+    {
+      "match": "^USB Right Angle$",
+      "simplify_mm": 0.03,
+      "max_tris": 4000,
+      "outline": true,
+      "_about": "the USB cable's right-angle Mini-B end (NAUO122): the LAC's own (the MRA's and RCC's Mini-B is straight); colours from the LAC atlas: shell silver, overmould black"
+    },
+    {
+      "match": "^F[1-9]$",
+      "color": "wood",
+      "simplify_mm": 0,
+      "roughen_mm": 0.1,
+      "engraving": "ink"
+    },
+    {
+      "match": "^Breadboard$",
+      "simplify_mm": 0.02,
+      "edge_min_size_mm": 0.0,
+      "_about": "the half breadboard: body white, legends black, the (+) rail stripes red and the (-) blue, from the LAC atlas"
+    },
+    {
+      "match": "^Paper$",
+      "color": "backing_grey",
+      "_about": "the breadboard's protective backing, peeled off in Step 1"
+    },
+    {
+      "match": "^HW-84 v7$",
+      "simplify_mm": 0.04,
+      "edge_min_size_mm": 1.0,
+      "_about": "the real-time clock module (DS3231, HW-84): colours from the LAC atlas"
+    },
+    {
+      "match": "^CR2025-50003LC$",
+      "color": "pin",
+      "outline": true,
+      "_about": "the RTC's coin cell"
+    },
+    {
+      "match": "^(LAC Resistor 1|Resistor stem 3)$",
+      "simplify_mm": 0.02,
+      "outline": true,
+      "_about": "the 2 resistors: body and colour bands from the LAC atlas, legs silver"
+    },
+    {
+      "match": "^(LAC Potentiometer|LAC Knob|LAC Nut|Washer)$",
+      "simplify_mm": 0.03,
+      "outline": true,
+      "_about": "the potentiometer, its knob, nut and washer: colours from the LAC atlas"
+    },
+    {
+      "match": "^Rocker Switch$",
+      "simplify_mm": 0.03,
+      "_about": "the rocker switch: black with white marks, from the LAC atlas"
+    },
+    {
+      "match": "^Piezo Buzzer$",
+      "simplify_mm": 0.03,
+      "outline": true,
+      "_about": "the buzzer: black, with its red and black lead stubs, from the LAC atlas"
+    },
+    {
+      "match": "^Part10\\^LCD V1$",
+      "color": "#cccccc",
+      "_about": "the LCD's screen (glass), as the house colour library has it"
+    },
+    {
+      "match": "^(LCD2004|SMD rezistory|SO16W|SOT23|TRIMR|Kol_kov_)",
+      "simplify_mm": 0.03,
+      "edge_min_size_mm": 0.8,
+      "_about": "the 20x4 LCD and its I2C backpack: colours from the LAC atlas (board green, bezel black, header pins silver) (the atlas matches the board, bezel and backpack solids exactly but only half of the small solids within 0.6 mm, the CAD and Cadasio boxes differing slightly: atlas_min_match 0.4 takes the nearest solid's colour for each)",
+      "atlas_min_match": 0.4
+    },
+    {
+      "match": "^(Wire Cap V2|Wire Cap)$",
+      "simplify_mm": 0.03,
+      "outline": true,
+      "_about": "the Dupont caps on the ends of the wires: male (Wire Cap V2: housing black, pin silver) and female (Wire Cap, the MRA's part: black), from the LAC atlas"
+    }
+  ],
+  "_notes": {
+    "unconfirmed": [
+      "Every colour is TechBox's own LAC Cadasio project's, except the Nano Board's (the MRA's, which Lee approved there) and the USB A end's (the MRA's). The female caps are black #1e1616 as in the LAC project; the MRA's same part is dark grey #404040."
+    ],
+    "decided": [
+      "2026-10-13 (Lee, MRA): outline edges use Cadasio's crease angle of 40 degrees on every part.",
+      "2026-10-13 (Lee, MRA): colours follow TechBox's own Cadasio project (the atlas file) unless a rule here says otherwise.",
+      "2026-10-16 (Lee): the wood plates are roughened (\"roughen_mm\": 0.1 on the wood rule), as on the MRA and RCC."
+    ],
+    "reused": "Lee, 19 Oct 2026: the parts the LAC shares with the MRA or RCC use the version made for them. The Nano Board is the MRA's export of the same Nano model (nano-mra.glb, cut by tools/cut_part.py and placed exactly where the LAC CAD's NAUO124 sits: the LAC's own export has 387,505 triangles and the same sliver triangles the RCC's had); the USB cable's A end is the MRA's usb-a-end.glb (the same STEP model as the LAC's NAUO121, fitted to it to 1e-11 mm). The female Dupont cap (Wire Cap) is the MRA's part already. The LAC's right-angle Mini-B plug has no counterpart (the MRA's and RCC's are straight) and stays the LAC's own.",
+    "f4": "The CAD has the top panel F4 only once, lying flat beside the base (NAUO50). Seated, it is that same panel moved +117.68 x, -17.26 y, +0.06 z: the rocker switch's two poses (NAUO51 in the flat F4, NAUO46 seated) differ by exactly that move. The guide uses extra part F4 (NAUO50 cut out by tools/cut_part.py into f4.glb, posed by that move).",
+    "missing": "The CAD has no F2, F5 or F6 (the back panel and the two end panels), which TechBox's published guide fits last (Steps 55 - 57): see README.txt, questions for Lee."
+  },
+  "atlas": "colour-atlas-lac.json",
+  "extra_parts": {
+    "NANO": {
+      "glb": "nano-mra.glb",
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "_about": "the Nano Board, in place of the CAD's NAUO124: the MRA's export of the same model (mra.glb NAUO126), cut out by tools/cut_part.py where NAUO124 sits: python tools/cut_part.py \"MRA Build Instructions Prototype/mra.glb\" NAUO126 \"LAC Build Instructions/nano-mra.glb\" --like \"LAC Build Instructions/lac.glb\" NAUO124"
+    },
+    "USB_A": {
+      "glb": "usb-a-end.glb",
+      "pose": {
+        "t": [
+          599.967,
+          880.479,
+          1573.919
+        ],
+        "r": [
+          0.57735,
+          0.57735,
+          -0.57735,
+          120.0
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the USB cable's A end (the MRA's usb-a-end.glb), where the CAD has its own A end (NAUO121, the same model): fitted to it vertex for vertex. The guide lays it on the table (rest_at)."
+    },
+    "F4": {
+      "glb": "f4.glb",
+      "pose": [
+        117.68,
+        -17.26,
+        0.06
+      ],
+      "_about": "the top panel seated: the CAD's only F4 (NAUO50, lying flat beside the base) cut out by tools/cut_part.py in assembly space (python tools/cut_part.py \"LAC Build Instructions/lac.glb\" NAUO50 \"LAC Build Instructions/f4.glb\"), moved onto the frame by the move between the rocker switch's two poses (see _notes.f4)"
+    }
+  }
+}
