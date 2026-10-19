@@ -3,10 +3,10 @@ name,quantity,image
 "Nano Board",1,Nano-Board.png
 "Joystick",2,Joystick.png
 "Breadboard Wire (F-F)",8,Breadboard-Wire-F-F.png
-"Base Motor",1,Base-Motor.png
-"Elbow Motor",1,Elbow-Motor.png
-"Shoulder Motor",1,Shoulder-Motor.png
-"Claw Motor",1,Claw-Motor.png
+"Base Servo",1,Base-Servo.png
+"Elbow Servo",1,Elbow-Servo.png
+"Shoulder Servo",1,Shoulder-Servo.png
+"Claw Servo",1,Claw-Servo.png
 "USB Cable",1,USB-Cable.png
 "R1",1,R1.png
 "R2",1,R2.png

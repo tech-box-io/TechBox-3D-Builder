@@ -2,10 +2,10 @@
  "summary": {
   "source": "mra.glb",
   "source_bytes": 41802208,
-  "model_bytes": 2135080,
-  "triangles_in": 1176532,
-  "triangles_out": 284050,
-  "edge_segments": 100201,
+  "model_bytes": 2141424,
+  "triangles_in": 1176582,
+  "triangles_out": 284100,
+  "edge_segments": 100486,
   "meshes": 92,
   "parts_kept": 108,
   "parts_in_source": 115,
@@ -455,51 +455,12 @@
    "note": "edges roughened by up to 0.1 mm"
   },
   {
-   "mesh": "ARA_C3",
-   "used_by": 1,
-   "solids": 1,
-   "tris_in": 2371,
-   "tris_out": 2371,
-   "edge_segments": 823,
-   "colours": [
-    "ink",
-    "wood"
-   ],
-   "note": "edges roughened by up to 0.1 mm"
-  },
-  {
    "mesh": "ARA_C4",
    "used_by": 1,
    "solids": 1,
    "tris_in": 2348,
    "tris_out": 2348,
    "edge_segments": 812,
-   "colours": [
-    "ink",
-    "wood"
-   ],
-   "note": "edges roughened by up to 0.1 mm"
-  },
-  {
-   "mesh": "ARA_C5",
-   "used_by": 1,
-   "solids": 1,
-   "tris_in": 1073,
-   "tris_out": 1073,
-   "edge_segments": 373,
-   "colours": [
-    "ink",
-    "wood"
-   ],
-   "note": "edges roughened by up to 0.1 mm"
-  },
-  {
-   "mesh": "ARA_C6",
-   "used_by": 1,
-   "solids": 1,
-   "tris_in": 1590,
-   "tris_out": 1590,
-   "edge_segments": 510,
    "colours": [
     "ink",
     "wood"
@@ -1171,6 +1132,45 @@
     "white_plastic"
    ],
    "note": ""
+  },
+  {
+   "mesh": "ARA_C3_Rev1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2332,
+   "tris_out": 2332,
+   "edge_segments": 925,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "ARA_C4_Rev1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1152,
+   "tris_out": 1152,
+   "edge_segments": 463,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "ARA_C5_Rev1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1600,
+   "tris_out": 1600,
+   "edge_segments": 603,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
   },
   {
    "mesh": "sticker sticker_off_black on NAUO58",

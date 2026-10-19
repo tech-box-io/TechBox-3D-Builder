@@ -668,9 +668,15 @@ def add_extra_parts(doc, blob, kit_dir, extras, assembly, to_mm):
     """Parts that come as files of their own (a purchased part's STEP, converted with tools/step_to_glb.py): materials.json
     "extra_parts": {id: {"glb": file in the kit folder, "pose": [x, y, z] or {"t", "r", "at"}}}. The pose places the
     file's own frame (mm) in the assembly. Each becomes a part called `id`, a child of the assembly node, exactly as
-    if the CAD export had had it. Returns the new (doc, blob)."""
+    if the CAD export had had it. An `id` the export already has is a newer revision of that part (the MRA's C3, C4 and C5:
+    Lee, 19 Oct 2026): the export's own copy leaves the assembly (and so the model). Returns the new (doc, blob)."""
     doc = json.loads(json.dumps(doc))
     for part_id, spec in extras.items():
+        older = [c for c in doc['nodes'][assembly].get('children', []) if doc['nodes'][c].get('name') == part_id]
+        if older:
+            doc['nodes'][assembly] = dict(doc['nodes'][assembly], children=[c for c in doc['nodes'][assembly]['children'] if c not in older])
+            for c in older:
+                doc['nodes'][c] = dict(doc['nodes'][c], name=f'{part_id} (replaced)')
         edoc, eblob = read_glb(kit_dir / spec['glb'])
         pad = (-len(blob)) % 4
         offset = len(blob) + pad
@@ -924,11 +930,20 @@ def build(kit_dir, keep='guide'):
         doc = promote(doc, spec['own_parts'], assembly)
     nodes = doc['nodes']
     dropped = set()
+
+    def drop(i):
+        dropped.add(i)
+        for c in nodes[i].get('children', []):
+            drop(c)
+    reached, todo = set(), list(roots)               # nodes no scene reaches (a part replaced by an extra_parts revision) are left out
+    while todo:
+        i = todo.pop()
+        reached.add(i)
+        todo += nodes[i].get('children', [])
+    for i in range(len(nodes)):
+        if i not in reached and i not in dropped:
+            drop(i)
     if keep is not None and assembly is not None:
-        def drop(i):
-            dropped.add(i)
-            for c in nodes[i].get('children', []):
-                drop(c)
         for child in nodes[assembly].get('children', []):
             if nodes[child].get('name') not in keep:
                 drop(child)

@@ -29,7 +29,8 @@ TOP_DIRS = ('assets', 'kits')
 ASSETS = ('site.css', 'techbox-wordmark-white.svg', 'frame-guard.js')
 IGNORED = ('.DS_Store',)                     # (Finder's; never committed, so never deployed)
 ICLOUD_COPY = re.compile(r'(^|/)([^/]+) \d+(\.[^/.]+)?$')   # ("index 2.html": iCloud's copy of a file it saw replaced; the Desktop syncs)
-icloud_note = lambda f: (f'{f}: a copy iCloud made of {re.sub(r" \d+(?=(\.[^/.]+)?$)", "", f)} (this folder is on the iCloud-synced Desktop), '
+ICLOUD_NUMBER = re.compile(r' \d+(?=(\.[^/.]+)?$)')        # (outside the f-string below: Python before 3.12, this Mac's /usr/bin/python3, refuses a \ in one)
+icloud_note = lambda f: (f'{f}: a copy iCloud made of {ICLOUD_NUMBER.sub("", f)} (this folder is on the iCloud-synced Desktop), '
                          'not part of the release: publishing the guide again (or --restore of its release) removes it')
 MODEL_GENERATOR = 'TechBox build_model.py'
 MODEL_LIMIT = 15_000_000

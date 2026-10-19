@@ -427,7 +427,9 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   that the kit puts on a purchased part (the coloured dots that tell the MRA's motors apart, on their wide faces; or one at
   a spot, `"at"`: the RCC Nano Boards' processors). `"extra_parts"` adds a part
   that comes as a STEP file of its own (the USB cable's two ends): convert it once with `tools/step_to_glb.py` into the
-  kit folder, and give the GLB and a pose placing it in the assembly; both tools then treat it as a CAD part. The same
+  kit folder, and give the GLB and a pose placing it in the assembly; both tools then treat it as a CAD part. Under the
+  id of a part the export has, it replaces that part with a newer revision (the MRA's C3, C4 and C5, hooked in Rev1: Lee,
+  19 Oct 2026; posed where the export had the old ones, as the part frames match; the export's copies leave the model). The same
   part from a better export in another kit is cut out with `tools/cut_part.py` (the RCC's Nanos). A rule's
   `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid; with
   `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's).

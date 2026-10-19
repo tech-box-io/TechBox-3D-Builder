@@ -2,7 +2,7 @@
  "kit": "Mini Robot Arm (MRA)",
  "part": "Full Build",
  "image_size": 500,
- "model": "d8ff68e5f08e",
+ "model": "46ec7559894a",
  "parts": [
   {
    "name": "Nano I/O Module",

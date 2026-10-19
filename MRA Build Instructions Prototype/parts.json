@@ -452,7 +452,7 @@
     "NAUO46"
    ],
    "picture": "parts/Base-Servo.png",
-   "group": "Motors"
+   "group": "Servo Motors"
   },
   {
    "name": "Elbow Servo",
@@ -471,7 +471,7 @@
     "NAUO59"
    ],
    "picture": "parts/Elbow-Servo.png",
-   "group": "Motors"
+   "group": "Servo Motors"
   },
   {
    "name": "Shoulder Servo",
@@ -490,7 +490,7 @@
     "NAUO67"
    ],
    "picture": "parts/Shoulder-Servo.png",
-   "group": "Motors"
+   "group": "Servo Motors"
   },
   {
    "name": "Claw Servo",
@@ -510,7 +510,7 @@
     "NAUO73"
    ],
    "picture": "parts/Claw-Servo.png",
-   "group": "Motors"
+   "group": "Servo Motors"
   },
   {
    "name": "USB Cable",

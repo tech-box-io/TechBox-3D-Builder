@@ -96,7 +96,7 @@ SERVO_HOVER = {i: dotted(NAMES[m]) for m, ids in ((BASE_MOTOR, (BASE_MOTOR, BASE
 WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'   # the wood parts' bands: blue-grey, so the wood stands out (the orange was too close to it: Lee, 16 Oct 2026)
 PART_GROUPS = [
     ('Parts List', 'Electronics', 'electronics', '#f9c0c0', '#ec8d8d', lambda n: n in ('Nano I/O Module', 'Nano Board', 'Joystick', 'Breadboard Wire (F-F)', 'USB Cable', 'Servo Extension Wire')),
-    ('Parts List', 'Motors', 'motors', '#d8edc6', '#a3cf84', lambda n: n.endswith('Servo')),
+    ('Parts List', 'Servo Motors', 'motors', '#d8edc6', '#a3cf84', lambda n: n.endswith('Servo')),
     ('Parts List', 'Screws', 'screws', '#c4e8e5', '#88cfc8', lambda n: n.endswith('Hex Screw')),
     ('Parts List (Cont.)', 'Rotating base', 'wood', WOOD_BAND, WOOD_HALO, lambda n: re.fullmatch(r'R\d+', n)),
     ('Parts List (Cont.)', 'Base and controller', 'wood', WOOD_BAND, WOOD_HALO, lambda n: re.fullmatch(r'B\d+', n)),
@@ -972,13 +972,23 @@ g.place('Begin the claw with C3. Push the claw motor through C3 from the engrave
         lines_at=[[[329.14, 196.6, 132.86], [329.14, 193.0, 132.86]], [[341.29, 196.6, 155.41], [341.29, 193.0, 155.41]]])   # case corners to cut-out corners
 g.place("Feed the claw motor's wire back through the hole in the end of C3.", **UPSIDE_DOWN, eye=[dict(anchor=[300.8, 196.5, 147.1], id=C3)],
         **by_way_of(43, 50, 57, 66, 76, CLAW['in_c3']))     # (the plug follows the lead through the hole, 55 - 59 mm along)
+CLAW_CAMERA_BEFORE = dict(view_dir=[0.5792, -0.5736, -0.5792], frame=([307.1, 195.2, 146.4], 82.6))   # Steps 80 - 81 (see HOOKED_IN below)
+CLAW_CAMERA_AFTER = dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([325.4, 175.6, 159.9], 109.6))    # Steps 82 - 89
 # (C1 and C2 go in along the claw's own normal: straight down, the test finds the 0.6 degree tilt in the way.)
 g.place('Insert C1 into the outer of the two slots on one side of C3, from the plain side, code facing out.', move=[C1], against=claw[:3],
         direction=CLAW_NORMAL, **UPSIDE_DOWN)
 g.place('Insert C2 into the outer half of the square slot on the other side, code facing out.', move=[C2], against=claw[:4],
-        direction=CLAW_NORMAL, **UPSIDE_DOWN)
-g.place('Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.', move=[C4], against=claw[:5], **UPSIDE_DOWN)
-g.place('Insert C5 into the slot next to C1, code facing C1.', move=[C5], against=claw[:6], **UPSIDE_DOWN)
+        direction=CLAW_NORMAL, **UPSIDE_DOWN, **CLAW_CAMERA_BEFORE)
+# C4 and C5 (revision 1, Lee 19 Oct 2026) are hooked: each drops through its slot in C3 5 mm along from its seat, then slides
+# along C3 into it, the hook under C3 (the collision test: straight in is blocked; the drop is clear only from 5.0 mm along).
+HOOKED_IN = [[5.0, -40.0, 0.0], [5.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+# One lead line each, along the drop: from the leading end of the hook (seated, 5 mm from the slot's end) to the slot in C3
+# it drops through (its outer hook drops beside C3's end and slides into the notch there: nothing to line up).
+HOOKED_LINE = lambda z: [[[313.3, 201.0, z], [318.3, 193.0, z]]]
+# The cameras of Steps 80 - 89 as they were before C3 - C5 changed (the generator's own choice for the new parts swung Step 82's
+# to the other side and moved the others by a millimetre; Lee asked for no camera to change): pinned on Steps 80 and 82.
+g.place('Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.', move=[C4], against=claw[:5], path=HOOKED_IN, lines_at=HOOKED_LINE(131.05), **UPSIDE_DOWN)
+g.place('Insert C5 into the slot next to C1, code facing C1.', move=[C5], against=claw[:6], path=HOOKED_IN, lines_at=HOOKED_LINE(157.22), **UPSIDE_DOWN, **CLAW_CAMERA_AFTER)
 g.place('Press C6 onto C4 and C5, code facing away from C3. The servo horn sits in its round cut-out.', move=[C6], against=claw[:7], **UPSIDE_DOWN)
 g.place('Screw C6 onto C3 with two 16mm screws.', move=C6_SCREWS[:1], against=claw[:8], direction=FROM_BELOW, **UPSIDE_DOWN, **SCREW,
         lines_at=[[[322.95, 195.85, 147.08], [322.95, 179.53, 147.08]]])
