@@ -435,7 +435,7 @@
    "group": "Electronics"
   },
   {
-   "name": "Base Motor",
+   "name": "Base Servo",
    "ids": [
     "NAUO45"
    ],
@@ -451,11 +451,11 @@
    "with": [
     "NAUO46"
    ],
-   "picture": "parts/Base-Motor.png",
+   "picture": "parts/Base-Servo.png",
    "group": "Motors"
   },
   {
-   "name": "Elbow Motor",
+   "name": "Elbow Servo",
    "ids": [
     "NAUO58"
    ],
@@ -470,11 +470,11 @@
    "with": [
     "NAUO59"
    ],
-   "picture": "parts/Elbow-Motor.png",
+   "picture": "parts/Elbow-Servo.png",
    "group": "Motors"
   },
   {
-   "name": "Shoulder Motor",
+   "name": "Shoulder Servo",
    "ids": [
     "NAUO66"
    ],
@@ -489,11 +489,11 @@
    "with": [
     "NAUO67"
    ],
-   "picture": "parts/Shoulder-Motor.png",
+   "picture": "parts/Shoulder-Servo.png",
    "group": "Motors"
   },
   {
-   "name": "Claw Motor",
+   "name": "Claw Servo",
    "ids": [
     "NAUO72"
    ],
@@ -509,7 +509,7 @@
    "with": [
     "NAUO73"
    ],
-   "picture": "parts/Claw-Motor.png",
+   "picture": "parts/Claw-Servo.png",
    "group": "Motors"
   },
   {

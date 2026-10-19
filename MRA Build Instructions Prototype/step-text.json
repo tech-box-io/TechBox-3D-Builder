@@ -1,0 +1,537 @@
+{
+ "note": "Edited wording of the steps (tools/step_text.py), only what was edited; applied when guide.py is run. key: the step's text_key in steps.json.",
+ "steps": [
+  {
+   "key": "T01F4BEB7",
+   "step": "Step 1",
+   "caption": "Press the Nano Board into the Nano I/O Module, with the USB connector on the same end as the module's power connector."
+  },
+  {
+   "key": "TCD270DB4",
+   "step": "Step 2",
+   "caption": "Place the Left Joystick beside the Nano I/O Module."
+  },
+  {
+   "key": "TFD76A366",
+   "step": "Step 3",
+   "caption": "Connect GND on the Left Joystick to A2 G on the Nano I/O Module."
+  },
+  {
+   "key": "T6D859F94",
+   "step": "Step 4",
+   "caption": "Connect +5V on the Left Joystick to A2 V on the Nano I/O Module."
+  },
+  {
+   "key": "TD7E1C492",
+   "step": "Step 5",
+   "caption": "Connect VRx on the Left Joystick to A2 S on the Nano I/O Module."
+  },
+  {
+   "key": "T766055A7",
+   "step": "Step 6",
+   "caption": "Connect VRy on the Left Joystick to A3 S on the Nano I/O Module."
+  },
+  {
+   "key": "T380EC219",
+   "step": "Step 7",
+   "caption": "Place the Right Joystick beside the Nano I/O Module."
+  },
+  {
+   "key": "T89878E39",
+   "step": "Step 8",
+   "caption": "Connect GND on the Right Joystick to A0 G on the Nano I/O Module."
+  },
+  {
+   "key": "TAF00DD05",
+   "step": "Step 9",
+   "caption": "Connect +5V on the Right Joystick to A0 V on the Nano I/O Module."
+  },
+  {
+   "key": "TF22CA88C",
+   "step": "Step 10",
+   "caption": "Connect VRx on the Right Joystick to A0 S on the Nano I/O Module."
+  },
+  {
+   "key": "T7F39BFBC",
+   "step": "Step 11",
+   "caption": "Connect VRy on the Right Joystick to A1 S on the Nano I/O Module."
+  },
+  {
+   "key": "TEB94B6D6",
+   "step": "Step 12",
+   "caption": "Plug the Base Servo (No Dot) into Row 5. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "TF4C8CB92",
+   "step": "Step 13",
+   "caption": "Plug the Elbow Servo (Black Dot) into Row 6. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "T83D2DBC0",
+   "step": "Step 14",
+   "caption": "Plug the Shoulder Servo (White Dot) into Row 9. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "T0AFA2A74",
+   "step": "Step 15",
+   "caption": "Plug the Claw Servo (Blue Dot) into Row 10. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "TFA0DD136",
+   "step": "Step 16",
+   "caption": "Connect the USB Cable to the Nano Board."
+  },
+  {
+   "key": "TA25258D0",
+   "step": "Step 17",
+   "caption": "Testing Checklist\nGo through the following checklist to make sure you have tested each part of your MRA:\n•  The MRA was powered on by connecting the USB Cable to the nano.\n•  Moving the Left Joystick side to side made the Base Servo (No Dot) turn.\n•  Moving the Left Joystick forward and back made the Shoulder Servo (White Dot) move.\n•  Moving the Right Joystick forward and back made the Elbow Servo (Black Dot) move.\n•  Moving the Right Joystick side to side made the Claw Servo (Blue Dot) move.\n•  Each servo stopped moving when the joystick was released.\n•  The USB Cable was disconnected from the nano after testing."
+  },
+  {
+   "key": "T8EC60AF1",
+   "step": "Step 18",
+   "caption": "Disconnect all four servos from the Nano I/O Module. Set everything aside except the Base Servo (No Dot).",
+   "was_caution": "Set the servos and the I/O module aside for now. You will use them again in a bit.",
+   "caution": "Keep the parts you set aside in a safe place to prevent them from getting lost or damaged. You will need them again soon."
+  },
+  {
+   "key": "TDA1A58FF",
+   "step": "Step 19",
+   "caption": "Tilt the Base Servo (No Dot) and push its servo horn down through the cutout in R1. Then, turn the servo and set it into the slot, with its wires at the notched end."
+  },
+  {
+   "key": "TFCB2CE0D",
+   "step": "Step 20",
+   "caption": "Slide R2 over the Base Servo, fitting the tabs of R2 into the slots in R1."
+  },
+  {
+   "key": "TF0F52FCD",
+   "step": "Step 21",
+   "caption": "Push the bottom tabs of R3 into the slots in R1."
+  },
+  {
+   "key": "TEECC45E0",
+   "step": "Step 22",
+   "caption": "Push the bottom tabs of R4 into the slots in R1."
+  },
+  {
+   "key": "TF141B185",
+   "step": "Step 23",
+   "caption": "Attach R5 to the left tab of R4 and the right tab of R3."
+  },
+  {
+   "key": "TE40FECBC",
+   "step": "Step 24",
+   "caption": "Attach R6 to the remaining tabs on R3 and R4. Keep the Base Servo's wires clear of the tabs."
+  },
+  {
+   "key": "TEE34A3FE",
+   "step": "Step 25",
+   "caption": "Place the Base Servo's wires into the hook-shaped slot in R4."
+  },
+  {
+   "key": "T64398169",
+   "step": "Step 26",
+   "caption": "Slide B2 under the servo horn until the servo sits in the round cutout."
+  },
+  {
+   "key": "T7BF0CE46",
+   "step": "Step 27",
+   "caption": "Lower B1 onto B2 so the servo horn fits into the cutout in B1.",
+   "was_caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 slot.",
+   "caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 cutout."
+  },
+  {
+   "key": "T8901A90F",
+   "step": "Step 28",
+   "caption": "Attach B1 and B2 using a 6mm screw."
+  },
+  {
+   "key": "T50F0B58B",
+   "step": "Step 29",
+   "caption": "Attach B1 and B2 using the other five 6mm screws."
+  },
+  {
+   "key": "TAB351905",
+   "step": "Step 30",
+   "caption": "Push the bottom tabs of B3 into the slots near the end of B2."
+  },
+  {
+   "key": "T975082CC",
+   "step": "Step 31",
+   "caption": "Insert B4 into the center slot in B2."
+  },
+  {
+   "key": "T984EC69E",
+   "step": "Step 32",
+   "caption": "Slide the Left Joystick into B5.",
+   "was_caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The left joystick is the one wired to A2 G, A2 V, A2 S and A3 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Left Joystick is wired to A2 and A3."
+  },
+  {
+   "key": "T41F554A3",
+   "step": "Step 33",
+   "caption": "Slide B6 onto the Left Joystick."
+  },
+  {
+   "key": "T76F5ECAF",
+   "step": "Step 34",
+   "caption": "Place B5 and B6 on B3 and B4, fitting them into the slots in B2."
+  },
+  {
+   "key": "T4DA0B663",
+   "step": "Step 35",
+   "caption": "Slide the Right Joystick into B6.",
+   "was_caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The right joystick is the one wired to A0 G, A0 V, A0 S and A1 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Right Joystick is wired to A0 and A1."
+  },
+  {
+   "key": "TE1EAFE39",
+   "step": "Step 36",
+   "caption": "Slide B7 onto the Right Joystick."
+  },
+  {
+   "key": "TF9438279",
+   "step": "Step 37",
+   "caption": "Place B6 and B7 on B3 and B4, fitting them into the slots in B2. Keep the joystick's wires clear."
+  },
+  {
+   "key": "T2307CE17",
+   "step": "Step 38",
+   "caption": "Place B8 on B5, B6, and B7."
+  },
+  {
+   "key": "T21CF4518",
+   "step": "Step 39",
+   "caption": "Slide the Nano I/O Module through the slots in both B6 pieces, tilted slightly. Then, lower it until it lies flat on B4."
+  },
+  {
+   "key": "T0CA13403",
+   "step": "Step 40",
+   "caption": "Reconnect the Base Servo (No Dot) to Row 5. Match the wires: brown to G, red to V, and orange to S.",
+   "was_caution": "Very important: the brown wire goes on G, the pin nearest the edge of the board.",
+   "caution": ""
+  },
+  {
+   "key": "TE78FAE95",
+   "step": "Step 41",
+   "caption": "Place A7 on the left two tabs of A6."
+  },
+  {
+   "key": "TE87F3329",
+   "step": "Step 42",
+   "caption": "Push A9 into the cross-shaped slot next to A7."
+  },
+  {
+   "key": "TEF977D95",
+   "step": "Step 43",
+   "caption": "Attach A7 to A9 using a 16mm screw through the center hole in A7."
+  },
+  {
+   "key": "T86440666",
+   "step": "Step 44",
+   "caption": "Place A8 on the other two tabs of A6, with the slot shaped like a servo horn at the bottom."
+  },
+  {
+   "key": "T337FE5D6",
+   "step": "Step 45",
+   "caption": "Push A9 into the cross-shaped slot next to A8."
+  },
+  {
+   "key": "TCCBB5069",
+   "step": "Step 46",
+   "caption": "Attach A8 to A9 using a 16mm screw through the center hole in A8."
+  },
+  {
+   "key": "T897FE576",
+   "step": "Step 47",
+   "caption": "Align the bottom hole in A7 with the outer edge of the hole in R2."
+  },
+  {
+   "key": "T89BB9A97",
+   "step": "Step 48",
+   "caption": "Attach A7 to R2 using a 6mm screw."
+  },
+  {
+   "key": "TF540D720",
+   "step": "Step 49",
+   "caption": "Place A2 on A1, aligning the screw holes."
+  },
+  {
+   "key": "T1C3234F8",
+   "step": "Step 50",
+   "caption": "Place A3 on A2, aligning the screw holes."
+  },
+  {
+   "key": "TF994B4C6",
+   "step": "Step 51",
+   "caption": "Attach A1, A2, and A3 using a 10mm screw through the center hole."
+  },
+  {
+   "key": "T1172FE74",
+   "step": "Step 52",
+   "caption": "Slide the slotted end of A1 - A3 down between R5 and A7. Fit the slot over the head of the screw connecting A7 to R2. Then, push A1 - A3 toward the joysticks."
+  },
+  {
+   "key": "TC9C23F2B",
+   "step": "Step 53",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide its servo horn through R5. Then, push the servo into place so the horn fits into the slot in A2 and A3."
+  },
+  {
+   "key": "TA9FA5F2F",
+   "step": "Step 54",
+   "caption": "Thread the Elbow Servo's wires through R8, then push R8 against the servo. Align the holes in R8 with the holes in R5."
+  },
+  {
+   "key": "TF37D6CC9",
+   "step": "Step 55",
+   "caption": "Attach R8 to R5 using a 10mm screw in the top hole."
+  },
+  {
+   "key": "T7FF94A6F",
+   "step": "Step 56",
+   "caption": "Attach R8 to R5 using a 10mm screw in the bottom hole."
+  },
+  {
+   "key": "TB3BEA110",
+   "step": "Step 57",
+   "caption": "Place the Elbow Servo's wires into the hook-shaped slot in R5."
+  },
+  {
+   "key": "TCAB3BE7B",
+   "step": "Step 58",
+   "caption": "Place A5 on A4, aligning the right hole in A5 with the left hole in A4."
+  },
+  {
+   "key": "T27BCF392",
+   "step": "Step 59",
+   "caption": "Attach A5 to A4 using a 6mm screw."
+  },
+  {
+   "key": "TA097FC53",
+   "step": "Step 60",
+   "caption": "Place A4 against A1, aligning their right holes. Then, place A5 on A7, aligning the middle hole in A5 with the left hole in A7."
+  },
+  {
+   "key": "TB060AB99",
+   "step": "Step 61",
+   "caption": "Attach A1 - A3 to A4 using a 10mm screw."
+  },
+  {
+   "key": "T71E22CD8",
+   "step": "Step 62",
+   "caption": "Attach A5 to A7 using a 6mm screw."
+  },
+  {
+   "key": "T121ED9E7",
+   "step": "Step 63",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide its servo horn through R6, until the horn sits in the slot in A8."
+  },
+  {
+   "key": "TFF7D3238",
+   "step": "Step 64",
+   "caption": "Thread the Shoulder Servo's wires through R7, then push R7 against the servo. Align the holes in R7 with the holes in R6."
+  },
+  {
+   "key": "T61EBF7DB",
+   "step": "Step 65",
+   "caption": "Attach R7 to R6 using a 10mm screw in the top hole."
+  },
+  {
+   "key": "T96AD3817",
+   "step": "Step 66",
+   "caption": "Attach R7 to R6 using a 10mm screw in the bottom hole."
+  },
+  {
+   "key": "T906ACD16",
+   "step": "Step 67",
+   "caption": "Place the Shoulder Servo's wires into the hook-shaped slot in R6."
+  },
+  {
+   "key": "TEEF135F0",
+   "step": "Step 68",
+   "caption": "Place A11 on A10, aligning the right hole in A11 with the left hole in A10."
+  },
+  {
+   "key": "TD961DF18",
+   "step": "Step 69",
+   "caption": "Attach A11 to A10 using a 6mm screw."
+  },
+  {
+   "key": "TF80E3930",
+   "step": "Step 70",
+   "caption": "Place A12 on A10, aligning the left hole in A12 with the top right hole in A10."
+  },
+  {
+   "key": "TBEA864E5",
+   "step": "Step 71",
+   "caption": "Attach A12 to A10 using a 6mm screw."
+  },
+  {
+   "key": "T98F67A92",
+   "step": "Step 72",
+   "caption": "Place A11 against the inside of R6. Place A10 on A8."
+  },
+  {
+   "key": "T52E67F36",
+   "step": "Step 73",
+   "caption": "Attach R6 to A11 using a 6mm screw."
+  },
+  {
+   "key": "TB457F0A3",
+   "step": "Step 74",
+   "caption": "Place A13 on A10, aligning the left hole in A13 with the bottom right hole in A10."
+  },
+  {
+   "key": "T295CAA85",
+   "step": "Step 75",
+   "caption": "Attach A13 to A10 using a 10mm screw."
+  },
+  {
+   "key": "T0B231C59",
+   "step": "Step 76",
+   "caption": "Gently swing the wooden pieces back and forth where they connect. Check that they move freely and the screws are not too tight."
+  },
+  {
+   "key": "T91D96F1A",
+   "step": "Step 77",
+   "caption": "Push the Claw Servo (Blue Dot) down through C3, wires first. Keep the wires at the notched end of the opening."
+  },
+  {
+   "key": "T52F0DA32",
+   "step": "Step 78",
+   "caption": "Thread the Claw Servo's wires through the hole at the top of C3."
+  },
+  {
+   "key": "T28A5FB4C",
+   "step": "Step 79",
+   "caption": "Push the tab of C1 through the slot at the top right of C3."
+  },
+  {
+   "key": "T7BE1A4D7",
+   "step": "Step 80",
+   "caption": "Push the tab of C2 through the slot at the top left of C3."
+  },
+  {
+   "key": "TE4E540E1",
+   "step": "Step 81",
+   "caption": "Push C4 down into the same slot in C3, next to C2."
+  },
+  {
+   "key": "T0945F2B1",
+   "step": "Step 82",
+   "caption": "Push C5 down into the slot in C3, next to C1."
+  },
+  {
+   "key": "T301AAD7D",
+   "step": "Step 83",
+   "caption": "Place C6 on the latches of C1 and C2, fitting the servo horn into the round cutout in C6."
+  },
+  {
+   "key": "TBD9C4CFC",
+   "step": "Step 84",
+   "caption": "Attach C6 to C3 using a 16mm screw in the top hole."
+  },
+  {
+   "key": "T4FD5D753",
+   "step": "Step 85",
+   "caption": "Attach C6 to C3 using a 16mm screw in the bottom hole."
+  },
+  {
+   "key": "TAF2B0A5D",
+   "step": "Step 86",
+   "caption": "Place C7 on the servo horn."
+  },
+  {
+   "key": "TD8725187",
+   "step": "Step 87",
+   "caption": "Place C9 on the latches of C1 and C2."
+  },
+  {
+   "key": "T70CD18B3",
+   "step": "Step 88",
+   "caption": "Slide C8 between C6 and C9 until the teeth on C8 fit into the teeth on C7."
+  },
+  {
+   "key": "TFE3AD44C",
+   "step": "Step 89",
+   "caption": "Attach C6 to C9 using a 10mm screw."
+  },
+  {
+   "key": "T2A645221",
+   "step": "Step 90",
+   "caption": "Slide the claw between A5 on one side and A12 and A13 on the other, with the servo facing up. Place A5 on C2, aligning the holes. Then, align A12 with the top hole in C1 and A13 with the bottom hole in C1."
+  },
+  {
+   "key": "T08316104",
+   "step": "Step 91",
+   "caption": "Attach A12 to C1 using a 6mm screw."
+  },
+  {
+   "key": "T9070BF5A",
+   "step": "Step 92",
+   "caption": "Attach A13 to C1 using a 6mm screw."
+  },
+  {
+   "key": "T6A96E012",
+   "step": "Step 93",
+   "caption": "Attach A5 to C2 using a 6mm screw."
+  },
+  {
+   "key": "T17B3F48A",
+   "step": "Step 94",
+   "caption": "Thread the Claw Servo's wires through the top square hole in A6."
+  },
+  {
+   "key": "T95CBB656",
+   "step": "Step 95",
+   "caption": "Thread the Claw Servo's wires through the bottom square hole in A6."
+  },
+  {
+   "key": "T8F7ED5F7",
+   "step": "Step 96",
+   "caption": "Connect the Servo Extension Wire to the Claw Servo's wires.",
+   "was_caution": "Check that the wire colours match across the join: brown to brown, red to red and orange to orange.",
+   "caution": "Match the wire colors: brown to brown, red to red, and orange to orange."
+  },
+  {
+   "key": "T6859680C",
+   "step": "Step 97",
+   "caption": "Place the Servo Extension Wire into the hook-shaped slot in R4."
+  },
+  {
+   "key": "T7FA527C2",
+   "step": "Step 98",
+   "caption": "Reconnect the Elbow Servo (Black Dot) to Row 6. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "T82071C25",
+   "step": "Step 99",
+   "caption": "Reconnect the Shoulder Servo (White Dot) to Row 9. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "TAEE05C40",
+   "step": "Step 100",
+   "caption": "Connect the Servo Extension Wire to Row 10. Match the wires: brown to G, red to V, and orange to S."
+  },
+  {
+   "key": "TF1E57449",
+   "step": "Step 101",
+   "caption": "Connect the USB Cable to the Nano Board."
+  },
+  {
+   "key": "T5332B90A",
+   "step": "Step 102",
+   "caption": "Place the top of T2 into one of the slots in T1."
+  },
+  {
+   "key": "T33122663",
+   "step": "Step 103",
+   "caption": "Slide the second T2 onto the first T2, fitting their slots together."
+  },
+  {
+   "key": "TFC5772F9",
+   "step": "Step 104",
+   "caption": "Place the second T1 on the tops of both T2 pieces."
+  }
+ ]
+}

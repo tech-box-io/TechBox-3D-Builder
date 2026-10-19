@@ -236,6 +236,12 @@ joysticks and the module at once; or in phases, the joysticks pulled off the wir
 the build makes on the bench (the electronics test: motors plugged in, then out again) has no counterpart. The fade of a part
 taken off: slower and smoother, as Cadasio's (below, section 13).
 
+**Lee, 2026-10-19 (the curriculum director):** a servo is named "X Servo (Y Dot)" on its labels and on hover alike ("Elbow Servo
+(Black Dot)"; the Base Servo has no dot), in the Full Build and the deconstruction; the parts list names it "X Servo" with the dot
+as its tag. The deconstruction's unplugging of a servo from its row carries the Full Build's labels for that row ("Row 6" and the
+servo), instead of an eye (an exception to "no text labels" above); and the deconstruction ends with the Full Build's parts list,
+after its Completed View.
+
 **Lee, 2026-10-18 (first round on the MRA's draft):** where a screw and the part it held come off in the same step (Lee named the
 MRA's A12, A13, A11, A5 and the A1 - A3 lever), they go in sequence: the screw slides out and fades, then the part slides out and
 fades (a stack of plates on one screw: the screw, then each plate in turn). Elsewhere a screw keeps its own step before its part, as

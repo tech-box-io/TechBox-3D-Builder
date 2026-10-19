@@ -312,7 +312,9 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   what rides on its parts too. The arrow of parts spread apart (six screws round a plate) starts on the one nearest their middle.
   The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
   no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
-  Board come out before the joysticks' walls), and it ends on R1. Run it after every Full Build change.
+  Board come out before the joysticks' walls), and it ends on R1, followed by the Full Build's parts list pages
+  (`take_apart(parts_list_at_end=True)`: Lee, 19 Oct 2026). Its Steps 5 - 7 carry the Full Build's Row and servo labels instead of
+  eyes. Run it after every Full Build change.
   The RCC's (`deconstruction.py`, 22 steps, Lee's order of 18 Oct 2026): the controller first, on its own (its USB cable, one arrow
   on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's camera for
   the right joystick turned round with the controller, one camera for the run); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged

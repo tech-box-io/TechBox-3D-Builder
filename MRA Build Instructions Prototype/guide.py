@@ -58,33 +58,37 @@ USB_B, USB_A = 'USB_B', 'USB_A'                                     # the Mini-B
 
 NAMES = {R1: 'R1', R2: 'R2', R3: 'R3', R4: 'R4', R5: 'R5', R6: 'R6', R7: 'R7', R8: 'R8',
          B1: 'B1', B2: 'B2', B3: 'B3', B4: 'B4', B5: 'B5', B6_LEFT: 'B6', B6_RIGHT: 'B6', B7: 'B7', B8: 'B8',
-         BASE_MOTOR: 'Base Motor', JOY_LEFT: 'Joystick', JOY_RIGHT: 'Joystick', MODULE: 'Nano I/O Module', NANO: 'Nano Board',
+         BASE_MOTOR: 'Base Servo', JOY_LEFT: 'Joystick', JOY_RIGHT: 'Joystick', MODULE: 'Nano I/O Module', NANO: 'Nano Board',
          T1_LOWER: 'T1', T1_UPPER: 'T1', T2_SOLID_DOWN: 'T2', T2_SLOT_DOWN: 'T2',
          **{s: '6mm Hex Screw' for s in BASE_SCREWS}}
 NAMES.update({A1: 'A1', A2: 'A2', A3: 'A3', A4: 'A4', A5: 'A5', A6: 'A6', A7: 'A7', A8: 'A8', A9_NEAR_A7: 'A9', A9_NEAR_A8: 'A9',
-              A10: 'A10', A11: 'A11', A12: 'A12', A13: 'A13', ELBOW_MOTOR: 'Elbow Motor', SHOULDER_MOTOR: 'Shoulder Motor',
+              A10: 'A10', A11: 'A11', A12: 'A12', A13: 'A13', ELBOW_MOTOR: 'Elbow Servo', SHOULDER_MOTOR: 'Shoulder Servo',
               **{s: '6mm Hex Screw' for s in (PIVOT_SCREW, A5_A4_SCREW, A5_A7_SCREW, A11_SCREW, A12_SCREW, R6_A11_SCREW)},
               **{s: '10mm Hex Screw' for s in (LEVER_SCREW, LEVER_A4_SCREW, A13_SCREW, *R8_SCREWS, *R7_SCREWS)},
               **{s: '16mm Hex Screw' for s in (A7_SCREW, A8_SCREW)}})
-NAMES.update({C1: 'C1', C2: 'C2', C3: 'C3', C4: 'C4', C5: 'C5', C6: 'C6', C7: 'C7', C8: 'C8', C9: 'C9', CLAW_MOTOR: 'Claw Motor',
+NAMES.update({C1: 'C1', C2: 'C2', C3: 'C3', C4: 'C4', C5: 'C5', C6: 'C6', C7: 'C7', C8: 'C8', C9: 'C9', CLAW_MOTOR: 'Claw Servo',
               COUPLER: 'Servo Extension Wire', **{s: '16mm Hex Screw' for s in C6_SCREWS}, C8_SCREW: '10mm Hex Screw',
               **{s: '6mm Hex Screw' for s in (A12_C1_SCREW, A13_C1_SCREW, A5_C2_SCREW)}})
 # Parts that come fitted to another: same name on hover, one line in the parts list, pictured together.
 PART_OF = {BASE_HORN: BASE_MOTOR, ELBOW_HORN: ELBOW_MOTOR, SHOULDER_HORN: SHOULDER_MOTOR, CLAW_HORN: CLAW_MOTOR, EXTENSION_PLUG: COUPLER}
 # Named on hover only (no label, no line in the parts list): the plug on a motor's lead, the caps of the jumper wires.
 JUMPER_CAPS = ['NAUO%d' % i for i in range(95, 111)]
-NAMES.update({BASE_PLUG: 'Base Motor', ELBOW_PLUG: 'Elbow Motor', SHOULDER_PLUG: 'Shoulder Motor', CLAW_PLUG: 'Claw Motor',
+NAMES.update({BASE_PLUG: 'Base Servo', ELBOW_PLUG: 'Elbow Servo', SHOULDER_PLUG: 'Shoulder Servo', CLAW_PLUG: 'Claw Servo',
               ROW10_PLUG: 'Servo Extension Wire', **{cap: 'Breadboard Wire (F-F)' for cap in JUMPER_CAPS}, USB_B: 'USB Cable', USB_A: 'USB Cable'})
 UNLISTED = [BASE_PLUG, ELBOW_PLUG, SHOULDER_PLUG, CLAW_PLUG, ROW10_PLUG, USB_A] + JUMPER_CAPS   # (the USB cable has one line in the parts list, pictured by its Mini-B end)
 
 # Part pictures that came out with the engraved code upside down are turned round here.
 PART_VIEWS = {'R1': {'roll': 180}, 'B1': {'roll': 180}, 'B2': {'roll': 180}, 'B8': {'roll': 180}, 'T2': {'roll': 180},   # (T2: its code read upside down, Lee 15 Oct 2026)
-              'Base Motor': {'dir': [0.62, 0.42, -0.66], 'roll': 180},             # motors from the side that carries the label
-              'Elbow Motor': {'dir': [0.4, -0.8, -0.45]}, 'Shoulder Motor': {'dir': [0.4, 0.8, 0.45]}, 'Claw Motor': {'dir': [-0.8, 0.45, -0.4], 'roll': 180}}
+              'Base Servo': {'dir': [0.62, 0.42, -0.66], 'roll': 180},             # servos from the side that carries the label
+              'Elbow Servo': {'dir': [0.4, -0.8, -0.45]}, 'Shoulder Servo': {'dir': [0.4, 0.8, 0.45]}, 'Claw Servo': {'dir': [-0.8, 0.45, -0.4], 'roll': 180}}
 
 # The coloured dot on three of the servos tells them apart (TechBox's Testing Checklist); a motor's label says which (Lee, 14 Oct 2026).
-DOT = {'Elbow Motor': 'Black Dot', 'Shoulder Motor': 'White Dot', 'Claw Motor': 'Blue Dot'}
+DOT = {'Elbow Servo': 'Black Dot', 'Shoulder Servo': 'White Dot', 'Claw Servo': 'Blue Dot'}
 dotted = lambda name: f'{name} ({DOT[name]})' if name in DOT else name
+# The servos' names, on hover and click as in their labels ("Elbow Servo (Black Dot)"; the Base Servo has no dot): the curriculum
+# director's names (Lee, 19 Oct 2026; they were "X Motor"). The parts list keeps the name and shows the dot as its tag.
+SERVO_HOVER = {i: dotted(NAMES[m]) for m, ids in ((BASE_MOTOR, (BASE_MOTOR, BASE_PLUG)), (ELBOW_MOTOR, (ELBOW_MOTOR, ELBOW_PLUG)),
+                                                  (SHOULDER_MOTOR, (SHOULDER_MOTOR, SHOULDER_PLUG)), (CLAW_MOTOR, (CLAW_MOTOR, CLAW_PLUG))) for i in ids}
 
 # The parts list after the title page, as the published guides lay it out (Lee, 14 Oct 2026): one band per kind of part, with
 # the quantity, the name (and its size or dot as a tag) and the picture, grouped by kind, each kind in a colour of its own.
@@ -92,7 +96,7 @@ dotted = lambda name: f'{name} ({DOT[name]})' if name in DOT else name
 WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'   # the wood parts' bands: blue-grey, so the wood stands out (the orange was too close to it: Lee, 16 Oct 2026)
 PART_GROUPS = [
     ('Parts List', 'Electronics', 'electronics', '#f9c0c0', '#ec8d8d', lambda n: n in ('Nano I/O Module', 'Nano Board', 'Joystick', 'Breadboard Wire (F-F)', 'USB Cable', 'Servo Extension Wire')),
-    ('Parts List', 'Motors', 'motors', '#d8edc6', '#a3cf84', lambda n: n.endswith('Motor')),
+    ('Parts List', 'Motors', 'motors', '#d8edc6', '#a3cf84', lambda n: n.endswith('Servo')),
     ('Parts List', 'Screws', 'screws', '#c4e8e5', '#88cfc8', lambda n: n.endswith('Hex Screw')),
     ('Parts List (Cont.)', 'Rotating base', 'wood', WOOD_BAND, WOOD_HALO, lambda n: re.fullmatch(r'R\d+', n)),
     ('Parts List (Cont.)', 'Base and controller', 'wood', WOOD_BAND, WOOD_HALO, lambda n: re.fullmatch(r'B\d+', n)),
@@ -139,7 +143,8 @@ def parts_list(parts):
 CODES = {i: (c['normal'], c['centre']) for i, c in json.load(open(HERE / 'engraved-codes.json')).items() if not i.startswith('_')}
 
 g = Guide(HERE, title='Mini Robot Arm (MRA)', part='Full Build', names=NAMES, part_views=PART_VIEWS, part_of=PART_OF, unlisted=UNLISTED,
-          hover_names={JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick'},   # (as their labels say; both 'Joystick' in the parts list: Lee, 16 Oct 2026)
+          hover_names={JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick',   # (as their labels say; both 'Joystick' in the parts list: Lee, 16 Oct 2026)
+                       **SERVO_HOVER},                                # (the servos as their labels say, with the dot: Lee, 19 Oct 2026)
           codes=CODES, hero_azimuth=135,                            # the finished model: from the front, on the R5 side, above
           # the title page: the camera of Lee's screenshot of 14 Oct 2026 (solved from where nine engraved codes are in it; within 6 px)
           # (it suits frames at least 1.7 times as wide as tall; on narrower ones the finished model's view is used; the USB
@@ -175,7 +180,7 @@ def routes(ids, lines, **ends):
 # --- the base motor's lead: straight up at first, then in the L-shaped slot in R4, then plugged into row 5
 base_chain = paths['chains'][BASE_MOTOR]
 base_plug = W.plug(paths['plugs'][BASE_PLUG], g_towards=[1, 0, 0])
-BASE_LEAD = lead_wires('base', 'Base Motor')
+BASE_LEAD = lead_wires('base', dotted('Base Servo'))
 exit_ = np.array(base_chain['leaves_servo_at'])
 up_line = W.join(W.straight(exit_, [0, 0, 1], 3.0), W.rounded([exit_ + [0, 0, 3], exit_ + [0, 0, 8], exit_ + [0, 52, 8]], radius=5)[1:])
 base_up, BASE_PLUG_UP = W.loose_lead(up_line, base_chain['across'], base_plug)
@@ -224,7 +229,7 @@ def side_lead(name, motor, plug_id, outwards, through_slot_mm, past_slot, chain=
     """outwards: -1 or 1, the z direction out of the turret on the motor's side. through_slot_mm: how far along the CAD's
     lead the hook-shaped slot has been passed. past_slot: corner points of the loose end beyond that, relative to it.
     chain: the lead's centre line, if not the CAD's."""
-    chain, plug, ids = chain or paths['chains'][motor], W.plug(paths['plugs'][plug_id], g_towards=[1, 0, 0]), lead_wires(name, NAMES[motor])
+    chain, plug, ids = chain or paths['chains'][motor], W.plug(paths['plugs'][plug_id], g_towards=[1, 0, 0]), lead_wires(name, dotted(NAMES[motor]))
     exit_, out = np.array(chain['leaves_servo_at']), np.array([0.0, 0.0, outwards])
     behind = exit_ + out * 8.4                                     # 3.6 mm clear of the back of the motor
     line = W.join(W.straight(exit_, [1, 0, 0], 3.0),
@@ -343,7 +348,7 @@ def spread(lines, pitch, over_mm=10.0):
 
 claw_chain = paths['chains'][CLAW_MOTOR]                           # (the CAD's centre line runs on through the join to row 10)
 claw_plug = W.plug(paths['plugs'][CLAW_PLUG], g_towards=[0, 0, 1])
-CLAW_LEAD = lead_wires('claw', 'Claw Motor')
+CLAW_LEAD = lead_wires('claw', dotted('Claw Servo'))
 claw_along = lambda from_mm, to_mm: W.along(claw_chain['middle'], from_mm, to_mm)
 ABOVE_R4 = np.array([-33.0, 31.0, 2.0])                            # where the join is made, from where the CAD has it: level, above the top edge of R4
 
@@ -656,15 +661,16 @@ for joystick, side, near_side in ((JOY_LEFT, 'left', [1, 1, -1]), (JOY_RIGHT, 'r
 ROW5_TOP, ROW6_TOP, ROW9_TOP, ROW10_TOP = ([52.574, PIN_TOP_Y, z] for z in (139.464, 142.0, 152.0, 154.6))
 claw_on_row10 = W.plug_pose(claw_plug, row10_plug['tops'][1], -row10_plug['cable'], row10_plug['across'])     # (for the test the claw motor goes straight onto row 10)
 BENCH = [  # motor, horn, plug, lead, the way its shaft points in the CAD, the plug's pose on its row, name, row, where it stands (z)
-    (BASE_MOTOR, BASE_HORN, BASE_PLUG, BASE_LEAD, [0, -1, 0], [0.0, 0.0, 0.0], base_plug, 'Base Motor', '5', ROW5_TOP, 118.0),
-    (ELBOW_MOTOR, ELBOW_HORN, ELBOW_PLUG, ELBOW_LEAD['wires'], [0, 0, 1], [0.0, 0.0, 0.0], ELBOW_LEAD['plug'], 'Elbow Motor', '6', ROW6_TOP, 140.0),
-    (SHOULDER_MOTOR, SHOULDER_HORN, SHOULDER_PLUG, SHOULDER_LEAD['wires'], [0, 0, -1], [0.0, 0.0, 0.0], SHOULDER_LEAD['plug'], 'Shoulder Motor', '9', ROW9_TOP, 162.0),
-    (CLAW_MOTOR, CLAW_HORN, CLAW_PLUG, CLAW_LEAD, [0, -1, 0], claw_on_row10, dict(claw_plug, across=row10_plug['across']), 'Claw Motor', '10', ROW10_TOP, 184.0)]
+    (BASE_MOTOR, BASE_HORN, BASE_PLUG, BASE_LEAD, [0, -1, 0], [0.0, 0.0, 0.0], base_plug, 'Base Servo', '5', ROW5_TOP, 118.0),
+    (ELBOW_MOTOR, ELBOW_HORN, ELBOW_PLUG, ELBOW_LEAD['wires'], [0, 0, 1], [0.0, 0.0, 0.0], ELBOW_LEAD['plug'], 'Elbow Servo', '6', ROW6_TOP, 140.0),
+    (SHOULDER_MOTOR, SHOULDER_HORN, SHOULDER_PLUG, SHOULDER_LEAD['wires'], [0, 0, -1], [0.0, 0.0, 0.0], SHOULDER_LEAD['plug'], 'Shoulder Servo', '9', ROW9_TOP, 162.0),
+    (CLAW_MOTOR, CLAW_HORN, CLAW_PLUG, CLAW_LEAD, [0, -1, 0], claw_on_row10, dict(claw_plug, across=row10_plug['across']), 'Claw Servo', '10', ROW10_TOP, 184.0)]
 for motor, horn, plug_id, lead, shaft, on_row, plug_info, name, row, row_top, z in BENCH:
     pose = standing(motor, shaft, 142.0, z)
     g.rest_at([motor, horn], pose)
     g.carry([plug_id], by=MODULE, pose=lifted(on_row, 40.0), appear=False)
-    g.place(f'Plug the {name.lower()} into Row {row} for the test. Remember brown to G, red to V, and orange to S.', appear=[motor, horn, plug_id],   # ("Row": Lee, 15 Oct 2026)
+    # (the wording as written before the servos were renamed, so that the edited wording in step-text.json still finds its step)
+    g.place(f'Plug the {name.lower().replace("servo", "motor")} into Row {row} for the test. Remember brown to G, red to V, and orange to S.', appear=[motor, horn, plug_id],   # ("Row": Lee, 15 Oct 2026)
             ride={plug_id: on_row}, labels=[dict(id=motor, text=dotted(name)), dict(text=f'Row {row}', anchor=row_top, id=MODULE, ring=False)],
             wires=bench_lead(lead, motor, pose, plug_info, plug_id, plug_pose=None if on_row == [0.0, 0.0, 0.0] else on_row))   # (the claw motor straight onto row 10, no extension: Lee)
 g.rest_at([USB_A], [0.0, ON_THE_BENCH, 0.0])
@@ -710,7 +716,7 @@ horn_way = [horn_pose(-28, 1.5, 52), horn_pose(-24, 1.5, 17.45),    # hovering a
             horn_pose(0, 0, 8.45),                                 # level and centred: R1 is between the horn and the motor's body
             [0, 8.4, 0], [0, 0, 0]]                                # a quarter turn about the shaft, then set down
 g.place("Begin with R1. Angle the base motor's servo horn through the slot in R1, then turn the motor and set it into the slot. The wire end of the motor lines up with the notch in the cut-out.",
-        move=[BASE_MOTOR, BASE_HORN], show=[R1], path=horn_way, labels={R1: 'R1', BASE_MOTOR: 'Base Motor'},
+        move=[BASE_MOTOR, BASE_HORN], show=[R1], path=horn_way, labels={R1: 'R1', BASE_MOTOR: 'Base Servo'},
         lines_at=[[[181.0, 89.4, 140.9], [163.7, 103.0, 124.3]]],
         wires=routes(BASE_LEAD, base_up, a=BASE_MOTOR, b=BASE_PLUG, b_at=BASE_PLUG_UP))
 g.place('Slide R2 over the base motor so its tabs enter the slots in R1.', move=[R2])
@@ -735,11 +741,11 @@ UNDER_TURRET = dict(flip=True, frame=([163.0, 98.0, 141.0], 82.0))
 # (An arrow along the slot in B2 rather than lead lines, Lee, 14 Oct 2026: from the round end of the cut-out, where the motor
 # ends up, out through the mouth of the slot towards the motor; just under B2, on the side that is seen.)
 g.place('Once R1 - R6 are together, slide B2 in between the servo horn and R5 / R6, until the motor sits in the round cut-out.',   # (Lee's wording, 15 Oct 2026, second note)
-        move=[B2], direction=[0, 0, 1], hover=60, labels={B2: 'B2', BASE_HORN: 'Base Motor'}, **UNDER_TURRET,
+        move=[B2], direction=[0, 0, 1], hover=60, labels={B2: 'B2', BASE_HORN: 'Base Servo'}, **UNDER_TURRET,
         arrows=[dict(tail=[163.67, 88.0, 140.85], head=[163.67, 88.0, 92.0], normal=[0, -1, 0])])
 # B1 comes up from below: two lines from the ends of its horn-shaped cut-out to the horn, two at the plates' corners.
 g.place('Place B2 onto B1 so the servo horn fits into the cut-out in B1.', move=[B1], direction=[0, -1, 0],
-        labels={B1: 'B1', BASE_HORN: 'Base Motor'}, flip=True, frame=([150.0, 84.0, 141.0], 112.0),   # (the same side, a little wider: B1 is large)
+        labels={B1: 'B1', BASE_HORN: 'Base Servo'}, flip=True, frame=([150.0, 84.0, 141.0], 112.0),   # (the same side, a little wider: B1 is large)
         lines_at=[[146.2, 88.6, 140.9], [181.2, 88.6, 140.9], [-26.0, 90.5, 94.5], [214.3, 90.5, 187.1]],
         caution='If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 slot.')
 # Screws thread into the wood, so the CAD cannot give their direction: set by hand. One is shown close up, then the rest.
@@ -807,7 +813,7 @@ BROWN_TO_G = 'Very important: the brown wire goes on G, the pin nearest the edge
 # The plug is lifted clear of the joystick wires, brought upright over row 5 and pushed straight down onto the pins.
 g.place('Reconnect the base motor to Row 5. Remember brown to G, red to V, and orange to S.', move=[BASE_PLUG],   # ("Row": Lee, 15 Oct 2026)
         path=[BASE_PLUG_SLOT, via([35, 62, 0]), [0, 45, 0], [0, 0, 0]],
-        labels=[dict(text='Row 5', anchor=ROW5, id=MODULE, ring=False), dict(text='Base Motor', id=BASE_PLUG)], lines=False,
+        labels=[dict(text='Row 5', anchor=ROW5, id=MODULE, ring=False), dict(text='Base Servo', id=BASE_PLUG)], lines=False,
         view_dir=[-0.527, 0.7929, -0.306], frame=([84.2, 131.5, 137.4], 69.0),   # (the camera of Lee's screenshot of Step 41c, 14 Oct 2026, solved within 6 px)
         wires_done=routes(BASE_LEAD, base_plugged, a=BASE_MOTOR, b=BASE_PLUG, b_from=IN_SLOT),
         caution=BROWN_TO_G)
@@ -877,7 +883,7 @@ elbow_way = horn_leading(ELBOW_HUB, ELBOW_HORN_ALONG, [0, 0, 1], [(20, -10, 60),
 elbow_way[2] = via(elbow_way[2])
 elbow_tip = np.array(ELBOW_HUB) + 18.0 * np.array(ELBOW_HORN_ALONG)    # the lead line runs from the horn's tip to where the tip passes through R5
 g.place('The elbow motor has 6 on its wire. Angle its servo horn through the opening in R5, then push the motor in so the horn sits in the slot in A2 and A3.', move=[ELBOW_MOTOR, ELBOW_HORN], path=elbow_way,
-        lines_at=[[elbow_tip, [182.0, 159.4, 110.6]]], wires=ELBOW_LEAD['loose'], focus=[ELBOW_MOTOR, R5], focus_pad=1.1, labels={ELBOW_MOTOR: dotted('Elbow Motor')})
+        lines_at=[[elbow_tip, [182.0, 159.4, 110.6]]], wires=ELBOW_LEAD['loose'], focus=[ELBOW_MOTOR, R5], focus_pad=1.1, labels={ELBOW_MOTOR: dotted('Elbow Servo')})
 g.place("Pass the elbow motor's plug through R8 and slide R8 down the wire onto the back of the motor, code facing out.", move=[R8],
         direction=OUT_LEFT, hover=45, focus=[R8, ELBOW_MOTOR, R5], focus_pad=1.1,
         lines_at=[[[170.28, 171.6, 106.46], [170.28, 171.6, 109.0]], [[170.28, 152.95, 106.46], [170.28, 152.95, 109.0]]])     # hole to hole
@@ -911,7 +917,7 @@ shoulder_way = horn_leading(SHOULDER_HUB, SHOULDER_HORN_ALONG, [0, 0, -1], [(20,
 shoulder_way[2], shoulder_way[3] = via(shoulder_way[2]), via(shoulder_way[3])
 shoulder_tip = np.array(SHOULDER_HUB) + 18.0 * np.array(SHOULDER_HORN_ALONG)    # (to where it passes through R6: a line ending there is hidden from the R5 side, so the camera comes round to R6)
 g.place('The shoulder motor has 9 on its wire. Hold the arm up, angle the servo horn through the opening in R6 and push the motor in so the horn sits in the slot in A8.', move=[SHOULDER_MOTOR, SHOULDER_HORN], path=shoulder_way,
-        lines_at=[[shoulder_tip, [180.7, 167.8, 170.7]]], wires=SHOULDER_LEAD['loose'], focus=[SHOULDER_MOTOR, R6], focus_pad=1.1, labels={SHOULDER_MOTOR: dotted('Shoulder Motor')})   # (9: confirmed by Lee)
+        lines_at=[[shoulder_tip, [180.7, 167.8, 170.7]]], wires=SHOULDER_LEAD['loose'], focus=[SHOULDER_MOTOR, R6], focus_pad=1.1, labels={SHOULDER_MOTOR: dotted('Shoulder Servo')})   # (9: confirmed by Lee)
 g.place("Pass the shoulder motor's plug through R7 and slide R7 down the wire onto the back of the motor, code facing out.", move=[R7],
         direction=OUT_RIGHT, hover=45, focus=[R7, SHOULDER_MOTOR, R6], focus_pad=1.1,
         lines_at=[[[170.28, 171.6, 174.74], [170.28, 171.6, 172.2]], [[170.28, 152.95, 174.74], [170.28, 152.95, 172.2]]])
@@ -962,7 +968,7 @@ GEAR_MESH = [334.8, 177.9, 147.2]                                    # where the
 # --- claw: the motor through C3, the two clips, the two bars, C6 screwed on, then the jaws and the cover
 # The motor arrives with its horn fitted (video 0:00). Nothing screws it down: its tabs are trapped between C3 and the bars.
 g.place('Begin the claw with C3. Push the claw motor through C3 from the engraved side, wire first, with the wire at the notched end of the cut-out.',
-        move=[CLAW_MOTOR, CLAW_HORN], show=[C3], against=claw[:1], hover=55, **UPSIDE_DOWN, wires=CLAW['up'][0], labels={C3: 'C3', CLAW_MOTOR: dotted('Claw Motor')},
+        move=[CLAW_MOTOR, CLAW_HORN], show=[C3], against=claw[:1], hover=55, **UPSIDE_DOWN, wires=CLAW['up'][0], labels={C3: 'C3', CLAW_MOTOR: dotted('Claw Servo')},
         lines_at=[[[329.14, 196.6, 132.86], [329.14, 193.0, 132.86]], [[341.29, 196.6, 155.41], [341.29, 193.0, 155.41]]])   # case corners to cut-out corners
 g.place("Feed the claw motor's wire back through the hole in the end of C3.", **UPSIDE_DOWN, eye=[dict(anchor=[300.8, 196.5, 147.1], id=C3)],
         **by_way_of(43, 50, 57, 66, 76, CLAW['in_c3']))     # (the plug follows the lead through the hole, 55 - 59 mm along)
@@ -1010,11 +1016,15 @@ g.place('Then feed it back through the bottom hole in A6 and bring the plug forw
         frame=([165.0, 180.0, 145.0], 62.0), view_dir=ALONG_A6,      # (through the hole, 203 - 207 mm along, then hanging behind A6)
         **by_way_of(190, 197, 204, 216, CLAW['above_r4']))
 # (The coupler arrives on the extension: on the video nobody fits it. The extension is the piece in the hand, so it moves.)
+CLAW_PLUG_JOIN = [154.3, 133.1, 144.7]                              # Step 96 | Claw Motor (NAUO90) | Lee's Option-click, 19 Oct 2026
 g.place("Push the coupler of the servo extension wire onto the claw motor's plug, brown wire to brown wire.",
         appear=[COUPLER, EXTENSION_PLUG, ROW10_PLUG], frame=([60.0, 160.0, 146.0], 80.0), wires=EXTENSION_LEAD['loose'],   # (wide enough for the loose end)
         caution='Check that the wire colours match across the join: brown to brown, red to red and orange to orange.',   # (instead of the eye: Lee, 14 Oct 2026)
         view_dir=[-0.45, 0.85, -0.3],                                 # (from high up, above the joysticks' wires: Lee, 14 Oct 2026)
-        ride={COUPLER: ABOVE_R4.tolist(), EXTENSION_PLUG: ABOVE_R4.tolist(), ROW10_PLUG: ROW10_PLUG_LOOSE})
+        ride={COUPLER: ABOVE_R4.tolist(), EXTENSION_PLUG: ABOVE_R4.tolist(), ROW10_PLUG: ROW10_PLUG_LOOSE},
+        # (a lead line where the extension joins the Claw Servo's lead: the curriculum director, Lee 19 Oct 2026. Lee's Option-click
+        # on the Claw Servo's plug, seated mm; the coupler meets that spot, 25 mm from where it waits; both ride on the servo here)
+        lines_at=[[(np.array(CLAW_PLUG_JOIN) + ABOVE_R4 + APART).round(2).tolist(), (np.array(CLAW_PLUG_JOIN) + ABOVE_R4).round(2).tolist()]])
 behind_r4 = [[0.0, float(ABOVE_R4[1]), 0.0], [0.0, 2.0, 0.0], [0.0, 0.0, 0.0]]   # back over the top edge of R4, then down (the extension down the slot's stem to its foot, then into the pocket)
 g.place('Push the join down behind R4 and move the servo extension wire into the L-shaped slot in R4.',
         eye=[dict(anchor=[133.4, 146.6, 141.7], id=R4)], frame=([128.0, 142.0, 143.0], 55.0),
@@ -1027,15 +1037,15 @@ row_label = lambda row, at, plug, name: [dict(text=f'Row {row}', anchor=at, id=M
 PLUG_IN = dict(lines=False, view_dir=[-0.3614, 0.8788, 0.3116], frame=([85.9, 131.8, 144.2], 64.3))   # one camera for the wiring run: Lee's screenshot of Step 102c (solved within 9 px)
 g.place('Reconnect the elbow motor to Row 6. Remember brown to G, red to V, and orange to S.', move=[ELBOW_PLUG],
         path=[ELBOW_LEAD['plug_hooked'], via(ELBOW_ALONG[150.0]), T_ELBOW_OFF, via(ELBOW_ALONG[190.0]), via(ELBOW_ALONG[205.0]), T_ELBOW_UP, [0.0, 0.0, 0.0]],   # (up, over the base motor's lead, then down beside it)
-        labels=row_label(6, ROW6, ELBOW_PLUG, 'Elbow Motor'), wires_done={w: [ELBOW_OFF[w], ELBOW_UP[w], ELBOW_LEAD['plugged'][w]] for w in ELBOW_LEAD['wires']}, **PLUG_IN)
+        labels=row_label(6, ROW6, ELBOW_PLUG, 'Elbow Servo'), wires_done={w: [ELBOW_OFF[w], ELBOW_UP[w], ELBOW_LEAD['plugged'][w]] for w in ELBOW_LEAD['wires']}, **PLUG_IN)
 g.place('Reconnect the shoulder motor to Row 9. Remember brown to G, red to V, and orange to S.', move=[SHOULDER_PLUG],
         path=[SHOULDER_LEAD['plug_hooked'], T_SHOULDER_OFF, turned_as(T_SHOULDER_UP, [20.0, 52.0, 0.0]), turned_as(T_SHOULDER_UP, [0.0, 52.0, 0.0]), T_SHOULDER_UP, [0.0, 0.0, 0.0]],   # (upright over the joysticks' wires, then over the row)
-        labels=row_label(9, ROW9, SHOULDER_PLUG, 'Shoulder Motor'), wires_done={w: [SHOULDER_OFF[w], SHOULDER_UP[w], SHOULDER_LEAD['plugged'][w]] for w in SHOULDER_LEAD['wires']}, **PLUG_IN)
+        labels=row_label(9, ROW9, SHOULDER_PLUG, 'Shoulder Servo'), wires_done={w: [SHOULDER_OFF[w], SHOULDER_UP[w], SHOULDER_LEAD['plugged'][w]] for w in SHOULDER_LEAD['wires']}, **PLUG_IN)
 g.place('Connect the servo extension wire to Row 10. Remember brown to G, red to V, and orange to S.', move=[ROW10_PLUG],
         # from its rest: straight up, still flat, under the shoulder motor's lead; across in front of R6's ear and turning upright,
         # under that lead where it runs down to row 9; then up beside it, over row 10 and down (clear of the jumper wires: Lee)
         path=[T_REST, via(lifted(T_REST, 35.0)), via([50.0, 21.0, 10.0]), T_RISEN, via(T_ACROSS), T_OVER, [0.0, 0.0, 0.0]],
-        labels=row_label(10, ROW10, ROW10_PLUG, 'Claw Motor'), **PLUG_IN,
+        labels=row_label(10, ROW10, ROW10_PLUG, 'Claw Servo'), **PLUG_IN,
         wires_done={w: [EXTENSION_LEAD['risen'][w], EXTENSION_LEAD['over_row'][w], EXTENSION_LEAD['plugged'][w]] for w in EXTENSION})
 # ================================================================ CLAW AND FINAL WIRING (end)
 

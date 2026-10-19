@@ -30,18 +30,18 @@
   "NAUO95": "Breadboard Wire (F-F)",
   "NAUO110": "Breadboard Wire (F-F)",
   "NAUO98": "Breadboard Wire (F-F)",
-  "NAUO45": "Base Motor",
-  "NAUO46": "Base Motor",
-  "NAUO83": "Base Motor",
-  "NAUO58": "Elbow Motor",
-  "NAUO59": "Elbow Motor",
-  "NAUO84": "Elbow Motor",
-  "NAUO66": "Shoulder Motor",
-  "NAUO67": "Shoulder Motor",
-  "NAUO86": "Shoulder Motor",
-  "NAUO72": "Claw Motor",
-  "NAUO73": "Claw Motor",
-  "NAUO90": "Claw Motor",
+  "NAUO45": "Base Servo",
+  "NAUO46": "Base Servo",
+  "NAUO83": "Base Servo",
+  "NAUO58": "Elbow Servo (Black Dot)",
+  "NAUO59": "Elbow Servo (Black Dot)",
+  "NAUO84": "Elbow Servo (Black Dot)",
+  "NAUO66": "Shoulder Servo (White Dot)",
+  "NAUO67": "Shoulder Servo (White Dot)",
+  "NAUO86": "Shoulder Servo (White Dot)",
+  "NAUO72": "Claw Servo (Blue Dot)",
+  "NAUO73": "Claw Servo (Blue Dot)",
+  "NAUO90": "Claw Servo (Blue Dot)",
   "USB_B": "USB Cable",
   "USB_A": "USB Cable",
   "NAUO10": "R1",
@@ -124,62 +124,62 @@
   "base brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "base red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "base orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "elbow brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "elbow red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "elbow orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "shoulder brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "shoulder red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "shoulder orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "claw brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "claw red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "claw orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "extension brown": {
    "colour": "#975100",
@@ -115513,26 +115513,26 @@
      "halo": "#a3cf84",
      "items": [
       {
-       "name": "Base Motor",
+       "name": "Base Servo",
        "qty": 1,
-       "picture": "parts/Base-Motor.png"
+       "picture": "parts/Base-Servo.png"
       },
       {
-       "name": "Elbow Motor",
+       "name": "Elbow Servo",
        "qty": 1,
-       "picture": "parts/Elbow-Motor.png",
+       "picture": "parts/Elbow-Servo.png",
        "tag": "Black Dot"
       },
       {
-       "name": "Shoulder Motor",
+       "name": "Shoulder Servo",
        "qty": 1,
-       "picture": "parts/Shoulder-Motor.png",
+       "picture": "parts/Shoulder-Servo.png",
        "tag": "White Dot"
       },
       {
-       "name": "Claw Motor",
+       "name": "Claw Servo",
        "qty": 1,
-       "picture": "parts/Claw-Motor.png",
+       "picture": "parts/Claw-Servo.png",
        "tag": "Blue Dot"
       }
      ]
@@ -115951,7 +115951,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Begin the electronics with the I/O module. Press the Nano Board into it, its USB socket at the same end as the power socket.",
+   "caption": "Press the Nano Board into the Nano I/O Module, with the USB connector on the same end as the module's power connector.",
    "text_key": "T01F4BEB7",
    "review": null,
    "moving": [
@@ -115993,7 +115993,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Begin the electronics with the I/O module. Press the Nano Board into it, its USB socket at the same end as the power socket.",
+   "caption": "Press the Nano Board into the Nano I/O Module, with the USB connector on the same end as the module's power connector.",
    "text_key": "T01F4BEB7",
    "review": null,
    "moving": [
@@ -116055,7 +116055,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay the left joystick beside the I/O module, its pins towards the module.",
+   "caption": "Place the Left Joystick beside the Nano I/O Module.",
    "text_key": "TCD270DB4",
    "review": null,
    "moving": [
@@ -116098,7 +116098,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay the left joystick beside the I/O module, its pins towards the module.",
+   "caption": "Place the Left Joystick beside the Nano I/O Module.",
    "text_key": "TCD270DB4",
    "review": null,
    "moving": [
@@ -116180,7 +116180,7 @@
     "left GND": 0
    },
    "carry": {},
-   "caption": "Connect GND on the left joystick to A2 G on the I/O module.",
+   "caption": "Connect GND on the Left Joystick to A2 G on the Nano I/O Module.",
    "text_key": "TFD76A366",
    "review": null,
    "moving": [
@@ -116254,7 +116254,7 @@
     "left GND": 0
    },
    "carry": {},
-   "caption": "Connect GND on the left joystick to A2 G on the I/O module.",
+   "caption": "Connect GND on the Left Joystick to A2 G on the Nano I/O Module.",
    "text_key": "TFD76A366",
    "review": null,
    "moving": [
@@ -116366,7 +116366,7 @@
     "left V": 1
    },
    "carry": {},
-   "caption": "Connect +5V on the left joystick to A2 V on the I/O module.",
+   "caption": "Connect +5V on the Left Joystick to A2 V on the Nano I/O Module.",
    "text_key": "T6D859F94",
    "review": null,
    "moving": [
@@ -116443,7 +116443,7 @@
     "left V": 1
    },
    "carry": {},
-   "caption": "Connect +5V on the left joystick to A2 V on the I/O module.",
+   "caption": "Connect +5V on the Left Joystick to A2 V on the Nano I/O Module.",
    "text_key": "T6D859F94",
    "review": null,
    "moving": [
@@ -116558,7 +116558,7 @@
     "left X": 2
    },
    "carry": {},
-   "caption": "Connect VRx on the left joystick to A2 S on the I/O module.",
+   "caption": "Connect VRx on the Left Joystick to A2 S on the Nano I/O Module.",
    "text_key": "TD7E1C492",
    "review": null,
    "moving": [
@@ -116638,7 +116638,7 @@
     "left X": 2
    },
    "carry": {},
-   "caption": "Connect VRx on the left joystick to A2 S on the I/O module.",
+   "caption": "Connect VRx on the Left Joystick to A2 S on the Nano I/O Module.",
    "text_key": "TD7E1C492",
    "review": null,
    "moving": [
@@ -116756,7 +116756,7 @@
     "left Y": 3
    },
    "carry": {},
-   "caption": "Connect VRy on the left joystick to A3 S on the I/O module.",
+   "caption": "Connect VRy on the Left Joystick to A3 S on the Nano I/O Module.",
    "text_key": "T766055A7",
    "review": null,
    "moving": [
@@ -116839,7 +116839,7 @@
     "left Y": 3
    },
    "carry": {},
-   "caption": "Connect VRy on the left joystick to A3 S on the I/O module.",
+   "caption": "Connect VRy on the Left Joystick to A3 S on the Nano I/O Module.",
    "text_key": "T766055A7",
    "review": null,
    "moving": [
@@ -116942,7 +116942,7 @@
     "left Y": 3
    },
    "carry": {},
-   "caption": "Lay the right joystick beside the I/O module, its pins towards the module.",
+   "caption": "Place the Right Joystick beside the Nano I/O Module.",
    "text_key": "T380EC219",
    "review": null,
    "moving": [
@@ -116999,7 +116999,7 @@
     "left Y": 3
    },
    "carry": {},
-   "caption": "Lay the right joystick beside the I/O module, its pins towards the module.",
+   "caption": "Place the Right Joystick beside the Nano I/O Module.",
    "text_key": "T380EC219",
    "review": null,
    "moving": [
@@ -117094,7 +117094,7 @@
     "right GND": 4
    },
    "carry": {},
-   "caption": "Connect GND on the right joystick to A0 G on the I/O module.",
+   "caption": "Connect GND on the Right Joystick to A0 G on the Nano I/O Module.",
    "text_key": "T89878E39",
    "review": null,
    "moving": [
@@ -117181,7 +117181,7 @@
     "right GND": 4
    },
    "carry": {},
-   "caption": "Connect GND on the right joystick to A0 G on the I/O module.",
+   "caption": "Connect GND on the Right Joystick to A0 G on the Nano I/O Module.",
    "text_key": "T89878E39",
    "review": null,
    "moving": [
@@ -117306,7 +117306,7 @@
     "right V": 5
    },
    "carry": {},
-   "caption": "Connect +5V on the right joystick to A0 V on the I/O module.",
+   "caption": "Connect +5V on the Right Joystick to A0 V on the Nano I/O Module.",
    "text_key": "TAF00DD05",
    "review": null,
    "moving": [
@@ -117396,7 +117396,7 @@
     "right V": 5
    },
    "carry": {},
-   "caption": "Connect +5V on the right joystick to A0 V on the I/O module.",
+   "caption": "Connect +5V on the Right Joystick to A0 V on the Nano I/O Module.",
    "text_key": "TAF00DD05",
    "review": null,
    "moving": [
@@ -117524,7 +117524,7 @@
     "right X": 6
    },
    "carry": {},
-   "caption": "Connect VRx on the right joystick to A0 S on the I/O module.",
+   "caption": "Connect VRx on the Right Joystick to A0 S on the Nano I/O Module.",
    "text_key": "TF22CA88C",
    "review": null,
    "moving": [
@@ -117617,7 +117617,7 @@
     "right X": 6
    },
    "carry": {},
-   "caption": "Connect VRx on the right joystick to A0 S on the I/O module.",
+   "caption": "Connect VRx on the Right Joystick to A0 S on the Nano I/O Module.",
    "text_key": "TF22CA88C",
    "review": null,
    "moving": [
@@ -117748,7 +117748,7 @@
     "right Y": 7
    },
    "carry": {},
-   "caption": "Connect VRy on the right joystick to A1 S on the I/O module.",
+   "caption": "Connect VRy on the Right Joystick to A1 S on the Nano I/O Module.",
    "text_key": "T7F39BFBC",
    "review": null,
    "moving": [
@@ -117844,7 +117844,7 @@
     "right Y": 7
    },
    "carry": {},
-   "caption": "Connect VRy on the right joystick to A1 S on the I/O module.",
+   "caption": "Connect VRy on the Right Joystick to A1 S on the Nano I/O Module.",
    "text_key": "T7F39BFBC",
    "review": null,
    "moving": [
@@ -117978,7 +117978,7 @@
    "labels": [
     {
      "id": "NAUO45",
-     "text": "Base Motor",
+     "text": "Base Servo",
      "anchor": [
       167.4,
       101.3,
@@ -118020,7 +118020,7 @@
      ]
     }
    },
-   "caption": "Plug the base motor into Row 5 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Base Servo (No Dot) into Row 5. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TEB94B6D6",
    "review": null,
    "moving": [],
@@ -118144,7 +118144,7 @@
      ]
     }
    },
-   "caption": "Plug the base motor into Row 5 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Base Servo (No Dot) into Row 5. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TEB94B6D6",
    "review": null,
    "moving": [],
@@ -118293,7 +118293,7 @@
    "labels": [
     {
      "id": "NAUO58",
-     "text": "Elbow Motor (Black Dot)",
+     "text": "Elbow Servo (Black Dot)",
      "anchor": [
       167.5,
       158.5,
@@ -118346,7 +118346,7 @@
      ]
     }
    },
-   "caption": "Plug the elbow motor into Row 6 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Elbow Servo (Black Dot) into Row 6. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TF4C8CB92",
    "review": null,
    "moving": [],
@@ -118525,7 +118525,7 @@
      ]
     }
    },
-   "caption": "Plug the elbow motor into Row 6 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Elbow Servo (Black Dot) into Row 6. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TF4C8CB92",
    "review": null,
    "moving": [],
@@ -118718,7 +118718,7 @@
    "labels": [
     {
      "id": "NAUO66",
-     "text": "Shoulder Motor (White Dot)",
+     "text": "Shoulder Servo (White Dot)",
      "anchor": [
       168.3,
       165.7,
@@ -118782,7 +118782,7 @@
      ]
     }
    },
-   "caption": "Plug the shoulder motor into Row 9 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Shoulder Servo (White Dot) into Row 9. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T83D2DBC0",
    "review": null,
    "moving": [],
@@ -119016,7 +119016,7 @@
      ]
     }
    },
-   "caption": "Plug the shoulder motor into Row 9 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Shoulder Servo (White Dot) into Row 9. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T83D2DBC0",
    "review": null,
    "moving": [],
@@ -119266,7 +119266,7 @@
    "labels": [
     {
      "id": "NAUO72",
-     "text": "Claw Motor (Blue Dot)",
+     "text": "Claw Servo (Blue Dot)",
      "anchor": [
       330.9,
       189.3,
@@ -119354,7 +119354,7 @@
      }
     }
    },
-   "caption": "Plug the claw motor into Row 10 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Claw Servo (Blue Dot) into Row 10. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T0AFA2A74",
    "review": null,
    "moving": [],
@@ -119669,7 +119669,7 @@
      }
     }
    },
-   "caption": "Plug the claw motor into Row 10 for the test. Remember brown to G, red to V, and orange to S.",
+   "caption": "Plug the Claw Servo (Blue Dot) into Row 10. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T0AFA2A74",
    "review": null,
    "moving": [],
@@ -120023,7 +120023,7 @@
      }
     }
    },
-   "caption": "Connect the USB cable to the Nano Board.",
+   "caption": "Connect the USB Cable to the Nano Board.",
    "text_key": "TFA0DD136",
    "review": null,
    "moving": [
@@ -120348,7 +120348,7 @@
      }
     }
    },
-   "caption": "Connect the USB cable to the Nano Board.",
+   "caption": "Connect the USB Cable to the Nano Board.",
    "text_key": "TFA0DD136",
    "review": null,
    "moving": [
@@ -120383,7 +120383,7 @@
   {
    "name": "Step 17",
    "kind": "card",
-   "caption": "Testing Checklist\nGo through the following checklist to make sure you have tested each part of your MRA:\n\u2022  The MRA was powered on by connecting a Mini-USB cable to the nano.\n\u2022  Moving the left joystick side to side made the Base servo turn.\n\u2022  Moving the left joystick forward and back made the Shoulder servo (white dot) move.\n\u2022  Moving the right joystick forward and back made the Elbow servo (black dot) move.\n\u2022  Moving the right joystick side to side made the Claw servo (blue dot) move.\n\u2022  Each servo stopped moving when the joystick was released.\n\u2022  The Mini-USB cable was disconnected from the nano after testing.",
+   "caption": "Testing Checklist\nGo through the following checklist to make sure you have tested each part of your MRA:\n\u2022  The MRA was powered on by connecting the USB Cable to the nano.\n\u2022  Moving the Left Joystick side to side made the Base Servo (No Dot) turn.\n\u2022  Moving the Left Joystick forward and back made the Shoulder Servo (White Dot) move.\n\u2022  Moving the Right Joystick forward and back made the Elbow Servo (Black Dot) move.\n\u2022  Moving the Right Joystick side to side made the Claw Servo (Blue Dot) move.\n\u2022  Each servo stopped moving when the joystick was released.\n\u2022  The USB Cable was disconnected from the nano after testing.",
    "text_key": "TA25258D0",
    "review": null,
    "visible": [
@@ -120732,7 +120732,7 @@
      }
     }
    },
-   "caption": "Unplug all four servo motor wires from the I/O module.",
+   "caption": "Disconnect all four servos from the Nano I/O Module. Set everything aside except the Base Servo (No Dot).",
    "text_key": "T8EC60AF1",
    "review": null,
    "moving": [],
@@ -120761,7 +120761,7 @@
     ],
     "radius": 96.4
    },
-   "caution": "Set the servos and the I/O module aside for now. You will use them again in a bit."
+   "caution": "Keep the parts you set aside in a safe place to prevent them from getting lost or damaged. You will need them again soon."
   },
   {
    "name": "Step 18c",
@@ -121048,7 +121048,7 @@
      }
     }
    },
-   "caption": "Unplug all four servo motor wires from the I/O module.",
+   "caption": "Disconnect all four servos from the Nano I/O Module. Set everything aside except the Base Servo (No Dot).",
    "text_key": "T8EC60AF1",
    "review": null,
    "moving": [],
@@ -121077,7 +121077,7 @@
     ],
     "radius": 96.4
    },
-   "caution": "Set the servos and the I/O module aside for now. You will use them again in a bit."
+   "caution": "Keep the parts you set aside in a safe place to prevent them from getting lost or damaged. You will need them again soon."
   },
   {
    "name": "Step 19",
@@ -121170,7 +121170,7 @@
     },
     {
      "id": "NAUO45",
-     "text": "Base Motor",
+     "text": "Base Servo",
      "anchor": [
       157.7,
       101.4,
@@ -121208,7 +121208,7 @@
     }
    },
    "cut": true,
-   "caption": "Begin with R1. Angle the base motor's servo horn through the slot in R1, then turn the motor and set it into the slot. The wire end of the motor lines up with the notch in the cut-out.",
+   "caption": "Tilt the Base Servo (No Dot) and push its servo horn down through the cutout in R1. Then, turn the servo and set it into the slot, with its wires at the notched end.",
    "text_key": "TDA1A58FF",
    "review": null,
    "moving": [
@@ -121413,7 +121413,7 @@
      }
     }
    },
-   "caption": "Begin with R1. Angle the base motor's servo horn through the slot in R1, then turn the motor and set it into the slot. The wire end of the motor lines up with the notch in the cut-out.",
+   "caption": "Tilt the Base Servo (No Dot) and push its servo horn down through the cutout in R1. Then, turn the servo and set it into the slot, with its wires at the notched end.",
    "text_key": "TDA1A58FF",
    "review": null,
    "moving": [
@@ -121662,7 +121662,7 @@
      }
     }
    },
-   "caption": "Slide R2 over the base motor so its tabs enter the slots in R1.",
+   "caption": "Slide R2 over the Base Servo, fitting the tabs of R2 into the slots in R1.",
    "text_key": "TFCB2CE0D",
    "review": null,
    "moving": [
@@ -121752,7 +121752,7 @@
      }
     }
    },
-   "caption": "Slide R2 over the base motor so its tabs enter the slots in R1.",
+   "caption": "Slide R2 over the Base Servo, fitting the tabs of R2 into the slots in R1.",
    "text_key": "TFCB2CE0D",
    "review": null,
    "moving": [
@@ -121886,7 +121886,7 @@
      }
     }
    },
-   "caption": "Add R3.",
+   "caption": "Push the bottom tabs of R3 into the slots in R1.",
    "text_key": "TF0F52FCD",
    "review": null,
    "moving": [
@@ -121977,7 +121977,7 @@
      }
     }
    },
-   "caption": "Add R3.",
+   "caption": "Push the bottom tabs of R3 into the slots in R1.",
    "text_key": "TF0F52FCD",
    "review": null,
    "moving": [
@@ -122112,7 +122112,7 @@
      }
     }
    },
-   "caption": "Add R4.",
+   "caption": "Push the bottom tabs of R4 into the slots in R1.",
    "text_key": "TEECC45E0",
    "review": null,
    "moving": [
@@ -122204,7 +122204,7 @@
      }
     }
    },
-   "caption": "Add R4.",
+   "caption": "Push the bottom tabs of R4 into the slots in R1.",
    "text_key": "TEECC45E0",
    "review": null,
    "moving": [
@@ -122364,7 +122364,7 @@
      }
     }
    },
-   "caption": "Add R5.",
+   "caption": "Attach R5 to the left tab of R4 and the right tab of R3.",
    "text_key": "TF141B185",
    "review": null,
    "moving": [
@@ -122457,7 +122457,7 @@
      }
     }
    },
-   "caption": "Add R5.",
+   "caption": "Attach R5 to the left tab of R4 and the right tab of R3.",
    "text_key": "TF141B185",
    "review": null,
    "moving": [
@@ -122618,7 +122618,7 @@
      }
     }
    },
-   "caption": "Add R6. Keep the base motor's wire up out of the way so it is not trapped.",
+   "caption": "Attach R6 to the remaining tabs on R3 and R4. Keep the Base Servo's wires clear of the tabs.",
    "text_key": "TE40FECBC",
    "review": null,
    "moving": [
@@ -122712,7 +122712,7 @@
      }
     }
    },
-   "caption": "Add R6. Keep the base motor's wire up out of the way so it is not trapped.",
+   "caption": "Attach R6 to the remaining tabs on R3 and R4. Keep the Base Servo's wires clear of the tabs.",
    "text_key": "TE40FECBC",
    "review": null,
    "moving": [
@@ -122818,7 +122818,7 @@
      }
     }
    },
-   "caption": "Move the base motor's wire into the L-shaped slot in R4.",
+   "caption": "Place the Base Servo's wires into the hook-shaped slot in R4.",
    "text_key": "TEE34A3FE",
    "review": null,
    "moving": [],
@@ -122962,7 +122962,7 @@
      30
     ]
    },
-   "caption": "Move the base motor's wire into the L-shaped slot in R4.",
+   "caption": "Place the Base Servo's wires into the hook-shaped slot in R4.",
    "text_key": "TEE34A3FE",
    "review": null,
    "moving": [],
@@ -123045,7 +123045,7 @@
     },
     {
      "id": "NAUO46",
-     "text": "Base Motor",
+     "text": "Base Servo",
      "anchor": [
       164.7,
       90.5,
@@ -123101,7 +123101,7 @@
      ]
     }
    ],
-   "caption": "Once R1 - R6 are together, slide B2 in between the servo horn and R5 / R6, until the motor sits in the round cut-out.",
+   "caption": "Slide B2 under the servo horn until the servo sits in the round cutout.",
    "text_key": "T64398169",
    "review": null,
    "moving": [
@@ -123207,7 +123207,7 @@
      }
     }
    },
-   "caption": "Once R1 - R6 are together, slide B2 in between the servo horn and R5 / R6, until the motor sits in the round cut-out.",
+   "caption": "Slide B2 under the servo horn until the servo sits in the round cutout.",
    "text_key": "T64398169",
    "review": null,
    "moving": [
@@ -123353,7 +123353,7 @@
     },
     {
      "id": "NAUO46",
-     "text": "Base Motor",
+     "text": "Base Servo",
      "anchor": [
       164.0,
       89.5,
@@ -123390,7 +123390,7 @@
      }
     }
    },
-   "caption": "Place B2 onto B1 so the servo horn fits into the cut-out in B1.",
+   "caption": "Lower B1 onto B2 so the servo horn fits into the cutout in B1.",
    "text_key": "T7BF0CE46",
    "review": null,
    "moving": [
@@ -123432,7 +123432,7 @@
      -0.7071
     ]
    },
-   "caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 slot."
+   "caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 cutout."
   },
   {
    "name": "Step 27c",
@@ -123498,7 +123498,7 @@
      }
     }
    },
-   "caption": "Place B2 onto B1 so the servo horn fits into the cut-out in B1.",
+   "caption": "Lower B1 onto B2 so the servo horn fits into the cutout in B1.",
    "text_key": "T7BF0CE46",
    "review": null,
    "moving": [
@@ -123540,7 +123540,7 @@
      -0.7071
     ]
    },
-   "caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 slot."
+   "caution": "If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 cutout."
   },
   {
    "name": "Step 28",
@@ -123638,7 +123638,7 @@
      }
     }
    },
-   "caption": "Screw B2 onto B1 with six 6mm screws.",
+   "caption": "Attach B1 and B2 using a 6mm screw.",
    "text_key": "T8901A90F",
    "review": null,
    "moving": [
@@ -123735,7 +123735,7 @@
      }
     }
    },
-   "caption": "Screw B2 onto B1 with six 6mm screws.",
+   "caption": "Attach B1 and B2 using a 6mm screw.",
    "text_key": "T8901A90F",
    "review": null,
    "moving": [
@@ -123936,7 +123936,7 @@
      }
     }
    },
-   "caption": "Add the other five 6mm screws.",
+   "caption": "Attach B1 and B2 using the other five 6mm screws.",
    "text_key": "T50F0B58B",
    "review": null,
    "moving": [
@@ -124042,7 +124042,7 @@
      }
     }
    },
-   "caption": "Add the other five 6mm screws.",
+   "caption": "Attach B1 and B2 using the other five 6mm screws.",
    "text_key": "T50F0B58B",
    "review": null,
    "moving": [
@@ -124192,7 +124192,7 @@
      }
     }
    },
-   "caption": "Insert B3 into B2.",
+   "caption": "Push the bottom tabs of B3 into the slots near the end of B2.",
    "text_key": "TAB351905",
    "review": null,
    "moving": [
@@ -124295,7 +124295,7 @@
      }
     }
    },
-   "caption": "Insert B3 into B2.",
+   "caption": "Push the bottom tabs of B3 into the slots near the end of B2.",
    "text_key": "TAB351905",
    "review": null,
    "moving": [
@@ -124442,7 +124442,7 @@
      }
     }
    },
-   "caption": "Insert B4 into B2.",
+   "caption": "Insert B4 into the center slot in B2.",
    "text_key": "T975082CC",
    "review": null,
    "moving": [
@@ -124546,7 +124546,7 @@
      }
     }
    },
-   "caption": "Insert B4 into B2.",
+   "caption": "Insert B4 into the center slot in B2.",
    "text_key": "T975082CC",
    "review": null,
    "moving": [
@@ -124703,7 +124703,7 @@
      ]
     }
    },
-   "caption": "Place the left joystick (the joystick connected to A3) into B5...",
+   "caption": "Slide the Left Joystick into B5.",
    "text_key": "T984EC69E",
    "review": null,
    "moving": [
@@ -124734,7 +124734,7 @@
     ],
     "radius": 71.1
    },
-   "caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The left joystick is the one wired to A2 G, A2 V, A2 S and A3 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Left Joystick is wired to A2 and A3.",
    "isolated": true
   },
   {
@@ -124810,7 +124810,7 @@
      ]
     }
    },
-   "caption": "Place the left joystick (the joystick connected to A3) into B5...",
+   "caption": "Slide the Left Joystick into B5.",
    "text_key": "T984EC69E",
    "review": null,
    "moving": [
@@ -124841,7 +124841,7 @@
     ],
     "radius": 71.1
    },
-   "caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The left joystick is the one wired to A2 G, A2 V, A2 S and A3 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Left Joystick is wired to A2 and A3.",
    "isolated": true
   },
   {
@@ -124961,7 +124961,7 @@
      ]
     }
    },
-   "caption": "...and B6.",
+   "caption": "Slide B6 onto the Left Joystick.",
    "text_key": "T41F554A3",
    "review": null,
    "moving": [
@@ -125068,7 +125068,7 @@
      ]
     }
    },
-   "caption": "...and B6.",
+   "caption": "Slide B6 onto the Left Joystick.",
    "text_key": "T41F554A3",
    "review": null,
    "moving": [
@@ -125403,7 +125403,7 @@
      ]
     }
    },
-   "caption": "Then place B5 and B6 onto B3.",
+   "caption": "Place B5 and B6 on B3 and B4, fitting them into the slots in B2.",
    "text_key": "T76F5ECAF",
    "review": null,
    "moving": [
@@ -125648,7 +125648,7 @@
      ]
     }
    },
-   "caption": "Then place B5 and B6 onto B3.",
+   "caption": "Place B5 and B6 on B3 and B4, fitting them into the slots in B2.",
    "text_key": "T76F5ECAF",
    "review": null,
    "moving": [
@@ -125807,7 +125807,7 @@
      ]
     }
    },
-   "caption": "Place the right joystick into B6...",
+   "caption": "Slide the Right Joystick into B6.",
    "text_key": "T4DA0B663",
    "review": null,
    "moving": [
@@ -125838,7 +125838,7 @@
     ],
     "radius": 81.5
    },
-   "caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The right joystick is the one wired to A0 G, A0 V, A0 S and A1 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Right Joystick is wired to A0 and A1.",
    "isolated": true
   },
   {
@@ -125914,7 +125914,7 @@
      ]
     }
    },
-   "caption": "Place the right joystick into B6...",
+   "caption": "Slide the Right Joystick into B6.",
    "text_key": "T4DA0B663",
    "review": null,
    "moving": [
@@ -125945,7 +125945,7 @@
     ],
     "radius": 81.5
    },
-   "caution": "The joystick's breadboard wires stay connected to the I/O module: just place the joystick for now. The right joystick is the one wired to A0 G, A0 V, A0 S and A1 S.",
+   "caution": "Keep the breadboard wires connected to the Nano I/O Module. The Right Joystick is wired to A0 and A1.",
    "isolated": true
   },
   {
@@ -126065,7 +126065,7 @@
      ]
     }
    },
-   "caption": "...and B7.",
+   "caption": "Slide B7 onto the Right Joystick.",
    "text_key": "TE1EAFE39",
    "review": null,
    "moving": [
@@ -126172,7 +126172,7 @@
      ]
     }
    },
-   "caption": "...and B7.",
+   "caption": "Slide B7 onto the Right Joystick.",
    "text_key": "TE1EAFE39",
    "review": null,
    "moving": [
@@ -126614,7 +126614,7 @@
      ]
     }
    },
-   "caption": "Hold the left joystick's wires up out of the way, then place B6 and B7 onto B3.",
+   "caption": "Place B6 and B7 on B3 and B4, fitting them into the slots in B2. Keep the joystick's wires clear.",
    "text_key": "TF9438279",
    "review": null,
    "moving": [
@@ -126978,7 +126978,7 @@
      ]
     }
    },
-   "caption": "Hold the left joystick's wires up out of the way, then place B6 and B7 onto B3.",
+   "caption": "Place B6 and B7 on B3 and B4, fitting them into the slots in B2. Keep the joystick's wires clear.",
    "text_key": "TF9438279",
    "review": null,
    "moving": [
@@ -127458,7 +127458,7 @@
      ]
     }
    },
-   "caption": "Attach B8 on top of B5 - B7.",
+   "caption": "Place B8 on B5, B6, and B7.",
    "text_key": "T2307CE17",
    "review": null,
    "moving": [
@@ -127821,7 +127821,7 @@
      ]
     }
    },
-   "caption": "Attach B8 on top of B5 - B7.",
+   "caption": "Place B8 on B5, B6, and B7.",
    "text_key": "T2307CE17",
    "review": null,
    "moving": [
@@ -128376,7 +128376,7 @@
      ]
     }
    },
-   "caption": "Slide the I/O module through the slots in B6 on top of B4, angled very slightly over the end of B4, until it lies flat.",
+   "caption": "Slide the Nano I/O Module through the slots in both B6 pieces, tilted slightly. Then, lower it until it lies flat on B4.",
    "text_key": "T21CF4518",
    "review": null,
    "moving": [
@@ -128824,7 +128824,7 @@
      ]
     }
    },
-   "caption": "Slide the I/O module through the slots in B6 on top of B4, angled very slightly over the end of B4, until it lies flat.",
+   "caption": "Slide the Nano I/O Module through the slots in both B6 pieces, tilted slightly. Then, lower it until it lies flat on B4.",
    "text_key": "T21CF4518",
    "review": null,
    "moving": [
@@ -129113,7 +129113,7 @@
      "ring": false
     },
     {
-     "text": "Base Motor",
+     "text": "Base Servo",
      "id": "NAUO83",
      "anchor": [
       51.8,
@@ -129274,7 +129274,7 @@
      ]
     }
    },
-   "caption": "Reconnect the base motor to Row 5. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Base Servo (No Dot) to Row 5. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T0CA13403",
    "review": null,
    "moving": [
@@ -129328,7 +129328,6 @@
     ],
     "radius": 69.0
    },
-   "caution": "Very important: the brown wire goes on G, the pin nearest the edge of the board.",
    "stops": [
     0,
     2,
@@ -129622,7 +129621,7 @@
      ]
     }
    },
-   "caption": "Reconnect the base motor to Row 5. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Base Servo (No Dot) to Row 5. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T0CA13403",
    "review": null,
    "moving": [
@@ -129676,7 +129675,6 @@
     ],
     "radius": 69.0
    },
-   "caution": "Very important: the brown wire goes on G, the pin nearest the edge of the board.",
    "stops": [
     0,
     2,
@@ -129746,7 +129744,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Press A7 onto the two tabs of A6 nearest the A6 code. The code on A7 faces out, with its A at the same end as the A6 code.",
+   "caption": "Place A7 on the left two tabs of A6.",
    "text_key": "TE78FAE95",
    "review": null,
    "moving": [
@@ -129789,7 +129787,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Press A7 onto the two tabs of A6 nearest the A6 code. The code on A7 faces out, with its A at the same end as the A6 code.",
+   "caption": "Place A7 on the left two tabs of A6.",
    "text_key": "TE78FAE95",
    "review": null,
    "moving": [
@@ -129865,7 +129863,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Push an A9 into the cross-shaped slot next to A7, from the engraved side of A6.",
+   "caption": "Push A9 into the cross-shaped slot next to A7.",
    "text_key": "TE87F3329",
    "review": null,
    "moving": [
@@ -129909,7 +129907,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Push an A9 into the cross-shaped slot next to A7, from the engraved side of A6.",
+   "caption": "Push A9 into the cross-shaped slot next to A7.",
    "text_key": "TE87F3329",
    "review": null,
    "moving": [
@@ -129986,7 +129984,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A7 to the A9 with a 16mm screw through the middle hole of A7.",
+   "caption": "Attach A7 to A9 using a 16mm screw through the center hole in A7.",
    "text_key": "TEF977D95",
    "review": null,
    "moving": [
@@ -130031,7 +130029,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A7 to the A9 with a 16mm screw through the middle hole of A7.",
+   "caption": "Attach A7 to A9 using a 16mm screw through the center hole in A7.",
    "text_key": "TEF977D95",
    "review": null,
    "moving": [
@@ -130121,7 +130119,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Press A8 onto the other two tabs of A6, code facing out and its horn-shaped slot at the end away from the A6 code.",
+   "caption": "Place A8 on the other two tabs of A6, with the slot shaped like a servo horn at the bottom.",
    "text_key": "T86440666",
    "review": null,
    "moving": [
@@ -130167,7 +130165,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Press A8 onto the other two tabs of A6, code facing out and its horn-shaped slot at the end away from the A6 code.",
+   "caption": "Place A8 on the other two tabs of A6, with the slot shaped like a servo horn at the bottom.",
    "text_key": "T86440666",
    "review": null,
    "moving": [
@@ -130246,7 +130244,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Push the other A9 into the cross-shaped slot next to A8.",
+   "caption": "Push A9 into the cross-shaped slot next to A8.",
    "text_key": "T337FE5D6",
    "review": null,
    "moving": [
@@ -130293,7 +130291,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Push the other A9 into the cross-shaped slot next to A8.",
+   "caption": "Push A9 into the cross-shaped slot next to A8.",
    "text_key": "T337FE5D6",
    "review": null,
    "moving": [
@@ -130373,7 +130371,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A8 to that A9 with a 16mm screw.",
+   "caption": "Attach A8 to A9 using a 16mm screw through the center hole in A8.",
    "text_key": "TCCBB5069",
    "review": null,
    "moving": [
@@ -130421,7 +130419,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A8 to that A9 with a 16mm screw.",
+   "caption": "Attach A8 to A9 using a 16mm screw through the center hole in A8.",
    "text_key": "TCCBB5069",
    "review": null,
    "moving": [
@@ -130799,7 +130797,7 @@
      ]
     }
    },
-   "caption": "Lower A6 - A9 over R2: A7 goes against the R5 side of R2, A8 beside R6.",
+   "caption": "Align the bottom hole in A7 with the outer edge of the hole in R2.",
    "text_key": "T897FE576",
    "review": null,
    "moving": [
@@ -131131,7 +131129,7 @@
      ]
     }
    },
-   "caption": "Lower A6 - A9 over R2: A7 goes against the R5 side of R2, A8 beside R6.",
+   "caption": "Align the bottom hole in A7 with the outer edge of the hole in R2.",
    "text_key": "T897FE576",
    "review": null,
    "moving": [
@@ -131495,7 +131493,7 @@
      ]
     }
    },
-   "caption": "Screw A7 to R2 with a 6mm screw. Reach it through the opening in R5. A7 must still swing.",
+   "caption": "Attach A7 to R2 using a 6mm screw.",
    "text_key": "T89BB9A97",
    "review": null,
    "moving": [
@@ -131822,7 +131820,7 @@
      ]
     }
    },
-   "caption": "Screw A7 to R2 with a 6mm screw. Reach it through the opening in R5. A7 must still swing.",
+   "caption": "Attach A7 to R2 using a 6mm screw.",
    "text_key": "T89BB9A97",
    "review": null,
    "moving": [
@@ -131917,7 +131915,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay A2 on A1, codes facing the same way and notches together.",
+   "caption": "Place A2 on A1, aligning the screw holes.",
    "text_key": "TF540D720",
    "review": null,
    "moving": [
@@ -131960,7 +131958,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay A2 on A1, codes facing the same way and notches together.",
+   "caption": "Place A2 on A1, aligning the screw holes.",
    "text_key": "TF540D720",
    "review": null,
    "moving": [
@@ -132048,7 +132046,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay A3 on A2 the same way.",
+   "caption": "Place A3 on A2, aligning the screw holes.",
    "text_key": "T1C3234F8",
    "review": null,
    "moving": [
@@ -132092,7 +132090,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay A3 on A2 the same way.",
+   "caption": "Place A3 on A2, aligning the screw holes.",
    "text_key": "T1C3234F8",
    "review": null,
    "moving": [
@@ -132169,7 +132167,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A1 - A3 together with a 10mm screw through the middle hole of A3.",
+   "caption": "Attach A1, A2, and A3 using a 10mm screw through the center hole.",
    "text_key": "TF994B4C6",
    "review": null,
    "moving": [
@@ -132214,7 +132212,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A1 - A3 together with a 10mm screw through the middle hole of A3.",
+   "caption": "Attach A1, A2, and A3 using a 10mm screw through the center hole.",
    "text_key": "TF994B4C6",
    "review": null,
    "moving": [
@@ -132634,7 +132632,7 @@
      ]
     }
    },
-   "caption": "Slide A1 - A3 down between R5 and A7, slotted end first and A3 facing R5, onto the screw head in A7. Swing it towards the controller.",
+   "caption": "Slide the slotted end of A1 - A3 down between R5 and A7. Fit the slot over the head of the screw connecting A7 to R2. Then, push A1 - A3 toward the joysticks.",
    "text_key": "T1172FE74",
    "review": null,
    "moving": [
@@ -133017,7 +133015,7 @@
      ]
     }
    },
-   "caption": "Slide A1 - A3 down between R5 and A7, slotted end first and A3 facing R5, onto the screw head in A7. Swing it towards the controller.",
+   "caption": "Slide the slotted end of A1 - A3 down between R5 and A7. Fit the slot over the head of the screw connecting A7 to R2. Then, push A1 - A3 toward the joysticks.",
    "text_key": "T1172FE74",
    "review": null,
    "moving": [
@@ -133323,7 +133321,7 @@
    "labels": [
     {
      "id": "NAUO58",
-     "text": "Elbow Motor (Black Dot)",
+     "text": "Elbow Servo (Black Dot)",
      "anchor": [
       176.5,
       168.3,
@@ -133507,7 +133505,7 @@
      }
     }
    },
-   "caption": "The elbow motor has 6 on its wire. Angle its servo horn through the opening in R5, then push the motor in so the horn sits in the slot in A2 and A3.",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide its servo horn through R5. Then, push the servo into place so the horn fits into the slot in A2 and A3.",
    "text_key": "TC9C23F2B",
    "review": null,
    "moving": [
@@ -133944,7 +133942,7 @@
      }
     }
    },
-   "caption": "The elbow motor has 6 on its wire. Angle its servo horn through the opening in R5, then push the motor in so the horn sits in the slot in A2 and A3.",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide its servo horn through R5. Then, push the servo into place so the horn fits into the slot in A2 and A3.",
    "text_key": "TC9C23F2B",
    "review": null,
    "moving": [
@@ -134425,7 +134423,7 @@
      }
     }
    },
-   "caption": "Pass the elbow motor's plug through R8 and slide R8 down the wire onto the back of the motor, code facing out.",
+   "caption": "Thread the Elbow Servo's wires through R8, then push R8 against the servo. Align the holes in R8 with the holes in R5.",
    "text_key": "TA9FA5F2F",
    "review": null,
    "moving": [
@@ -134802,7 +134800,7 @@
      }
     }
    },
-   "caption": "Pass the elbow motor's plug through R8 and slide R8 down the wire onto the back of the motor, code facing out.",
+   "caption": "Thread the Elbow Servo's wires through R8, then push R8 against the servo. Align the holes in R8 with the holes in R5.",
    "text_key": "TA9FA5F2F",
    "review": null,
    "moving": [
@@ -135211,7 +135209,7 @@
      }
     }
    },
-   "caption": "Screw R8 onto R5 with two 10mm screws.",
+   "caption": "Attach R8 to R5 using a 10mm screw in the top hole.",
    "text_key": "TF37D6CC9",
    "review": null,
    "moving": [
@@ -135589,7 +135587,7 @@
      }
     }
    },
-   "caption": "Screw R8 onto R5 with two 10mm screws.",
+   "caption": "Attach R8 to R5 using a 10mm screw in the top hole.",
    "text_key": "TF37D6CC9",
    "review": null,
    "moving": [
@@ -135999,7 +135997,7 @@
      }
     }
    },
-   "caption": "Add the second 10mm screw.",
+   "caption": "Attach R8 to R5 using a 10mm screw in the bottom hole.",
    "text_key": "T7FF94A6F",
    "review": null,
    "moving": [
@@ -136378,7 +136376,7 @@
      }
     }
    },
-   "caption": "Add the second 10mm screw.",
+   "caption": "Attach R8 to R5 using a 10mm screw in the bottom hole.",
    "text_key": "T7FF94A6F",
    "review": null,
    "moving": [
@@ -136769,7 +136767,7 @@
      }
     }
    },
-   "caption": "Move the elbow motor's wire into the hook-shaped slot in R5.",
+   "caption": "Place the Elbow Servo's wires into the hook-shaped slot in R5.",
    "text_key": "TB3BEA110",
    "review": null,
    "moving": [],
@@ -137146,7 +137144,7 @@
      }
     }
    },
-   "caption": "Move the elbow motor's wire into the hook-shaped slot in R5.",
+   "caption": "Place the Elbow Servo's wires into the hook-shaped slot in R5.",
    "text_key": "TB3BEA110",
    "review": null,
    "moving": [],
@@ -137227,7 +137225,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay the coded end of A5 over the plain end of A4.",
+   "caption": "Place A5 on A4, aligning the right hole in A5 with the left hole in A4.",
    "text_key": "TCAB3BE7B",
    "review": null,
    "moving": [
@@ -137270,7 +137268,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay the coded end of A5 over the plain end of A4.",
+   "caption": "Place A5 on A4, aligning the right hole in A5 with the left hole in A4.",
    "text_key": "TCAB3BE7B",
    "review": null,
    "moving": [
@@ -137346,7 +137344,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A5 to A4 with a 6mm screw.",
+   "caption": "Attach A5 to A4 using a 6mm screw.",
    "text_key": "T27BCF392",
    "review": null,
    "moving": [
@@ -137390,7 +137388,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A5 to A4 with a 6mm screw.",
+   "caption": "Attach A5 to A4 using a 6mm screw.",
    "text_key": "T27BCF392",
    "review": null,
    "moving": [
@@ -137816,7 +137814,7 @@
      }
     }
    },
-   "caption": "Swing A1 - A3 up until its free end stands clear above R5, and hold the coded end of A4 against the inner face of A1 there.",
+   "caption": "Place A4 against A1, aligning their right holes. Then, place A5 on A7, aligning the middle hole in A5 with the left hole in A7.",
    "text_key": "TA097FC53",
    "review": null,
    "moving": [
@@ -138200,7 +138198,7 @@
      }
     }
    },
-   "caption": "Swing A1 - A3 up until its free end stands clear above R5, and hold the coded end of A4 against the inner face of A1 there.",
+   "caption": "Place A4 against A1, aligning their right holes. Then, place A5 on A7, aligning the middle hole in A5 with the left hole in A7.",
    "text_key": "TA097FC53",
    "review": null,
    "moving": [
@@ -138616,7 +138614,7 @@
      }
     }
    },
-   "caption": "With A1 - A3 still swung up clear of R5, screw A1 - A3 to A4 with a 10mm screw through the large hole in A3.",
+   "caption": "Attach A1 - A3 to A4 using a 10mm screw.",
    "text_key": "TB060AB99",
    "review": null,
    "moving": [
@@ -138999,7 +138997,7 @@
      }
     }
    },
-   "caption": "With A1 - A3 still swung up clear of R5, screw A1 - A3 to A4 with a 10mm screw through the large hole in A3.",
+   "caption": "Attach A1 - A3 to A4 using a 10mm screw.",
    "text_key": "TB060AB99",
    "review": null,
    "moving": [
@@ -139414,7 +139412,7 @@
      }
     }
    },
-   "caption": "Swing A5 up against the outside of A7 and screw them together with a 6mm screw through the second hole of A5.",
+   "caption": "Attach A5 to A7 using a 6mm screw.",
    "text_key": "T71E22CD8",
    "review": null,
    "moving": [
@@ -139798,7 +139796,7 @@
      }
     }
    },
-   "caption": "Swing A5 up against the outside of A7 and screw them together with a 6mm screw through the second hole of A5.",
+   "caption": "Attach A5 to A7 using a 6mm screw.",
    "text_key": "T71E22CD8",
    "review": null,
    "moving": [
@@ -140081,7 +140079,7 @@
    "labels": [
     {
      "id": "NAUO66",
-     "text": "Shoulder Motor (White Dot)",
+     "text": "Shoulder Servo (White Dot)",
      "anchor": [
       171.3,
       168.5,
@@ -140289,7 +140287,7 @@
      }
     }
    },
-   "caption": "The shoulder motor has 9 on its wire. Hold the arm up, angle the servo horn through the opening in R6 and push the motor in so the horn sits in the slot in A8.",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide its servo horn through R6, until the horn sits in the slot in A8.",
    "text_key": "T121ED9E7",
    "review": null,
    "moving": [
@@ -140797,7 +140795,7 @@
      }
     }
    },
-   "caption": "The shoulder motor has 9 on its wire. Hold the arm up, angle the servo horn through the opening in R6 and push the motor in so the horn sits in the slot in A8.",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide its servo horn through R6, until the horn sits in the slot in A8.",
    "text_key": "T121ED9E7",
    "review": null,
    "moving": [
@@ -141349,7 +141347,7 @@
      }
     }
    },
-   "caption": "Pass the shoulder motor's plug through R7 and slide R7 down the wire onto the back of the motor, code facing out.",
+   "caption": "Thread the Shoulder Servo's wires through R7, then push R7 against the servo. Align the holes in R7 with the holes in R6.",
    "text_key": "TFF7D3238",
    "review": null,
    "moving": [
@@ -141779,7 +141777,7 @@
      }
     }
    },
-   "caption": "Pass the shoulder motor's plug through R7 and slide R7 down the wire onto the back of the motor, code facing out.",
+   "caption": "Thread the Shoulder Servo's wires through R7, then push R7 against the servo. Align the holes in R7 with the holes in R6.",
    "text_key": "TFF7D3238",
    "review": null,
    "moving": [
@@ -142241,7 +142239,7 @@
      }
     }
    },
-   "caption": "Screw R7 onto R6 with two 10mm screws.",
+   "caption": "Attach R7 to R6 using a 10mm screw in the top hole.",
    "text_key": "T61EBF7DB",
    "review": null,
    "moving": [
@@ -142672,7 +142670,7 @@
      }
     }
    },
-   "caption": "Screw R7 onto R6 with two 10mm screws.",
+   "caption": "Attach R7 to R6 using a 10mm screw in the top hole.",
    "text_key": "T61EBF7DB",
    "review": null,
    "moving": [
@@ -143135,7 +143133,7 @@
      }
     }
    },
-   "caption": "Add the second 10mm screw.",
+   "caption": "Attach R7 to R6 using a 10mm screw in the bottom hole.",
    "text_key": "T96AD3817",
    "review": null,
    "moving": [
@@ -143567,7 +143565,7 @@
      }
     }
    },
-   "caption": "Add the second 10mm screw.",
+   "caption": "Attach R7 to R6 using a 10mm screw in the bottom hole.",
    "text_key": "T96AD3817",
    "review": null,
    "moving": [
@@ -144011,7 +144009,7 @@
      }
     }
    },
-   "caption": "Move the shoulder motor's wire into the hook-shaped slot in R6.",
+   "caption": "Place the Shoulder Servo's wires into the hook-shaped slot in R6.",
    "text_key": "T906ACD16",
    "review": null,
    "moving": [],
@@ -144441,7 +144439,7 @@
      }
     }
    },
-   "caption": "Move the shoulder motor's wire into the hook-shaped slot in R6.",
+   "caption": "Place the Shoulder Servo's wires into the hook-shaped slot in R6.",
    "text_key": "T906ACD16",
    "review": null,
    "moving": [],
@@ -144522,7 +144520,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay the coded end of A11 on the sharp corner of A10.",
+   "caption": "Place A11 on A10, aligning the right hole in A11 with the left hole in A10.",
    "text_key": "TEEF135F0",
    "review": null,
    "moving": [
@@ -144565,7 +144563,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay the coded end of A11 on the sharp corner of A10.",
+   "caption": "Place A11 on A10, aligning the right hole in A11 with the left hole in A10.",
    "text_key": "TEEF135F0",
    "review": null,
    "moving": [
@@ -144641,7 +144639,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A11 to A10 with a 6mm screw.",
+   "caption": "Attach A11 to A10 using a 6mm screw.",
    "text_key": "TD961DF18",
    "review": null,
    "moving": [
@@ -144685,7 +144683,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A11 to A10 with a 6mm screw.",
+   "caption": "Attach A11 to A10 using a 6mm screw.",
    "text_key": "TD961DF18",
    "review": null,
    "moving": [
@@ -144762,7 +144760,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Lay A12 on A10 with the two triangle marks together.",
+   "caption": "Place A12 on A10, aligning the left hole in A12 with the top right hole in A10.",
    "text_key": "TF80E3930",
    "review": null,
    "moving": [
@@ -144807,7 +144805,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Lay A12 on A10 with the two triangle marks together.",
+   "caption": "Place A12 on A10, aligning the left hole in A12 with the top right hole in A10.",
    "text_key": "TF80E3930",
    "review": null,
    "moving": [
@@ -144885,7 +144883,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Screw A12 to A10 with a 6mm screw.",
+   "caption": "Attach A12 to A10 using a 6mm screw.",
    "text_key": "TBEA864E5",
    "review": null,
    "moving": [
@@ -144931,7 +144929,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Screw A12 to A10 with a 6mm screw.",
+   "caption": "Attach A12 to A10 using a 6mm screw.",
    "text_key": "TBEA864E5",
    "review": null,
    "moving": [
@@ -145422,7 +145420,7 @@
      }
     }
    },
-   "caption": "Lower the plain end of A11 inside R6, behind the lobe on its top edge. A10 goes against the outside of A8.",
+   "caption": "Place A11 against the inside of R6. Place A10 on A8.",
    "text_key": "T98F67A92",
    "review": null,
    "moving": [
@@ -145863,7 +145861,7 @@
      }
     }
    },
-   "caption": "Lower the plain end of A11 inside R6, behind the lobe on its top edge. A10 goes against the outside of A8.",
+   "caption": "Place A11 against the inside of R6. Place A10 on A8.",
    "text_key": "T98F67A92",
    "review": null,
    "moving": [
@@ -146336,7 +146334,7 @@
      }
     }
    },
-   "caption": "Screw R6 to A11 with a 6mm screw, through the hole in the lobe from outside R6.",
+   "caption": "Attach R6 to A11 using a 6mm screw.",
    "text_key": "T52E67F36",
    "review": null,
    "moving": [
@@ -146774,7 +146772,7 @@
      }
     }
    },
-   "caption": "Screw R6 to A11 with a 6mm screw, through the hole in the lobe from outside R6.",
+   "caption": "Attach R6 to A11 using a 6mm screw.",
    "text_key": "T52E67F36",
    "review": null,
    "moving": [
@@ -147244,7 +147242,7 @@
      }
     }
    },
-   "caption": "Lay the square-marked end of A13 on A10, over the hole at the end of A8.",
+   "caption": "Place A13 on A10, aligning the left hole in A13 with the bottom right hole in A10.",
    "text_key": "TB457F0A3",
    "review": null,
    "moving": [
@@ -147683,7 +147681,7 @@
      }
     }
    },
-   "caption": "Lay the square-marked end of A13 on A10, over the hole at the end of A8.",
+   "caption": "Place A13 on A10, aligning the left hole in A13 with the bottom right hole in A10.",
    "text_key": "TB457F0A3",
    "review": null,
    "moving": [
@@ -148154,7 +148152,7 @@
      }
     }
    },
-   "caption": "Screw A13 and A10 to A8 with a 10mm screw.",
+   "caption": "Attach A13 to A10 using a 10mm screw.",
    "text_key": "T295CAA85",
    "review": null,
    "moving": [
@@ -148594,7 +148592,7 @@
      }
     }
    },
-   "caption": "Screw A13 and A10 to A8 with a 10mm screw.",
+   "caption": "Attach A13 to A10 using a 10mm screw.",
    "text_key": "T295CAA85",
    "review": null,
    "moving": [
@@ -149056,7 +149054,7 @@
      }
     }
    },
-   "caption": "Check that the arm and all its links swing freely.",
+   "caption": "Gently swing the wooden pieces back and forth where they connect. Check that they move freely and the screws are not too tight.",
    "text_key": "T0B231C59",
    "review": null,
    "moving": [
@@ -149441,7 +149439,7 @@
     },
     {
      "id": "NAUO72",
-     "text": "Claw Motor (Blue Dot)",
+     "text": "Claw Servo (Blue Dot)",
      "anchor": [
       329.0,
       196.4,
@@ -149478,7 +149476,7 @@
      }
     }
    },
-   "caption": "Begin the claw with C3. Push the claw motor through C3 from the engraved side, wire first, with the wire at the notched end of the cut-out.",
+   "caption": "Push the Claw Servo (Blue Dot) down through C3, wires first. Keep the wires at the notched end of the opening.",
    "text_key": "T91D96F1A",
    "review": null,
    "moving": [
@@ -149580,7 +149578,7 @@
      }
     }
    },
-   "caption": "Begin the claw with C3. Push the claw motor through C3 from the engraved side, wire first, with the wire at the notched end of the cut-out.",
+   "caption": "Push the Claw Servo (Blue Dot) down through C3, wires first. Keep the wires at the notched end of the opening.",
    "text_key": "T91D96F1A",
    "review": null,
    "moving": [
@@ -149694,7 +149692,7 @@
      }
     }
    },
-   "caption": "Feed the claw motor's wire back through the hole in the end of C3.",
+   "caption": "Thread the Claw Servo's wires through the hole at the top of C3.",
    "text_key": "T52F0DA32",
    "review": null,
    "moving": [],
@@ -149908,7 +149906,7 @@
      86
     ]
    },
-   "caption": "Feed the claw motor's wire back through the hole in the end of C3.",
+   "caption": "Thread the Claw Servo's wires through the hole at the top of C3.",
    "text_key": "T52F0DA32",
    "review": null,
    "moving": [],
@@ -150051,7 +150049,7 @@
      }
     }
    },
-   "caption": "Insert C1 into the outer of the two slots on one side of C3, from the plain side, code facing out.",
+   "caption": "Push the tab of C1 through the slot at the top right of C3.",
    "text_key": "T28A5FB4C",
    "review": null,
    "moving": [
@@ -150153,7 +150151,7 @@
      }
     }
    },
-   "caption": "Insert C1 into the outer of the two slots on one side of C3, from the plain side, code facing out.",
+   "caption": "Push the tab of C1 through the slot at the top right of C3.",
    "text_key": "T28A5FB4C",
    "review": null,
    "moving": [
@@ -150299,7 +150297,7 @@
      }
     }
    },
-   "caption": "Insert C2 into the outer half of the square slot on the other side, code facing out.",
+   "caption": "Push the tab of C2 through the slot at the top left of C3.",
    "text_key": "T7BE1A4D7",
    "review": null,
    "moving": [
@@ -150402,7 +150400,7 @@
      }
     }
    },
-   "caption": "Insert C2 into the outer half of the square slot on the other side, code facing out.",
+   "caption": "Push the tab of C2 through the slot at the top left of C3.",
    "text_key": "T7BE1A4D7",
    "review": null,
    "moving": [
@@ -150537,7 +150535,7 @@
      }
     }
    },
-   "caption": "Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.",
+   "caption": "Push C4 down into the same slot in C3, next to C2.",
    "text_key": "TE4E540E1",
    "review": null,
    "moving": [
@@ -150641,7 +150639,7 @@
      }
     }
    },
-   "caption": "Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.",
+   "caption": "Push C4 down into the same slot in C3, next to C2.",
    "text_key": "TE4E540E1",
    "review": null,
    "moving": [
@@ -150789,7 +150787,7 @@
      }
     }
    },
-   "caption": "Insert C5 into the slot next to C1, code facing C1.",
+   "caption": "Push C5 down into the slot in C3, next to C1.",
    "text_key": "T0945F2B1",
    "review": null,
    "moving": [
@@ -150894,7 +150892,7 @@
      }
     }
    },
-   "caption": "Insert C5 into the slot next to C1, code facing C1.",
+   "caption": "Push C5 down into the slot in C3, next to C1.",
    "text_key": "T0945F2B1",
    "review": null,
    "moving": [
@@ -151043,7 +151041,7 @@
      }
     }
    },
-   "caption": "Press C6 onto C4 and C5, code facing away from C3. The servo horn sits in its round cut-out.",
+   "caption": "Place C6 on the latches of C1 and C2, fitting the servo horn into the round cutout in C6.",
    "text_key": "T301AAD7D",
    "review": null,
    "moving": [
@@ -151149,7 +151147,7 @@
      }
     }
    },
-   "caption": "Press C6 onto C4 and C5, code facing away from C3. The servo horn sits in its round cut-out.",
+   "caption": "Place C6 on the latches of C1 and C2, fitting the servo horn into the round cutout in C6.",
    "text_key": "T301AAD7D",
    "review": null,
    "moving": [
@@ -151287,7 +151285,7 @@
      }
     }
    },
-   "caption": "Screw C6 onto C3 with two 16mm screws.",
+   "caption": "Attach C6 to C3 using a 16mm screw in the top hole.",
    "text_key": "TBD9C4CFC",
    "review": null,
    "moving": [
@@ -151394,7 +151392,7 @@
      }
     }
    },
-   "caption": "Screw C6 onto C3 with two 16mm screws.",
+   "caption": "Attach C6 to C3 using a 16mm screw in the top hole.",
    "text_key": "TBD9C4CFC",
    "review": null,
    "moving": [
@@ -151533,7 +151531,7 @@
      }
     }
    },
-   "caption": "Add the second 16mm screw.",
+   "caption": "Attach C6 to C3 using a 16mm screw in the bottom hole.",
    "text_key": "T4FD5D753",
    "review": null,
    "moving": [
@@ -151641,7 +151639,7 @@
      }
     }
    },
-   "caption": "Add the second 16mm screw.",
+   "caption": "Attach C6 to C3 using a 16mm screw in the bottom hole.",
    "text_key": "T4FD5D753",
    "review": null,
    "moving": [
@@ -151781,7 +151779,7 @@
      }
     }
    },
-   "caption": "Press C7 over the servo horn, code facing away from C6.",
+   "caption": "Place C7 on the servo horn.",
    "text_key": "TAF2B0A5D",
    "review": null,
    "moving": [
@@ -151891,7 +151889,7 @@
      }
     }
    },
-   "caption": "Press C7 over the servo horn, code facing away from C6.",
+   "caption": "Place C7 on the servo horn.",
    "text_key": "TAF2B0A5D",
    "review": null,
    "moving": [
@@ -152045,7 +152043,7 @@
      }
     }
    },
-   "caption": "Press C9 onto the ends of C1 and C2 until they click through, code facing out.",
+   "caption": "Place C9 on the latches of C1 and C2.",
    "text_key": "TD8725187",
    "review": null,
    "moving": [
@@ -152155,7 +152153,7 @@
      }
     }
    },
-   "caption": "Press C9 onto the ends of C1 and C2 until they click through, code facing out.",
+   "caption": "Place C9 on the latches of C1 and C2.",
    "text_key": "TD8725187",
    "review": null,
    "moving": [
@@ -152297,7 +152295,7 @@
      }
     }
    },
-   "caption": "Slide C8 in between C6 and C9, code facing C9, with both jaws closed, until its teeth mesh with C7.",
+   "caption": "Slide C8 between C6 and C9 until the teeth on C8 fit into the teeth on C7.",
    "text_key": "T70CD18B3",
    "review": null,
    "moving": [
@@ -152427,7 +152425,7 @@
     "alt": "Close-up of the claw with C9 left out: the teeth of C7 and C8 mesh together.",
     "caption": "Seen without C9"
    },
-   "caption": "Slide C8 in between C6 and C9, code facing C9, with both jaws closed, until its teeth mesh with C7.",
+   "caption": "Slide C8 between C6 and C9 until the teeth on C8 fit into the teeth on C7.",
    "text_key": "T70CD18B3",
    "review": null,
    "moving": [
@@ -152570,7 +152568,7 @@
      }
     }
    },
-   "caption": "Screw C8 in place with a 10mm screw through C9.",
+   "caption": "Attach C6 to C9 using a 10mm screw.",
    "text_key": "TFE3AD44C",
    "review": null,
    "moving": [
@@ -152682,7 +152680,7 @@
      }
     }
    },
-   "caption": "Screw C8 in place with a 10mm screw through C9.",
+   "caption": "Attach C6 to C9 using a 10mm screw.",
    "text_key": "TFE3AD44C",
    "review": null,
    "moving": [
@@ -153301,7 +153299,7 @@
      }
     }
    },
-   "caption": "Slide the claw in between A5 and A12 / A13, with the motor on top and C1 against A12 and A13.",
+   "caption": "Slide the claw between A5 on one side and A12 and A13 on the other, with the servo facing up. Place A5 on C2, aligning the holes. Then, align A12 with the top hole in C1 and A13 with the bottom hole in C1.",
    "text_key": "T2A645221",
    "review": null,
    "moving": [
@@ -153811,7 +153809,7 @@
      }
     }
    },
-   "caption": "Slide the claw in between A5 and A12 / A13, with the motor on top and C1 against A12 and A13.",
+   "caption": "Slide the claw between A5 on one side and A12 and A13 on the other, with the servo facing up. Place A5 on C2, aligning the holes. Then, align A12 with the top hole in C1 and A13 with the bottom hole in C1.",
    "text_key": "T2A645221",
    "review": null,
    "moving": [
@@ -154353,7 +154351,7 @@
      }
     }
    },
-   "caption": "Screw A12 to C1 with a 6mm screw.",
+   "caption": "Attach A12 to C1 using a 6mm screw.",
    "text_key": "T08316104",
    "review": null,
    "moving": [
@@ -154851,7 +154849,7 @@
      }
     }
    },
-   "caption": "Screw A12 to C1 with a 6mm screw.",
+   "caption": "Attach A12 to C1 using a 6mm screw.",
    "text_key": "T08316104",
    "review": null,
    "moving": [
@@ -155381,7 +155379,7 @@
      }
     }
    },
-   "caption": "Screw A13 to C1 with a 6mm screw.",
+   "caption": "Attach A13 to C1 using a 6mm screw.",
    "text_key": "T9070BF5A",
    "review": null,
    "moving": [
@@ -155880,7 +155878,7 @@
      }
     }
    },
-   "caption": "Screw A13 to C1 with a 6mm screw.",
+   "caption": "Attach A13 to C1 using a 6mm screw.",
    "text_key": "T9070BF5A",
    "review": null,
    "moving": [
@@ -156411,7 +156409,7 @@
      }
     }
    },
-   "caption": "Screw A5 to C2 with a 6mm screw.",
+   "caption": "Attach A5 to C2 using a 6mm screw.",
    "text_key": "T6A96E012",
    "review": null,
    "moving": [
@@ -156911,7 +156909,7 @@
      }
     }
    },
-   "caption": "Screw A5 to C2 with a 6mm screw.",
+   "caption": "Attach A5 to C2 using a 6mm screw.",
    "text_key": "T6A96E012",
    "review": null,
    "moving": [
@@ -157423,7 +157421,7 @@
      }
     }
    },
-   "caption": "Feed the claw motor's wire through the top hole in A6, from the plain side.",
+   "caption": "Thread the Claw Servo's wires through the top square hole in A6.",
    "text_key": "T17B3F48A",
    "review": null,
    "moving": [],
@@ -158036,7 +158034,7 @@
      104
     ]
    },
-   "caption": "Feed the claw motor's wire through the top hole in A6, from the plain side.",
+   "caption": "Thread the Claw Servo's wires through the top square hole in A6.",
    "text_key": "T17B3F48A",
    "review": null,
    "moving": [],
@@ -158546,7 +158544,7 @@
      }
     }
    },
-   "caption": "Then feed it back through the bottom hole in A6 and bring the plug forward over R4.",
+   "caption": "Thread the Claw Servo's wires through the bottom square hole in A6.",
    "text_key": "T95CBB656",
    "review": null,
    "moving": [],
@@ -159112,7 +159110,7 @@
      119
     ]
    },
-   "caption": "Then feed it back through the bottom hole in A6 and bring the plug forward over R4.",
+   "caption": "Thread the Claw Servo's wires through the bottom square hole in A6.",
    "text_key": "T95CBB656",
    "review": null,
    "moving": [],
@@ -159405,7 +159403,20 @@
      ]
     }
    },
-   "guides": [],
+   "guides": [
+    {
+     "tip": [
+      96.3,
+      164.1,
+      146.7
+     ],
+     "mouth": [
+      121.3,
+      164.1,
+      146.7
+     ]
+    }
+   ],
    "labels": [
     {
      "id": "NAUO91",
@@ -159668,7 +159679,7 @@
      }
     }
    },
-   "caption": "Push the coupler of the servo extension wire onto the claw motor's plug, brown wire to brown wire.",
+   "caption": "Connect the Servo Extension Wire to the Claw Servo's wires.",
    "text_key": "T8F7ED5F7",
    "review": null,
    "moving": [],
@@ -159697,7 +159708,7 @@
     ],
     "radius": 80.0
    },
-   "caution": "Check that the wire colours match across the join: brown to brown, red to red and orange to orange."
+   "caution": "Match the wire colors: brown to brown, red to red, and orange to orange."
   },
   {
    "name": "Step 96c",
@@ -160212,7 +160223,7 @@
      }
     }
    },
-   "caption": "Push the coupler of the servo extension wire onto the claw motor's plug, brown wire to brown wire.",
+   "caption": "Connect the Servo Extension Wire to the Claw Servo's wires.",
    "text_key": "T8F7ED5F7",
    "review": null,
    "moving": [],
@@ -160241,7 +160252,7 @@
     ],
     "radius": 80.0
    },
-   "caution": "Check that the wire colours match across the join: brown to brown, red to red and orange to orange."
+   "caution": "Match the wire colors: brown to brown, red to red, and orange to orange."
   },
   {
    "name": "Step 97",
@@ -160768,7 +160779,7 @@
      }
     }
    },
-   "caption": "Push the join down behind R4 and move the servo extension wire into the L-shaped slot in R4.",
+   "caption": "Place the Servo Extension Wire into the hook-shaped slot in R4.",
    "text_key": "T6859680C",
    "review": null,
    "moving": [],
@@ -161399,7 +161410,7 @@
      131
     ]
    },
-   "caption": "Push the join down behind R4 and move the servo extension wire into the L-shaped slot in R4.",
+   "caption": "Place the Servo Extension Wire into the hook-shaped slot in R4.",
    "text_key": "T6859680C",
    "review": null,
    "moving": [],
@@ -161705,7 +161716,7 @@
      "ring": false
     },
     {
-     "text": "Elbow Motor (Black Dot)",
+     "text": "Elbow Servo (Black Dot)",
      "id": "NAUO84",
      "anchor": [
       53.5,
@@ -161944,7 +161955,7 @@
      }
     }
    },
-   "caption": "Reconnect the elbow motor to Row 6. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Elbow Servo (Black Dot) to Row 6. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T7FA527C2",
    "review": null,
    "moving": [
@@ -162573,7 +162584,7 @@
      143
     ]
    },
-   "caption": "Reconnect the elbow motor to Row 6. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Elbow Servo (Black Dot) to Row 6. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T7FA527C2",
    "review": null,
    "moving": [
@@ -162972,7 +162983,7 @@
      "ring": false
     },
     {
-     "text": "Shoulder Motor (White Dot)",
+     "text": "Shoulder Servo (White Dot)",
      "id": "NAUO86",
      "anchor": [
       52.5,
@@ -163190,7 +163201,7 @@
      }
     }
    },
-   "caption": "Reconnect the shoulder motor to Row 9. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Shoulder Servo (White Dot) to Row 9. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T82071C25",
    "review": null,
    "moving": [
@@ -163762,7 +163773,7 @@
      152
     ]
    },
-   "caption": "Reconnect the shoulder motor to Row 9. Remember brown to G, red to V, and orange to S.",
+   "caption": "Reconnect the Shoulder Servo (White Dot) to Row 9. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "T82071C25",
    "review": null,
    "moving": [
@@ -164125,7 +164136,7 @@
      "ring": false
     },
     {
-     "text": "Claw Motor (Blue Dot)",
+     "text": "Claw Servo (Blue Dot)",
      "id": "NAUO85",
      "anchor": [
       52.3,
@@ -164322,7 +164333,7 @@
      ]
     }
    },
-   "caption": "Connect the servo extension wire to Row 10. Remember brown to G, red to V, and orange to S.",
+   "caption": "Connect the Servo Extension Wire to Row 10. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TAEE05C40",
    "review": null,
    "moving": [
@@ -164821,7 +164832,7 @@
      161
     ]
    },
-   "caption": "Connect the servo extension wire to Row 10. Remember brown to G, red to V, and orange to S.",
+   "caption": "Connect the Servo Extension Wire to Row 10. Match the wires: brown to G, red to V, and orange to S.",
    "text_key": "TAEE05C40",
    "review": null,
    "moving": [
@@ -165358,7 +165369,7 @@
      ]
     }
    },
-   "caption": "Connect the power cable to the Nano Board.",
+   "caption": "Connect the USB Cable to the Nano Board.",
    "text_key": "TF1E57449",
    "review": null,
    "moving": [
@@ -165807,7 +165818,7 @@
      ]
     }
    },
-   "caption": "Connect the power cable to the Nano Board.",
+   "caption": "Connect the USB Cable to the Nano Board.",
    "text_key": "TF1E57449",
    "review": null,
    "moving": [
@@ -165890,7 +165901,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Build the T1 / T2 block. Push the solid end of a T2 into one arm of the plus-shaped slot in a T1.",
+   "caption": "Place the top of T2 into one of the slots in T1.",
    "text_key": "T5332B90A",
    "review": null,
    "moving": [
@@ -165933,7 +165944,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Build the T1 / T2 block. Push the solid end of a T2 into one arm of the plus-shaped slot in a T1.",
+   "caption": "Place the top of T2 into one of the slots in T1.",
    "text_key": "T5332B90A",
    "review": null,
    "moving": [
@@ -166009,7 +166020,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Slide the other T2 down over it, slot into slot, until it clicks into the T1 as well.",
+   "caption": "Slide the second T2 onto the first T2, fitting their slots together.",
    "text_key": "T33122663",
    "review": null,
    "moving": [
@@ -166053,7 +166064,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Slide the other T2 down over it, slot into slot, until it clicks into the T1 as well.",
+   "caption": "Slide the second T2 onto the first T2, fitting their slots together.",
    "text_key": "T33122663",
    "review": null,
    "moving": [
@@ -166130,7 +166141,7 @@
    "eye": [],
    "wires": {},
    "carry": {},
-   "caption": "Press the other T1 onto the tops of the two T2 until it clicks.",
+   "caption": "Place the second T1 on the tops of both T2 pieces.",
    "text_key": "TFC5772F9",
    "review": null,
    "moving": [
@@ -166175,7 +166186,7 @@
    "offsets": {},
    "wires": {},
    "carry": {},
-   "caption": "Press the other T1 onto the tops of the two T2 until it clicks.",
+   "caption": "Place the second T1 on the tops of both T2 pieces.",
    "text_key": "TFC5772F9",
    "review": null,
    "moving": [

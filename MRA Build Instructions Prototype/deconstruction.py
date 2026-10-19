@@ -102,7 +102,7 @@ def full_way_back(step, part, then=()):
 g = Guide(HERE, title='Mini Robot Arm (MRA)', part='Deconstruction', names=dict(FULL['names']), steps_file='steps-deconstruction.json',
           hover_names={JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick'},
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
-g.take_apart()
+g.take_apart(parts_list_at_end=True)                                # (the Full Build's parts list, after the Completed View: Lee, 19 Oct 2026)
 
 
 def where(i):
@@ -124,9 +124,12 @@ g.put_away([T1_LOWER])                                              # (what is l
 A_ON_THE_TABLE = VIEW['Completed View']['offsets'][USB_A]
 g.remove('Unplug the power cable from the Nano Board.', [USB_B, USB_A], units=[[USB_B]], arrow_scale=2.0,
          paths={USB_A: [dict(A_ON_THE_TABLE, t=[A_ON_THE_TABLE['t'][0], A_ON_THE_TABLE['t'][1] + 30.0, A_ON_THE_TABLE['t'][2]])]})   # (its other end lifted off the table with it)
-g.unplug('Unplug the servo extension wire from Row 10.', [ROW10_PLUG])
-g.unplug('Unplug the shoulder motor from Row 9.', [SHOULDER_PLUG])
-g.unplug('Unplug the elbow motor from Row 6.', [ELBOW_PLUG])
+# (the Row labels of the Full Build's Steps 100, 99 and 98, instead of an eye: Lee, 19 Oct 2026. The row's label keeps its spot on
+# the module; the servo's is placed afresh, on its plug where it is here.)
+row_labels = lambda step: [dict(l) if l.get('ring') is False else dict(id=l['id'], text=l['text']) for l in VIEW[step]['labels']]
+g.unplug('Unplug the servo extension wire from Row 10.', [ROW10_PLUG], eye=[], labels=row_labels('Step 100'))
+g.unplug('Unplug the shoulder motor from Row 9.', [SHOULDER_PLUG], eye=[], labels=row_labels('Step 99'))
+g.unplug('Unplug the elbow motor from Row 6.', [ELBOW_PLUG], eye=[], labels=row_labels('Step 98'))
 
 # The join of the claw motor's lead and the servo extension wire: up from behind R4 and over its top edge, the extension wire out of
 # the L-shaped slot in R4 (the Full Build's Step 97, walked back); then the extension wire pulled off the claw motor's plug (96).

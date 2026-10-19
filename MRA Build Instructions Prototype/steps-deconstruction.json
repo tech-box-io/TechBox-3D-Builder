@@ -3,7 +3,7 @@
   "title": "Mini Robot Arm (MRA)",
   "part": "Deconstruction",
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
-  "taken_from": "c53b099811a2",
+  "taken_from": "5d72581e3f14",
   "full_build": "steps.json",
   "logo": "logo.webp"
  },
@@ -12,9 +12,9 @@
  "frame_padding": 1.08,
  "names": {
   "NAUO10": "R1",
-  "NAUO45": "Base Motor",
-  "NAUO46": "Base Motor",
-  "NAUO83": "Base Motor",
+  "NAUO45": "Base Servo",
+  "NAUO46": "Base Servo",
+  "NAUO83": "Base Servo",
   "NAUO11": "R2",
   "NAUO12": "R3",
   "NAUO13": "R4",
@@ -67,9 +67,9 @@
   "NAUO19": "A2",
   "NAUO20": "A3",
   "NAUO56": "10mm Hex Screw",
-  "NAUO58": "Elbow Motor",
-  "NAUO59": "Elbow Motor",
-  "NAUO84": "Elbow Motor",
+  "NAUO58": "Elbow Servo (Black Dot)",
+  "NAUO59": "Elbow Servo (Black Dot)",
+  "NAUO84": "Elbow Servo (Black Dot)",
   "NAUO17": "R8",
   "NAUO60": "10mm Hex Screw",
   "NAUO61": "10mm Hex Screw",
@@ -78,9 +78,9 @@
   "NAUO57": "6mm Hex Screw",
   "NAUO62": "10mm Hex Screw",
   "NAUO63": "6mm Hex Screw",
-  "NAUO66": "Shoulder Motor",
-  "NAUO67": "Shoulder Motor",
-  "NAUO86": "Shoulder Motor",
+  "NAUO66": "Shoulder Servo (White Dot)",
+  "NAUO67": "Shoulder Servo (White Dot)",
+  "NAUO86": "Shoulder Servo (White Dot)",
   "NAUO16": "R7",
   "NAUO68": "10mm Hex Screw",
   "NAUO69": "10mm Hex Screw",
@@ -93,9 +93,9 @@
   "NAUO28": "A13",
   "NAUO71": "10mm Hex Screw",
   "NAUO34": "C3",
-  "NAUO72": "Claw Motor",
-  "NAUO73": "Claw Motor",
-  "NAUO90": "Claw Motor",
+  "NAUO72": "Claw Servo (Blue Dot)",
+  "NAUO73": "Claw Servo (Blue Dot)",
+  "NAUO90": "Claw Servo (Blue Dot)",
   "NAUO32": "C1",
   "NAUO33": "C2",
   "NAUO36": "C4",
@@ -125,62 +125,62 @@
   "base brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "base red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "base orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Base Motor"
+   "name": "Base Servo"
   },
   "elbow brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "elbow red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "elbow orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Elbow Motor"
+   "name": "Elbow Servo (Black Dot)"
   },
   "shoulder brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "shoulder red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "shoulder orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Shoulder Motor"
+   "name": "Shoulder Servo (White Dot)"
   },
   "claw brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "claw red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "claw orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Claw Motor"
+   "name": "Claw Servo (Blue Dot)"
   },
   "extension brown": {
    "colour": "#975100",
@@ -98120,10 +98120,20 @@
     ]
    },
    "guides": [],
-   "labels": [],
-   "eye": [
+   "labels": [
+    {
+     "text": "Row 10",
+     "anchor": [
+      52.574,
+      113.8,
+      154.6
+     ],
+     "id": "NAUO82",
+     "ring": false
+    },
     {
      "id": "NAUO85",
+     "text": "Claw Servo (Blue Dot)",
      "anchor": [
       52.3,
       114.4,
@@ -98131,6 +98141,7 @@
      ]
     }
    ],
+   "eye": [],
    "wires": {
     "base brown": 0,
     "base red": 1,
@@ -99110,10 +99121,20 @@
     }
    },
    "guides": [],
-   "labels": [],
-   "eye": [
+   "labels": [
+    {
+     "text": "Row 9",
+     "anchor": [
+      52.574,
+      113.8,
+      152.0
+     ],
+     "id": "NAUO82",
+     "ring": false
+    },
     {
      "id": "NAUO86",
+     "text": "Shoulder Servo (White Dot)",
      "anchor": [
       53.5,
       134.4,
@@ -99121,6 +99142,7 @@
      ]
     }
    ],
+   "eye": [],
    "wires": {
     "base brown": 0,
     "base red": 1,
@@ -100212,10 +100234,20 @@
     }
    },
    "guides": [],
-   "labels": [],
-   "eye": [
+   "labels": [
+    {
+     "text": "Row 6",
+     "anchor": [
+      52.574,
+      113.8,
+      142.0
+     ],
+     "id": "NAUO82",
+     "ring": false
+    },
     {
      "id": "NAUO84",
+     "text": "Elbow Servo (Black Dot)",
      "anchor": [
       53.5,
       134.4,
@@ -100223,6 +100255,7 @@
      ]
     }
    ],
+   "eye": [],
    "wires": {
     "base brown": 0,
     "base red": 1,
@@ -139543,6 +139576,407 @@
      140.6
     ],
     "radius": 50.5
+   }
+  },
+  {
+   "name": "Parts List",
+   "kind": "card",
+   "caption": "Parts List",
+   "parts": [
+    {
+     "title": "Electronics",
+     "icon": "electronics",
+     "colour": "#f9c0c0",
+     "halo": "#ec8d8d",
+     "items": [
+      {
+       "name": "Nano I/O Module",
+       "qty": 1,
+       "picture": "parts/Nano-I-O-Module.png"
+      },
+      {
+       "name": "Nano Board",
+       "qty": 1,
+       "picture": "parts/Nano-Board.png"
+      },
+      {
+       "name": "Joystick",
+       "qty": 2,
+       "picture": "parts/Joystick.png"
+      },
+      {
+       "name": "Breadboard Wire (F-F)",
+       "qty": 8,
+       "picture": "parts/Breadboard-Wire-F-F.png"
+      },
+      {
+       "name": "USB Cable",
+       "qty": 1,
+       "picture": "parts/USB-Cable.png"
+      },
+      {
+       "name": "Servo Extension Wire",
+       "qty": 1,
+       "picture": "parts/Servo-Extension-Wire.png"
+      }
+     ]
+    },
+    {
+     "title": "Motors",
+     "icon": "motors",
+     "colour": "#d8edc6",
+     "halo": "#a3cf84",
+     "items": [
+      {
+       "name": "Base Servo",
+       "qty": 1,
+       "picture": "parts/Base-Servo.png"
+      },
+      {
+       "name": "Elbow Servo",
+       "qty": 1,
+       "picture": "parts/Elbow-Servo.png",
+       "tag": "Black Dot"
+      },
+      {
+       "name": "Shoulder Servo",
+       "qty": 1,
+       "picture": "parts/Shoulder-Servo.png",
+       "tag": "White Dot"
+      },
+      {
+       "name": "Claw Servo",
+       "qty": 1,
+       "picture": "parts/Claw-Servo.png",
+       "tag": "Blue Dot"
+      }
+     ]
+    },
+    {
+     "title": "Screws",
+     "icon": "screws",
+     "colour": "#c4e8e5",
+     "halo": "#88cfc8",
+     "items": [
+      {
+       "name": "Hex Screw",
+       "qty": 15,
+       "picture": "parts/6mm-Hex-Screw.png",
+       "tag": "6mm"
+      },
+      {
+       "name": "Hex Screw",
+       "qty": 8,
+       "picture": "parts/10mm-Hex-Screw.png",
+       "tag": "10mm"
+      },
+      {
+       "name": "Hex Screw",
+       "qty": 4,
+       "picture": "parts/16mm-Hex-Screw.png",
+       "tag": "16mm"
+      }
+     ]
+    }
+   ],
+   "visible": [],
+   "offsets": {},
+   "camera": {
+    "dir": [
+     0.5997,
+     0.5299,
+     -0.5997
+    ],
+    "target": [
+     183.4,
+     165.6,
+     184.6
+    ],
+    "radius": 267.5
+   }
+  },
+  {
+   "name": "Parts List (Cont.)",
+   "kind": "card",
+   "caption": "Parts List (Cont.)",
+   "parts": [
+    {
+     "title": "Rotating base (R1 - R8)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "R1",
+       "qty": 1,
+       "picture": "parts/R1.png"
+      },
+      {
+       "name": "R2",
+       "qty": 1,
+       "picture": "parts/R2.png"
+      },
+      {
+       "name": "R3",
+       "qty": 1,
+       "picture": "parts/R3.png"
+      },
+      {
+       "name": "R4",
+       "qty": 1,
+       "picture": "parts/R4.png"
+      },
+      {
+       "name": "R5",
+       "qty": 1,
+       "picture": "parts/R5.png"
+      },
+      {
+       "name": "R6",
+       "qty": 1,
+       "picture": "parts/R6.png"
+      },
+      {
+       "name": "R7",
+       "qty": 1,
+       "picture": "parts/R7.png"
+      },
+      {
+       "name": "R8",
+       "qty": 1,
+       "picture": "parts/R8.png"
+      }
+     ]
+    },
+    {
+     "title": "Base and controller (B1 - B8)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "B1",
+       "qty": 1,
+       "picture": "parts/B1.png"
+      },
+      {
+       "name": "B2",
+       "qty": 1,
+       "picture": "parts/B2.png"
+      },
+      {
+       "name": "B3",
+       "qty": 1,
+       "picture": "parts/B3.png"
+      },
+      {
+       "name": "B4",
+       "qty": 1,
+       "picture": "parts/B4.png"
+      },
+      {
+       "name": "B5",
+       "qty": 1,
+       "picture": "parts/B5.png"
+      },
+      {
+       "name": "B6",
+       "qty": 2,
+       "picture": "parts/B6.png"
+      },
+      {
+       "name": "B7",
+       "qty": 1,
+       "picture": "parts/B7.png"
+      },
+      {
+       "name": "B8",
+       "qty": 1,
+       "picture": "parts/B8.png"
+      }
+     ]
+    },
+    {
+     "title": "T1 / T2 block (T1 - T2)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "T1",
+       "qty": 2,
+       "picture": "parts/T1.png"
+      },
+      {
+       "name": "T2",
+       "qty": 2,
+       "picture": "parts/T2.png"
+      }
+     ]
+    }
+   ],
+   "visible": [],
+   "offsets": {},
+   "camera": {
+    "dir": [
+     0.5997,
+     0.5299,
+     -0.5997
+    ],
+    "target": [
+     183.4,
+     165.6,
+     184.6
+    ],
+    "radius": 267.5
+   }
+  },
+  {
+   "name": "Parts List (Cont. 2)",
+   "kind": "card",
+   "caption": "Parts List (Cont. 2)",
+   "parts": [
+    {
+     "title": "Arm (A1 - A13)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "A1",
+       "qty": 1,
+       "picture": "parts/A1.png"
+      },
+      {
+       "name": "A2",
+       "qty": 1,
+       "picture": "parts/A2.png"
+      },
+      {
+       "name": "A3",
+       "qty": 1,
+       "picture": "parts/A3.png"
+      },
+      {
+       "name": "A4",
+       "qty": 1,
+       "picture": "parts/A4.png"
+      },
+      {
+       "name": "A5",
+       "qty": 1,
+       "picture": "parts/A5.png"
+      },
+      {
+       "name": "A6",
+       "qty": 1,
+       "picture": "parts/A6.png"
+      },
+      {
+       "name": "A7",
+       "qty": 1,
+       "picture": "parts/A7.png"
+      },
+      {
+       "name": "A8",
+       "qty": 1,
+       "picture": "parts/A8.png"
+      },
+      {
+       "name": "A9",
+       "qty": 2,
+       "picture": "parts/A9.png"
+      },
+      {
+       "name": "A10",
+       "qty": 1,
+       "picture": "parts/A10.png"
+      },
+      {
+       "name": "A11",
+       "qty": 1,
+       "picture": "parts/A11.png"
+      },
+      {
+       "name": "A12",
+       "qty": 1,
+       "picture": "parts/A12.png"
+      },
+      {
+       "name": "A13",
+       "qty": 1,
+       "picture": "parts/A13.png"
+      }
+     ]
+    },
+    {
+     "title": "Claw (C1 - C9)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "C1",
+       "qty": 1,
+       "picture": "parts/C1.png"
+      },
+      {
+       "name": "C2",
+       "qty": 1,
+       "picture": "parts/C2.png"
+      },
+      {
+       "name": "C3",
+       "qty": 1,
+       "picture": "parts/C3.png"
+      },
+      {
+       "name": "C4",
+       "qty": 1,
+       "picture": "parts/C4.png"
+      },
+      {
+       "name": "C5",
+       "qty": 1,
+       "picture": "parts/C5.png"
+      },
+      {
+       "name": "C6",
+       "qty": 1,
+       "picture": "parts/C6.png"
+      },
+      {
+       "name": "C7",
+       "qty": 1,
+       "picture": "parts/C7.png"
+      },
+      {
+       "name": "C8",
+       "qty": 1,
+       "picture": "parts/C8.png"
+      },
+      {
+       "name": "C9",
+       "qty": 1,
+       "picture": "parts/C9.png"
+      }
+     ]
+    }
+   ],
+   "visible": [],
+   "offsets": {},
+   "camera": {
+    "dir": [
+     0.5997,
+     0.5299,
+     -0.5997
+    ],
+    "target": [
+     183.4,
+     165.6,
+     184.6
+    ],
+    "radius": 267.5
    }
   }
  ]

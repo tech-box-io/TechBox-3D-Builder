@@ -820,12 +820,14 @@ class Guide:
             own['camera'] = cam
 
     # -- a deconstruction guide: the Full Build taken apart (rulebook section 11)
-    def take_apart(self, full='steps.json'):
+    def take_apart(self, full='steps.json', parts_list_at_end=False):
         """Begin a deconstruction guide (a guide of its own: Guide(steps_file='steps-deconstruction.json')) with the Full Build as it
         ends: every part where the Full Build leaves it, parts riding on others still riding, the leads as they are routed. Its
         title page is the Full Build's (the same camera; its subtitle is this guide's `part`). remove(), unplug() and lift() then
         take it apart, as a rule the build in reverse. The Full Build's steps file is read as its guide.py last wrote it: run that
-        first, and this script again after any change to it (publish.py warns when the Full Build has changed since)."""
+        first, and this script again after any change to it (publish.py warns when the Full Build has changed since).
+        parts_list_at_end=True: the Full Build's parts list pages, as they are there, after the Completed View (the MRA's: every part
+        counted back in once the kit is apart: Lee, 19 Oct 2026)."""
         from check_site import steps_stamp
         if self.steps_file == 'steps.json':
             raise ValueError('take_apart(): in a guide of its own (Guide(steps_file="steps-deconstruction.json")), not in the Full Build')
@@ -876,7 +878,10 @@ class Guide:
                     wires_now[w] = routes[no]
         if end is None or end.get('cut'):
             self.log.append(f'  NOTE: take_apart(): {full} has no plain Completed View; each part is taken as the last step that showed it had it')
-        self.taken = dict(file=full, stamp=steps_stamp(data), came=came, start=views[0], routes=routes)
+        self.taken = dict(file=full, stamp=steps_stamp(data), came=came, start=views[0], routes=routes,
+                          parts_pages=[copy.deepcopy(v) for v in views if v['kind'] == 'card' and v.get('parts')] if parts_list_at_end else [])
+        if parts_list_at_end and not self.taken['parts_pages']:
+            raise SystemExit(f'take_apart(parts_list_at_end=True): {full} has no parts list to show')
         self.placed = placed
         self.riding = {i: (c['by'], c['pose']) for i, c in carry.items() if i in placed}
         self.resting = {i: p for i, p in offsets.items() if i not in carry and _moved(p)}
@@ -2057,6 +2062,8 @@ class Guide:
         if self.parts_list:                                 # the parts list, on pages of its own after the title page
             for k, page in enumerate(self.parts_list(parts)):
                 views.insert(1 + k, dict(name=page['name'], kind='card', caption=page['name'], parts=page['groups'], visible=[], offsets={}, camera=hero))
+        if self.taken and self.taken.get('parts_pages'):    # a deconstruction's: the Full Build's pages, after the Completed View (take_apart())
+            views.extend(copy.deepcopy(self.taken['parts_pages']))
 
         model_file = self.kit_dir / 'model.glb'
         stamp = f'?v={model_stamp(model_file)}' if model_file.exists() else ''     # so browsers refetch the model only when it changes

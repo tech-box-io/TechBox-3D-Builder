@@ -25,24 +25,24 @@
    "image": "Breadboard-Wire-F-F.png"
   },
   {
-   "name": "Base Motor",
+   "name": "Base Servo",
    "quantity": 1,
-   "image": "Base-Motor.png"
+   "image": "Base-Servo.png"
   },
   {
-   "name": "Elbow Motor",
+   "name": "Elbow Servo",
    "quantity": 1,
-   "image": "Elbow-Motor.png"
+   "image": "Elbow-Servo.png"
   },
   {
-   "name": "Shoulder Motor",
+   "name": "Shoulder Servo",
    "quantity": 1,
-   "image": "Shoulder-Motor.png"
+   "image": "Shoulder-Servo.png"
   },
   {
-   "name": "Claw Motor",
+   "name": "Claw Servo",
    "quantity": 1,
-   "image": "Claw-Motor.png"
+   "image": "Claw-Servo.png"
   },
   {
    "name": "USB Cable",
