@@ -1,0 +1,4 @@
+# The STEP files converted once with tools/step_to_glb.py for assemble.py (made again from the STEPs, which are not in git either)
+lsm-wood.glb
+lsm-electronics.glb
+lsm-fullbuild-raw.glb

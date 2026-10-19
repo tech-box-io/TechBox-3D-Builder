@@ -1,0 +1,113 @@
+{
+ "kit": "Laser Stem Matrix (LSM)",
+ "part": "Full Build",
+ "image_size": 500,
+ "model": "7d689414f7bf",
+ "parts": [
+  {
+   "name": "Breadboard",
+   "quantity": 1,
+   "image": "Breadboard.png"
+  },
+  {
+   "name": "D1",
+   "quantity": 1,
+   "image": "D1.png"
+  },
+  {
+   "name": "Nano Board",
+   "quantity": 1,
+   "image": "Nano-Board.png"
+  },
+  {
+   "name": "12 kΩ Resistor",
+   "quantity": 1,
+   "image": "12-k-Resistor.png"
+  },
+  {
+   "name": "Capacitor",
+   "quantity": 1,
+   "image": "Capacitor.png"
+  },
+  {
+   "name": "Breadboard Wire (M-F)",
+   "quantity": 3,
+   "image": "Breadboard-Wire-M-F.png"
+  },
+  {
+   "name": "330 Ω Resistor",
+   "quantity": 1,
+   "image": "330-Resistor.png"
+  },
+  {
+   "name": "LED Matrix",
+   "quantity": 1,
+   "image": "LED-Matrix.png"
+  },
+  {
+   "name": "Push Button",
+   "quantity": 1,
+   "image": "Push-Button.png"
+  },
+  {
+   "name": "D2",
+   "quantity": 1,
+   "image": "D2.png"
+  },
+  {
+   "name": "USB Cable",
+   "quantity": 1,
+   "image": "USB-Cable.png"
+  },
+  {
+   "name": "D4",
+   "quantity": 1,
+   "image": "D4.png"
+  },
+  {
+   "name": "D3",
+   "quantity": 1,
+   "image": "D3.png"
+  },
+  {
+   "name": "D5",
+   "quantity": 1,
+   "image": "D5.png"
+  },
+  {
+   "name": "D9",
+   "quantity": 2,
+   "image": "D9.png"
+  },
+  {
+   "name": "D10",
+   "quantity": 1,
+   "image": "D10.png"
+  },
+  {
+   "name": "D6",
+   "quantity": 1,
+   "image": "D6.png"
+  },
+  {
+   "name": "D11",
+   "quantity": 4,
+   "image": "D11.png"
+  },
+  {
+   "name": "D7",
+   "quantity": 1,
+   "image": "D7.png"
+  },
+  {
+   "name": "D8",
+   "quantity": 1,
+   "image": "D8.png"
+  },
+  {
+   "name": "LED Stem",
+   "quantity": 64,
+   "image": "LED-Stem.png"
+  }
+ ]
+}

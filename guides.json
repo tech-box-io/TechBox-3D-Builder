@@ -3,12 +3,14 @@
   "embed_origins": ["https://edu.tech-box.io"],
   "kits": {
     "mini-robot-arm": {"name": "Mini Robot Arm", "code": "MRA", "folder": "MRA Build Instructions Prototype"},
-    "remote-controlled-car": {"name": "Remote Controlled Car", "code": "RCC", "folder": "RCC Build Instructions"}
+    "remote-controlled-car": {"name": "Remote Controlled Car", "code": "RCC", "folder": "RCC Build Instructions"},
+    "laser-stem-matrix": {"name": "Laser Stem Matrix", "code": "LSM", "folder": "LSM Build Instructions"}
   },
   "guides": {
     "mini-robot-arm-full-build": {"kit": "mini-robot-arm", "steps": "steps.json", "label": "Full Build"},
     "mini-robot-arm-deconstruction": {"kit": "mini-robot-arm", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
     "remote-controlled-car-full-build": {"kit": "remote-controlled-car", "steps": "steps.json", "label": "Full Build"},
-    "remote-controlled-car-deconstruction": {"kit": "remote-controlled-car", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"}
+    "remote-controlled-car-deconstruction": {"kit": "remote-controlled-car", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
+    "laser-stem-matrix-full-build": {"kit": "laser-stem-matrix", "steps": "steps.json", "label": "Full Build"}
   }
 }

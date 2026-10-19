@@ -1,0 +1,402 @@
+{
+ "summary": {
+  "source": "lsm.glb",
+  "source_bytes": 19390912,
+  "model_bytes": 1680256,
+  "triangles_in": 610388,
+  "triangles_out": 133402,
+  "edge_segments": 82293,
+  "meshes": 26,
+  "parts_kept": 98,
+  "parts_in_source": 98,
+  "materials": [
+   "edge",
+   "ink",
+   "wood",
+   "wood_dark",
+   "#000000",
+   "#0074d9",
+   "#ff0e00",
+   "#ffffff",
+   "backing_grey",
+   "#1e1616",
+   "#a6a9aa",
+   "#b1b3b3",
+   "#fbfbfb",
+   "#000f41",
+   "#181818",
+   "#191919",
+   "#a5936d",
+   "#d3d6d3",
+   "#e4e4e4",
+   "#efefef",
+   "pin",
+   "#cad1ee",
+   "#cccccc",
+   "black_plastic",
+   "white_plastic",
+   "#a36315",
+   "#ff851b",
+   "#2d2926",
+   "#ef3340",
+   "nut_grey",
+   "stem_white"
+  ],
+  "wire_colour_breaks": []
+ },
+ "meshes": [
+  {
+   "mesh": "LSM_Bottom_r1",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2416,
+   "tris_out": 2416,
+   "edge_segments": 1193,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm (11 sliver corners eased)"
+  },
+  {
+   "mesh": "LSM_Side3_r2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2916,
+   "tris_out": 2916,
+   "edge_segments": 1920,
+   "colours": [
+    "ink",
+    "wood",
+    "wood_dark"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Side1_r8",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2600,
+   "tris_out": 2600,
+   "edge_segments": 1128,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Side2_r2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1172,
+   "tris_out": 1172,
+   "edge_segments": 526,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Side4_r2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1296,
+   "tris_out": 1296,
+   "edge_segments": 502,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Lens_Bottom",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2256,
+   "tris_out": 2256,
+   "edge_segments": 1049,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Lens_Middle",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1752,
+   "tris_out": 1752,
+   "edge_segments": 923,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_Lens_Top",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2456,
+   "tris_out": 2456,
+   "edge_segments": 1099,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_MatrixSupportLong_r3",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1012,
+   "tris_out": 1012,
+   "edge_segments": 302,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_MatrixSupportSmall_r2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 924,
+   "tris_out": 924,
+   "edge_segments": 299,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_LensSupport_r2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 924,
+   "tris_out": 924,
+   "edge_segments": 390,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "Breadboard",
+   "used_by": 1,
+   "solids": 133,
+   "tris_in": 56640,
+   "tris_out": 23030,
+   "edge_segments": 21365,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#ff0e00",
+    "#ffffff"
+   ],
+   "note": "atlas match 98%; 30605 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Paper",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "backing_grey"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "8x8 LED",
+   "used_by": 1,
+   "solids": 321,
+   "tris_in": 95417,
+   "tris_out": 36708,
+   "edge_segments": 27432,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa",
+    "#b1b3b3",
+    "#fbfbfb"
+   ],
+   "note": "atlas match 100%; 7234 faces under a skin recoloured"
+  },
+  {
+   "mesh": "nano_Varsay\u0131lan",
+   "used_by": 1,
+   "solids": 273,
+   "tris_in": 380001,
+   "tris_out": 34193,
+   "edge_segments": 14541,
+   "colours": [
+    "#000f41",
+    "#181818",
+    "#191919",
+    "#a5936d",
+    "#a6a9aa",
+    "#d3d6d3",
+    "#e4e4e4",
+    "#efefef",
+    "pin"
+   ],
+   "note": "atlas match 100%; 141247 faces under a skin recoloured"
+  },
+  {
+   "mesh": "USB Right Angle",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 3592,
+   "tris_out": 1148,
+   "edge_segments": 589,
+   "colours": [
+    "#1e1616",
+    "#cad1ee",
+    "#cccccc"
+   ],
+   "note": "atlas match 100%; 982 faces under a skin recoloured"
+  },
+  {
+   "mesh": "USBCableend",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 8128,
+   "tris_out": 3099,
+   "edge_segments": 1767,
+   "colours": [
+    "black_plastic",
+    "pin",
+    "white_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Resistor body 12k",
+   "used_by": 1,
+   "solids": 6,
+   "tris_in": 9888,
+   "tris_out": 2120,
+   "edge_segments": 678,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#a36315",
+    "#ff0e00"
+   ],
+   "note": "atlas match 100%; 1162 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Resistor body 330",
+   "used_by": 1,
+   "solids": 6,
+   "tris_in": 9888,
+   "tris_out": 2116,
+   "edge_segments": 682,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#a36315",
+    "#ff851b"
+   ],
+   "note": "atlas match 100%; 1162 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Capacitor body",
+   "used_by": 1,
+   "solids": 4,
+   "tris_in": 6462,
+   "tris_out": 1883,
+   "edge_segments": 1643,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%; 2018 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Capacitor leg",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 164,
+   "tris_out": 64,
+   "edge_segments": 34,
+   "colours": [
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Push button",
+   "used_by": 1,
+   "solids": 7,
+   "tris_in": 8912,
+   "tris_out": 2243,
+   "edge_segments": 810,
+   "colours": [
+    "#1e1616",
+    "#2d2926",
+    "#cad1ee",
+    "#ef3340"
+   ],
+   "note": "atlas match 100%; 366 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Push button nut",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 376,
+   "tris_out": 218,
+   "edge_segments": 115,
+   "colours": [
+    "nut_grey"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Wire Cap V2",
+   "used_by": 1,
+   "solids": 2,
+   "tris_in": 1104,
+   "tris_out": 346,
+   "edge_segments": 147,
+   "colours": [
+    "#1e1616",
+    "#a6a9aa"
+   ],
+   "note": "atlas match 100%"
+  },
+  {
+   "mesh": "Wire Cap",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 316,
+   "tris_out": 166,
+   "edge_segments": 95,
+   "colours": [
+    "black_plastic"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LSM_Stem",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "stem_white"
+   ],
+   "note": ""
+  }
+ ]
+}

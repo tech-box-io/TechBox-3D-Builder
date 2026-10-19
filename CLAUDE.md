@@ -369,7 +369,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     render.yaml                the Render static site's configuration
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
-                               bundle.py, step_text.py, step_to_glb.py, cut_part.py; site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
+                               bundle.py, step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), wirecheck.py
+                               (wires passing into parts, view by view); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
     MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)
@@ -393,6 +394,13 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                kit's trim_source.py to lac-guide.glb (the parts the guide uses: the source both tools read); nano-mra.glb and
                                usb-a-end.glb (the MRA's), f4.glb (F4 seated: the STEP has it only lying beside the base). The STEP has no
                                F2, F5, F6 yet (README.txt). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
+    LSM Build Instructions/    the Laser Stem Matrix (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lsm.json (make_atlas.py),
+                               lsm.glb made by the kit's assemble.py: Lee's STEPs hold no working assembly (the loose parts files
+                               LSM_WoodSteps / LSM_Electronics, a Full Build export missing the Nano, D4 - D10 and the stems), so each part is
+                               taken from them in its own frame and placed where TechBox's published Cadasio guide has it (the same SolidWorks
+                               parts, same coordinates), or into the breadboard holes the guide names; the Nano and USB A end are the MRA's;
+                               the stems are drawn from Cadasio's box until their CAD comes. docs/research/lsm/cad_study.md has the
+                               sub-millimetre corrections. Server on port 8805 ("Open Prototype.command").
 
 ## Conventions in the code
 

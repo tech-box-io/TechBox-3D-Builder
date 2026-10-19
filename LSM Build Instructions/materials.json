@@ -1,0 +1,64 @@
+{
+  "_about": "Colour and detail rules for the LSM's 3D model. Edit here, then run: python tools/build_model.py \"LSM Build Instructions\". Rules are tried top to bottom against each mesh name of lsm.glb (made by assemble.py); the first match wins. A mesh whose rule names no colour takes its colours from the \"atlas\" file (colour-atlas-lsm.json, made by make_atlas.py): TechBox's published LSM Cadasio guide, solid by solid, and the MRA's atlas for the MRA's Nano. A rule that does name a colour is a house-library colour or a TechBox decision (see _notes). First draft, 19 Oct 2026: the colours listed under _notes.unconfirmed wait on Lee.",
+  "source": "lsm.glb",
+  "source_scale_to_mm": 1000.0,
+  "atlas": "colour-atlas-lsm.json",
+  "palette": {
+    "edge": "#111111",
+    "wood": "#deb887",
+    "wood_dark": "#855e42",
+    "steel": "#a6a9aa",
+    "black_plastic": "#1e1616",
+    "white_plastic": "#f5f5f6",
+    "pcb_navy": "#000f41",
+    "pcb_black": "#1e1616",
+    "pin": "#a6a9aa",
+    "metal_can": "#a6a9aa",
+    "ic_black": "#191919",
+    "header_black": "#181818",
+    "header_yellow": "#ffff80",
+    "nut_grey": "#cccccc",
+    "backing_grey": "#cccccc",
+    "stem_white": "#ffffff",
+    "wire_red": "#ef3340",
+    "wire_black": "#2d2926",
+    "wire_purple": "#4e008e",
+    "wire_grey": "#cad1ee",
+    "wire_white": "#f2f2f2",
+    "grey": "#a6a9aa",
+    "ink": "#1e1616",
+    "cable_black": "#2d2926"
+  },
+  "defaults": {
+    "color": "grey",
+    "edge_angle": 40,
+    "simplify_mm": 0.04,
+    "edge_min_size_mm": 0.0
+  },
+  "rules": [
+    {"match": "^LSM_Stem$", "color": "stem_white", "simplify_mm": 0, "_about": "the 64 acrylic LED stems (drawn in assemble.py from Cadasio's box: the stem's own CAD is not in Lee's files yet), white as published"},
+    {"match": "^LSM_Side3_r2$", "color": "wood", "regions": [{"box": [[-7, -1, 2.95], [90, 52, 3.05]], "color": "wood_dark"}], "simplify_mm": 0, "roughen_mm": 0.1, "engraving": "ink", "_about": "D2, the side with the push button: its outer face brown, as the published guide shows it (Cadasio lays a brown sheet over that face)"},
+    {"match": "^LSM_", "color": "wood", "simplify_mm": 0, "roughen_mm": 0.1, "engraving": "ink", "_about": "the laser-cut wood, D1 - D11"},
+    {"match": "^nano_", "simplify_mm": 0.06, "edge_min_size_mm": 2.0, "max_tris": 16000, "atlas_colours": {"#cccccc": "pin"}, "_about": "the Nano Board: the MRA's model and the MRA's rule"},
+    {"match": "^Breadboard$", "simplify_mm": 0.02, "edge_min_size_mm": 1.0},
+    {"match": "^8x8 LED$", "simplify_mm": 0.03, "max_tris": 30000, "edge_min_size_mm": 1.0},
+    {"match": "^Resistor body", "simplify_mm": 0.02},
+    {"match": "^Capacitor body$", "simplify_mm": 0.02},
+    {"match": "^Capacitor leg$", "color": "pin", "simplify_mm": 0.02},
+    {"match": "^Push button$", "simplify_mm": 0.03, "max_tris": 4000},
+    {"match": "^Push button nut$", "color": "nut_grey", "simplify_mm": 0.02},
+    {"match": "^USB Right Angle$", "simplify_mm": 0.03, "outline": true},
+    {"match": "^USBCableend$", "color": "black_plastic", "components": [{"rank": 1, "color": "pin"}, {"rank": 2, "color": "white_plastic"}, {"rank": [3, 4], "color": "pin"}], "simplify_mm": 0.03, "max_tris": 4000, "outline": true, "_about": "the USB cable's A end: the MRA's model and rule"},
+    {"match": "^Wire Cap V2$", "simplify_mm": 0.02, "_about": "a jumper wire's male end: pin silver, housing black"},
+    {"match": "^Wire Cap$", "color": "black_plastic", "simplify_mm": 0.02, "_about": "a jumper wire's female end (the MRA's model)"},
+    {"match": "^Paper$", "color": "backing_grey", "_about": "the breadboard's protective backing, light grey as the published guide shows it"}
+  ],
+  "_notes": {
+    "unconfirmed": [
+      "D2's outer face brown #855e42 (the published guide's colour; the other wood parts are #deb887 on both faces).",
+      "LED stems white #ffffff (published).",
+      "Jumper wires white / light grey #cad1ee / purple #4e008e (published), the push button's leads red #ef3340 / black #2d2926 (published, the house pre-wired lead colours)."
+    ],
+    "decided": []
+  }
+}

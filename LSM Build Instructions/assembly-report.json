@@ -1,0 +1,1433 @@
+{
+ "D1": {
+  "came": "lsm-wood.glb LSM_Bottom_r1 (its plate)",
+  "cadasio": "LSM_Bottom_r1-1",
+  "lo": [
+   593.78,
+   859.4,
+   1150.0
+  ],
+  "hi": [
+   682.68,
+   862.4,
+   1258.61
+  ]
+ },
+ "D2": {
+  "came": "lsm-wood.glb LSM_Side3_r2 (its plate)",
+  "cadasio": "LSM_Side3_r2-1",
+  "lo": [
+   590.58,
+   856.23,
+   1251.93
+  ],
+  "hi": [
+   685.89,
+   907.03,
+   1254.93
+  ]
+ },
+ "D3": {
+  "came": "lsm-wood.glb LSM_Side1_r8 (its plate)",
+  "cadasio": "LSM_Side1_r8-1",
+  "lo": [
+   590.78,
+   856.23,
+   1153.5
+  ],
+  "hi": [
+   685.18,
+   907.03,
+   1156.68
+  ]
+ },
+ "D4": {
+  "came": "lsm-wood.glb LSM_Side2_r2 (its plate)",
+  "cadasio": "LSM_Side2_r2-1",
+  "lo": [
+   594.41,
+   856.23,
+   1150.44
+  ],
+  "hi": [
+   597.41,
+   907.04,
+   1258.05
+  ]
+ },
+ "D5": {
+  "came": "lsm-wood.glb LSM_Side4_r2 (its plate)",
+  "cadasio": "LSM_Side4_r2-1",
+  "lo": [
+   679.51,
+   856.1,
+   1150.41
+  ],
+  "hi": [
+   682.51,
+   906.92,
+   1258.03
+  ]
+ },
+ "D6": {
+  "came": "lsm-wood.glb LSM_Lens_Bottom (its plate)",
+  "cadasio": "LSM_Lens_Bottom-3",
+  "lo": [
+   596.96,
+   900.98,
+   1156.68
+  ],
+  "hi": [
+   679.51,
+   903.98,
+   1251.93
+  ]
+ },
+ "D7": {
+  "came": "lsm-wood.glb LSM_Lens_Middle (its plate)",
+  "cadasio": "LSM_Lens_Middle-2",
+  "lo": [
+   596.96,
+   913.5,
+   1156.68
+  ],
+  "hi": [
+   679.51,
+   916.5,
+   1251.93
+  ]
+ },
+ "D8": {
+  "came": "lsm-wood.glb LSM_Lens_Top (its plate)",
+  "cadasio": "LSM_Lens_Top-1",
+  "lo": [
+   596.96,
+   927.1,
+   1156.68
+  ],
+  "hi": [
+   679.51,
+   930.27,
+   1251.93
+  ]
+ },
+ "D9_A": {
+  "came": "lsm-wood.glb LSM_MatrixSupportLong_r3 (its plate)",
+  "cadasio": "LSM_MatrixSupportLong_r3-2",
+  "lo": [
+   617.13,
+   882.18,
+   1153.5
+  ],
+  "hi": [
+   620.13,
+   900.69,
+   1254.75
+  ]
+ },
+ "D9_B": {
+  "came": "lsm-wood.glb LSM_MatrixSupportLong_r3 (its plate)",
+  "cadasio": "LSM_MatrixSupportLong_r3-3",
+  "lo": [
+   655.83,
+   882.17,
+   1153.44
+  ],
+  "hi": [
+   658.83,
+   900.68,
+   1254.69
+  ]
+ },
+ "D10": {
+  "came": "lsm-wood.glb LSM_MatrixSupportSmall_r2 (its plate)",
+  "cadasio": "LSM_MatrixSupportSmall_r2-1",
+  "lo": [
+   593.43,
+   883.12,
+   1202.97
+  ],
+  "hi": [
+   682.33,
+   900.68,
+   1205.97
+  ]
+ },
+ "D11_A": {
+  "came": "lsm-wood.glb LSM_LensSupport_r2 (its plate)",
+  "cadasio": "LSM_LensSupport_r2-2",
+  "lo": [
+   673.33,
+   856.02,
+   1234.46
+  ],
+  "hi": [
+   676.33,
+   935.76,
+   1250.34
+  ]
+ },
+ "D11_B": {
+  "came": "lsm-wood.glb LSM_LensSupport_r2 (its plate)",
+  "cadasio": "LSM_LensSupport_r2-3",
+  "lo": [
+   673.33,
+   856.02,
+   1158.26
+  ],
+  "hi": [
+   676.33,
+   935.76,
+   1174.14
+  ]
+ },
+ "D11_C": {
+  "came": "lsm-wood.glb LSM_LensSupport_r2 (its plate)",
+  "cadasio": "LSM_LensSupport_r2-1",
+  "lo": [
+   600.13,
+   856.02,
+   1234.46
+  ],
+  "hi": [
+   603.13,
+   935.76,
+   1250.34
+  ]
+ },
+ "D11_D": {
+  "came": "lsm-wood.glb LSM_LensSupport_r2 (its plate)",
+  "cadasio": "LSM_LensSupport_r2-4",
+  "lo": [
+   600.13,
+   856.02,
+   1158.26
+  ],
+  "hi": [
+   603.13,
+   935.76,
+   1174.14
+  ]
+ },
+ "BREADBOARD": {
+  "came": "lsm-electronics.glb Breadboard",
+  "cadasio": "Breadboard-1",
+  "lo": [
+   611.18,
+   862.4,
+   1162.57
+  ],
+  "hi": [
+   667.26,
+   871.92,
+   1245.58
+  ]
+ },
+ "BACKING": {
+  "came": "lsm-fullbuild-raw.glb Paper",
+  "cadasio": "Paper-1",
+  "lo": [
+   611.18,
+   862.2,
+   1163.9
+  ],
+  "hi": [
+   665.93,
+   862.4,
+   1245.76
+  ]
+ },
+ "MATRIX": {
+  "came": "lsm-electronics.glb 8x8 LED",
+  "cadasio": "8x8 LED-4",
+  "lo": [
+   606.92,
+   890.62,
+   1173.79
+  ],
+  "hi": [
+   670.71,
+   899.2,
+   1234.2
+  ]
+ },
+ "NANO": {
+  "came": "mra.glb nano_Varsay\u0131lan (the MRA Nano)",
+  "cadasio": "Arduino Nano V1-1",
+  "lo": [
+   628.29,
+   865.9,
+   1166.63
+  ],
+  "hi": [
+   646.29,
+   884.52,
+   1211.63
+  ]
+ },
+ "USB_B": {
+  "came": "lsm-fullbuild-raw.glb USB Right Angle",
+  "cadasio": "USB Right Angle-1",
+  "lo": [
+   619.29,
+   873.62,
+   1204.6
+  ],
+  "hi": [
+   643.29,
+   881.12,
+   1224.46
+  ]
+ },
+ "USB_A": {
+  "came": "MRA usb-a-end.glb",
+  "cadasio": "USB Cable end-2",
+  "lo": [
+   520.0,
+   856.23,
+   1211.05
+  ],
+  "hi": [
+   569.7,
+   864.78,
+   1226.95
+  ]
+ },
+ "R12K": {
+  "came": "lsm-electronics.glb NAUO4",
+  "cadasio": "Resistor 1-1",
+  "lo": [
+   645.09,
+   874.65,
+   1183.84
+  ],
+  "hi": [
+   649.99,
+   879.55,
+   1194.84
+  ],
+  "legs": [
+   [
+    [
+     647.54,
+     869.1,
+     1172.98
+    ],
+    "h3"
+   ],
+   [
+    [
+     647.54,
+     869.1,
+     1206.02
+    ],
+    "h16"
+   ]
+  ]
+ },
+ "R330": {
+  "came": "lsm-electronics.glb NAUO5",
+  "cadasio": "Resistor 2-1",
+  "lo": [
+   622.05,
+   874.48,
+   1197.98
+  ],
+  "hi": [
+   626.95,
+   879.38,
+   1208.98
+  ],
+  "legs": [
+   [
+    [
+     624.5,
+     868.93,
+     1193.3
+    ],
+    "a11"
+   ],
+   [
+    [
+     624.5,
+     868.93,
+     1213.64
+    ],
+    "a19"
+   ]
+  ]
+ },
+ "CAP": {
+  "came": "lsm-electronics.glb NAUO8",
+  "cadasio": "Capacitor V3-1",
+  "lo": [
+   651.05,
+   863.62,
+   1169.17
+  ],
+  "hi": [
+   657.11,
+   883.87,
+   1174.27
+  ],
+  "legs": [
+   [
+    [
+     652.62,
+     863.64,
+     1170.47
+    ],
+    "j2"
+   ],
+   [
+    [
+     652.62,
+     863.64,
+     1172.97
+    ],
+    "j3"
+   ]
+  ]
+ },
+ "BUTTON": {
+  "came": "lsm-fullbuild-raw.glb Push button (less its nut)",
+  "cadasio": "Push button-1",
+  "lo": [
+   629.81,
+   873.2,
+   1233.65
+  ],
+  "hi": [
+   646.66,
+   890.05,
+   1258.55
+  ]
+ },
+ "NUT": {
+  "came": "lsm-fullbuild-raw.glb Push button (its nut)",
+  "cadasio": "Push button-1",
+  "lo": [
+   627.71,
+   872.61,
+   1250.43
+  ],
+  "hi": [
+   648.74,
+   890.65,
+   1251.93
+  ]
+ },
+ "J_WHITE_M": {
+  "came": "lsm-electronics.glb Wire Cap V2, in i2",
+  "cadasio": null,
+  "lo": [
+   649.2,
+   867.92,
+   1169.58
+  ],
+  "hi": [
+   650.95,
+   879.92,
+   1171.33
+  ],
+  "hole": "i2"
+ },
+ "J_GREY_M": {
+  "came": "lsm-electronics.glb Wire Cap V2, in i3",
+  "cadasio": null,
+  "lo": [
+   649.2,
+   867.92,
+   1172.12
+  ],
+  "hi": [
+   650.95,
+   879.92,
+   1173.87
+  ],
+  "hole": "i3"
+ },
+ "J_PURPLE_M": {
+  "came": "lsm-electronics.glb Wire Cap V2, in b19",
+  "cadasio": null,
+  "lo": [
+   626.16,
+   867.92,
+   1212.76
+  ],
+  "hi": [
+   627.91,
+   879.92,
+   1214.51
+  ],
+  "hole": "b19"
+ },
+ "BTN_RED_PIN": {
+  "came": "lsm-electronics.glb Wire Cap V2, in j5",
+  "cadasio": null,
+  "lo": [
+   651.74,
+   867.92,
+   1177.2
+  ],
+  "hi": [
+   653.49,
+   879.92,
+   1178.95
+  ],
+  "hole": "j5"
+ },
+ "BTN_BLACK_PIN": {
+  "came": "lsm-electronics.glb Wire Cap V2, in j16",
+  "cadasio": null,
+  "lo": [
+   651.74,
+   867.92,
+   1205.14
+  ],
+  "hi": [
+   653.49,
+   879.92,
+   1206.89
+  ],
+  "hole": "j16"
+ },
+ "J_WHITE_F": {
+  "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
+  "cadasio": "Wire Cap-14",
+  "lo": [
+   607.8,
+   890.68,
+   1178.36
+  ],
+  "hi": [
+   609.55,
+   892.43,
+   1186.36
+  ]
+ },
+ "J_PURPLE_F": {
+  "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
+  "cadasio": "Wire Cap-15",
+  "lo": [
+   609.7,
+   890.68,
+   1178.36
+  ],
+  "hi": [
+   611.45,
+   892.43,
+   1186.36
+  ]
+ },
+ "J_GREY_F": {
+  "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
+  "cadasio": "Wire Cap-16",
+  "lo": [
+   611.6,
+   890.68,
+   1178.36
+  ],
+  "hi": [
+   613.35,
+   892.43,
+   1186.36
+  ]
+ },
+ "STEM_01": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-151",
+  "lo": [
+   606.89,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_02": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-152",
+  "lo": [
+   615.39,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_03": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-153",
+  "lo": [
+   623.89,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_04": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-154",
+  "lo": [
+   632.39,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_05": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-155",
+  "lo": [
+   640.89,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_06": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-156",
+  "lo": [
+   649.39,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_07": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-157",
+  "lo": [
+   657.89,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_08": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-158",
+  "lo": [
+   666.39,
+   902.31,
+   1174.25
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1177.43
+  ]
+ },
+ "STEM_09": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-143",
+  "lo": [
+   606.89,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_10": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-144",
+  "lo": [
+   615.39,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_11": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-145",
+  "lo": [
+   623.89,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_12": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-146",
+  "lo": [
+   632.39,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_13": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-147",
+  "lo": [
+   640.89,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_14": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-148",
+  "lo": [
+   649.39,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_15": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-149",
+  "lo": [
+   657.89,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_16": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-150",
+  "lo": [
+   666.39,
+   902.31,
+   1182.4
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1185.58
+  ]
+ },
+ "STEM_17": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-135",
+  "lo": [
+   606.89,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_18": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-136",
+  "lo": [
+   615.39,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_19": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-137",
+  "lo": [
+   623.89,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_20": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-138",
+  "lo": [
+   632.39,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_21": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-139",
+  "lo": [
+   640.89,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_22": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-140",
+  "lo": [
+   649.39,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_23": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-141",
+  "lo": [
+   657.89,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_24": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-142",
+  "lo": [
+   666.39,
+   902.31,
+   1190.55
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1193.73
+  ]
+ },
+ "STEM_25": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-127",
+  "lo": [
+   606.89,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_26": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-128",
+  "lo": [
+   615.39,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_27": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-129",
+  "lo": [
+   623.89,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_28": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-130",
+  "lo": [
+   632.39,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_29": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-131",
+  "lo": [
+   640.89,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_30": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-132",
+  "lo": [
+   649.39,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_31": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-133",
+  "lo": [
+   657.89,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_32": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-134",
+  "lo": [
+   666.39,
+   902.31,
+   1198.7
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1201.88
+  ]
+ },
+ "STEM_33": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-119",
+  "lo": [
+   606.89,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_34": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-120",
+  "lo": [
+   615.39,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_35": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-121",
+  "lo": [
+   623.89,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_36": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-122",
+  "lo": [
+   632.39,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_37": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-123",
+  "lo": [
+   640.89,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_38": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-124",
+  "lo": [
+   649.39,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_39": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-125",
+  "lo": [
+   657.89,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_40": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-126",
+  "lo": [
+   666.39,
+   902.31,
+   1206.85
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1210.03
+  ]
+ },
+ "STEM_41": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-111",
+  "lo": [
+   606.89,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_42": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-112",
+  "lo": [
+   615.39,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_43": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-113",
+  "lo": [
+   623.89,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_44": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-114",
+  "lo": [
+   632.39,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_45": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-115",
+  "lo": [
+   640.89,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_46": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-116",
+  "lo": [
+   649.39,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_47": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-117",
+  "lo": [
+   657.89,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_48": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-118",
+  "lo": [
+   666.39,
+   902.31,
+   1215.0
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1218.18
+  ]
+ },
+ "STEM_49": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-103",
+  "lo": [
+   606.89,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_50": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-104",
+  "lo": [
+   615.39,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_51": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-105",
+  "lo": [
+   623.89,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_52": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-106",
+  "lo": [
+   632.39,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_53": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-107",
+  "lo": [
+   640.89,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_54": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-108",
+  "lo": [
+   649.39,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_55": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-109",
+  "lo": [
+   657.89,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_56": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-110",
+  "lo": [
+   666.39,
+   902.31,
+   1223.15
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1226.33
+  ]
+ },
+ "STEM_57": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-1",
+  "lo": [
+   606.89,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   610.07,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_58": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-96",
+  "lo": [
+   615.39,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   618.57,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_59": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-97",
+  "lo": [
+   623.89,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   627.07,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_60": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-98",
+  "lo": [
+   632.39,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   635.57,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_61": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-99",
+  "lo": [
+   640.89,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   644.07,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_62": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-100",
+  "lo": [
+   649.39,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   652.57,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_63": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-101",
+  "lo": [
+   657.89,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   661.07,
+   968.99,
+   1234.48
+  ]
+ },
+ "STEM_64": {
+  "came": "drawn: Cadasio box of LSM_Stem",
+  "cadasio": "LSM_Stem-102",
+  "lo": [
+   666.39,
+   902.31,
+   1231.3
+  ],
+  "hi": [
+   669.57,
+   968.99,
+   1234.48
+  ]
+ }
+}
