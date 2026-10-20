@@ -2,7 +2,7 @@
  "kit": "Piano Memory Game (PMG)",
  "part": "Full Build",
  "image_size": 500,
- "model": "73fbc84d42c3",
+ "model": "7e6f1622374f",
  "parts": [
   {
    "name": "Nano I/O Module",

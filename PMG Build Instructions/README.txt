@@ -1,7 +1,7 @@
 PMG Build Instructions (Piano Memory Game, Full Build: the electronics wired on the bench, then the wooden case with the electronics
 fitted into it)
 
-FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND done the same evening (below). Build instructions generated from Lee's STEP ("PMG Full 3D
+FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening (below). Build instructions generated from Lee's STEP ("PMG Full 3D
 Cadasio Build.STEP") and TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-piano_memory_game_pmg-full_build),
 in the same format as the MRA and RCC guides, with the same player. Not for distribution. Open questions are yellow Review notes on
 their steps (in the kit's player; the website copy leaves Review notes out) and are listed at the end of this file.
@@ -15,34 +15,43 @@ HOW TO OPEN (Mac)
 The controls are the MRA guide's: arrows step through, drag to rotate, scroll to zoom, Option-click a spot to copy where it is, the
 grid button shows every step, ?review=0 hides the Review notes.
 
-THE BUILD (49 steps, in the published guide's order)
+THE BUILD (48 steps, in the published guide's order)
 - Step 1: the Nano Board into the Nano I/O module, lying on the bench (its USB socket at the power socket's end).
 - Step 2: twelve breadboard wires peeled off the ribbon and separated.
 - Step 3: the push buttons introduced, as the published guide's "Push Buttons" card: one button on its own, close up, and a close-up
   of its pins with their printed names (VCC, OUT, GND) boxed in red.
 - Steps 4 - 15: the four push buttons, black, yellow, white and blue (rows 4, 5, 6, 7), each wired pin by pin: VCC to V, OUT to S,
   GND to G. One wire per step, as published: the wire lies loose in front of the module (an eye on it), then its two caps are lifted,
-  held over their pins and pushed on; a label at the top of each pin (e.g. VCC and V4; Step 4's caution says what V4 means).
+  held over their pins and pushed on; a label at the top of each pin (e.g. VCC and V4, the module's up and to the right of its pin;
+  Step 4's caution says what V4 means). Seen from a little higher (Lee's screenshot of Step 9).
 - Step 16: nine more wires off the ribbon (seen from higher up).
-- Steps 17 - 20: the 4-digit display (CLK to S8, DIO to S9, VCC to V9, GND to G9); its wires run behind the push buttons' (over the
-  Nano Board) into rows 8 and 9.
-- Steps 21 - 25: the dot matrix display (VCC to V11, GND to G11, DIN to S11, CS to S12, CLK to S13), seen from behind it: its printed
-  pin names beside its header and the module's pins; each wire lies behind the module, where this camera sees it.
+- Steps 17 - 20: the 4-digit display (CLK to S8, DIO to S9, VCC to V9, GND to G9), seen from behind and above: its printed pin names
+  and the module's pins; its wires run between the push buttons' and the camera (over the Nano Board) into rows 8 and 9; each wire
+  lies between the display and the module before it goes in. A beat each: the display's cap to its place 12 mm off its pin and the
+  module's lifted straight up off the bench; the module's carried over the Nano Board and the wires already in; lowered over its pin;
+  both pushed on.
+- Steps 21 - 25: the dot matrix display (VCC to V11, GND to G11, DIN to S11, CS to S12, CLK to S13), seen from behind and above it
+  (Lee's screenshot of Step 22): its printed pin names beside its header, the module's pins; the module's labels to its left, the
+  matrix's below it; each wire lies across the gap between the matrix and the module before it goes in. A beat each: the matrix's cap
+  rises straight up to its place 5 mm off its pin (under the wires already in) while the module's comes through the gap, upright,
+  just above the pins' height; the module's slides along its column to over its pin; both pushed on.
 - Step 26: the USB cable's right-angle plug into the Nano Board; its A end lies on the bench. A caution: set the module aside.
 - Steps 27 - 31: the case on its own (as published): H1, then H2, H3 and H4 pushed on; the case turned over for H5 and H6, each hooked
   into H2's windows and swung into H3's notches (a beat for each, seen from the front, by H1).
-- Steps 32 - 33: the electronics come back beside the case; the blue push button into its pocket in H6, then the other three. Their
-  wires run under H5 (between H5 and H7), out under H4's raised bottom edge, and on to the module.
+- Steps 32 - 33: the electronics come back beside the case; the blue push button into its pocket in H6, then the other three, each
+  moved clear of the module, lifted above the case, carried over its pocket and pressed in (a beat each). Their wires run under H5
+  (between H5 and H7), out under H4's raised bottom edge, and on to the module.
 - Step 34: H7 over the buttons (still turned over, as H5 and H6).
 - Steps 35 - 41: the case the right way up: H8; one piano key (H9) slid in from the front, then the other three; H10 hooked into H4 and
-  lowered (the keys' camera for all three); H11 and H12 down into H10 and back into H4 (each from a front corner, close); H13 down its
-  slope.
-- Steps 42 - 48: the electronics into the case, each picked up first (an eye), then placed: the I/O module held over the back of H4
-  (the USB cable's A end laid on the table behind the case) and lowered onto it; the 4-digit display passed under the dot matrix
-  display's wires into the space behind the module (Step 44), lifted up behind the case, over the top and held over its place
-  (Step 45), and lowered into the notches of H11 and H12 (Step 46); the dot matrix display lifted, carried over the case and held in
-  front (Step 47), then hung on the hooks of H11 and H12 (Step 48).
-- Step 49: H14 over the 4-digit display: its two bottom tabs set down onto the top edge of the dot matrix display (lead lines and a
+  lowered (the keys' camera for all three, close); H11 and H12 down into H10 and back into H4 (each from a front corner, close); H13
+  down its slope.
+- Steps 42 - 47: the electronics into the case, each picked up first (an eye), then placed: the I/O module held over the back of H4
+  (the USB cable's A end laid on the table behind the case) and lowered onto it (its label to its left); the 4-digit display passed
+  under the dot matrix display's wires into the space behind the module, lifted up behind the case, over the top and held over its
+  place, a beat for each, in one step (Step 44), then lowered into the notches of H11 and H12 (Step 45); the dot matrix display lifted,
+  carried over the case and held in front, a beat for each (Step 46: the USB cable moves out over its wires), then hung on the hooks
+  of H11 and H12 (Step 47).
+- Step 48: H14 over the 4-digit display: its two bottom tabs set down onto the top edge of the dot matrix display (lead lines and a
   close-up on them), then its top swung in. The Completed View shows the game from the front, on the student's right, as the title
   page does.
 
@@ -61,12 +70,36 @@ display) is now two steps (44 and 45), so its Steps 44 - 47 are now 46 - 49.
   new wire is held clear of those already in). What is left, only while a step plays: where a whole bundle changes shape (the
   buttons into the case, Steps 32 - 33; the module up and down, 42 - 43; the display, 44 - 45; the dot matrix, 47) its own wires pass
   through one another for a moment (the player blends each wire on its own); in Steps 22 and 25 one matrix wire touches another as
-  it settles in; in Step 33 the push buttons' wires touch H5's edge by up to 0.7 mm for a moment. And a riding part's in-between
-  stops (the display over the top in Step 45, the dot matrix in Step 47) all play within one 0.8 s beat: see question 8.
+  it settles in; in Step 33 the push buttons' wires touch H5's edge by up to 0.7 mm for a moment. (A riding part's in-between stops then played within one 0.8 s beat: a beat each since the second round.)
 - Parts list pictures: the I/O module and the Nano Board from their component side; the yellow push button; H5, H6, H7, H9, H10 and
   H13 the right way up; H14 face on.
 - Cameras changed where Lee asked (and nowhere else, checked view by view against the first draft): Step 16; Steps 21 - 25; Steps
   30, 31 and 34; Steps 37 and 38 (Step 36's); Steps 39, 40, 41; the framing of Steps 44 - 45 and 47, whose motions changed.
+
+LEE'S SECOND ROUND (19 Oct 2026, late; docs/research/pmg/round2_plan.md). Lee's step numbers are the first round's; since this round
+its Steps 44 and 45 are one step (44), so its Steps 46 - 49 are now 45 - 48.
+- The push buttons' wires (Steps 4 - 15): the module pin's label up and to the right of its pin; the camera a little higher (solved
+  from Lee's screenshot).
+- The 4-digit display's wires (Steps 17 - 20): from behind and above (its printed pin names, the module's pins), its wires in front
+  of the buttons' from there, each loose wire between the display and the module; the plug-in motions no longer cross other wires.
+- The dot matrix's wires (Steps 21 - 25): higher (as Lee's screenshot of Step 22), the module's labels to its left, the matrix's
+  below it (its name on its face, by the header), each loose wire between them, across the gap. Its input header as on the real board (Lee's photo 6): the five pins now reach 6.4 mm past
+  the board's edge, and their tails behind it are 1.5 mm (make_source.py; the five caps moved out with them).
+- Lee's own lead-line points: Steps 30, 31, 34 (H5, H6, H7 into H2 and H3), 37 (the keys into H4), 48 (H14 over H11 and H12).
+- Steps 32 - 33: each button moved clear, lifted above the case, carried over, pressed in (it passed through H5).
+- Steps 35 - 38 closer; Step 43's label to the left of the module.
+- Steps 44 and 45 of the first round combined (the display under the matrix's wires, a pause, then up, over and held); Step 46 (the
+  dot matrix) slower: a beat for each stage, as the player now allows a riding part (`ride_beats`, opt-in; checked on every kit).
+  The USB cable moves out over the dot matrix's wires during Step 46 (it no longer runs between them and the case).
+- Labels can now be told where to sit (`side`, opt-in in the player): used for the pin labels, the module's and the eyes above;
+  the push buttons' names (Steps 4, 7, 10, 13) up and to the right, as the module's pins.
+- Found while checking this round (not in Lee's notes): in Steps 17 - 25 the module's cap passed through the I/O board and the Nano
+  Board on its way from the bench to its pin (and in Steps 22 and 25 a matrix wire touched another as it settled in). Both
+  displays' wires now go in as described above (a beat for each stretch, so these steps play longer: 3.2 s and 2.4 s); no cap
+  passes through a part or a wire (docs/research/pmg/scripts/check_caps.py, a check of every moving cap added this round).
+- Checked: every view (no wire in a part or through another), the motions, wires and moving caps (round2/motion_check.txt, which
+  lists what is left while steps play), the run-through on all 99 views in the kit and as published to the test website, and every
+  other kit's run-through with the changed player.
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
@@ -107,7 +140,5 @@ QUESTIONS FOR LEE (still open after the first round)
 5. Jumper caps grey as the MRA's (this draft) or black as the published PMG guide?
 6. Should the Full Build also be cut into the published Parts 1 - 3 (the buttons; the display, matrix and USB; the case)?
 7. An electronics check before the case (as the MRA's and RCC's test card), or none (as published)?
-8. Steps 45 and 47 carry the display and the dot matrix over the case through in-between stops, but the player plays a riding
-   part's stops within one 0.8 s beat, so the crossing over the top is quick. A player change would give each stop a beat of its own
-   (as a moving part's stops have); it would also slow the plugs walked back in the MRA's and RCC's deconstructions. Make it?
-(The first draft's question 5, the boards' printed pin names, was answered by Lee's photos: done.)
+(The first draft's question 5, the boards' printed pin names, was answered by Lee's photos: done. The first round's question 8, a beat
+for each stage of a carried part, was answered in the second round: done, as an opt-in that changes no other kit.)

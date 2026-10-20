@@ -1,11 +1,11 @@
 {
  "summary": {
   "source": "pmg-guide.glb",
-  "source_bytes": 16654696,
-  "model_bytes": 1419824,
+  "source_bytes": 16654680,
+  "model_bytes": 1419740,
   "triangles_in": 825974,
-  "triangles_out": 174515,
-  "edge_segments": 93625,
+  "triangles_out": 174511,
+  "edge_segments": 93629,
   "meshes": 52,
   "parts_kept": 69,
   "parts_in_source": 69,
@@ -577,8 +577,8 @@
    "used_by": 1,
    "solids": 11,
    "tris_in": 1504,
-   "tris_out": 856,
-   "edge_segments": 655,
+   "tris_out": 852,
+   "edge_segments": 659,
    "colours": [
     "header_black",
     "pin"

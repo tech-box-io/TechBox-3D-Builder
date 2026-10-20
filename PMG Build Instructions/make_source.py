@@ -68,6 +68,13 @@ MODULE_CAPS = dict(G4='NAUO97', S4='NAUO96', G5='NAUO95', S5='NAUO99', G6='NAUO9
 BUTTON_CAPS = [dict(VCC='NAUO86', OUT='NAUO87'), dict(VCC='NAUO88', OUT='NAUO89'), dict(VCC='NAUO90', OUT='NAUO91'), dict(VCC='NAUO93', OUT='NAUO92')]
 DISPLAY_CAPS = dict(CLK='NAUO259', DIO='NAUO260', VCC='NAUO261', GND='NAUO262')
 MATRIX_CAPS = dict(VCC='NAUO134', GND='NAUO135', DIN='NAUO136', CS='NAUO137', CLK='NAUO138')
+# The dot matrix's input header (a right-angle header, NAUO359 in the matrix): in the CAD its tails stand 4.5 mm out of the board's
+# back and its arms reach only 2.4 mm past the board's edge; on the real board (Lee's photo 6) the arms reach well past the edge and
+# only short tails show behind (Lee's second round, 19 Oct 2026). In the board's own frame (NAUO358: x along the board, its edge at
+# x -16.19; z out of its back, the back face at z 1.5): the arms' ends moved out by MATRIX_ARM_MM, the tails cut back by MATRIX_TAIL_MM;
+# the five caps on the arms move out with them.
+MATRIX_HEADER, MATRIX_PCB = 'NAUO359', 'NAUO358'
+MATRIX_ARM_MM, MATRIX_TAIL_MM = 4.0, 3.0
 # The pose copies the guide's poses are measured from (never kept).
 BENCH_MODULE, HELD_MODULE = 'NAUO1', 'NAUO94'
 BENCH_BUTTONS = ['NAUO7', 'NAUO6', 'NAUO5', 'NAUO4']      # black, yellow, white, blue, standing in a row in front of the bench module
@@ -193,11 +200,24 @@ class Writer:
             self.by_content[key] = len(self.out['accessors']) - 1
         return self.by_content[key]
 
-    def mesh(self, src, index, name=None):
+    def positions_accessor(self, P):
+        """A new POSITION accessor holding P (metres, float32)."""
+        raw = np.ascontiguousarray(P, np.float32).tobytes()
+        while len(self.data) % 4:
+            self.data.append(0)
+        self.out['bufferViews'].append(dict(buffer=0, byteOffset=len(self.data), byteLength=len(raw), target=34962))
+        self.data.extend(raw)
+        self.out['accessors'].append(dict(bufferView=len(self.out['bufferViews']) - 1, componentType=5126, count=len(P), type='VEC3',
+                                          min=np.asarray(P, float).min(0).tolist(), max=np.asarray(P, float).max(0).tolist()))
+        return len(self.out['accessors']) - 1
+
+    def mesh(self, src, index, name=None, edit=None):
+        """Copy mesh `index`; edit(positions in metres) -> new positions, if given (the dot matrix's header)."""
         m = src.doc['meshes'][index]
         prims = []
         for p in m['primitives']:
-            q = dict(p, attributes={k: self.accessor(src, v) for k, v in p['attributes'].items()})
+            q = dict(p, attributes={k: (self.positions_accessor(edit(np.frombuffer(src.accessor_bytes(v)[0], np.float32).reshape(-1, 3).astype(np.float64)))
+                                        if k == 'POSITION' and edit is not None else self.accessor(src, v)) for k, v in p['attributes'].items()})
             if 'indices' in p:
                 q['indices'] = self.accessor(src, p['indices'])
             if 'material' in p:
@@ -211,7 +231,7 @@ class Writer:
         self.out['meshes'].append(dict({k: v for k, v in m.items() if k != 'primitives'}, name=name or m.get('name'), primitives=prims))
         return len(self.out['meshes']) - 1
 
-    def subtree(self, src, i, drop=(), rename=None, matrix=None, name=None):
+    def subtree(self, src, i, drop=(), rename=None, matrix=None, name=None, edits=None):
         """Copy node i and its children (less any named in `drop`) under the assembly node: at `matrix` (its world placement, mm)
         if given, else where it is in the source. Returns the new node's index and the number of vertices copied."""
         n = src.nodes[i]
@@ -227,13 +247,13 @@ class Writer:
         count = 0
         if 'mesh' in n:
             mesh_name = src.doc['meshes'][n['mesh']].get('name')
-            new['mesh'] = self.mesh(src, n['mesh'], (rename or {}).get(mesh_name))
+            new['mesh'] = self.mesh(src, n['mesh'], (rename or {}).get(mesh_name), edit=(edits or {}).get(n.get('name')))
             count += src.doc['accessors'][src.doc['meshes'][n['mesh']]['primitives'][0]['attributes']['POSITION']]['count']
         kids = []
         for c in n.get('children', []):
             if src.nodes[c].get('name') in drop:
                 continue
-            kid, more = self.subtree(src, c, drop, rename)
+            kid, more = self.subtree(src, c, drop, rename, edits=edits)
             kids.append(kid)
             count += more
         if kids:
@@ -338,10 +358,27 @@ def main():
     a_v = src.vertices(top[USB_A]) @ move[:3, :3].T + move[:3, 3]
     a_end = translation([0.0, TABLE_Y - float(a_v[:, 1].min()), 0.0]) @ a_end
 
+    # The dot matrix's header, as the real board's (see MATRIX_HEADER): edited in the board's own frame, the caps moved out with the arms.
+    Mh, Mp = src.world(src.find(MATRIX_HEADER, under=top[MATRIX])), src.world(src.find(MATRIX_PCB, under=top[MATRIX]))
+    to_own, from_own = np.linalg.inv(Mp) @ Mh, np.linalg.inv(Mh) @ Mp
+
+    def header(P):
+        """The header's vertices (its own mesh, metres): the arms' ends out past the board's edge, the tails behind cut back."""
+        Q = P * 1000.0 @ to_own[:3, :3].T + to_own[:3, 3]
+        arm, tail = Q[:, 0] < -18.2, Q[:, 2] > 5.7
+        Q[arm, 0] -= MATRIX_ARM_MM
+        Q[tail, 2] -= MATRIX_TAIL_MM
+        print(f'dot matrix header: {int(arm.sum())} arm-end vertices out {MATRIX_ARM_MM} mm, {int(tail.sum())} tail-end vertices in {MATRIX_TAIL_MM} mm')
+        return (Q @ from_own[:3, :3].T + from_own[:3, 3]) / 1000.0
+    EDITS = {MATRIX_HEADER: header}
+    arm_out = Mp[:3, :3] @ [-MATRIX_ARM_MM, 0.0, 0.0]          # (the arms' way out, assembly mm)
+
     # What goes into pmg-guide.glb: {name: (source node, world placement or None to keep, mesh renames, nodes left out)}.
     parts = {}
-    for name in WOOD + [DISPLAY, MATRIX] + list(DISPLAY_CAPS.values()) + list(MATRIX_CAPS.values()):
+    for name in WOOD + [DISPLAY, MATRIX] + list(DISPLAY_CAPS.values()):
         parts[name] = (top[name], None, None, ())
+    for name in MATRIX_CAPS.values():                       # (on the lengthened arms)
+        parts[name] = (top[name], translation(arm_out) @ W[name], None, ())
     for k, name in enumerate(BUTTONS):
         parts[name] = (top[name], None, {'Push_Button_Cap.step_По умолчанию': f'Push_Button_Cap {BUTTON_COLOURS[k]}'}, ())
     for caps in BUTTON_CAPS:
@@ -373,7 +410,7 @@ def main():
     order = [n for n in top if n in parts] + [n for n in parts if n not in top]
     for name in order:
         node, M, rename, drop = parts[name]
-        kid, count = w.subtree(src, node, drop=set(drop), rename=rename, matrix=M, name=name)
+        kid, count = w.subtree(src, node, drop=set(drop), rename=rename, matrix=M, name=name, edits=EDITS if name == MATRIX else None)
         kids.append(kid)
         total += count
     kid, count = w.subtree(mra, nano_node, matrix=NANO_M, name='NANO')
@@ -390,9 +427,18 @@ def main():
     seat = {name: (M if M is not None else W[name]) for name, (_, M, _, _) in parts.items()}
     seat['NANO'] = NANO_M
 
+    def vertices(node, drop=()):                           # (as written: the dot matrix's header edited)
+        out = []
+        for j, m, Wn in src.mesh_nodes(node, set(drop)):
+            P = src.positions(m)
+            if src.nodes[j].get('name') in EDITS and src._under(j, top[MATRIX]):
+                P = EDITS[src.nodes[j]['name']](P)
+            out.append(P * 1000.0 @ Wn[:3, :3].T + Wn[:3, 3])
+        return np.concatenate(out)
+
     def middle(name):
         node, M, _, drop = parts[name]
-        V = src.vertices(node, set(drop))
+        V = vertices(node, set(drop))
         V = V @ (M @ np.linalg.inv(W[name]))[:3, :3].T + (M @ np.linalg.inv(W[name]))[:3, 3] if M is not None else V
         lo, hi = box(V)
         return (lo + hi) / 2, lo, hi
@@ -432,7 +478,7 @@ def main():
     groups += [(DISPLAY, DISPLAY_CAPS), (MATRIX, MATRIX_CAPS)]
     def seated_vertices(name):
         node, M, _, drop = parts[name]
-        V = src.vertices(node, set(drop))
+        V = vertices(node, set(drop))
         return V if M is None else V @ (M @ np.linalg.inv(W[name]))[:3, :3].T + (M @ np.linalg.inv(W[name]))[:3, 3]
 
     for device, pins in groups:
