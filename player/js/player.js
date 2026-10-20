@@ -272,6 +272,8 @@ function screenRect(view, cam, W, H) {
 // The box of instructions on screen, for labels and close-ups to keep clear of (null when it is not shown).
 const onScreenInstructions = () => { const el = $('instructions'); if (el.hidden) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
 // Returns [{text|eye, x, y, w, h, side}] in pixels for a W x H frame.
+const NEAR = {'up-right': [1, -1], 'up-left': [-1, -1], 'down-right': [1, 1], 'down-left': [-1, 1],
+              'near-left': [-1.25, 0], 'near-right': [1.25, 0], 'near-above': [0, -1.25], 'near-below': [0, 1.25]};
 function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = null} = {}) {
   const size = Math.max(15, Math.min(28, W * 0.027)), pad = 10, gap = Math.max(14, W * 0.02);
   const R = screenRect(view, cam, W, H);
@@ -282,8 +284,16 @@ function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = nul
     const room = {right: W - R.x1 - gap - it.w - 8, left: R.x0 - gap - it.w - 8, top: R.y0 - gap - it.h - top, bottom: H - R.y1 - gap - it.h - bottom};
     const reach = {right: R.x1 - ax, left: ax - R.x0, top: ay - R.y0, bottom: R.y1 - ay};
     const sides = Object.keys(room).filter(s => room[s] >= 0).sort((a, b) => reach[a] - reach[b]);
-    it.side = sides[0] || 'float';
-    if (it.side === 'right') { it.x = R.x1 + gap; it.y = ay - it.h - gap * 1.6; }           // a little above the part, so the leader slopes
+    // A callout may ask for its place (`side`): a side of the model ('left', 'right', 'top', 'bottom'), or a place beside its own spot
+    // ('up-right', 'up-left', 'down-right', 'down-left', 'near-left', 'near-right', 'near-above', 'near-below'; `reach`: how far, as a
+    // share of the view's width, default 0.07): the PMG's module-pin labels up and to the right of their pins (Lee, 19 Oct 2026).
+    const near = NEAR[it.side];
+    it.side = near || ['left', 'right', 'top', 'bottom'].includes(it.side) ? it.side : sides[0] || 'float';
+    if (near) {
+      const d = (it.reach || 0.07) * W;
+      it.x = ax + near[0] * d - (near[0] < 0 ? it.w : near[0] === 0 ? it.w / 2 : 0);
+      it.y = ay + near[1] * d - (near[1] < 0 ? it.h : near[1] === 0 ? it.h / 2 : 0);
+    } else if (it.side === 'right') { it.x = R.x1 + gap; it.y = ay - it.h - gap * 1.6; }           // a little above the part, so the leader slopes
     else if (it.side === 'left') { it.x = R.x0 - gap - it.w; it.y = ay - it.h - gap * 1.6; }
     else if (it.side === 'top') { it.x = ax + gap; it.y = R.y0 - gap - it.h; }
     else if (it.side === 'bottom') { it.x = ax + gap; it.y = R.y1 + gap; }
@@ -644,7 +654,12 @@ function go(i, animate = true) {
   if (controls) { controls.enableDamping = false; controls.update(); controls.enableDamping = true; }   // (drop any spin still running from a drag)
   const pose = poseFor(to, stage.width / stage.height);
   const stopsOf = id => wayStops ? wayStops[id] || null : stopsFor(to, id);
-  const legs = Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1;
+  // A step that carries a riding part through in-between places and asks for it (`ride_beats`: the PMG's display slid under the dot
+  // matrix's wires, lifted behind the case and over it) gives each stretch a beat of its own, as a moving part's stops have; the
+  // riding part and its wires then keep pace stop by stop (paced(), below). Coming back, the same from the step being left.
+  const rideView = backward ? from : to;
+  const rideLegs = rideView.ride_beats ? Math.max(1, ...Object.values(rideView.carry || {}).map(c => (c.via || []).length + 1)) : 1;
+  const legs = Math.max(rideLegs, Object.keys(ways).length ? Math.max(1, ...Object.keys(ways).map(id => (stopsOf(id) || ways[id]).length - 1)) : 1);
   // Parts taken off slide out, then fade out over a beat of their own (FADE_MS), each once its own way has come to rest (a screw,
   // then the part it held); coming back, the same played backwards: each fades in where its way out ended, then slides back.
   // Their leads go with them.

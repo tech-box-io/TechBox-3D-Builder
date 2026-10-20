@@ -1204,7 +1204,8 @@ class Guide:
     def place(self, caption, move=(), show=(), against=None, direction=None, hover=None, path=None, labels=None, review=None,
               appear_after=(), appear=(), staged=False, lines=True, lines_to=None, lines_at=None, axial=False, eye=(),
               focus=None, focus_pad=1.6, wires=None, wires_done=None, ride=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False):
+              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False,
+              ride_beats=False):
         """Add one part (or move one sub-assembly) into place. With no `move`, a step where only wires change.
 
         move:       ids that travel in this step (new parts appear hovering; parts already on screen move as a group).
@@ -1274,6 +1275,10 @@ class Guide:
                     one corner otherwise shares one (see build()): its parts come in from well off the others' (the MRA's Step 88, C8
                     slid in from the side, so that the claw's other steps can be framed close: Lee, 19 Oct 2026). The camera moves for
                     it, and back if the step after it pins the stretch's framing again. remove() / unplug() / lift() take it too.
+        ride_beats: True when a riding part goes through in-between places (ride={id: [via, ..., final]}) and each stretch should
+                    have a beat of its own, as a moving part's stops do, its wires (wires_done lists) keeping pace stop by stop (the
+                    PMG's display slid under the dot matrix's wires, lifted behind the case and carried over it: Lee, 19 Oct 2026).
+                    Without it, the whole ride plays within one beat.
         """
         if self.taken:
             raise ValueError('place(): a deconstruction guide takes parts off (remove(), unplug(), lift()); it puts nothing on')
@@ -1335,7 +1340,7 @@ class Guide:
         self._record(caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                      wires, wires_done, lines_at is not None, riders=riders, ride=ride, stops=stops, frame=frame, look_from=look_from, flip=flip, view_dir=view_dir, paths=paths,
                      caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single, ghost=ghost,
-                     own_frame=own_frame)
+                     own_frame=own_frame, ride_beats=ride_beats)
 
     @staticmethod
     def _arrow_dims(reach, size):
@@ -1463,7 +1468,8 @@ class Guide:
 
     def _record(self, caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                 wires, wires_done, by_hand, from_hand=False, riders=None, ride=None, stops=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False):
+                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False,
+                ride_beats=False):
         riders = dict(riders or {})
         ride = {i: (list(p) if isinstance(p, list) and p and isinstance(p[0], (list, dict)) else [p]) for i, p in (ride or {}).items()}   # id -> [in-between poses..., final]
         wires_done = {i: (list(r) if isinstance(r, list) else [r]) for i, r in (wires_done or {}).items()}                              # id -> [in-between routes..., final]
@@ -1490,7 +1496,7 @@ class Guide:
                                flip=flip, view_dir=view_dir, paths=dict(paths or {}), rest={i: self.resting[i] for i in appear if i in self.resting},
                                caution=caution, arrows=list(arrows or []), inset=dict(inset) if inset else None, wiggle=bool(wiggle),
                                one_off_camera=bool(one_off_camera), single=bool(single), **({'ghost': {i: float(a) for i, a in ghost.items()}} if ghost else {}),
-                               **({'own_frame': True} if own_frame else {})))
+                               **({'own_frame': True} if own_frame else {}), **({'ride_beats': True} if ride_beats else {})))
         for i in new + list(riders) + list(appear_after):
             if i not in self.placed:
                 self.placed.append(i)
@@ -1850,6 +1856,8 @@ class Guide:
                     common['path_stops'] = held
             if s.get('wiggle'):
                 common['wiggle'] = True
+            if s.get('ride_beats'):                                         # (a riding part's in-between places: a beat each)
+                common['ride_beats'] = True
             if s['stops'] and len(s['stops']) < len(s['path']):
                 common['stops'] = s['stops']
             if s['staged']:

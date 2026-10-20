@@ -79,7 +79,12 @@ docstrings of `Guide.place` and `Guide.seat`):
   `inset=` is then drawn on that view), `ghost={id: alpha}` (parts see-through on Step N, turning solid again on Step Nc: the LSM's
   D1 from below, the posts' tabs in its slots), `inset=dict(..., marks=[(point, half-width), ...])` (a red box round each of several
   spots: the LSM's four slots in D1). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
-  0.25 for the LSM's resistor legs, whose bends looked pinched).
+  0.25 for the LSM's resistor legs, whose bends looked pinched). A label or an eye may ask for its place:
+  `dict(..., side=)` a side of the model ('left', 'right', 'top', 'bottom') or a place beside its own spot ('up-right', 'up-left',
+  'down-right', 'down-left', 'near-left', 'near-right', 'near-above', 'near-below'; `reach=` how far, a share of the view's width,
+  default 0.07): the PMG's module-pin labels up and to the right of their pins. `ride_beats=True` gives a riding part's in-between
+  places (`ride={id: [via, ..., final]}`) a beat each, its wires keeping pace (the PMG's display under the dot matrix's wires, up and
+  over the case); without it a ride plays within one beat.
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
