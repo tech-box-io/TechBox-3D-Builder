@@ -168,7 +168,7 @@
     ],
     "reused": "Lee, 19 Oct 2026: the parts the LAC shares with the MRA or RCC use the version made for them. The Nano Board is the MRA's export of the same Nano model (nano-mra.glb, cut by tools/cut_part.py and placed exactly where the LAC CAD's NAUO124 sits: the LAC's own export has 387,505 triangles and the same sliver triangles the RCC's had); the USB cable's A end is the MRA's usb-a-end.glb (the same STEP model as the LAC's NAUO121, fitted to it to 1e-11 mm). The female Dupont cap (Wire Cap) is the MRA's part already. The LAC's right-angle Mini-B plug has no counterpart (the MRA's and RCC's are straight) and stays the LAC's own.",
     "f4": "The CAD has the top panel F4 only once, lying flat beside the base (NAUO50). Seated, it is that same panel moved +117.68 x, -17.26 y, +0.06 z: the rocker switch's two poses (NAUO51 in the flat F4, NAUO46 seated) differ by exactly that move. The guide uses extra part F4 (NAUO50 cut out by tools/cut_part.py into f4.glb, posed by that move).",
-    "missing": "The CAD has no F2, F5 or F6 (the back panel and the two end panels), which TechBox's published guide fits last (Steps 55 - 57): see README.txt, questions for Lee."
+    "missing": "Until 19 Oct 2026 the CAD had no F2, F5 or F6; Lee sent each as a STEP of its own (F2.STEP, F5.STEP, F6.STEP: extra parts F2, F5, F6, placed as TechBox's Cadasio project has them)."
   },
   "atlas": "colour-atlas-lac.json",
   "extra_parts": {
@@ -211,6 +211,72 @@
         0.06
       ],
       "_about": "the top panel seated: the CAD's only F4 (NAUO50, lying flat beside the base) cut out by tools/cut_part.py in assembly space (python tools/cut_part.py \"LAC Build Instructions/lac.glb\" NAUO50 \"LAC Build Instructions/f4.glb\"), moved onto the frame by the move between the rocker switch's two poses (see _notes.f4)"
+    },
+    "F5": {
+      "glb": "f5.glb",
+      "pose": {
+        "t": [
+          807.986,
+          977.871,
+          1366.068
+        ],
+        "r": [
+          1.0,
+          0.0,
+          -0.0,
+          90.0001
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the end panel at the breadboard's end (+z): Lee's F5.STEP (19 Oct 2026; the assembly export had no F5), converted by tools/step_to_glb.py into f5.glb in its own part frame, placed where TechBox's published Cadasio project has F5-1 (its scene is this assembly's frame scaled by 0.6055: fitted on F1, F3, F7 x2, F8 and F9 to 0.0006 mm, and its F4-1 is the seated F4 above to 0.004 mm)"
+    },
+    "F2": {
+      "glb": "f2.glb",
+      "pose": {
+        "t": [
+          644.626,
+          985.734,
+          1366.468
+        ],
+        "r": [
+          0.577351,
+          -0.57735,
+          0.57735,
+          120.0
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the back panel (-x), with the slit the USB cable leaves by: Lee's F2.STEP (19 Oct 2026; the assembly export had no F2), converted by tools/step_to_glb.py into f2.glb in its own part frame, placed where TechBox's published Cadasio project has F2-1 (its scene is this assembly's frame scaled by 0.6055: fitted on F1, F3, F7 x2, F8 and F9 to 0.0006 mm, and its F4-1 is the seated F4 above to 0.004 mm)"
+    },
+    "F6": {
+      "glb": "f6.glb",
+      "pose": {
+        "t": [
+          796.323,
+          948.499,
+          1213.668
+        ],
+        "r": [
+          0.0,
+          -0.707107,
+          0.707106,
+          180.0
+        ],
+        "at": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_about": "the end panel at the buzzer's end (-z), with the speaker slots: Lee's F6.STEP (19 Oct 2026; the assembly export had no F6), converted by tools/step_to_glb.py into f6.glb in its own part frame, placed where TechBox's published Cadasio project has F6-1 (its scene is this assembly's frame scaled by 0.6055: fitted on F1, F3, F7 x2, F8 and F9 to 0.0006 mm, and its F4-1 is the seated F4 above to 0.004 mm)"
     }
   }
 }

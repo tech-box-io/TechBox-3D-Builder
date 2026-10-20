@@ -4,12 +4,14 @@ the view's poses).
     .venv.nosync/bin/python tools/wirecheck.py <kit folder> [steps file]
 
 Each route is resampled every 0.2 mm (a 3 mm plate crossed between two of the route's own points would otherwise go unseen). A point
-away from the wire's own ends counts when it is inside a part on screen in that view (the part at the view's pose), or within 0.7 of
-the wire's radius of its surface; two wires count when their centre lines come closer than 0.9 of their radii added. The route is
+away from the wire's own ends counts when it is inside a part on screen in that view (the part at the view's pose; parts moved, split
+out or added by materials.json as the guide has them; clearly behind the face nearest it, not merely beside an edge), or within 0.7
+of the wire's radius of its surface; two wires count when their centre lines come closer than 0.9 of their radii added. The route is
 taken as written (the player bends a route a little when its end parts are not where it was drawn). Run after changing a guide's
 wires; each line names the view, the wire, the part (or the other wire) and the nearest point (in that part's seated frame).
 """
 import json, sys
+from pathlib import Path
 import numpy as np
 from scipy.spatial import cKDTree
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
@@ -28,7 +30,8 @@ def dense(pts, step=STEP):
 kit = sys.argv[1]
 steps = json.load(open(f'{kit}/{sys.argv[2] if len(sys.argv) > 2 else "steps.json"}'))
 spec = json.load(open(f'{kit}/materials.json'))
-M = Model(f'{kit}/{spec["source"]}')
+M = Model(f'{kit}/{spec["source"]}', adjust=spec.get('adjust_mm') or {}, own_parts=spec.get('own_parts', {}),     # (the parts as the guide has them:
+          extra_parts={i: (Path(kit) / e['glb'], e['pose']) for i, e in spec.get('extra_parts', {}).items()})  # moved, split out, added)
 radius = {w: d['radius'] for w, d in steps['wires'].items()}
 seen, problems = set(), 0
 for v in steps['views']:
@@ -53,7 +56,7 @@ for v in steps['views']:
                 continue
             p = q[sel]
             cp, d, tri = M.inst[i].nearest.on_surface(p)
-            inside = np.einsum('ij,ij->i', p - cp, M.inst[i].face_normals[tri]) < 0
+            inside = np.einsum('ij,ij->i', p - cp, M.inst[i].face_normals[tri]) < -0.3 * d     # (clearly behind the face: at an edge the face's normal can be square to the way out)
             bad = inside | (d < rad * 0.7)
             if bad.any():
                 k = np.where(bad)[0][np.argmax(np.where(inside[bad], d[bad], -d[bad]))]

@@ -11,7 +11,7 @@ parts the guide uses), measured in docs/research/lac (wire-paths.json: the bread
 line, and the poses the CAD has each sub-assembly in). The Nano Board and the USB cable's A end are the MRA's models (Lee, 19 Oct
 2026: "replacing each item in the LAC file with the version you used on either the MRA or RCC if it's present").
 One part or one action per step; one wire per step, both ends of a loose wire in one step (docs/cadasio-patterns.md).
-Not yet: F5, F2 and F6 (the two end panels and the back), which the STEP does not have (README.txt, questions for Lee).
+F5, F2 and F6 (the two end panels and the back) came as STEPs of their own (Lee, 19 Oct 2026), placed as TechBox's Cadasio project has them.
 
 How things move. A part that has to lie somewhere, or be moved about, before it is finally seated (a jumper wire lying beside the
 board, F4 with its switch lying beside the base, F1 with the potentiometer, the buzzer, the LCD, the F7s spread apart) rides on a
@@ -38,6 +38,8 @@ BREADBOARD, F3, RTC, COIN, RES1, RES2 = 'NAUO1', 'NAUO2', 'NAUO3', 'NAUO4', 'NAU
 F1, POT, NUT, KNOB, WASHER = 'NAUO10', 'NAUO11', 'NAUO12', 'NAUO13', 'NAUO146'
 F7A, F7B, F8, F9 = 'NAUO42', 'NAUO43', 'NAUO44', 'NAUO45'          # F7A at the back (-X), F7B in front
 F4 = 'F4'                                                           # the top panel, seated (materials.json "extra_parts": the CAD has it only lying beside the base)
+F5, F2, F6 = 'F5', 'F2', 'F6'                                       # the end panel at the breadboard's end, the back, the end panel at the buzzer's end
+                                                                    # (Lee's STEPs of their own, placed as TechBox's Cadasio project has them: materials.json)
 SWITCH, BUZZER, LCD, USB_B, PAPER = 'NAUO46', 'NAUO62', 'NAUO94', 'NAUO122', 'NAUO141'
 NANO, USB_A = 'NANO', 'USB_A'                                       # the MRA's Nano Board and USB A end (materials.json "extra_parts")
 
@@ -75,7 +77,7 @@ LCD_MALE, LCD_FEMALE = [w[1] for w in LCD_WIRES], [w[3] for w in LCD_WIRES]
 
 NAMES = {BREADBOARD: 'Breadboard', F3: 'F3', RTC: 'Real Time Clock', COIN: 'Real Time Clock', RES1: 'Resistor', RES2: 'Resistor',
          F1: 'F1', POT: 'Potentiometer', NUT: 'Potentiometer', KNOB: 'Potentiometer', WASHER: 'Potentiometer', F7A: 'F7', F7B: 'F7', F8: 'F8',
-         F9: 'F9', F4: 'F4', SWITCH: 'Rocker Switch', BUZZER: 'Alarm Buzzer', LCD: 'LCD Screen', USB_B: 'USB Cable', USB_A: 'USB Cable',
+         F9: 'F9', F4: 'F4', F5: 'F5', F2: 'F2', F6: 'F6', SWITCH: 'Rocker Switch', BUZZER: 'Alarm Buzzer', LCD: 'LCD Screen', USB_B: 'USB Cable', USB_A: 'USB Cable',
          PAPER: 'Breadboard', NANO: 'Nano Board', **{c: 'Breadboard Wire (M-M)' for c in JUMPER_CAPS},
          **{c: 'Breadboard Wire (M-F)' for c in LCD_MALE + LCD_FEMALE}, **{w[1]: 'Rocker Switch' for w in SWITCH_LEADS},
          **{w[1]: 'Potentiometer' for w in POT_LEADS}, **{w[1]: 'Alarm Buzzer' for w in BUZZER_LEADS}}
@@ -91,7 +93,8 @@ UNLISTED = [USB_A] + JUMPER_CAPS + LEAD_CAPS + LCD_MALE + LCD_FEMALE
 # pockets), so the camera prefers a side from which it can be read.
 CODES = {F3: ([0, 1, 0], [714.19, 887.48, 1234.4]), F1: ([1, 0, 0], [723.7, 895.78, 1221.91]),
          F7A: ([-1, 0, 0], [657.45, 940.02, 1233.35]), F7B: ([1, 0, 0], [693.05, 940.02, 1233.02]),
-         F8: ([0, 0, -1], [707.73, 946.58, 1264.59]), F9: ([0, 0, 1], [698.74, 916.95, 1357.15]), F4: ([0, 1, 0], [714.0, 954.33, 1234.5])}
+         F8: ([0, 0, -1], [707.73, 946.58, 1264.59]), F9: ([0, 0, 1], [698.74, 916.95, 1357.15]), F4: ([0, 1, 0], [714.0, 954.33, 1234.5]),
+         F5: ([0, 0, 1], [652.46, 895.62, 1368.94]), F2: ([-1, 0, 0], [641.75, 895.78, 1358.52]), F6: ([0, 0, -1], [712.82, 895.74, 1210.8])}
 
 # The parts list after the title page (as the MRA's and RCC's): electronics, the wires, the wood.
 WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'
@@ -188,11 +191,11 @@ def lying(cap, point, outward):
     return tidy(turned(unit(np.cross([0, -1, 0], unit(outward))).tolist(), 90.0, w.round(2).tolist(), (np.asarray(point, float) - w).round(2).tolist()))
 
 
-def arch(start, end, height, lift=6.0):
-    """A smooth wire up out of one hole and down into another, rising `height` mm over the higher end."""
+def arch(start, end, height, lift=6.0, shift=(0.0, 0.0, 0.0)):
+    """A smooth wire up out of one hole and down into another, rising `height` mm over the higher end (its top moved by `shift`)."""
     s, e = np.asarray(start, float), np.asarray(end, float)
     p1, p2 = s + [0.0, lift, 0.0], e + [0.0, lift, 0.0]
-    mid = (p1 + p2) / 2
+    mid = (p1 + p2) / 2 + np.asarray(shift, float)
     body = W.smooth([p1, [mid[0], max(s[1], e[1]) + height, mid[2]], p2], start_dir=[0, 1, 0], end_dir=[0, -1, 0], spacing=0.5)
     return W.resample(W.join(W.straight(s, [0, 1, 0], lift), body, W.straight(p2, [0, -1, 0], lift)), 1.0)
 
@@ -289,8 +292,9 @@ def ribbon(jumpers, z_mid, pitch):
 
 
 def jumper_done(ca, cb, key):
-    """A jumper's route plugged in: the CAD's, or for the dark red one an arch of the same kind."""
-    line = cad_line(key, ca) if key else arch(wire_at(ca), wire_at(cb), 22.0)
+    """A jumper's route plugged in: the CAD's, or for the dark red one a low arch of the same kind (it clears the jumpers and the
+    leads by the clock module)."""
+    line = cad_line(key, ca) if key else arch(wire_at(ca), wire_at(cb), 8.0, shift=(0.0, 0.0, 3.0))
     return W.route(line, a=ca, b=cb, stretch=True)
 
 
@@ -368,10 +372,11 @@ g.place('Push the rocker switch, wires first, down into the square hole in F4 un
         labels={F4: 'F4', SWITCH: 'Rocker Switch'}, wires={f'switch {c}': switch_lead(c, cap, e, FLAT_F4) for c, cap, _, e in SWITCH_LEADS},
         frame=F4_FLAT_FRAME, view_dir=[0.45, 0.75, -0.48])
 SWITCH_CAMERA = dict(view_dir=[0.8, 0.42, -0.43], frame=([628.0, 928.0, 1272.0], 82.0))   # (from the front, low: the leads hang under F4)
-# Each lead's way to its hole: down from the switch, across over F3's back edge (keeping to the buzzer's side of the clock module),
-# and down into its hole.
-SWITCH_WAY = {'red': [[582.0, 925.0, 1262.0], [640.0, 915.0, 1268.0]], 'tan': [[585.0, 925.0, 1260.0], [645.0, 916.0, 1263.0], [690.0, 914.0, 1266.0]],
-              'black': [[590.0, 924.0, 1262.0], [640.0, 915.0, 1268.0]]}
+# Each lead's way to its hole: down from the switch, across over F3's back edge in a lane of its own (keeping to the buzzer's side of
+# the clock module and clear of the other two), and down into its hole.
+SWITCH_WAY = {'red': [[566.0, 932.0, 1262.0], [620.0, 923.0, 1264.0], [654.0, 917.0, 1272.0]],
+              'tan': [[570.0, 931.0, 1254.0], [620.0, 924.0, 1256.0], [655.0, 919.0, 1262.0], [688.0, 917.0, 1266.0]],
+              'black': [[575.0, 930.0, 1258.5], [620.0, 922.0, 1260.5], [650.0, 916.0, 1265.0]]}
 for colour, cap, label, exit_ in SWITCH_LEADS:
     start = compose(FLAT_F4, switch_hang(cap, exit_))
     done = switch_lead(colour, cap, exit_, FLAT_F4, SWITCH_WAY[colour])
@@ -462,12 +467,15 @@ def pot_flat_lead(colour, cap, exit_):
 
 ASIDE = [150.0, 35.0, 225.0]                                        # (on the way: carried along, still upright, past the end of the base, then laid down)
 g.place('Lay F1 face down beside the end of the base, as shown, with the potentiometer at the end nearer the breadboard.',
-        ride={F1: [ASIDE, FLAT_BESIDE], POT: [ASIDE, FLAT_BESIDE]}, lines=False, eye=[F1],
+        ride={F1: [ASIDE, FLAT_BESIDE], POT: [ASIDE, FLAT_BESIDE]}, ride_beats=True, lines=False, eye=[F1],
         wires_done={f'pot {c}': [pot_hanging(c, cap, e, ASIDE), pot_flat_lead(c, cap, e)] for c, cap, _, e, _ in POT_LEADS},
         view_dir=[0.55, 0.7, 0.45], frame=([745.0, 930.0, 1420.0], 185.0))
-POT_WAY = {'red': [[700.0, 905.0, 1535.0], [702.0, 895.0, 1440.0], [700.0, 900.0, 1372.0], [697.0, 912.0, 1345.0]],
-           'tan': [[700.0, 905.0, 1530.0], [697.0, 895.0, 1440.0], [692.0, 900.0, 1372.0], [690.0, 912.0, 1347.0]],
-           'black': [[700.0, 905.0, 1525.0], [706.0, 895.0, 1440.0], [704.0, 900.0, 1372.0], [700.0, 912.0, 1345.0]]}
+# Each lead's way to its hole: out along F1's back, up over the buzzer and the LCD lying beside the base (and their wires), past
+# the end of F9 (where F9 will stand: x < 689), and down into its hole. The black lead crosses over the other two (its pin is at the
+# other side of them from its hole).
+POT_WAY = {'tan': [[668.0, 917.0, 1560.0], [680.5, 920.0, 1530.0], [682.0, 921.0, 1460.0], [681.5, 921.0, 1400.0], [681.5, 921.0, 1365.0], [682.5, 921.0, 1352.0], [686.0, 920.5, 1341.0]],
+           'red': [[668.0, 917.0, 1566.0], [684.5, 920.0, 1532.0], [684.5, 921.0, 1460.0], [684.0, 921.0, 1400.0], [684.0, 921.0, 1365.0], [685.0, 921.0, 1352.0], [691.5, 920.5, 1340.0]],
+           'black': [[660.0, 916.0, 1556.0], [672.0, 921.0, 1535.0], [682.5, 925.5, 1505.0], [688.5, 923.0, 1465.0], [687.5, 921.5, 1400.0], [686.8, 921.5, 1365.0], [687.5, 921.5, 1352.0], [694.5, 921.0, 1341.0]]}
 
 
 def pot_plugged(colour, cap, exit_, f1_pose, way):
@@ -583,32 +591,59 @@ for k, (colour, male, label, fem, pin, lying_key, _, _) in enumerate(LCD_WIRES):
     done = lcd_route(lying_key, fem, male, LCD_LYING)
     x = FRONT_X + k * SPLIT_PITCH
     g.place(f"Connect the {colour} wire from {pin} on the LCD screen to {label}.", move=[male], paths={male: [apart[colour][0], UP, ZERO]},
-            ride={fem: [F_OFF, ZERO]}, lines=False, labels=[dict(text=pin, anchor=fem_centre(fem).round(2).tolist(), id=LCD), hole_label(label, male)],
+            ride={fem: [F_OFF, ZERO]}, ride_beats=True, lines=False, labels=[dict(text=pin, anchor=fem_centre(fem).round(2).tolist(), id=LCD), hole_label(label, male)],
             eye=[dict(anchor=[x, TABLE_Y + 1.0, LCD_Z])], wires_done={f'lcd {colour}': [done, done]}, **LCD_CAMERA)
 # ================================================================ THE LCD SCREEN (end)
 
 # ================================================================ THE USB CABLE (begin)
-# The right-angle Mini-B end goes into the Nano Board's socket (hover and plug, as decided for the MRA: section 13); the A end lies
-# on the table behind the base, where the CAD has it, lifted onto the table.
+# The right-angle Mini-B end goes into the Nano Board's socket (hover and plug, as decided for the MRA: section 13). The cable leaves
+# it towards the back and lies straight out behind the case, on the table, along the line on which F2's slit comes in (Step 55: F2 is
+# brought in from behind, swung out, its tabs are hooked into F5 and it swings shut, its slit, open at the bottom, sliding along the
+# cable); from then on it passes through the slit, and bends round to the A end. (The CAD's cable crosses F2's plane at z 1339.4,
+# y 890.8, through F3's edge, and lays the A end along the case, 9 mm under the table; here the cable passes 9 mm higher, in the
+# slit's open part, clear of F2, F3 and the breadboard.)
 g.wire('usb cable', 'cable_black', 1.75, name='USB Cable')
-A_ON_TABLE = [0.0, round(TABLE_Y - float(g.model.inst[USB_A].bounds[0][1]), 3), 0.0]
-g.rest_at([USB_A], A_ON_TABLE)
-USB_OUT = 30.0
 _usb = cad_line('NAUO123')
 USB_EXIT, USB_EXIT_DIR = _usb[0], unit(_usb[3] - _usb[0])
-A_EXIT = _usb[-1] + A_ON_TABLE
+NOTCH = np.array([643.13, 899.6, 1339.4])                           # where the cable passes F2 seated: the middle of its slit (5 mm wide, open to y 901)
+USB_PRE = np.array([651.5, 900.8, 1343.0])                          # (on the way: past the breadboard's corner)
+SWING = 20.0                                                        # F2 swung out at its far end (published: about 21 degrees)
+HINGE = [641.63, 919.5, 1366.07]                                    # F2's outer face where it meets F5's inside: it swings about the upright there
+swung = lambda t=(0.0, 0.0, 0.0): turned([0, 1, 0], SWING, HINGE, list(t))
+_u = np.array([np.sin(np.radians(SWING)), 0.0, np.cos(np.radians(SWING))])   # F2's length, swung out
+F2_HOOK = (-_u * 14.0).round(2).tolist()                            # swung out, 14 mm short of F5: its tabs just out of F5's slots
+F2_OFF = np.add(F2_HOOK, [-40.0, 0.0, 0.0]).round(2).tolist()       # ... and 40 mm further out behind the case (it comes in along x)
+# (published: F2 comes in about 80 mm, diagonally from behind and from F6's end, the case lying on its front; here the case stays
+# upright, seen from behind, as the player turns a model only upside down, and F2 comes in straight along x and then 14 mm along
+# itself, so that its slit, open at the bottom, slides along the cable lying straight out behind the case)
+SLIT_IN = posed_line(swung(F2_HOOK), [NOTCH])[0]                    # where the slit is as F2 comes in (along x, at this z)
+A_CABLE_END = _usb[-1]                                              # the A end's cable end, as the CAD has it (its plug towards +z)
+A_TARGET = np.array([575.0, TABLE_Y + 4.3, SLIT_IN[2]])             # ... and where it lies: out behind the case, in line with the slit coming in
+A_ON_TABLE = tidy(turned([0, 1, 0], -90.0, A_CABLE_END.round(2).tolist(), (A_TARGET - A_CABLE_END.round(2)).round(2).tolist()))
+g.rest_at([USB_A], A_ON_TABLE)
+USB_OUT = 18.0                                                      # (the plug's hover, clear of the buzzer lying behind it)
 
 
-def usb_cable(out=0.0):
+def usb_cable(out=0.0, f2=None):
+    """The cable from the Nano Board's socket (its plug `out` mm short of it) through F2's slit with F2 at pose f2 (relative to its seat),
+    or, for f2 None, along the line on which the slit comes in, and on to the A end on the table."""
     a_at = [0.0, 0.0, out] if out else None
     start = USB_EXIT + [0.0, 0.0, out]
-    return {'usb cable': W.route(W.curve(start, USB_EXIT_DIR, A_EXIT, [0, 0, 1], pull=30.0), a=USB_B, b=USB_A, a_at=a_at, b_at=A_ON_TABLE)}
+    if f2 is None:
+        slit, across = SLIT_IN, np.array([-1.0, 0.0, 0.0])
+    else:
+        slit = posed_line(f2, [NOTCH])[0]
+        across = unit(posed_line(f2, [NOTCH + [-1.0, 0.0, 0.0]])[0] - slit)     # (straight through F2)
+    inside = W.smooth([start, USB_PRE + [0.0, 0.0, out / 2], slit - across * 6.0, slit], start_dir=USB_EXIT_DIR, end_dir=across, spacing=0.5)
+    outside = W.smooth([slit, slit + across * 6.0, A_TARGET + [12.0, 0.0, 0.0]], start_dir=across, end_dir=[-1, 0, 0], spacing=0.5)
+    line = W.resample(W.join(inside, outside, W.straight(outside[-1], [-1, 0, 0], 12.0)), 1.0)   # (down to the table, and straight into the A end)
+    to_slit = float(np.linalg.norm(np.diff(line[:int(np.argmin(np.linalg.norm(line - slit, axis=1))) + 1], axis=0), axis=1).sum())
+    return {'usb cable': W.route(line, a=USB_B, b=USB_A, a_at=a_at, b_at=A_ON_TABLE, tail_from=round(to_slit, 1))}   # (the bit in the slit stays in it as the cable changes shape)
 
 
-_tip = g.model.inst[USB_B].bounds
-g.place("Plug the USB cable's small end into the Nano Board's USB socket.", move=[USB_B], appear=[USB_A], path=[[0.0, 0.0, USB_OUT], ZERO],
+g.place("Plug the USB cable's small end into the Nano Board's USB socket, the cable towards the back.", move=[USB_B], appear=[USB_A], path=[[0.0, 0.0, USB_OUT], ZERO],
         lines_at=[[[676.34, 903.89, 1337.64], [676.34, 903.89, 1345.07]]], labels={USB_B: 'USB Cable'},
-        wires=usb_cable(USB_OUT), wires_done=usb_cable(), view_dir=[-0.62, 0.6, 0.5], frame=([648.0, 902.0, 1370.0], 62.0))   # (from behind: the LCD lies in front)
+        wires=usb_cable(USB_OUT), wires_done=usb_cable(), view_dir=[-0.62, 0.6, 0.5], frame=([628.0, 900.0, 1350.0], 70.0))   # (from behind: the LCD lies in front; the A end in frame)
 # ================================================================ THE USB CABLE (end)
 
 # ================================================================ THE CASE (begin)
@@ -639,7 +674,7 @@ g.place('Push F9 down into the slots in F3 beside the end of the breadboard, its
 # F1 is carried round to the far end (the buzzer's) and laid face up there, its potentiometer's leads re-routed (the CAD's).
 F1_MID = [70.0, 40.0, -100.0]                                      # (on the way round: upright, in front of the box)
 POT_OTHER = {c: W.route(cad_line(k, cap)[::-1], a=POT, b=cap, a_at=FLAT_OTHER_END, stretch=True) for c, cap, _, _, k in POT_LEADS}
-g.place('Move F1 round to the other end of the base and lay it face up there.', ride={F1: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END], POT: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END]}, lines=False, eye=[F1],
+g.place('Move F1 round to the other end of the base and lay it face up there.', ride={F1: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END], POT: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END]}, ride_beats=True, lines=False, eye=[F1],
         wires_done={f'pot {c}': [POT_OTHER[c], POT_OTHER[c]] for c, *_ in POT_LEADS}, view_dir=[0.62, 0.62, 0.48], frame=([700.0, 915.0, 1300.0], 200.0))
 
 # F4: lifted over the frame (the switch's leads re-routed, the CAD's), then lowered onto the tabs of the F7s and F9.
@@ -647,8 +682,12 @@ SW_OVER = {c: W.route(cad_line(k, cap)[::-1], a=SWITCH, b=cap, a_at=HOVER_F4, st
 g.place('Lift F4, with the switch, over the frame.', ride={F4: HOVER_F4}, lines=False, eye=[F4],
         wires_done={f'switch {c}': [SW_OVER[c], SW_OVER[c]] for c, *_ in SWITCH_LEADS}, **CASE_CAMERA)
 F4_SLOTS = [[693.64, 1355.78], [697.62, 1355.78], [658.83, 1238.01], [691.68, 1228.36]]   # (over the tabs of F9 (x2) and the F7s, as published)
-SW_SEATED = {c: W.route(into_hole(cap, exit_, [0, -1, 0], [[np.mean([exit_[0], wire_at(cap)[0]]), 918.0, np.mean([exit_[2], wire_at(cap)[2]])]]),
-                        a=SWITCH, b=cap, stretch=True) for c, cap, _, exit_ in SWITCH_LEADS}
+# Each lead's way from the seated switch down to its hole, clear of the others and of the jumpers (found by a path search through
+# the closed case, kept as control points).
+SW_SEATED_WAY = {'red': [[669.0, 921.7, 1263.0], [666.9, 920.0, 1266.0], [665.1, 918.5, 1269.2], [663.2, 917.3, 1272.8]],
+                'tan': [[685.0, 921.7, 1262.1], [687.9, 919.6, 1264.4], [690.5, 917.8, 1266.2], [693.7, 916.1, 1268.1]],
+                'black': [[682.1, 919.2, 1257.5], [679.2, 917.0, 1259.1], [676.3, 915.7, 1261.5], [673.4, 915.1, 1263.6], [669.8, 914.8, 1265.6], [666.3, 914.5, 1267.3]]}
+SW_SEATED = {c: W.route(into_hole(cap, exit_, [0, -1, 0], SW_SEATED_WAY[c]), a=SWITCH, b=cap, stretch=True) for c, cap, _, exit_ in SWITCH_LEADS}
 g.place('Lower F4 onto the tabs of the F7s and F9.', move=[F4], path=[HOVER_F4, ZERO], lines_at=[[[x, 951.46, z], [x, 957.84, z]] for x, z in F4_SLOTS],
         wires_done={f'switch {c}': SW_SEATED[c] for c in SW_SEATED}, **CASE_CAMERA)
 g.place('Slide F8 into the slots in F4 and F3 from the front.', move=[F8], direction=[1, 0, 0], hover=94, labels={F8: 'F8'}, **CASE_CAMERA)   # (published: 94.2 mm)
@@ -656,22 +695,48 @@ g.place('Slide F8 into the slots in F4 and F3 from the front.', move=[F8], direc
 # The LCD: stood up in front of the box and brought in, 15 mm short of F9 (the CAD's), then slid into F9's notches.
 LCD_STAND_ROUTE = {c: lcd_route(k, f, m, LCD_STANDING) for c, m, _, f, _, _, k, _ in LCD_WIRES}
 LCD_SEAT_ROUTE = {c: lcd_route(k, f, m, None) for c, m, _, f, _, _, _, k in LCD_WIRES}
-g.place('Stand the LCD screen up, face to the front, and bring it into the front of the case.', ride={LCD: [np.add(LCD_STANDING, [40.0, 0.0, 0.0]).tolist(), LCD_STANDING]},
+g.place('Stand the LCD screen up, face to the front, and bring it into the front of the case.', ride={LCD: [np.add(LCD_STANDING, [40.0, 0.0, 0.0]).tolist(), LCD_STANDING]}, ride_beats=True,
         lines=False, eye=[LCD], wires_done={f'lcd {c}': [LCD_STAND_ROUTE[c]] * 2 for c in LCD_STAND_ROUTE}, view_dir=[0.62, 0.62, 0.48], frame=([705.0, 915.0, 1320.0], 110.0))
-g.place("Slide the LCD screen along until its board goes into the notches in F9.", move=[LCD], path=[LCD_STANDING, ZERO], wires_done={f'lcd {c}': LCD_SEAT_ROUTE[c] for c in LCD_SEAT_ROUTE},
+g.place("Slide the LCD screen along until its board goes into the notches in F9 and F8.", move=[LCD], path=[LCD_STANDING, ZERO], wires_done={f'lcd {c}': LCD_SEAT_ROUTE[c] for c in LCD_SEAT_ROUTE},
         view_dir=[0.62, 0.62, 0.48], frame=([705.0, 915.0, 1320.0], 110.0))
 
 # F1: stood up in front of the box (the CAD's), then pushed onto the tabs of F4 and F3.
-F1_UP_WAY = {'red': [[760.0, 900.0, 1240.0], [720.0, 905.0, 1290.0], [700.0, 912.0, 1330.0]], 'tan': [[760.0, 900.0, 1245.0], [715.0, 905.0, 1290.0], [692.0, 912.0, 1330.0]],
-             'black': [[760.0, 900.0, 1250.0], [722.0, 905.0, 1290.0], [702.0, 912.0, 1330.0]]}
-F1_IN_WAY = {'red': [[712.0, 898.0, 1255.0], [700.0, 905.0, 1305.0]], 'tan': [[708.0, 898.0, 1258.0], [692.0, 905.0, 1305.0]],
-             'black': [[714.0, 898.0, 1262.0], [703.0, 905.0, 1305.0]]}
+# Each lead's way through the closed case to its hole, seated (found by a path search, kept as control points): from the pins down
+# under the potentiometer, between the buzzer and F8, then along the rails (black behind the LCD's board, red over the (+) rail, tan
+# over the Nano Board) and down into its hole. Stood up in front of the case, each lead runs in from the front to the same way.
+F1_IN_WAY = {'black': [[712.9, 903.1, 1249.3], [708.7, 907.3, 1254.3], [704.2, 911.8, 1258.9], [700.8, 916.0, 1265.0], [701.3, 917.4, 1272.8], [703.6, 916.2, 1280.2], [704.8, 916.0, 1288.1], [705.0, 916.0, 1296.0], [705.0, 916.0, 1304.0], [704.9, 916.0, 1312.0], [703.7, 916.0, 1319.9], [701.3, 915.4, 1327.6]],
+             'red': [[713.2, 900.7, 1240.1], [709.3, 902.4, 1246.8], [704.7, 903.2, 1253.7], [699.6, 905.1, 1259.4], [695.1, 908.9, 1264.4], [692.4, 911.6, 1271.4], [692.0, 912.0, 1279.6], [692.0, 912.0, 1287.6], [692.1, 912.0, 1295.5], [693.3, 912.1, 1303.5], [694.7, 913.1, 1311.0], [695.0, 914.0, 1319.0], [695.3, 914.5, 1326.9]],
+             'tan': [[710.7, 905.9, 1242.4], [705.3, 906.9, 1247.7], [699.4, 907.4, 1253.6], [694.2, 907.9, 1259.2], [690.4, 908.0, 1266.1], [689.2, 908.0, 1274.0], [689.0, 908.0, 1281.9], [689.0, 908.0, 1290.4], [688.6, 908.0, 1298.2], [686.5, 908.0, 1305.8], [683.7, 908.0, 1313.1], [682.6, 908.7, 1321.2], [685.0, 911.7, 1328.2]]}
+F1_FRONT_WAY = {'black': [[781.2, 900.0, 1240.0], [771.3, 900.0, 1240.0], [761.5, 900.3, 1240.3], [753.2, 904.0, 1244.0], [746.5, 909.2, 1249.2], [736.8, 911.0, 1251.0], [726.9, 911.0, 1251.2], [717.3, 911.0, 1253.2], [708.0, 911.2, 1257.1]],
+                'red': [[781.7, 900.0, 1233.0], [771.7, 900.0, 1233.0], [761.7, 900.0, 1233.0], [751.5, 900.2, 1233.6], [742.5, 902.1, 1236.7], [733.6, 903.0, 1241.0], [724.3, 903.0, 1245.2], [715.1, 903.0, 1249.4]],
+                'tan': [[781.6, 903.1, 1237.0], [771.5, 904.0, 1237.0], [761.5, 904.0, 1237.0], [751.8, 904.6, 1237.1], [741.9, 906.5, 1237.7], [731.8, 907.0, 1238.2], [722.2, 907.0, 1240.3], [713.0, 907.0, 1244.4]]}
+F1_UP_WAY = {c: F1_FRONT_WAY[c] + F1_IN_WAY[c][1 if c == 'tan' else 2:] for c in F1_IN_WAY}
 POT_UP = {c: pot_plugged(c, cap, e, FRONT_OUT, F1_UP_WAY[c]) for c, cap, _, e, _ in POT_LEADS}
 POT_IN = {c: pot_plugged(c, cap, e, None, F1_IN_WAY[c]) for c, cap, _, e, _ in POT_LEADS}
 g.place('Stand F1 up in front of the case, the knob on the outside.', ride={F1: FRONT_OUT, POT: FRONT_OUT}, lines=False, eye=[F1],
         wires_done={f'pot {c}': [POT_UP[c]] * 1 for c in POT_UP}, view_dir=[0.62, 0.55, -0.56], frame=([720.0, 915.0, 1270.0], 120.0))
 g.place('Push F1 onto the tabs of F4 and F3.', move=[F1, POT], path=[FRONT_OUT, ZERO], wires_done={f'pot {c}': POT_IN[c] for c in POT_IN},
         view_dir=[0.62, 0.55, -0.56], frame=([720.0, 915.0, 1270.0], 120.0))
+
+# The ends and the back, as published (Steps 55 - 57): F5 onto the end by the breadboard; F2's hooks into F5's slots with F2 swung out,
+# then F2 swung shut over the tabs of F3 and F4, its slit sliding along the USB cable; F6 onto the other end, which locks them all.
+# Lead lines from each slot (on the moving panel) to the tab that goes into it.
+END_CAMERA = dict(view_dir=[0.82, 0.4, 0.42], frame=([683.0, 919.0, 1320.0], 115.0))   # (low, from the front, as published: from further round F5 hides its lines)
+F5_TABS = [[722.33, 949.8, 1372.45], [722.33, 888.4, 1372.45], [663.68, 886.11, 1369.24], [701.78, 886.11, 1369.24]]   # F1's two hooks, F3's two tabs
+g.place("Push F5 onto the end of the case by the breadboard: the tabs of F1, F3 and F4 go into its slots. Its engraved side faces out.", move=[F5],
+        direction=[0, 0, 1], hover=56, lines_at=[[[x, y, 1366.07], [x, y, z]] for x, y, z in F5_TABS], labels={F5: 'F5'}, **END_CAMERA)   # (published: 56.0 mm)
+F2_HOOKS = [[643.13, 949.8, 1372.45], [643.13, 888.4, 1372.45]]    # the hooks at F2's end by F5
+g.place("Turn the case so its back faces you. Hook the tabs at the slit end of F2 into the slots in F5, its engraved side facing out and "
+        "its other end swung out, then swing F2 shut onto the tabs of F3 and F4.", move=[F2], path=[swung(F2_OFF), swung(F2_HOOK), swung(), ZERO],
+        lines_at=[[h, [h[0], h[1], 1366.07]] for h in F2_HOOKS], labels={F2: 'F2'}, eye=[dict(anchor=[643.13, 889.0, 1339.4], id=F2)],   # (the cable in the slit)
+        inset=dict(target=NOTCH.round(2).tolist(), dir=[-0.9, 0.35, -0.25], radius=14.0, mark=4.0, alt='The USB cable in the slit at the bottom of F2'),
+        caution='The USB cable must sit in the slit at the bottom of F2.', wires_done={'usb cable': [usb_cable()['usb cable'], usb_cable(f2=swung())['usb cable'],
+                                                                                        usb_cable(f2=ZERO)['usb cable']]},   # (the cable follows the slit)
+        view_dir=[-0.7, 0.5, -0.5], frame=([640.0, 915.0, 1290.0], 125.0))   # (F2 swung out, whole, in frame)
+F6_TABS = [[722.33, 949.8, 1207.29], [722.33, 888.4, 1207.29], [643.13, 949.8, 1207.29], [643.13, 888.4, 1207.29]]   # F1's and F2's hooks
+g.place("Push F6 onto the other end of the case: the tabs of F1, F2, F3 and F4 go into its slots. Its engraved side faces out.", move=[F6],
+        direction=[0, 0, -1], hover=67.5, lines_at=[[[x, y, 1213.67], [x, y, z]] for x, y, z in F6_TABS], labels={F6: 'F6'},
+        view_dir=[0.5, 0.55, -0.67], frame=([683.0, 919.0, 1250.0], 110.0))   # (published: 67.5 mm)
 # ================================================================ THE CASE (end)
 
 g.build()

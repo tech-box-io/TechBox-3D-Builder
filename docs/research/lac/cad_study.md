@@ -11,11 +11,10 @@ trimesh). Written 19 Oct 2026 for the first draft of the guide.
 1. **The engineer's export carries most parts several times, once per pose** (the copies the published guide swaps between). The
    guide shows each part once, seated, and moves it: `LAC Build Instructions/trim_source.py` cuts lac.glb down to the 52 instances it
    uses (`lac-guide.glb`, 7.4 MB), which keeps each generator run light (about 15 - 30 s, small memory).
-2. **Missing: F2, F5 and F6** (the back panel and the two end panels; the published guide's Steps 55 - 57), **and F4 seated**. F4
-   exists once, lying flat beside the base (NAUO50); seated it is that panel moved +117.68, -17.26, +0.06 mm, exactly the move between
-   the rocker switch's flat and seated copies (NAUO51 -> NAUO46): the guide uses extra part `F4` (`f4.glb`, cut from NAUO50).
-   TechBox's Cadasio project has F2 (twice), F5 and F6 as Draco meshes (`docs/research/lac/cadasio/raw`), so they exist in the
-   SolidWorks model; they were not in this export.
+2. **Missing from the export: F2, F5 and F6** (the back panel and the two end panels; the published guide's Steps 55 - 57), **and F4
+   seated**. F4 exists once, lying flat beside the base (NAUO50); seated it is that panel moved +117.68, -17.26, +0.06 mm, exactly the
+   move between the rocker switch's flat and seated copies (NAUO51 -> NAUO46): the guide uses extra part `F4` (`f4.glb`, cut from
+   NAUO50). Lee sent F2, F5 and F6 as STEP files of their own on 19 Oct 2026: section 7.
 3. **Broken or doubled copies** (Lee: "some of which are broken"): the LCD lying face down (NAUO95) has no display (only the I2C
    backpack); two coin cells side by side (NAUO4 in the holder, NAUO5 half out of it); the dark red jumper (NAUO32) ends in a14,
    the hole the white one uses (the published guide: a12); several wire bodies Cadasio never shows (Part29/30, Part34-36/39,
@@ -83,3 +82,35 @@ degrees about (-1, 1, 0)/sqrt 2: face down).
 Engraved codes (0.25 mm pockets): F3 on its top (714.2, 887.5, 1234.4), F1 outward (723.7, 895.8, 1221.9), F7s outward, F8 towards -z,
 F9 towards +z, F4 on its top. Tab tops: F7 at z 1228.4 / 1238.0, F9 at x 693.6 / 697.6, F8 at x 708.3 / 715.7, all y 957.84; F1's
 top edge y 957.63 (through F4's front slots).
+
+## 7. F2, F5 and F6 (Lee's STEPs, 19 Oct 2026)
+
+`F2.STEP`, `F5.STEP`, `F6.STEP` (one part each, in its own part frame), converted by `tools/step_to_glb.py` to `f2.glb`, `f5.glb`,
+`f6.glb` (extra parts in materials.json). They are placed where TechBox's published Cadasio project has F2-1, F5-1 and F6-1: its scene
+is this assembly's frame scaled by 0.6054634 (fitted on F1, F3, the two F7s, F8 and F9 to 0.0006 mm; its F4-1 is the seated F4 above
+to 0.004 mm), and its part frames are the STEPs' (`docs/research/lac/cadasio/raw`). Every tab then meets its slot:
+
+- F5 (the breadboard's end, z 1366.07 - 1369.07; F1's and F2's hooks pass through it to z 1372.45): slots for F1's two hooks
+  (x 722.33, y 888.4 / 949.8), F3's two tabs (x 663.68 / 701.78) and F4's; engraved code outward (+z) at (652.46, 895.62, 1368.94).
+- F2 (the back, x 641.63 - 644.63): hooks at its F5 end (x 643.13, y 888.4 / 949.8, into F5's slots); the slit the USB cable leaves by,
+  z 1336.9 - 1341.9 (5 mm), open from F2's bottom edge up to y 901 (rounded top at 902.7); code outward (-x) at (641.75, 895.78, 1358.52).
+- F6 (the buzzer's end, z 1210.67 - 1213.67, the hooks through it to z 1207.29), with the speaker slots: slots for F1's and F2's
+  hooks (x 722.33 / 643.13, y 888.4 / 949.8) and the tabs of F3 and F4; code outward (-z) at (712.82, 895.74, 1210.8).
+
+In the guide F2 swings about the upright where its outer face meets F5's inside (641.63, z 1366.07), 20 degrees out, as published
+(about 21); held 14 mm short of F5 its slit is at z 1327.34 and moves straight in along x, which is where the USB cable lies.
+
+## 8. Wire routes, checked
+
+`tools/wirecheck.py` (with the extra parts loaded) finds no wire in any view passing into a part or another wire (488 such points in
+the first draft). The CAD's own routes are kept wherever they were clear; redrawn: the switch's three leads (each in a lane of its own
+beside the base; seated, through the closed case), the potentiometer's (lying beside the base: raised over the lying buzzer and LCD
+and their wires, crossing F9's plane at x < 689, the black lead crossing over the other two, whose pin is on the far side of them;
+stood up in front of the case; seated: under the potentiometer, between the buzzer and F8, along the rails, black behind the LCD's
+board), the dark red jumper (a low arch, 8 mm), and the USB cable (out through F2's slit, clear of the breadboard by 1.2 mm and of
+the slit by 0.6 mm). The seated routes were found by a path search over a 1 mm grid of the closed case (clearance to every part's
+surface and every other wire, A* preferring 3 mm of room) and smoothed into control points (`scripts/routing/`).
+The CAD's jumper wires lie as tightly as the engineer drew them (some 0.02 mm apart), within the check's tolerance.
+`tools/motioncheck.py` (wires during each move) still finds wires passing briefly through parts or each other mid-move, mostly where a
+lead changes shape while its part is carried (README.txt, question 8).
+

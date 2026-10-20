@@ -418,8 +418,10 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     LAC Build Instructions/    the LCD Alarm Clock (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lac.json, wire-paths.json,
                                lac.glb from "LAC Full Build.STEP" (the engineer's export, every part in several posed copies), cut down by the
                                kit's trim_source.py to lac-guide.glb (the parts the guide uses: the source both tools read); nano-mra.glb and
-                               usb-a-end.glb (the MRA's), f4.glb (F4 seated: the STEP has it only lying beside the base). The STEP has no
-                               F2, F5, F6 yet (README.txt). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
+                               usb-a-end.glb (the MRA's), f4.glb (F4 seated: the STEP has it only lying beside the base); f2.glb, f5.glb,
+                               f6.glb from Lee's F2/F5/F6.STEP (19 Oct 2026), placed where TechBox's Cadasio project has them. Wire routes
+                               re-drawn clear of every part and wire (docs/research/lac/scripts/routing/: a path search through the closed
+                               case). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
     LSM Build Instructions/    the Laser Stem Matrix (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lsm.json (make_atlas.py),
                                lsm.glb made by the kit's assemble.py: Lee's STEPs hold no working assembly (the loose parts files
                                LSM_WoodSteps / LSM_Electronics, a Full Build export missing the Nano, D4 - D10 and the stems), so each part is

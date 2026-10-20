@@ -2,13 +2,13 @@
  "summary": {
   "source": "lac-guide.glb",
   "source_bytes": 7431252,
-  "model_bytes": 1470156,
-  "triangles_in": 723280,
-  "triangles_out": 133321,
-  "edge_segments": 65670,
-  "meshes": 33,
-  "parts_kept": 55,
-  "parts_in_source": 55,
+  "model_bytes": 1533108,
+  "triangles_in": 728052,
+  "triangles_out": 138049,
+  "edge_segments": 67749,
+  "meshes": 36,
+  "parts_kept": 58,
+  "parts_in_source": 58,
   "materials": [
    "edge",
    "#000000",
@@ -486,6 +486,45 @@
    "tris_in": 1590,
    "tris_out": 1590,
    "edge_segments": 822,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "F5",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 880,
+   "tris_out": 880,
+   "edge_segments": 351,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "F2",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2032,
+   "tris_out": 2032,
+   "edge_segments": 972,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "F6",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 1860,
+   "tris_out": 1816,
+   "edge_segments": 756,
    "colours": [
     "ink",
     "wood"

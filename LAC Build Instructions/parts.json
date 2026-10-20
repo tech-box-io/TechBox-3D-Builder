@@ -662,6 +662,33 @@
    "qty": 1,
    "picture": "parts/F8.png",
    "group": "Case (F1 - F9)"
+  },
+  {
+   "name": "F5",
+   "ids": [
+    "F5"
+   ],
+   "qty": 1,
+   "picture": "parts/F5.png",
+   "group": "Case (F1 - F9)"
+  },
+  {
+   "name": "F2",
+   "ids": [
+    "F2"
+   ],
+   "qty": 1,
+   "picture": "parts/F2.png",
+   "group": "Case (F1 - F9)"
+  },
+  {
+   "name": "F6",
+   "ids": [
+    "F6"
+   ],
+   "qty": 1,
+   "picture": "parts/F6.png",
+   "group": "Case (F1 - F9)"
   }
  ]
 }

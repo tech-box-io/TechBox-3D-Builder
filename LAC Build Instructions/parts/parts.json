@@ -2,7 +2,7 @@
  "kit": "LCD Alarm Clock (LAC)",
  "part": "Full Build",
  "image_size": 500,
- "model": "24d041d7fa95",
+ "model": "790b1307a4b3",
  "parts": [
   {
    "name": "Breadboard",
@@ -88,6 +88,21 @@
    "name": "F8",
    "quantity": 1,
    "image": "F8.png"
+  },
+  {
+   "name": "F5",
+   "quantity": 1,
+   "image": "F5.png"
+  },
+  {
+   "name": "F2",
+   "quantity": 1,
+   "image": "F2.png"
+  },
+  {
+   "name": "F6",
+   "quantity": 1,
+   "image": "F6.png"
   }
  ]
 }
