@@ -155,12 +155,13 @@ g.lift('Slide the claw out from between A5 and A12 / A13.', CLAW_PARTS, arrow_sc
 CLAW = CLAW_PARTS + [CLAW_PLUG]
 without = lambda *gone: [i for i in CLAW if i not in gone]
 g.remove('Take the claw apart. Unscrew the 10mm screw from C9.', [C8_SCREW], alone=CLAW, arrow_scale=1.5)
-g.remove('Slide C8 out from between C6 and C9.', [C8], alone=without(C8_SCREW))
+g.remove('Slide C8 out from between C6 and C9.', [C8], alone=without(C8_SCREW), own_frame=True)   # (framed on its own, as the Full Build's Step 88)
 g.remove('Pull C9 off the ends of C1 and C2.', [C9], alone=without(C8_SCREW, C8))
 g.remove('Pull C7 off the servo horn.', [C7], alone=without(C8_SCREW, C8, C9))
 g.remove('Unscrew the two 16mm screws that hold C6 to C3.', C6_SCREWS, alone=without(C8_SCREW, C8, C9, C7), arrow_scale=1.5)
 g.remove('Lift C6 off C4 and C5.', [C6], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS))
-g.remove('Pull C4 and C5 out of their slots in C3.', [C4, C5], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS, C6), arrow_scale=1.5)
+g.remove('Pull C4 and C5 out of their slots in C3.', [C4, C5], alone=without(C8_SCREW, C8, C9, C7, *C6_SCREWS, C6), arrow_scale=1.5,
+         own_frame=True)   # (framed on its own, as the Full Build's Step 82)
 IN_C3 = [C3, CLAW_MOTOR, CLAW_HORN, CLAW_PLUG]
 g.remove('Pull C1 and C2 out of their slots in C3.', [C1, C2], alone=IN_C3 + [C1, C2])
 assert VIEW['Step 78c']['carry'][CLAW_PLUG]['pose'] == VIEW['Step 94']['carry'][CLAW_PLUG]['pose']   # (the plug is where Step 78 left it)

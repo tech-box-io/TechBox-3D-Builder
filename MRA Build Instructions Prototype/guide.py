@@ -965,46 +965,66 @@ UPSIDE_DOWN = dict(staged=True, flip=True)                           # a claw st
 claw = [C3, CLAW_MOTOR, CLAW_HORN, C1, C2, C4, C5, C6, *C6_SCREWS, C7, C9, C8, C8_SCREW]
 GEAR_MESH = [334.8, 177.9, 147.2]                                    # where the teeth of C7 and C8 meet: half-way between the horn's axis and C8's pivot, in the gears' mid-plane
 
+# The claw's cameras, Steps 77 - 89 (Lee, 19 Oct 2026: closer in, and as close for C5 as for C4). Each keeps the angle it had. The
+# steps seen from one corner share one framing (build(): Lee, 14 Oct 2026), here the closest round everything they show, the
+# parts hovering too, that keeps it all in the picture and clear of each step's caption box (Step 86's with its caution), at
+# 1024 x 682, 1100 x 634 and 820 x 634 (measured in the player). All at one zoom, radius 66 mm, but Steps 77 - 78 (the motor's
+# 55 mm drop under a two-line caption: 70.5). Two steps are framed on their own (own_frame), each centred on what it shows: Step 82,
+# so that C5 goes in as close and as central as C4 in Step 81 (in the framing of Steps 83 - 89, made for C6, C7 and C9 hovering
+# above, it sat low and to the side), and Step 88, as C8 slides in from well off to the side (with it in their framing Steps 82 - 89
+# could come no closer than 96.5). The deconstruction takes the claw apart with these cameras.
+CLAW_FRAME = {
+    '77-78': dict(view_dir=[-0.5792, -0.5736, -0.5792], frame=([327.7, 180.6, 163.4], 70.5)),
+    '79': dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([316.8, 217.9, 142.9], 66.0)),
+    '80-81': dict(view_dir=[0.5792, -0.5736, -0.5792], frame=([315.4, 199.3, 150.7], 66.0)),
+    '82': dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([328.1, 171.4, 152.9], 66.0)),
+    '83-87, 89': dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([332.4, 152.6, 130.0], 66.0)),
+    '88': dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([339.2, 194.1, 164.4], 66.0)),
+}
+CLAW_VIEW = {77: CLAW_FRAME['77-78'], 78: CLAW_FRAME['77-78'], 79: CLAW_FRAME['79'], 80: CLAW_FRAME['80-81'], 81: CLAW_FRAME['80-81'],
+             82: dict(CLAW_FRAME['82'], own_frame=True), **{k: CLAW_FRAME['83-87, 89'] for k in (83, 84, 85, 86, 87, 89)},
+             88: dict(CLAW_FRAME['88'], own_frame=True)}
+
 # --- claw: the motor through C3, the two clips, the two bars, C6 screwed on, then the jaws and the cover
 # The motor arrives with its horn fitted (video 0:00). Nothing screws it down: its tabs are trapped between C3 and the bars.
 g.place('Begin the claw with C3. Push the claw motor through C3 from the engraved side, wire first, with the wire at the notched end of the cut-out.',
         move=[CLAW_MOTOR, CLAW_HORN], show=[C3], against=claw[:1], hover=55, **UPSIDE_DOWN, wires=CLAW['up'][0], labels={C3: 'C3', CLAW_MOTOR: dotted('Claw Servo')},
-        lines_at=[[[329.14, 196.6, 132.86], [329.14, 193.0, 132.86]], [[341.29, 196.6, 155.41], [341.29, 193.0, 155.41]]])   # case corners to cut-out corners
+        lines_at=[[[329.14, 196.6, 132.86], [329.14, 193.0, 132.86]], [[341.29, 196.6, 155.41], [341.29, 193.0, 155.41]]], **CLAW_VIEW[77])   # case corners to cut-out corners
 g.place("Feed the claw motor's wire back through the hole in the end of C3.", **UPSIDE_DOWN, eye=[dict(anchor=[300.8, 196.5, 147.1], id=C3)],
-        **by_way_of(43, 50, 57, 66, 76, CLAW['in_c3']))     # (the plug follows the lead through the hole, 55 - 59 mm along)
-CLAW_CAMERA_BEFORE = dict(view_dir=[0.5792, -0.5736, -0.5792], frame=([307.1, 195.2, 146.4], 82.6))   # Steps 80 - 81 (see HOOKED_IN below)
-CLAW_CAMERA_AFTER = dict(view_dir=[0.5792, -0.5736, 0.5792], frame=([325.4, 175.6, 159.9], 109.6))    # Steps 82 - 89
+        **by_way_of(43, 50, 57, 66, 76, CLAW['in_c3']), **CLAW_VIEW[78])     # (the plug follows the lead through the hole, 55 - 59 mm along)
 # (C1 and C2 go in along the claw's own normal: straight down, the test finds the 0.6 degree tilt in the way.)
 g.place('Insert C1 into the outer of the two slots on one side of C3, from the plain side, code facing out.', move=[C1], against=claw[:3],
-        direction=CLAW_NORMAL, **UPSIDE_DOWN)
+        direction=CLAW_NORMAL, **UPSIDE_DOWN, **CLAW_VIEW[79])
 g.place('Insert C2 into the outer half of the square slot on the other side, code facing out.', move=[C2], against=claw[:4],
-        direction=CLAW_NORMAL, **UPSIDE_DOWN, **CLAW_CAMERA_BEFORE)
+        direction=CLAW_NORMAL, **UPSIDE_DOWN, **CLAW_VIEW[80])
 # C4 and C5 (revision 1, Lee 19 Oct 2026) are hooked: each drops through its slot in C3 5 mm along from its seat, then slides
 # along C3 into it, the hook under C3 (the collision test: straight in is blocked; the drop is clear only from 5.0 mm along).
 HOOKED_IN = [[5.0, -40.0, 0.0], [5.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
-# One lead line each, along the drop: from the leading end of the hook (seated, 5 mm from the slot's end) to the slot in C3
-# it drops through (its outer hook drops beside C3's end and slides into the notch there: nothing to line up).
-HOOKED_LINE = lambda z: [[[313.3, 201.0, z], [318.3, 193.0, z]]]
-# The cameras of Steps 80 - 89 as they were before C3 - C5 changed (the generator's own choice for the new parts swung Step 82's
-# to the other side and moved the others by a millimetre; Lee asked for no camera to change): pinned on Steps 80 and 82.
-g.place('Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.', move=[C4], against=claw[:5], path=HOOKED_IN, lines_at=HOOKED_LINE(131.05), **UPSIDE_DOWN)
-g.place('Insert C5 into the slot next to C1, code facing C1.', move=[C5], against=claw[:6], path=HOOKED_IN, lines_at=HOOKED_LINE(157.22), **UPSIDE_DOWN, **CLAW_CAMERA_AFTER)
-g.place('Press C6 onto C4 and C5, code facing away from C3. The servo horn sits in its round cut-out.', move=[C6], against=claw[:7], **UPSIDE_DOWN)
+# Two lead lines each, one down each hook: the inner hook's, and the outer hook's (Lee's Option-click on it, 19 Oct 2026: its x and
+# z). Each is the spot on the hook that ends up level with C3's face (0.2 mm off it, so that the line shows on it), so the line comes
+# down from the hook to the slot (or the open notch at C3's end) it drops into and then runs the 5 mm along C3's face into the seat
+# (the player draws a line through each stop of the way; a spot at the hook's end took the line on through C3, to end under it).
+HOOKED_LINES = lambda z, outer: [[313.3, 192.8, z], [outer[0], 192.8, outer[2]]]
+g.place('Insert C4 into the same square slot from the engraved side of C3, next to C2, code facing C2.', move=[C4], against=claw[:5], path=HOOKED_IN,
+        lines_at=HOOKED_LINES(131.05, [345.5, 200.6, 131.4]), **UPSIDE_DOWN, **CLAW_VIEW[81])
+g.place('Insert C5 into the slot next to C1, code facing C1.', move=[C5], against=claw[:6], path=HOOKED_IN,
+        lines_at=HOOKED_LINES(157.22, [347.2, 200.5, 156.8]), **UPSIDE_DOWN, **CLAW_VIEW[82])
+g.place('Press C6 onto C4 and C5, code facing away from C3. The servo horn sits in its round cut-out.', move=[C6], against=claw[:7], **UPSIDE_DOWN, **CLAW_VIEW[83])
 g.place('Screw C6 onto C3 with two 16mm screws.', move=C6_SCREWS[:1], against=claw[:8], direction=FROM_BELOW, **UPSIDE_DOWN, **SCREW,
-        lines_at=[[[322.95, 195.85, 147.08], [322.95, 179.53, 147.08]]])
+        lines_at=[[[322.95, 195.85, 147.08], [322.95, 179.53, 147.08]]], **CLAW_VIEW[84])
 g.place('Add the second 16mm screw.', move=C6_SCREWS[1:], against=claw[:9], direction=FROM_BELOW, **UPSIDE_DOWN, **SCREW,
-        lines_at=[[[347.25, 195.59, 147.06], [347.25, 179.53, 147.06]]])
+        lines_at=[[[347.25, 195.59, 147.06], [347.25, 179.53, 147.06]]], **CLAW_VIEW[85])
 # (The CAD has the horn 0.35 mm into the sides of C7's slot, a push fit, so the horn is left out of the motion test.)
-g.place('Press C7 over the servo horn, code facing away from C6.', move=[C7], against=[i for i in claw[:10] if i != CLAW_HORN], lines_to=[CLAW_HORN], **UPSIDE_DOWN,
+g.place('Press C7 over the servo horn, code facing away from C6.', move=[C7], against=[i for i in claw[:10] if i != CLAW_HORN], lines_to=[CLAW_HORN], **UPSIDE_DOWN, **CLAW_VIEW[86],
         caution='If the servo horn is not lined up, you may need to adjust it so that it fits in the C7 slot.')
 # The cover goes on before the second jaw, as on the video (2:29 - 2:53): C8 is then slid in under it.
-g.place('Press C9 onto the ends of C1 and C2 until they click through, code facing out.', move=[C9], against=claw[:11], **UPSIDE_DOWN)
+g.place('Press C9 onto the ends of C1 and C2 until they click through, code facing out.', move=[C9], against=claw[:11], **UPSIDE_DOWN, **CLAW_VIEW[87])
 # Step 88c: a close-up of the two gears as if C9 were not there, with a lead line to where they mesh (Lee, 14 Oct 2026), seen
 # square-on to the gears from the C9 side.
-g.place('Slide C8 in between C6 and C9, code facing C9, with both jaws closed, until its teeth mesh with C7.', move=[C8], against=claw[:12], **UPSIDE_DOWN,
+g.place('Slide C8 in between C6 and C9, code facing C9, with both jaws closed, until its teeth mesh with C7.', move=[C8], against=claw[:12], **UPSIDE_DOWN, **CLAW_VIEW[88],
         inset=dict(target=GEAR_MESH, dir=[0.0, -1.0, 0.0], radius=21.0, hide=[C9], mark=4.5, caption='Seen without C9',
                    alt='Close-up of the claw with C9 left out: the teeth of C7 and C8 mesh together.'))
-g.place('Screw C8 in place with a 10mm screw through C9.', move=[C8_SCREW], against=claw[:13], direction=FROM_BELOW, **UPSIDE_DOWN, **SCREW)
+g.place('Screw C8 in place with a 10mm screw through C9.', move=[C8_SCREW], against=claw[:13], direction=FROM_BELOW, **UPSIDE_DOWN, **SCREW, **CLAW_VIEW[89])
 
 # --- claw onto the arm: slid back between the forearm strips, then one 6mm screw through each strip
 g.seat('Slide the claw in between A5 and A12 / A13, with the motor on top and C1 against A12 and A13.', claw,

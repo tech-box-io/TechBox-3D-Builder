@@ -944,7 +944,7 @@ class Guide:
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
                  alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None, keep_camera=False,
-                 arrow_scale=1.0, arrow_style=None):
+                 arrow_scale=1.0, arrow_style=None, own_frame=False):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
         units_given = units
@@ -1156,7 +1156,8 @@ class Guide:
                                arrows=list(arrows) if arrows else [], eye=eye_list, labels=label_list, camera=camera, view_dir=view_dir,
                                frame=frame, look_from=look_from, flip=bool(flip), inset=dict(inset) if inset else None,
                                alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {}), keep_camera=bool(keep_camera),
-                               arrow_scale=float(arrow_scale), arrow_style={i: dict(v) for i, v in (arrow_style or {}).items()}))
+                               arrow_scale=float(arrow_scale), arrow_style={i: dict(v) for i, v in (arrow_style or {}).items()},
+                               **({'own_frame': True} if own_frame else {})))
         # the guide's state from here on
         for i in leave:
             self.placed.remove(i)
@@ -1203,7 +1204,7 @@ class Guide:
     def place(self, caption, move=(), show=(), against=None, direction=None, hover=None, path=None, labels=None, review=None,
               appear_after=(), appear=(), staged=False, lines=True, lines_to=None, lines_at=None, axial=False, eye=(),
               focus=None, focus_pad=1.6, wires=None, wires_done=None, ride=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None):
+              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False):
         """Add one part (or move one sub-assembly) into place. With no `move`, a step where only wires change.
 
         move:       ids that travel in this step (new parts appear hovering; parts already on screen move as a group).
@@ -1269,6 +1270,10 @@ class Guide:
         one_off_camera: True when this step's camera (view_dir= / frame=) is a one-off: the steps after it choose theirs
                     as if it had the camera the generator would have given it (so pinning one step's camera, from a
                     screenshot, leaves the next steps' cameras as they were).
+        own_frame:  True for a turned-over step that keeps its own framing (frame=) where a stretch of turned-over steps seen from
+                    one corner otherwise shares one (see build()): its parts come in from well off the others' (the MRA's Step 88, C8
+                    slid in from the side, so that the claw's other steps can be framed close: Lee, 19 Oct 2026). The camera moves for
+                    it, and back if the step after it pins the stretch's framing again. remove() / unplug() / lift() take it too.
         """
         if self.taken:
             raise ValueError('place(): a deconstruction guide takes parts off (remove(), unplug(), lift()); it puts nothing on')
@@ -1329,7 +1334,8 @@ class Guide:
             anchors = []
         self._record(caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                      wires, wires_done, lines_at is not None, riders=riders, ride=ride, stops=stops, frame=frame, look_from=look_from, flip=flip, view_dir=view_dir, paths=paths,
-                     caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single, ghost=ghost)
+                     caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single, ghost=ghost,
+                     own_frame=own_frame)
 
     @staticmethod
     def _arrow_dims(reach, size):
@@ -1457,7 +1463,7 @@ class Guide:
 
     def _record(self, caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                 wires, wires_done, by_hand, from_hand=False, riders=None, ride=None, stops=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None):
+                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False):
         riders = dict(riders or {})
         ride = {i: (list(p) if isinstance(p, list) and p and isinstance(p[0], (list, dict)) else [p]) for i, p in (ride or {}).items()}   # id -> [in-between poses..., final]
         wires_done = {i: (list(r) if isinstance(r, list) else [r]) for i, r in (wires_done or {}).items()}                              # id -> [in-between routes..., final]
@@ -1483,7 +1489,8 @@ class Guide:
                                focus_pad=focus_pad, frame=frame, look_from=look_from, wires=dict(wires or {}), wires_done=wires_done,
                                flip=flip, view_dir=view_dir, paths=dict(paths or {}), rest={i: self.resting[i] for i in appear if i in self.resting},
                                caution=caution, arrows=list(arrows or []), inset=dict(inset) if inset else None, wiggle=bool(wiggle),
-                               one_off_camera=bool(one_off_camera), single=bool(single), **({'ghost': {i: float(a) for i, a in ghost.items()}} if ghost else {})))
+                               one_off_camera=bool(one_off_camera), single=bool(single), **({'ghost': {i: float(a) for i, a in ghost.items()}} if ghost else {}),
+                               **({'own_frame': True} if own_frame else {})))
         for i in new + list(riders) + list(appear_after):
             if i not in self.placed:
                 self.placed.append(i)
@@ -1982,6 +1989,9 @@ class Guide:
             v['camera'] = dict(cam, **run)
         # ...and a stretch of them seen from the same corner keeps one framing (a sphere round all of theirs), so that the
         # model does not slide about the screen from step to step; the camera moves only when the corner changes (Lee, 14 Oct 2026).
+        # A step with own_frame (place()) is a stretch of its own: its two views keep their framing, and the steps either side of it
+        # are framed apart.
+        own = lambda v: v['_step'] if '_step' in v and self.steps[v['_step']].get('own_frame') else None
         k = 0
         while k < len(fb):
             cam = fb[k]['camera']
@@ -1989,7 +1999,8 @@ class Guide:
                 k += 1
                 continue
             j = k
-            while j + 1 < len(fb) and fb[j + 1]['kind'] != 'card' and fb[j + 1]['camera'].get('flip') and fb[j + 1]['camera']['dir'] == cam['dir']:
+            while (j + 1 < len(fb) and fb[j + 1]['kind'] != 'card' and fb[j + 1]['camera'].get('flip') and fb[j + 1]['camera']['dir'] == cam['dir']
+                   and own(fb[j + 1]) == own(fb[k])):
                 j += 1
             spheres = [(np.array(fb[i]['camera']['target'], float), float(fb[i]['camera']['radius'])) for i in range(k, j + 1)]
             centre, radius = spheres[0]

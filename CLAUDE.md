@@ -56,7 +56,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   of each wood part coming in can be read (`engraved-codes.json`). `look_from=` picks the diagonal nearest a
   direction, `view_dir=` gives an exact direction, `focus=` / `frame=` punch in. `flip=True` shows the step with
   the model turned over (work done with the kit upside down): the player turns the model, not the camera, so
-  the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them.
+  the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them,
+  and a stretch of them seen from one corner shares one framing (Lee, 14 Oct 2026); `own_frame=True` (place(), remove())
+  frames one such step on its own (the MRA's Step 88, C8 slid in from the side, so that the rest of the claw is framed close).
   `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
   screenshot, with the narrowest window it suits, `min_aspect`, and `otherwise=` for narrower ones; or `otherwise=[...]`, wider
   cameras closest first: the generator notes where the parts reach on screen with each (`fit`), and the player takes the first
