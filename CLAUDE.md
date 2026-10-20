@@ -496,8 +496,11 @@ kit folder takes its place the next time `guide.py` runs.
 This folder is a git repository (branch `main`). Its data is in `.git.nosync` (`.git` is a pointer file to it), which keeps
 it out of iCloud sync, as the `.nosync` suffix does for the Python environment; until a remote is added the history is on this
 Mac only. Kept out of git (`.gitignore`): the build videos, `share/`, the source CAD files (STEP and the like; checksums in
-`cad-sources.sha256`), kits' `thumbs/`, environments. Commit each checked change. The remote (when Lee adds one) must be a
-private GitHub repository; pushing `main` is a backup, pushing to `live` publishes (above).
+`cad-sources.sha256`), kits' `thumbs/`, environments, step-text sheets sent back for import, and research pictures
+(`docs/research/**/*.jpg`, `.png`, `.webp`: screenshots, Cadasio step pictures, review sheets, Lee's attachments; Lee, 19 Oct
+2026: they stay on this Mac). Research notes, data and scripts stay in git; nothing that regenerates or publishes a guide reads
+docs/research, and a picture a guide shows belongs in its kit folder. Commit each checked change. The remote is the private GitHub
+repository `tech-box-io/TechBox-3D-Builder`; pushing `main` is a backup, pushing to `live` publishes (above).
 
 ## This computer
 

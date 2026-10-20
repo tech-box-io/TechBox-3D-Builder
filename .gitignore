@@ -52,7 +52,21 @@ MRA_Videos/
 *.key
 share/
 thumbs/
-!docs/research/**/thumbs/
+# Research pictures: screenshots, the published Cadasio guides' step pictures, review contact sheets, build-video stills and
+# the pictures Lee attaches in chat. Working material that stays on this Mac (Lee, 19 Oct 2026: research files need not go to
+# GitHub). The notes (.md), data (.json) and scripts (.py) beside them stay in git: they are small, they are the record behind
+# the rulebook, and some remake kit inputs (the Cadasio dumps behind the colour atlases and the LSM's lsm.glb). No code that
+# regenerates or publishes a guide reads anything under docs/research. Pictures a guide shows live in its kit folder (parts/,
+# cards/, logo.webp, an inset's picture), never here.
+docs/research/**/*.jpg
+docs/research/**/*.JPG
+docs/research/**/*.jpeg
+docs/research/**/*.png
+docs/research/**/*.PNG
+docs/research/**/*.webp
+docs/research/**/*.gif
+# A step-text sheet sent back for import (its edits are in the kit's step-text*.json once imported)
+*step text*.csv
 .venv.nosync/
 __pycache__/
 *.pyc
