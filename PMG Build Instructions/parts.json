@@ -11,6 +11,13 @@
     "NAUO78"
    ],
    "qty": 1,
+   "view": {
+    "dir": [
+     0.78,
+     0.36,
+     0.51
+    ]
+   },
    "picture": "parts/Nano-I-O-Module.png",
    "group": "Electronics"
   },
@@ -20,19 +27,34 @@
     "NANO"
    ],
    "qty": 1,
+   "view": {
+    "dir": [
+     0.78,
+     0.36,
+     0.51
+    ]
+   },
    "picture": "parts/Nano-Board.png",
    "group": "Electronics"
   },
   {
    "name": "Push Button",
    "ids": [
-    "NAUO76",
     "NAUO83",
+    "NAUO76",
     "NAUO84",
     "NAUO85"
    ],
    "qty": 4,
    "picture": "parts/Push-Button.png",
+   "also": [
+    {
+     "ids": [
+      "NAUO76"
+     ],
+     "picture": "parts/Push-Button-black.png"
+    }
+   ],
    "group": "Electronics"
   },
   {
@@ -447,6 +469,9 @@
     "NAUO67"
    ],
    "qty": 1,
+   "view": {
+    "roll": 180
+   },
    "picture": "parts/H5.png",
    "group": "Case (H1 - H14)"
   },
@@ -456,6 +481,9 @@
     "NAUO60"
    ],
    "qty": 1,
+   "view": {
+    "roll": 180
+   },
    "picture": "parts/H6.png",
    "group": "Case (H1 - H14)"
   },
@@ -465,6 +493,9 @@
     "NAUO68"
    ],
    "qty": 1,
+   "view": {
+    "roll": 180
+   },
    "picture": "parts/H7.png",
    "group": "Case (H1 - H14)"
   },
@@ -486,6 +517,9 @@
     "NAUO69"
    ],
    "qty": 4,
+   "view": {
+    "roll": 180
+   },
    "picture": "parts/H9.png",
    "group": "Case (H1 - H14)"
   },
@@ -495,6 +529,9 @@
     "NAUO64"
    ],
    "qty": 1,
+   "view": {
+    "roll": 180
+   },
    "picture": "parts/H10.png",
    "group": "Case (H1 - H14)"
   },
@@ -522,6 +559,19 @@
     "NAUO75"
    ],
    "qty": 1,
+   "view": {
+    "dir": [
+     0.45,
+     0.86,
+     -0.27
+    ],
+    "up": [
+     -0.766,
+     0.643,
+     0.0
+    ],
+    "roll": 180
+   },
    "picture": "parts/H13.png",
    "group": "Case (H1 - H14)"
   },
@@ -531,6 +581,18 @@
     "NAUO74"
    ],
    "qty": 1,
+   "view": {
+    "dir": [
+     -0.587,
+     0.763,
+     0.263
+    ],
+    "up": [
+     0.643,
+     0.766,
+     0.0
+    ]
+   },
    "picture": "parts/H14.png",
    "group": "Case (H1 - H14)"
   }

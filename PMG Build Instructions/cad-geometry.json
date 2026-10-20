@@ -1,5 +1,5 @@
 {
- "_about": "Measured by make_source.py from pmg.glb and cadasio-placements.json; read by guide.py. Assembly mm (Y up, front -X, the student's right +Z), every part where it sits when the game is built (pmg-guide.glb). poses: where the pose copies the engineer modelled (and the published project's held and half-way copies) are, as stepgen poses of the built part about its middle. caps: each jumper cap on its pin, built: its device and pin, middle, out (unit, from the pin end to the wire end), wire_end (the middle of the face the wire leaves from), pin_tip (2.2 mm inside the wire end: where a label points).",
+ "_about": "Measured by make_source.py from pmg.glb and cadasio-placements.json; read by guide.py. Assembly mm (Y up, front -X, the student's right +Z), every part where it sits when the game is built (pmg-guide.glb). poses: where the pose copies the engineer modelled (and the published project's held and half-way copies) are, as stepgen poses of the built part about its middle. caps: each jumper cap on its pin, built: its device and pin, middle, out (unit, from the pin end to the wire end), wire_end (the middle of the face the wire leaves from), pin_tip (the tip of the pin the cap goes on, measured on the device: where a label points).",
  "table_y": 887.79,
  "bench_y": 877.104,
  "module_lift_mm": 1.909,
@@ -445,10 +445,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     923.943,
     1270.581
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO96": {
    "device": "NAUO78",
@@ -470,10 +471,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     923.938,
     1275.568
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO95": {
    "device": "NAUO78",
@@ -495,10 +497,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     926.489,
     1270.593
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO99": {
    "device": "NAUO78",
@@ -520,10 +523,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     926.487,
     1275.567
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO98": {
    "device": "NAUO78",
@@ -545,10 +549,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     929.035,
     1270.61
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO100": {
    "device": "NAUO78",
@@ -570,10 +575,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     929.029,
     1275.576
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO102": {
    "device": "NAUO78",
@@ -595,10 +601,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     931.567,
     1270.598
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO101": {
    "device": "NAUO78",
@@ -620,10 +627,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     931.556,
     1275.598
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO111": {
    "device": "NAUO78",
@@ -645,10 +653,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     936.514,
     1275.578
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO114": {
    "device": "NAUO78",
@@ -670,10 +679,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     939.049,
     1270.61
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO113": {
    "device": "NAUO78",
@@ -695,10 +705,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     939.072,
     1273.085
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO112": {
    "device": "NAUO78",
@@ -720,10 +731,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     939.026,
     1275.585
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO117": {
    "device": "NAUO78",
@@ -745,10 +757,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     944.107,
     1270.588
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO116": {
    "device": "NAUO78",
@@ -770,10 +783,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     944.103,
     1273.102
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO115": {
    "device": "NAUO78",
@@ -795,10 +809,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     944.105,
     1275.587
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO118": {
    "device": "NAUO78",
@@ -820,10 +835,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     949.041,
     1275.56
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO119": {
    "device": "NAUO78",
@@ -845,10 +861,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     951.581,
     1275.569
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_V4": {
    "device": "NAUO78",
@@ -870,10 +887,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     923.966,
     1273.056
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_V5": {
    "device": "NAUO78",
@@ -895,10 +913,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     926.512,
     1273.068
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_V6": {
    "device": "NAUO78",
@@ -920,10 +939,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     929.058,
     1273.085
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_V7": {
    "device": "NAUO78",
@@ -945,10 +965,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    604.313,
+    604.345,
     931.59,
     1273.073
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO86": {
    "device": "NAUO76",
@@ -970,10 +991,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.522,
-    906.504,
+    520.306,
+    906.69,
     1244.162
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO87": {
    "device": "NAUO76",
@@ -995,10 +1017,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.298,
-    906.538,
+    520.287,
+    906.746,
     1241.604
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_GND1": {
    "device": "NAUO76",
@@ -1020,10 +1043,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.278,
-    906.558,
+    520.272,
+    906.766,
     1239.104
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO88": {
    "device": "NAUO83",
@@ -1045,10 +1069,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.62,
-    906.855,
+    520.397,
+    907.04,
     1276.714
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO89": {
    "device": "NAUO83",
@@ -1070,10 +1095,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.581,
-    906.7,
+    520.399,
+    906.889,
     1274.192
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_GND2": {
    "device": "NAUO83",
@@ -1095,10 +1121,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.561,
-    906.72,
+    520.384,
+    906.909,
     1271.692
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO90": {
    "device": "NAUO84",
@@ -1120,10 +1147,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.143,
-    906.811,
+    520.287,
+    907.035,
     1309.291
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO91": {
    "device": "NAUO84",
@@ -1145,10 +1173,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.189,
-    906.895,
+    520.266,
+    907.112,
     1306.802
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_GND3": {
    "device": "NAUO84",
@@ -1170,10 +1199,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.169,
-    906.915,
+    520.251,
+    907.132,
     1304.302
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO93": {
    "device": "NAUO85",
@@ -1195,10 +1225,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    518.24,
-    905.462,
+    520.144,
+    905.66,
     1341.822
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO92": {
    "device": "NAUO85",
@@ -1220,10 +1251,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    517.991,
-    905.563,
+    520.118,
+    905.785,
     1339.319
-   ]
+   ],
+   "pin_measured": true
   },
   "CAP_GND4": {
    "device": "NAUO85",
@@ -1245,10 +1277,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    517.971,
-    905.583,
+    520.102,
+    905.805,
     1336.819
-   ]
+   ],
+   "pin_measured": true
   },
   "NAUO259": {
    "device": "NAUO79",
@@ -1270,10 +1303,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    564.356,
+    564.355,
     985.721,
-    1316.299
-   ]
+    1317.12
+   ],
+   "pin_measured": true
   },
   "NAUO260": {
    "device": "NAUO79",
@@ -1296,9 +1330,10 @@
    "length": 8.002,
    "pin_tip": [
     562.816,
-    983.886,
-    1316.182
-   ]
+    983.887,
+    1317.12
+   ],
+   "pin_measured": true
   },
   "NAUO261": {
    "device": "NAUO79",
@@ -1322,8 +1357,9 @@
    "pin_tip": [
     561.271,
     982.045,
-    1316.369
-   ]
+    1317.12
+   ],
+   "pin_measured": true
   },
   "NAUO262": {
    "device": "NAUO79",
@@ -1345,10 +1381,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    559.723,
+    559.722,
     980.2,
-    1316.449
-   ]
+    1317.12
+   ],
+   "pin_measured": true
   },
   "NAUO134": {
    "device": "NAUO81",
@@ -1370,10 +1407,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    537.092,
-    959.558,
-    1220.967
-   ]
+    537.091,
+    959.559,
+    1223.164
+   ],
+   "pin_measured": true
   },
   "NAUO135": {
    "device": "NAUO81",
@@ -1395,10 +1433,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    535.45,
-    957.61,
-    1221.008
-   ]
+    535.448,
+    957.612,
+    1223.163
+   ],
+   "pin_measured": true
   },
   "NAUO136": {
    "device": "NAUO81",
@@ -1420,10 +1459,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    533.811,
-    955.666,
-    1220.999
-   ]
+    533.81,
+    955.667,
+    1223.163
+   ],
+   "pin_measured": true
   },
   "NAUO137": {
    "device": "NAUO81",
@@ -1445,10 +1485,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    532.023,
-    953.872,
-    1220.963
-   ]
+    532.022,
+    953.873,
+    1223.163
+   ],
+   "pin_measured": true
   },
   "NAUO138": {
    "device": "NAUO81",
@@ -1470,10 +1511,11 @@
    ],
    "length": 8.002,
    "pin_tip": [
-    530.43,
-    951.861,
-    1220.968
-   ]
+    530.428,
+    951.863,
+    1223.163
+   ],
+   "pin_measured": true
   }
  },
  "usb": {

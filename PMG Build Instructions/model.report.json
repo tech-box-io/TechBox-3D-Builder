@@ -2,10 +2,10 @@
  "summary": {
   "source": "pmg-guide.glb",
   "source_bytes": 16654696,
-  "model_bytes": 1440216,
+  "model_bytes": 1419824,
   "triangles_in": 825974,
-  "triangles_out": 185779,
-  "edge_segments": 113077,
+  "triangles_out": 174515,
+  "edge_segments": 93625,
   "meshes": 52,
   "parts_kept": 69,
   "parts_in_source": 69,
@@ -590,8 +590,8 @@
    "used_by": 4,
    "solids": 79,
    "tris_in": 26976,
-   "tris_out": 11400,
-   "edge_segments": 10731,
+   "tris_out": 8584,
+   "edge_segments": 5868,
    "colours": [
     "ink",
     "led_face",
@@ -599,7 +599,7 @@
     "pin"
    ],
    "note": "",
-   "tolerance_relaxed_to_mm": 0.048
+   "tolerance_relaxed_to_mm": 0.077
   },
   {
    "mesh": "8x female rounded header",

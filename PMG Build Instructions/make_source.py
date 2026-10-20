@@ -430,8 +430,14 @@ def main():
     for k, b in enumerate(BUTTONS):
         groups.append((b, {**BUTTON_CAPS[k], 'GND': f'CAP_GND{k + 1}'}))
     groups += [(DISPLAY, DISPLAY_CAPS), (MATRIX, MATRIX_CAPS)]
+    def seated_vertices(name):
+        node, M, _, drop = parts[name]
+        V = src.vertices(node, set(drop))
+        return V if M is None else V @ (M @ np.linalg.inv(W[name]))[:3, :3].T + (M @ np.linalg.inv(W[name]))[:3, 3]
+
     for device, pins in groups:
         dev_mid = np.asarray(mids[device]['middle'])
+        dev_v = seated_vertices(device)
         for pin, cap in pins.items():
             like = new_caps[cap][0] if cap in new_caps else cap
             Ms = seat[cap]
@@ -451,9 +457,15 @@ def main():
             ends = [centre + axis * 4.0, centre - axis * 4.0]
             out = axis if np.linalg.norm(ends[0] - dev_mid) > np.linalg.norm(ends[1] - dev_mid) else -axis
             proj = (V - centre) @ out
+            # the pin's tip: the end, towards the wire, of the device's points inside the cap round its axis (the pin)
+            rel = dev_v - centre
+            along = rel @ out
+            radial = np.linalg.norm(rel - along[:, None] * out, axis=1)
+            inside = (radial < 0.6) & (np.abs(along) < float(proj.max()) + 0.5)
+            tip = centre + out * float(along[inside].max()) if inside.any() else centre + out * (float(proj.max()) - 2.2)
             caps[cap] = dict(device=device, pin=pin, centre=np.round(centre, 3).tolist(), out=np.round(out, 5).tolist(),
                              wire_end=np.round(centre + out * float(proj.max()), 3).tolist(), length=round(float(proj.max() - proj.min()), 3),
-                             pin_tip=np.round(centre + out * (float(proj.max()) - 2.2), 3).tolist())
+                             pin_tip=np.round(tip, 3).tolist(), pin_measured=bool(inside.any()))
     # the USB cable: where it leaves each end, and the plug's tip and the Nano socket's mouth, built. Measured on the STEP's own
     # copies: the bench set (plug NAUO279, lead NAUO277, A end NAUO278) for where the lead meets each end, the built plug NAUO282 for
     # the plug's metal (fully in the socket: 903.1 - 910.1 mm up, pushed in along +y in the STEP, the module the other way up).
@@ -473,7 +485,8 @@ def main():
                   "student's right +Z), every part where it sits when the game is built (pmg-guide.glb). poses: where the pose copies the "
                   "engineer modelled (and the published project's held and half-way copies) are, as stepgen poses of the built part about its "
                   'middle. caps: each jumper cap on its pin, built: its device and pin, middle, out (unit, from the pin end to the wire end), '
-                  'wire_end (the middle of the face the wire leaves from), pin_tip (2.2 mm inside the wire end: where a label points).',
+                  'wire_end (the middle of the face the wire leaves from), pin_tip (the tip of the pin the cap goes on, measured on the device: '
+                  'where a label points).',
         'table_y': TABLE_Y, 'bench_y': round(bench_y, 3), 'module_lift_mm': round(lift, 3),
         'mra_module_to_pmg': np.round(D @ T, 6).tolist(),   # (the MRA's I/O module onto this one: for silkscreen.py)
         'parts': mids, 'poses': poses, 'caps': caps, 'usb': usb,

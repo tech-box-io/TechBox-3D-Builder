@@ -411,7 +411,9 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). Server on
                                port 8805 ("Open Prototype.command").
     PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
-                               decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses). pmg.glb (167 MB, from "PMG Full 3D Cadasio
+                               decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses), routing.py (Lee's first round: every set of jumper wires shown together laid as
+                               ribbons, then settled clear of each other and of the parts on screen; checked during each motion too by
+                               docs/research/pmg/scripts/check_motion.py). pmg.glb (167 MB, from "PMG Full 3D Cadasio
                                Build.STEP": the engineer's pose copies of most parts; kept out of git, over GitHub's limit) is cut down by the kit's
                                make_source.py to pmg-guide.glb (one copy of each part, built; the source both tools read; the MRA's Nano grafted in)
                                and cad-geometry.json (every other copy as a pose, the jumper caps, the USB cable's ends). The STEP is older than the

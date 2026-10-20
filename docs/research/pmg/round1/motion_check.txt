@@ -1,0 +1,92 @@
+Step 4c deepest wire in wood during the motion (mm, at t): none
+Step 4c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 5c deepest wire in wood during the motion (mm, at t): none
+Step 5c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 6c deepest wire in wood during the motion (mm, at t): none
+Step 6c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 7c deepest wire in wood during the motion (mm, at t): none
+Step 7c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 8c deepest wire in wood during the motion (mm, at t): none
+Step 8c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 9c deepest wire in wood during the motion (mm, at t): none
+Step 9c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 10c deepest wire in wood during the motion (mm, at t): none
+Step 10c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 11c deepest wire in wood during the motion (mm, at t): none
+Step 11c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 12c deepest wire in wood during the motion (mm, at t): none
+Step 12c wires through one another (centre lines closer than 1.15 mm, at t): {('white VCC', 'white GND'): (1.09, 0.5, [653.5, 908.0, 1295.9])}
+Step 13c deepest wire in wood during the motion (mm, at t): none
+Step 13c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 14c deepest wire in wood during the motion (mm, at t): none
+Step 14c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 15c deepest wire in wood during the motion (mm, at t): none
+Step 15c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 16c deepest wire in wood during the motion (mm, at t): none
+Step 16c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 17c deepest wire in wood during the motion (mm, at t): none
+Step 17c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 18c deepest wire in wood during the motion (mm, at t): none
+Step 18c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 19c deepest wire in wood during the motion (mm, at t): none
+Step 19c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 20c deepest wire in wood during the motion (mm, at t): none
+Step 20c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 21c deepest wire in wood during the motion (mm, at t): none
+Step 21c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 22c deepest wire in wood during the motion (mm, at t): none
+Step 22c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display VCC', 'dot matrix display GND'): (0.09, 0.6, [655.2, 925.2, 1319.6])}
+Step 23c deepest wire in wood during the motion (mm, at t): none
+Step 23c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 24c deepest wire in wood during the motion (mm, at t): none
+Step 24c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 25c deepest wire in wood during the motion (mm, at t): none
+Step 25c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display CS', 'dot matrix display CLK'): (0.33, 0.55, [658.2, 917.9, 1319.2])}
+Step 26c deepest wire in wood during the motion (mm, at t): none
+Step 26c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 27c deepest wire in wood during the motion (mm, at t): none
+Step 27c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 28c deepest wire in wood during the motion (mm, at t): none
+Step 28c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 29c deepest wire in wood during the motion (mm, at t): none
+Step 29c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 30c deepest wire in wood during the motion (mm, at t): none
+Step 30c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 31c deepest wire in wood during the motion (mm, at t): none
+Step 31c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 32c deepest wire in wood during the motion (mm, at t): none
+Step 32c wires through one another (centre lines closer than 1.15 mm, at t): {('blue VCC', 'blue OUT'): (0.2, 0.3, [617.8, 891.7, 1313.2]), ('blue VCC', 'blue GND'): (0.33, 0.2, [643.1, 904.0, 1304.6]), ('blue OUT', 'blue GND'): (0.34, 0.25, [616.4, 895.4, 1318.7])}
+Step 33c deepest wire in wood during the motion (mm, at t): {('white GND', 'NAUO67'): (0.73, 0.25, [582.7, 900.1, 1315.9]), ('black GND', 'NAUO67'): (0.53, 0.25, [582.7, 899.9, 1269.5]), ('yellow GND', 'NAUO67'): (0.51, 0.25, [582.9, 899.9, 1292.7])}
+Step 33c wires through one another (centre lines closer than 1.15 mm, at t): {('yellow VCC', 'yellow OUT'): (0.09, 0.45, [624.9, 891.6, 1289.5]), ('white VCC', 'white GND'): (0.18, 0.2, [646.0, 902.2, 1298.2]), ('yellow OUT', 'yellow GND'): (0.19, 0.25, [636.1, 898.1, 1293.9]), ('black OUT', 'black GND'): (0.22, 0.35, [620.5, 890.9, 1279.3]), ('white OUT', 'blue GND'): (0.25, 0.25, [627.1, 896.6, 1303.1]), ('yellow VCC', 'yellow GND'): (0.26, 0.25, [640.2, 898.5, 1293.8]), ('white GND', 'blue GND'): (0.26, 0.25, [641.5, 899.0, 1298.1]), ('white VCC', 'blue GND'): (0.29, 0.25, [644.4, 899.2, 1298.3]), ('black VCC', 'black GND'): (0.3, 0.3, [628.1, 894.8, 1283.8]), ('white VCC', 'white OUT'): (0.3, 0.5, [625.1, 892.6, 1298.1]), ('black VCC', 'black OUT'): (0.35, 0.45, [624.2, 892.4, 1281.2]), ('white OUT', 'blue OUT'): (0.49, 0.2, [649.1, 903.5, 1298.5])}
+Step 34c deepest wire in wood during the motion (mm, at t): none
+Step 34c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 35c deepest wire in wood during the motion (mm, at t): none
+Step 35c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 36c deepest wire in wood during the motion (mm, at t): none
+Step 36c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 37c deepest wire in wood during the motion (mm, at t): none
+Step 37c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 38c deepest wire in wood during the motion (mm, at t): none
+Step 38c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 39c deepest wire in wood during the motion (mm, at t): none
+Step 39c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 40c deepest wire in wood during the motion (mm, at t): none
+Step 40c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 41c deepest wire in wood during the motion (mm, at t): none
+Step 41c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 42c deepest wire in wood during the motion (mm, at t): {('blue GND', 'NAUO68'): (0.43, 0.45, [573.1, 897.1, 1328.2]), ('blue OUT', 'NAUO68'): (0.43, 0.45, [573.0, 897.3, 1330.8]), ('blue VCC', 'NAUO67'): (0.3, 0.4, [533.2, 900.0, 1341.8]), ('blue GND', 'NAUO67'): (0.3, 0.4, [533.3, 899.9, 1336.7]), ('white GND', 'NAUO67'): (0.26, 0.4, [533.2, 900.0, 1304.3]), ('white GND', 'NAUO68'): (0.26, 0.4, [572.9, 897.4, 1304.3]), ('white VCC', 'NAUO67'): (0.25, 0.35, [533.4, 899.8, 1309.3]), ('blue VCC', 'NAUO68'): (0.22, 0.5, [572.2, 897.5, 1333.3])}
+Step 42c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display DIN', 'dot matrix display CS'): (0.07, 0.45, [652.4, 949.8, 1324.8]), ('dot matrix display GND', 'dot matrix display DIN'): (0.17, 0.5, [639.3, 982.0, 1293.7]), ('4-digit display CLK', '4-digit display DIO'): (0.19, 0.4, [658.2, 938.0, 1282.1]), ('dot matrix display VCC', 'dot matrix display DIN'): (0.23, 0.5, [642.6, 980.0, 1296.9]), ('black OUT', 'yellow GND'): (0.24, 0.4, [631.1, 927.0, 1284.7]), ('yellow OUT', 'white GND'): (0.25, 0.4, [632.2, 925.1, 1287.1]), ('white VCC', 'blue GND'): (0.26, 0.55, [624.6, 952.5, 1275.0]), ('dot matrix display CS', 'dot matrix display CLK'): (0.28, 0.45, [652.6, 950.4, 1324.3]), ('dot matrix display VCC', 'dot matrix display GND'): (0.3, 0.5, [636.2, 983.5, 1290.8]), ('yellow OUT', 'white VCC'): (0.31, 0.45, [631.3, 936.7, 1284.3]), ('white VCC', 'white OUT'): (0.34, 0.55, [591.6, 895.2, 1307.8]), ('dot matrix display DIN', 'dot matrix display CLK'): (0.37, 0.45, [652.7, 950.0, 1324.7])}
+Step 43c deepest wire in wood during the motion (mm, at t): none
+Step 43c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display CS', 'dot matrix display CLK'): (0.25, 0.5, [660.3, 972.8, 1307.9]), ('dot matrix display VCC', 'dot matrix display DIN'): (0.26, 0.5, [659.7, 975.9, 1300.8]), ('dot matrix display GND', 'dot matrix display CS'): (0.27, 0.5, [660.5, 971.7, 1309.3]), ('blue VCC', 'blue OUT'): (0.28, 0.5, [593.0, 895.4, 1331.3]), ('dot matrix display VCC', 'dot matrix display CLK'): (0.3, 0.5, [660.2, 973.5, 1307.1]), ('dot matrix display DIN', 'dot matrix display CLK'): (0.31, 0.5, [660.6, 970.7, 1310.2]), ('dot matrix display VCC', 'dot matrix display CS'): (0.47, 0.5, [660.2, 973.5, 1306.8]), ('dot matrix display GND', 'dot matrix display CLK'): (0.47, 0.5, [660.5, 971.4, 1309.4]), ('dot matrix display DIN', 'dot matrix display CS'): (0.48, 0.5, [660.8, 969.9, 1311.7]), ('dot matrix display GND', 'dot matrix display DIN'): (0.52, 0.5, [660.3, 973.1, 1306.0]), ('white VCC', 'white OUT'): (0.65, 0.5, [590.7, 894.8, 1307.9]), ('dot matrix display VCC', 'dot matrix display GND'): (1.01, 0.45, [656.7, 978.2, 1310.8])}
+Step 44c deepest wire in wood during the motion (mm, at t): none
+Step 44c wires through one another (centre lines closer than 1.15 mm, at t): {('4-digit display DIO', '4-digit display VCC'): (0.06, 0.5, [630.2, 936.3, 1286.5]), ('4-digit display CLK', '4-digit display DIO'): (0.15, 0.45, [633.8, 935.7, 1281.2]), ('4-digit display DIO', '4-digit display GND'): (0.2, 0.5, [629.7, 936.3, 1286.0]), ('4-digit display VCC', '4-digit display GND'): (0.21, 0.5, [629.7, 936.5, 1285.6]), ('4-digit display CLK', '4-digit display VCC'): (0.64, 0.45, [632.4, 935.3, 1280.4]), ('4-digit display CLK', '4-digit display GND'): (1.01, 0.5, [629.7, 936.5, 1285.6])}
+Step 45c deepest wire in wood during the motion (mm, at t): none
+Step 45c wires through one another (centre lines closer than 1.15 mm, at t): {('4-digit display CLK', '4-digit display VCC'): (0.08, 0.3, [624.7, 950.3, 1311.5]), ('4-digit display DIO', '4-digit display VCC'): (0.2, 0.3, [624.6, 951.5, 1314.7]), ('4-digit display VCC', '4-digit display GND'): (0.24, 0.3, [624.6, 951.3, 1314.5]), ('4-digit display CLK', '4-digit display GND'): (0.26, 0.3, [624.8, 950.7, 1312.5]), ('4-digit display CLK', '4-digit display DIO'): (0.34, 0.35, [624.0, 956.6, 1310.3]), ('4-digit display DIO', '4-digit display GND'): (0.36, 0.3, [624.6, 951.1, 1313.8])}
+Step 46c deepest wire in wood during the motion (mm, at t): none
+Step 46c wires through one another (centre lines closer than 1.15 mm, at t): none
+Step 47c deepest wire in wood during the motion (mm, at t): none
+Step 47c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display VCC', 'dot matrix display CLK'): (0.2, 0.65, [603.9, 979.4, 1236.8]), ('dot matrix display GND', 'dot matrix display DIN'): (0.2, 0.65, [599.9, 982.3, 1234.3]), ('dot matrix display VCC', 'dot matrix display CS'): (0.31, 0.65, [604.3, 978.7, 1237.3]), ('dot matrix display VCC', 'dot matrix display DIN'): (0.32, 0.65, [607.8, 975.0, 1240.8]), ('dot matrix display CS', 'dot matrix display CLK'): (0.36, 0.65, [603.3, 979.9, 1236.0]), ('dot matrix display DIN', 'dot matrix display CS'): (0.63, 0.65, [603.6, 979.3, 1236.7]), ('dot matrix display GND', 'dot matrix display CS'): (0.68, 0.65, [601.5, 980.9, 1234.7]), ('dot matrix display DIN', 'dot matrix display CLK'): (0.8, 0.65, [603.3, 979.9, 1236.0]), ('dot matrix display GND', 'dot matrix display CLK'): (0.92, 0.65, [601.9, 980.8, 1234.6]), ('dot matrix display VCC', 'dot matrix display GND'): (0.96, 0.45, [655.8, 977.3, 1296.0])}
+Step 48c deepest wire in wood during the motion (mm, at t): none
+Step 48c wires through one another (centre lines closer than 1.15 mm, at t): {('dot matrix display VCC', 'dot matrix display GND'): (1.05, 0.35, [600.7, 946.7, 1236.2])}
+Step 49c deepest wire in wood during the motion (mm, at t): none
+Step 49c wires through one another (centre lines closer than 1.15 mm, at t): none

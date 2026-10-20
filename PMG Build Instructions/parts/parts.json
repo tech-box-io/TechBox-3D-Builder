@@ -2,7 +2,7 @@
  "kit": "Piano Memory Game (PMG)",
  "part": "Full Build",
  "image_size": 500,
- "model": "20bdcec81efb",
+ "model": "73fbc84d42c3",
  "parts": [
   {
    "name": "Nano I/O Module",
@@ -17,7 +17,10 @@
   {
    "name": "Push Button",
    "quantity": 4,
-   "image": "Push-Button.png"
+   "image": "Push-Button.png",
+   "also": [
+    "Push-Button-black.png"
+   ]
   },
   {
    "name": "4-Digit Display",
