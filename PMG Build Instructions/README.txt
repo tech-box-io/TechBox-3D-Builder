@@ -23,23 +23,24 @@ THE BUILD (48 steps, in the published guide's order)
 - Steps 4 - 15: the four push buttons, black, yellow, white and blue (rows 4, 5, 6, 7), each wired pin by pin: VCC to V, OUT to S,
   GND to G. One wire per step, as published: the wire lies loose in front of the module (an eye on it), then its two caps are lifted,
   held over their pins and pushed on; a label at the top of each pin (e.g. VCC and V4, the module's up and to the right of its pin;
-  Step 4's caution says what V4 means). Seen from a little higher (Lee's screenshot of Step 9).
+  the button's pins labelled on its right; Step 4's caption says what V4 is). Seen from a little higher (Lee's screenshot of Step 9).
 - Step 16: nine more wires off the ribbon (seen from higher up).
 - Steps 17 - 20: the 4-digit display (CLK to S8, DIO to S9, VCC to V9, GND to G9), seen from behind and above: its printed pin names
   and the module's pins; its wires run between the push buttons' and the camera (over the Nano Board) into rows 8 and 9; each wire
-  lies between the display and the module before it goes in. A beat each: the display's cap to its place 12 mm off its pin and the
-  module's lifted straight up off the bench; the module's carried over the Nano Board and the wires already in; lowered over its pin;
-  both pushed on.
+  lies between the display and the module before it goes in. A beat each: both caps lifted straight up off the bench; carried over,
+  the display's to 30 mm out along its pin in its own lane above the wires already in, the module's over the Nano Board and the
+  bundle to above its pin (low enough to stay clear of the caption box in the LMS's frame); the display's slid along its lane to
+  12 mm off its pin while the module's is lowered over its pin; both pushed on.
 - Steps 21 - 25: the dot matrix display (VCC to V11, GND to G11, DIN to S11, CS to S12, CLK to S13), seen from behind and above it
   (Lee's screenshot of Step 22): its printed pin names beside its header, the module's pins; the module's labels to its left, the
   matrix's below it; each wire lies across the gap between the matrix and the module before it goes in. A beat each: the matrix's cap
   rises straight up to its place 5 mm off its pin (under the wires already in) while the module's comes through the gap, upright,
-  just above the pins' height; the module's slides along its column to over its pin; both pushed on.
+  above the pins' height; the module's slides along its column, 10.5 mm above the pins, to over its pin; both pushed on.
 - Step 26: the USB cable's right-angle plug into the Nano Board; its A end lies on the bench. A caution: set the module aside.
 - Steps 27 - 31: the case on its own (as published): H1, then H2, H3 and H4 pushed on; the case turned over for H5 and H6, each hooked
   into H2's windows and swung into H3's notches (a beat for each, seen from the front, by H1).
 - Steps 32 - 33: the electronics come back beside the case; the blue push button into its pocket in H6, then the other three, each
-  moved clear of the module, lifted above the case, carried over its pocket and pressed in (a beat each). Their wires run under H5
+  moved 26 mm clear of the module (the others also 8 mm along the row), lifted above the case, carried over its pocket and pressed in (a beat each). Their wires run under H5
   (between H5 and H7), out under H4's raised bottom edge, and on to the module.
 - Step 34: H7 over the buttons (still turned over, as H5 and H6).
 - Steps 35 - 41: the case the right way up: H8; one piano key (H9) slid in from the front, then the other three; H10 hooked into H4 and
@@ -97,9 +98,32 @@ its Steps 44 and 45 are one step (44), so its Steps 46 - 49 are now 45 - 48.
   Board on its way from the bench to its pin (and in Steps 22 and 25 a matrix wire touched another as it settled in). Both
   displays' wires now go in as described above (a beat for each stretch, so these steps play longer: 3.2 s and 2.4 s); no cap
   passes through a part or a wire (docs/research/pmg/scripts/check_caps.py, a check of every moving cap added this round).
+- An independent review of the finished round (20 Oct 2026: the labels at four window sizes, from an iPad in portrait and the LMS's
+  frame on a laptop to Lee's own, and the step-list pictures; and the new motions, replayed finely) found, and this was fixed:
+  the push buttons' names further out (at the LMS's size the caption box pushed White Push Button down onto its VCC label) and the
+  yellow, white and blue buttons' pin labels on their right (the yellow's ran across the black button's caps); Step 4's caution box
+  folded into its caption (in the LMS's frame the box hid the black button); in Steps 21 - 25 the module's labels closer to the
+  module (they sat on the dot matrix's header and its printed pin names, and the leaders crossed), the matrix's lower, its name
+  further along it, the eye clear of the loose wire; in Steps 18 - 20 the display's cap no longer passes through the wires already in
+  as it comes to its pin (it did for a fifth of a second), and in Steps 17 - 20 the carried cap stays clear of the caption box; in
+  Steps 21 - 25 the module's cap slides higher over the pins; in Step 33 the buttons move further clear before rising (the white one
+  rose through the blue one's wires). docs/research/pmg/scripts/check_caps.py now paces each beat as the player does and samples
+  201 moments per motion (19 had missed the display's crossing). A second review of the fixes (pictures in round2/verify2 and
+  verify3) tuned them: each button's name as far out as the LMS's size needs, no further (the leaders were long on Lee's screen);
+  the dot matrix's VCC and GND labels lower still (on an iPad they sat on the board's corner); the display's module cap carried
+  lower and its wire flatter (its loop still touched the caption box), the lifted wire sagging (straight, it read as lying on the
+  board); the matrix's S-column caps higher (they read as among the pins); the buttons 26 mm clear and the other three 8 mm along
+  the row (30 mm brought them within 2 mm of H5's tongue, and the white wires still grazed the blue ones).
+- Not changed, for Lee: in the LMS's frame (narrower than Lee's window) the caption box covers the top of the push buttons in
+  Steps 4 - 15 (the camera Lee asked for puts them near the top); only a camera change (the same angle, framed a little lower when the
+  window is narrow) would clear it. In Steps 7 - 15 a button's pin labels (now to the right) have leaders that pass just over the
+  bare OUT and GND pins; a dashed ring on the pin would mark which pin is meant, but pin labels have no ring (Lee, 14 Oct, the MRA).
+  In Steps 11 and 14 the OUT wire passes the VCC wire for a moment as it is lifted to its pin (the white by half a millimetre, the
+  blue through it), older than this round, found by the finer check: for the white and blue buttons the OUT pin lies beyond VCC's
+  wire as seen from where the loose wire lies, so the way in has to be planned again (as the displays' were) to go round it.
 - Checked: every view (no wire in a part or through another), the motions, wires and moving caps (round2/motion_check.txt, which
-  lists what is left while steps play), the run-through on all 99 views in the kit and as published to the test website, and every
-  other kit's run-through with the changed player.
+  lists what is left while steps play), labels at four window sizes (none overlapping, crossing or under the caption), the run-through
+  on all 99 views in the kit and as published to the test website, and every other kit's run-through with the changed player.
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three

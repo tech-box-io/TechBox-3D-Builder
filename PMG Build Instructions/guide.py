@@ -339,14 +339,17 @@ def plug_on(wire, park):
     gap between the module and the matrix, across it), a beat each: the matrix's cap rises straight up to its place 5 mm off its pin
     (each wire's place is under those already in) while the module's comes over through the gap, upright, just above the pins'
     height; then the module's slides along its column to over its pin; then both are pushed on. So neither cap passes through the
-    module or the Nano Board, and the wire comes into its bundle from below. With park['over'] (a height: the 4-digit display's), the
-    module's cap is lifted straight up off the bench to that height, carried over the Nano Board and the wires already in, and
-    lowered to where it is held, a beat each."""
+    module or the Nano Board, and the wire comes into its bundle from below. With park['over'] and park['lift_a'] (heights: the 4-digit
+    display's), a beat each: both caps lifted straight up off the bench (the module's to `over`, the display's to `lift_a`); carried
+    over, the display's to 30 mm out along its pin, in its own lane above the wires already in, the module's over the Nano Board and
+    the bundle to above its pin; the display's slid along its lane to where it is held while the module's is lowered over its pin;
+    both pushed on."""
     a, b = DEV_CAP[wire], MOD_CAP[wire]
     pa, pb = on_bench(wire, 'a'), MODULE_BENCH
     ha, hb = along_out(a, pa, HELD_MM), along_out(b, pb, HELD_MM)
     if park.get('gap') is not None:
-        ha, hb = along_out(a, pa, 5.0), along_out(b, pb, 8.0)
+        ha, hb = along_out(a, pa, 5.0), along_out(b, pb, 13.0 if WIRE_ROW[wire].startswith('S') else 10.5)   # (the module's cap
+#                                                    slides well clear of the pins it passes; the S column, nearest the camera, higher)
         gb = compose(shift([0.0, 0.0, park['gap'] - apply_pose(pb, CAPS[b]['centre'])[2]]), hb, CAPS[b]['centre'])
     ea, _ = cap_end(a, ha)
     eb, _ = cap_end(MOD_CAP[wire], hb)
@@ -377,20 +380,23 @@ def plug_on(wire, park):
                                      skip={wire: {a, b}})[wire]
         ride = {a: [HUB(a, ha), HUB(a, ha), HUB(a, pa)], b: [HUB(b, gb), HUB(b, hb), ZERO]}
         routes = [W.route(LAYOUTS[name], a=a, b=b, a_at=ha, b_at=gb, stretch=True), *routes]
-    if park.get('over') is not None:                               # (the display's: the module's cap straight up off the bench, over
-        _, lb, _ = loose_poses(wire, park['x'], park['z'], park['along'])   # the Nano Board and the bundle, down over its pin)
-        ub = compose(shift([0.0, park['over'] - LOOSE_Y, 0.0]), lb, CAPS[b]['centre'])
-        ob = compose(shift([0.0, park['over'] - apply_pose(hb, CAPS[b]['centre'])[1], 0.0]), hb, CAPS[b]['centre'])
-        shapes = []
-        for k, pose in enumerate((ub, ob)):
+    if park.get('over') is not None:                               # (the display's: both caps straight up off the bench; the display's
+        la, lb, _ = loose_poses(wire, park['x'], park['z'], park['along'])   # over to 30 mm out along its pin, in its own lane above the
+        ua = compose(shift([0.0, park['lift_a'] - LOOSE_Y, 0.0]), la, CAPS[a]['centre'])   # wires already in, then along it to where
+        oa = along_out(a, pa, 30.0)                                # it is held; the module's over the Nano Board and the bundle, low
+        ub = compose(shift([0.0, park['over'] - LOOSE_Y, 0.0]), lb, CAPS[b]['centre'])   # enough to stay clear of the caption box,
+        ob = compose(shift([0.0, park['over'] - apply_pose(hb, CAPS[b]['centre'])[1], 0.0]), hb, CAPS[b]['centre'])   # then down
+        shapes = []                                                # over its pin: an independent review, 20 Oct 2026)
+        for k, (pa_, pb_) in enumerate(((ua, ub), (oa, ob))):
             name = f'{("lifted", "over")[k]}: {wire}'
             if name not in LAYOUTS:
-                (ea, ea_out), (eo, eo_out) = cap_end(a, ha), cap_end(b, pose)
-                scene = [item for item in on_screen(MODULE_BENCH, devices) if item[0] not in (a, b)] + [(a, ha), (b, pose)]
-                LAYOUTS[name] = R.settle({wire: jumper(ea, ea_out, eo, eo_out, [(ea + eo) / 2 + [0.0, 10.0, 0.0]], lead=8.0)},
+                (ea, ea_out), (eo, eo_out) = cap_end(a, pa_), cap_end(b, pb_)
+                scene = [item for item in on_screen(MODULE_BENCH, devices) if item[0] not in (a, b)] + [(a, pa_), (b, pb_)]
+                LAYOUTS[name] = R.settle({wire: jumper(ea, ea_out, eo, eo_out, [(ea + eo) / 2 + [0.0, (-7.0, 1.0)[k], 0.0]],   # (lifted:
+                                                         lead=(4.0, 2.0)[k])},   # sagging, so it reads as in the air; over: flat, below the caption)
                                          fixed=plugged, parts=SURFACES.placed(scene), skip={wire: {a, b}})[wire]
-            shapes.append(W.route(LAYOUTS[name], a=a, b=b, a_at=ha, b_at=pose, stretch=True))
-        ride = {a: [HUB(a, ha), HUB(a, ha), HUB(a, ha), HUB(a, pa)], b: [HUB(b, ub), HUB(b, ob), HUB(b, hb), ZERO]}
+            shapes.append(W.route(LAYOUTS[name], a=a, b=b, a_at=pa_, b_at=pb_, stretch=True))
+        ride = {a: [HUB(a, ua), HUB(a, oa), HUB(a, ha), HUB(a, pa)], b: [HUB(b, ub), HUB(b, ob), HUB(b, hb), ZERO]}
         routes = [*shapes, *routes]
     return ride, {wire: routes}
 
@@ -512,24 +518,30 @@ def wire_step(wire, caption, appear=(), labels_more=(), caution=None, camera=Non
             ride_beats='gap' in park or 'over' in park, **(camera or {}))   # (the displays': a beat for each stretch, see plug_on)
 
 
+NAME_REACH = dict(zip(BUTTONS, (0.10, 0.16, 0.10, 0.13)))           # (each the least that clears the caption box at LMS sizes)
+
+
 def name_on_cap(b):
     """A push button's name label, on its round cap (seated: the cap is the top of the button), so that its pins have one pointer."""
     lo, hi = np.asarray(GEO['parts'][b]['lo']), np.asarray(GEO['parts'][b]['hi'])
     return dict(id=b, text=HOVER_NAMES[b], anchor=[round(float(lo[0] + hi[0]) / 2 - 3.0, 2), round(float(hi[1]) - 1.5, 2), round(float(lo[2] + hi[2]) / 2, 2)],
-                side='up-right', reach=0.08)                       # (up and to the right, as the module's: Lee's second round)
+                side='up-right', reach=NAME_REACH[b])              # (up and to the right, as the module's: Lee's second round; far
+#                                                                     enough out to clear the caption box at LMS sizes: a review, 20 Oct)
 
 
 THREE_WIRES = ("Three wires per push button here (VCC to V, OUT to S, GND to G), as in the published guide. Your STEP has two (OUT to S, VCC to "
                "G) and looks like an older save of the model. Which is the kit's wiring?")
-ROWS = 'V4 is the pin in the V column of row 4 on the I/O module (S4 and G4 are the other two pins of that row).'
+ROWS = ' (the V pin of row 4)'                                      # (in Step 4's caption, not a caution box: the box hid the black
+#                                                                     button in the LMS's frame: a review, 20 Oct 2026)
 for k, b in enumerate(BUTTONS):
     for pin in ('VCC', 'OUT', 'GND'):
         wire = WIRE_ID[(b, pin)]
         first = pin == 'VCC'
         name = f'{COLOURS[k]} push button'
-        wire_step(wire, f'Connect {pin} on the {name} to {WIRE_ROW[wire]} on the I/O module.',
+        wire_step(wire, f'Connect {pin} on the {name} to {WIRE_ROW[wire]}{ROWS if (k, pin) == (0, "VCC") else ""} on the I/O module.',
                   appear=[b] if first and k > 0 else [], labels_more=[name_on_cap(b)] if first else [], camera=BUTTON_RUN,
-                  review=THREE_WIRES if (k, pin) == (0, 'VCC') else None, caution=ROWS if (k, pin) == (0, 'VCC') else None)
+                  review=THREE_WIRES if (k, pin) == (0, 'VCC') else None,
+                  device_label=dict(side='right') if k > 0 else None)   # (the pins' labels to the right, clear of the buttons before)
 
 # Steps 15 - 24: the 4-digit display and the dot matrix display: nine more wires off the ribbon, then each display pin by pin.
 DISPLAY_WIRES, MATRIX_WIRES = ALL_WIRES[12:16], ALL_WIRES[16:]
@@ -541,17 +553,19 @@ for wire in DISPLAY_WIRES:
     first = wire == DISPLAY_WIRES[0]
     wire_step(wire, f'Connect {WIRE_PIN[wire]} on the 4-digit display to {WIRE_ROW[wire]} on the I/O module.',
               appear=[DISPLAY] if first else [], labels_more=[dict(id=DISPLAY, text='4-Digit Display', side='near-below', reach=0.1)] if first else [],
-              camera=DISPLAY_RUN, park=dict(x=712.0, z=1262.0, over=932.0, eye_place=dict(side='near-below', reach=0.05)),   # (on the camera's
+              camera=DISPLAY_RUN, park=dict(x=712.0, z=1262.0, over=916.0, lift_a=932.0, eye_place=dict(side='near-below', reach=0.05)),   # (on the camera's
 #                                                                             side, between; the module's cap over the Nano Board: see plug_on)
               module_label=dict(side='up-left', reach=0.08), device_label=dict(side='up-right', reach=0.08))
 for wire in MATRIX_WIRES:
     first = wire == MATRIX_WIRES[0]
     wire_step(wire, f'Connect {WIRE_PIN[wire]} on the dot matrix display to {WIRE_ROW[wire]} on the I/O module.',
-              appear=[MATRIX] if first else [], labels_more=[dict(id=MATRIX, text='Dot Matrix Display', side='near-below', reach=0.1,
-                                                                       anchor=[531.1, 941.6, 1240.0])] if first else [],
-              camera=MATRIX_RUN, park=dict(x=680.0, z=1356.0, along='x', gap=1338.0, eye_place=dict(side='near-below', reach=0.05)),   # (in the
+              appear=[MATRIX] if first else [], labels_more=[dict(id=MATRIX, text='Dot Matrix Display', side='near-below',
+                                                                       anchor=[531.1, 941.6, 1251.0], reach=0.12)] if first else [],
+              camera=MATRIX_RUN, park=dict(x=680.0, z=1356.0, along='x', gap=1338.0, eye_place=dict(side='near-below', reach=0.09)),   # (in the
 #                                                                                    gap between them, across it: Lee's second round)
-              module_label=dict(side='near-left', reach=0.12), device_label=dict(side='near-below', reach=0.09))   # (labels: Lee's second round)
+              module_label=dict(side='near-left', reach=0.08),
+              device_label=dict(side='near-below', reach={'VCC': 0.145, 'GND': 0.13}.get(WIRE_PIN[wire], 0.12)))   # (labels: Lee's second round;
+#                                                    the reaches clear of one another at every window size, from an iPad to Lee's: a review, 20 Oct)
 
 # Step 25: the USB cable, its right-angle plug pushed into the Nano Board's socket (as published: hover and plug, one lead line), its A
 # end lying on the bench. Seen from behind the module, as published (the plug goes in along -z, at the module's +z end: side on).
@@ -707,14 +721,16 @@ def first_button_layout():
 BUTTON_DOWN = 70.0                                                 # a button held over its place in H6 (below it: the case is turned over)
 
 
-def button_way(k):
+def button_way(k, clear=(-26.0, 0.0, 0.0)):
     """A button from where it stands on the bench: moved clear of the module, lifted (the case is turned over: up on screen is down
     here) above the case, turned and carried over its pocket in H6, then pressed in, a beat each (Lee's second round: in one move it
-    passed through H5)."""
+    passed through H5). Moved 26 mm clear (14 before; the others also 8 mm along the row): the white one, and then its wires, rose
+    through the blue one's wires, which run from behind H4 to the module over the others' bench places; 30 mm brought them within
+    2 mm of H5's tongue (an independent review, 20 Oct 2026)."""
     mid = GEO['parts'][BUTTONS[k]]['middle']
-    clear = compose([-14.0, 0.0, 0.0], BUTTON_BENCH[k], mid)
-    lifted = compose([-14.0, -110.0, 0.0], BUTTON_BENCH[k], mid)
-    return [BUTTON_BENCH[k], clear, lifted, [0.0, -BUTTON_DOWN, 0.0], ZERO]
+    cx, cy, cz = clear
+    return [BUTTON_BENCH[k], compose([cx, cy, cz], BUTTON_BENCH[k], mid), compose([cx, cy - 110.0, cz], BUTTON_BENCH[k], mid),
+            [0.0, -BUTTON_DOWN, 0.0], ZERO]
 
 
 FIRST = 3                                                          # the blue button goes in first, as published
@@ -728,7 +744,7 @@ done_others = as_routes(case_bench_layout(), MODULE_BENCH)      # (the blue butt
 # (The case is turned over: on screen and in the student's hands its left and right are the other way round, so the pockets are named
 # from the blue button's.)
 g.place('Press the other three push buttons into their pockets the same way: white next to the blue one, then yellow, then black nearest H3.',
-        move=OTHERS, paths={b: button_way(BUTTONS.index(b)) for b in OTHERS}, lines=False, flip=True, eye=[OTHERS[0]],
+        move=OTHERS, paths={b: button_way(BUTTONS.index(b), clear=(-26.0, 0.0, -8.0)) for b in OTHERS}, lines=False, flip=True, eye=[OTHERS[0]],
         wires_done=done_others, **BUTTONS_IN)
 g.place('Lay H7 on H6 the same way, over the push buttons: its tabs into the windows in H2, then into the notches in H3.',
         move=[H7], path=hinged(H7, [518.1, 897.39, 1357.17]), flip=True, labels={H7: 'H7'}, lines_at=[[547.8, 897.1, 1222.3], [501.9, 897.3, 1222.0], [502.1, 897.3, 1357.9], [547.7, 897.1, 1358.0]],   # (Lee's points)

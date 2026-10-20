@@ -1,11 +1,14 @@
-"""tools/motioncheck.py (wires during each step's motion, against the parts on screen and one another), with two more tests: each
-moving wire cap (a part riding on another, moved to a new place) against every part on screen, and against every other wire (its
-centre line inside the cap's box, within 0.7 of the wire's radius). Lee's second round, 19 Oct 2026: in Steps 17 - 25 the module's
-cap passed through the I/O board and the Nano Board on its way to its pin, which the wire-only check did not see. A part's depth is
-how far a cap's corner is inside it (a thin board can only be entered by half its thickness: any entry is a pass-through). Large
-parts carried as riders (the module in Step 42) give false cap-against-wire hits: their box holds the wires.
+"""tools/motioncheck.py (wires during each step's motion, against the parts on screen and one another), with more tests and finer
+timing. Each moving wire cap (a part riding on another, moved to a new place) against every part on screen, and against every other
+wire (its centre line inside the cap's box, within 0.7 of the wire's radius). The beats paced as the player paces them, a riding
+part's in-between places included when the view says ride_beats; and as many moments as asked (--samples, default 41; 201 finds a
+crossing that lasts a tenth of a second). Lee's second round, 19 Oct 2026: in Steps 17 - 25 the module's cap passed through the I/O
+board and the Nano Board on its way to its pin, which the wire-only check did not see; an independent review (20 Oct) found crossings
+at the end of a beat that 19 even moments missed. A part's depth is how far a cap's corner is inside it (a thin board can only be
+entered by half its thickness: any entry is a pass-through). Large parts carried as riders (the module in Step 42) give false
+cap-against-wire hits: their box holds the wires.
 
-    .venv.nosync/bin/python docs/research/pmg/scripts/check_caps.py "PMG Build Instructions" ["Step 18c" ...]
+    .venv.nosync/bin/python docs/research/pmg/scripts/check_caps.py "PMG Build Instructions" [--samples 201] ["Step 18c" ...]
 """
 import json
 import sys
@@ -33,10 +36,16 @@ def main(argv):
         args.pop(0)
         steps_file = args.pop(0)
     trace = '--trace' in args
+    samples = 41
+    if '--samples' in args:
+        k = args.index('--samples')
+        samples = int(args[k + 1])
+        del args[k:k + 2]
     names = [a for a in args if a != '--trace']
     steps = json.load(open(kit / steps_file))
     spec = json.load(open(kit / 'materials.json'))
-    model = Model(kit / spec['source'])
+    model = Model(kit / spec['source'], adjust=spec.get('adjust_mm') or {}, own_parts=spec.get('own_parts', {}),   # (the parts as the guide
+                  extra_parts={i: (kit / e['glb'], e['pose']) for i, e in spec.get('extra_parts', {}).items()})  # has them: as wirecheck.py)
     routes, views = steps['routes'], steps['views']
     radius = {w: d['radius'] for w, d in steps['wires'].items()}
     centre = {}
@@ -121,6 +130,8 @@ def main(argv):
         # (the moving parts move into the step's done view; in its opening view they stand where they hover)
         ways = {pid: (v.get('paths') or {}).get(pid) or v['path'] for pid in v.get('moving') or []} if v.get('kind') == 'done' else {}
         beats = max([len(stops_of(pid) or ways[pid]) - 1 for pid in ways] or [1])
+        if v.get('ride_beats'):                 # (a riding part's in-between places a beat each, as player.js rideLegs)
+            beats = max([beats] + [len(c.get('via', [])) + 1 for c in (v.get('carry') or {}).values()])
 
         def paced(n, km):
             if beats > 1 and n == beats:
@@ -128,7 +139,7 @@ def main(argv):
                 return (b + ease(km * beats - b)) / beats
             return ease(km)
         worst, touching, traced, capworst, capwire = {}, {}, {}, {}, {}
-        for km in np.linspace(0.05, 0.95, 19):
+        for km in np.linspace(0.0, 1.0, samples)[1:-1]:
             M = {pid: _matrix(pose) for pid, pose in (v.get('offsets') or {}).items()
                  if pid not in (v.get('carry') or {}) and pid not in ways}
             for pid, way in ways.items():
@@ -148,7 +159,7 @@ def main(argv):
                 return M[pid]
             for pid in carry:
                 placed(pid)
-            for pid, c in carry.items():           # (scratch: the moving caps against the parts on screen)
+            for pid, c in carry.items():           # (the moving caps against the parts on screen)
                 was = prior.get(pid, {}).get('pose') if prior.get(pid, {}).get('by') == c['by'] else None
                 if was is None or was == c['pose'] or pid not in model.inst:
                     continue
@@ -165,12 +176,12 @@ def main(argv):
                     if not near.any():
                         continue
                     cp, d, tri = mesh.nearest.on_surface(q[near])
-                    inside = np.einsum('ij,ij->i', q[near] - cp, mesh.face_normals[tri]) < 0
+                    inside = np.einsum('ij,ij->i', q[near] - cp, mesh.face_normals[tri]) < -0.3 * d
                     if inside.any():
                         depth = float(d[inside].max())
                         key = (pid, part)
                         if depth > capworst.get(key, (-1,))[0]:
-                            capworst[key] = (round(depth, 2), round(float(km), 2), q[near][inside][int(np.argmax(d[inside]))].round(1).tolist())
+                            capworst[key] = (round(depth, 2), round(float(km), 3), q[near][inside][int(np.argmax(d[inside]))].round(1).tolist())
             wire_via = v.get('wire_via') or {}
             we = paced(max([len(x) for x in wire_via.values()] or [0]) + 1, km)
             lines, src = {}, {}
@@ -218,7 +229,8 @@ def main(argv):
                     if not near.any():
                         continue
                     cp, d, tri = mesh.nearest.on_surface(q[near])
-                    inside = np.einsum('ij,ij->i', q[near] - cp, mesh.face_normals[tri]) < 0
+                    inside = np.einsum('ij,ij->i', q[near] - cp, mesh.face_normals[tri]) < -0.3 * d   # (clearly behind the face: beside an edge the
+                    # nearest face's normal can be square to the way out, and the sign is noise: the LAC session, 19 Oct 2026)
                     depth = np.where(inside, d + rad, rad - d)          # how far the tube's surface reaches into the part
                     bad = inside | (d < rad * 0.7)
                     if bad.any():
@@ -231,7 +243,7 @@ def main(argv):
                                 pt = inner[near][j]
                                 x = int(np.argmin(np.linalg.norm(pa + (pb - pa) * f - pt, axis=1)))
                                 traced[key] = f'leg {leg} f {f:.2f}: sample {x}/{len(pa)} from {pa[x].round(1).tolist()} to {pb[x].round(1).tolist()}'
-            for pid, c in carry.items():           # (scratch: the moving caps against the other wires)
+            for pid, c in carry.items():           # (the moving caps against the other wires)
                 was = prior.get(pid, {}).get('pose') if prior.get(pid, {}).get('by') == c['by'] else None
                 if was is None or was == c['pose'] or pid not in model.inst:
                     continue
@@ -248,7 +260,7 @@ def main(argv):
                         pen = np.minimum(q - (lo - rad), (hi + rad) - q).min(axis=1)[inside].max()
                         key = (pid, w)
                         if pen > capwire.get(key, (-1,))[0]:
-                            capwire[key] = (round(float(pen), 2), round(float(km), 2))
+                            capwire[key] = (round(float(pen), 2), round(float(km), 3))
             ids = sorted(lines)
             for x, wa in enumerate(ids):
                 tree = cKDTree(lines[wa][3:-3])
@@ -259,19 +271,29 @@ def main(argv):
                         key = (wa, wb)
                         if dd.min() < touching.get(key, (9,))[0]:
                             touching[key] = (round(float(dd.min()), 2), round(float(km), 2), lines[wb][3:-3][int(np.argmin(dd))].round(1).tolist())
+                            if trace:                       # (which bits of each wire's two shapes meet there)
+                                pt, out = lines[wb][3:-3][int(np.argmin(dd))], []
+                                for w in (wa, wb):
+                                    if w in src:
+                                        pa, pb, leg, f = src[w]
+                                        x = int(np.argmin(np.linalg.norm(pa + (pb - pa) * f - pt, axis=1)))
+                                        out.append(f'{w} leg {leg} f {f:.2f} sample {x}/{len(pa)}: {pa[x].round(1).tolist()} -> {pb[x].round(1).tolist()}')
+                                traced[key] = '; '.join(out)
         for (w, part), (d, km, at) in sorted(worst.items(), key=lambda kv: -kv[1][0]):
             print(f'{name:9s} {w:13s} into {part:12s} {d:5.2f} mm at {km:.2f} of the motion, near {at}')
             if (w, part) in traced:
                 print('          ', traced[(w, part)])
             problems += 1
         for (cp_, part), (d, km, at) in sorted(capworst.items(), key=lambda kv: -kv[1][0]):
-            print(f'{name:9s} cap {cp_:10s} into {part:12s} {d:5.2f} mm at {km:.2f}')
+            print(f'{name:9s} cap {cp_:10s} into {part:12s} {d:5.2f} mm at {km:.3f}')
             problems += 1
         for (cp_, w), (d, km) in sorted(capwire.items(), key=lambda kv: -kv[1][0]):
-            print(f'{name:9s} cap {cp_:10s} through wire {w:24s} {d:5.2f} mm at {km:.2f}')
+            print(f'{name:9s} cap {cp_:10s} through wire {w:24s} {d:5.2f} mm at {km:.3f}')
             problems += 1
         for (wa, wb), (d, km, at) in sorted(touching.items(), key=lambda kv: kv[1][0]):
             print(f'{name:9s} {wa:13s} and {wb:13s} centre lines {d:.2f} mm apart at {km:.2f}, near {at}')
+            if (wa, wb) in traced:
+                print('          ', traced[(wa, wb)])
             problems += 1
     print('checked', len(names), 'views in motion;', problems, 'problems')
 
