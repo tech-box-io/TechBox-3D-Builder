@@ -84,7 +84,12 @@ docstrings of `Guide.place` and `Guide.seat`):
   'down-right', 'down-left', 'near-left', 'near-right', 'near-above', 'near-below'; `reach=` how far, a share of the view's width,
   default 0.07): the PMG's module-pin labels up and to the right of their pins. `ride_beats=True` gives a riding part's in-between
   places (`ride={id: [via, ..., final]}`) a beat each, its wires keeping pace (the PMG's display under the dot matrix's wires, up and
-  over the case); without it a ride plays within one beat.
+  over the case); without it a ride plays within one beat. (A step whose moving part has as many stops as the ride has stretches
+  paces the ride the same way: the LSM's Step 26, D4 given a way that stays put, `paths={D4: [ZERO] * 5}`, for four beats.)
+  A close-up can be a picture made outside instead of a view of the model: `inset=dict(image='file.webp', ...)`, a file in the
+  kit folder (the LSM's capacitor card, Step 6; published and bundled with the guide); and can draw parts faintly,
+  `inset=dict(..., ghost={id: alpha})` (the LSM's matrix at 0.12 over the wires in D10's slot, Step 32). A close-up keeps clear of
+  the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14).
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
@@ -94,7 +99,14 @@ docstrings of `Guide.place` and `Guide.seat`):
   plug turning no more than a quarter turn per beat: the player blends shapes bit by bit along their length, and very unlike
   shapes (one bending back, the next forward) or shapes twisted the opposite way fold or cross their wires as they blend. A lead
   whose length does not matter says `stretch` (W.route): it then stretches evenly between shapes of different lengths instead of
-  growing out of its tip, and while it changes shape it is carried by its ends' moves only, not turned with its plug. A part in both `move` and `appear` is on screen where its path starts
+  growing out of its tip, and while it changes shape it is carried by its ends' moves only, not turned with its plug. A lead whose
+  far end rides on a part that moves while the lead changes shape, and whose run from the near end is the same in both shapes (the
+  LSM's matrix wires, lying in the box, lifted over D4, carried and lowered: Lee, 19 Oct 2026), says `tail_from=` (W.route: mm from
+  the first point): changing between two routes that both have it, the run up to there is matched by distance from the first end
+  and the rest by distance from the last, each along the route as drawn, so that the run in the box stays put and the run under
+  the moving part keeps pace with it whatever the lengths in between (`stretch` matching instead let both slide; the LSM's
+  `jumper(..., stretch=False, follow=6.0, tail=point)`). `tools/motioncheck.py <kit> [views]` checks the wires at 19 moments of
+  each move against every part and each other (wirecheck.py checks the views at rest). A part in both `move` and `appear` is on screen where its path starts
   as the step opens (a plug at the end of a lead laid out on the bench) instead of gliding in.
 - **Parts list.** `Guide(parts_list=fn)` puts Parts List pages after the title page, built from the parts the guide
   shows (so a guide for one part of the build lists that part's parts); `fn` groups them (the MRA's is in its guide.py).
@@ -382,7 +394,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     render.yaml                the Render static site's configuration
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
-                               bundle.py, step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), wirecheck.py
+                               bundle.py, step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), motioncheck.py
+                               (wires during each move, 19 moments, against every part and each other; --trace names the bits of the two shapes blended), wirecheck.py
                                (wires passing into parts or into each other, view by view, sampled every 0.2 mm); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
@@ -448,7 +461,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   19 Oct 2026; posed where the export had the old ones, as the part frames match; the export's copies leave the model). The same
   part from a better export in another kit is cut out with `tools/cut_part.py` (the RCC's Nanos). A rule's
   `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid; with
-  `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's).
+  `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's); with
+  `"round": "xy"` only the faces within the ellipse the box holds across those two axes (a round window: the LSM's corner LED).
   `"move_engraving"` moves a wood part's engraved code elsewhere on its face (and can turn it the right way up), for a part
   the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead. `"fill_holes"`
   ({instance: [points on the holes' axes, assembly mm]}) fills round pin holes in a plate that nothing passes through any

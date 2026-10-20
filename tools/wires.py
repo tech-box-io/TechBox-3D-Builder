@@ -13,7 +13,7 @@ import json
 import numpy as np
 
 
-def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False, spacing=None):
+def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False, spacing=None, tail_from=None):
     """A route as steps.json stores it.
 
     a, b: the part ids at the first and last point. The wire moves with them: the first part of its
@@ -33,6 +33,10 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
     instead of growing out of its tip (or bunching at it). For a lead whose length does not matter (the RCC's motor leads).
     spacing: how far apart, in mm, the player puts the rings of this wire's tube (default 1.5): closer for a short wire with a
     tight bend, which at 1.5 mm comes out faceted (the LSM's resistor legs, 0.25: Lee, 19 Oct 2026).
+    tail_from: millimetres from the first point after which, when the wire changes between two routes that both have it, each
+    bit keeps its distance from the last end instead of the first: the run from the first end to there (the same in both
+    shapes) stays put, and so does the run at the far end, under the part it is carried by (the LSM's LED matrix, lifted and
+    moved with its wires under it: Lee, 19 Oct 2026); what is longer in one shape than in the other is taken up between the two.
     """
     out = dict(pts=np.round(np.asarray(points, float), 2).tolist(), a=a, b=b)
     if b_from:
@@ -48,6 +52,8 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
         out['stretch'] = True
     if spacing:
         out['spacing'] = float(spacing)
+    if tail_from is not None:
+        out['tail_from'] = float(tail_from)
     return out
 
 

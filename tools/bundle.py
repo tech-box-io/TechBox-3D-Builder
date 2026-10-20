@@ -71,6 +71,11 @@ def bundle(kit, out, steps_file='steps.json'):
                 if not picture.exists():
                     raise SystemExit(f'bundle.py: {item["picture"]} is missing: open parts.html through tools/serve.py to make the part pictures')
                 item['picture'] = data_url(picture.read_bytes(), 'image/png')
+    for view in steps['views']:                      # a close-up that is a picture made outside (inset image)
+        inset = view.get('inset') or {}
+        if inset.get('image'):
+            mime = {'.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg'}[Path(inset['image']).suffix.lower()]
+            inset['image'] = data_url((kit / inset['image']).read_bytes(), mime)
     logo = steps['meta'].get('logo')
     if logo:
         mime = {'.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp'}[Path(logo).suffix.lower()]

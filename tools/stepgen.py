@@ -1182,6 +1182,16 @@ class Guide:
         self.log.append(f"{caption[:58]:58s} {how:6s} {len(leave) if how == 'remove' else len(movers)} part(s), {way_note}"
                         f"{f', {len(units)} arrow(s)' if units else ''}{f', {len(lead_off)} lead(s) with them' if lead_off else ''}")
 
+    def _inset_image(self, name):
+        """A close-up that is a picture made outside (inset=dict(..., image='file.webp')): the file, beside the steps in the kit
+        folder (publish.py and bundle.py take it along), and its shape, height over width, for the player to size the box."""
+        path = self.kit_dir / name
+        if not path.exists():
+            raise SystemExit(f'inset image {name!r} is not in the kit folder')
+        from PIL import Image
+        with Image.open(path) as im:
+            return {'image': name, 'image_aspect': round(im.height / im.width, 4)}
+
     def put_away(self, ids):
         """These parts leave the screen (no step of its own): a test set-up on the bench, taken apart before the build.
         Each comes back as a new part when a later step brings it in; give it a new carry() or rest_at() first if it
@@ -1267,7 +1277,9 @@ class Guide:
         ghost:      {id: alpha} parts drawn see-through on Step N (0.5: half), to show what is behind them (the LSM's D1 from below,
                     the posts' tabs in its slots: Lee, 19 Oct 2026); on Step Nc they fade back to solid over the motion.
         inset marks: inset=dict(..., marks=[([x, y, z], half-width mm), ...]) draws a red box round each of several spots instead of
-                    the one `mark` round the target (the LSM's four slots in D1).
+                    the one `mark` round the target (the LSM's four slots in D1). inset=dict(..., ghost={id: alpha}) draws those parts
+                    faintly in the close-up (the LSM's matrix over D10's slot); inset=dict(..., image='file.webp') shows a picture made
+                    outside, a file in the kit folder, instead of a view of the model (the LSM's capacitor card).
         one_off_camera: True when this step's camera (view_dir= / frame=) is a one-off: the steps after it choose theirs
                     as if it had the camera the generator would have given it (so pinning one step's camera, from a
                     screenshot, leaves the next steps' cameras as they were).
@@ -1884,7 +1896,9 @@ class Guide:
                 I = s['inset']
                 inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
                              hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption') if k in I},
-                             **({'marks': [dict(at=[round(float(x), 2) for x in at], half=float(half)) for at, half in I['marks']]} if I.get('marks') else {}))
+                             **({'marks': [dict(at=[round(float(x), 2) for x in at], half=float(half)) for at, half in I['marks']]} if I.get('marks') else {}),
+                             **({'ghost': {i: float(v) for i, v in I['ghost'].items()}} if I.get('ghost') else {}),
+                             **(self._inset_image(I['image']) if I.get('image') else {}))
             if own is not None and part_cam and inset and 'dir' not in s['inset']:   # (the close-up from the Part's own side too)
                 own['inset'] = dict(inset, dir=_unit(part_cam['dir']).round(4).tolist())
             if s.get('single'):                                            # one view only: the step is its opening view

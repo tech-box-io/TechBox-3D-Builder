@@ -131,13 +131,14 @@ function skinned(route, poses, endsOnly = false) {
     pts[i * 3] = x; pts[i * 3 + 1] = y; pts[i * 3 + 2] = z;
     if (i) cum[i] = cum[i - 1] + Math.hypot(x - pts[i * 3 - 3], y - pts[i * 3 - 2], z - pts[i * 3 - 1]);
   }
-  return {pts, cum, total: cum[m - 1], m};
+  return {pts, cum, total: cum[m - 1], m, route};
 }
-// n points along it, evenly spaced over `span` mm from its first end (points past its own end stay on the end).
-function sampled(line, n, span = line.total) {
-  const {pts, cum, total, m} = line, out = new Float32Array(n * 3);
+// n points along it, evenly spaced over `span` mm from its first end (points past its own end stay on the end); or from `start`
+// mm, kept between lo and hi mm.
+function sampled(line, n, span = line.total, start = 0, lo = 0, hi = line.total) {
+  const {pts, cum, m} = line, out = new Float32Array(n * 3);
   for (let k = 0, i = 0; k < n; k++) {
-    const d = Math.min(total, span * k / (n - 1));
+    const d = Math.max(lo, Math.min(hi, start + span * k / (n - 1)));
     while (i < m - 2 && cum[i + 1] < d) i++;
     const f = cum[i + 1] > cum[i] ? Math.min(1, (d - cum[i]) / (cum[i + 1] - cum[i])) : 0;
     for (let c = 0; c < 3; c++) out[k * 3 + c] = pts[i * 3 + c] + (pts[i * 3 + 3 + c] - pts[i * 3 + c]) * f;
@@ -161,8 +162,19 @@ function drawWires(view, poses, from, k = 1, via = null, alphas = null) {
       // stretches evenly rather than growing out of the tip; and it is carried by its ends' moves only, see skinned)
       const even = !!(routes[way[leg]].stretch || routes[way[leg + 1]].stretch);
       const a = skinned(routes[way[leg]], poses, even), b = leg === legs - 1 && !even ? line : skinned(routes[way[leg + 1]], poses, even);
-      const span = Math.max(a.total, b.total), pa = even ? sampled(a, n) : sampled(a, n, span);
-      pts = even ? sampled(b, n) : sampled(b, n, span);
+      const span = Math.max(a.total, b.total);
+      let pa;
+      const ta = routes[way[leg]].tail_from, tb = routes[way[leg + 1]].tail_from;
+      if (!even && ta != null && tb != null) {
+        // (`tail_from` in both: the head by distance from the first end, the tail by distance from the last, each measured along the
+        // route as drawn: a bit of the run under the matrix then meets the same bit of the other shape, and the two keep pace with it)
+        const drawn = (l, r) => ({pts: l.pts, cum: r.s.map(x => x * r.len), total: r.len, m: l.m});
+        const A = drawn(a, routes[way[leg]]), B = drawn(b, routes[way[leg + 1]]);
+        const head = Math.max(ta, tb), tail = Math.max(A.total - ta, B.total - tb);
+        const n1 = Math.max(2, Math.min(n - 2, Math.round(n * head / Math.max(1e-6, head + tail))));
+        const two = (l, t, out = new Float32Array(n * 3)) => (out.set(sampled(l, n1, head, 0, 0, t)), out.set(sampled(l, n - n1, tail, l.total - tail, t, l.total), n1 * 3), out);
+        pa = two(A, ta); pts = two(B, tb);
+      } else { pa = even ? sampled(a, n) : sampled(a, n, span); pts = even ? sampled(b, n) : sampled(b, n, span); }
       for (let i = 0; i < pts.length; i++) pts[i] = pa[i] + (pts[i] - pa[i]) * f;
       const fa = routes[way[leg]].fade, fb = routes[way[leg + 1]].fade;
       if (fa || fb) {                          // a faded end grows out to the whole wire (or back)
@@ -281,6 +293,7 @@ function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = nul
                  ...(view.eye || []).map(e => ({...e, eye: true, w: Math.max(44, W * 0.07), h: Math.max(44, W * 0.07) * 0.56}))];
   for (const it of items) {
     const [ax, ay] = project(anchorOf(it, view), cam, W, H);
+    it.ay = ay;
     const room = {right: W - R.x1 - gap - it.w - 8, left: R.x0 - gap - it.w - 8, top: R.y0 - gap - it.h - top, bottom: H - R.y1 - gap - it.h - bottom};
     const reach = {right: R.x1 - ax, left: ax - R.x0, top: ay - R.y0, bottom: R.y1 - ay};
     const sides = Object.keys(room).filter(s => room[s] >= 0).sort((a, b) => reach[a] - reach[b]);
@@ -303,10 +316,11 @@ function layoutCallouts(view, cam, W, H, {top = 64, bottom = 12, keepClear = nul
   // never under the instructions at the top left (caption and caution can be tall, on a phone most of all)
   const box = keepClear && keepClear();
   if (box) for (const it of items) if (it.x < box.right + 8 && it.x + it.w > box.left - 8 && it.y < box.bottom + 8) it.y = Math.min(H - it.h - bottom, box.bottom + 12);
-  // keep labels on the same side from overlapping
+  // keep labels on the same side from overlapping; down a side in the order of the spots they name, so that their leaders do not cross
+  // when some have been moved down out of the instructions' way (the LSM's Step 14 in a narrow window)
   for (const side of ['right', 'left', 'top', 'bottom', 'float']) {
     const group = items.filter(i => i.side === side), horizontal = side === 'top' || side === 'bottom';
-    group.sort((a, b) => horizontal ? a.x - b.x : a.y - b.y);
+    group.sort((a, b) => horizontal ? a.x - b.x : a.ay - b.ay || a.y - b.y);
     for (let i = 1; i < group.length; i++) {
       const a = group[i - 1], b = group[i];
       if (horizontal) { if (b.x < a.x + a.w + 14) b.x = a.x + a.w + 14; }
@@ -376,18 +390,26 @@ function buildInset(view) {
   const I = view.inset, box = $('inset');
   insetLeader = null;
   if (!I) { box.hidden = true; return; }
-  const W = stage.width, H = stage.height, w = Math.round(Math.max(200, Math.min(400, W * 0.28))), h = Math.round(w * 0.72);
+  // A close-up is a picture of the model drawn as the view opens, or a picture made outside (`image`, a file beside the steps, with
+  // its shape `image_aspect`, height over width: the LSM's capacitor card), no taller than half the view.
+  const W = stage.width, H = stage.height, aspect = I.image ? (I.image_aspect || 1) : 0.72;
+  let w = Math.round(Math.max(200, Math.min(400, W * 0.28))), h = Math.round(w * aspect);
+  if (I.image && h > H * 0.5) { h = Math.round(H * 0.5); w = Math.round(h / aspect); }
   const ratio = Math.min(2, devicePixelRatio || 1), picked = stage.highlighted();
   const shown = view.visible.filter(id => !(I.hide || []).includes(id));
+  if (I.image) $('insetimg').src = I.image;
+  else {
   const {canvas, camera: cam} = stage.snapshot(Math.round(w * ratio), Math.round(h * ratio), {setup: c => {
     stage.setHighlight([]); stage.setVisible(shown); stage.setLeadLines([]); stage.setArrows(I.arrows ? arrowsOf(view).filter(a => I.arrows === true || I.arrows.includes(a.part)) : []);   // (arrows: [parts] whose arrow it shows: one seen only here)
+    for (const id in I.ghost || {}) stage.setFade(id, I.ghost[id]);   // (parts drawn faintly, `ghost`: {id: alpha}, to show what is under them)
     const at = stage.toWorld(I.target), d = new THREE.Vector3(...I.dir).normalize().applyQuaternion(stage.world.quaternion);
     const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);   // the picture is turned as the main view is
     up.addScaledVector(d, -up.dot(d)); if (up.lengthSq() < 1e-6) up.set(0, 0, 1);
     c.up.copy(up.normalize());
     c.position.copy(at).addScaledVector(d, I.radius / Math.sin(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * 1.05);
     c.lookAt(at); c.updateMatrixWorld(true);
-    return () => { stage.setVisible(view.visible); stage.setHighlight(picked); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); };
+    return () => { for (const id in I.ghost || {}) stage.setFade(id, (view.ghost || {})[id] ?? 1);
+                   stage.setVisible(view.visible); stage.setHighlight(picked); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); };
   }});
   // a thin red box round the exact detail, as in the published guides; or several (`marks`: [{at, half}], each round its own spot)
   const boxes = I.marks ? I.marks.map(m => ({at: m.at, half: m.half})) : I.mark ? [{at: I.target, half: I.mark}] : [];
@@ -400,6 +422,7 @@ function buildInset(view) {
     ctx.stroke();
   }
   $('insetimg').src = canvas.toDataURL('image/png');
+  }
   $('insetimg').alt = I.alt || '';
   $('insetcap').textContent = I.caption || '';
   // where: the side of the model with the most room, level with the place it shows
@@ -407,11 +430,38 @@ function buildInset(view) {
   const R = screenRect(view, camera, W, H), [ax, ay] = project(I.target, camera, W, H), boxH = h + 12 + (I.caption ? 24 : 0) + 8, boxW = w + 20;
   const room = {right: W - R.x1, left: R.x0, top: R.y0 - 70, bottom: H - R.y1};
   const side = Object.keys(room).sort((a, b) => room[b] - room[a])[0];
-  let x = side === 'right' ? R.x1 + Math.max(24, (W - R.x1 - boxW) / 2) : side === 'left' ? Math.min(R.x0 - boxW - 24, (R.x0 - boxW) / 2) : ax - boxW / 2;   // (in the middle of the free space)
-  let y = side === 'top' ? 70 : side === 'bottom' ? H - boxH - 16 : ay - boxH / 2;
-  x = Math.max(12, Math.min(W - boxW - 12, x)); y = Math.max(70, Math.min(H - boxH - 12, y));
   const clear = onScreenInstructions();         // (not over the instructions)
-  if (clear && x < clear.right + 8 && x + boxW > clear.left - 8 && y < clear.bottom + 8) y = Math.min(H - boxH - 12, clear.bottom + 12);
+  const placeAt = s => {
+    let x = s === 'right' ? R.x1 + Math.max(24, (W - R.x1 - boxW) / 2) : s === 'left' ? Math.min(R.x0 - boxW - 24, (R.x0 - boxW) / 2) : ax - boxW / 2;   // (in the middle of the free space)
+    let y = s === 'top' ? 70 : s === 'bottom' ? H - boxH - 16 : ay - boxH / 2;
+    x = Math.max(12, Math.min(W - boxW - 12, x)); y = Math.max(70, Math.min(H - boxH - 12, y));
+    if (clear && x < clear.right + 8 && x + boxW > clear.left - 8 && y < clear.bottom + 8) y = Math.min(H - boxH - 12, clear.bottom + 12);
+    return [x, y];
+  };
+  let [x, y] = placeAt(side);
+  // Not over the step's labels and eyes or their leaders either (a view with both, such as the LSM's Steps 6 and 14: Lee, 19 Oct
+  // 2026): if it would be, the first other place that is clear of them (the other sides, or this side higher or lower), or else
+  // the one that covers least. A close-up that covers none stays where it was.
+  const marks = [];
+  for (const {it} of callouts) {
+    marks.push([it.x - 8, it.y - 8, it.x + it.w + 8, it.y + it.h + 8]);
+    const [px, py] = project(anchorOf(it, view), camera, W, H), lx = it.x + it.w / 2, ly = it.y + it.h;
+    for (let k = 1; k < 12; k++) { const qx = lx + (px - lx) * k / 12, qy = ly + (py - ly) * k / 12; marks.push([qx - 3, qy - 3, qx + 3, qy + 3]); }
+  }
+  if (marks.length && clear) marks.push([clear.left - 8, clear.top - 8, clear.right + 8, clear.bottom + 8]);   // (nor, moved, over the instructions)
+  const covered = (x, y) => marks.reduce((s, [x0, y0, x1, y1]) => s + Math.max(0, Math.min(x + boxW, x1) - Math.max(x, x0)) * Math.max(0, Math.min(y + boxH, y1) - Math.max(y, y0)), 0);
+  if (marks.length && covered(x, y) > 0) {
+    const tries = [];
+    for (const s of Object.keys(room).sort((a, b) => room[b] - room[a])) {
+      const [sx, sy] = placeAt(s);
+      tries.push([sx, sy]);
+      if (s === 'left' || s === 'right') tries.push([sx, Math.max(70, clear && sx < clear.right + 8 && sx + boxW > clear.left - 8 ? clear.bottom + 12 : 70)], [sx, H - boxH - 12]);
+      else tries.push([12, sy], [W - boxW - 12, sy]);
+    }
+    let best = [x, y, covered(x, y)];
+    for (const [tx, ty] of tries) { const c = covered(tx, ty); if (c < best[2]) best = [tx, ty, c]; if (!c) break; }
+    [x, y] = best;
+  }
   Object.assign(box.style, {left: x + 'px', top: y + 'px', width: boxW + 'px'});
   box.hidden = false;
   const stroke = Math.max(3, Math.min(28, W * 0.027) * 0.16), make = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
@@ -698,23 +748,26 @@ function stepAnimation(now) {
   if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, e), aW.lerpVectors(w.at0, w.at1, e)); }
   liveOffsets = {};
   for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], km, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
+  // Something passing through as many stretches as the step has beats keeps pace with the moving parts' stops, stop by stop: a
+  // wire through its in-between routes (the servo extension wire onto row 10), and a riding part through its in-between places
+  // (the LSM's LED matrix lifted over D4, carried across and laid down, its wires keeping pace); anything else over the whole step.
+  const beats = anim.moveDur ? Math.max(1, Math.round(anim.moveDur / STEP_MS)) : 1;
+  const paced = n => { if (beats > 1 && n === beats) { const b = Math.min(beats - 1, Math.floor(km * beats)); return (b + ease(km * beats - b)) / beats; } return e; };
   const carry = anim.to.carry || {}, before = (anim.from && anim.from.carry) || {}, back = !!anim.wireVia;
   for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
     if (!(id in anim.end)) continue;
     const c = carry[id], was = before[id] && before[id].by === c.by ? before[id].pose : null;
     if (!was && anim.ways[id]) continue;     // (a part with a way of its own that did not ride on it before: it follows its way, which ends where it rides)
     const via = back ? ((was && before[id].via) || []).slice().reverse() : c.via || [];
-    if (was) liveOffsets[id] = composePose(liveOffsets[c.by], JSON.stringify(was) === JSON.stringify(c.pose) ? c.pose : throughPoses([was, ...via, c.pose], e), id);   // (it may be moved to a new place on its carrier)
+    if (was) liveOffsets[id] = composePose(liveOffsets[c.by], JSON.stringify(was) === JSON.stringify(c.pose) ? c.pose : throughPoses([was, ...via, c.pose], paced(via.length + 1)), id);   // (it may be moved to a new place on its carrier)
     else if (anim.fresh.has(id)) liveOffsets[id] = composePose(liveOffsets[c.by], c.pose, id);        // new with its carrier: it rides from the start
     else liveOffsets[id] = mixPose(anim.start[id], composePose(liveOffsets[c.by], c.pose, id), e);   // it was not riding before: it glides there
     stage.setPose(id, liveOffsets[id]);
   }
-  // A wire that passes through as many routes as the moving part has stops keeps pace with it, stop by stop (the
-  // servo extension wire onto row 10); any other wire changes route over the whole step.
+  // (A wire that passes through as many routes as the moving part has stops keeps pace with it, stop by stop: see `paced`.)
   const wireVia = anim.wireVia || anim.to.wire_via;
-  const beats = anim.moveDur ? Math.max(1, Math.round(anim.moveDur / STEP_MS)) : 1, vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
-  let we = e;
-  if (beats > 1 && vias + 1 === beats) { const b = Math.min(beats - 1, Math.floor(km * beats)); we = (b + ease(km * beats - b)) / beats; }
+  const vias = wireVia ? Math.max(0, ...Object.values(wireVia).map(v => v.length)) : 0;
+  const we = paced(vias + 1);
   const leads = anim.leaving.length && k < 1 && anim.to.leaving_wires ? {...anim.to, wires: {...anim.to.wires, ...anim.to.leaving_wires}} : anim.to;   // (a lead taken off goes with its parts)
   let alphas = null;
   if (anim.fade && k < 1) {                  // (parts taken off, fading out; or fading in again, coming back: the same, backwards)

@@ -342,7 +342,8 @@ def published_steps(steps, name, release, model_v):
 
 
 def needed_files(steps):
-    """The guide's own files, relative to the kit folder: the model, the logo, and each picture its Parts List shows."""
+    """The guide's own files, relative to the kit folder: the model, the logo, each picture its Parts List shows, and each
+    close-up that is a picture made outside (inset image: the LSM's capacitor card)."""
     files = [steps['model'].split('?')[0]]
     if steps['meta'].get('logo'):
         files.append(steps['meta']['logo'])
@@ -351,6 +352,9 @@ def needed_files(steps):
             for item in group['items']:
                 if item.get('picture') and item['picture'] not in files:
                     files.append(item['picture'])
+        image = (view.get('inset') or {}).get('image')
+        if image and image not in files:
+            files.append(image)
     return files
 
 

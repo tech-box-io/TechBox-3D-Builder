@@ -18,6 +18,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'tools'))
 import wires as W  # noqa: E402
+from scipy.spatial.transform import Rotation  # noqa: E402
 from stepgen import Guide, apply_pose, compose, relative_pose, turn_dir, turned, via  # noqa: E402
 
 ZERO = [0.0, 0.0, 0.0]
@@ -201,13 +202,19 @@ M_EXIT = {w: np.array([hole(JUMPER_HOLES[w])[0], 879.92, hole(JUMPER_HOLES[w])[2
 F_EXIT = {w: np.array([mid(FEMALE[w])[0], mid(FEMALE[w])[1], box(FEMALE[w])[1][2]]) for w in JUMPERS}
 F_TIP = {w: np.array([mid(FEMALE[w])[0], mid(FEMALE[w])[1], box(FEMALE[w])[0][2]]) for w in JUMPERS}   # (its open end, on the pin)
 
-# The LED matrix's places, as the published guide has them (each relative to its seat, about its middle): over the breadboard for
-# its wires (Steps 13 - 15, turned half round); lying beside the base (Steps 19 - 24); outside D4 while the box is closed round the
-# breadboard (24c - 28); held over the box (28c - 30); in the box.
+# The LED matrix's places, each relative to its seat: held upright over the breadboard's far half for its wires, its back (with the
+# pins) towards the student, the header at the top and the pins pointing down (Steps 15 - 17; Lee, 19 Oct 2026: "vertical so that
+# the connection to the header and where the wires are located on the breadboard can be seen simultaneously"); lying beside the
+# base, turned half round (Steps 21 - 25, as the published guide); laid outside D4 the right way round, turned as it is carried over
+# (Steps 26 - 29), so that over the box it is only lifted and moved (Step 30; Lee, 19 Oct 2026); held over the box; in the box.
 MC = mid(MATRIX).round(2).tolist()
-P_OVER = turned([0, 1, 0], 180.0, MC, [0.49, 21.76, 14.14])
+_up = Rotation.from_euler('y', 25, degrees=True) * Rotation.from_euler('x', 90, degrees=True)
+UP_AT = np.array([641.0, 936.0, 1228.0])                            # (where the middle pin is, the matrix upright)
+_rv = _up.as_rotvec()
+P_UP = turned((_rv / np.linalg.norm(_rv)).round(6).tolist(), round(float(np.degrees(np.linalg.norm(_rv))), 4), MC,
+              (UP_AT - (_up.apply(np.array([610.78, 894.333, 1186.0]) - np.array(MC)) + np.array(MC))).round(3).tolist())
 P_BESIDE = turned([0, 1, 0], 180.0, MC, [91.01, -21.66, 11.37])
-P_OUTSIDE = turned([0, 1, 0], 180.0, MC, [-90.76, 5.89, 25.09])
+P_OUTSIDE = [-90.76, 5.89, 25.09]
 P_HELD = [-0.2, 56.64, -0.32]
 SOCKET_OFF = [0.0, 0.0, 15.0]                                       # a socket held 15 mm off its pin, in line with it (Steps 10 - 15)
 
@@ -229,13 +236,31 @@ def m_end(w, pose):
     return apply_pose(pose, [M_EXIT[w]])[0], turn_dir(pose, [0, 1, 0])
 
 
-def jumper(w, m_pose, f_pose_, mids=(), skip=(), lead=3.0):
+def jumper(w, m_pose, f_pose_, mids=(), skip=(), lead=3.0, stretch=True, fixed=None, follow=None, tail=None):
+    """stretch=False for shapes that share their start (pin, along the floor, up beside D4): changing from one to the other, that
+    part then stays where it is (the player matches the two shapes by distance from the pin, not by share of the length).
+    fixed: a point on the way (one of the mids); the wire up to it does not move with the socket's part (the LED matrix) at all, so
+    that the part of it lying in the box stays put while the matrix is moved about above. follow: mm at the socket's end that move
+    with the matrix; the rest is left to the change of shape (from Step 21 on: 6 mm). The player moves a wire's middle with its end
+    parts by a share that grows along it, and two shapes with different shares, blended while the matrix moves, part from where they
+    should be in between (through the board, the floor); with only the socket's end following, a blend of two shapes that each lie
+    clear of the board stays clear of it, since the board and the blend keep pace. tail: a point on the way (one of the mids) from
+    which on, changing to another shape that has one too, the wire is matched by distance from the socket, not from the pin: the
+    run under the matrix (the same, under the board, in both shapes) then keeps pace with the board, while the run in the box (the
+    same in both) stays put; what one shape has more of in between is taken up there (with stretch=False)."""
     a, ad = m_end(w, m_pose)
     b, bd = f_end(w, f_pose_)
     line = smooth(a, ad, b, -bd, mids, lead=lead)
     check(line, JUMPER_R, skip=(MALE[w], FEMALE[w], *skip), name=f'wire {w}')
+    b_from = None
+    s = np.concatenate([[0], np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))])
+    if fixed is not None:
+        b_from = float(s[np.argmin(np.linalg.norm(line - np.asarray(fixed, float), axis=1))])
+    if follow is not None:
+        b_from = float(s[-1] - follow)
+    tail_from = None if tail is None else float(s[np.argmin(np.linalg.norm(line - np.asarray(tail, float), axis=1))])
     return {f'wire {w}': W.route(line, a=MALE[w], b=FEMALE[w], a_at=m_pose if m_pose != ZERO else None,
-                                 b_at=f_pose_ if f_pose_ != ZERO else None, stretch=True)}
+                                 b_at=f_pose_ if f_pose_ != ZERO else None, stretch=stretch, b_from=b_from, tail_from=tail_from)}
 
 
 # ---------------------------------------------------------------- the build
@@ -279,10 +304,12 @@ CAP_VIEW = [0.346, 0.574, 0.742]                                   # (25 degrees
 g.place('The capacitor has a negative (-) leg and a positive (+) leg. The grey stripe down its side marks the negative leg, which goes to GND.',
         show=[CAP], staged=True, single=True, lines=False, view_dir=[-0.646, 0.259, 0.718], frame=([653.6, 874.0, 1172.0], 13.0),   # (the stripe and both legs)
         labels=[dict(id=CAP, text='GND (-)', anchor=CAP_LEG['gnd']), dict(id=CAP, text='+', anchor=CAP_LEG['plus'])], eye=[dict(id=CAP, anchor=STRIPE)],
-        inset=dict(target=STRIPE, dir=[-0.21, 0.15, 0.966], radius=4.5, mark=2.0, caption='Grey stripe: the negative (-) leg, to GND',
-                   alt='Close-up of the grey stripe down the side of the capacitor'))
+        # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card)
+        inset=dict(target=STRIPE, image='capacitor-card.webp', caption='The grey stripe marks the GND (-) leg',
+                   alt='A capacitor: the grey strip down its side is over the GND (-) leg; the other leg is VCC (+)'))
 g.seat('Push the capacitor into j2 and j3, its grey stripe in j3.', [CAP], direction=[0, 1, 0], hover=29,
-       labels=[hole_label('j3'), hole_label('j2')], lines_at=[hole('j2'), hole('j3')], eye=[dict(id=CAP, anchor=STRIPE)],
+       labels=[hole_label('j3'), hole_label('j2')], lines_at=[[652.5, 863.6, 1170.6], [652.5, 863.6, 1173.1]],   # (the legs' tips: Lee, 19 Oct 2026)
+       eye=[dict(id=CAP, anchor=STRIPE)],
        caution="The capacitor's grey stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND).",
        view_dir=CAP_VIEW, frame=([652.6, 885.0, 1172.0], 28.0))
 g.place('Bend both legs of the 330 Ω resistor (orange, orange, black, black, brown) straight down.', show=[R330], staged=True, lines=False, frame=(mid(R330).tolist(), 18.0), view_dir=DIAG,
@@ -345,71 +372,102 @@ g.place('Pull apart both ends of the three-wire jumper ribbon, so that each wire
         wires={k: v for w in JUMPERS for k, v in ribbon_wire(w, False).items()}, wires_done={k: v for w in JUMPERS for k, v in ribbon_wire(w, True).items()})
 g.put_away(list(MALE.values()) + list(FEMALE.values()))
 
-# Back to the breadboard: the pins held over their holes, the sockets held where the LED matrix's pins will be (Steps 13 - 15).
-# One wire per step: its pin straight down into its hole.
+# Back to the breadboard: the pins held over their holes, the sockets held where the LED matrix's pins will be with the matrix
+# upright (Steps 15 - 17). One wire per step: its pin straight down into its hole. The white and grey wires stay side by side as the
+# ribbon they came from, apart only at their ends (Lee, 19 Oct 2026: in the first round they spread apart and were "confusing to look
+# at"); the purple wire, whose hole is elsewhere, leaves them at the sockets, passing under the white one.
 for w in JUMPERS:
     g.rest_at([MALE[w]], PIN_HOVER)
-    g.rest_at([FEMALE[w]], f_pose(w, P_OVER, SOCKET_OFF))
-# The wires from the pins to the sockets held off the LED matrix's pins (and, ON_MIDS, on them): white and grey side by side, the
-# purple wire passing under the grey one to its socket between the other two. With the pins still held up, the wires leave them
-# higher, the white one over the grey one's pin.
-LOOSE_MIDS = dict(white=[[659.0, 901.0, 1192.0], [667.5, 907.5, 1199.0], [669.8, 913.5, 1205.5]],
-                  grey=[[655.0, 901.0, 1195.5], [662.0, 906.5, 1201.5], [664.7, 913.0, 1206.5]],
-                  purple=[[640.0, 900.0, 1214.0], [660.0, 902.0, 1210.0], [666.8, 905.5, 1207.0], [667.2, 913.5, 1208.5]])
-HOVER_MIDS = dict(white=[[651.0, 925.0, 1176.0], [662.0, 922.0, 1192.0], [667.5, 918.0, 1199.0], [669.8, 915.5, 1205.5]],
-                  grey=[[651.0, 918.5, 1180.0], [657.0, 917.0, 1193.0], [662.0, 915.0, 1201.5], [664.7, 914.5, 1206.5]],
-                  purple=[[634.0, 916.5, 1213.6], [652.0, 912.0, 1211.0], [664.0, 909.0, 1208.5], [667.0, 911.0, 1208.0]])
-ON_MIDS = dict(white=[[659.0, 901.0, 1192.0], [669.5, 906.5, 1203.0], [671.0, 911.0, 1214.0], [670.4, 914.5, 1222.0]],   # (wide of the purple socket)
-               grey=[[655.0, 901.0, 1195.5], [662.0, 906.5, 1209.0], [664.7, 913.0, 1220.0]],
-               purple=[[640.0, 900.0, 1214.0], [660.0, 902.0, 1215.0], [666.8, 905.5, 1219.0], [667.2, 913.5, 1222.0]])
+    g.rest_at([FEMALE[w]], f_pose(w, P_UP, SOCKET_OFF))
+# (White and grey as a centre line and 1.27 mm either side of it across the ribbon, level, so that the two keep apart all along: from
+# their pins, a row along the breadboard, first away from the pins' row, then round towards the matrix, the white wire on the outside
+# of the bend. Neither crosses over the other's hole, so that the grey pin, pushed in after the white one, does not come down through
+# the white wire, as it did when the two went off along the row.)
+def _rib(pts, k, up=0.0):
+    start = (M_EXIT['white'] + M_EXIT['grey']) / 2 + [0.0, 3.0 + up, 0.0]
+    c = np.array([start, *pts], float)
+    out = []
+    for i in range(1, len(c)):
+        t = c[min(i + 1, len(c) - 1)] - c[i - 1]
+        n = np.cross([0.0, 1.0, 0.0], t)
+        n[1] = 0.0
+        out.append((c[i] + 1.27 * k * n / np.linalg.norm(n)).round(2).tolist())
+    return out
+
+
+# (Rising from the pins more steeply than the first try, so that the wires do not bend sharply on the pin housings and lie clear of the
+# 12 kΩ resistor, as in Lee's picture of Step 12c: an independent review, 19 Oct 2026.)
+_turn = [[645.8, 887.0, 1171.72], [643.6, 891.0, 1174.0], [642.6, 896.0, 1179.5]]
+_lo = _turn + [[642.4, 902.0, 1199.0], [642.0, 902.4, 1209.0], [641.3, 905.5, 1219.0]]
+_on = _turn + [[642.4, 902.0, 1199.0], [642.0, 902.8, 1209.0], [641.3, 907.0, 1220.0]]
+_hi = [[645.8, 915.0, 1171.72], [643.6, 916.0, 1174.0], [642.6, 916.0, 1179.5], [642.4, 906.0, 1199.0], [642.0, 905.8, 1209.0], [641.3, 905.5, 1219.0]]
+LOOSE_MIDS = dict(white=_rib(_lo, -1), grey=_rib(_lo, 1),                                                 # (pins in, sockets held off)
+                  purple=[[630.0, 892.0, 1217.0], [636.5, 900.5, 1222.5], [640.2, 906.0, 1226.0]])
+HOVER_MIDS = dict(white=_rib(_hi, -1, 30.0), grey=_rib(_hi, 1, 30.0),                                                 # (pins still held up)
+                  purple=[[630.5, 912.5, 1218.0], [636.5, 904.0, 1223.0], [640.2, 906.0, 1226.0]])
+ON_MIDS = dict(white=_rib(_on, -1) + [[638.9, 918.5, 1227.8]], grey=_rib(_on, 1) + [[643.1, 918.5, 1225.5]],   # (sockets on)
+               purple=[[630.0, 892.0, 1217.0], [636.5, 900.5, 1222.5], [640.0, 910.0, 1226.0], [641.0, 919.5, 1227.9]])
+
+
+# Where the white and grey wires' shapes are matched from the sockets' end on (`tail`): the ribbon from there to the sockets stays put
+# while a pin goes in. With the white pin in and the grey still held up (Step 11c, Step 12 as it opens), the grey runs beside the white
+# ribbon from there and leaves it only to climb to its pin (the first try kept it on its own high path: "basically fully separated").
+JOIN = {k: [round(a + (b - a) * 0.53, 2) for a, b in zip(_rib(_lo, kk)[2], _rib(_lo, kk)[3])] for k, kk in (('white', -1), ('grey', 1))}
+HELD_GREY = [[647.0, 909.5, 1177.0], JOIN['grey']] + _rib(_lo, 1)[3:]
 
 
 def loose(w, plugged):
-    return jumper(w, ZERO if plugged else PIN_HOVER, f_pose(w, P_OVER, SOCKET_OFF), LOOSE_MIDS[w] if plugged else HOVER_MIDS[w])
+    if w in JOIN:
+        return jumper(w, ZERO if plugged else PIN_HOVER, f_pose(w, P_UP, SOCKET_OFF), LOOSE_MIDS[w] if plugged else HOVER_MIDS[w],
+                      stretch=False, tail=JOIN[w])
+    return jumper(w, ZERO if plugged else PIN_HOVER, f_pose(w, P_UP, SOCKET_OFF), LOOSE_MIDS[w] if plugged else HOVER_MIDS[w])
 
 
 wires_now = {k: v for w in JUMPERS for k, v in loose(w, False).items()}
-# (Each from a corner where the hole is not hidden: i2 and i3 from beyond row j, b19 from beyond row a and the 330 Ω resistor's far
-# end: Lee, 19 Oct 2026.)
-PIN_CAMERA = dict(white=dict(view_dir=[0.5792, 0.5736, -0.5792], frame=([650.1, 892.0, 1172.0], 34.0)),
-                  grey=dict(view_dir=[0.5792, 0.5736, -0.5792], frame=([650.1, 892.0, 1172.0], 34.0)),
+# (i2 and i3 as Lee framed them, 19 Oct 2026, a screenshot of Step 12c: from the end of the breadboard by column 1; b19 from beyond
+# row a and the 330 Ω resistor's far end.)
+PIN_CAMERA = dict(white=dict(view_dir=[-0.3282, 0.6298, -0.704], frame=([644.3, 895.7, 1180.6], 38.3)),
+                  grey=dict(view_dir=[-0.3282, 0.6298, -0.704], frame=([644.3, 895.7, 1180.6], 38.3)),
                   purple=dict(view_dir=[-0.5792, 0.5736, 0.5792], frame=([627.0, 892.0, 1213.6], 34.0)))
 plugged = []
 for k, w in enumerate(JUMPERS):
     h = JUMPER_HOLES[w]
     g.place(f'Push the {w} wire\'s pin into {h}.', move=[MALE[w]], appear=list(MALE.values()) + list(FEMALE.values()) if k == 0 else (),
             path=[PIN_HOVER, ZERO], lines=False, labels=[hole_label(h)], eye=[MALE[w]],
-            wires=wires_now if k == 0 else None, wires_done=loose(w, True), **PIN_CAMERA[w])
+            wires=wires_now if k == 0 else None,
+            wires_done={**loose(w, True), **(jumper('grey', PIN_HOVER, f_pose('grey', P_UP, SOCKET_OFF), HELD_GREY, stretch=False,
+                                                   tail=JOIN['grey']) if w == 'white' else {})}, **PIN_CAMERA[w])
     plugged.append(w)
 
-# The LED matrix comes in over the breadboard, turned half round, its three pins towards the sockets; each socket goes onto its pin.
-# (The card gives the pins their names; the sockets ride on the matrix from here on.)
-g.put_away(list(FEMALE.values()))
 # The LED matrix itself, turned over (Lee, 19 Oct 2026: "an actual visual of the LED Matrix", in place of the first draft's note card):
 # its three pins, in a right-angle header lying flat at one corner of its back, and the label stuck beside them, V- IN V+. Seen from the
-# side that reads the label upright.
+# side that reads the label upright. Each pin is named at a different place along it (V- by the header, IN half way, V+ at its tip),
+# so that the three names, stacked beside the matrix, have leaders that do not cross (Lee, 19 Oct 2026); no eye.
+g.put_away(list(FEMALE.values()))
 PIN_X = dict(white=608.24, purple=610.78, grey=613.32)               # V+, IN, V- (assemble.py), 1.27 mm under the back face
 PIN_Y, PIN_TIP_Z = 894.333, 1190.06
+ALONG_PIN = dict(grey=1183.4, purple=1186.2, white=1189.4)
 g.place('Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. '
         'The white wire goes on V+, the purple wire on IN and the grey wire on V-.',
         show=[MATRIX], staged=True, single=True, lines=False, flip=True, view_dir=[-0.18, -0.8, 0.57], frame=([628.0, 895.0, 1199.0], 36.0),
-        labels=[dict(id=MATRIX, text=MATRIX_PINS[w], anchor=[PIN_X[w], PIN_Y, PIN_TIP_Z - 1.0]) for w in ('white', 'purple', 'grey')],
-        eye=[dict(id=MATRIX, anchor=[610.78, 894.2, 1181.0])],
-        inset=dict(target=[612.5, 894.5, 1191.0], radius=10.0, caption='V+, IN and V-, as the label names them', alt='Close-up of the three pins and the label'))
+        labels=[dict(id=MATRIX, text=MATRIX_PINS[w], anchor=[PIN_X[w], PIN_Y, ALONG_PIN[w]]) for w in ('grey', 'purple', 'white')],
+        # (its ring on the label by the pins' tips, so that it is not taken for a fourth pin's: an independent review, 19 Oct 2026)
+        inset=dict(target=[613.0, 895.6, 1196.0], radius=11.0, caption='V+, IN and V-, as the label names them', alt='Close-up of the three pins and the label'))
 g.put_away([MATRIX])
-g.rest_at([MATRIX], P_OVER)
+# The LED matrix held upright over the breadboard, its back towards the student, the header at the top; each socket goes up onto its
+# pin. Each step names the pin, and the hole the wire's other end is in (Lee, 19 Oct 2026).
+g.rest_at([MATRIX], P_UP)
 for w in JUMPERS:
     g.carry([FEMALE[w]], by=MATRIX, pose=SOCKET_OFF, appear=False)
-ON_PIN = {w: jumper(w, ZERO, f_pose(w, P_OVER), ON_MIDS[w]) for w in JUMPERS}
-# (From the corner to the right of the first draft's, a little below the matrix and looking up at its pins: Lee, 19 Oct 2026. One
-# camera for the three.)
-_pins_over = apply_pose(P_OVER, [[PIN_X['purple'], PIN_Y, 1186.0]])[0]
-PIN_VIEW = dict(view_dir=[0.757, -0.154, -0.635], frame=(_pins_over.round(1).tolist(), 30.0))
-OFF_PIN = {k: v for w in JUMPERS for k, v in loose(w, True).items()}   # (the wires as Step 12 left them: put_away took them off with the sockets)
+ON_PIN = {w: jumper(w, ZERO, f_pose(w, P_UP), ON_MIDS[w]) for w in JUMPERS}
+PIN_VIEW = dict(view_dir=[-0.36, 0.45, -0.82], frame=([643.0, 906.0, 1203.0], 48.0))   # (the header and the holes together; one camera for the three)
+OFF_PIN = {k: v for w in JUMPERS for k, v in loose(w, True).items()}   # (the wires as Step 13 left them: put_away took them off with the sockets)
 for k, w in enumerate(['white', 'purple', 'grey']):                # (in the order of the pins along the matrix's edge)
     g.place(f'Push the {w} wire\'s socket onto the {MATRIX_PINS[w]} pin of the LED matrix.', appear=[MATRIX] + list(FEMALE.values()) if k == 0 else (),
             ride={FEMALE[w]: ZERO}, lines=False,
-            labels=[dict(id=MATRIX, text=MATRIX_PINS[w], anchor=F_TIP[w].round(2).tolist())], eye=[FEMALE[w]],   # (anchors are on the part, as built)
+            labels=[dict(id=MATRIX, text=MATRIX_PINS[w], anchor=F_TIP[w].round(2).tolist()),
+                    dict(id=MALE[w], text=JUMPER_HOLES[w], anchor=[float(hole(JUMPER_HOLES[w])[0]), 877.0, float(hole(JUMPER_HOLES[w])[2])])],
+            eye=[FEMALE[w]],
             wires=OFF_PIN if k == 0 else None, wires_done=ON_PIN[w], **PIN_VIEW)
 g.put_away([MATRIX] + list(FEMALE.values()))
 # ================================================================ PART 2 (end)
@@ -468,7 +526,8 @@ def nut_turns(z0, z1, sign, turns=2):
 g.place('Unscrew the nut from the push button and slide it off over the wires.', move=[BUTTON], path=TWO_BEATS, staged=True,
         ride={NUT: nut_turns(3.12, NUT_OFF[2], -1)}, lines=False,
         labels={BUTTON: 'Push Button'}, wires={**hand_lead('red'), **hand_lead('black')},
-        arrows=[dict(tail=[AXIS[0] + 11.0, AXIS[1], 1255.0 - 3.0], head=[AXIS[0] + 11.0, AXIS[1], 1255.0 - 60.0], normal=[0, 1, 0], part=NUT)],
+        # (from the nut's rear face, so that it does not run into the nut: Lee, 19 Oct 2026; seated mm on the nut, its rear face z 1250.43)
+        arrows=[dict(tail=[AXIS[0] + 11.0, AXIS[1] + 1.0, 1250.3], head=[AXIS[0] + 11.0, AXIS[1] + 1.0, 1193.3], normal=[0, 1, 0], part=NUT)],   # (1 mm up: clear of the black lead)
         **r1_camera([0.6213, 0.2806, 0.7316], [638.2, 881.6, 1207.0], 53.4))
 g.put_away([NUT])
 g.place('Push the button, wires first, through the round hole in D2 from the side with D2 engraved on it.', move=[BUTTON], show=[D2], against=[D2], staged=True,
@@ -491,7 +550,8 @@ for w in JUMPERS:
 BESIDE_MIDS = dict(white=[[652.0, 895.0, 1176.0], [690.0, 868.0, 1194.5], [731.2, 865.0, 1207.8]],   # (side by side as their sockets are, the
                    grey=[[652.0, 894.0, 1179.0], [690.0, 868.0, 1199.5], [728.8, 865.0, 1212.2]],    # purple wire over the grey one to its place
                    purple=[[630.0, 900.0, 1216.0], [672.0, 899.5, 1207.0], [696.0, 875.0, 1197.5], [730.0, 865.0, 1210.0]])   # between the two)
-BESIDE = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_BESIDE), BESIDE_MIDS[w]).items()}
+BESIDE = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_BESIDE), BESIDE_MIDS[w], stretch=False, follow=6.0,
+                                                    tail=BESIDE_MIDS[w][-1]).items()}
 
 
 def plugged_lead(c, d2_pose=ZERO, mids=(), into=3.0):
@@ -502,13 +562,15 @@ def plugged_lead(c, d2_pose=ZERO, mids=(), into=3.0):
 
 
 LEAD_MIDS = dict(red=[[636.0, 893.0, 1250.0], [651.0, 895.0, 1192.0]], black=[[642.0, 893.0, 1250.0], [652.0, 894.0, 1222.0]])
+# (Closer, from beyond row j: Lee, 19 Oct 2026; the black wire's as Lee framed it, a screenshot of Step 22.)
+LEAD_CAMERA = dict(red=dict(view_dir=[0.5792, 0.5736, -0.5792], frame=([645.0, 884.0, 1209.0], 40.0)),
+                   black=dict(view_dir=[0.6491, 0.6967, -0.3055], frame=([653.7, 892.4, 1204.6], 35.5)))
 for k, c in enumerate(('red', 'black')):
     g.place(f'Push the pin on the button\'s {c} wire into {PIN_HOLE[c]}.', move=[PIN_OF[c]], path=[pin_pose(c, D2_OUT), ZERO], lines=False,
             appear=[D2, MATRIX, RED_PIN, BLACK_PIN] if k == 0 else (),
             labels=[hole_label(PIN_HOLE[c])], eye=[PIN_OF[c]],
             wires={**BESIDE, **hand_lead('red', D2_OUT), **hand_lead('black', D2_OUT)} if k == 0 else None,
-            wires_done=plugged_lead(c, D2_OUT, LEAD_MIDS[c]),
-            view_dir=[0.5792, 0.5736, -0.5792], frame=([645.0, 884.0, 1209.0], 40.0))   # (closer, from beyond row j: Lee, 19 Oct 2026)
+            wires_done=plugged_lead(c, D2_OUT, LEAD_MIDS[c]), **LEAD_CAMERA[c])
 
 # The USB cable: its right-angle Mini-B plug into the Nano Board's socket, its cable leaving towards D4 and out through the notch in
 # D4's foot to the A end lying on the table.
@@ -533,9 +595,10 @@ def usb_cable(out=ZERO):
     return {'usb cable': W.route(line, a=USB_B, b=USB_A, a_at=out if out != ZERO else None, stretch=True)}
 
 
+BASE_CAMERA = r1_camera(DIAG, [630.0, 880.0, 1228.0], 125.0)       # (Steps 23 - 25, a little closer than the first draft's: Lee, 19 Oct 2026)
 g.place("Plug the USB cable's Mini-B plug into the Nano Board's USB socket, its cable towards the D4 end of the base.", move=[USB_B], show=[USB_A],
         path=[USB_OUT, ZERO], lines_at=[[637.29, 877.37, 1211.63]], labels={USB_B: 'USB Cable'}, wires=usb_cable(USB_OUT), wires_done=usb_cable(),
-        **r1_camera(DIAG, [640.9, 881.6, 1232.8], 148.7))
+        **BASE_CAMERA)
 
 # D2 stands on D1, its tabs into the slots along D1's edge; the button's leads follow.
 # (Round the USB plug on its far side, between the 12 kΩ resistor's leg and the black wire's pin, under D10.)
@@ -543,14 +606,14 @@ SEATED_LEAD_MIDS = dict(red=[[640.0, 882.5, 1229.0], [647.5, 881.5, 1222.0], [65
                         black=[[645.5, 882.0, 1228.0], [651.0, 881.4, 1218.0], [652.62, 881.0, 1210.0]])
 g.place('Stand D2, with the button, on D1: its tabs go into the slots along the edge of D1.', move=[D2], path=[D2_OUT, ZERO],
         wires_done={**plugged_lead('red', ZERO, SEATED_LEAD_MIDS['red']), **plugged_lead('black', ZERO, SEATED_LEAD_MIDS['black'], into=1.2)},   # (j16 is under D10)
-        **r1_camera(DIAG, [640.9, 881.6, 1232.8], 148.7))
+        **BASE_CAMERA)
 # ================================================================ PART 3 (end)
 
 # ================================================================ PART 4: THE HOUSING (begin)
-# (The USB cable's A end lies out of D4's way, 60 mm further out than in the first draft (assemble.py), so that D4, held out before it
-# goes on, has the cable in its notch: Lee, 19 Oct 2026. The cable itself passes through the notch in D4's foot.)
-g.place('Push D4 onto the end of D1 and D2, the USB cable in the notch at its foot.', move=[D4], labels={D4: 'D4'}, direction=[-1, 0, 0], hover=65,
-        against=[i for i in g.placed if i not in g.parked and i != USB_A], **r1_camera(DIAG, [640.9, 881.6, 1232.8], 148.7))
+# D4 comes down from above (Lee, 19 Oct 2026), the USB cable into the notch at its foot, to just outside its place, then goes on over the
+# tabs of D1 and D2: those go through closed slots in D4, so it cannot be lowered straight into place.
+g.place('Lower D4 beside the end of D1, the USB cable in the notch at its foot, then push it onto the tabs of D1 and D2.', move=[D4], labels={D4: 'D4'},
+        path=[[-8.0, 65.0, 0.0], [-8.0, 0.0, 0.0], ZERO], **BASE_CAMERA)
 
 # ---- The LED matrix's three wires from here on (Lee, 19 Oct 2026: they went through D4, the D9s and D10). Inside the box each runs
 # from its pin under the end of D9 nearest D3 (the white and grey wires over the Nano Board's ICSP pins, which leave 1.8 mm under the
@@ -563,58 +626,60 @@ IN_BOX = dict(white=[[646.0, 885.4, 1170.45], [622.0, 885.4, 1170.45], [609.0, 8
               grey=[[646.0, 885.4, 1172.99], [622.0, 885.4, 1172.99], [611.0, 884.8, 1173.1], [607.4, 883.0, 1177.0], [607.4, 882.0, 1188.0], [607.4, 882.0, 1199.0]],
               purple=[[623.5, 881.45, 1213.6], [614.0, 881.45, 1213.6]])
 PIN_LEAD = dict(white=3.0, grey=3.0, purple=1.5)                    # (the purple wire turns under the D9 as soon as it leaves its pin)
-# Where each crosses the top edge of D4 (y 907.04), 2.5 mm apart, in the order their sockets lie outside (white nearest D4): so the
-# grey wire rises first and passes over the white one, which runs on along the floor and rises behind it.
-OVER_Z = dict(grey=1211.0, purple=1213.5, white=1216.0)
-RISE = dict(white=[[605.0, 882.0, 1209.0], [604.6, 882.6, 1213.5], [603.8, 887.5, 1215.6], [602.0, 898.0, 1216.0]],   # (from the floor to D4's top, inside)
-            grey=[[607.4, 882.0, 1203.0], [607.6, 884.5, 1206.0], [607.0, 890.5, 1208.6], [604.6, 899.5, 1210.6]],
-            purple=[[610.0, 883.0, 1213.5], [607.0, 887.0, 1213.5], [603.6, 893.0, 1213.5], [600.4, 900.0, 1213.5]])
+# Then on along the floor and up between D4 and the D9 at the D2 end (Lee's round 1: "extending from between D4 and the nearest D9
+# support and upward"), to above the walls: the same in every shape from Step 26 to Step 31, and fixed (it does not move with the
+# matrix), so it stays put whatever the matrix does above. The three rise 1.4 mm apart along the box, in the order their sockets lie
+# outside D4 (grey nearest D3), so that they never cross over D4's edge; clear of D10 as it comes up (z 1242.7 - 1245.7).
+UP_SIDE = dict(white=[[605.0, 882.0, 1241.0], [605.2, 884.0, 1246.8], [605.6, 893.0, 1249.8], [606.0, 913.0, 1250.1]],
+               grey=[[607.4, 882.0, 1238.0], [607.6, 884.0, 1244.2], [608.5, 893.0, 1247.0], [610.0, 913.0, 1247.3]],
+               purple=[[611.0, 882.0, 1219.0], [610.8, 882.0, 1240.0], [610.6, 884.0, 1245.4], [610.0, 893.0, 1248.4], [609.2, 913.0, 1248.7]])
+SIDE_TOP = {w: UP_SIDE[w][-1] for w in JUMPERS}
+
+
+D4_TOP = 909.5                                                      # (where the wires cross D4's top edge, y 907.04: the same in every shape)
 
 
 def over_d4(w, lift):
-    """The wire from its pin, over the top of D4, to its socket on the LED matrix laid outside, `lift` mm up (the published guide's
-    pose: 5.89)."""
-    pose = turned([0, 1, 0], 180.0, MC, [-90.76, lift, 25.09])
+    """The wire from its pin, up beside D4 at the D2 end, over D4's top edge, to its socket on the LED matrix laid outside the right
+    way round, `lift` mm up (5.89, the published guide's height; 25 while it is carried over; 56.64 lifted, to be moved over the box).
+    The header is at the matrix's far edge: the wires go on under the board to it, 1.2 mm below the sockets' height (clear of the board
+    while it moves), straight (points every 16 mm, so that the curve does not bulge up into the board)."""
+    pose = [-90.76, lift, 25.09]
     sx = f_end(w, pose)[0]
-    top = 908.4 + (lift - 5.89) * 0.25                              # (over the edge, higher while the matrix is held higher)
-    z = OVER_Z[w]
-    ys = sx[1]
-    out = [[599.3, top - 2.6, z], [596.0, top, z], [592.5, top - 1.6, z + 0.6]]
-    # Outside, the three go on as a flat ribbon about the purple wire's line, turning from going out across D4's edge (side by side
-    # along z) to going along the sockets (side by side along x), each kept 2.5 mm from the middle one square to the way they run;
-    # down under the matrix's edge before they reach it.
-    k = dict(white=1, purple=0, grey=-1)[w]
-    px = f_end('purple', pose)[0]
-    c0, c1 = np.array([592.5, OVER_Z['purple'] + 0.6]), np.array([px[0], px[2] - 3.0])
-    for f in (0.25, 0.5, 0.75):
-        t = (1 - f) * np.array([-1.0, 0.0]) + f * np.array([0.0, 1.0])
-        t /= np.linalg.norm(t)
-        x, zz = (1 - f) * c0 + f * c1 + 2.5 * k * np.array([t[1], -t[0]])
-        out.append([round(float(x), 2), round(top - 1.6 - (top - 1.6 - ys - 0.3) * min(1.0, f / 0.55), 2), round(float(zz), 2)])
-    return pose, jumper(w, ZERO, f_pose(w, pose), IN_BOX[w] + RISE[w] + out, lead=PIN_LEAD[w])
+    ys, yb = sx[1], sx[1] - 1.2
+    xt, _, zr = SIDE_TOP[w]
+    z_run = dict(grey=1222.0, purple=1226.0, white=1230.0)[w]
+    dx = dict(white=-1.0, purple=0.0, grey=1.0)[w]                  # (apart across their slant down towards the board)
+    out = [[601.5, 911.5, zr], [596.0, 910.0, zr], [591.0 + dx, 910.0 + 0.15 * (ys - 910.0), zr - 2.0], [585.0 + dx, 910.0 + 0.6 * (ys - 910.0), (zr + 2 * z_run) / 3 + 3.0],
+           [580.6, yb, z_run], [565.0, yb, z_run], [548.0, yb, z_run], [531.0, yb, z_run], [sx[0] + 4.0, yb, z_run - 1.0], [sx[0] + 0.8, ys - 0.4, z_run - 3.6]]
+    return pose, jumper(w, ZERO, f_pose(w, pose), IN_BOX[w] + UP_SIDE[w] + [[round(float(v), 2) for v in m] for m in out], lead=PIN_LEAD[w],
+                        stretch=False, follow=6.0, tail=SIDE_TOP[w])
 
 
 # The LED matrix is lifted over D4 and laid outside it, its wires over the top edge of D4 (Lee, 19 Oct 2026: from above, with one
-# arrow, as the published guide's Step 23): lifted straight up, carried across over the walls, lowered outside. Three beats (D4 is
-# given a way that stays where it is, which makes the step three beats long), the wires keeping pace.
+# arrow, as the published guide's Step 23). Lifted straight up; turned a quarter turn over the box; carried on outside D4, turning the
+# other quarter, so that it lies the right way round for Step 30 (Lee, 19 Oct 2026); lowered. Four beats (D4 is given a way that stays
+# where it is, which makes the step four beats long): the matrix and its wires keep pace, stop by stop.
 P_UP_BESIDE = turned([0, 1, 0], 180.0, MC, [91.01, 25.0, 11.37])
-UP_BESIDE_MIDS = dict(white=[[652.0, 902.0, 1176.0], [690.0, 912.0, 1194.5], [731.2, 915.5, 1207.8]],   # (BESIDE's, lifted)
-                      grey=[[652.0, 901.0, 1179.0], [690.0, 911.5, 1199.5], [728.8, 915.5, 1212.2]],
-                      purple=[[630.0, 905.0, 1216.0], [672.0, 917.0, 1207.0], [696.0, 914.5, 1197.5], [730.0, 915.5, 1210.0]])
-UP_BESIDE = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_UP_BESIDE), UP_BESIDE_MIDS[w]).items()}
-P_UP_OUTSIDE, UP_OUTSIDE = None, {}
+P_MID = turned([0, 1, 0], 90.0, MC, [-26.0, 25.0, 18.0])              # (its header over D4, by where the wires come up)
+P_UP_OUTSIDE = [-90.76, 25.0, 25.09]
+UP_BESIDE_MIDS = dict(white=[[652.0, 910.0, 1176.0], [690.0, 912.0, 1194.5], [731.2, 911.66, 1207.8]],   # (BESIDE's, lifted: the last
+                      grey=[[652.0, 901.0, 1179.0], [690.0, 911.5, 1199.5], [728.8, 911.66, 1212.2]],     # as much as the matrix)
+                      purple=[[630.0, 905.0, 1216.0], [672.0, 917.0, 1207.0], [696.0, 914.5, 1197.5], [730.0, 911.66, 1210.0]])
+UP_BESIDE = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_UP_BESIDE), UP_BESIDE_MIDS[w], stretch=False, follow=6.0,
+                                                       tail=UP_BESIDE_MIDS[w][-1]).items()}
+# Half way over, the header over D4 at the D2 end: the wires as they will lie (under the D9's end, along the floor, up beside D4 at the
+# D2 end), then straight on into the sockets under the board, in the same order.
+MID_TAIL = dict(white=[[605.4, 916.5, 1251.4]], purple=[[607.0, 916.5, 1249.6]], grey=[[607.6, 916.5, 1247.4]])
+MID = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_MID), IN_BOX[w] + UP_SIDE[w] + MID_TAIL[w], lead=PIN_LEAD[w], stretch=False,
+                                                 follow=6.0, tail=SIDE_TOP[w]).items()}
+UP_OUTSIDE, OUTSIDE = {}, {}
 for w in JUMPERS:
-    P_UP_OUTSIDE, r = over_d4(w, 25.0)
-    UP_OUTSIDE.update(r)
-OUTSIDE = {}
-for w in JUMPERS:
-    P_OUT, r = over_d4(w, 5.89)
-    OUTSIDE.update(r)
-assert P_OUT == P_OUTSIDE
-_bb = box(BREADBOARD)
-g.place('Lift the LED matrix over D4 and lay it down outside, its wires over the top edge of D4.', move=[D4], paths={D4: [ZERO, ZERO, ZERO, ZERO]},
-        ride={MATRIX: [P_UP_BESIDE, P_UP_OUTSIDE, P_OUTSIDE]}, lines=False, eye=[MATRIX],
-        wires_done={k: [UP_BESIDE[k], UP_OUTSIDE[k], OUTSIDE[k]] for k in OUTSIDE},
+    UP_OUTSIDE.update(over_d4(w, 25.0)[1])
+    OUTSIDE.update(over_d4(w, 5.89)[1])
+g.place('Lift the LED matrix over D4, turning it round, and lay it down outside, LEDs up, its wires over the top edge of D4.', move=[D4], paths={D4: [ZERO] * 5},
+        ride={MATRIX: [P_UP_BESIDE, P_MID, P_UP_OUTSIDE, P_OUTSIDE]}, lines=False, eye=[MATRIX],
+        wires_done={k: [UP_BESIDE[k], MID[k], UP_OUTSIDE[k], OUTSIDE[k]] for k in OUTSIDE},
         arrows=[dict(tail=[690.0, 862.4, 1133.0], head=[585.0, 862.4, 1133.0], normal=[0, 1, 0], part=D1, width=5.0)],
         view_dir=[0.0, 0.996, 0.088], frame=([638.5, 880.0, 1205.0], 82.0))
 # D3 and D5 go on with the box turned over (as in the published guide): D3 is hooked into D4 tilted, then swung shut; D5 closes the box.
@@ -626,9 +691,10 @@ _in = 40.0 * np.array([np.cos(np.radians(TILT)), 0.0, -np.sin(np.radians(TILT))]
 g.place('Turn the box over. Hook the tabs at the end of D3 into the slots in D4, then swing D3 shut onto D1.', move=[D3], labels={D3: 'D3'},
         path=[turned([0, 1, 0], TILT, HINGE, _in.round(2).tolist()), turned([0, 1, 0], TILT, HINGE), ZERO], flip=True,
         lines_at=[[[590.9, y, 1155.1], [597.4, y, 1155.1]] for y in (862.0, 902.0)],   # (D3's end tabs into D4's slots)
-        **r1_camera([-0.5792, -0.5736, -0.5792], [617.4, 881.6, 1189.6], 135.7))
+        **r1_camera([-0.5792, -0.5736, -0.5792], [622.0, 881.6, 1195.0], 118.0))      # (a little closer: Lee, 19 Oct 2026)
 # (From the corner on D5's side, near its engraved code: Lee, 19 Oct 2026. The box is upside down, so the code is too.)
-g.place('Push D5 onto the open end, over the tabs of D3 and D2.', move=[D5], labels={D5: 'D5'}, direction=[1, 0, 0], hover=42, flip=True,
+g.place('Push D5 onto the open end, over the tabs of D1, D2 and D3.', move=[D5], labels={D5: 'D5'}, direction=[1, 0, 0], hover=42, flip=True,
+        lines_at=[[682.6, 861.3, 1176.1], [[682.5, 864.8, 1254.2], [685.9, 864.8, 1254.2]]],   # (points on D1 and D2: Lee, 19 Oct 2026; D2's tab end is proud of D5: from D5's face)
         **r1_camera([0.5792, -0.5736, -0.5792], [617.4, 881.6, 1189.6], 135.7))
 # ================================================================ PART 4 (end)
 
@@ -637,38 +703,68 @@ g.place('Push D5 onto the open end, over the tabs of D3 and D2.', move=[D5], lab
 HELD_CAMERA = r1_camera(DIAG, [601.0, 910.9, 1204.6], 114.8)
 g.place('Turn the box the right way up. Push the two D9 LED supports down into their slots in D2 and D3.', move=[D9_A, D9_B], labels={D9_A: 'D9'},
         direction=[0, 1, 0], hover=65, **HELD_CAMERA)
-# Held over the box (Lee, 19 Oct 2026, as the published guide): each wire on along the floor beside D4, up behind D2, over and back
-# along under the matrix's edge to its socket, through where D10's slot will be (x 605.2 - 612.8): D10 then comes up behind the matrix
-# with the wires in its slot, and slides along under them.
-HELD_TAIL = dict(white=[[605.0, 882.0, 1238.0], [605.2, 884.0, 1244.8], [605.6, 893.0, 1248.0], [605.9, 925.0, 1248.3], [606.2, 940.5, 1251.3],
-                        [606.4, 945.0, 1255.0], [606.6, 949.3, 1253.0], [606.6, 950.4, 1247.5], [606.6, 950.4, 1205.0]],
-                 grey=[[607.4, 882.0, 1236.5], [607.6, 884.0, 1243.5], [608.5, 893.0, 1246.6], [609.5, 925.0, 1246.9], [610.2, 940.0, 1249.8],
-                       [610.8, 944.6, 1253.8], [611.2, 948.8, 1252.0], [611.2, 950.4, 1246.5], [611.2, 950.4, 1205.0]],
-                 purple=[[611.0, 882.0, 1219.0], [610.8, 882.0, 1238.5], [610.4, 884.0, 1246.0], [609.6, 893.0, 1249.4], [609.0, 925.0, 1249.7], [608.9, 941.0, 1252.4],
-                         [608.9, 945.4, 1256.2], [608.9, 949.6, 1254.0], [608.9, 950.4, 1248.5], [608.9, 950.4, 1205.0]])
-HELD = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_HELD), IN_BOX[w] + HELD_TAIL[w], lead=PIN_LEAD[w]).items()}
-P_TURN = turned([0, 1, 0], 90.0, MC, [-50.0, 45.0, 12.0])          # (half way round, in the air: each turn between two poses under 180 degrees)
-g.place('Pick up the LED matrix and hold it over the box, LEDs up.', ride={MATRIX: [P_TURN, P_HELD]}, lines=False, eye=[MATRIX], wires_done=HELD, **HELD_CAMERA)
+# Held over the box (Lee, 19 Oct 2026, as the published guide): each wire straight along under the matrix's edge (from just past its
+# socket, where the three close up to lie in D10's slot all the way along which D10 slides: x 605.2 - 612.8), on past
+# where D10 comes up (Lee, 19 Oct 2026: "dead straight until at least beyond the point where D10 spawns"), through where D10's slot will
+# be (x 605.2 - 612.8), over D2 and back down behind it into the box, along the floor beside D4 and under the D9 to its pin. D10 comes up
+# between the matrix's end and the wires' bend, the wires in its slot, and slides along under them.
+# (Points every 20 mm along the straight run, so that the curve does not swing aside between them as the wires close up from the
+# sockets' 2.54 mm to 1.8 mm apart.)
+HELD_TAIL = dict(white=[[606.6, 925.0, 1250.3], [607.4, 935.0, 1252.0], [608.0, 942.0, 1256.8], [608.3, 948.4, 1258.9], [608.4, 950.97, 1256.2],
+                        [608.4, 950.97, 1253.0], [608.4, 950.97, 1244.0], [608.4, 950.97, 1224.0], [608.4, 950.97, 1213.0], [608.4, 950.97, 1207.0], [608.4, 950.97, 1203.0]],
+                 purple=[[609.4, 925.0, 1248.9], [609.8, 935.0, 1250.6], [610.1, 942.0, 1255.8], [610.2, 948.4, 1257.9], [610.2, 950.97, 1255.3],
+                         [610.2, 950.97, 1253.0], [610.2, 950.97, 1244.0], [610.2, 950.97, 1224.0], [610.2, 950.97, 1213.0], [610.2, 950.97, 1207.0], [610.2, 950.97, 1203.0]],
+                 grey=[[611.0, 925.0, 1247.5], [611.5, 935.0, 1249.2], [611.8, 942.0, 1254.4], [612.0, 948.4, 1256.5], [611.9, 950.97, 1254.0],
+                       [611.9, 950.97, 1252.0], [611.9, 950.97, 1244.0], [611.9, 950.97, 1224.0], [611.9, 950.97, 1213.0], [611.9, 950.97, 1207.0], [611.9, 950.97, 1203.0]])
+HELD = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_HELD), IN_BOX[w] + UP_SIDE[w] + HELD_TAIL[w], lead=PIN_LEAD[w],
+                                                  stretch=False, follow=6.0, tail=SIDE_TOP[w]).items()}
+# Lifted straight up outside D4, then moved over the box: no turn (Lee, 19 Oct 2026). Two beats, the wires keeping pace.
+P_LIFT = [-90.76, 56.64, 25.09]
+LIFT = {}
+for w in JUMPERS:
+    LIFT.update(over_d4(w, 56.64)[1])
+g.place('Pick up the LED matrix and hold it over the box, LEDs up.', move=[D4], paths={D4: [ZERO] * 3}, ride={MATRIX: [P_LIFT, P_HELD]}, lines=False,
+        eye=[MATRIX], wires_done={k: [LIFT[k], HELD[k]] for k in HELD}, **HELD_CAMERA)
 # D10 hooks under the LED matrix: up under it, then slid along so that its hooks hold the matrix's edges (it rides on the matrix).
 D10_UNDER = [0.0, -22.0, 40.0]
 g.carry([D10], by=MATRIX, pose=D10_UNDER, appear=False)
 _d10 = box(D10)
+# (Two beats, up and then along; as Lee framed it, a screenshot of Step 31; the arrow on D10's end at D4, outside the matrix, where it
+# shows: Lee, 19 Oct 2026.)
 g.place('Hook D10 under the LED matrix: hold it under the matrix, then slide it along until its hooks hold both edges.', appear=[D10],
-        ride={D10: [[0.0, 0.0, 40.0], ZERO]}, lines=False, labels={D10: 'D10'},
-        arrows=[dict(tail=[float(mid(D10)[0]), float(_d10[1][1]) + 1.0, float(_d10[1][2]) + 1.0], head=[float(mid(D10)[0]), float(_d10[1][1]) + 1.0, float(_d10[1][2]) - 28.0],
-                     normal=[1, 0, 0], part=D10)], **HELD_CAMERA)
+        move=[D4], paths={D4: [ZERO] * 3}, ride={D10: [[0.0, 0.0, 40.0], ZERO]}, lines=False, labels={D10: 'D10'},
+        # (from D10's front face, below its lower edge: not through D10, nor over its code: an independent review, 19 Oct 2026)
+        arrows=[dict(tail=[599.5, 880.0, 1202.4], head=[599.5, 880.0, 1176.0], normal=[-1.0, 0.6, 0.0], part=D10)],
+        view_dir=[-0.6875, 0.4904, -0.5355], frame=([631.8, 932.6, 1218.0], 63.4))
 # In the box: from the floor beside D4 up into the slot in D10 and back along under the matrix to its socket (as the published guide).
 SEATED_TAIL = dict(white=[[605.2, 882.0, 1205.0], [605.6, 885.0, 1208.6], [606.2, 890.0, 1209.2], [606.6, 893.2, 1207.3], [606.6, 893.6, 1203.5], [606.8, 893.7, 1197.0]],
                    grey=[[607.6, 882.0, 1205.0], [608.6, 884.6, 1208.8], [610.4, 890.0, 1209.6], [611.2, 893.2, 1207.6], [611.2, 893.6, 1203.5], [611.6, 893.7, 1197.0]],
                    purple=[[610.8, 883.0, 1213.2], [609.8, 886.5, 1212.2], [609.2, 889.5, 1211.0], [608.9, 892.8, 1208.8], [608.9, 893.6, 1203.5], [609.3, 893.7, 1197.0]])
-SEATED = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, ZERO, IN_BOX[w] + SEATED_TAIL[w], lead=PIN_LEAD[w]).items()}
+SEATED = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, ZERO, IN_BOX[w] + SEATED_TAIL[w], lead=PIN_LEAD[w], stretch=False, follow=6.0,
+                                                    tail=SEATED_TAIL[w][2]).items()}
+# Half way down (the matrix 28 mm up), the same shape with the drop beside D10 longer: the matrix passes through it without stopping
+# (via), the wires shortening with it (rather than the long held shape folding straight into the short one through D2 and the floor).
+# This shape and the seated one are matched from part way up their rise (`tail`), where the three lie across the box in the held wires'
+# order (white, purple, grey): matched from the floor, where the grey is between the others, the grey and purple crossed as they moved.
+P_HALF = [-0.1, 28.0, -0.16]
+HALF_TAIL = dict(white=[[605.2, 882.0, 1205.0], [605.6, 885.0, 1208.6], [606.0, 900.0, 1210.0], [606.4, 915.0, 1209.5], [606.6, 921.2, 1207.3],
+                        [606.6, 921.6, 1203.5], [606.8, 921.7, 1197.0]],
+                 grey=[[607.6, 882.0, 1205.0], [608.6, 884.6, 1208.8], [609.8, 900.0, 1210.4], [610.8, 915.0, 1210.0], [611.2, 921.2, 1207.6],
+                       [611.2, 921.6, 1203.5], [611.6, 921.7, 1197.0]],
+                 purple=[[610.8, 883.0, 1213.2], [609.8, 886.5, 1212.2], [609.3, 900.0, 1212.0], [609.0, 915.0, 1211.0], [608.9, 920.8, 1208.8],
+                         [608.9, 921.6, 1203.5], [609.3, 921.7, 1197.0]])
+HALF = {k: v for w in JUMPERS for k, v in jumper(w, ZERO, f_pose(w, P_HALF), IN_BOX[w] + HALF_TAIL[w], lead=PIN_LEAD[w], stretch=False, follow=6.0,
+                                                  tail=HALF_TAIL[w][2]).items()}
 # (The lead lines end at the bottoms of the slots in D4 and D5, where D10's end tabs stop: Lee, 19 Oct 2026. A close-up, the matrix
 # left out, of the wires going down through the slot in D10 to the breadboard.)
 D10_TABS = [[596.0, 891.15, 1204.47], [681.0, 891.15, 1204.47]]
-g.place('Lower the LED matrix, with D10, into the box: the ends of D10 go into the slots in D4 and D5.', move=[MATRIX], path=[P_HELD, ZERO],
-        lines_at=D10_TABS, lines_to=WALLS + [D10], wires_done=SEATED, **HELD_CAMERA,
-        inset=dict(target=[608.5, 889.0, 1203.0], dir=[-0.45, 0.85, 0.27], radius=15.0, hide=[MATRIX],
-                   caption='The wires go down through the slot in D10', alt='Close-up, without the LED matrix, of the wires in the slot in D10'))
+g.place('Lower the LED matrix, with D10, into the box: the ends of D10 go into the slots in D4 and D5.', move=[MATRIX], path=[P_HELD, via(P_HALF), ZERO],
+        lines_at=D10_TABS, lines_to=WALLS + [D10], wires_done={k: [HALF[k], SEATED[k]] for k in SEATED},
+        view_dir=DIAG, frame=([636.0, 912.0, 1210.0], 66.0),                  # (closer, on the matrix and D10: Lee, 19 Oct 2026)
+        # (the matrix drawn faintly, and seen along the slot, so that the wires show lying in it: Lee, 19 Oct 2026)
+        # (the sockets, between the camera and the slot, and D4, over the end of D10's code, faint as well: an independent review)
+        inset=dict(target=[612.0, 892.0, 1203.0], dir=[0.15, 0.5, -0.85], radius=15.0, ghost={MATRIX: 0.12, D4: 0.25, **{FEMALE[w]: 0.12 for w in JUMPERS}},
+                   caption='The wires lie in the slot in D10', alt='Close-up along the slot in D10, the LED matrix faint: the three wires lie in the slot'))
 # (Centred and closer, from the same corner as the step before, so that D6's code reads; a close-up from above, D6 left out, of the four
 # slots in D1 that the D11 posts go into: Lee, 19 Oct 2026, as the published guide.)
 D1_SLOTS = [[x, 862.4, z] for x in (601.63, 674.83) for z in (1166.2, 1242.4)]
@@ -693,14 +789,15 @@ g.place('Turn the box over. Push all four D11 posts down until their tabs come t
         flip=True, view_dir=[0.4109, -0.8401, 0.3541], frame=([638.5, 870.0, 1204.5], 72.0), ghost={D1: 0.5, D5: 0.5},
         eye=[dict(id=D11_B, anchor=foot(D11_B, 0.0))], lines_at=[[[float(mid(i)[0]), 874.75, float(mid(i)[2])], [float(mid(i)[0]), 857.98, float(mid(i)[2])]] for i in D11S],
         inset=dict(target=[674.83, 857.0, 1166.2], radius=6.0, caption='The tab through D1', alt='Close-up from below of a D11 tab through its slot in D1'))
-g.place('Turn the box the right way up. Lay D7 onto the D11 posts.', move=[D7], labels={D7: 'D7'}, direction=[0, 1, 0], hover=65, lines_to=D11S,
-        **r1_camera(DIAG, [602.9, 918.8, 1204.3], 117.3))
-g.place('Lay D8 onto the D11 posts.', move=[D8], labels={D8: 'D8'}, direction=[0, 1, 0], hover=55, lines_to=D11S, **r1_camera(DIAG, [602.9, 918.8, 1204.3], 117.3))
+# (Closer, near Step 33's framing: Lee, 19 Oct 2026.)
+SHELF_CAMERA, STEM_CAMERA = r1_camera(DIAG, [638.5, 922.0, 1204.5], 90.0), r1_camera(DIAG, [638.5, 936.0, 1204.5], 90.0)
+g.place('Turn the box the right way up. Lay D7 onto the D11 posts.', move=[D7], labels={D7: 'D7'}, direction=[0, 1, 0], hover=65, lines_to=D11S, **SHELF_CAMERA)
+g.place('Lay D8 onto the D11 posts.', move=[D8], labels={D8: 'D8'}, direction=[0, 1, 0], hover=55, lines_to=D11S, **SHELF_CAMERA)
 g.place('Push one LED stem down through a corner hole of D8, D7 and D6 until it stands over its LED.', move=[STEMS[0]], direction=[0, 1, 0], hover=44,
-        labels={STEMS[0]: 'LED Stem'}, axial=True, **r1_camera(DIAG, [602.9, 934.5, 1204.3], 126.4))
+        labels={STEMS[0]: 'LED Stem'}, axial=True, **STEM_CAMERA)
 # (All 63 come in and go down together, rather than appearing in place: Lee, 19 Oct 2026.)
 g.place('Push in the other 63 LED stems the same way, one through each hole.', move=STEMS[1:], direction=[0, 1, 0], hover=44, lines=False,
-        eye=[STEMS[0]], **r1_camera(DIAG, [602.9, 934.5, 1204.3], 126.4))
+        eye=[STEMS[0]], **STEM_CAMERA)
 # ================================================================ PART 5 (end)
 
 g.build()

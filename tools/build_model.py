@@ -1071,7 +1071,11 @@ def build(kit_dir, keep='guide'):
         for region in rule.get('regions', []):        # faces whose middle lies in a box (mm, the mesh's own frame): one solid in two colours (see cut_faces for "cut")
             lo, hi = np.asarray(region['box'], float)
             middle = Vp[Fp].mean(axis=1)
-            face_colour[np.all((middle >= lo) & (middle <= hi), axis=1)] = region['color']
+            inside = np.all((middle >= lo) & (middle <= hi), axis=1)
+            if region.get('round'):                   # "round": "xy": only within the ellipse the box holds across those two axes (a round
+                c, h = (lo + hi) / 2, (hi - lo) / 2   # window: the LSM's corner LED, whose square box also took the body round the window)
+                inside &= sum(((middle[:, a] - c[a]) / h[a]) ** 2 for a in ['xyz'.index(k) for k in region['round']]) <= 1.0
+            face_colour[inside] = region['color']
         if rule.get('engraving') and mi in moves:      # the code moved: its pocket filled in flush, the code drawn as a decal elsewhere
             V, N, F, face_colour = move_engraving(V, N, F, Vp, Fp, face_colour, *moves[mi], rule['engraving'])
         elif rule.get('engraving'):

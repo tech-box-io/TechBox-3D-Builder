@@ -32,16 +32,13 @@ along = lambda d: (PLACE[:3, :3] @ d).round(6).tolist()
 INK, LABEL, LABEL_INK = '#f2f2f2', '#f4f4f2', '#1e1616'
 X0, Y0 = -32.75, -31.65                                   # the board's corner at own min x, min y (the far end from the header)
 
-# The board's own print, white, reading along +x with the tops of the letters away from the header (seen from below).
+# The board's own print, white, reading along +x with the tops of the letters away from the header (seen from below). Of the
+# photograph's print only the two lines about the LEDs are kept (Lee, 19 Oct 2026: "remove the BTE, Better than Expected, Only ONE Pin,
+# and WS2812B-64 text"), centred on the board where the larger print was.
 back = dict(name='silkscreen back', origin=seated([X0, Y0, -0.02]), u=along([1, 0, 0]), v=along([0, 1, 0]), size=[63.79, 60.42],
             px_per_mm=24, colour=INK, items=[
-                dict(text='WS2812B-64', at=[31.60, 19.95], size=3.59, weight=400, width=20.9),
-                dict(text='Better Than Expected', at=[30.62, 27.89], size=2.5, weight=400, width=25.6),
-                dict(fill=[24.30, 32.50, 10.8, 5.1]),
-                dict(text='BTE', at=[29.53, 35.03], size=5.74, weight='italic 700', width=9.3, colour='#111111'),
-                dict(text='Only ONE Pin', at=[14.08, 42.91], size=2.53, weight=400, width=13.9),
-                dict(text='24 bit color', at=[29.69, 42.91], size=2.53, weight=400, width=11.2),
-                dict(text='64 RGB LEDs', at=[46.09, 42.91], size=2.53, weight=400, width=15.4)])
+                dict(text='24 bit color', at=[31.9, 26.0], size=2.53, weight=400, width=11.2),
+                dict(text='64 RGB LEDs', at=[31.9, 30.5], size=2.53, weight=400, width=15.4)])
 
 # The label: a white half-inch square beside the header, past the pins' tips, reading the other way round (its tops towards the
 # header), "V- IN V+" in black, V+ over the V+ pin's side. 0.04 mm off the face, so that it is drawn over the board's print.

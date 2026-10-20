@@ -1,6 +1,7 @@
 LSM Build Instructions (Laser Stem Matrix, Full Build: the electronics on the open base, the housing, the LED matrix, shelves and stems)
 
-FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND OF NOTES DONE THE SAME DAY (docs/research/lsm/lee_notes_2026-10-19.md). Build
+FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND OF NOTES DONE THE SAME DAY (docs/research/lsm/lee_notes_2026-10-19.md), AND THE SECOND
+ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was done for each note). Build
 instructions generated from Lee's STEP files and TechBox's published Cadasio guide for the kit
 (instructions.online/?id=19075-laser_stem_matrix_lsm_-_full_build), in the same format and with the same player as the MRA and RCC
 guides. Not for distribution. The open questions are under QUESTIONS FOR LEE below.
@@ -28,7 +29,9 @@ sub-millimetre corrections made to Cadasio's placements, are in docs/research/ls
   on its top. The wood is roughened as on every kit.
 - The LED matrix (Lee's notes and photographs, 19 Oct 2026): its pin header made again as the real one is, a right-angle header
   lying flat on the back at one corner, its three pins (V+, IN, V-) pointing in along the board and their tails soldered to pads at
-  the edge; the back printed as photographed, with the white label V- IN V+ beside the pins (silkscreen.py -> decals.json). The
+  the edge; the back printed as photographed, with the white label V- IN V+ beside the pins (silkscreen.py -> decals.json); of the
+  board's own print only "24 bit color" and "64 RGB LEDs" are kept (Lee's second round). The LED at the corner under the header was
+  white all over: in Lee's STEP its window is fused into its body, so materials.json paints that spot grey like the others. The
   matrix rests on the two D9 (the published assembly left it 1.1 mm above them), D10 is centred between D4 and D5, and the USB
   cable's A end lies 60 mm further out, so that D4 slides on over the cable rather than through the A end.
 Commands (from the project folder), after a change to the CAD or the guide:
@@ -44,20 +47,32 @@ THE BUILD (40 numbered steps; the published guide's 38 and its order, with the h
   own, its legs labelled GND (-) and + with a close-up of its grey stripe, then into j2 and j3, stripe in j3; the 330 Ohm resistor's
   legs bent, into a11 and a19.
 - Steps 10 - 17, the LED matrix's wires: the three-wire ribbon's ends pulled apart; the white, grey and purple pins into i2, i3 and
-  b19, one per step, each from a corner where its hole shows; the LED matrix turned over, its three pins labelled, with a close-up of
-  the header and label; the white socket onto V+, the purple onto IN, the grey onto V-, seen from low down at the pins.
-- Steps 18 - 24, the button and the USB cable: the button's nut off (turning two turns as it comes off); the button through D2 from
-  its engraved side; the nut back on (turning); the red lead into j5 and the black into j16, one per step; the USB cable's Mini-B plug
-  into the Nano, its cable out to the A end on the table; D2 stood on D1.
-- Steps 25 - 28, the housing: D4 (the USB cable in the notch at its foot); the LED matrix lifted over D4 and laid outside, seen from
-  above with an arrow, its wires over D4's top edge; with the box turned over, D3 hooked into D4 and swung shut, then D5 (from the
-  corner where its code is).
-- Steps 29 - 40, inside and on top: the two D9 (the wires already under the engraved end of the one nearer D4); the LED matrix held
-  over the box, its wires out past its end and back down between D4 and the D9; D10 hooked under it, over the wires; the matrix and
-  D10 lowered in (lead lines to the bottoms of D4's and D5's slots; a close-up of the wires going down through D10's slot); D6 (a
+  b19, one per step (i2 and i3 from Lee's framing; the white and grey wires stay side by side as a ribbon, leaving their pins away
+  from the row, so that neither crosses the other's hole); the LED matrix turned over, its three pins labelled (each named at a
+  different place along it, so that the leaders do not cross), with a close-up of the header and label; then the matrix held upright
+  over the breadboard, header at the top, and the white socket onto V+, the purple onto IN, the grey onto V-: each step names the
+  pin and the hole the wire's other end is in, with an eye on the socket.
+- Steps 18 - 24, the button and the USB cable: the button's nut off (turning two turns as it comes off; the arrow from the nut's back
+  face); the button through D2 from its engraved side; the nut back on (turning); the red lead into j5 and the black into j16, one per
+  step (the black from Lee's framing); the USB cable's Mini-B plug into the Nano, its cable out to the A end on the table; D2 stood on
+  D1 (Steps 23 - 25 share one camera, closer than the first draft's).
+- Steps 25 - 28, the housing: D4 lowered from above beside its place (the USB cable in the notch at its foot), then pushed 8 mm on
+  over the tabs of D1 and D2 (they go through closed slots in D4, so it cannot come straight down into place); the LED matrix lifted
+  over D4 and laid outside, seen from above with an arrow, turned on the way so that it lies the right way round for Step 30 (four
+  beats: up, over the D2 end turning, out turning, down), its wires over D4's top edge; with the box turned over, D3 hooked into D4
+  and swung shut, then D5 (from the corner where its code is; lead lines at Lee's points on D1 and D2).
+- Steps 29 - 40, inside and on top: the two D9 (the wires already under the engraved end of the one nearer D4); the LED matrix
+  lifted straight up and moved over the box (no turn), its wires dead straight along under its edge past where D10 comes up, then
+  back down between D4 and the D9; D10 hooked under it, over the wires (two beats, up then along, from Lee's framing, the arrow on
+  D10's front face outside the matrix); the matrix and D10 lowered in, through a half-way shape without stopping (lead lines to the
+  bottoms of D4's and D5's slots; a
+  close-up of D10's end, the matrix, the sockets and D4 drawn faint, the wires dropping through its slot); D6 (a
   close-up from above of the four slots in D1 for the posts); two D11 posts, then the other two, each pair seen from the side its
   codes face, down only until their tabs reach D1; the box turned over, D1 and D5 see-through, all four pushed home (a close-up of a
-  tab through D1); D7; D8; one stem; the other 63 coming in together.
+  tab through D1); D7; D8; one stem; the other 63 coming in together (Steps 37 - 40 closer, near Step 33's framing).
+- The wires are checked at rest in every view (tools/wirecheck.py) and at 19 moments of every move (tools/motioncheck.py): no wire
+  passes into a part. For a moment while they change shape, two wires brush against each other twice in Step 26 (under the matrix)
+  and once in Step 32 (low in the box by D4).
 
 QUESTIONS FOR LEE
 1. The LED stem's CAD (you mentioned the acrylic stem is missing): until it comes, each stem is a plain square rod of Cadasio's size.
@@ -76,7 +91,17 @@ QUESTIONS FOR LEE
    1's "Pin D12 - c16" label and the circuit), which puts every wire on the right Nano pin. Worth a check against the real kit.
 9. Step 28 (D5): D5 goes on with the box upside down (as D3 in Step 27), so its code, now in view, reads upside down. The published
    guide turns the box on its side for these two instead. Keep the box upside down, or stand it on its side?
-10. Step 14: the label reads upright from this side; the board's own print (WS2812B-64 ...) runs the other way round, as in your
-    photograph, so it reads upside down. The header's pins are drawn silver (the photograph's are gold at the tips). The CAD board
-    is about 5 mm smaller than the real 65 mm board in one direction; the printing is placed by the mounting holes.
+10. Step 14: the label reads upright from this side; the board's own print (now only "24 bit color" and "64 RGB LEDs") runs the
+    other way round, as in your photograph, so it reads upside down. The header's pins are drawn silver (the photograph's are gold
+    at the tips). The CAD board is about 5 mm smaller than the real 65 mm board in one direction; the printing is placed by the
+    mounting holes.
 11. Steps 26 - 29: the LED matrix laid outside D4 is held in the air, as the published guide has it, not resting on the table.
+12. (Answered, second round) The USB cable's A end in Step 23 is true to the CAD: the same model and size as the MRA's and the
+    published guide's, 16 x 8.5 x 50 mm. It looks large next to the small parts on the breadboard.
+13. (Second round) Step 25: D4 comes down from above, as asked, but stops beside its place and is then pushed 8 mm on: D1's and D2's
+    tabs go through closed slots in D4, so it cannot be lowered straight in (the published guide pushes it on sideways too).
+14. (Second round) Step 28: the lead lines are your two (D1 and D2); the generator's two lines to D3's tabs are gone, and the caption
+    now names D1, D2 and D3. Bring the D3 lines back?
+15. (Second round) Steps 23 - 25: the A end lies 60 mm further out than needed now that D4 comes from above. Bring it in (closer
+    framing for these steps, the cable moved in every later step)?
+16. (Second round) Step 28 now opens about 15% wider than Step 27, which you had zoomed in. Zoom Step 28 to match?
