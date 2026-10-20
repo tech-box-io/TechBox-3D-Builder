@@ -1203,7 +1203,7 @@ class Guide:
     def place(self, caption, move=(), show=(), against=None, direction=None, hover=None, path=None, labels=None, review=None,
               appear_after=(), appear=(), staged=False, lines=True, lines_to=None, lines_at=None, axial=False, eye=(),
               focus=None, focus_pad=1.6, wires=None, wires_done=None, ride=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False):
+              caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None):
         """Add one part (or move one sub-assembly) into place. With no `move`, a step where only wires change.
 
         move:       ids that travel in this step (new parts appear hovering; parts already on screen move as a group).
@@ -1261,6 +1261,11 @@ class Guide:
         wiggle:     True for a move on the spot that is played as the step opens as well as when it completes (a
                     check that parts move freely: their paths start and end where they are).
         single:     True for a step of one view (no Step Nc): a check where nothing goes on (the arm's jiggle, Lee 2026-10-14).
+                    An inset on such a step is drawn on its one view.
+        ghost:      {id: alpha} parts drawn see-through on Step N (0.5: half), to show what is behind them (the LSM's D1 from below,
+                    the posts' tabs in its slots: Lee, 19 Oct 2026); on Step Nc they fade back to solid over the motion.
+        inset marks: inset=dict(..., marks=[([x, y, z], half-width mm), ...]) draws a red box round each of several spots instead of
+                    the one `mark` round the target (the LSM's four slots in D1).
         one_off_camera: True when this step's camera (view_dir= / frame=) is a one-off: the steps after it choose theirs
                     as if it had the camera the generator would have given it (so pinning one step's camera, from a
                     screenshot, leaves the next steps' cameras as they were).
@@ -1324,7 +1329,7 @@ class Guide:
             anchors = []
         self._record(caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                      wires, wires_done, lines_at is not None, riders=riders, ride=ride, stops=stops, frame=frame, look_from=look_from, flip=flip, view_dir=view_dir, paths=paths,
-                     caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single)
+                     caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single, ghost=ghost)
 
     @staticmethod
     def _arrow_dims(reach, size):
@@ -1452,7 +1457,7 @@ class Guide:
 
     def _record(self, caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                 wires, wires_done, by_hand, from_hand=False, riders=None, ride=None, stops=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
-                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False):
+                caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None):
         riders = dict(riders or {})
         ride = {i: (list(p) if isinstance(p, list) and p and isinstance(p[0], (list, dict)) else [p]) for i, p in (ride or {}).items()}   # id -> [in-between poses..., final]
         wires_done = {i: (list(r) if isinstance(r, list) else [r]) for i, r in (wires_done or {}).items()}                              # id -> [in-between routes..., final]
@@ -1478,7 +1483,7 @@ class Guide:
                                focus_pad=focus_pad, frame=frame, look_from=look_from, wires=dict(wires or {}), wires_done=wires_done,
                                flip=flip, view_dir=view_dir, paths=dict(paths or {}), rest={i: self.resting[i] for i in appear if i in self.resting},
                                caution=caution, arrows=list(arrows or []), inset=dict(inset) if inset else None, wiggle=bool(wiggle),
-                               one_off_camera=bool(one_off_camera), single=bool(single)))
+                               one_off_camera=bool(one_off_camera), single=bool(single), **({'ghost': {i: float(a) for i, a in ghost.items()}} if ghost else {})))
         for i in new + list(riders) + list(appear_after):
             if i not in self.placed:
                 self.placed.append(i)
@@ -1850,6 +1855,7 @@ class Guide:
                                    normal=_unit(turn_dir(pose, a.get('normal', [0, 1, 0]))).round(4).tolist(), **({'width': a['width']} if 'width' in a else {})))
             stay = [i for i in s['move'] if i in s['appear']]               # (on screen where its path starts: see place())
             views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(hover), guides=s['guides'], labels=s['labels'], eye=s['eye'],
+                              **({'ghost': dict(s['ghost'])} if s.get('ghost') else {}),
                               wires=wires_in(wires, shown), carry=carry_hover, **({'arrows': arrows} if arrows else {}), **({'cut': True} if cut else {}),
                               **({'still': stay} if stay else {}), **common))
             cut = False
@@ -1862,10 +1868,13 @@ class Guide:
             if s.get('inset'):
                 I = s['inset']
                 inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
-                             hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption') if k in I})
+                             hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption') if k in I},
+                             **({'marks': [dict(at=[round(float(x), 2) for x in at], half=float(half)) for at, half in I['marks']]} if I.get('marks') else {}))
             if own is not None and part_cam and inset and 'dir' not in s['inset']:   # (the close-up from the Part's own side too)
                 own['inset'] = dict(inset, dir=_unit(part_cam['dir']).round(4).tolist())
             if s.get('single'):                                            # one view only: the step is its opening view
+                if inset:                                                  # (its close-up, if any, goes on that view)
+                    views[-1]['inset'] = inset
                 continue
             views.append(dict(name=f'Step {n}c', kind='done', visible=shown_done, offsets=poses_out(done), wires=wires_in(wires, shown_done), carry=carry_done,
                               **({'wire_via': wire_via} if wire_via else {}), **({'inset': inset} if inset else {}), **common))

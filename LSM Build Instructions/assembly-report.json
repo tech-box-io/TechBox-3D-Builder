@@ -143,12 +143,12 @@
   "came": "lsm-wood.glb LSM_MatrixSupportSmall_r2 (its plate)",
   "cadasio": "LSM_MatrixSupportSmall_r2-1",
   "lo": [
-   593.43,
+   594.01,
    883.12,
    1202.97
   ],
   "hi": [
-   682.33,
+   682.91,
    900.68,
    1205.97
   ]
@@ -238,16 +238,16 @@
   ]
  },
  "MATRIX": {
-  "came": "lsm-electronics.glb 8x8 LED",
+  "came": "lsm-electronics.glb 8x8 LED (its header made again)",
   "cadasio": "8x8 LED-4",
   "lo": [
    606.92,
-   890.62,
+   893.06,
    1173.79
   ],
   "hi": [
    670.71,
-   899.2,
+   898.1,
    1234.2
   ]
  },
@@ -283,12 +283,12 @@
   "came": "MRA usb-a-end.glb",
   "cadasio": "USB Cable end-2",
   "lo": [
-   520.0,
+   460.0,
    856.23,
    1211.05
   ],
   "hi": [
-   569.7,
+   509.7,
    864.78,
    1226.95
   ]
@@ -496,42 +496,42 @@
   "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
   "cadasio": "Wire Cap-14",
   "lo": [
-   607.8,
-   890.68,
-   1178.36
+   607.36,
+   893.46,
+   1183.26
   ],
   "hi": [
-   609.55,
-   892.43,
-   1186.36
+   609.11,
+   895.21,
+   1191.26
   ]
  },
  "J_PURPLE_F": {
   "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
   "cadasio": "Wire Cap-15",
   "lo": [
-   609.7,
-   890.68,
-   1178.36
+   609.9,
+   893.46,
+   1183.26
   ],
   "hi": [
-   611.45,
-   892.43,
-   1186.36
+   611.65,
+   895.21,
+   1191.26
   ]
  },
  "J_GREY_F": {
   "came": "lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin",
   "cadasio": "Wire Cap-16",
   "lo": [
-   611.6,
-   890.68,
-   1178.36
+   612.44,
+   893.46,
+   1183.26
   ],
   "hi": [
-   613.35,
-   892.43,
-   1186.36
+   614.19,
+   895.21,
+   1191.26
   ]
  },
  "STEM_01": {

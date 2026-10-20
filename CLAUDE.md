@@ -73,7 +73,11 @@ docstrings of `Guide.place` and `Guide.seat`):
 - **On a step, too:** `caution=` (an orange Caution box under the caption, read aloud with it; not a Review note),
   `arrows=` (fat red arrows instead of lead lines, for a slide with nothing to line up), `inset=` (a framed close-up on
   Step Nc with some parts left out, e.g. gears under a cover, with a leader to the spot), `wiggle=True` (a jiggle on the
-  spot, played as the step opens and as it completes: a check that parts move freely), `single=True` (one view, no Step Nc).
+  spot, played as the step opens and as it completes: a check that parts move freely), `single=True` (one view, no Step Nc; an
+  `inset=` is then drawn on that view), `ghost={id: alpha}` (parts see-through on Step N, turning solid again on Step Nc: the LSM's
+  D1 from below, the posts' tabs in its slots), `inset=dict(..., marks=[(point, half-width), ...])` (a red box round each of several
+  spots: the LSM's four slots in D1). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
+  0.25 for the LSM's resistor legs, whose bends looked pinched).
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
@@ -372,7 +376,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
                                bundle.py, step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), wirecheck.py
-                               (wires passing into parts, view by view); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
+                               (wires passing into parts or into each other, view by view, sampled every 0.2 mm); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
     MRA_Videos/                the four build videos (Base, Controller, Arm, Claw)
@@ -402,7 +406,10 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                taken from them in its own frame and placed where TechBox's published Cadasio guide has it (the same SolidWorks
                                parts, same coordinates), or into the breadboard holes the guide names; the Nano and USB A end are the MRA's;
                                the stems are drawn from Cadasio's box until their CAD comes. docs/research/lsm/cad_study.md has the
-                               sub-millimetre corrections. Server on port 8805 ("Open Prototype.command").
+                               sub-millimetre corrections; Lee's second round (19 Oct 2026) remade the LED matrix's pin header (a
+                               right-angle surface-mount one, as photographed) and lowered the matrix onto the D9s (assemble.py), and
+                               silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). Server on
+                               port 8805 ("Open Prototype.command").
     PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
                                decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses). pmg.glb (167 MB, from "PMG Full 3D Cadasio
                                Build.STEP": the engineer's pose copies of most parts; kept out of git, over GitHub's limit) is cut down by the kit's

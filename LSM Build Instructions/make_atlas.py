@@ -46,6 +46,13 @@ def main():
         elif callable(which):
             solids = [s for s in solids if which(s)]
         solids = [dict(s, **({'skin': True} if 'Surface-Offset' in s['name'] else {})) for s in solids]
+        if mesh == '8x8 LED':
+            # (assemble.py drops the CAD's pin header, which is everything below the board's back face: its shells and the part of the
+            # board's body that reached down under them. Lee, 19 Oct 2026.)
+            solids = [s for s in solids if not s['name'].startswith('8x8 LED-Surface-Offset4')]
+            for s in solids:
+                if s['name'].startswith('8x8 LED-Boss-Extrude5'):
+                    s['min'] = [s['min'][0], s['min'][1], max(s['min'][2], -0.02)]
         lo = [min(s['min'][a] for s in solids) for a in range(3)]
         hi = [max(s['max'][a] for s in solids) for a in range(3)]
         out[mesh] = dict(cadasio_part=comp, bbox_min=lo, bbox_max=hi, solids=solids)

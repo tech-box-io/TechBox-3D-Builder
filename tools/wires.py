@@ -13,7 +13,7 @@ import json
 import numpy as np
 
 
-def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False):
+def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False, spacing=None):
     """A route as steps.json stores it.
 
     a, b: the part ids at the first and last point. The wire moves with them: the first part of its
@@ -31,6 +31,8 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
     stretch: when the wire changes to or from this route, each bit of it keeps its share of the wire's length, not its
     distance from the first end: a representative lead that is longer or shorter in its next shape then stretches evenly
     instead of growing out of its tip (or bunching at it). For a lead whose length does not matter (the RCC's motor leads).
+    spacing: how far apart, in mm, the player puts the rings of this wire's tube (default 1.5): closer for a short wire with a
+    tight bend, which at 1.5 mm comes out faceted (the LSM's resistor legs, 0.25: Lee, 19 Oct 2026).
     """
     out = dict(pts=np.round(np.asarray(points, float), 2).tolist(), a=a, b=b)
     if b_from:
@@ -44,6 +46,8 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
         out['fade'] = [float(fade[0]), float(fade[1])]
     if stretch:
         out['stretch'] = True
+    if spacing:
+        out['spacing'] = float(spacing)
     return out
 
 

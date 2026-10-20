@@ -1,19 +1,18 @@
 {
  "summary": {
   "source": "lsm.glb",
-  "source_bytes": 19390912,
-  "model_bytes": 1680256,
-  "triangles_in": 610388,
-  "triangles_out": 133402,
-  "edge_segments": 82293,
-  "meshes": 26,
+  "source_bytes": 19183552,
+  "model_bytes": 1693872,
+  "triangles_in": 603124,
+  "triangles_out": 136555,
+  "edge_segments": 79992,
+  "meshes": 30,
   "parts_kept": 98,
   "parts_in_source": 98,
   "materials": [
    "edge",
    "ink",
    "wood",
-   "wood_dark",
    "#000000",
    "#0074d9",
    "#ff0e00",
@@ -23,6 +22,8 @@
    "#a6a9aa",
    "#b1b3b3",
    "#fbfbfb",
+   "header_black",
+   "pin",
    "#000f41",
    "#181818",
    "#191919",
@@ -30,13 +31,13 @@
    "#d3d6d3",
    "#e4e4e4",
    "#efefef",
-   "pin",
    "#cad1ee",
    "#cccccc",
    "black_plastic",
    "white_plastic",
    "#a36315",
    "#ff851b",
+   "metal_can",
    "#2d2926",
    "#ef3340",
    "nut_grey",
@@ -64,11 +65,10 @@
    "solids": 1,
    "tris_in": 2916,
    "tris_out": 2916,
-   "edge_segments": 1920,
+   "edge_segments": 1352,
    "colours": [
     "ink",
-    "wood",
-    "wood_dark"
+    "wood"
    ],
    "note": "edges roughened by up to 0.1 mm"
   },
@@ -219,17 +219,65 @@
   {
    "mesh": "8x8 LED",
    "used_by": 1,
-   "solids": 321,
-   "tris_in": 95417,
-   "tris_out": 36708,
-   "edge_segments": 27432,
+   "solids": 313,
+   "tris_in": 87961,
+   "tris_out": 35090,
+   "edge_segments": 26846,
    "colours": [
     "#1e1616",
     "#a6a9aa",
     "#b1b3b3",
     "#fbfbfb"
    ],
-   "note": "atlas match 100%; 7234 faces under a skin recoloured"
+   "note": "atlas match 100%; 3672 faces under a skin recoloured"
+  },
+  {
+   "mesh": "LED Matrix header",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "header_black"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LED Matrix pin",
+   "used_by": 1,
+   "solids": 3,
+   "tris_in": 36,
+   "tris_out": 36,
+   "edge_segments": 36,
+   "colours": [
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LED Matrix pad",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "pin"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "LED Matrix solder",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 12,
+   "tris_out": 12,
+   "edge_segments": 12,
+   "colours": [
+    "pin"
+   ],
+   "note": ""
   },
   {
    "mesh": "nano_Varsay\u0131lan",
@@ -314,13 +362,13 @@
    "used_by": 1,
    "solids": 4,
    "tris_in": 6462,
-   "tris_out": 1883,
-   "edge_segments": 1643,
+   "tris_out": 6462,
+   "edge_segments": 304,
    "colours": [
-    "#1e1616",
-    "#a6a9aa"
+    "black_plastic",
+    "metal_can"
    ],
-   "note": "atlas match 100%; 2018 faces under a skin recoloured"
+   "note": ""
   },
   {
    "mesh": "Capacitor leg",

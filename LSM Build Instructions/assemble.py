@@ -185,6 +185,45 @@ def box_mesh(size):
     return np.array(V), np.array(N), np.array(F)
 
 
+def convex_solid(faces):
+    """A flat-shaded convex solid from its faces (each a list of corner points, in order round the face), facing outwards."""
+    c = np.mean([p for f in faces for p in f], axis=0)
+    V, N, F = [], [], []
+    for f in faces:
+        f = [np.asarray(p, float) for p in f]
+        n = np.cross(f[1] - f[0], f[2] - f[0])
+        n /= np.linalg.norm(n)
+        if np.dot(n, np.mean(f, axis=0) - c) < 0:
+            f, n = f[::-1], -n
+        b = len(V)
+        V += f
+        N += [n] * len(f)
+        F += [b + i for k in range(1, len(f) - 1) for i in (0, k, k + 1)]
+    return np.array(V), np.array(N), np.array(F)
+
+
+def prism(section, p0, p1, across=(1, 0, 0)):
+    """A straight bar from p0 to p1 with a convex cross-section [(s, t), ...]: s along `across`, t along (p1 - p0) x across."""
+    p0, p1 = np.asarray(p0, float), np.asarray(p1, float)
+    d = (p1 - p0) / np.linalg.norm(p1 - p0)
+    e1 = np.asarray(across, float) - d * np.dot(across, d)
+    e1 /= np.linalg.norm(e1)
+    e2 = np.cross(d, e1)
+    a, b = [[p + e1 * s + e2 * t for s, t in section] for p in (p0, p1)]
+    k = len(section)
+    return convex_solid([a, b] + [[a[i], a[(i + 1) % k], b[(i + 1) % k], b[i]] for i in range(k)])
+
+
+def merge(*solids):
+    V, N, F, n = [], [], [], 0
+    for v, nn, f in solids:
+        V.append(v)
+        N.append(nn)
+        F.append(f + n)
+        n += len(v)
+    return np.concatenate(V), np.concatenate(N), np.concatenate(F)
+
+
 # ---------------------------------------------------------------- the parts
 WOOD, EL, FB = KIT / 'lsm-wood.glb', KIT / 'lsm-electronics.glb', KIT / 'lsm-fullbuild-raw.glb'
 parts = {}          # id -> dict(meshes=[(mesh name, V, N, F, 4x4 inside the part)], place=4x4, came=..., cadasio=name)
@@ -232,11 +271,45 @@ parts['D8']['place'][2, 3] += 0.81
 # The four shelf posts at one height (Cadasio has two of them 0.6 and 1.0 mm low: they stand on D1 like the other two).
 for part_id in ('D11_C', 'D11_D'):
     parts[part_id]['place'][1, 3] = parts['D11_A']['place'][1, 3]
+# D10 centred between D4 and D5 (Lee, 19 Oct 2026: "it should be more centered"; Cadasio has it 0.58 mm towards D4 of the middle).
+parts['D10']['place'][0, 3] += 0.58
 
-# the breadboard, its backing sheet and the LED matrix: where Cadasio has them (the matrix 0.2 mm across as Cadasio shows it seated)
+# the breadboard and its backing sheet: where Cadasio has them
 add('BREADBOARD', from_mesh(EL, 'Breadboard'), at('Breadboard-1'), 'lsm-electronics.glb Breadboard', 'Breadboard-1')
 add('BACKING', from_mesh(FB, 'Paper'), at('Paper-1'), 'lsm-fullbuild-raw.glb Paper', 'Paper-1')
-add('MATRIX', from_mesh(EL, '8x8 LED'), at('8x8 LED-4', (0.2, 0.0, -0.2)), 'lsm-electronics.glb 8x8 LED', '8x8 LED-4')
+
+# The LED matrix: Cadasio's, 0.2 mm across as Cadasio shows it seated, and 1.10 mm lower, resting on the tops of the two D9 (Cadasio
+# leaves its back 1.10 mm above them, held by nothing). Its own frame: x along the assembly's x, its own z (towards the LEDs) up,
+# its own y along -z; the back face is its own z 0.
+# Its pin header made again (Lee, 19 Oct 2026, with photographs of the board: "a surface mount / flat / right angle header"): the CAD's
+# (Cadasio's) is three blocks hanging 4 mm under the board at 1.9 mm pitch with a stub under each. Every triangle below its own z -0.05
+# is dropped (the header's shells and the parts of the board's body under them; nothing else is below the back face), the three
+# openings that leaves in the back face are closed, and a header is drawn as the photograph has it: a 7.62 x 2.54 x 2.54 mm plastic
+# body lying flat on the back face at the corner, three 0.64 mm square pins at 2.54 mm pitch along x pointing +z, 8 mm past the body,
+# their tails bent up onto pads at the board's edge in solder (docs/research/lsm/round2/led_matrix.md, sections 1.3 and 2.3).
+V, N, F = mesh_data(EL, '8x8 LED')
+V, N, F = sub_mesh(V, N, F, np.where(~(V[F.reshape(-1, 3)][:, :, 2] < -0.05).any(axis=1))[0])
+openings = [convex_solid([[[x0, 22.768, 0.0], [x0, 27.768, 0.0], [x1, 27.768, 0.0], [x1, 22.768, 0.0]]])
+            for x0, x1 in ((-31.75, -30.25), (-29.85, -28.35), (-27.95, -26.45))]
+for v, n, f in openings:                                  # (each a single face: made to face the board's back, own -z)
+    n[:] = [0.0, 0.0, -1.0]
+    if np.cross(v[f[1]] - v[f[0]], v[f[2]] - v[f[0]])[2] > 0:
+        f[:] = f.reshape(-1, 3)[:, ::-1].reshape(-1)
+V, N, F = merge((V, N, F), *openings)
+PIN_X = (-31.433, -28.893, -26.353)                       # V+, IN, V- (own x), as the guide wires them: white, purple, grey
+PIN_Z, BODY_Y, TIP_Y = -1.27, 20.293, 12.293              # pin centre 1.27 mm under the back face; the body's face the pins leave by; tips
+SQ = [(-0.32, -0.32), (0.32, -0.32), (0.32, 0.32), (-0.32, 0.32)]
+pin = merge(prism(SQ, [0, TIP_Y, PIN_Z], [0, 23.353 + 0.3, PIN_Z]),                    # through the body and out the far side ...
+            prism(SQ, [0, 23.353 - 0.15, PIN_Z - 0.1], [0, 23.953 + 0.15, -0.32 + 0.1]),   # ... bent up to the face ...
+            prism(SQ, [0, 23.953 - 0.3, -0.32], [0, 27.953, -0.32]))                  # ... and flat on its pad to 0.8 mm from the edge
+pad = prism([(-1.0, 0.0), (1.0, 0.0), (1.0, 0.03), (-1.0, 0.03)], [0, 23.018, 0], [0, 28.521, 0])   # (as the CAD's OUT pads)
+solder = prism([(-0.62, 0.02), (0.62, 0.02), (0.38, 0.72), (-0.38, 0.72)], [0, 23.95, 0], [0, 27.75, 0])
+header = box_mesh((7.62, 2.54, 2.54))
+shift = lambda x, y=0.0, z=0.0: placement(np.eye(3), [x, y, z])
+add('MATRIX', [('8x8 LED', V, N, F, np.eye(4)), ('LED Matrix header', *header, shift(-32.703, BODY_Y, -2.54))]
+    + [('LED Matrix pin', *pin, shift(x)) for x in PIN_X] + [('LED Matrix pad', *pad, shift(x + 0.042)) for x in PIN_X]
+    + [('LED Matrix solder', *solder, shift(x)) for x in PIN_X],
+    at('8x8 LED-4', (0.2, -1.10, -0.2)), 'lsm-electronics.glb 8x8 LED (its header made again)', '8x8 LED-4')
 
 # The Nano: the MRA's model (mra.glb NAUO126: its pins 2.54 mm apart along its own x, the two rows at z 0 and -15.24, tips at
 # y -8.52, the header's plastic down to y -2.5, the USB socket at the +x end). In rows c and g, columns 2 - 16, USB socket at
@@ -251,9 +324,10 @@ plug_t = nano_t + NANO_TURN @ np.array([41.18 + 8.0, 2.95 - 3.75, -7.62])
 add('USB_B', from_mesh(FB, 'USB Right Angle'), placement(NANO_TURN, plug_t), 'lsm-fullbuild-raw.glb USB Right Angle', 'USB Right Angle-1')
 # The A end lies on the table outside D4, in line with the notch in D4's foot the cable leaves by (z 1219), plug pointing away
 # (its own +x, tip to cable, along +x; its own y across, along z): the box stands on its walls' feet, so the table is at y 856.23.
-# (Cadasio has it 24 mm below the table.)
+# (Cadasio has it 24 mm below the table.) 60 mm further out than the first draft had it, so that D4, held 65 mm out before it goes
+# on, has the cable in its notch rather than the A end (Lee, 19 Oct 2026).
 TABLE_Y = 856.23
-add('USB_A', from_mesh(MRA / 'usb-a-end.glb', 'USBCableend'), placement(np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]], float), [520.0 - 134.3, TABLE_Y + 8.4, 1219.0]),
+add('USB_A', from_mesh(MRA / 'usb-a-end.glb', 'USBCableend'), placement(np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]], float), [520.0 - 134.3 - 60.0, TABLE_Y + 8.4, 1219.0]),
     'MRA usb-a-end.glb', 'USB Cable end-2')
 
 # The resistors and the capacitor: Cadasio's turn, moved so that their legs stand in the holes the guide names. A resistor's legs
@@ -304,9 +378,13 @@ for part_id, h in [('J_WHITE_M', 'i2'), ('J_GREY_M', 'i3'), ('J_PURPLE_M', 'b19'
     t = np.array([p[0] - mid[0], BOARD_TOP, p[2] + mid[1]])
     add(part_id, [('Wire Cap V2', VM, NM, FM, np.eye(4))], placement(CAP_UP, t), f'lsm-electronics.glb Wire Cap V2, in {h}')
     parts[part_id]['hole'] = h
-# (Cadasio has the three 1.38 mm to one side of the matrix's pins and 0.56 mm low: each is put on its pin, the pin's end 2.9 mm in.)
-for part_id, inst in [('J_WHITE_F', 'Wire Cap-14'), ('J_PURPLE_F', 'Wire Cap-15'), ('J_GREY_F', 'Wire Cap-16')]:
-    add(part_id, from_mesh(EL, 'Wire Cap'), at(inst, (1.385, 0.555, 0.0)), 'lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin', inst)
+# The female ends on the LED matrix's new pins (white V+, purple IN, grey V-): the cap (a tube, its bore at its own x -0.558,
+# y -0.786) turned half round about y, its bore on the pin, its open end 1 mm off the header's body, the pin 7 mm in.
+SOCKET_TURN = np.diag([-1.0, 1.0, -1.0])
+for part_id, inst, x in [('J_WHITE_F', 'Wire Cap-14', PIN_X[0]), ('J_PURPLE_F', 'Wire Cap-15', PIN_X[1]), ('J_GREY_F', 'Wire Cap-16', PIN_X[2])]:
+    p = (parts['MATRIX']['place'] @ [x, BODY_Y - 1.0, PIN_Z, 1.0])[:3]          # (the pin's axis where the socket's open end is)
+    add(part_id, from_mesh(EL, 'Wire Cap'), placement(SOCKET_TURN, p + [-0.558, 0.786, 8.0]),
+        'lsm-electronics.glb Wire Cap (the MRA jumper cap), on its pin', inst)
 
 # The 64 LED stems, where Cadasio has them (in its order: LSM_Stem-1, then -96 to -158).
 STEM = box_mesh((3.175, 66.675, 3.175))

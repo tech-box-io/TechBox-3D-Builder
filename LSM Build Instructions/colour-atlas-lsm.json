@@ -2263,7 +2263,7 @@
   "bbox_min": [
    -32.75,
    -31.65,
-   -6.083
+   -0.023
   ],
   "bbox_max": [
    31.04,
@@ -4196,7 +4196,7 @@
     "min": [
      -32.75,
      -31.65,
-     -6.075
+     -0.02
     ],
     "max": [
      31.04,
@@ -4327,22 +4327,6 @@
     "shown": 20
    },
    {
-    "name": "8x8 LED-Surface-Offset4[4]",
-    "min": [
-     -31.758,
-     22.76,
-     -4.05
-    ],
-    "max": [
-     -30.242,
-     27.776,
-     0.0
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
     "name": "8x8 LED-Surface-Offset1[36]",
     "min": [
      9.395,
@@ -4449,22 +4433,6 @@
      -29.6,
      15.242,
      1.105
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
-    "name": "8x8 LED-Surface-Offset4[7]",
-    "min": [
-     -29.875,
-     26.035,
-     -4.05
-    ],
-    "max": [
-     -28.325,
-     26.035,
-     -2.45
     ],
     "colour": "#b1b3b3",
     "shown": 20,
@@ -4769,22 +4737,6 @@
      -13.395,
      23.042,
      1.105
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
-    "name": "8x8 LED-Surface-Offset4[1]",
-    "min": [
-     -29.858,
-     22.76,
-     -4.05
-    ],
-    "max": [
-     -28.342,
-     27.776,
-     0.0
     ],
     "colour": "#b1b3b3",
     "shown": 20,
@@ -6087,22 +6039,6 @@
     "skin": true
    },
    {
-    "name": "8x8 LED-Surface-Offset4[6]",
-    "min": [
-     -31.775,
-     26.035,
-     -4.05
-    ],
-    "max": [
-     -30.225,
-     26.035,
-     -2.45
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
     "name": "8x8 LED-Surface-Offset3[47]",
     "min": [
      25.595,
@@ -6551,22 +6487,6 @@
     "skin": true
    },
    {
-    "name": "8x8 LED-Surface-Offset4[3]",
-    "min": [
-     -31.633,
-     21.26,
-     -6.083
-    ],
-    "max": [
-     -30.367,
-     25.901,
-     -4.2
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
     "name": "8x8 LED-Surface-Offset3[38]",
     "min": [
      1.295,
@@ -6727,22 +6647,6 @@
     "skin": true
    },
    {
-    "name": "8x8 LED-Surface-Offset4[5]",
-    "min": [
-     -29.733,
-     21.26,
-     -6.083
-    ],
-    "max": [
-     -28.467,
-     25.901,
-     -4.2
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
     "name": "8x8 LED-Surface-Offset1[3]",
     "min": [
      -28.605,
@@ -6807,22 +6711,6 @@
     "skin": true
    },
    {
-    "name": "8x8 LED-Surface-Offset4[8]",
-    "min": [
-     -27.833,
-     21.26,
-     -6.083
-    ],
-    "max": [
-     -26.567,
-     25.901,
-     -4.2
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
     "name": "8x8 LED-Surface-Offset2[36]",
     "min": [
      1.295,
@@ -6865,22 +6753,6 @@
      21.505,
      15.242,
      1.105
-    ],
-    "colour": "#b1b3b3",
-    "shown": 20,
-    "skin": true
-   },
-   {
-    "name": "8x8 LED-Surface-Offset4[2]",
-    "min": [
-     -27.958,
-     22.76,
-     -4.05
-    ],
-    "max": [
-     -26.442,
-     27.776,
-     0.0
     ],
     "colour": "#b1b3b3",
     "shown": 20,

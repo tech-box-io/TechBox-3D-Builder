@@ -1,0 +1,18 @@
+{
+ "_about": "Printing on parts, drawn by the player (js/core.js); materials.json \"decals\" names this file. Written by silkscreen.py: edit that, not this.",
+ "MATRIX": [
+  {"name": "silkscreen back", "origin": [606.923, 895.583, 1234.203], "u": [1.0, 0.0, 0.0], "v": [0.0, 0.0, -1.0], "size": [63.79, 60.42], "px_per_mm": 24, "colour": "#f2f2f2", "items": [
+   {"text": "WS2812B-64", "at": [31.6, 19.95], "size": 3.59, "weight": 400, "width": 20.9},
+   {"text": "Better Than Expected", "at": [30.62, 27.89], "size": 2.5, "weight": 400, "width": 25.6},
+   {"fill": [24.3, 32.5, 10.8, 5.1]},
+   {"text": "BTE", "at": [29.53, 35.03], "size": 5.74, "weight": "italic 700", "width": 9.3, "colour": "#111111"},
+   {"text": "Only ONE Pin", "at": [14.08, 42.91], "size": 2.53, "weight": 400, "width": 13.9},
+   {"text": "24 bit color", "at": [29.69, 42.91], "size": 2.53, "weight": 400, "width": 11.2},
+   {"text": "64 RGB LEDs", "at": [46.09, 42.91], "size": 2.53, "weight": 400, "width": 15.4}]},
+  {"name": "label V- IN V+", "origin": [619.96, 895.563, 1193.5], "u": [-1.0, 0.0, 0.0], "v": [0.0, 0.0, 1.0], "size": [12.7, 12.7], "px_per_mm": 40, "colour": "#1e1616", "items": [
+   {"fill": [0, 0, 12.7, 12.7], "colour": "#f4f4f2"},
+   {"text": "V-", "at": [1.69, 6.49], "size": 2.2, "weight": 400},
+   {"text": "IN", "at": [5.51, 6.49], "size": 2.2, "weight": 400},
+   {"text": "V+", "at": [9.7, 6.49], "size": 2.2, "weight": 400}]}
+ ]
+}

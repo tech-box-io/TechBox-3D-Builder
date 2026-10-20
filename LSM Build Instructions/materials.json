@@ -2,6 +2,7 @@
   "_about": "Colour and detail rules for the LSM's 3D model. Edit here, then run: python tools/build_model.py \"LSM Build Instructions\". Rules are tried top to bottom against each mesh name of lsm.glb (made by assemble.py); the first match wins. A mesh whose rule names no colour takes its colours from the \"atlas\" file (colour-atlas-lsm.json, made by make_atlas.py): TechBox's published LSM Cadasio guide, solid by solid, and the MRA's atlas for the MRA's Nano. A rule that does name a colour is a house-library colour or a TechBox decision (see _notes). First draft, 19 Oct 2026: the colours listed under _notes.unconfirmed wait on Lee.",
   "source": "lsm.glb",
   "source_scale_to_mm": 1000.0,
+  "decals": "decals.json",
   "atlas": "colour-atlas-lsm.json",
   "palette": {
     "edge": "#111111",
@@ -37,13 +38,18 @@
   },
   "rules": [
     {"match": "^LSM_Stem$", "color": "stem_white", "simplify_mm": 0, "_about": "the 64 acrylic LED stems (drawn in assemble.py from Cadasio's box: the stem's own CAD is not in Lee's files yet), white as published"},
-    {"match": "^LSM_Side3_r2$", "color": "wood", "regions": [{"box": [[-7, -1, 2.95], [90, 52, 3.05]], "color": "wood_dark"}], "simplify_mm": 0, "roughen_mm": 0.1, "engraving": "ink", "_about": "D2, the side with the push button: its outer face brown, as the published guide shows it (Cadasio lays a brown sheet over that face)"},
     {"match": "^LSM_", "color": "wood", "simplify_mm": 0, "roughen_mm": 0.1, "engraving": "ink", "_about": "the laser-cut wood, D1 - D11"},
     {"match": "^nano_", "simplify_mm": 0.06, "edge_min_size_mm": 2.0, "max_tris": 16000, "atlas_colours": {"#cccccc": "pin"}, "_about": "the Nano Board: the MRA's model and the MRA's rule"},
     {"match": "^Breadboard$", "simplify_mm": 0.02, "edge_min_size_mm": 1.0},
     {"match": "^8x8 LED$", "simplify_mm": 0.03, "max_tris": 30000, "edge_min_size_mm": 1.0},
+    {"match": "^LED Matrix header$", "color": "header_black", "simplify_mm": 0, "_about": "the LED matrix's right-angle pin header, made in assemble.py from Lee's photographs (19 Oct 2026): its plastic body"},
+    {"match": "^LED Matrix (pin|pad|solder)$", "color": "pin", "simplify_mm": 0, "_about": "the header's three pins, the pads at the board's edge and the solder on them"},
     {"match": "^Resistor body", "simplify_mm": 0.02},
-    {"match": "^Capacitor body$", "simplify_mm": 0.02},
+    {"match": "^Capacitor body$", "color": "black_plastic", "simplify_mm": 0,
+     "regions": [{"box": [[-2.6, -0.1, -2.6], [2.6, 0.31, 2.6]], "color": "metal_can"},
+                 {"box": [[-2.6, 9.69, -2.6], [2.6, 10.1, 2.6]], "color": "metal_can"},
+                 {"box": [[2.0, 0.3, -1.54], [2.6, 9.7, 0.52]], "color": "metal_can"}],
+     "_about": "the electrolytic capacitor, as published: black can, silver caps at both ends (own y 0 is the top in the assembly) and the silver stripe over the negative leg, in j3. Painted by boxes in the mesh's own frame, not from the atlas: Cadasio's silver caps are copies 0.04 - 0.05 mm over the rounded ends, and the black faces left under them showed through the silver as black marks on the top (Lee, 19 Oct 2026)"},
     {"match": "^Capacitor leg$", "color": "pin", "simplify_mm": 0.02},
     {"match": "^Push button$", "simplify_mm": 0.03, "max_tris": 4000},
     {"match": "^Push button nut$", "color": "nut_grey", "simplify_mm": 0.02},
@@ -55,10 +61,11 @@
   ],
   "_notes": {
     "unconfirmed": [
-      "D2's outer face brown #855e42 (the published guide's colour; the other wood parts are #deb887 on both faces).",
       "LED stems white #ffffff (published).",
       "Jumper wires white / light grey #cad1ee / purple #4e008e (published), the push button's leads red #ef3340 / black #2d2926 (published, the house pre-wired lead colours)."
     ],
-    "decided": []
+    "decided": [
+      "D2 plain wood on both faces, as the other walls (19 Oct 2026: Lee read the published guide's brown outer face as bad lighting on D2; Cadasio's brown is a 0.127 mm sheet laid over that face in SolidWorks, and Lee's newer D2 has none)."
+    ]
   }
 }

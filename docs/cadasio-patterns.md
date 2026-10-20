@@ -61,7 +61,7 @@ Section 14 says what the in-house player does today against each rule.
 - **Two identical parts** may share a step only on first placement, with the same motion, both clearly visible. Four identical posts were done 2 + 2 with a camera turn between.
 - **A set of four or more identical drop-in parts** (64 LED stems, 4 piano keys, 4 button modules): show one in full, then one "do the rest" step where the others appear in place with a quantity cue ("64x"). A set of four can go either way (the four posts were 2 + 2); the divider is whether each part needs its own lead lines and viewpoint. Never used where each part needs its own destination label: identical modules are wired in full every time.
 - **Every fastener gets its own step**, coming off and going on (15 of 15: knob, nut, washer). Refit order is the exact reverse of removal. *No published kit contains a screw*, so identical screws are a TechBox decision (section 13).
-- **A fit that needs two motions is two stages**, never one long animation: either the second motion is its own numbered step, or it is chained by an auto-advancing Transition. (Hook in then swing shut; drop then slide to lock; leave proud then push home.)
+- **A fit that needs two motions is two stages**, never one long animation: either the second motion is its own numbered step, or it is chained by an auto-advancing Transition. (Hook in then swing shut; drop then slide to lock; leave proud then push home.) **In-house (Lee, 2026-10-19), the LSM's four D11 posts:** posts that pass through one panel into slots in another come down two by two only until their tabs reach the slots (each pair seen from the side its engraved codes face); then, the kit turned over and the lower panel (and the wall in front of it) see-through, all four are pushed home together as the panel turns solid again, and a close-up shows a tab through its slot.
 - **Anything that arrives pre-assembled is one part**: a jumper with its two end housings, a switch with its leads, a module with its coin cell.
 - **Preparation is its own numbered step, immediately before first use**, with the part alone on screen. A jumper ribbon is split into exactly the wires the next wiring run needs.
 - **An already-wired sub-assembly usually takes two steps**: pick it up (eye icon), then attach it (lead lines).
@@ -81,7 +81,7 @@ Section 14 says what the in-house player does today against each rule.
 - **Parts appear already seated when there is nothing to teach**: the rest of an identical set, free-standing modules introduced on a card, plugged cables.
 - **A part that is set down before it goes in is set down in line with its way in (TechBox, Lee, 2026-10-16)**, so that the next step is one straight move with no sideways shift (the RCC's barrel plug, held in line with the power socket; the battery placed to allow it). A part carried over others to its seat clears what is already there (the RCC's right motor plug, carried high over the left one already on its header).
 - **A removal inside a build** is hold, slide, fade: `Step N` shows it in place with an arrow, a Transition slides it off along its axis, `Step Nc` fades it out.
-- **Threaded parts may spin** about half a turn while travelling, on a 1600 ms frame (LSM habit; not consistent).
+- **Threaded parts may spin** about half a turn while travelling, on a 1600 ms frame (LSM habit; not consistent). **In-house (Lee, 2026-10-19):** a nut coming off or going on turns as it travels, one or two whole turns over the move, unscrewing clockwise seen from the head: the idea of turning, not a true thread pitch (the LSM's push-button nut: two turns over two beats, a quarter turn a pose, so that a hexagon is never seen turning backwards).
 
 ## 5. Red lead lines and arrows
 
@@ -127,6 +127,7 @@ Section 14 says what the in-house player does today against each rule.
 **Pictures**
 - Any explanatory picture is a framed inset: white rounded rectangle, 5 px `#7fdbff` border, blue leader and ring to the feature, thin red rectangles inside marking the exact detail.
 - A real product photo with the pin names boxed, on a module's section card. A close-up render in the guide's own style on a step (a hidden face, a latch to release, a result to check).
+- **In-house (Lee, 2026-10-19):** a part whose way round matters gets a step of its own first, alone in the hand, its legs labelled and a close-up of its mark with a red box (the LSM's capacitor: GND (-) and +, the grey stripe), in place of the published Capacitor card; a module's pins are shown on the module itself, turned to show them, labelled as printed, with a close-up (the LSM's LED matrix, its label V- IN V+), in place of a diagram card. The model carries the printing (a decal), so it matches the photographs.
 
 **Never annotated:** the final view; wooden panels with text; wire colours; part names or values; the route of a wire; step numbers; warnings, ticks, tools or hands.
 
@@ -180,7 +181,8 @@ Section 14 says what the in-house player does today against each rule.
 - **Anything that plugs into the breadboard or a socket** (Nano, resistor, capacitor) is a rigid part: hover about 35 mm straight above, lead lines to the end holes, the two end holes labelled.
 - **Connector gender is modelled correctly**: male pins into breadboard holes, female housings onto header pins. Every housing is black.
 - **All wiring is done on the open base before any enclosure wall is fitted.** Modules that mount to the enclosure are wired loose and mounted later.
-- **Hold one camera for the run**; do not zoom to the pin.
+- **Hold one camera for the run**; do not zoom to the pin. (In-house, Lee 2026-10-13 and 2026-10-19: punch in where a wire has to be seen going into its hole, from a corner where nothing hides the hole.)
+- **In-house (Lee, 2026-10-19): wires never pass through parts or through each other**, at rest or while they move: a lead that runs under a part in the real kit is drawn under it (the LSM's matrix wires under the engraved end of the D9 nearer D4, and in through the slot in D10). `tools/wirecheck.py` checks every view.
 
 ## 10. Wood, fasteners and enclosures
 
@@ -371,7 +373,8 @@ Status on 2026-10-14 (third round of that day), for the MRA full build (electron
 | Arrows | Done: flat red 3D arrows (body : head width : head length 5 : 20 : 17), shown on Step N in place of lead lines (`arrows=` on a step). One so far (B2). |
 | Removal inside a build; deconstruction guides | **Deconstruction guides: done (2026-10-17)**, as a guide of its own (stepgen `take_apart()`, then `remove()`, `unplug()`, `lift()`): Step N shows the parts where they are with one red arrow per unit (an eye on a plug), Next plays them out the way the Full Build put them in, reversed, by that step's camera, fading as they go; Prev brings them back the same way. The guide's card on the website is its title page (Lee, 2026-10-17). A lead goes with its parts when both its ends go; an unplugged plug dangles from its lead until its part goes. Removal inside a build: not yet (the bench test's unplugging is a plain Step / Step c pair, plugs lifting off). |
 | Fade for parts appearing | Not yet: parts appear at once, and new parts glide in from a little further out. |
-| Framed insets and "check this" cues on result views | Done: the eye icon, and a framed close-up on Step Nc (`inset=`: drawn once as the view opens, with chosen parts left out, a blue leader and ring, a red box round the detail). |
+| Framed insets and "check this" cues on result views | Done: the eye icon, and a framed close-up on Step Nc (`inset=`: drawn once as the view opens, with chosen parts left out, a blue leader and ring, a red box round the detail; on a one-view step, on that view; several red boxes with `marks`: the LSM's four slots in D1, 2026-10-19). |
+| See-through parts (the LSM's published Step 34) | Done (2026-10-19): `ghost={id: alpha}` on a step draws those parts see-through on Step N; on Step Nc they turn solid again over the motion. |
 | Parts list | Done (section 13): pages after the title page, from the guide's own parts. Pictures load only when a page is shown (or the step list, which pictures each page small, is opened). |
 | **Differs on purpose:** a view reset | A button at the top right, beside full screen, swings the camera back to the step's own view (Lee, 2026-10-16); hidden on note cards and the parts list. Pointing at or clicking a part names it as its labels do where the parts list groups it (Left / Right Joystick). |
 | **Differs on purpose:** cautions; reading aloud; keyboard and screen reader | Cautions as decided in section 13. A speaker button beside the caption reads the step (caption and caution) with the browser's own voice: nothing is downloaded. Every control is a button, list or tick box (Tab, then Enter or Space); Left / Right arrow, Home and End step through. A screen reader is told each step as it opens (name, caption, caution, labels); the 3D view, the parts list and the close-ups have text for it. |
