@@ -98,7 +98,7 @@ const routes = (data.routes || []).map(r => {
 });
 const wireSamples = {};                      // points along each wire: enough for its longest route
 for (const v of views) for (const [id, nos] of [...Object.entries(v.wires || {}).map(([id, no]) => [id, [no]]), ...Object.entries(v.wire_via || {})])
-  for (const no of nos) wireSamples[id] = Math.max(wireSamples[id] || 0, Math.min(160, Math.max(12, Math.ceil(routes[no].len / 1.5))));   // (in-between routes too)
+  for (const no of nos) wireSamples[id] = Math.max(wireSamples[id] || 0, Math.min(160, Math.max(12, Math.ceil(routes[no].len / (routes[no].spacing || 1.5)))));   // (in-between routes too; a route may ask for its tube's rings closer together, `spacing` mm: a tight bend, a resistor's leg)
 const ramp = s => { const t = Math.min(1, Math.max(0, (s - 0.1) / 0.8)); return t * t * (3 - 2 * t); };   // the ends stay with their parts
 const mA = new THREE.Matrix4(), mB = new THREE.Matrix4(), mR = new THREE.Matrix4();
 // How far the part at one end of a route has moved from where it was when the route was drawn (`ref`, normally its seat).
@@ -379,10 +379,12 @@ function buildInset(view) {
     c.lookAt(at); c.updateMatrixWorld(true);
     return () => { stage.setVisible(view.visible); stage.setHighlight(picked); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); };
   }});
-  if (I.mark) {                              // a thin red box round the exact detail, as in the published guides
-    const ctx = canvas.getContext('2d'), v = stage.toWorld(I.target).project(cam);
+  // a thin red box round the exact detail, as in the published guides; or several (`marks`: [{at, half}], each round its own spot)
+  const boxes = I.marks ? I.marks.map(m => ({at: m.at, half: m.half})) : I.mark ? [{at: I.target, half: I.mark}] : [];
+  for (const b of boxes) {
+    const ctx = canvas.getContext('2d'), v = stage.toWorld(b.at).project(cam);
     const half = THREE.MathUtils.degToRad((data.fov || 45) / 2), across = I.radius * 1.05 / Math.cos(half);   // (half the picture's height at the detail, in mm)
-    const cx = (v.x + 1) / 2 * canvas.width, cy = (1 - v.y) / 2 * canvas.height, r = I.mark / across * canvas.height * 0.5;
+    const cx = (v.x + 1) / 2 * canvas.width, cy = (1 - v.y) / 2 * canvas.height, r = b.half / across * canvas.height * 0.5;
     ctx.strokeStyle = '#ff0000'; ctx.lineWidth = 2 * ratio; ctx.beginPath();
     if (ctx.roundRect) ctx.roundRect(cx - r, cy - r, 2 * r, 2 * r, 4 * ratio); else ctx.rect(cx - r, cy - r, 2 * r, 2 * r);
     ctx.stroke();
@@ -705,6 +707,13 @@ function stepAnimation(now) {
     for (const id in f.parts) stage.setFade(id, alpha(f.parts[id]));
     alphas = Object.fromEntries(Object.entries(f.wires).map(([w, at]) => [w, alpha(at)]));
   }
+  // A part shown see-through on a view (`ghost`: {id: alpha}, to see what is behind it: the posts' tabs through D1 from below),
+  // blending from the view before's value to this view's over the motion (a Step Nc without it: the part fades back to solid).
+  const g0 = (anim.from && anim.from.ghost) || {}, g1 = anim.to.ghost || {};
+  for (const id of new Set([...Object.keys(g0), ...Object.keys(g1)])) {
+    const a0 = anim.from ? (g0[id] != null ? g0[id] : 1) : (g1[id] != null ? g1[id] : 1), a1 = g1[id] != null ? g1[id] : 1;
+    if (!(anim.fade && id in anim.fade.parts)) stage.setFade(id, a0 + (a1 - a0) * e);
+  }
   drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia, alphas);
   if (anim.cam) {                            // swing around the target rather than cutting through the model
     const c = anim.cam;
@@ -723,6 +732,7 @@ function stepAnimation(now) {
     const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade; anim = null;
     if (gone) stage.setVisible(view.visible);   // (the parts taken off have gone)
     if (faded) stage.clearFades();
+    for (const id in view.ghost || {}) stage.setFade(id, view.ghost[id]);   // (see-through as the view has it, once the step has played)
     if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
     if (view.inset) buildInset(view);
   }

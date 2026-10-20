@@ -11,6 +11,17 @@
     "uncommitted_changes": false
    },
    "was": null
+  },
+  {
+   "when": "2026-10-19T21:54:02",
+   "action": "published",
+   "release": "r2",
+   "note": "Lee's rounds of 19 Oct 2026: the developer's step text; the servos named X Servo (Y Dot), parts list Servo Motors; Step 96 lead line; C3, C4, C5 revision 1 (C4 and C5 drop in, then slide along C3); the claw steps closer in; lead lines on C4's and C5's outer hooks; deconstruction: Row labels on Steps 5-7, the parts list at the end",
+   "source": {
+    "commit": "70bbbc321f24a1732e554d7b9953e0abcc73b523",
+    "uncommitted_changes": false
+   },
+   "was": "r1"
   }
  ]
 }

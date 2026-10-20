@@ -79,4 +79,16 @@ services:
       - path: /remote-controlled-car-deconstruction/*
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"
+      - path: /laser-stem-matrix-full-build
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /laser-stem-matrix-full-build/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /piano-memory-game-full-build
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /piano-memory-game-full-build/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
       # END guide framing
