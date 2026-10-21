@@ -1,0 +1,121 @@
+== this round (final; 401 moments)
+beat 1  dot matrix display CLK       sharpest 166 deg at 0.062 [656.9, 905.4, 1313.0]   longer x0.915 at 0.19   above both shapes 0 mm at 0
+beat 1  dot matrix display CS        sharpest 152 deg at 0.065 [657.6, 907.5, 1309.6]   longer x0.904 at 0.11   above both shapes 0 mm at 0
+beat 1  dot matrix display DIN       sharpest 140 deg at 0.06 [658.6, 904.6, 1306.2]   longer x0.91 at 0.105   above both shapes 0 mm at 0
+beat 1  dot matrix display GND       sharpest 135 deg at 0.058 [654.2, 904.0, 1306.1]   longer x0.909 at 0.11   above both shapes 0 mm at 0
+beat 1  dot matrix display VCC       sharpest 134 deg at 0.065 [656.8, 908.6, 1304.8]   longer x0.91 at 0.105   above both shapes 0 mm at 0
+beat 1  usb cable                    sharpest 126 deg at 0.043 [602.7, 885.6, 1368.8]   longer x0.982 at 0.185   above both shapes 0 mm at 0
+beat 2  black GND                    sharpest  65 deg at 0.398 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.395   above both shapes 0 mm at 0
+beat 2  black OUT                    sharpest  64 deg at 0.398 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  black VCC                    sharpest  64 deg at 0.38 [609.8, 1026.4, 1273.3]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  blue GND                     sharpest  85 deg at 0.263 [610.0, 909.1, 1320.7]   longer x1.0 at 0.393   above both shapes 0 mm at 0
+beat 2  usb cable                    sharpest 138 deg at 0.34 [605.8, 1087.2, 1240.6]   longer x0.972 at 0.205   above both shapes 0 mm at 0
+beat 2  white GND                    sharpest  77 deg at 0.273 [615.1, 916.0, 1297.4]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 2  white VCC                    sharpest  63 deg at 0.27 [613.7, 913.4, 1302.4]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 3  black GND                    sharpest  65 deg at 0.598 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.4   above both shapes 0 mm at 0
+beat 3  black OUT                    sharpest  64 deg at 0.598 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 3  black VCC                    sharpest  64 deg at 0.4 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 4  black GND                    sharpest  65 deg at 0.797 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.6   above both shapes 0 mm at 0
+beat 4  black OUT                    sharpest  64 deg at 0.797 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 4  black VCC                    sharpest  64 deg at 0.6 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 5  black GND                    sharpest  65 deg at 1.0 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.8   above both shapes 0 mm at 0
+beat 5  black OUT                    sharpest  64 deg at 1.0 [609.6, 1026.5, 1275.8]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+beat 5  black VCC                    sharpest  64 deg at 0.8 [609.6, 1026.5, 1273.3]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+== before the review (401 moments)
+beat 1  dot matrix display CLK       sharpest 135 deg at 0.052 [649.4, 920.0, 1348.2]   longer x0.92 at 0.118   above both shapes 0 mm at 0
+beat 1  dot matrix display CS        sharpest 132 deg at 0.062 [650.3, 923.4, 1344.5]   longer x0.894 at 0.113   above both shapes 0 mm at 0
+beat 1  dot matrix display DIN       sharpest 113 deg at 0.068 [651.3, 926.6, 1342.8]   longer x0.867 at 0.105   above both shapes 0 mm at 0
+beat 1  dot matrix display GND       sharpest 123 deg at 0.062 [650.8, 928.5, 1344.4]   longer x0.899 at 0.11   above both shapes 0 mm at 0
+beat 1  dot matrix display VCC       sharpest 113 deg at 0.07 [651.9, 932.4, 1341.0]   longer x0.875 at 0.105   above both shapes 0 mm at 0
+beat 1  usb cable                    sharpest 169 deg at 0.058 [609.4, 902.2, 1337.5]   longer x0.982 at 0.185   above both shapes 0 mm at 0
+beat 2  black GND                    sharpest  65 deg at 0.398 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.395   above both shapes 0 mm at 0
+beat 2  black OUT                    sharpest  64 deg at 0.398 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  black VCC                    sharpest  64 deg at 0.38 [609.8, 1026.4, 1273.3]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  blue GND                     sharpest  85 deg at 0.263 [610.0, 909.1, 1320.7]   longer x1.0 at 0.393   above both shapes 0 mm at 0
+beat 2  usb cable                    sharpest 138 deg at 0.34 [605.8, 1087.2, 1240.6]   longer x0.972 at 0.205   above both shapes 0 mm at 0
+beat 2  white GND                    sharpest  77 deg at 0.273 [615.1, 916.0, 1297.4]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 2  white VCC                    sharpest  63 deg at 0.27 [613.7, 913.4, 1302.4]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 3  black GND                    sharpest  65 deg at 0.598 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.4   above both shapes 0 mm at 0
+beat 3  black OUT                    sharpest  64 deg at 0.598 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 3  black VCC                    sharpest  64 deg at 0.4 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 4  black GND                    sharpest  65 deg at 0.797 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.6   above both shapes 0 mm at 0
+beat 4  black OUT                    sharpest  64 deg at 0.797 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 4  black VCC                    sharpest  64 deg at 0.6 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 5  black GND                    sharpest  65 deg at 1.0 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.8   above both shapes 0 mm at 0
+beat 5  black OUT                    sharpest  64 deg at 1.0 [609.6, 1026.5, 1275.8]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+beat 5  black VCC                    sharpest  64 deg at 0.8 [609.6, 1026.5, 1273.3]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+== round 3 (401 moments)
+beat 2  dot matrix display CLK       sharpest  80 deg at 0.18 [633.3, 1028.9, 1315.6]   longer x1.0 at 0.1   above both shapes 0 mm at 0
+beat 2  dot matrix display CS        sharpest  70 deg at 0.182 [634.5, 1031.5, 1314.1]   longer x1.0 at 0.1   above both shapes 0 mm at 0
+beat 2  dot matrix display DIN       sharpest  71 deg at 0.182 [635.2, 1033.2, 1314.6]   longer x1.0 at 0.1   above both shapes 0 mm at 0
+beat 2  dot matrix display GND       sharpest  75 deg at 0.182 [636.3, 1035.5, 1313.7]   longer x1.0 at 0.1   above both shapes 0 mm at 0
+beat 2  dot matrix display VCC       sharpest  67 deg at 0.185 [638.0, 1038.3, 1311.6]   longer x1.0 at 0.1   above both shapes 0 mm at 0
+beat 2  usb cable                    sharpest 133 deg at 0.14 [619.6, 945.9, 1339.3]   longer x0.999 at 0.198   above both shapes 0 mm at 0
+beat 3  dot matrix display CLK       sharpest 122 deg at 0.275 [630.9, 1063.1, 1286.7]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 3  dot matrix display CS        sharpest 106 deg at 0.28 [633.4, 1064.5, 1285.0]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 3  dot matrix display DIN       sharpest 107 deg at 0.283 [635.1, 1066.0, 1284.9]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 3  dot matrix display GND       sharpest 114 deg at 0.297 [637.3, 1067.8, 1283.4]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 3  dot matrix display VCC       sharpest  94 deg at 0.278 [639.9, 1067.7, 1283.0]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 3  usb cable                    sharpest  69 deg at 0.238 [608.1, 995.1, 1323.6]   longer x1.0 at 0.292   above both shapes 0 mm at 0
+beat 4  black GND                    sharpest  65 deg at 0.398 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.3   above both shapes 0 mm at 0
+beat 4  black OUT                    sharpest  64 deg at 0.398 [609.6, 1026.5, 1275.8]   longer x1.0 at 0.3   above both shapes 0 mm at 0
+beat 4  black VCC                    sharpest  64 deg at 0.39 [609.6, 1026.4, 1273.2]   longer x1.0 at 0.3   above both shapes 0 mm at 0
+beat 4  blue GND                     sharpest  72 deg at 0.323 [600.3, 895.4, 1327.9]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 4  blue OUT                     sharpest  73 deg at 0.323 [600.9, 896.1, 1326.6]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 4  blue VCC                     sharpest  67 deg at 0.323 [600.5, 896.4, 1328.6]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 4  dot matrix display CLK       sharpest 134 deg at 0.343 [640.7, 1057.9, 1281.6]   longer x0.999 at 0.3   above both shapes 0 mm at 0
+beat 4  dot matrix display CS        sharpest 134 deg at 0.338 [640.4, 1059.8, 1281.5]   longer x0.999 at 0.305   above both shapes 0 mm at 0
+beat 4  dot matrix display DIN       sharpest 131 deg at 0.343 [645.5, 1053.2, 1281.5]   longer x0.999 at 0.305   above both shapes 0 mm at 0
+beat 4  dot matrix display GND       sharpest 122 deg at 0.323 [639.1, 1066.3, 1282.0]   longer x1.0 at 0.3   above both shapes 0 mm at 0
+beat 4  dot matrix display VCC       sharpest 125 deg at 0.345 [649.7, 1050.8, 1280.1]   longer x0.999 at 0.302   above both shapes 0 mm at 0
+beat 4  white GND                    sharpest  68 deg at 0.32 [599.3, 895.1, 1304.4]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 4  white OUT                    sharpest  69 deg at 0.323 [598.9, 895.1, 1306.9]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 4  white VCC                    sharpest  68 deg at 0.32 [598.7, 895.2, 1309.3]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 5  black GND                    sharpest  65 deg at 0.497 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.4   above both shapes 0 mm at 0
+beat 5  black OUT                    sharpest  64 deg at 0.497 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.497   above both shapes 0 mm at 0
+beat 5  black VCC                    sharpest  64 deg at 0.4 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.497   above both shapes 0 mm at 0
+beat 6  black GND                    sharpest  65 deg at 0.598 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.5   above both shapes 0 mm at 0
+beat 6  black OUT                    sharpest  64 deg at 0.598 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 6  black VCC                    sharpest  64 deg at 0.5 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 7  black GND                    sharpest  65 deg at 0.698 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.6   above both shapes 0 mm at 0
+beat 7  black OUT                    sharpest  64 deg at 0.698 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.698   above both shapes 0 mm at 0
+beat 7  black VCC                    sharpest  64 deg at 0.6 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.698   above both shapes 0 mm at 0
+beat 7  usb cable                    sharpest  82 deg at 0.655 [607.7, 1083.6, 1251.3]   longer x1.0 at 0.6   above both shapes 0 mm at 0
+beat 8  black GND                    sharpest  65 deg at 0.797 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.7   above both shapes 0 mm at 0
+beat 8  black OUT                    sharpest  64 deg at 0.797 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 8  black VCC                    sharpest  64 deg at 0.7 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 9  black GND                    sharpest  65 deg at 0.897 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.8   above both shapes 0 mm at 0
+beat 9  black OUT                    sharpest  64 deg at 0.897 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.897   above both shapes 0 mm at 0
+beat 9  black VCC                    sharpest  64 deg at 0.8 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.897   above both shapes 0 mm at 0
+beat 10  black GND                    sharpest  65 deg at 1.0 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.9   above both shapes 0 mm at 0
+beat 10  black OUT                    sharpest  64 deg at 1.0 [609.6, 1026.5, 1275.8]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+beat 10  black VCC                    sharpest  64 deg at 0.9 [609.6, 1026.5, 1273.3]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+== this round's first try, from the front (401 moments)
+beat 1  dot matrix display CLK       sharpest  94 deg at 0.168 [592.1, 1032.2, 1274.4]   longer x1.0 at 0.0   above both shapes 0 mm at 0
+beat 1  dot matrix display CS        sharpest  79 deg at 0.145 [593.1, 1027.2, 1279.5]   longer x1.0 at 0.0   above both shapes 0 mm at 0
+beat 1  dot matrix display DIN       sharpest  86 deg at 0.165 [591.8, 1036.0, 1275.0]   longer x1.0 at 0.0   above both shapes 0 mm at 0
+beat 1  dot matrix display GND       sharpest  89 deg at 0.198 [591.9, 1041.1, 1273.2]   longer x1.0 at 0.0   above both shapes 0 mm at 0
+beat 1  dot matrix display VCC       sharpest  73 deg at 0.133 [594.3, 1026.8, 1285.2]   longer x1.0 at 0.0   above both shapes 0 mm at 0
+beat 1  usb cable                    sharpest 166 deg at 0.068 [606.6, 910.8, 1331.4]   longer x0.984 at 0.198   above both shapes 0 mm at 0
+beat 2  black GND                    sharpest  65 deg at 0.398 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.395   above both shapes 0 mm at 0
+beat 2  black OUT                    sharpest  64 deg at 0.398 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  black VCC                    sharpest  64 deg at 0.38 [609.8, 1026.4, 1273.3]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 2  blue GND                     sharpest  85 deg at 0.263 [610.0, 909.1, 1320.7]   longer x1.0 at 0.393   above both shapes 0 mm at 0
+beat 2  dot matrix display CLK       sharpest 129 deg at 0.295 [624.6, 1061.6, 1283.2]   longer x0.931 at 0.288   above both shapes 0 mm at 0
+beat 2  dot matrix display CS        sharpest 131 deg at 0.29 [622.4, 1060.4, 1282.6]   longer x0.95 at 0.273   above both shapes 0 mm at 0
+beat 2  dot matrix display DIN       sharpest 125 deg at 0.29 [626.7, 1059.1, 1284.4]   longer x0.988 at 0.238   above both shapes 0 mm at 0
+beat 2  dot matrix display GND       sharpest 111 deg at 0.29 [627.0, 1060.4, 1282.7]   longer x1.0 at 0.2   above both shapes 0 mm at 0
+beat 2  dot matrix display VCC       sharpest 112 deg at 0.29 [629.0, 1061.0, 1283.8]   longer x0.999 at 0.21   above both shapes 0 mm at 0
+beat 2  usb cable                    sharpest  81 deg at 0.3 [597.3, 1059.5, 1257.3]   longer x1.0 at 0.39   above both shapes 0 mm at 0
+beat 2  white GND                    sharpest  77 deg at 0.273 [615.1, 916.0, 1297.4]   longer x1.0 at 0.398   above both shapes 0 mm at 0
+beat 2  white VCC                    sharpest  63 deg at 0.27 [613.7, 913.4, 1302.4]   longer x0.999 at 0.398   above both shapes 0 mm at 0
+beat 3  black GND                    sharpest  65 deg at 0.598 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.4   above both shapes 0 mm at 0
+beat 3  black OUT                    sharpest  64 deg at 0.598 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 3  black VCC                    sharpest  64 deg at 0.4 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.598   above both shapes 0 mm at 0
+beat 3  usb cable                    sharpest  97 deg at 0.508 [598.6, 1083.9, 1250.2]   longer x1.0 at 0.4   above both shapes 0 mm at 0
+beat 4  black GND                    sharpest  65 deg at 0.797 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.6   above both shapes 0 mm at 0
+beat 4  black OUT                    sharpest  64 deg at 0.797 [609.6, 1026.5, 1275.8]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 4  black VCC                    sharpest  64 deg at 0.6 [609.6, 1026.5, 1273.3]   longer x0.999 at 0.797   above both shapes 0 mm at 0
+beat 5  black GND                    sharpest  65 deg at 1.0 [609.6, 1026.5, 1270.8]   longer x1.0 at 0.8   above both shapes 0 mm at 0
+beat 5  black OUT                    sharpest  64 deg at 1.0 [609.6, 1026.5, 1275.8]   longer x0.999 at 1.0   above both shapes 0 mm at 0
+beat 5  black VCC                    sharpest  64 deg at 0.8 [609.6, 1026.5, 1273.3]   longer x0.999 at 1.0   above both shapes 0 mm at 0

@@ -98,7 +98,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14), and is
   made smaller (to 85%, 72% or 60%) only where no full-size place is clear (the LSM's Step 6, labels both sides, in a narrow window);
   `inset=dict(..., side='right')` asks for its side of the model, tried at every size before any other (the LSM's capacitor picture,
-  to the right of the capacitor, its leader not across it).
+  to the right of the capacitor, its leader not across it; the PMG's Steps 19c - 20c, `side='left'`). Nor does it cover the place it
+  shows (21 Oct 2026: on its side with no room beside it in a narrow window it did, the PMG's Steps 19c - 20c and the LSM's Step 36c
+  at 760 px; it then goes higher or lower on that side, or smaller).
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's

@@ -537,6 +537,8 @@ function buildInset(view) {
     for (let k = 1; k < 12; k++) { const qx = lx + (px - lx) * k / 12, qy = ly + (py - ly) * k / 12; marks.push([qx - 3, qy - 3, qx + 3, qy + 3]); }
   }
   if (marks.length && clear) marks.push([clear.left - 8, clear.top - 8, clear.right + 8, clear.bottom + 8]);   // (nor, moved, over the instructions)
+  marks.push([ax - 2, ay - 2, ax + 2, ay + 2]);   // (nor over the place it shows: asked for the side where that is, with no room beside it in a
+  //                                                 narrow window, it covered it, the PMG's Steps 19c - 20c at 760 px; it is then made smaller there)
   const covered = (x, y) => marks.reduce((s, [x0, y0, x1, y1]) => s + Math.max(0, Math.min(x + boxW, x1) - Math.max(x, x0)) * Math.max(0, Math.min(y + boxH, y1) - Math.max(y, y0)), 0);
   if (marks.length && covered(x, y) > 0) {
     // (and if nowhere is clear at full size, a little smaller, down to 60%: a view with labels on both sides in a narrow window, the

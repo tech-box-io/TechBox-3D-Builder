@@ -507,9 +507,12 @@ MATRIX_RUN = dict(view_dir=[0.474, 0.829, 0.296], frame=([672.0, 898.0, 1338.0],
 
 
 def wire_step(wire, caption, appear=(), labels_more=(), caution=None, camera=None, review=None, park=None,
-              module_label=dict(side='up-right'), device_label=None):
+              module_label=dict(side='up-right'), device_label=None, close_up=False):
     """One wire: it lies loose at the parking spot (an eye on it), then its two caps are lifted, held over their pins and pushed on.
-    A label at each pin, at the top of the pin (measured: make_source.py), on the device and on the module (Lee's first round)."""
+    A label at each pin, at the top of the pin (measured: make_source.py), on the device and on the module (Lee's first round).
+    close_up: on Step Nc, a close-up from above of the module's pin with the new cap on it, boxed in red (as the LAC's breadboard holes:
+    Lee's fourth round, Steps 17 - 20); or the side of the model to put it on ('left': Steps 19 - 20, where the pin is at the module's
+    left end; on the right, the side with most room, its leader ran across the module and the caps just put on: a review, 21 Oct)."""
     device, row = WIRE_DEVICE[wire], WIRE_ROW[wire]
     a, b = DEV_CAP[wire], MOD_CAP[wire]
     park = dict(dict(x=PARK_X, z=LOOSE_Z, along='z', eye=0.0), **(park or {}))   # (where the loose wire lies; eye: mm along it from its middle)
@@ -520,9 +523,16 @@ def wire_step(wire, caption, appear=(), labels_more=(), caution=None, camera=Non
     ride, routes = plug_on(wire, park)
     labels = [dict(text=WIRE_PIN[wire], anchor=pin_tip(a), id=device, ring=False, **(device_label or {})),
               dict(text=row, anchor=pin_tip(b), id=MODULE, ring=False, **(module_label or {})), *labels_more]
+    inset = None
+    if close_up:
+        top = np.asarray(apply_pose(MODULE_BENCH, pin_tip(b)), float)
+        inset = dict(target=top.round(2).tolist(), dir=[0.06, 1.0, 0.1], radius=13.0, mark=1.6,
+                     alt=f"Close-up from above: the {WIRE_PIN[wire]} wire's cap on {row} of the I/O module, among the caps already in",
+                     **({'side': close_up} if isinstance(close_up, str) else {}))
     g.place(caption, appear=list(appear) + [a, b], ride=ride, wires=loose_route, wires_done=routes, lines=False, labels=labels,
             eye=[dict(anchor=eye_at.round(2).tolist(), **park.get('eye_place', {}))], caution=caution, review=review,
-            ride_beats='gap' in park or 'over' in park, **(camera or {}))   # (the displays': a beat for each stretch, see plug_on)
+            ride_beats='gap' in park or 'over' in park, **({'inset': inset} if inset else {}), **(camera or {}))   # (the displays': a beat
+#                                                                       for each stretch, see plug_on)
 
 
 NAME_REACH = dict(zip(BUTTONS, (0.10, 0.16, 0.10, 0.13)))           # (each the least that clears the caption box at LMS sizes)
@@ -565,17 +575,28 @@ for wire in DISPLAY_WIRES:
               **(dict(module_label=dict(side='left', reach=0.08), device_label=dict(side='down-right', reach=0.05))   # (from DISPLAY_PINS_RUN: clear
                  if WIRE_PIN[wire] in ('VCC', 'GND') else                                                          #  of the wires, boards and the
                                                                                                                    #  parked wire's cap)
-                 dict(module_label=dict(side='up-left', reach=0.08), device_label=dict(side='up-right', reach=0.08))))
+                 dict(module_label=dict(side='up-left', reach=0.08), device_label=dict(side='up-right', reach=0.08))),
+              close_up='left' if WIRE_PIN[wire] in ('VCC', 'GND') else True)
+# Steps 21 - 25 (Lee's fourth round, 21 Oct 2026): each matrix pin's label to the right of its pin, just under the wire put in the step
+# before (VCC, the first, up and to the right); the module's V11, G11, S12 and S13 up and a little to the right of where they were (S11
+# too, though Lee did not name it: where it was it met DIN at the LMS's size); the eye to the right of the loose wire, 18 mm down it (clear
+# of the module's corner). Checked clear of one another at four window sizes.
+MATRIX_LABELS = {'VCC': (dict(side='up-left', reach=0.03), dict(side='up-right', reach=0.03)),     # (VCC: no wire above it yet)
+                 'GND': (dict(side='up-left', reach=0.025), dict(side='near-right', reach=0.035)),     # (G11 nearer than the others: at 0.03 it
+                 'DIN': (dict(side='up-left', reach=0.03), dict(side='near-right', reach=0.035)),       #  met GND at 1440 wide; above its pin, it
+#                                                                                                         sat over the brown wire: a review, 21 Oct;
+#                                                                                                         S11, near-left, met DIN at the LMS's size)
+                 'CS': (dict(side='up-left', reach=0.03), dict(side='near-right', reach=0.035)),
+                 'CLK': (dict(side='up-left', reach=0.025), dict(side='near-right', reach=0.025))}   # (closer: S13 met CLK)
 for wire in MATRIX_WIRES:
     first = wire == MATRIX_WIRES[0]
+    module_label, device_label = MATRIX_LABELS[WIRE_PIN[wire]]
     wire_step(wire, f'Connect {WIRE_PIN[wire]} on the dot matrix display to {WIRE_ROW[wire]} on the I/O module.',
               appear=[MATRIX] if first else [], labels_more=[dict(id=MATRIX, text='Dot Matrix Display', side='near-below',
                                                                        anchor=[531.1, 941.6, 1251.0], reach=0.12)] if first else [],
-              camera=MATRIX_RUN, park=dict(x=680.0, z=1356.0, along='x', gap=1338.0, eye_place=dict(side='near-below', reach=0.09)),   # (in the
+              camera=MATRIX_RUN, park=dict(x=680.0, z=1356.0, along='x', gap=1338.0, eye=18.0, eye_place=dict(side='near-right', reach=0.025)),   # (in the
 #                                                                                    gap between them, across it: Lee's second round)
-              module_label=dict(side='near-left', reach=0.08),
-              device_label=dict(side='near-below', reach={'VCC': 0.145, 'GND': 0.13}.get(WIRE_PIN[wire], 0.12)))   # (labels: Lee's second round;
-#                                                    the reaches clear of one another at every window size, from an iPad to Lee's: a review, 20 Oct)
+              module_label=module_label, device_label=device_label)
 
 # Step 25: the USB cable, its right-angle plug pushed into the Nano Board's socket (as published: hover and plug, one lead line), its A
 # end lying on the bench. Seen from behind the module, as published (the plug goes in along -z, at the module's +z end: side on).
@@ -596,7 +617,8 @@ g.put_away(ELECTRONICS)
 # ================================================================ THE CASE (begin)
 # The case is built on its own first (the published guide hides the electronics until the buttons go in). H1 is the datum.
 g.place('Begin the case with H1. Push the front tabs of H2 into the slots at the end of H1 until they click.', move=[H2], show=[H1],
-        direction=[1, 0, 0], hover=40, labels={H1: 'H1', H2: 'H2'})
+        direction=[1, 0, 0], hover=40, labels=[dict(id=H1, text='H1', side='near-above', reach=0.06), dict(id=H2, text='H2')])   # (H1's
+#                                                                                                   label above it: Lee's fourth round)
 g.place('Push H3 onto the other end of H1 the same way.', move=[H3], direction=[1, 0, 0], hover=43, labels={H3: 'H3'})
 g.place('Push H4 onto the back tabs of H2 and H3.', move=[H4], direction=[1, 0, 0], hover=65, labels={H4: 'H4'})
 
@@ -960,17 +982,25 @@ def usb_outside():
 
 # Each from the published guide's side (its Steps 45 - 51), framed on the action; the display, the dot matrix display and H14 from in
 # front, where their faces are.
-# Step 42 (Lee's third round, 20 Oct 2026: every wire changed shape at once as the module rose, turned and moved, and the USB cable's
-# end swept across them all, so that wires seemed to pass through one another): a beat each. The module is lifted straight up off
-# the bench, every wire carried along in the shape it had (nearer the module, the more it moves with it); turned and carried to where
-# it is held over H4 in thirds, the wires keeping their bench shapes for the first two (turning with the board near it) and taking
-# their shapes there only in the last, the board then turned away from the camera, between it and the pins; then, on its own, the USB
-# cable's A end laid on the table behind the case: carried over the back, set down to the left of the 4-digit display and slid in
-# under its end (independent reviews of 20 and 21 Oct: carried over the top and set down beyond the display's wires, it passed
-# through them, and under the caption box; hung in front of them, it looked plugged into the display).
-MODULE_LIFTED = compose([0.0, 60.0, 0.0], MODULE_BENCH, GEO['parts'][MODULE]['middle'])
-
-
+# Step 42 (Lee's third and fourth rounds, 20 - 21 Oct 2026). The fourth: "still a mess and the animation is way too slow and weird
+# now. How about you try moving the IO module through the gap between the Dot matrix display wires and the Blue Push Button's wires
+# (moving the USB cable in unison up and letting it settle between the Black Push button's wires and the 4-digit display's wires."
+# On the bench the buttons' bundles come to the module from the case (-x), side by side (the black one at -z, the blue at +z), the
+# display's from -z and the matrix's from +z; the USB cable runs from the plug, at the module's +z end, out through the corner between
+# the blue button's bundle and the matrix's to its A end beside the case. Five beats (4 s; round 3's took ten): the module lifted and
+# spun flat a quarter turn, its USB end swinging through that corner towards the case, while the A end is lifted straight up out of
+# it and turned the right way up; the module stood up onto H4 (its USB end rising, its face turning to the back) while the A end goes
+# up with it, over the module's top to its display side; then the A end straight down there, beside the 4-digit display, set down
+# and slid in under the display's end, the cable coming out of the plug towards the display's side and down between the black
+# button's wires and the display's. Seen from behind (Lee, the same round: "from behind the model instead of up and above it"), as
+# Steps 41 and 43 are: from there the A end, carried across below the module's top (as it was for the view from the front), passed
+# between the wires and H4, and from over the middle of the top, down across the display's wires; over the top to the display side
+# and straight down it crosses nothing. Of the ways compared (round4/scripts/path42.py), spinning first and
+# standing up second crossed the button bundles about half as often as the shortest turn or standing up first; the A end's way was
+# screened against the moving module, the wires and the parts, and drawn over the wires from the camera (round4/scripts/eval42n.py,
+# eval42top.py, eval42top2.py); the camera's frame fitted to keep it all clear of the caption box at four window sizes (fit42.py). While the module spins every wire keeps the shape it had on the bench and is bent
+# with the module (wholly from where it first lies over it, `b_whole`, less and less towards its far end); as it stands up the wires
+# take their shapes over H4, matched from each end (`tail_from`).
 _MODULE_SEATED = np.vstack([np.asarray(g.model.inst[p].vertices) for p in (MODULE, NANO, USB_B)])
 
 
@@ -986,164 +1016,147 @@ def over_module(pose, margin=3.0, above=25.0):
     return over
 
 
-def between(p0, p1, f, centre):
-    """The pose a fraction f of the way from p0 to p1 as the player moves a part: its middle in a straight line, turning about it."""
-    from scipy.spatial.transform import Rotation, Slerp
-    A, B, centre = _matrix(p0), _matrix(p1), np.asarray(centre, float)
-    R = Slerp([0.0, 1.0], Rotation.from_matrix([A[:3, :3], B[:3, :3]]))([f])[0]
-    c = (A[:3, :3] @ centre + A[:3, 3]) * (1 - f) + (B[:3, :3] @ centre + B[:3, 3]) * f
-    rv = R.as_rotvec()
-    angle = float(np.linalg.norm(rv))
-    axis = rv / angle if angle > 1e-9 else np.array([0.0, 1.0, 0.0])
-    return turned(axis.round(6).tolist(), round(float(np.degrees(angle)), 4), centre.round(3).tolist(), (c - centre).round(3).tolist())
-
-
-def seat_turned(R, middle):
-    """A pose of the USB A end: turned by the rotation matrix R from its place, about its middle, the middle moved to `middle`."""
+def turned_by(R, centre, middle):
+    """A pose: turned by the rotation matrix R from where the part sits, about the point `centre` (its middle), that point moved to `middle`."""
     from scipy.spatial.transform import Rotation
     rv = Rotation.from_matrix(R).as_rotvec()
     angle = float(np.linalg.norm(rv))
-    return turned((rv / angle).round(6).tolist(), round(float(np.degrees(angle)), 4), np.round(_mid_a, 3).tolist(),
-                  (np.asarray(middle, float) - _mid_a).round(3).tolist())
+    centre = np.asarray(centre, float)
+    if angle < 1e-9:
+        return (np.asarray(middle, float) - centre).round(3).tolist()
+    return turned((rv / angle).round(6).tolist(), round(float(np.degrees(angle)), 4), centre.round(3).tolist(),
+                  (np.asarray(middle, float) - centre).round(3).tolist())
+
+
+def upright(deg):
+    """A turn of `deg` about the vertical."""
+    from scipy.spatial.transform import Rotation
+    return Rotation.from_rotvec(np.radians(deg) * np.array([0.0, 1.0, 0.0])).as_matrix()
 
 
 _on_bench = {DISPLAY: DISPLAY_BENCH, MATRIX: MATRIX_BENCH}
-_mid_module = GEO['parts'][MODULE]['middle']
-TURNING = [between(MODULE_LIFTED, MODULE_HELD, f, _mid_module) for f in (1 / 3, 2 / 3)]   # (the turn in thirds: a beat each)
+_mid_module = np.asarray(GEO['parts'][MODULE]['middle'], float)
+_mid_a = np.asarray(GEO['parts'][USB_A]['middle'], float)
+_mid_bench, _mid_held = np.asarray(apply_pose(MODULE_BENCH, _mid_module)), np.asarray(apply_pose(MODULE_HELD, _mid_module))
+MODULE_SPUN = turned_by(upright(-90.0) @ _matrix(MODULE_BENCH)[:3, :3], _mid_module, (_mid_bench + _mid_held) / 2 + [0.0, 40.0, 0.0])
+#   (spun flat a quarter turn on its way up, half way there and 40 mm higher: its USB end, at +z on the bench, towards the case)
 _held_lines = module_held_layout()
+
+
+def bent(route, pose):
+    """A route's centre line as the player draws it with the module at `pose` (bent by its b_whole / b_from weights, or its default
+    ramp), for settling the USB cable among the wires as they are part of the way."""
+    p = np.asarray(route['pts'], float)
+    s = np.r_[0, np.cumsum(np.linalg.norm(np.diff(p, axis=0), axis=1))]
+    if route.get('a_whole') is not None or route.get('b_whole') is not None:
+        lo, hi = max(route.get('a_whole') or 0.0, route.get('b_from') or 0.0), route.get('b_whole', s[-1])
+        t = np.clip((s - lo) / max(1e-6, hi - lo), 0.0, 1.0)
+    else:
+        u = (s - route['b_from']) / max(1e-6, s[-1] - route['b_from']) if route.get('b_from') else s / s[-1]
+        t = np.clip((u - 0.1) / 0.8, 0.0, 1.0)
+    B = _matrix(pose) @ np.linalg.inv(_matrix(route['b_ref']))
+    return p + (t * t * (3 - 2 * t))[:, None] * ((p @ B[:3, :3].T + B[:3, 3]) - p)
 
 
 CABLE_NEAR = 40.0   # (mm of the USB cable out of its plug that turn with the plug while the module turns: stretched, carried by its ends'
 #                     moves only, it folded flat there: the review of 21 Oct)
 
 
-def usb_held(name, a_pose, via_pts, near=False):
-    """The USB cable with the module held over H4 and its A end at a_pose, drawn through `via_pts` (over the module's top and beside
-    the bundles, never across them), settled among the wires as they are there. near: matched from each end, its first CABLE_NEAR mm
-    turning with the plug (a shape the module turns into or out of), not stretched."""
+def usb_at(name, mod_pose, a_pose, via_pts, fixed, near=False):
+    """The USB cable with the module at mod_pose and its A end at a_pose, drawn through `via_pts`, settled among the wires `fixed` and
+    the parts on screen. near: matched from each end, its first CABLE_NEAR mm turning with the plug (a shape the module turns into or
+    out of), not stretched."""
     if name not in LAYOUTS:
-        start, sdir = np.asarray(apply_pose(MODULE_HELD, USB['plug_exit'])), unit(turn_dir(MODULE_HELD, USB['plug_out']))
+        start, sdir = np.asarray(apply_pose(mod_pose, USB['plug_exit'])), unit(turn_dir(mod_pose, USB['plug_out']))
         end, edir = np.asarray(apply_pose(a_pose, USB['a_exit'])), unit(turn_dir(a_pose, USB['a_out']))
         line = W.resample(W.smooth([start, start + sdir * 8.0, *map(np.asarray, via_pts), end + edir * 8.0, end], start_dir=sdir, end_dir=-edir,
                                    spacing=0.5), 1.0)
-        scene = on_screen(MODULE_HELD, {**SEATED, DISPLAY: DISPLAY_BENCH, MATRIX: MATRIX_BENCH}, case=CASE_ALL, extra=[(USB_A, a_pose)])
+        scene = on_screen(mod_pose, {**SEATED, DISPLAY: DISPLAY_BENCH, MATRIX: MATRIX_BENCH}, case=CASE_ALL, extra=[(USB_A, a_pose)])
         report = []
-        LAYOUTS[name] = R.settle({'usb cable': line}, fixed=dict(_held_lines), parts=SURFACES.placed(scene), skip={'usb cable': {USB_B, USB_A}},
+        LAYOUTS[name] = R.settle({'usb cable': line}, fixed=dict(fixed), parts=SURFACES.placed(scene), skip={'usb cable': {USB_B, USB_A}},
                                  radii={'usb cable': 1.75}, report=report)['usb cable']
-        print(f'  wires, {name}: settled among 21 held, {report[0]}')
-    return W.route(LAYOUTS[name], a=USB_B, b=USB_A, a_at=MODULE_HELD, b_at=a_pose, stretch=not near,
+        print(f'  wires, {name}: settled among {len(fixed)} wires, {report[0]}')
+    return W.route(LAYOUTS[name], a=USB_B, b=USB_A, a_at=mod_pose, b_at=a_pose, stretch=not near,
                    **(dict(tail_from=CABLE_NEAR, a_whole=CABLE_NEAR) if near else {}))
 
 
-LOOP = [[600.0, 1086.0, 1252.0], [588.0, 1090.0, 1266.0], [591.0, 1090.0, 1290.0]]   # (out of the plug and round over the module's top in a
-#   loop lying across the view, towards the camera and back: the reviews of 20 and 21 Oct saw a flat black paddle where it doubled back
-#   upwards, edge on)
-_held_cable_bench = usb_held('usb cable, the module held, the A end on the bench', USB_A_BENCH, LOOP + [[600.0, 1040.0, 1350.0]], near=True)
-
-
-# While the module is lifted and turned two thirds of the way, every wire keeps one route, the shape it had on the bench, which the
-# player bends with the module: wholly from where it first lies over the module, the Nano Board or the USB plug (`b_whole`), less and
-# less towards its far end, not at all along its run in the case (b_from); the USB cable likewise, its first CABLE_NEAR mm turning with
-# its plug (`a_whole`). Drawn at each stop and changed from one to the next, they passed through the plug, the board and one another
-# between the stops (a bit of wire at the same distance from its end was a different bit in each shape: the reviews of 20 and 21 Oct);
-# bent, every bit keeps its place on the wire. In the last third they change to their shapes over H4, matched from each end
-# (`tail_from`), the board then turned away from the camera, between it and the pins. (The USB cable, its plug end turning with the
-# plug, gets a shape at each stop: see cable_stop.)
 _bench_wires = as_routes({**case_bench_layout(), **{w: p for w, p in bench_layout().items() if WIRE_DEVICE[w] in (DISPLAY, MATRIX)}}, MODULE_BENCH,
                          _on_bench, held_in_case=True, tail=True, shared=[MATRIX])
 _near = dict(tail_from=CABLE_NEAR, a_whole=CABLE_NEAR)
 _bench_cable = W.route(BENCH_CABLE, a=USB_B, b=USB_A, a_at=MODULE_BENCH, b_at=USB_A_BENCH, **_near)
-
-
-def cable_bent(line, frm, to):
-    """The USB cable's centre line (from its plug) bent as the module moves from `frm` to `to`: each point with the plug by a weight
-    falling smoothly along it to the A end, which stays on the bench."""
-    T = _matrix(to) @ np.linalg.inv(_matrix(frm))
-    p = np.asarray(line, float)
-    cs = np.r_[0, np.cumsum(np.linalg.norm(np.diff(p, axis=0), axis=1))]
-    t = 1.0 - cs / max(1e-6, cs[-1])
-    return p + (t * t * (3 - 2 * t))[:, None] * ((p @ T[:3, :3].T + T[:3, 3]) - p)
-
-
-def tail_mix(p, q, f, head, n=240):
-    """Lines p and q (the same two ends) a fraction f of the way from p to q, matched as the player matches `tail_from` routes: the
-    first `head` mm by distance from the first end, the rest by distance from the last."""
-    p, q = np.asarray(p, float), np.asarray(q, float)
-    cum = lambda l: np.r_[0, np.cumsum(np.linalg.norm(np.diff(l, axis=0), axis=1))]
-    tail = max(cum(p)[-1], cum(q)[-1]) - head
-    n1 = max(2, min(n - 2, round(n * head / (head + tail))))
-
-    def two(l):
-        s = cum(l)
-        at = np.r_[np.clip(np.linspace(0.0, head, n1), 0.0, head), np.clip(s[-1] - tail + np.linspace(0.0, tail, n - n1), head, s[-1])]
-        return np.stack([np.interp(at, s, l[:, c]) for c in range(3)], 1)
-    m = two(p) * (1 - f) + two(q) * f
-    keep = np.r_[True, np.linalg.norm(np.diff(m, axis=0), axis=1) > 1e-6]
-    return W.resample(m[keep], 1.0)
-
-
-def cable_stop(name, pose, f):
-    """The USB cable with the module at `pose`, a fraction f of the way through the turn: its lifted shape and its shape over H4 (the
-    loop), each bent there, mixed f of the way from the one to the other, and settled clear of the parts on screen. Its change of shape
-    so spreads over the three beats of the turn (drawn from either alone, it folded into a hairpin in one beat or coiled in another, and
-    from the lifted one it cut the case's back corner: the reviews and checks of 21 Oct)."""
-    if name not in LAYOUTS:
-        line = tail_mix(cable_bent(_c_lifted, MODULE_LIFTED, pose), cable_bent(_held_cable_bench['pts'], MODULE_HELD, pose), f, CABLE_NEAR)
-        scene = on_screen(pose, {**SEATED, DISPLAY: DISPLAY_BENCH, MATRIX: MATRIX_BENCH}, case=CASE_ALL, extra=[(USB_A, USB_A_BENCH)])
-        report = []
-        LAYOUTS[name] = R.settle({'usb cable': line}, fixed={}, parts=SURFACES.placed(scene), skip={'usb cable': {USB_B, USB_A}},
-                                 radii={'usb cable': 1.75}, report=report)['usb cable']
-        print(f'  wires, {name}: settled, {report[0]}')
-    return LAYOUTS[name]
-
-
-_c_lifted = cable_bent(BENCH_CABLE, MODULE_BENCH, MODULE_LIFTED)   # (lifted straight up: nothing to settle)
-_c_turning = [cable_stop(f'usb cable, the module turning, {k + 1} of 3', pose, (k + 1) / (len(TURNING) + 1)) for k, pose in enumerate(TURNING)]
-_cable_stops = [W.route(c, a=USB_B, b=USB_A, a_at=pose, b_at=USB_A_BENCH, **_near)
-                for c, pose in zip([_c_lifted, *_c_turning], [MODULE_LIFTED, *TURNING])]
 _held_wires = as_routes(_held_lines, MODULE_HELD, _on_bench, held_in_case=True, tail=True)
-_mid_a = np.asarray(GEO['parts'][USB_A]['middle'], float)
+A_UP = turned_by(upright(-90.0), _mid_a, [670.0, 1025.0, 1399.0])   # (lifted straight up out of the corner, the right way up, its cable end towards the module)
 
 
-def _upright(deg):
-    """The rotation of the USB A end turned `deg` about the vertical from its place (the right way up)."""
-    from scipy.spatial.transform import Rotation
-    return Rotation.from_rotvec(np.radians(deg) * np.array([0.0, 1.0, 0.0])).as_matrix()
+def spun_matrix_layout(others):
+    """The dot matrix's wires with the module spun flat (Step 42's first stop), settled among `others`: straight up out of their pins,
+    then over and down to the matrix on the bench. (On the bench they come in over the USB plug; bent with the module, that drape stood
+    up with the module's USB end and folded into a tent above it, seen from behind: Lee's fourth round. Straight up, they turn out of
+    the module's face as it stands up, as they come out of it over H4. Laid along the board away from the plug instead, they folded
+    halfway through the first beat. The change from the bench shape, less than half as long, is matched by head_first, below.)"""
+    lines = bundle_lines(MATRIX, MATRIX_BENCH, MODULE_SPUN, [[651.0, 955.0, 1345.0], [646.0, 1010.0, 1322.0], [634.0, 1034.0, 1296.0],
+                                                             [624.0, 1030.0, 1281.0]])   # (from the matrix)
+    scene = on_screen(MODULE_SPUN, {**SEATED, DISPLAY: DISPLAY_BENCH, MATRIX: MATRIX_BENCH}, case=CASE_ALL, extra=[(USB_A, A_UP)])
+    return settled('the dot matrix wires, the module spun', lines, scene, held=others)
 
 
-_at = lambda middle: (np.asarray(middle, float) - _mid_a).round(3).tolist()   # (as it lies in its place, moved)
-# The A end's way, a beat each (checked against every wire and part, and the caption box at the four window sizes: round3/scripts/
-# way42d.py, way42e.py): lifted off the bench and turned the right way up, its cable end towards the module; back over the dot matrix
-# display; across, above the module (in sight: the frame raised 20 mm up the screen for it, the review of 21 Oct), turning towards its place; over to the left of the 4-digit display; set down on the table
-# there; and slid in under the display's end to its place, its cable end staying in front of the display's wires (hung in front of them,
-# the review of 21 Oct found it drawn over the display's header, as if plugged into it). The cable runs out of the plug in the same loop
-# while the A end is to the right (+z) of the module, unwinding as it is carried across, then straight down to its left (the shapes
-# checked with round3/scripts/exp42c.py for the caption box; lengths 121 - 249 mm on the A end's way).
-USB_A_WAY = [(seat_turned(_upright(-90.0), [597.0, 1000.0, 1399.0]), LOOP + [[600.0, 1070.0, 1330.0]]),
-             (seat_turned(_upright(-90.0), [680.0, 1000.0, 1399.0]), LOOP + [[618.0, 1080.0, 1322.0], [650.0, 1040.0, 1352.0]]),
-             (seat_turned(_upright(-45.0), [680.0, 1030.0, 1290.0]), [[614.0, 1082.0, 1248.0], [636.0, 1082.0, 1248.0], [652.0, 1056.0, 1262.0]]),
-             (_at([667.0, 980.0, 1180.0]), [[606.0, 1080.0, 1250.0], [614.0, 1050.0, 1210.0], [626.0, 1000.0, 1186.0]]),
-             (_at([667.048, 892.065, 1180.0]), [[606.0, 1080.0, 1250.0], [612.0, 1050.0, 1215.0], [620.0, 990.0, 1190.0], [628.0, 930.0, 1183.0]]),
-             (ZERO, None)]
-_a_cables = [usb_held(f'usb cable, the A end on its way, {k + 1} of {len(USB_A_WAY) - 1}', pose, way) if way else usb_cable(MODULE_HELD, None)['usb cable']
-             for k, (pose, way) in enumerate(USB_A_WAY)]
-_mod_stops = [MODULE_LIFTED, *TURNING, MODULE_HELD]
-_bent = len(_mod_stops) - 1                                         # (the beats in which the wires are only bent with the module)
-_ride = {MODULE: _mod_stops + [MODULE_HELD] * len(USB_A_WAY), USB_A: [USB_A_BENCH] * len(_mod_stops) + [p for p, _ in USB_A_WAY]}
-_wires_42 = {**{w: [_bench_wires[w]] * _bent + [_held_wires[w]] * (1 + len(USB_A_WAY)) for w in ALL_WIRES},
-             'usb cable': _cable_stops + [_held_cable_bench] + _a_cables}
-assert all(len(x) == len(_mod_stops) + len(USB_A_WAY) for x in [*_ride.values(), *_wires_42.values()])
+_spun_lines = {w: bent(r, MODULE_SPUN) for w, r in _bench_wires.items() if WIRE_DEVICE[w] != MATRIX}
+_spun_lines.update(spun_matrix_layout(_spun_lines))
+_spun_matrix = as_routes({w: p for w, p in _spun_lines.items() if WIRE_DEVICE[w] == MATRIX}, MODULE_SPUN, _on_bench, tail=True, shared=[MATRIX])
+
+# The A end's way (and the module's stops), a beat each, the cable at each stop.
+A_TOP = turned_by(np.eye(3), _mid_a, [650.0, 1110.0, 1215.0])     # (over the module's top as it stands up, to its display side, turned as it
+#                                                                      will lie, its cable end towards the plug: from there it goes straight
+#                                                                      down, clear of the display's wires)
+WAY_42 = [(MODULE_SPUN, A_UP, usb_at('usb cable, the module spun', MODULE_SPUN, A_UP,
+                                      [[598.0, 1030.0, 1258.0], [601.0, 1054.0, 1264.0], [630.0, 1046.0, 1316.0]], _spun_lines, near=True)),
+#   (over the module's USB end, not across its face, where it hid the board as it spun, nor round it on the case's side, where the
+#   change from its shape on the bench took it through the case's back corner: a check of 21 Oct (it still dips into the top of the case
+#   for a moment in the first beat, up to 2.4 mm: README); up out of the plug, then to the A end: turned back on itself, in the run
+#   that turns with the plug or beyond, it folded into a hook as the A end crossed over)
+          (MODULE_HELD, A_TOP, usb_at('usb cable, the module held, the A end over its top', MODULE_HELD, A_TOP,
+                                      [[611.0, 1082.0, 1252.0], [607.0, 1100.0, 1228.0]], _held_lines, near=True)),
+#   (out of the plug towards the display's side and up into the A end, which faces it)
+          (MODULE_HELD, turned_by(np.eye(3), _mid_a, [684.0, 992.0, 1180.0]), None),
+          (MODULE_HELD, turned_by(np.eye(3), _mid_a, [667.048, 892.065, 1180.0]), None),
+          (MODULE_HELD, ZERO, None)]
+_cables = [WAY_42[0][2], WAY_42[1][2],
+           usb_at('usb cable, the A end over', MODULE_HELD, WAY_42[2][1], [[606.0, 1080.0, 1250.0], [614.0, 1050.0, 1210.0], [628.0, 1000.0, 1186.0]], _held_lines),
+           usb_at('usb cable, the A end set down', MODULE_HELD, WAY_42[3][1],
+                  [[606.0, 1080.0, 1250.0], [612.0, 1050.0, 1215.0], [620.0, 990.0, 1190.0], [628.0, 930.0, 1183.0]], _held_lines),
+           usb_cable(MODULE_HELD, None)['usb cable']]
+_ride = {MODULE: [m for m, _, _ in WAY_42], USB_A: [a for _, a, _ in WAY_42]}
+
+
+def head_first(route, tail=3.0):
+    """`route` matched, between two such routes, by distance from its first end along all but its last `tail` mm. The dot matrix's
+    wires and the USB cable change in Step 42's first beat between shapes 70 - 80 mm and 190 - 220 mm long; matched by distance from
+    the far end beyond the first few mm (tail_from 7, or the cable's 40), the shorter one's points bunched where the two runs met and a
+    small copy of the longer one's shape hung there, a zigzag by the matrix's header and a hairpin above the plug in the open; bunched
+    at the far end instead, it is among the module's pins (the A end, at the start, lies behind the dot matrix display). (Only the
+    bench cable: matched so, the cable lifted with the module and its next shape, 197 and 103 mm, bunched at the A end in view.)"""
+    L = float(np.linalg.norm(np.diff(np.asarray(route['pts'], float), axis=0), axis=1).sum())
+    return {**route, 'tail_from': round(L - tail, 2)}
+
+
+_firsts = [w for w in ALL_WIRES if WIRE_DEVICE[w] == MATRIX]
+_bench_wires.update({w: head_first(_bench_wires[w]) for w in _firsts})
+_spun_matrix = {w: head_first(r) for w, r in _spun_matrix.items()}
+_held_wires.update({w: head_first(_held_wires[w]) for w in _firsts})
+_bench_cable = head_first(_bench_cable)
+_wires_42 = {**{w: [_spun_matrix.get(w, _bench_wires[w])] + [_held_wires[w]] * (len(WAY_42) - 1) for w in ALL_WIRES}, 'usb cable': _cables}
+assert all(len(x) == len(WAY_42) for x in [*_ride.values(), *_wires_42.values()])
 g.place("Pick up the I/O module, with everything plugged into it, and hold it over the back of H4, its USB end at the top. Lay the USB "
         "cable's other end on the table behind the case.",
-        ride=_ride, ride_beats=True,                                  # (a beat each: the module's four, then the A end's six)
+        ride=_ride, ride_beats=True,                                  # (a beat each: see WAY_42)
         lines=False, labels=[], eye=[MODULE],
         wires={**_bench_wires, 'usb cable': _bench_cable},            # (the same shapes as Step 41c's, drawn to be bent: see above)
         review=("The module goes on H4 USB end up, as in the published guide. Your STEP has it USB end down, its power socket on H5's tongue. "
                 "Which way up is right?"),
         wires_done=_wires_42,
-        view_dir=[-0.5248, 0.848, -0.0738], frame=([632.0, 1003.0, 1292.0], 112.0))   # (from the front of the case, high: the case
-#   hides the buttons' wires behind H4 while the module turns over it; from behind, they seemed to pass through one another: Lee's
-#   third round asked whether another view would help)
+        view_dir=[0.8387, 0.5446, 0.0], frame=([638.0, 1012.0, 1323.0], 126.0))   # (from behind: Lee's fourth round; round 3's view was
+#   from the front of the case, high, which hid the buttons' wires behind H4. Straight behind, between Step 41's corner and Step 43's,
+#   with the module's face square on)
 _c = np.asarray(GEO['parts'][MODULE]['middle'])
 SIDE = [0.0, 0.0, 35.5]                                            # (beside the module's +z edge, clear of its face and wires)
 g.place('Lower the I/O module onto the back of H4, its edges into the notches in the tabs of H10.', move=[MODULE], path=[MODULE_HELD, ZERO],

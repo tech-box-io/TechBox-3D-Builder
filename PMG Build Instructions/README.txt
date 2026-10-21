@@ -1,7 +1,7 @@
 PMG Build Instructions (Piano Memory Game, Full Build: the electronics wired on the bench, then the wooden case with the electronics
 fitted into it)
 
-FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
+FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct, the FOURTH on 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
 Cadasio Build.STEP") and TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-piano_memory_game_pmg-full_build),
 in the same format as the MRA and RCC guides, with the same player. Not for distribution. Open questions are yellow Review notes on
 their steps (in the kit's player; the website copy leaves Review notes out) and are listed at the end of this file.
@@ -32,10 +32,11 @@ THE BUILD (48 steps, in the published guide's order)
   bundle to above its pin (low enough to stay clear of the caption box in the LMS's frame); the display's slid along its lane to
   12 mm off its pin while the module's is lowered over its pin; both pushed on. Steps 19 and 20 (VCC to V9, GND to G9) are seen from
   lower and further round towards rows 10 - 13 (Lee's third round: from Steps 17 - 18's side the display's own wires hid V9 and G9;
-  the display's printed back still in view).
+  the display's printed back still in view). On each Step Nc a close-up from above of the module's pin, its new cap boxed in red
+  (Lee's fourth round).
 - Steps 21 - 25: the dot matrix display (VCC to V11, GND to G11, DIN to S11, CS to S12, CLK to S13), seen from behind and above it
-  (Lee's screenshot of Step 22): its printed pin names beside its header, the module's pins; the module's labels to its left, the
-  matrix's below it; each wire lies across the gap between the matrix and the module before it goes in. A beat each: the matrix's cap
+  (Lee's screenshot of Step 22): its printed pin names beside its header, the module's pins; the module's labels up and to its left,
+  the matrix's to the right of its pin, under the wire before (Lee's fourth round), the eye to the right of the loose wire; each wire lies across the gap between the matrix and the module before it goes in. A beat each: the matrix's cap
   rises straight up to its place 5 mm off its pin (under the wires already in) while the module's comes through the gap, upright,
   above the pins' height; the module's slides along its column, 10.5 mm above the pins, to over its pin; both pushed on.
 - Step 26: the USB cable's right-angle plug into the Nano Board; its A end lies on the bench. A caution: set the module aside.
@@ -49,9 +50,11 @@ THE BUILD (48 steps, in the published guide's order)
   lowered (the keys' camera for all three, close); H11 and H12 down into H10 and back into H4 (each from a front corner, close); H13
   down its slope.
 - Steps 42 - 47: the electronics into the case, each picked up first (an eye), then placed: the I/O module held over the back of H4
-  (Step 42, seen from the front of the case, a beat each: lifted straight up off the bench, turned in thirds to where it is held; then
-  the USB cable's A end lifted and turned the right way up, carried back over the dot matrix display, across above the module, over
-  to the left of the 4-digit display, set down on the table there and slid in under the display's end to its place behind the case)
+  (Step 42, seen from straight behind, five beats: the module lifted and spun flat a quarter turn, its USB end swinging through
+  the corner between the blue button's wires and the dot matrix display's, the USB cable's A end lifted out of that corner with it;
+  the module stood up onto H4 while the A end goes up with it, over its top to the display's side; then the A end straight down
+  beside the 4-digit display, set down and slid in under the display's end to its place behind the case, the cable between the black
+  button's wires and the display's)
   and lowered onto it (its label to its left); the 4-digit display passed under the dot matrix display's wires into the space
   behind the module, lifted up behind the case, over the top and held over its place, a beat for each, in one step (Step 44), then
   lowered into the notches of H11 and H12 (Step 45); the dot matrix display lifted,
@@ -195,6 +198,66 @@ LEE'S THIRD ROUND (20 Oct 2026; Lee's step numbers are the guide's as it was, an
   (round3/verify3/raw); cameras changed only on Steps 19, 20 and 42 (both views of each); the run-through on all 99 views in the kit and
   as published to the test website; and every other kit's run-through with the changed player (MRA 211 views and its deconstruction
   151, RCC 61 and 42, LAC 116, LSM 82).
+
+LEE'S FOURTH ROUND (21 Oct 2026; Lee's step numbers, unchanged)
+- Steps 17 - 20: on each Step Nc, a close-up from above of the I/O module's pin the wire has just gone onto (S8, S9, V9, G9), its cap
+  boxed in red among those already in, the printed row numbers and S / V / G beside them (as the LAC's breadboard holes; recorded in
+  the rulebook's section 6, as Lee asked it). Steps 19c - 20c turn it as their own camera is turned, and put it on the module's left,
+  beside the pin, its leader not across the module (from 1000 px wide; at 760 px see the review below).
+- Steps 21 - 25: each dot matrix pin's label (VCC, GND, DIN, CS, CLK) to the right of its pin, just under the wire put in the step
+  before (VCC, the first, up and to the right); the module's labels up and a little to the right of where they were, still to the
+  left of the wires (G11 a little nearer its pin than the others; S11 too, though not named: where it was it met DIN at the LMS's
+  size); the eye to the right of the loose wire, a little down it, clear of the module's corner. Clear of one another at four window
+  sizes.
+- Step 27: H1's label above H1.
+- Step 42, as Lee asked: the module through the gap between the dot matrix display's wires and the blue push button's, the USB cable
+  up with it and settling between the black push button's wires and the 4-digit display's; in five beats (4 s; round 3's took ten).
+  (1) The module lifted and spun flat a quarter turn, its USB end swinging through that gap towards the case, while the USB cable's A
+  end is lifted straight up out of the corner; (2) the module stood up onto H4 while the A end goes up with it, over the module's top
+  to the display's side; (3) the A end straight down there, clear of the display's wires; (4) set down beside the 4-digit display;
+  (5) slid in under its end. While the module spins, the wires keep their bench shapes, bent with it; the dot matrix's turn to come
+  straight up out of their pins (below).
+- Step 42 seen from behind again, as Steps 41 and 43 are (Lee, the same round: "from behind the model instead of up and above it"):
+  straight behind, between their two corners, the module's face square on, framed so that everything moving stays clear of the
+  caption box at four window sizes (round4/scripts/fit42.py). From behind, the round's first try (made for the view from the front)
+  showed what the front had hidden, and this was changed: the dot matrix's wires, which on the bench come in over the USB plug, stood
+  up with the plug as the module stood up and folded into a tent above it (now, while the module spins flat, they turn to come straight
+  up out of their pins, and so turn out of the module's face as it stands up, as they come out of it over H4); the A end, carried across
+  below the module's top, passed between the wires and H4 and then down across the display's wires (now over the top and straight
+  down the display's side); and the cable folded into a hook at the plug (now it rises out of the plug and runs straight to the A end).
+  What is left (round4/verify/motion_Step42c_final.txt, 201 moments): 104 contacts, all in the first two beats (round 3: 102; this
+  round's first try, from the front: 109); the A end's three beats touch nothing. In the first beat (0.07 - 0.12 of the step, about
+  0.2 s), as the module spins: the dot matrix's wires pass into the module's corner, the Nano Board and the USB plug (12 contacts, the
+  deepest 4.8 mm, CS into the Nano Board at 0.10; round 3's deepest anywhere in the step was 4.4 mm), and the USB cable into the top
+  of the case at the back (H10 2.4 mm, H11 2.1 mm, H13 1.5 mm, H4 1.2 mm, at 0.09 - 0.10): the price of the shapes changing there
+  without folding (the review, below). In the stand-up (0.23 - 0.34, about half a second) the buttons' four bundles, side by side on
+  the bench and nested one outside another over H4, pass through one another (54 contacts), wires within a bundle pass into one
+  another (28: 10 of them the dot matrix's, 6 the 4-digit display's, 12 the buttons'; of all 82 wire contacts, 69 have centre lines
+  closer than a wire's radius), and the blue and white buttons' wires dip into the module by up to 1.4 mm (6, at 0.29): from behind
+  this is in view (from the front, H4 hid it). As the A end crosses over the module's top, the cable folds for a moment (0.30 - 0.35,
+  about 0.2 s; 138 degrees within 3 mm): the plug's cable comes out towards the display's side, so with the A end on the matrix's
+  side it has to turn back, and it straightens as the A end crosses. The first beat's sharpest bends are now among the module's pins
+  (round4/verify/shapes42.txt). At the start the A end lies behind the dot matrix display, out of sight from behind, until it is lifted.
+- An independent review of the round (21 Oct 2026: round4/verify/review_raw.json, with the pictures it looked at in round4/verify/raw;
+  four reviewers, each finding then checked by a second before anything was changed) found, and this was changed: in Step 42's first
+  beat the dot matrix's wires zigzagged just past their header and the USB cable stood up in a hairpin above the plug, in the open
+  (each changed into a shape more than twice as long, and the shorter one's points bunched where its two runs were matched; now matched
+  from the first end along all but the last 3 mm, guide.py's head_first: the bunching falls among the module's pins and, for the cable,
+  at the A end, behind the dot matrix display); G11 in Step 22 had moved more than "a bit" and sat over the brown wire (now up and to
+  the left of its pin, nearer than before); the close-up's leader in Steps 19c - 20c ran across the module and the caps just put on,
+  against the rulebook (now on the module's left, beside the pin; at 760 px, an iPad in the LMS, there is no room beside it, and the
+  close-up sits at the top left, over the left half of the 4-digit display, its leader straight down to the pin); the rulebook's new
+  entry claimed more than Lee asked (narrowed to what Lee asked); and this account left out the contacts into parts and the first
+  beat's folds.
+- The player, every kit: a close-up no longer covers the place it shows (on its side, with no room beside it in a narrow window, Steps
+  19c - 20c covered their pin; it now goes higher or lower on that side, or smaller). Of the other kits' 13 close-ups at four window
+  sizes, only the LSM's Step 36c at 760 px covered its own place (the D11 tab through D1, hidden): it now sits lower on the left with a
+  short leader; every other close-up is where it was (each measured with the old rule and the new). Recorded in CLAUDE.md.
+- Checked: every view at rest (tools/wirecheck.py: 0 problems in 99 views); every motion, wires and moving parts (check_caps.py, 201
+  moments: only Step 42c differs from round 3); labels at four window sizes (48 labelled views: none overlapping, crossing or under
+  the caption box); cameras changed only on Step 42 (both views), checked view by view against the guide as it was before the round;
+  the close-ups at four window sizes; the run-through on all 99 views in the kit and as published to the test website (http://localhost:8799, release r8); and every other kit's run-through with
+  the changed player (MRA 211 views and its deconstruction 151, RCC 61 and 42, LAC 116, LSM 82: no problems).
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
