@@ -282,6 +282,13 @@ around them comes out, as the build plugged them in last (the wheel motors befor
 cable, and none on its far end. Wood that holds a part (the motors' L4 and L5) comes off that part in the hand, and the guide ends
 on the base (L1). Its card is the Full Build's (as the MRA's).
 
+**Lee, 2026-10-21 (the PMG's deconstruction, "same principles as you used for the MRA"):** "some things can be removed in groups
+(like the breadboard wires, four buttons, four H9 parts, etc.)": parts the build put in one at a time come off together where they
+are alike or go together, each with its own arrow. The PMG's draft follows TechBox's published PMG take-apart where it has one (the
+wired modules lifted out of the case still wired; each device pulled off the ends of its wires, then the wires off the I/O module
+together; the Nano Board last of the electronics), within the in-house principles above (the power cable first; the electronics
+taken apart on their own, then back to the case; it ends on the base, H1, with the Full Build's parts list after it).
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |

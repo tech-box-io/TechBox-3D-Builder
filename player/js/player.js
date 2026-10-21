@@ -841,11 +841,13 @@ function go(i, animate = true) {
   // place, and its wires, fade out where they are, then fade in where they end, a beat each; back, the same the other way.
   const rv = forward && from.kind === 'hover' && to.kind === 'done' && to.reappear ? to : backward && from.kind === 'done' && to.kind === 'hover' && from.reappear ? from : null;
   if (rv && playing) {
-    const same = (a, b) => JSON.stringify(a || ZERO) === JSON.stringify(b || ZERO);
+    const mA = new THREE.Matrix4(), mB = new THREE.Matrix4();   // (where a part is, to a thousandth: a turned pose worked out again on the way, a part
+    const same = (a, b) => { stage.poseMatrix(a || null, mA); stage.poseMatrix(b || null, mB); return mA.elements.every((x, k) => Math.abs(x - mB.elements[k]) < 1e-3); };   //  lying still, is not moving)
     const parts = Object.keys(end).filter(id => !same(start[id], end[id]));
     const wires = Object.keys(to.wires || {}).filter(w => (from.wires || {})[w] !== to.wires[w] || [routes[to.wires[w]].a, routes[to.wires[w]].b].some(e => parts.includes(e)));
     anim.reappear = {parts, wires};
     anim.dur = anim.moveDur = 2 * FADE_MS; anim.moveAt = 0;
+    if (turnAround) anim.t0 = performance.now() - Math.max(0, anim.dur - elapsed);   // (a take-apart's fade turned round half-way: on from there)
   }
   stage.invalidate();
 }

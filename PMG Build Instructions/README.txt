@@ -5,8 +5,9 @@ FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, th
 Cadasio Build.STEP") and TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-piano_memory_game_pmg-full_build),
 in the same format as the MRA and RCC guides, with the same player. Not for distribution. Open questions are yellow Review notes on
 their steps (in the kit's player; the website copy leaves Review notes out) and are listed at the end of this file.
-Also on the local test website: http://localhost:8799/piano-memory-game-full-build/ (share/Test guides preview, a practice publish;
-nothing is live).
+Also on the local test website: http://localhost:8799/piano-memory-game-full-build/ and, the take-apart (first draft 21 Oct 2026,
+below), http://localhost:8799/piano-memory-game-deconstruction/ (share/Test guides preview, a practice publish; nothing is live).
+In the kit's player the take-apart is http://localhost:8792/player.html?steps=steps-deconstruction.json.
 
 HOW TO OPEN (Mac)
 1. Double-click "Open Prototype.command". A Terminal window opens and the prototype opens in your browser (port 8792, so it can run
@@ -318,6 +319,52 @@ LEE'S SIXTH ROUND (21 Oct 2026, after the fifth)
   in the kit and as published to the test website (http://localhost:8799, release r12). An independent review (two reviewers,
   21 Oct 2026, the cameras re-projected from the model's own points) found no fault in the cameras and corrected this text: where the
   player moves the title page aside, and the 4-degree turn.
+
+THE DECONSTRUCTION (first draft, 21 Oct 2026)
+Lee: "take this PMG Full Build guide and create a Deconstruction Guide based on it. Same principles as you used for the MRA.
+Remembering some things can be removed in groups (like the breadboard wires, four buttons, four H9 parts, etc.)". deconstruction.py
+-> steps-deconstruction.json (26 steps), made from the Full Build as guide.py last wrote it: run it again after every Full Build
+change. Its title page is the Full Build's, it ends on H1 followed by the Full Build's two parts list pages (as the MRA's), and its
+card on the website is the Full Build's. The order is the Full Build in reverse, in the order of TechBox's own published PMG
+take-apart where it has one (docs/research/guide_19075-piano-memory-game-deconstruction.md); the reasons for each choice are in
+docs/research/pmg/deconstruction/ (the Full Build mapped step by step, the take-apart machinery, Lee's conventions).
+- Step 1: the USB cable, both ends (power first, as the MRA's and the RCC's), from behind, one arrow on the plug pulled.
+- Step 2: H14 (its way out points at the camera: an eye on its wood, above its window).
+- Steps 3 - 8: the dot matrix display, the 4-digit display and the I/O module out of the case to the table behind it, still wired, each
+  in the Full Build's two steps reversed, each by the camera of the step it undoes, the wires through the Full Build's own shapes
+  stage by stage: tilted forward and lifted off its hooks (or out of its notches), then carried back over the case (the 4-digit
+  display down behind it and out under the dot matrix display's wires); the I/O module lifted straight up off H4, then set on the
+  table by a fade, as the Full Build's Step 42 brought it (Lee kept that fade).
+- Steps 9 - 14: H13, H12, H11, H10, the four keys (H9) at once (an arrow on each), H8.
+- Steps 15 - 16: the case turned over: H7, then the four push buttons out of their pockets at once, back to the table still wired.
+- Steps 17 - 21: the electronics on their own, the case hidden (as the RCC's controller and I/O module): the dot matrix display, then the
+  4-digit display, then the four push buttons at once, each pulled off the ends of its wires, which stay on the I/O module (as TechBox's
+  published take-apart); then all 21 breadboard wires off the module at once (an eye on them); then the Nano Board out (the Full
+  Build's Step 1 camera). One wide camera while the dot matrix display comes off, one closer for the rest.
+- Steps 22 - 26: back to the case, still upside down: H6, H5; the right way up: H4, H3, H2. H1 is left.
+- No counterpart for the Full Build's preparation (the wires peeled off the ribbon) or its Step 3 card.
+- Choices Lee may want otherwise: it ends on H1, the base (as the MRA's and the RCC's; TechBox's published one ends on the bare I/O
+  module, its case's last plates vanishing unexplained); the devices come off their wires before the wires come off the module (as
+  published; the MRA's breadboard wires came off both ends at once); the I/O module goes back to the table by a fade. The wording
+  names the parts as the Full Build does (the I/O module, the 4-digit display ...); the developer's sheet can change it
+  (tools/step_text.py export ... steps-deconstruction.json).
+- New in the generator and the player, for every kit (only this guide uses them): lift(..., reappear=True), a fade instead of a move,
+  as place()'s; remove() / lift(..., let_go=[ids]), riders of what leaves that stay where they are (the wire ends a device is pulled
+  off); the player turns a take-apart's fade round where it is when Prev or Next is pressed half-way, and a fade now leaves alone the
+  parts that lie still (it compared poses as text, and a turned pose worked out again on the way could differ in the last digit: in
+  this guide's Step 8 both displays faded with the module; in the Full Build's Step 42 the same 34 parts fade as before).
+- An independent review (21 Oct 2026, three reviewers: pictures, order and wording, code) found, and this was changed: the wires of
+  the devices pulled off vanished for two steps (their ends, let go of, were not on the electronics' own view); both displays faded
+  with the module; the module's lift off H4 was faded too (now a step of its own, as the Full Build's); H11's arrow seemed to lift
+  the 4-digit display behind it; H10's lay on the keys like theirs; H14's eye fell on the display's digits; the wording of Steps 3,
+  5 and 22; the framing of the electronics' run.
+- Checked: the run-through on all 56 views (and every other guide with the changed player: PMG Full Build 99, MRA 211, its
+  deconstruction 151 and Parts 35, 50, 132, RCC 61 and 42, LAC 116, LSM 82: no problems); every step as it opens, half-way and at its
+  end, at 1440 x 900 and the hand-framed ones at 760 x 720; the wires during each move (check_caps.py, 201 moments): no wire end
+  passes into a part; wires of one device pass through each other in the matrix's and the display's carry, the module's lift off H4
+  and the push buttons' way out, and two of the blue button's wires graze H7 by 0.22 mm half-way through the module's lift, exactly
+  as in the Full Build's own Steps 46c, 44c, 43c, 32c and 33c (the same pairs and places, mirrored in time), not new here;
+  the RCC's and MRA's deconstructions regenerate unchanged with the new generator; published to the test website (release r1).
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three

@@ -81,7 +81,8 @@ docstrings of `Guide.place` and `Guide.seat`):
   D1 from below, the posts' tabs in its slots), `inset=dict(..., marks=[(point, half-width), ...])` (a red box round each of several
   spots: the LSM's four slots in D1), `reappear=True` (nothing moves: what changes place, its riders and its wires fade out where
   they are and fade in where they end, a beat each, as the published guides move wired things; the PMG's Step 42, the I/O module
-  onto H4 with every wire on it: Lee, 21 Oct 2026, that step only; motioncheck.py skips it). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
+  onto H4 with every wire on it: Lee, 21 Oct 2026, that step only; motioncheck.py skips it; its deconstruction undoes that step the
+  same way, `lift(..., reappear=True)`). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
   0.25 for the LSM's resistor legs, whose bends looked pinched). A label or an eye may ask for its place:
   `dict(..., side=)` a side of the model ('left', 'right', 'top', 'bottom') or a place beside its own spot ('up-right', 'up-left',
   'down-right', 'down-left', 'near-left', 'near-right', 'near-above', 'near-below'; `reach=` how far, a share of the view's width,
@@ -153,6 +154,7 @@ Run from this folder. The Python environment is `.venv.nosync` (the Desktop is i
     .venv.nosync/bin/python "MRA Build Instructions Prototype/guide.py"            # after editing guide.py
     .venv.nosync/bin/python "MRA Build Instructions Prototype/deconstruction.py"   # then the deconstruction, made from the Full Build
     .venv.nosync/bin/python "RCC Build Instructions/deconstruction.py"            # (the RCC's, likewise, after its guide.py)
+    .venv.nosync/bin/python "PMG Build Instructions/deconstruction.py"            # (the PMG's, likewise, after its guide.py)
     .venv.nosync/bin/python tools/build_model.py "MRA Build Instructions Prototype" # after editing materials.json or replacing the CAD
     .venv.nosync/bin/python "MRA Build Instructions Prototype/silkscreen.py"       # after editing the module's printing (then build_model)
     /usr/bin/python3 tools/serve.py "MRA Build Instructions Prototype" 8791         # local server; then open http://localhost:8791/player.html
@@ -329,7 +331,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026; the PMG's, 21 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
   `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
   Full Build's title page. Then, as a rule the build in reverse (rulebook section 11 and Lee's conventions there: parts may go in
@@ -354,14 +356,20 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     By hand, per step (Lee's third round, 18 Oct 2026): `arrow_scale=k` (every arrow of the step), `arrow_style={id: dict(scale=,
     like=id2 (as big as id2's own arrow: a screw's as its part's), at=[x, y, z] (where its tail is: the top of R7, the edge of B2's
     cut-out), shift=[dx, dy, dz] (raised clear of wires), face=, keep=True (an arrow even towards the camera: the A9s), stage=k (along stage k
-    of its way, 0 the first, not the longest: the RCC's joysticks pulled back out of their sockets))}`.
+    of its way, 0 the first, not the longest: the RCC's joysticks pulled back out of their sockets))}`. `let_go=[ids]` (remove() and
+    lift()): parts riding on what leaves that stay where they are, resting from then on (the caps of a device's jumper wires, the
+    device pulled off them: the PMG's displays and push buttons, as TechBox's published take-apart does; the wires stay on the
+    module until a later step takes them off it).
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
     the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
   - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the
     Full Build's way in, reversed (a group lifted off to be taken apart in the hand). With `ride_on=` each part rides on that part
     again where it ends: a Full Build step that moved only a plug on its lead (into a slot, a hook, a hole), walked back with its
     poses as `via()` and its lead's stages as `wire_via={wire: [route, ...]}` (last route in `wires=`); the player then moves the
-    plug as the Full Build did, at an even pace with its lead (the MRA's `walked_back()`).
+    plug as the Full Build did, at an even pace with its lead (the MRA's `walked_back()`). `reappear=True`: nothing moves; what changes
+    place, its riders and its leads fade out where they are and fade in where they end, a beat each, as the Full Build's own
+    `reappear` (the PMG's I/O module off H4 back to the table with every wire on it: its Full Build Step 42 undone; Prev half-way
+    through turns the fade round where it is). Not for remove() (parts taken off fade out anyway) or with `in_turn=`.
   - `g.note(...)` as in a build; `put_away(ids)` for what is left of a sub-assembly taken apart on its own.
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
@@ -372,18 +380,29 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   slower and smoother than the fade inside the slide of 17 Oct), each part once its own way has come to rest; Prev plays the whole
   backwards (each fades in where its way out ended, then slides back). `in_turn=[[screw], [part]]` takes a screw and the part it
   held off in one step, one after the other: the screw out and gone, then the part (Lee, 18 Oct 2026). An `alone=` view shows
-  what rides on its parts too. The arrow of parts spread apart (six screws round a plate) starts on the one nearest their middle.
+  what rides on its parts too; parts let go of (`let_go=`) ride on nothing, so a later `alone=` names them (the PMG's wire ends). The arrow of parts spread apart (six screws round a plate) starts on the one nearest their middle.
   The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
   no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
   Board come out before the joysticks' walls), and it ends on R1, followed by the Full Build's parts list pages
   (`take_apart(parts_list_at_end=True)`: Lee, 19 Oct 2026). Its Steps 5 - 7 carry the Full Build's Row and servo labels instead of
   eyes. Run it after every Full Build change.
-  The RCC's (`deconstruction.py`, 22 steps, Lee's order of 18 Oct 2026): the controller first, on its own (its USB cable, one arrow
+  The RCC's (`deconstruction.py`, 20 steps, Lee's order of 18 Oct 2026, both wheel motors unplugged in one step and pulled out of L5 in one): the controller first, on its own (its USB cable, one arrow
   on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's camera for
   the right joystick turned round with the controller, one camera for the run); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged
   (the Full Build's four beats, reversed) before L6, L7 and the I/O module; the module taken apart on its own; L4 and L5 lifted
   off L1 with the motors, the leads straightened back as in the hand so that L4 slides off over the plugs, the motors out of L5;
   L3 and L2; it ends on L1. Run it after every Full Build change.
+  The PMG's (`deconstruction.py`, 26 steps, first draft 21 Oct 2026: Lee's "same principles as the MRA", with "some things removed in
+  groups (like the breadboard wires, four buttons, four H9 parts)"), in the order of TechBox's published PMG take-apart where it has
+  one: the USB cable first; H14; the dot matrix display and the 4-digit display each lifted out of the case to the table still wired,
+  in the Full Build's two steps reversed (off its hooks or out of its notches, then carried back over the case), each by the camera
+  of the Full Build step it undoes, its wires through the Full Build's own shapes; the I/O module likewise, lifted off H4, then set
+  on the table by a fade (its Full Build Step 42 undone, `reappear`); the case top down (H13, H12, H11, H10, the four keys at once,
+  H8; turned over, H7, the four push buttons out of their pockets at once, still wired); the electronics on their own (the case
+  hidden): each device pulled off the ends of its wires (`let_go=`: the dot matrix display, the 4-digit display, the four push
+  buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
+  the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
+  Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
@@ -483,7 +502,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                make_source.py to pmg-guide.glb (one copy of each part, built; the source both tools read; the MRA's Nano grafted in)
                                and cad-geometry.json (every other copy as a pose, the jumper caps, the USB cable's ends). The STEP is older than the
                                published Cadasio guide's model, which the draft follows (three wires per button, the I/O module USB end up:
-                               README.txt). Research: docs/research/pmg/. Server on port 8792 ("Open Prototype.command").
+                               README.txt). deconstruction.py -> steps-deconstruction.json (the take-apart, made from the Full Build: first draft
+                               21 Oct 2026; docs/research/pmg/deconstruction/). Research: docs/research/pmg/. Server on port 8792 ("Open Prototype.command").
 
 ## Conventions in the code
 

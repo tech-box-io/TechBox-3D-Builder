@@ -16,6 +16,7 @@
     "remote-controlled-car-full-build": {"kit": "remote-controlled-car", "steps": "steps.json", "label": "Full Build"},
     "remote-controlled-car-deconstruction": {"kit": "remote-controlled-car", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
     "laser-stem-matrix-full-build": {"kit": "laser-stem-matrix", "steps": "steps.json", "label": "Full Build"},
-    "piano-memory-game-full-build": {"kit": "piano-memory-game", "steps": "steps.json", "label": "Full Build"}
+    "piano-memory-game-full-build": {"kit": "piano-memory-game", "steps": "steps.json", "label": "Full Build"},
+    "piano-memory-game-deconstruction": {"kit": "piano-memory-game", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"}
   }
 }

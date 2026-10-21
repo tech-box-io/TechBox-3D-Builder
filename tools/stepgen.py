@@ -923,14 +923,16 @@ class Guide:
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
           in_turn=[[ids], [ids], ...]: the parts leave one group after another, each its own way, each fading out once it has
               slid out (a screw, then the part it held: Lee, 18 Oct 2026); Prev brings them back the other way round.
-          alone=[ids]: the step shown with only these parts on screen (a sub-assembly taken apart on its own), and what rides on them."""
+          alone=[ids]: the step shown with only these parts on screen (a sub-assembly taken apart on its own), and what rides on them.
+          let_go=[ids]: parts riding on what leaves that stay where they are (the caps of a device's jumper wires, the device pulled
+              off them: the PMG's displays and push buttons, as TechBox's published take-apart does), resting from then on."""
         return self._takeoff('remove', caption, ids, **how)
 
     def unplug(self, caption, ids, ride_on=None, **how):
         """Unplug plugs (after take_apart()): each comes out of its socket the way the Full Build plugged it in, reversed, to where it
         was before (its lead back on the route it had then), and stays there, riding on the part it rode on in the Full Build (or on
         `ride_on`: an id, or {plug: id}), until a later step takes it off with its lead and the part at the lead's other end. Step N
-        has an eye on each plug (rulebook section 11), no arrow. Other options as remove()'s."""
+        has an eye on each plug (rulebook section 11), no arrow. Other options as remove()'s (let_go= too), and reappear= as lift()'s."""
         return self._takeoff('unplug', caption, ids, ride_on=ride_on, **how)
 
     def lift(self, caption, ids, to=None, ride_on=None, **how):
@@ -943,13 +945,15 @@ class Guide:
         pace the Full Build moved such a plug, stage by stage with its lead). List a plug that is in one of its sockets with them,
         so that it goes along, and a later unplug() takes it out from there; the log warns of a plug left behind. Other options as
         remove()'s, and wire_via={id: [route, ...]}: routes a lead passes through on the way, one per stage of the way (its last
-        route is given in wires=)."""
+        route is given in wires=). reappear=True: nothing moves; what changes place, its riders and its leads fade out where they are
+        and fade in where they end, a beat each, as the Full Build's place(..., reappear=True) (the PMG's I/O module back off H4 to the
+        bench with every wire on it: the Full Build's Step 42 undone, Lee's fade kept). let_go=[ids]: as remove()'s."""
         return self._takeoff('lift', caption, ids, to=to, ride_on=ride_on, **how)
 
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
                  alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None, keep_camera=False,
-                 arrow_scale=1.0, arrow_style=None, own_frame=False):
+                 arrow_scale=1.0, arrow_style=None, own_frame=False, reappear=False, let_go=()):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
         units_given = units
@@ -957,6 +961,8 @@ class Guide:
         missing = [i for i in ids if i not in self.placed]
         if missing:
             raise ValueError(f'{how}({caption[:30]!r}): {missing} not on screen (taken off already, or never there)')
+        if reappear and (how == 'remove' or in_turn):
+            raise ValueError(f'{how}({caption[:30]!r}): reappear= is for lift() or unplug() in one go (parts taken off fade out anyway)')
 
         def riders(group):                            # what rides on these (and on what rides on them)
             out, todo = [], list(group)
@@ -968,7 +974,12 @@ class Guide:
                         todo.append(i)
             return out
         movers = [i for i in ids if not (i in self.riding and self.riding[i][0] in ids)]   # (one riding on another that moves goes with it)
-        leave = ids + riders(ids) if how == 'remove' else []
+        let_go = list(dict.fromkeys(let_go or ()))    # (riders that stay where they are: a device pulled off its wires' caps)
+        stray = [i for i in let_go if i not in riders(ids) or i in ids]
+        if stray:
+            raise ValueError(f'{how}({caption[:30]!r}): let_go= names parts that do not ride on what moves: {stray}')
+        kept = set(let_go) | set(riders(let_go))     # (and what rides on them stays with them)
+        leave = [i for i in ids + riders(ids) if i not in kept] if how == 'remove' else []
         if alone is not None and any(i not in alone for i in ids):
             raise ValueError(f'{how}(): alone= must include the parts it moves')
         if alone is not None:                         # (what rides on the parts shown is shown with them: a joystick's wire caps)
@@ -979,6 +990,7 @@ class Guide:
                 by, rel = self.riding[i]
                 return compose(now(by, (*seen, i)), rel, self._pivot(i))
             return self.resting.get(i)
+        held_here = {i: now(i) for i in let_go}       # (where the riders let go of stay)
         staying = [i for i in self.placed if i not in leave and i not in ids]
         seated = [i for i in staying if not _moved(now(i)) and i not in self.riding]   # (what a straight pull is tested against)
         came = self.taken['came']
@@ -1162,13 +1174,18 @@ class Guide:
                                frame=frame, look_from=look_from, flip=bool(flip), inset=dict(inset) if inset else None,
                                alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {}), keep_camera=bool(keep_camera),
                                arrow_scale=float(arrow_scale), arrow_style={i: dict(v) for i, v in (arrow_style or {}).items()},
-                               **({'own_frame': True} if own_frame else {})))
+                               **({'own_frame': True} if own_frame else {}), **({'reappear': True} if reappear else {}),
+                               **({'let_go': let_go} if let_go else {})))
         # the guide's state from here on
         for i in leave:
             self.placed.remove(i)
             self.riding.pop(i, None)
             self.resting.pop(i, None)
             self.parked.discard(i)
+        for i in let_go:                              # (let go of: resting where they were)
+            self.riding.pop(i, None)
+            self.resting[i] = held_here[i]
+            self.parked.add(i)
         for w in lead_off:
             self.wire_state[w] = None
         self.wire_state.update(after)
@@ -1711,6 +1728,11 @@ class Guide:
                     cut, part_cut = False, True                            #  Parts, which leave it out, start the next view afresh instead)
                 continue
             if s['kind'] == 'takeoff':                                     # a deconstruction step: parts taken off, unplugged or set aside
+                if s.get('let_go'):                                        # (riders let go of rest where they are, on both views: they
+                    still, _ = with_riders({i: p for i, p in parked.items() if i in visible}, visible)   # stay put either way)
+                    for i in s['let_go']:
+                        riding.pop(i, None)
+                        parked[i] = still.get(i)
                 shown = [i for i in visible if i in s['alone']] if s['alone'] is not None else list(visible)
                 here, carry_here = with_riders({i: p for i, p in parked.items() if i in shown}, shown)
                 for i in s['movers']:                                      # (a part that moves on its own is no longer riding)
@@ -1777,7 +1799,8 @@ class Guide:
                     inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
                                  hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption', 'arrows') if k in I})
                 common = dict(caption=s['caption'], text_key=s['text_key'], review=s['review'], camera=camera, _step=si,
-                              **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}))
+                              **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}),
+                              **({'reappear': True} if s.get('reappear') else {}))
                 views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=[], labels=s['labels'], eye=s['eye'],
                                   wires=wires_in({**wires, **s['wires_here']}, shown), carry=carry_here, moving=[], path=[ZERO, ZERO], **({'arrows': arrows} if arrows else {}),
                                   **({'inset': inset} if inset else {}), **({'cut': True} if cut else {}), **({'_part_cut': True} if part_cut else {}),

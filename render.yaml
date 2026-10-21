@@ -109,4 +109,10 @@ services:
       - path: /piano-memory-game-full-build/*
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"
+      - path: /piano-memory-game-deconstruction
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /piano-memory-game-deconstruction/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
       # END guide framing
