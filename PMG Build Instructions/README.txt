@@ -402,6 +402,22 @@ were fetched (docs/research/pmg/cadasio/raw, decon_digest, decon_thumbs, decon_s
   unchanged; published to the test website (release r2). Then H5's arrows corrected to the published 6.2 mm thick (the first measure
   took an unused arrow of the same length: the LSM session's check of every published arrow), release r3.
 
+THE DECONSTRUCTION, LEE'S SECOND ROUND (21 Oct 2026)
+Lee: "Step 7 needs a wider arrow / Step 10 - the second arrow appears too early and is partially occluded in H12 for part of the
+animation. / Step 11 - Same as Step 10".
+- Step 7 (the I/O module lifted off H4): its arrow 6.5 mm thick, as the published one (it was 2.1: the in-house thickness for its length).
+- Steps 10 and 11: H12 and H11 now slide toward H1, rest for a beat while the up arrow fades in, then lift (the up arrow used to fade
+  in while the plate was still sliding). The rest beat is the generator's (arrow_style then=), so every part that comes off in stages
+  has it: H14 (Step 2), H10 (12), H7 (15), H6 (22), H5 (23), each step a beat longer. Both of H12's and H11's arrows are drawn 15 mm
+  in front of the plate, towards the camera (in_front() in deconstruction.py), so the plate never covers them as it moves; the
+  fading arrow no longer goes behind it.
+- Checked: every changed step frame by frame through its move (the first arrow while the part slides, the second only once it rests,
+  in front of the plate all through the lift); no camera changed; the run-through on all 56 views; the RCC's deconstruction
+  regenerates unchanged (the MRA's has no then=). An independent review (three reviewers, each finding checked by another) found
+  nothing wrong in what plays; two small points were changed: a stage= of another part in the same step is renumbered with the rest
+  beats too (no guide has one yet), and stepgen.py's remove() docstring describes the new timing. The LSM's deconstruction, committed
+  by its session, was made with this rest beat already (its D10, D3, D4 and cable steps). Published to the test website (release r4).
+
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
   displays, four dot matrices, 139 wire caps, 114 wire bodies). make_source.py cuts it down to pmg-guide.glb (17 MB): one copy of each

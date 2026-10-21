@@ -930,8 +930,10 @@ class Guide:
               shift=[dx, dy, dz], face=[x, y, z], keep=True)}: the arrow of the unit with that part, by hand (_arrow_out); like=id2:
               as big as id2's own arrow (a screw's as its part's, Lee's third round); dims=(length, width) in mm (the PMG's, as TechBox's
               published take-apart has them); then=[dict(stage=k, dims=, at=, shift=, face=, keep=), ...]: arrows shown in turn as the
-              step plays, each along stage k of the way, drawn where the part is as that stage begins, showing while the stage before it
-              plays and going as its own plays (the published take-apart's arrow swap: the PMG's H12 slid toward H1, then lifted).
+              step plays, each along stage k of the way, drawn where the part is as that stage begins (the published take-apart's arrow
+              swap: the PMG's H12 slid toward H1, then lifted). Every moving part rests for a beat before each such stage, the arrow fading
+              in then and going as its own stage plays (Lee, 21 Oct 2026: H12's up arrow came while H12 still slid); the beats are added
+              here and every stage= given is renumbered with them, so stage numbers count the stages of the way as given. Not with wire_via=.
           wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
               drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
@@ -1111,6 +1113,19 @@ class Guide:
                 if first is None or not 0 <= int(first) < n or ks != sorted(set(ks)) or any(not int(first) < k < n for k in ks):
                     raise ValueError(f'{how}({caption[:30]!r}): arrow_style then= stages come after the first arrow\'s stage= ({first}), '
                                      f'in order, within the {n} stages of the way ({ks})')
+            if wire_via:
+                raise ValueError(f'{how}({caption[:30]!r}): arrow_style then= adds beats to the way, which wire_via= could not keep pace with')
+            holds = sorted({int(t['stage']) for st in thens.values() for t in st['then']})   # (a beat at rest before each later stage: its
+            for i in [j for j in movers if j in ways]:                 #  arrow shows once the stage before has played, before the part moves
+                w, st = list(ways[i]), list(stops.get(i, range(len(ways[i]))))   # on: Lee, 21 Oct 2026, the PMG's H12 and H11, whose up arrow
+                for k in reversed(holds):                              #  came while they were still sliding toward H1)
+                    w.insert(st[k] + 1, copy.deepcopy(w[st[k]]))
+                    st = st[:k + 1] + [p + 1 for p in st[k:]]
+                ways[i], stops[i] = w, st
+            new = lambda k: k + sum(1 for h in holds if h <= k)       # (a stage's number with the pauses before it)
+            arrow_style = {i: dict(v, **({'stage': new(int(v['stage']))} if v.get('stage') is not None else {}),   # (every unit's: another
+                                   **({'then': [dict(t, stage=new(int(t['stage']))) for t in v['then']]} if v.get('then') else {}))   #  part's stage= too)
+                           for i, v in arrow_style.items()}
 
         # where the unplugged plugs ride from now on, and what the leads do
         ride_after = {}

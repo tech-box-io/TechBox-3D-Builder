@@ -115,12 +115,19 @@ def off_the_pins(caps):
 # (Lee, 21 Oct 2026: "the arrow sizes and sequencing need refinement. Examine the Cadasio"): (length, shaft width) in mm, measured from
 # its data (docs/research/pmg/deconstruction/published_arrows.txt); a part that comes off in stages shows an arrow for each, in turn
 # (arrow_style then=), as its auto-advancing frames do: H14, H12 and H11 (toward H1, then up: Lee), H10, H7, H6, H5.
-PUBLISHED = dict(usb=(42.2, 8.2), h14=(29.0, 5.2), matrix=(62.2, 8.5), display=(29.1, 5.5), module=(83.6, 2.1),
+PUBLISHED = dict(usb=(42.2, 8.2), h14=(29.0, 5.2), matrix=(62.2, 8.5), display=(29.1, 5.5), module=(83.6, 6.5),
                  h13=(74.4, 6.1), h12=(37.6, 4.5), h12_up=(43.1, 5.3), h11=(46.1, 6.2), h11_up=(57.2, 6.1), h10=(52.4, 6.7),
                  h10_out=(116.1, 6.9), keys=(109.5, 11.8), h8=(71.7, 6.9), h7=(45.2, 8.0), h6=(34.5, 4.8), h5=(34.8, 6.2),
                  buttons=(44.7, 9.7), matrix_off=(45.1, 6.7), display_off=(30.6, 6.1), matrix_wires=(65.9, 7.3),
                  button_wires=(50.9, 7.0), display_wires=(43.3, 7.0), nano=(28.5, 3.0), h4=(105.0, 7.6), h1=(84.0, 7.8))
 size = lambda key, **more: dict(dims=PUBLISHED[key], **more)
+# (the I/O module's published arrow is 2.1 mm thick: wider, as the plates' (Lee, 21 Oct 2026: "Step 7 needs a wider arrow"))
+
+
+def in_front(point, step, mm=15.0):
+    """A point moved towards a Full Build step's camera: a flat arrow drawn there lies wholly in front of the plate it is on (turned to
+    face the camera, its width reached behind the plate's face, which hid part of it as the plate moved: Lee, 21 Oct 2026, H12 and H11)."""
+    return (np.asarray(point, float) + _unit(VIEW[step]['camera']['dir']) * mm).round(2).tolist()
 
 
 # ================================================================ POWER (Lee's principle, as the MRA's and RCC's: the cable first)
@@ -167,10 +174,12 @@ g.lift('Set the I/O module down on the table behind the case, with everything st
 g.remove('Slide H13 up from between H11 and H12, bringing its hooks out of H4.', [H13], arrow_style={H13: size('h13')})
 # (H12 and H11: toward H1 out of H4, then up out of H10, an arrow for each in turn: Lee, 21 Oct 2026, as published)
 g.remove('Slide H12 forward until it comes out of H4, then lift it out of the slot in H10.', [H12],
-         arrow_style={H12: size('h12', stage=0, at=[526.0, 960.0, 1268.5], then=[size('h12_up', stage=1, at=[537.4, 965.0, 1268.5])])})   # (up from its face, slid toward
+         arrow_style={H12: size('h12', stage=0, at=in_front([526.0, 960.0, 1268.5], 'Step 40'),
+                                then=[size('h12_up', stage=1, at=in_front([537.4, 965.0, 1268.5], 'Step 40'))])})   # (up from its face, slid toward
          #                                                 H1: from its top, it seemed to lift the parts lying behind, as published)
 g.remove('Slide H11 forward until it comes out of H4, then lift it out of the slot in H10.', [H11],
-         arrow_style={H11: size('h11', stage=0, at=[526.0, 960.0, 1312.5], then=[size('h11_up', stage=1, at=[538.3, 965.0, 1312.5])])})
+         arrow_style={H11: size('h11', stage=0, at=in_front([526.0, 960.0, 1312.5], 'Step 39'),
+                                then=[size('h11_up', stage=1, at=in_front([538.3, 965.0, 1312.5], 'Step 39'))])})
 # (each from the plate's front edge, as published: from its middle they lay over H10 and the keys)
 g.remove('Lift the front of H10 off H2 and H3, then unhook its rear tabs from the slots in H4.', [H10],
          arrow_style={H10: size('h10', stage=0, at=[519.0, 936.0, 1290.5], then=[size('h10_out', stage=1)])})   # (its front up, at its front

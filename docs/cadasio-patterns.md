@@ -308,6 +308,12 @@ sizes, step by step (docs/research/pmg/deconstruction/published_arrows.txt: most
 an eye, as published. The step order stays the in-house one (Lee, the same day: "Keep the current step order; the arrows were what
 needed changing"): the power cable first, the electronics taken apart on their own before the case's last plates, ending on H1.
 
+**Lee, 2026-10-21 (the PMG's take-apart, second round: "Step 10 - the second arrow appears too early and is partially occluded in H12
+for part of the animation. Step 11 - Same as Step 10"; "Step 7 needs a wider arrow"):** a later stage's arrow appears only once the stage
+before it has finished: the part rests for a beat, its next arrow fades in, then it moves on (for every part that comes off in stages,
+not only H12 and H11). An arrow drawn on a plate that moves along itself is set in front of the plate, towards the camera, so the plate
+never covers it. Step 7's arrow (the I/O module lifted off H4) is the published 6.5 mm thick.
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |
