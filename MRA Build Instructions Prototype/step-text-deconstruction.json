@@ -1,0 +1,373 @@
+{
+ "note": "Edited wording of the steps (tools/step_text.py), only what was edited; applied when guide.py is run. key: the step's text_key in steps.json.",
+ "steps": [
+  {
+   "key": "T00501D68",
+   "step": "Step 1",
+   "caption": "Remove T1 from both T2 pieces."
+  },
+  {
+   "key": "TE506B2B9",
+   "step": "Step 2",
+   "caption": "Slide the top T2 off the bottom T2."
+  },
+  {
+   "key": "TD459F875",
+   "step": "Step 3",
+   "caption": "Remove the second T2 from T1."
+  },
+  {
+   "key": "T3FFC623C",
+   "step": "Step 4",
+   "caption": "Disconnect the USB Cable from the Nano Board."
+  },
+  {
+   "key": "TAAB85E1D",
+   "step": "Step 5",
+   "caption": "Disconnect the Servo Extension Wire from Row 10."
+  },
+  {
+   "key": "T07984480",
+   "step": "Step 6",
+   "caption": "Disconnect the Shoulder Servo (White Dot) from Row 9."
+  },
+  {
+   "key": "T2708ABB3",
+   "step": "Step 7",
+   "caption": "Disconnect the Elbow Servo (Black Dot) from Row 6."
+  },
+  {
+   "key": "T2CB80CCD",
+   "step": "Step 8",
+   "caption": "Remove the Servo Extension Wire from the hook-shaped slot in R4."
+  },
+  {
+   "key": "T8E4CD712",
+   "step": "Step 9",
+   "caption": "Disconnect the Servo Extension Wire from the Claw Servo's wires.",
+   "was_caution": "",
+   "caution": "When disconnecting the wires, pull apart the two black connectors. Do not pull on the wires themselves."
+  },
+  {
+   "key": "T6E3B2A7D",
+   "step": "Step 10",
+   "caption": "Thread the Claw Servo's wires out of the bottom square hole in A6."
+  },
+  {
+   "key": "T19C0AFD6",
+   "step": "Step 11",
+   "caption": "Thread the Claw Servo's wires out of the top square hole in A6."
+  },
+  {
+   "key": "T51581AA0",
+   "step": "Step 12",
+   "caption": "Remove the two 6mm screws connecting A12 and A13 to C1."
+  },
+  {
+   "key": "T1BFCA6DA",
+   "step": "Step 13",
+   "caption": "Remove the 6mm screw connecting A5 to C2."
+  },
+  {
+   "key": "T4DA2644C",
+   "step": "Step 14",
+   "caption": "Slide the claw out from between A5 on one side and A12 and A13 on the other."
+  },
+  {
+   "key": "T653D9210",
+   "step": "Step 15",
+   "caption": "Remove the 10mm screw connecting C6 to C9."
+  },
+  {
+   "key": "T084BF17E",
+   "step": "Step 17",
+   "caption": "Remove C9 from the latches of C1 and C2."
+  },
+  {
+   "key": "T5E116C7D",
+   "step": "Step 18",
+   "caption": "Remove C7 from the servo horn."
+  },
+  {
+   "key": "TFBEF66B4",
+   "step": "Step 19",
+   "caption": "Remove the two 16mm screws connecting C6 to C3."
+  },
+  {
+   "key": "TAE32DF71",
+   "step": "Step 20",
+   "caption": "Remove C6 from the latches of C1 and C2."
+  },
+  {
+   "key": "T634FF106",
+   "step": "Step 21",
+   "caption": "Slide C4 and C5 toward the bottom of C3, then lift them out of the slots."
+  },
+  {
+   "key": "TE6E2D888",
+   "step": "Step 22",
+   "caption": "Remove C1 and C2 from the slots in C3."
+  },
+  {
+   "key": "TE43E1D0D",
+   "step": "Step 23",
+   "caption": "Thread the Claw Servo's wires out of the hole at the top of C3."
+  },
+  {
+   "key": "TE0221B33",
+   "step": "Step 24",
+   "caption": "Remove the Claw Servo (Blue Dot) from C3."
+  },
+  {
+   "key": "T1446D5A5",
+   "step": "Step 25",
+   "caption": "Remove the 6mm screw connecting A12 to A10, then separate the pieces."
+  },
+  {
+   "key": "TB7013580",
+   "step": "Step 26",
+   "caption": "Remove the 10mm screw connecting A13 to A10, then separate the pieces."
+  },
+  {
+   "key": "TFB02BE6A",
+   "step": "Step 27",
+   "caption": "Remove the 6mm screw connecting R6 to A11."
+  },
+  {
+   "key": "T65B71CC4",
+   "step": "Step 28",
+   "caption": "Remove A10 and A11 from R6."
+  },
+  {
+   "key": "TB1FB561A",
+   "step": "Step 29",
+   "caption": "Remove the 6mm screw connecting A11 to A10, then separate the pieces."
+  },
+  {
+   "key": "T80B8DB57",
+   "step": "Step 30",
+   "caption": "Remove the Shoulder Servo's wires from the hook-shaped slot in R6."
+  },
+  {
+   "key": "T05B30A04",
+   "step": "Step 31",
+   "caption": "Remove the two 10mm screws connecting R7 to R6."
+  },
+  {
+   "key": "T580218FC",
+   "step": "Step 32",
+   "caption": "Remove R7 from the Shoulder Servo (White Dot).",
+   "was_caution": "",
+   "caution": "Carefully thread the Shoulder Servo's wires all the way out of R7."
+  },
+  {
+   "key": "TFC43BDDE",
+   "step": "Step 33",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide it out of R6."
+  },
+  {
+   "key": "T041F0502",
+   "step": "Step 34",
+   "caption": "Remove the 6mm screw connecting A5 to A7 and the 10mm screw connecting A1 - A3 to A4."
+  },
+  {
+   "key": "T3177C76A",
+   "step": "Step 35",
+   "caption": "Remove A4 and A5 together from A1 and A7."
+  },
+  {
+   "key": "TA7D15CC4",
+   "step": "Step 36",
+   "caption": "Remove the 6mm screw connecting A5 to A4, then separate the pieces."
+  },
+  {
+   "key": "T7CDB6FA7",
+   "step": "Step 37",
+   "caption": "Remove the Elbow Servo's wires from the hook-shaped slot in R5."
+  },
+  {
+   "key": "TB6DAA203",
+   "step": "Step 38",
+   "caption": "Remove the two 10mm screws connecting R8 to R5."
+  },
+  {
+   "key": "TE98631F5",
+   "step": "Step 39",
+   "caption": "Remove R8 from the Elbow Servo (Black Dot).",
+   "was_caution": "",
+   "caution": "Carefully thread the Elbow Servo's wires all the way out of R8."
+  },
+  {
+   "key": "T14696FF7",
+   "step": "Step 40",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide it out of R5."
+  },
+  {
+   "key": "T7EC1880C",
+   "step": "Step 41",
+   "caption": "Slide A1 - A3 up and out from between R5 and A7."
+  },
+  {
+   "key": "TFD7604F4",
+   "step": "Step 42",
+   "caption": "Remove the 10mm screw connecting A1, A2, and A3. Then, separate the pieces."
+  },
+  {
+   "key": "TBE7BB569",
+   "step": "Step 43",
+   "caption": "Remove the 6mm screw connecting A7 to R2."
+  },
+  {
+   "key": "TDC6B6B51",
+   "step": "Step 44",
+   "caption": "Remove A6 - A9 from R2."
+  },
+  {
+   "key": "T109D1B68",
+   "step": "Step 45",
+   "caption": "Remove the 16mm screw connecting A8 to A9."
+  },
+  {
+   "key": "T3670EAE0",
+   "step": "Step 46",
+   "caption": "Remove A9 from the cross-shaped slot next to A8."
+  },
+  {
+   "key": "TDE23BC52",
+   "step": "Step 47",
+   "caption": "Remove A8 from A6."
+  },
+  {
+   "key": "T6CEAF662",
+   "step": "Step 48",
+   "caption": "Remove the 16mm screw connecting A7 to A9."
+  },
+  {
+   "key": "TD0478466",
+   "step": "Step 49",
+   "caption": "Remove A9 from the cross-shaped slot next to A7."
+  },
+  {
+   "key": "T94C8DC57",
+   "step": "Step 50",
+   "caption": "Remove A7 from A6."
+  },
+  {
+   "key": "T62106007",
+   "step": "Step 51",
+   "caption": "Disconnect the Base Servo (No Dot) from Row 5."
+  },
+  {
+   "key": "T7DC471F6",
+   "step": "Step 52",
+   "caption": "Remove B8 from B5, B6, and B7."
+  },
+  {
+   "key": "T15CAC3EC",
+   "step": "Step 53",
+   "caption": "Disconnect all eight breadboard wires from the joysticks and the Nano I/O Module."
+  },
+  {
+   "key": "T704F2A8F",
+   "step": "Step 54",
+   "caption": "Lift the Nano I/O Module over the notch in B4, then slide it out of the slots in both B6 pieces."
+  },
+  {
+   "key": "T4B974050",
+   "step": "Step 55",
+   "caption": "Remove the Nano Board from the Nano I/O Module.",
+   "was_caution": "",
+   "caution": "Use the Pry Tool to carefully remove the Nano Board."
+  },
+  {
+   "key": "T7874C56F",
+   "step": "Step 56",
+   "caption": "Remove B6, B7, and the Right Joystick together from B3 and B4."
+  },
+  {
+   "key": "T8A07182D",
+   "step": "Step 57",
+   "caption": "Remove B7 from the Right Joystick."
+  },
+  {
+   "key": "T7197E35A",
+   "step": "Step 58",
+   "caption": "Remove the Right Joystick from B6."
+  },
+  {
+   "key": "T258AAB3D",
+   "step": "Step 59",
+   "caption": "Remove B5, B6, and the Left Joystick together from B3 and B4."
+  },
+  {
+   "key": "TFB12198D",
+   "step": "Step 60",
+   "caption": "Remove B6 from the Left Joystick."
+  },
+  {
+   "key": "T8CCE747B",
+   "step": "Step 61",
+   "caption": "Remove the Left Joystick from B5."
+  },
+  {
+   "key": "T2CD3C10B",
+   "step": "Step 62",
+   "caption": "Remove B4 from the center slot in B2."
+  },
+  {
+   "key": "T33C4840F",
+   "step": "Step 63",
+   "caption": "Remove B3 from the slots in B2."
+  },
+  {
+   "key": "TCCE908A9",
+   "step": "Step 64",
+   "caption": "Remove the six 6mm screws connecting B1 and B2."
+  },
+  {
+   "key": "T9A795645",
+   "step": "Step 65",
+   "caption": "Remove B1 from B2."
+  },
+  {
+   "key": "TC2E11894",
+   "step": "Step 66",
+   "caption": "Slide B2 out from under the servo horn."
+  },
+  {
+   "key": "T7081313E",
+   "step": "Step 67",
+   "caption": "Remove the Base Servo's wires from the hook-shaped slot in R4."
+  },
+  {
+   "key": "T9D468E40",
+   "step": "Step 68",
+   "caption": "Remove R6 from R3 and R4."
+  },
+  {
+   "key": "T2303EA25",
+   "step": "Step 69",
+   "caption": "Remove R5 from R3 and R4."
+  },
+  {
+   "key": "TE9B6E2A8",
+   "step": "Step 70",
+   "caption": "Remove R4 from R1."
+  },
+  {
+   "key": "TB7A63431",
+   "step": "Step 71",
+   "caption": "Remove R3 from R1."
+  },
+  {
+   "key": "T3CC0656F",
+   "step": "Step 72",
+   "caption": "Remove R2 from the Base Servo (No Dot)."
+  },
+  {
+   "key": "T6CCFAC80",
+   "step": "Step 73",
+   "caption": "Tilt the Base Servo (No Dot) to guide it out of R1."
+  }
+ ]
+}

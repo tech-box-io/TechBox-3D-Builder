@@ -3,7 +3,7 @@
   "title": "Mini Robot Arm (MRA)",
   "part": "Deconstruction",
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
-  "taken_from": "9dc23bdf7bb1",
+  "taken_from": "8d85e7dc427d",
   "full_build": "steps.json",
   "logo": "logo.webp"
  },
@@ -96576,7 +96576,7 @@
      "part": "NAUO44"
     }
    ],
-   "caption": "Take the T1 / T2 block apart. Pull the top T1 off the two T2.",
+   "caption": "Remove T1 from both T2 pieces.",
    "text_key": "T00501D68",
    "review": null,
    "camera": {
@@ -96644,7 +96644,7 @@
     "NAUO44"
    ],
    "away": true,
-   "caption": "Take the T1 / T2 block apart. Pull the top T1 off the two T2.",
+   "caption": "Remove T1 from both T2 pieces.",
    "text_key": "T00501D68",
    "review": null,
    "camera": {
@@ -96710,7 +96710,7 @@
      "part": "NAUO43"
     }
    ],
-   "caption": "Slide the upper T2 up and out of the other T2.",
+   "caption": "Slide the top T2 off the bottom T2.",
    "text_key": "TE506B2B9",
    "review": null,
    "camera": {
@@ -96777,7 +96777,7 @@
     "NAUO43"
    ],
    "away": true,
-   "caption": "Slide the upper T2 up and out of the other T2.",
+   "caption": "Slide the top T2 off the bottom T2.",
    "text_key": "TE506B2B9",
    "review": null,
    "camera": {
@@ -96842,7 +96842,7 @@
      "part": "NAUO42"
     }
    ],
-   "caption": "Pull the last T2 out of the plus-shaped slot in the lower T1.",
+   "caption": "Remove the second T2 from T1.",
    "text_key": "TD459F875",
    "review": null,
    "camera": {
@@ -96908,7 +96908,7 @@
     "NAUO42"
    ],
    "away": true,
-   "caption": "Pull the last T2 out of the plus-shaped slot in the lower T1.",
+   "caption": "Remove the second T2 from T1.",
    "text_key": "TD459F875",
    "review": null,
    "camera": {
@@ -97381,7 +97381,7 @@
     }
    ],
    "cut": true,
-   "caption": "Unplug the power cable from the Nano Board.",
+   "caption": "Disconnect the USB Cable from the Nano Board.",
    "text_key": "T3FFC623C",
    "review": null,
    "camera": {
@@ -97893,7 +97893,7 @@
     "usb cable": 23
    },
    "away": true,
-   "caption": "Unplug the power cable from the Nano Board.",
+   "caption": "Disconnect the USB Cable from the Nano Board.",
    "text_key": "T3FFC623C",
    "review": null,
    "camera": {
@@ -98342,7 +98342,7 @@
      0.0
     ]
    ],
-   "caption": "Unplug the servo extension wire from Row 10.",
+   "caption": "Disconnect the Servo Extension Wire from Row 10.",
    "text_key": "TAAB85E1D",
    "review": null,
    "camera": {
@@ -98876,7 +98876,7 @@
     ]
    },
    "away": true,
-   "caption": "Unplug the servo extension wire from Row 10.",
+   "caption": "Disconnect the Servo Extension Wire from Row 10.",
    "text_key": "TAAB85E1D",
    "review": null,
    "camera": {
@@ -99364,7 +99364,7 @@
      0.0
     ]
    ],
-   "caption": "Unplug the shoulder motor from Row 9.",
+   "caption": "Disconnect the Shoulder Servo (White Dot) from Row 9.",
    "text_key": "T07984480",
    "review": null,
    "camera": {
@@ -99971,7 +99971,7 @@
     ]
    },
    "away": true,
-   "caption": "Unplug the shoulder motor from Row 9.",
+   "caption": "Disconnect the Shoulder Servo (White Dot) from Row 9.",
    "text_key": "T07984480",
    "review": null,
    "camera": {
@@ -100498,7 +100498,7 @@
      0.0
     ]
    ],
-   "caption": "Unplug the elbow motor from Row 6.",
+   "caption": "Disconnect the Elbow Servo (Black Dot) from Row 6.",
    "text_key": "T2708ABB3",
    "review": null,
    "camera": {
@@ -101162,7 +101162,7 @@
     ]
    },
    "away": true,
-   "caption": "Unplug the elbow motor from Row 6.",
+   "caption": "Disconnect the Elbow Servo (Black Dot) from Row 6.",
    "text_key": "T2708ABB3",
    "review": null,
    "camera": {
@@ -101717,7 +101717,7 @@
      0.0
     ]
    ],
-   "caption": "Lift the join back up from behind R4, and the servo extension wire up out of the L-shaped slot in R4.",
+   "caption": "Remove the Servo Extension Wire from the hook-shaped slot in R4.",
    "text_key": "T2CB80CCD",
    "review": null,
    "camera": {
@@ -102514,7 +102514,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift the join back up from behind R4, and the servo extension wire up out of the L-shaped slot in R4.",
+   "caption": "Remove the Servo Extension Wire from the hook-shaped slot in R4.",
    "text_key": "T2CB80CCD",
    "review": null,
    "camera": {
@@ -103081,7 +103081,7 @@
      "part": "NAUO91"
     }
    ],
-   "caption": "Pull the servo extension wire off the claw motor's plug.",
+   "caption": "Disconnect the Servo Extension Wire from the Claw Servo's wires.",
    "text_key": "T8E4CD712",
    "review": null,
    "camera": {
@@ -103096,7 +103096,8 @@
      146.0
     ],
     "radius": 80.0
-   }
+   },
+   "caution": "When disconnecting the wires, pull apart the two black connectors. Do not pull on the wires themselves."
   },
   {
    "name": "Step 9c",
@@ -103660,7 +103661,7 @@
     "extension orange": 56
    },
    "away": true,
-   "caption": "Pull the servo extension wire off the claw motor's plug.",
+   "caption": "Disconnect the Servo Extension Wire from the Claw Servo's wires.",
    "text_key": "T8E4CD712",
    "review": null,
    "camera": {
@@ -103675,7 +103676,8 @@
      146.0
     ],
     "radius": 80.0
-   }
+   },
+   "caution": "When disconnecting the wires, pull apart the two black connectors. Do not pull on the wires themselves."
   },
   {
    "name": "Step 10",
@@ -104144,7 +104146,7 @@
      0.0
     ]
    ],
-   "caption": "Pull the claw motor's plug back out of the bottom hole in A6.",
+   "caption": "Thread the Claw Servo's wires out of the bottom square hole in A6.",
    "text_key": "T6E3B2A7D",
    "review": null,
    "camera": {
@@ -104844,7 +104846,7 @@
     ]
    },
    "away": true,
-   "caption": "Pull the claw motor's plug back out of the bottom hole in A6.",
+   "caption": "Thread the Claw Servo's wires out of the bottom square hole in A6.",
    "text_key": "T6E3B2A7D",
    "review": null,
    "camera": {
@@ -105354,7 +105356,7 @@
      0.0
     ]
    ],
-   "caption": "Then pull it back out of the top hole in A6.",
+   "caption": "Thread the Claw Servo's wires out of the top square hole in A6.",
    "text_key": "T19C0AFD6",
    "review": null,
    "camera": {
@@ -106106,7 +106108,7 @@
     ]
    },
    "away": true,
-   "caption": "Then pull it back out of the top hole in A6.",
+   "caption": "Thread the Claw Servo's wires out of the top square hole in A6.",
    "text_key": "T19C0AFD6",
    "review": null,
    "camera": {
@@ -106647,7 +106649,7 @@
      "part": "NAUO78"
     }
    ],
-   "caption": "Unscrew the two 6mm screws that hold A12 and A13 to C1.",
+   "caption": "Remove the two 6mm screws connecting A12 and A13 to C1.",
    "text_key": "T51581AA0",
    "review": null,
    "camera": {
@@ -107187,7 +107189,7 @@
     "NAUO78"
    ],
    "away": true,
-   "caption": "Unscrew the two 6mm screws that hold A12 and A13 to C1.",
+   "caption": "Remove the two 6mm screws connecting A12 and A13 to C1.",
    "text_key": "T51581AA0",
    "review": null,
    "camera": {
@@ -107707,7 +107709,7 @@
      "part": "NAUO79"
     }
    ],
-   "caption": "Unscrew the 6mm screw that holds A5 to C2.",
+   "caption": "Remove the 6mm screw connecting A5 to C2.",
    "text_key": "T1BFCA6DA",
    "review": null,
    "camera": {
@@ -108227,7 +108229,7 @@
     "NAUO79"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A5 to C2.",
+   "caption": "Remove the 6mm screw connecting A5 to C2.",
    "text_key": "T1BFCA6DA",
    "review": null,
    "camera": {
@@ -108746,7 +108748,7 @@
      "part": "NAUO34"
     }
    ],
-   "caption": "Slide the claw out from between A5 and A12 / A13.",
+   "caption": "Slide the claw out from between A5 on one side and A12 and A13 on the other.",
    "text_key": "T4DA2644C",
    "review": null,
    "camera": {
@@ -109497,7 +109499,7 @@
     ]
    },
    "away": true,
-   "caption": "Slide the claw out from between A5 and A12 / A13.",
+   "caption": "Slide the claw out from between A5 on one side and A12 and A13 on the other.",
    "text_key": "T4DA2644C",
    "review": null,
    "camera": {
@@ -109793,7 +109795,7 @@
      "part": "NAUO76"
     }
    ],
-   "caption": "Take the claw apart. Unscrew the 10mm screw from C9.",
+   "caption": "Remove the 10mm screw connecting C6 to C9.",
    "text_key": "T653D9210",
    "review": null,
    "camera": {
@@ -110088,7 +110090,7 @@
     "NAUO76"
    ],
    "away": true,
-   "caption": "Take the claw apart. Unscrew the 10mm screw from C9.",
+   "caption": "Remove the 10mm screw connecting C6 to C9.",
    "text_key": "T653D9210",
    "review": null,
    "camera": {
@@ -110943,7 +110945,7 @@
      "part": "NAUO40"
     }
    ],
-   "caption": "Pull C9 off the ends of C1 and C2.",
+   "caption": "Remove C9 from the latches of C1 and C2.",
    "text_key": "T084BF17E",
    "review": null,
    "camera": {
@@ -111210,7 +111212,7 @@
     "NAUO40"
    ],
    "away": true,
-   "caption": "Pull C9 off the ends of C1 and C2.",
+   "caption": "Remove C9 from the latches of C1 and C2.",
    "text_key": "T084BF17E",
    "review": null,
    "camera": {
@@ -111476,7 +111478,7 @@
      "part": "NAUO39"
     }
    ],
-   "caption": "Pull C7 off the servo horn.",
+   "caption": "Remove C7 from the servo horn.",
    "text_key": "T5E116C7D",
    "review": null,
    "camera": {
@@ -111729,7 +111731,7 @@
     "NAUO39"
    ],
    "away": true,
-   "caption": "Pull C7 off the servo horn.",
+   "caption": "Remove C7 from the servo horn.",
    "text_key": "T5E116C7D",
    "review": null,
    "camera": {
@@ -112000,7 +112002,7 @@
      "part": "NAUO75"
     }
    ],
-   "caption": "Unscrew the two 16mm screws that hold C6 to C3.",
+   "caption": "Remove the two 16mm screws connecting C6 to C3.",
    "text_key": "TFBEF66B4",
    "review": null,
    "camera": {
@@ -112244,7 +112246,7 @@
     "NAUO75"
    ],
    "away": true,
-   "caption": "Unscrew the two 16mm screws that hold C6 to C3.",
+   "caption": "Remove the two 16mm screws connecting C6 to C3.",
    "text_key": "TFBEF66B4",
    "review": null,
    "camera": {
@@ -112468,7 +112470,7 @@
      "part": "NAUO35"
     }
    ],
-   "caption": "Lift C6 off C4 and C5.",
+   "caption": "Remove C6 from the latches of C1 and C2.",
    "text_key": "TAE32DF71",
    "review": null,
    "camera": {
@@ -112679,7 +112681,7 @@
     "NAUO35"
    ],
    "away": true,
-   "caption": "Lift C6 off C4 and C5.",
+   "caption": "Remove C6 from the latches of C1 and C2.",
    "text_key": "TAE32DF71",
    "review": null,
    "camera": {
@@ -112908,7 +112910,7 @@
      "part": "NAUO37"
     }
    ],
-   "caption": "Pull C4 and C5 out of their slots in C3.",
+   "caption": "Slide C4 and C5 toward the bottom of C3, then lift them out of the slots.",
    "text_key": "T634FF106",
    "review": null,
    "camera": {
@@ -113120,7 +113122,7 @@
     "NAUO37"
    ],
    "away": true,
-   "caption": "Pull C4 and C5 out of their slots in C3.",
+   "caption": "Slide C4 and C5 toward the bottom of C3, then lift them out of the slots.",
    "text_key": "T634FF106",
    "review": null,
    "camera": {
@@ -113321,7 +113323,7 @@
      "part": "NAUO33"
     }
    ],
-   "caption": "Pull C1 and C2 out of their slots in C3.",
+   "caption": "Remove C1 and C2 from the slots in C3.",
    "text_key": "TE6E2D888",
    "review": null,
    "camera": {
@@ -113495,7 +113497,7 @@
     "NAUO33"
    ],
    "away": true,
-   "caption": "Pull C1 and C2 out of their slots in C3.",
+   "caption": "Remove C1 and C2 from the slots in C3.",
    "text_key": "TE6E2D888",
    "review": null,
    "camera": {
@@ -113637,7 +113639,7 @@
      0.0
     ]
    ],
-   "caption": "Pull the claw motor's wire back out of the hole in the end of C3.",
+   "caption": "Thread the Claw Servo's wires out of the hole at the top of C3.",
    "text_key": "TE43E1D0D",
    "review": null,
    "camera": {
@@ -114010,7 +114012,7 @@
     ]
    },
    "away": true,
-   "caption": "Pull the claw motor's wire back out of the hole in the end of C3.",
+   "caption": "Thread the Claw Servo's wires out of the hole at the top of C3.",
    "text_key": "TE43E1D0D",
    "review": null,
    "camera": {
@@ -114153,7 +114155,7 @@
      "part": "NAUO72"
     }
    ],
-   "caption": "Push the claw motor back out of C3.",
+   "caption": "Remove the Claw Servo (Blue Dot) from C3.",
    "text_key": "TE0221B33",
    "review": null,
    "camera": {
@@ -114300,7 +114302,7 @@
     "claw orange": 98
    },
    "away": true,
-   "caption": "Push the claw motor back out of C3.",
+   "caption": "Remove the Claw Servo (Blue Dot) from C3.",
    "text_key": "TE0221B33",
    "review": null,
    "camera": {
@@ -114794,7 +114796,7 @@
     }
    ],
    "cut": true,
-   "caption": "Unscrew the 6mm screw that holds A12 to A10, then lift A12 off.",
+   "caption": "Remove the 6mm screw connecting A12 to A10, then separate the pieces.",
    "text_key": "T1446D5A5",
    "review": null,
    "camera": {
@@ -115284,7 +115286,7 @@
     "NAUO27"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A12 to A10, then lift A12 off.",
+   "caption": "Remove the 6mm screw connecting A12 to A10, then separate the pieces.",
    "text_key": "T1446D5A5",
    "review": null,
    "camera": {
@@ -115763,7 +115765,7 @@
      "part": "NAUO28"
     }
    ],
-   "caption": "Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.",
+   "caption": "Remove the 10mm screw connecting A13 to A10, then separate the pieces.",
    "text_key": "TB7013580",
    "review": null,
    "camera": {
@@ -116251,7 +116253,7 @@
     "NAUO28"
    ],
    "away": true,
-   "caption": "Unscrew the 10mm screw that holds A13 and A10 to A8, then lift A13 off.",
+   "caption": "Remove the 10mm screw connecting A13 to A10, then separate the pieces.",
    "text_key": "TB7013580",
    "review": null,
    "camera": {
@@ -116709,7 +116711,7 @@
      "part": "NAUO70"
     }
    ],
-   "caption": "Unscrew the 6mm screw in the lobe of R6, from outside R6.",
+   "caption": "Remove the 6mm screw connecting R6 to A11.",
    "text_key": "TFB02BE6A",
    "review": null,
    "camera": {
@@ -117167,7 +117169,7 @@
     "NAUO70"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw in the lobe of R6, from outside R6.",
+   "caption": "Remove the 6mm screw connecting R6 to A11.",
    "text_key": "TFB02BE6A",
    "review": null,
    "camera": {
@@ -117624,7 +117626,7 @@
      "part": "NAUO26"
     }
    ],
-   "caption": "Lift A10 and A11 out from behind the lobe of R6.",
+   "caption": "Remove A10 and A11 from R6.",
    "text_key": "T65B71CC4",
    "review": null,
    "camera": {
@@ -118115,7 +118117,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift A10 and A11 out from behind the lobe of R6.",
+   "caption": "Remove A10 and A11 from R6.",
    "text_key": "T65B71CC4",
    "review": null,
    "camera": {
@@ -118232,7 +118234,7 @@
      "part": "NAUO25"
     }
    ],
-   "caption": "Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.",
+   "caption": "Remove the 6mm screw connecting A11 to A10, then separate the pieces.",
    "text_key": "TB1FB561A",
    "review": null,
    "camera": {
@@ -118332,7 +118334,7 @@
     "NAUO25"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A11 to A10, then lift A11 off.",
+   "caption": "Remove the 6mm screw connecting A11 to A10, then separate the pieces.",
    "text_key": "TB1FB561A",
    "review": null,
    "camera": {
@@ -118776,7 +118778,7 @@
     ]
    ],
    "cut": true,
-   "caption": "Take the shoulder motor's wire out of the hook-shaped slot in R6.",
+   "caption": "Remove the Shoulder Servo's wires from the hook-shaped slot in R6.",
    "text_key": "T80B8DB57",
    "review": null,
    "camera": {
@@ -119249,7 +119251,7 @@
     ]
    },
    "away": true,
-   "caption": "Take the shoulder motor's wire out of the hook-shaped slot in R6.",
+   "caption": "Remove the Shoulder Servo's wires from the hook-shaped slot in R6.",
    "text_key": "T80B8DB57",
    "review": null,
    "camera": {
@@ -119722,7 +119724,7 @@
      "part": "NAUO69"
     }
    ],
-   "caption": "Unscrew the two 10mm screws that hold R7 to R6.",
+   "caption": "Remove the two 10mm screws connecting R7 to R6.",
    "text_key": "T05B30A04",
    "review": null,
    "camera": {
@@ -120194,7 +120196,7 @@
     "NAUO69"
    ],
    "away": true,
-   "caption": "Unscrew the two 10mm screws that hold R7 to R6.",
+   "caption": "Remove the two 10mm screws connecting R7 to R6.",
    "text_key": "T05B30A04",
    "review": null,
    "camera": {
@@ -120646,7 +120648,7 @@
      "part": "NAUO16"
     }
    ],
-   "caption": "Slide R7 back up the shoulder motor's wire and off over its plug.",
+   "caption": "Remove R7 from the Shoulder Servo (White Dot).",
    "text_key": "T580218FC",
    "review": null,
    "camera": {
@@ -120661,7 +120663,8 @@
      209.2
     ],
     "radius": 86.2
-   }
+   },
+   "caution": "Carefully thread the Shoulder Servo's wires all the way out of R7."
   },
   {
    "name": "Step 32c",
@@ -121098,7 +121101,7 @@
     "NAUO16"
    ],
    "away": true,
-   "caption": "Slide R7 back up the shoulder motor's wire and off over its plug.",
+   "caption": "Remove R7 from the Shoulder Servo (White Dot).",
    "text_key": "T580218FC",
    "review": null,
    "camera": {
@@ -121113,7 +121116,8 @@
      209.2
     ],
     "radius": 86.2
-   }
+   },
+   "caution": "Carefully thread the Shoulder Servo's wires all the way out of R7."
   },
   {
    "name": "Step 33",
@@ -121549,7 +121553,7 @@
      "part": "NAUO66"
     }
    ],
-   "caption": "Take the shoulder motor out of R6, angling its servo horn back out through the opening.",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide it out of R6.",
    "text_key": "TFC43BDDE",
    "review": null,
    "camera": {
@@ -122204,7 +122208,7 @@
     "shoulder orange": 116
    },
    "away": true,
-   "caption": "Take the shoulder motor out of R6, angling its servo horn back out through the opening.",
+   "caption": "Tilt the Shoulder Servo (White Dot) to guide it out of R6.",
    "text_key": "TFC43BDDE",
    "review": null,
    "camera": {
@@ -122629,7 +122633,7 @@
      "part": "NAUO62"
     }
    ],
-   "caption": "Unscrew the 6mm screw that holds A5 to A7, and the 10mm screw that holds A1 - A3 to A4.",
+   "caption": "Remove the 6mm screw connecting A5 to A7 and the 10mm screw connecting A1 - A3 to A4.",
    "text_key": "T041F0502",
    "review": null,
    "camera": {
@@ -123053,7 +123057,7 @@
     "NAUO62"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A5 to A7, and the 10mm screw that holds A1 - A3 to A4.",
+   "caption": "Remove the 6mm screw connecting A5 to A7 and the 10mm screw connecting A1 - A3 to A4.",
    "text_key": "T041F0502",
    "review": null,
    "camera": {
@@ -123457,7 +123461,7 @@
      "part": "NAUO21"
     }
    ],
-   "caption": "Lift A4 and A5 off together.",
+   "caption": "Remove A4 and A5 together from A1 and A7.",
    "text_key": "T3177C76A",
    "review": null,
    "camera": {
@@ -123895,7 +123899,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift A4 and A5 off together.",
+   "caption": "Remove A4 and A5 together from A1 and A7.",
    "text_key": "T3177C76A",
    "review": null,
    "camera": {
@@ -124012,7 +124016,7 @@
      "part": "NAUO22"
     }
    ],
-   "caption": "Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.",
+   "caption": "Remove the 6mm screw connecting A5 to A4, then separate the pieces.",
    "text_key": "TA7D15CC4",
    "review": null,
    "camera": {
@@ -124112,7 +124116,7 @@
     "NAUO22"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A5 to A4, then lift A5 off.",
+   "caption": "Remove the 6mm screw connecting A5 to A4, then separate the pieces.",
    "text_key": "TA7D15CC4",
    "review": null,
    "camera": {
@@ -124503,7 +124507,7 @@
     ]
    ],
    "cut": true,
-   "caption": "Take the elbow motor's wire out of the hook-shaped slot in R5.",
+   "caption": "Remove the Elbow Servo's wires from the hook-shaped slot in R5.",
    "text_key": "T7CDB6FA7",
    "review": null,
    "camera": {
@@ -124923,7 +124927,7 @@
     ]
    },
    "away": true,
-   "caption": "Take the elbow motor's wire out of the hook-shaped slot in R5.",
+   "caption": "Remove the Elbow Servo's wires from the hook-shaped slot in R5.",
    "text_key": "T7CDB6FA7",
    "review": null,
    "camera": {
@@ -125343,7 +125347,7 @@
      "part": "NAUO61"
     }
    ],
-   "caption": "Unscrew the two 10mm screws that hold R8 to R5.",
+   "caption": "Remove the two 10mm screws connecting R8 to R5.",
    "text_key": "TB6DAA203",
    "review": null,
    "camera": {
@@ -125762,7 +125766,7 @@
     "NAUO61"
    ],
    "away": true,
-   "caption": "Unscrew the two 10mm screws that hold R8 to R5.",
+   "caption": "Remove the two 10mm screws connecting R8 to R5.",
    "text_key": "TB6DAA203",
    "review": null,
    "camera": {
@@ -126161,7 +126165,7 @@
      "part": "NAUO17"
     }
    ],
-   "caption": "Slide R8 back up the elbow motor's wire and off over its plug.",
+   "caption": "Remove R8 from the Elbow Servo (Black Dot).",
    "text_key": "TE98631F5",
    "review": null,
    "camera": {
@@ -126176,7 +126180,8 @@
      71.4
     ],
     "radius": 83.6
-   }
+   },
+   "caution": "Carefully thread the Elbow Servo's wires all the way out of R8."
   },
   {
    "name": "Step 39c",
@@ -126560,7 +126565,7 @@
     "NAUO17"
    ],
    "away": true,
-   "caption": "Slide R8 back up the elbow motor's wire and off over its plug.",
+   "caption": "Remove R8 from the Elbow Servo (Black Dot).",
    "text_key": "TE98631F5",
    "review": null,
    "camera": {
@@ -126575,7 +126580,8 @@
      71.4
     ],
     "radius": 83.6
-   }
+   },
+   "caution": "Carefully thread the Elbow Servo's wires all the way out of R8."
   },
   {
    "name": "Step 40",
@@ -126958,7 +126964,7 @@
      "part": "NAUO58"
     }
    ],
-   "caption": "Take the elbow motor out of R5, angling its servo horn back out through the opening.",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide it out of R5.",
    "text_key": "T14696FF7",
    "review": null,
    "camera": {
@@ -127524,7 +127530,7 @@
     "elbow orange": 119
    },
    "away": true,
-   "caption": "Take the elbow motor out of R5, angling its servo horn back out through the opening.",
+   "caption": "Tilt the Elbow Servo (Black Dot) to guide it out of R5.",
    "text_key": "T14696FF7",
    "review": null,
    "camera": {
@@ -127877,7 +127883,7 @@
      "part": "NAUO18"
     }
    ],
-   "caption": "Slide A1 - A3 back up from between R5 and A7.",
+   "caption": "Slide A1 - A3 up and out from between R5 and A7.",
    "text_key": "T7EC1880C",
    "review": null,
    "camera": {
@@ -128530,7 +128536,7 @@
     ]
    },
    "away": true,
-   "caption": "Slide A1 - A3 back up from between R5 and A7.",
+   "caption": "Slide A1 - A3 up and out from between R5 and A7.",
    "text_key": "T7EC1880C",
    "review": null,
    "camera": {
@@ -128694,7 +128700,7 @@
      "part": "NAUO56"
     }
    ],
-   "caption": "Unscrew the 10mm screw from A1 - A3, then lift A3 off, then A2, leaving A1.",
+   "caption": "Remove the 10mm screw connecting A1, A2, and A3. Then, separate the pieces.",
    "text_key": "TFD7604F4",
    "review": null,
    "camera": {
@@ -129041,7 +129047,7 @@
     "NAUO19"
    ],
    "away": true,
-   "caption": "Unscrew the 10mm screw from A1 - A3, then lift A3 off, then A2, leaving A1.",
+   "caption": "Remove the 10mm screw connecting A1, A2, and A3. Then, separate the pieces.",
    "text_key": "TFD7604F4",
    "review": null,
    "camera": {
@@ -129380,7 +129386,7 @@
     ]
    ],
    "cut": true,
-   "caption": "Unscrew the 6mm screw that holds A7 to R2. Reach it through the opening in R5.",
+   "caption": "Remove the 6mm screw connecting A7 to R2.",
    "text_key": "TBE7BB569",
    "review": null,
    "camera": {
@@ -129729,7 +129735,7 @@
     "NAUO55"
    ],
    "away": true,
-   "caption": "Unscrew the 6mm screw that holds A7 to R2. Reach it through the opening in R5.",
+   "caption": "Remove the 6mm screw connecting A7 to R2.",
    "text_key": "TBE7BB569",
    "review": null,
    "camera": {
@@ -130077,7 +130083,7 @@
      "part": "NAUO29"
     }
    ],
-   "caption": "Lift A6 - A9 up off R2.",
+   "caption": "Remove A6 - A9 from R2.",
    "text_key": "TDC6B6B51",
    "review": null,
    "camera": {
@@ -130531,7 +130537,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift A6 - A9 up off R2.",
+   "caption": "Remove A6 - A9 from R2.",
    "text_key": "TDC6B6B51",
    "review": null,
    "camera": {
@@ -130685,7 +130691,7 @@
      "part": "NAUO54"
     }
    ],
-   "caption": "Unscrew the 16mm screw that holds A8 to the A9 beside it.",
+   "caption": "Remove the 16mm screw connecting A8 to A9.",
    "text_key": "T109D1B68",
    "review": null,
    "camera": {
@@ -130827,7 +130833,7 @@
     "NAUO54"
    ],
    "away": true,
-   "caption": "Unscrew the 16mm screw that holds A8 to the A9 beside it.",
+   "caption": "Remove the 16mm screw connecting A8 to A9.",
    "text_key": "T109D1B68",
    "review": null,
    "camera": {
@@ -130968,7 +130974,7 @@
      "part": "NAUO31"
     }
    ],
-   "caption": "Pull that A9 out of its cross-shaped slot in A6.",
+   "caption": "Remove A9 from the cross-shaped slot next to A8.",
    "text_key": "T3670EAE0",
    "review": null,
    "camera": {
@@ -131096,7 +131102,7 @@
     "NAUO31"
    ],
    "away": true,
-   "caption": "Pull that A9 out of its cross-shaped slot in A6.",
+   "caption": "Remove A9 from the cross-shaped slot next to A8.",
    "text_key": "T3670EAE0",
    "review": null,
    "camera": {
@@ -131223,7 +131229,7 @@
      "part": "NAUO24"
     }
    ],
-   "caption": "Pull A8 off its two tabs on A6.",
+   "caption": "Remove A8 from A6.",
    "text_key": "TDE23BC52",
    "review": null,
    "camera": {
@@ -131337,7 +131343,7 @@
     "NAUO24"
    ],
    "away": true,
-   "caption": "Pull A8 off its two tabs on A6.",
+   "caption": "Remove A8 from A6.",
    "text_key": "TDE23BC52",
    "review": null,
    "camera": {
@@ -131450,7 +131456,7 @@
      "part": "NAUO53"
     }
    ],
-   "caption": "Unscrew the 16mm screw that holds A7 to the other A9.",
+   "caption": "Remove the 16mm screw connecting A7 to A9.",
    "text_key": "T6CEAF662",
    "review": null,
    "camera": {
@@ -131550,7 +131556,7 @@
     "NAUO53"
    ],
    "away": true,
-   "caption": "Unscrew the 16mm screw that holds A7 to the other A9.",
+   "caption": "Remove the 16mm screw connecting A7 to A9.",
    "text_key": "T6CEAF662",
    "review": null,
    "camera": {
@@ -131649,7 +131655,7 @@
      "part": "NAUO30"
     }
    ],
-   "caption": "Pull that A9 out of its slot too.",
+   "caption": "Remove A9 from the cross-shaped slot next to A7.",
    "text_key": "TD0478466",
    "review": null,
    "camera": {
@@ -131735,7 +131741,7 @@
     "NAUO30"
    ],
    "away": true,
-   "caption": "Pull that A9 out of its slot too.",
+   "caption": "Remove A9 from the cross-shaped slot next to A7.",
    "text_key": "TD0478466",
    "review": null,
    "camera": {
@@ -131820,7 +131826,7 @@
      "part": "NAUO23"
     }
    ],
-   "caption": "Pull A7 off the last two tabs on A6.",
+   "caption": "Remove A7 from A6.",
    "text_key": "T94C8DC57",
    "review": null,
    "camera": {
@@ -131891,7 +131897,7 @@
     "NAUO23"
    ],
    "away": true,
-   "caption": "Pull A7 off the last two tabs on A6.",
+   "caption": "Remove A7 from A6.",
    "text_key": "T94C8DC57",
    "review": null,
    "camera": {
@@ -132222,7 +132228,7 @@
     ]
    ],
    "cut": true,
-   "caption": "Unplug the base motor from Row 5.",
+   "caption": "Disconnect the Base Servo (No Dot) from Row 5.",
    "text_key": "T62106007",
    "review": null,
    "camera": {
@@ -132604,7 +132610,7 @@
     ]
    },
    "away": true,
-   "caption": "Unplug the base motor from Row 5.",
+   "caption": "Disconnect the Base Servo (No Dot) from Row 5.",
    "text_key": "T62106007",
    "review": null,
    "camera": {
@@ -132984,7 +132990,7 @@
      "part": "NAUO8"
     }
    ],
-   "caption": "Lift B8 off B5 - B7.",
+   "caption": "Remove B8 from B5, B6, and B7.",
    "text_key": "T7DC471F6",
    "review": null,
    "camera": {
@@ -133364,7 +133370,7 @@
     "NAUO8"
    ],
    "away": true,
-   "caption": "Lift B8 off B5 - B7.",
+   "caption": "Remove B8 from B5, B6, and B7.",
    "text_key": "T7DC471F6",
    "review": null,
    "camera": {
@@ -133747,7 +133753,7 @@
      0.0
     ]
    ],
-   "caption": "Unplug the eight breadboard wires from the joysticks and the I/O module.",
+   "caption": "Disconnect all eight breadboard wires from the joysticks and the Nano I/O Module.",
    "text_key": "T15CAC3EC",
    "review": null,
    "camera": {
@@ -134190,7 +134196,7 @@
     "right GND": 130
    },
    "away": true,
-   "caption": "Unplug the eight breadboard wires from the joysticks and the I/O module.",
+   "caption": "Disconnect all eight breadboard wires from the joysticks and the Nano I/O Module.",
    "text_key": "T15CAC3EC",
    "review": null,
    "camera": {
@@ -134337,7 +134343,7 @@
      "part": "NAUO82"
     }
    ],
-   "caption": "Slide the I/O module back out of the slots in B6.",
+   "caption": "Lift the Nano I/O Module over the notch in B4, then slide it out of the slots in both B6 pieces.",
    "text_key": "T704F2A8F",
    "review": null,
    "camera": {
@@ -134600,7 +134606,7 @@
     ]
    },
    "away": true,
-   "caption": "Slide the I/O module back out of the slots in B6.",
+   "caption": "Lift the Nano I/O Module over the notch in B4, then slide it out of the slots in both B6 pieces.",
    "text_key": "T704F2A8F",
    "review": null,
    "camera": {
@@ -134710,7 +134716,7 @@
      "part": "NAUO126"
     }
    ],
-   "caption": "Lift the Nano Board out of the I/O module.",
+   "caption": "Remove the Nano Board from the Nano I/O Module.",
    "text_key": "T4B974050",
    "review": null,
    "camera": {
@@ -134726,6 +134732,7 @@
     ],
     "radius": 52.6
    },
+   "caution": "Use the Pry Tool to carefully remove the Nano Board.",
    "isolated": true
   },
   {
@@ -134833,7 +134840,7 @@
     "NAUO126"
    ],
    "away": true,
-   "caption": "Lift the Nano Board out of the I/O module.",
+   "caption": "Remove the Nano Board from the Nano I/O Module.",
    "text_key": "T4B974050",
    "review": null,
    "camera": {
@@ -134849,6 +134856,7 @@
     ],
     "radius": 52.6
    },
+   "caution": "Use the Pry Tool to carefully remove the Nano Board.",
    "isolated": true
   },
   {
@@ -134967,7 +134975,7 @@
     }
    ],
    "cut": true,
-   "caption": "Lift B6 and B7 off B3 with the right joystick between them.",
+   "caption": "Remove B6, B7, and the Right Joystick together from B3 and B4.",
    "text_key": "T7874C56F",
    "review": null,
    "camera": {
@@ -135133,7 +135141,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift B6 and B7 off B3 with the right joystick between them.",
+   "caption": "Remove B6, B7, and the Right Joystick together from B3 and B4.",
    "text_key": "T7874C56F",
    "review": null,
    "camera": {
@@ -135231,7 +135239,7 @@
      "part": "NAUO7"
     }
    ],
-   "caption": "Pull B7 off the right joystick.",
+   "caption": "Remove B7 from the Right Joystick.",
    "text_key": "T8A07182D",
    "review": null,
    "camera": {
@@ -135317,7 +135325,7 @@
     "NAUO7"
    ],
    "away": true,
-   "caption": "Pull B7 off the right joystick.",
+   "caption": "Remove B7 from the Right Joystick.",
    "text_key": "T8A07182D",
    "review": null,
    "camera": {
@@ -135402,7 +135410,7 @@
      "part": "NAUO81"
     }
    ],
-   "caption": "Pull the right joystick out of B6.",
+   "caption": "Remove the Right Joystick from B6.",
    "text_key": "T7197E35A",
    "review": null,
    "camera": {
@@ -135473,7 +135481,7 @@
     "NAUO81"
    ],
    "away": true,
-   "caption": "Pull the right joystick out of B6.",
+   "caption": "Remove the Right Joystick from B6.",
    "text_key": "T7197E35A",
    "review": null,
    "camera": {
@@ -135604,7 +135612,7 @@
     }
    ],
    "cut": true,
-   "caption": "Lift B5 and B6 off B3 with the left joystick between them.",
+   "caption": "Remove B5, B6, and the Left Joystick together from B3 and B4.",
    "text_key": "T258AAB3D",
    "review": null,
    "camera": {
@@ -135767,7 +135775,7 @@
     ]
    },
    "away": true,
-   "caption": "Lift B5 and B6 off B3 with the left joystick between them.",
+   "caption": "Remove B5, B6, and the Left Joystick together from B3 and B4.",
    "text_key": "T258AAB3D",
    "review": null,
    "camera": {
@@ -135865,7 +135873,7 @@
      "part": "NAUO5"
     }
    ],
-   "caption": "Pull B6 off the left joystick.",
+   "caption": "Remove B6 from the Left Joystick.",
    "text_key": "TFB12198D",
    "review": null,
    "camera": {
@@ -135951,7 +135959,7 @@
     "NAUO5"
    ],
    "away": true,
-   "caption": "Pull B6 off the left joystick.",
+   "caption": "Remove B6 from the Left Joystick.",
    "text_key": "TFB12198D",
    "review": null,
    "camera": {
@@ -136036,7 +136044,7 @@
      "part": "NAUO80"
     }
    ],
-   "caption": "Pull the left joystick out of B5.",
+   "caption": "Remove the Left Joystick from B5.",
    "text_key": "T8CCE747B",
    "review": null,
    "camera": {
@@ -136107,7 +136115,7 @@
     "NAUO80"
    ],
    "away": true,
-   "caption": "Pull the left joystick out of B5.",
+   "caption": "Remove the Left Joystick from B5.",
    "text_key": "T8CCE747B",
    "review": null,
    "camera": {
@@ -136235,7 +136243,7 @@
     }
    ],
    "cut": true,
-   "caption": "Pull B4 out of B2.",
+   "caption": "Remove B4 from the center slot in B2.",
    "text_key": "T2CD3C10B",
    "review": null,
    "camera": {
@@ -136361,7 +136369,7 @@
     "NAUO3"
    ],
    "away": true,
-   "caption": "Pull B4 out of B2.",
+   "caption": "Remove B4 from the center slot in B2.",
    "text_key": "T2CD3C10B",
    "review": null,
    "camera": {
@@ -136486,7 +136494,7 @@
      "part": "NAUO9"
     }
    ],
-   "caption": "Pull B3 out of B2.",
+   "caption": "Remove B3 from the slots in B2.",
    "text_key": "T33C4840F",
    "review": null,
    "camera": {
@@ -136611,7 +136619,7 @@
     "NAUO9"
    ],
    "away": true,
-   "caption": "Pull B3 out of B2.",
+   "caption": "Remove B3 from the slots in B2.",
    "text_key": "T33C4840F",
    "review": null,
    "camera": {
@@ -136848,7 +136856,7 @@
      "NAUO47"
     ]
    },
-   "caption": "Unscrew the six 6mm screws that hold B2 to B1.",
+   "caption": "Remove the six 6mm screws connecting B1 and B2.",
    "text_key": "TCCE908A9",
    "review": null,
    "camera": {
@@ -137062,7 +137070,7 @@
     "NAUO52"
    ],
    "away": true,
-   "caption": "Unscrew the six 6mm screws that hold B2 to B1.",
+   "caption": "Remove the six 6mm screws connecting B1 and B2.",
    "text_key": "TCCE908A9",
    "review": null,
    "camera": {
@@ -137180,7 +137188,7 @@
      "part": "NAUO1"
     }
    ],
-   "caption": "Lift R1 - R6 and B2 off B1.",
+   "caption": "Remove B1 from B2.",
    "text_key": "T9A795645",
    "review": null,
    "camera": {
@@ -137309,7 +137317,7 @@
     "NAUO1"
    ],
    "away": true,
-   "caption": "Lift R1 - R6 and B2 off B1.",
+   "caption": "Remove B1 from B2.",
    "text_key": "T9A795645",
    "review": null,
    "camera": {
@@ -137437,7 +137445,7 @@
      "part": "NAUO2"
     }
    ],
-   "caption": "Slide B2 out from between the servo horn and R5 / R6.",
+   "caption": "Slide B2 out from under the servo horn.",
    "text_key": "TC2E11894",
    "review": null,
    "camera": {
@@ -137565,7 +137573,7 @@
     "NAUO2"
    ],
    "away": true,
-   "caption": "Slide B2 out from between the servo horn and R5 / R6.",
+   "caption": "Slide B2 out from under the servo horn.",
    "text_key": "TC2E11894",
    "review": null,
    "camera": {
@@ -137680,7 +137688,7 @@
      0.0
     ]
    ],
-   "caption": "Take the base motor's wire out of the L-shaped slot in R4.",
+   "caption": "Remove the Base Servo's wires from the hook-shaped slot in R4.",
    "text_key": "T7081313E",
    "review": null,
    "camera": {
@@ -137909,7 +137917,7 @@
     ]
    },
    "away": true,
-   "caption": "Take the base motor's wire out of the L-shaped slot in R4.",
+   "caption": "Remove the Base Servo's wires from the hook-shaped slot in R4.",
    "text_key": "T7081313E",
    "review": null,
    "camera": {
@@ -138025,7 +138033,7 @@
      "part": "NAUO14"
     }
    ],
-   "caption": "Take R6 off. Keep the base motor's wire clear of it.",
+   "caption": "Remove R6 from R3 and R4.",
    "text_key": "T9D468E40",
    "review": null,
    "camera": {
@@ -138141,7 +138149,7 @@
     "NAUO14"
    ],
    "away": true,
-   "caption": "Take R6 off. Keep the base motor's wire clear of it.",
+   "caption": "Remove R6 from R3 and R4.",
    "text_key": "T9D468E40",
    "review": null,
    "camera": {
@@ -138256,7 +138264,7 @@
      "part": "NAUO15"
     }
    ],
-   "caption": "Take R5 off the other side.",
+   "caption": "Remove R5 from R3 and R4.",
    "text_key": "T2303EA25",
    "review": null,
    "camera": {
@@ -138371,7 +138379,7 @@
     "NAUO15"
    ],
    "away": true,
-   "caption": "Take R5 off the other side.",
+   "caption": "Remove R5 from R3 and R4.",
    "text_key": "T2303EA25",
    "review": null,
    "camera": {
@@ -138485,7 +138493,7 @@
      "part": "NAUO13"
     }
    ],
-   "caption": "Lift R4 off R1.",
+   "caption": "Remove R4 from R1.",
    "text_key": "TE9B6E2A8",
    "review": null,
    "camera": {
@@ -138599,7 +138607,7 @@
     "NAUO13"
    ],
    "away": true,
-   "caption": "Lift R4 off R1.",
+   "caption": "Remove R4 from R1.",
    "text_key": "TE9B6E2A8",
    "review": null,
    "camera": {
@@ -138712,7 +138720,7 @@
      "part": "NAUO12"
     }
    ],
-   "caption": "Lift R3 off R1.",
+   "caption": "Remove R3 from R1.",
    "text_key": "TB7A63431",
    "review": null,
    "camera": {
@@ -138825,7 +138833,7 @@
     "NAUO12"
    ],
    "away": true,
-   "caption": "Lift R3 off R1.",
+   "caption": "Remove R3 from R1.",
    "text_key": "TB7A63431",
    "review": null,
    "camera": {
@@ -138937,7 +138945,7 @@
      "part": "NAUO11"
     }
    ],
-   "caption": "Slide R2 up off the base motor.",
+   "caption": "Remove R2 from the Base Servo (No Dot).",
    "text_key": "T3CC0656F",
    "review": null,
    "camera": {
@@ -139049,7 +139057,7 @@
     "NAUO11"
    ],
    "away": true,
-   "caption": "Slide R2 up off the base motor.",
+   "caption": "Remove R2 from the Base Servo (No Dot).",
    "text_key": "T3CC0656F",
    "review": null,
    "camera": {
@@ -139160,7 +139168,7 @@
      "part": "NAUO45"
     }
    ],
-   "caption": "Turn the base motor and angle its servo horn back out through the slot in R1.",
+   "caption": "Tilt the Base Servo (No Dot) to guide it out of R1.",
    "text_key": "T6CCFAC80",
    "review": null,
    "camera": {
@@ -139548,7 +139556,7 @@
     "base orange": 133
    },
    "away": true,
-   "caption": "Turn the base motor and angle its servo horn back out through the slot in R1.",
+   "caption": "Tilt the Base Servo (No Dot) to guide it out of R1.",
    "text_key": "T6CCFAC80",
    "review": null,
    "camera": {
