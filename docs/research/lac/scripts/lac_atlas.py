@@ -33,9 +33,13 @@ for sid in j['orderedSteps']:
             seen[k][c] += 1
 base = lambda name: re.sub(r'-\d+$', '', name.split('/')[-1])
 res, single = {}, {}
+# The Cadasio copy to read a part's colours from where its copies differ: the buzzer's lying copy, whose red stub is the one wired to j4
+# (the clamped copy has the stubs the other way round: Lee, 21 Oct 2026, docs/research/lac/round2/buzzer_leads.md).
+PREFER = {'Piezo Buzzer': 'Piezo Buzzer-1'}
 for k, r in refs.items():
     b = base(r['name'])
     if b not in want or b in res or b in single: continue
+    if b in PREFER and r['name'].split('/')[-1] != PREFER[b]: continue
     sol = []
     for L in leaves(k):
         v = rv.get(refs[L]['ver'])

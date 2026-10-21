@@ -1,0 +1,5 @@
+Step 43c  buzzer black  and lcd yellow    centre lines 0.31 mm apart at 0.46, near [678.2, 933.8, 1349.3]
+Step 43c  buzzer black  and lcd teal      centre lines 0.53 mm apart at 0.46, near [682.5, 929.8, 1348.3]
+Step 43c  buzzer black  and lcd blue      centre lines 0.62 mm apart at 0.44, near [682.2, 928.4, 1352.0]
+Step 43c  buzzer black  and lcd purple    centre lines 0.76 mm apart at 0.46, near [677.3, 936.5, 1347.2]
+checked 1 views in motion; 4 problems

@@ -2,21 +2,18 @@
  "summary": {
   "source": "lac-guide.glb",
   "source_bytes": 7431252,
-  "model_bytes": 1556872,
-  "triangles_in": 723364,
+  "model_bytes": 1558804,
+  "triangles_in": 723384,
   "triangles_out": 137511,
-  "edge_segments": 72075,
-  "meshes": 35,
+  "edge_segments": 72092,
+  "meshes": 36,
   "parts_kept": 58,
   "parts_in_source": 58,
   "materials": [
    "edge",
-   "#000000",
-   "#0074d9",
-   "#ff0e00",
-   "#ffffff",
    "ink",
    "wood",
+   "#0074d9",
    "#191919",
    "#84694b",
    "#a0a0a0",
@@ -24,10 +21,13 @@
    "#c4c5c4",
    "#f4e5a7",
    "pin",
+   "#000000",
    "#a36315",
+   "#ff0e00",
    "#855e42",
    "#1e1616",
    "#181818",
+   "#ffffff",
    "#2d2926",
    "#ef3340",
    "#1a7e26",
@@ -52,21 +52,6 @@
   "wire_colour_breaks": []
  },
  "meshes": [
-  {
-   "mesh": "Breadboard",
-   "used_by": 1,
-   "solids": 133,
-   "tris_in": 56640,
-   "tris_out": 23012,
-   "edge_segments": 21752,
-   "colours": [
-    "#000000",
-    "#0074d9",
-    "#ff0e00",
-    "#ffffff"
-   ],
-   "note": "atlas match 99%; 30605 faces under a skin recoloured"
-  },
   {
    "mesh": "F3",
    "used_by": 1,
@@ -430,6 +415,33 @@
    "edge_segments": 412,
    "colours": [
     "#a6a9aa"
+   ],
+   "note": ""
+  },
+  {
+   "mesh": "Breadboard",
+   "used_by": 1,
+   "solids": 133,
+   "tris_in": 56610,
+   "tris_out": 22962,
+   "edge_segments": 21709,
+   "colours": [
+    "#000000",
+    "#0074d9",
+    "#ff0e00",
+    "#ffffff"
+   ],
+   "note": "atlas match 99%; 30605 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Breadboard tabs",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 50,
+   "tris_out": 50,
+   "edge_segments": 60,
+   "colours": [
+    "#ffffff"
    ],
    "note": ""
   },

@@ -4368,7 +4368,7 @@
      2.619,
      -0.048
     ],
-    "colour": "#ef3340",
+    "colour": "#2d2926",
     "shown": 37
    },
    {
@@ -4383,11 +4383,11 @@
      2.619,
      1.476
     ],
-    "colour": "#2d2926",
+    "colour": "#ef3340",
     "shown": 37
    }
   ],
-  "cadasio_instance": "Piezo Buzzer-2"
+  "cadasio_instance": "Piezo Buzzer-1", "_note": "Stub colours from Cadasio's lying copy (Piezo Buzzer-1, published Steps 33 - 43: red stub and red lead to j4, as the captions say), not its clamped copy (Piezo Buzzer-2, which has them the other way round, its red lead going to (-) blue). The CAD wires solid [2] (seated x 674.5) to j4 in both poses. Lee, 21 Oct 2026: the stubs were the wrong colours against the leads (docs/research/lac/round2/buzzer_leads.md)."
  },
  "USB Right Angle": {
   "bbox_min": [

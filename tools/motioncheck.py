@@ -1,15 +1,17 @@
 """Wires during a step's motion: the in-between frames that tools/wirecheck.py (views at rest) does not see.
 
-    .venv.nosync/bin/python tools/motioncheck.py <kit folder> [--steps steps.json] "Step 26c" "Step 30c" ...   (no names: every view
-                                                                                                               where a wire moves)
+    .venv.nosync/bin/python tools/motioncheck.py <kit folder> [--steps steps.json] [--moments N] "Step 26c" "Step 30c" ...
+                                                                    (no names: every view where a wire moves; N moments, default 19)
 
-For each named view, at 19 moments of the motion that opens it: the moving parts along their ways, the riding parts through their
+For each named view, at 19 moments of the motion that opens it (or N: 39 takes in the quarters, where a step of two or four beats
+changes beat): the moving parts along their ways, the riding parts through their
 in-between places, each wire blended from its route in the view before to its route in this view (through any in-between routes),
 as the player does (player.js: skinned, drawWires, throughPoses, paced); then every wire against every part on screen at that moment
 (a point inside a part, or within 0.7 of the wire's radius of it, away from the wire's own ends) and against the other wires
 (centre lines closer than 0.9 of their radii added). Adapted from the PMG session's docs/research/pmg/scripts/check_motion.py (19 Oct
-2026), for any kit and every part. Approximate where the player is: poses are mixed linearly (turns by quaternion about the part's
-middle), and a way's in-between poses are spaced by distance only.
+2026), for any kit and every part. Poses are mixed as the player mixes them (player.js mixPose: the turn about the pose's pivot), and a
+way's in-between poses are spaced as the player spaces them (poseGap: the move plus half the turn in degrees; LAC round 2, 21 Oct 2026:
+by the matrices' translations, a pose written as a turn about a far point took most of its beat).
 """
 import json
 import sys
@@ -37,7 +39,13 @@ def main(argv):
         args.pop(0)
         steps_file = args.pop(0)
     trace = '--trace' in args
-    names = [a for a in args if a != '--trace']
+    args = [a for a in args if a != '--trace']
+    moments = 19
+    if '--moments' in args:
+        i = args.index('--moments')
+        moments = int(args[i + 1])
+        del args[i:i + 2]
+    names = args
     steps = json.load(open(kit / steps_file))
     spec = json.load(open(kit / 'materials.json'))
     model = Model(kit / spec['source'], adjust=spec.get('adjust_mm') or {}, own_parts=spec.get('own_parts', {}),   # (the parts as the guide
@@ -58,6 +66,14 @@ def main(argv):
         M[:3, 3] = (A[:3, :3] @ c + A[:3, 3]) * (1 - k) + (B[:3, :3] @ c + B[:3, 3]) * k - R @ c
         return M
 
+    def shift(p):
+        return np.asarray(p if isinstance(p, (list, tuple)) else (p or {}).get('t', [0.0, 0.0, 0.0]), float)
+
+    def gap(a, b):
+        """How far apart two poses of a way are, as the player measures it to pace the poses between two stops (player.js poseGap)."""
+        turn = (Rotation.from_matrix(_matrix(a)[:3, :3]).inv() * Rotation.from_matrix(_matrix(b)[:3, :3])).magnitude()
+        return float(np.linalg.norm(shift(b) - shift(a)) + np.degrees(turn) * 0.5)
+
     def along(path, stops, t, part=None):
         stops = stops or list(range(len(path)))
         beats = len(stops) - 1
@@ -66,7 +82,7 @@ def main(argv):
         seg = path[stops[b]:stops[b + 1] + 1]
         if len(seg) == 2:
             return mix(seg[0], seg[1], k, part)
-        L = [np.linalg.norm(_matrix(seg[i + 1])[:3, 3] - _matrix(seg[i])[:3, 3]) + 1e-6 for i in range(len(seg) - 1)]
+        L = [gap(seg[i], seg[i + 1]) + 1e-6 for i in range(len(seg) - 1)]
         d, i = k * sum(L), 0
         while i < len(L) - 1 and d > L[i]:
             d -= L[i]
@@ -142,7 +158,7 @@ def main(argv):
                 return (b + ease(km * beats - b)) / beats
             return ease(km)
         worst, touching, traced = {}, {}, {}
-        for km in np.linspace(0.05, 0.95, 19):
+        for km in np.linspace(0.0, 1.0, moments + 2)[1:-1]:
             M = {pid: _matrix(pose) for pid, pose in (v.get('offsets') or {}).items()
                  if pid not in (v.get('carry') or {}) and pid not in ways}
             for pid, way in ways.items():

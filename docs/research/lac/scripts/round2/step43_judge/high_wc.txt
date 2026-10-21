@@ -1,0 +1,2 @@
+Step 12    jumper purple route 23: NAUO22 (0.04 mm, 12 pts, at [690.2, 897.2, 1321.9])
+checked 116 views; 1 problems

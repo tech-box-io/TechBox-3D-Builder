@@ -96,7 +96,14 @@
       "match": "^Breadboard$",
       "simplify_mm": 0.02,
       "edge_min_size_mm": 0.0,
-      "_about": "the half breadboard: body white, legends black, the (+) rail stripes red and the (-) blue, from the LAC atlas"
+      "atlas_frame": [[-69.285, -5.25, -42.17], [-13.205, 4.27, 40.84]],
+      "_about": "the half breadboard: body white, legends black, the (+) rail stripes red and the (-) blue, from the LAC atlas. The mesh is the LSM's (extra part NAUO1, breadboard-lsm.glb), its joining tabs on the a side and the column 30 end as the real board has them (Lee, 21 Oct 2026), which changes the mesh's box: atlas_frame lines it up with the atlas by the CAD mesh's own box"
+    },
+    {
+      "match": "^Breadboard tabs$",
+      "color": "#ffffff",
+      "simplify_mm": 0,
+      "_about": "the breadboard's joining tabs, two on the a side (the front, +X) and three on the column 30 end (-Z), as on the LSM's breadboard (Lee, 21 Oct 2026): the body's white"
     },
     {
       "match": "^Paper$",
@@ -158,6 +165,7 @@
     }
   ],
   "_notes": {
+    "adjusted": ["NAUO82, NAUO84 (the LCD's GND and VCC wires' male caps): moved 10.16 and 15.23 mm along the (-) blue and (+) red rails, to k = +2 and +4 (z 1290.00, 1295.08), from where the CAD has them (k = -2, z 1279.84), under the legs of the black and green jumpers: neither wire could go in there without passing through them (Lee, 21 Oct 2026, Steps 36 - 37; guide.py LCD_RAIL_SHIFT moves its copy of the caps the same; docs/research/lac/round2/wire_clipping.md)."],
     "unconfirmed": [
       "Every colour is TechBox's own LAC Cadasio project's, except the Nano Board's (the MRA's, which Lee approved there) and the USB A end's (the MRA's). The female caps are black #1e1616 as in the LAC project; the MRA's same part is dark grey #404040."
     ],
@@ -171,7 +179,20 @@
     "missing": "Until 19 Oct 2026 the CAD had no F2, F5 or F6; Lee sent each as a STEP of its own (F2.STEP, F5.STEP, F6.STEP: extra parts F2, F5, F6, placed as TechBox's Cadasio project has them)."
   },
   "atlas": "colour-atlas-lac.json",
+  "adjust_mm": {
+    "NAUO82": [0.0, 0.0, 10.16],
+    "NAUO84": [0.0, 0.0, 15.23]
+  },
   "extra_parts": {
+    "NAUO1": {
+      "glb": "breadboard-lsm.glb",
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "_about": "the breadboard, in place of the CAD's NAUO1: the LSM's breadboard as revised (Lee, 20 - 21 Oct 2026: the two joining tabs on the a side and the three on the column 30 end, where the real board has them; the CAD has them on the j side and the column 1 end). The same CAD part, vertex for vertex; cut from lsm.glb by tools/cut_part.py where NAUO1 sits: python tools/cut_part.py \"LSM Build Instructions/lsm.glb\" BREADBOARD \"LAC Build Instructions/breadboard-lsm.glb\" --like \"LAC Build Instructions/lac-guide.glb\" NAUO1. Holes unchanged (wire-paths.json; docs/research/lac/round2/breadboard_tabs.md)."
+    },
     "NANO": {
       "glb": "nano-mra.glb",
       "pose": [

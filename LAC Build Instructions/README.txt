@@ -1,6 +1,6 @@
 LAC Build Instructions (LCD Alarm Clock, Full Build: the electronics on the breadboard, wired one wire at a time, then the box)
 
-FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 (below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
+FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
 guide for the kit (instructions.online/?id=19075-lac_full_build), in the same format and with the same player as the MRA and RCC
 guides (player/ was not changed). Not for distribution. Open questions are yellow Review notes on their steps (Step 45) and
 under QUESTIONS FOR LEE below.
@@ -58,14 +58,15 @@ is the published Step N + 1.)
   case stays upright (published: laid on its front, F2 lowered from above; the player can turn a model only upside down), and F2 comes
   in 40 mm straight from behind and then 14 mm along itself (published: about 80 mm, diagonally from behind and F6's end), so that its
   slit slides along the cable lying straight out behind the case.
-- Checked (20 Oct 2026): the player's run-through check passes on every view (116 views, forwards, backwards and jumping, 0 problems);
-  at rest each wire is clear of the parts and of the other wires (tools/wirecheck.py: 3 touches of 0.03 - 0.05 mm, a jumper's cap held
-  over its hole beside the wire before it, Steps 12 - 14); during the moves (tools/motioncheck.py, every move at 19
-  moments) no wire passes into a panel any more: 13 moments where a plug going down brushes the wire beside it by 0.2 - 0.9 mm
-  (Steps 12 - 14, 33, 36 - 39), one where the buzzer's red lead grazes the clock module's edge by 0.7 mm as the buzzer is carried
-  over (Step 43, its second beat), and 49 where two wires brush for a moment inside the bundle (most as a lead's run in the case
-  changes, Steps 46 and 52); before the round, 132 moments, some a lead through a 3 mm panel, and the check did not see the parts
-  that swung off the screen.
+- Checked (21 Oct 2026, after Lee's second round): the player's run-through check passes on every view (116 views, forwards,
+  backwards and jumping, 0 problems); at rest each wire is clear of the parts and of the other wires (tools/wirecheck.py: one touch
+  of 0.04 mm, the purple jumper's cap held over its hole beside the blue's, Step 12); during the moves (tools/motioncheck.py, every
+  move at 39 moments: twice as many as Lee's first round was checked at) no wire passes into a panel, and 22 moments in 96 moves
+  are left: the purple jumper brushing the blue jumper's cap and wire by 0.6 - 0.8 mm as it goes in (Step 12), the switch's black
+  and tan leads 0.8 mm apart as Step 17 starts, the orange and yellow jumpers 0.94 mm apart (Step 21c), the buzzer's black lead
+  through the LCD's four wires for about 50 ms (Step 43c: question 11), and 16 where the potentiometer's leads brush the wires of
+  the bundle for a moment as their run in the case changes (Steps 46c and 52c, as after the first round). Lee's first round was
+  left at 63 moments of 19 per move; before it, 132. Cameras: only those of Steps 16 - 18, 30 - 35, 49 and 50 changed in this round.
 
 LEE'S FIRST ROUND (20 Oct 2026)
 - The 12 kΩ resistor is named so everywhere (the parts list, labels, captions; "2x - 12 kΩ Resistor" on Step 4).
@@ -89,6 +90,34 @@ LEE'S FIRST ROUND (20 Oct 2026)
   frame, the LCD ribbon's two ends crossing as each wire was connected, the LCD wires' run lifting through the jumpers in Step 50.
 - Research for the round: docs/research/lac/round1/ (how the LSM does what Lee asked for, the published guide's moves and cameras, the
   model's colour faults, why the wires misbehaved mid-move).
+
+LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs/research/lac/round2/)
+- The breadboard's joining tabs as on the LSM's, where the real board has them: two on the a side (the front) and three on the column 30
+  end (the buzzer's end). It is the LSM's revised breadboard (breadboard-lsm.glb, extra part NAUO1: the same CAD part vertex for vertex,
+  holes unchanged); Step 1's camera and Step 2's corner lines kept where they were.
+- Labels and eyes beside their targets, not at the window's edges, in every step of the kit (guide.py near(): 'near-left', 'up-right' ...
+  with a reach; chosen per step clear of each other: round2/labels.md).
+- Lee's cameras, solved from his screenshots to the pixel (round2/cameras.md): Steps 16 - 18, 30 - 32, 33 - 34, 49 (F8's label up and to
+  its right). b9 (Step 39) shows from no direction in front (the cameras of Steps 14, 20, 21 and 38 already show their holes whole,
+  from the first round), so Step 39c now has a close-up of it from above, the blue wire's pin in it.
+- Wires going in through others: the white jumper (Step 13) is a low arch, and it and the dark red (Step 14) come in low from the front,
+  5 mm up, under the purple and blue; the potentiometer's black lead (Step 32) runs under the tan's hump and is held 5 mm up; the LCD's
+  GND and VCC wires go into other holes of the same rails (k = +2, +4: z 1290, 1295), clear of the green and black jumpers that lean over
+  the CAD's holes (question 10); each LCD wire is pushed in by its cap only, the rest of it still; the lying LCD wires run in smooth lanes
+  (Steps 36 - 39: "crazy and bent" was a hairpin and a straight drop).
+- The buzzer's stubs coloured as its leads (red to j4, as published: our colours came from TechBox's other copy of the buzzer, which has
+  them the other way round). Its leads start at the stubs (no gap), and seated they run over the jumpers, the eye above it. Step 43: the
+  buzzer is lifted, carried high over the board (turning upright) and lowered straight in, its leads passing over every jumper and wire
+  (round2/step43_judge.md: two designs, the better taken); seated, the red lead now leaves the buzzer forward, beside the black, up in
+  front of the switch, and crosses back over the board past the clock module into j4 from behind (question 11).
+- The LCD's ribbon (Step 35) laid clear of F1 and the potentiometer's leads, the view a little wider to take it in; its wires' ends are
+  then put away, and each comes back on its own step (Steps 36 - 39), held over its hole, and is pushed in.
+- The USB cable centred on both plugs (its ends came from the rim of the CAD's end faces).
+- Step 50: the LCD is stood on its header end, tips up and over it to stand upright out in front, comes in, and slides along its own length
+  into F8's slots (it went in sideways, through F8's front); closer camera. Step 51 straightens it in the middle of F8's slots.
+- Step 53: the fourth lead line from F1's back, as the other three.
+- tools/motioncheck.py spaces a way's in-between poses as the player does (poseGap) and takes --moments (39 catches the quarters, where a
+  step of two or four beats changes beat).
 
 REUSED FROM THE MRA AND RCC (Lee, 19 Oct 2026: "replacing each item in the LAC file with the version you used on either the MRA or RCC")
 - The Nano Board: the LAC's NAUO124 is the same Nano model as the MRA's; the guide shows the MRA's export of it (nano-mra.glb, cut by
@@ -129,6 +158,16 @@ QUESTIONS FOR LEE
 6. The jumper wires change length between lying loose and plugged in (the CAD routes them 50 - 90 mm); fine, as for the RCC's leads?
 7. When it is ready for the website: its address would be lcd-alarm-clock-full-build (kit lcd-alarm-clock), added to guides.json then.
 8. (Done in your first round: see above.)
+10. Steps 36 - 37: the LCD's GND and VCC wires now go into the (-) blue and (+) red rails two and four holes further along than the CAD
+   has them (the same connection): where the CAD has them, the green and black jumpers lean right over the holes and the wires cannot go
+   in without passing through them. Fine, or should they go back?
+11. Step 43: the buzzer's leads now pass over every jumper, lying and as the buzzer is carried in, except for one moment (about 50 ms,
+   mid-carry) when the black lead passes through the LCD's four wires: those were laid over the lying black lead (Steps 36 - 39), so one
+   has to pass the other. Clean would take re-laying the LCD wires in front of the (-) blue rail (Steps 35 - 51), or playing Step 43 as
+   a fade (the buzzer fading out and back in seated, as the PMG's Step 42), which no longer shows the carry. While the buzzer is held
+   high, its leads look stiff for a moment (a long black line over the board, a red post behind the caps); softer shapes are possible.
+12. Step 49's label (up and to the right of F8, as asked) lands on F8 in windows under about 880 px wide (an iPad in the LMS is 768):
+   'up-left' is clear at every width.
 9. The potentiometer's knob: TechBox's Cadasio project draws a silver ring round the end of the knob (and a silver pointer groove), so
    the guide keeps it and only stops the black showing through. If the real knob is all black, it is a one-line change to make it so.
 
@@ -139,6 +178,7 @@ FILES
   trim_source.py                lac.glb -> lac-guide.glb (the parts the guide uses)
   lac.glb, lac-guide.glb        the CAD (converted from LAC Full Build.STEP), and cut down
   nano-mra.glb, usb-a-end.glb   the MRA's Nano Board and USB A end; f4.glb the top panel (extra parts)
+  breadboard-lsm.glb            the LSM's revised breadboard (its tabs on the a side and the column 30 end), in place of NAUO1
   f2.glb, f5.glb, f6.glb        the back and end panels, from Lee's F2.STEP, F5.STEP, F6.STEP (extra parts; the STEPs stay out of git,
                                 their checksums in cad-sources.sha256)
   steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand

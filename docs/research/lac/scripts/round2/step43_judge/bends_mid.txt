@@ -1,0 +1,33 @@
+now
+  buzzer red: sharpest 47.0 deg/mm at t 0.515, 75.0 mm from the hole, near [669.4, 912.2, 1274.7] (lead 111.1 mm); moments over 30 deg/mm: (0.465, 0.545, 17)
+      t 0.515: 47.0 deg/mm at 75.0 mm, near [669.4, 912.2, 1274.7]
+      t 0.485: 42.7 deg/mm at 42.0 mm, near [664.8, 918.5, 1307.9]
+      t 0.545: 30.5 deg/mm at 94.0 mm, near [672.3, 907.6, 1259.1]
+      t 0.45: 16.0 deg/mm at 20.5 mm, near [659.8, 917.6, 1338.4]
+  buzzer black: sharpest 25.6 deg/mm at t 0.485, 55.5 mm from the hole, near [680.4, 921.6, 1307.4] (lead 101.2 mm); moments over 30 deg/mm: None
+      t 0.485: 25.6 deg/mm at 55.5 mm, near [680.4, 921.6, 1307.4]
+      t 0.45: 25.5 deg/mm at 12.0 mm, near [698.7, 912.8, 1339.3]
+      t 0.535: 23.6 deg/mm at 105.0 mm, near [683.7, 914.0, 1262.2]
+      t 0.42: 17.2 deg/mm at 14.5 mm, near [696.2, 912.8, 1343.0]
+low
+  buzzer red: sharpest 42.1 deg/mm at t 0.385, 79.0 mm from the hole, near [665.3, 933.5, 1292.1] (lead 99.1 mm); moments over 30 deg/mm: (0.355, 0.39, 7)
+      t 0.385: 42.1 deg/mm at 79.0 mm, near [665.3, 933.5, 1292.1]
+      t 0.355: 31.3 deg/mm at 30.5 mm, near [654.5, 913.3, 1348.2]
+      t 0.6: 26.9 deg/mm at 95.5 mm, near [672.2, 928.6, 1262.9]
+      t 0.63: 19.1 deg/mm at 98.5 mm, near [673.1, 918.1, 1259.2]
+  buzzer black: sharpest 32.9 deg/mm at t 0.38, 85.5 mm from the hole, near [689.3, 941.8, 1283.7] (lead 121.8 mm); moments over 30 deg/mm: (0.37, 0.395, 6)
+      t 0.38: 32.9 deg/mm at 85.5 mm, near [689.3, 941.8, 1283.7]
+      t 0.35: 24.1 deg/mm at 50.5 mm, near [695.0, 942.7, 1318.5]
+      t 0.095: 14.8 deg/mm at 12.0 mm, near [698.4, 912.6, 1342.0]
+      t 0.06: 13.1 deg/mm at 12.0 mm, near [698.1, 912.0, 1342.6]
+high
+  buzzer red: sharpest 48.8 deg/mm at t 0.515, 72.0 mm from the hole, near [668.1, 948.0, 1300.2] (lead 92.5 mm); moments over 30 deg/mm: (0.45, 0.765, 26)
+      t 0.515: 48.8 deg/mm at 72.0 mm, near [668.1, 948.0, 1300.2]
+      t 0.48: 34.8 deg/mm at 12.0 mm, near [654.3, 907.8, 1333.0]
+      t 0.725: 30.4 deg/mm at 44.5 mm, near [661.8, 924.6, 1302.6]
+      t 0.765: 30.1 deg/mm at 45.0 mm, near [662.0, 924.7, 1302.1]
+  buzzer black: sharpest 19.1 deg/mm at t 0.49, 54.5 mm from the hole, near [683.8, 939.9, 1327.5] (lead 89.3 mm); moments over 30 deg/mm: None
+      t 0.49: 19.1 deg/mm at 54.5 mm, near [683.8, 939.9, 1327.5]
+      t 0.285: 15.2 deg/mm at 15.0 mm, near [695.9, 912.1, 1345.1]
+      t 0.315: 15.2 deg/mm at 15.0 mm, near [695.9, 912.1, 1345.1]
+      t 0.36: 15.2 deg/mm at 15.0 mm, near [695.9, 912.1, 1345.1]

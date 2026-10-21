@@ -1,0 +1,2 @@
+Step 43c  buzzer black  and lcd teal      centre lines 0.70 mm apart at 0.45, near [682.1, 930.3, 1349.8]
+checked 1 views in motion; 1 problems

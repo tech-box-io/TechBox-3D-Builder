@@ -1,0 +1,6 @@
+# (lifted, carried high over the board to 75 mm over its seat and lowered in: a stop each, its leads keeping pace stop by stop: carried,
+# each lead rises behind what it will lie over and arches high to the buzzer; lowered, it settles straight down onto its seated way)
+g.place('Lower the buzzer in between the two F7s, its ears into their slots.', move=[BUZZER], path=[BUZZER_LYING, BUZZER_LIFT, BUZZER_HIGH, ZERO],
+        lines=False, eye=[dict(id=BUZZER, **near('near-above'))],         # (above the buzzer: Lee, 21 Oct 2026)
+        wires_done={f'buzzer {c}': [buzzer_plugged(c, cap, e, BUZZER_LIFT, BUZZER_LIFT_WAY[c], stretch=True, hold=BUZZER_LIFT_HOLD.get(c)),
+                                    buzzer_high(c, cap, e), buzzer_clamped(c, cap, e)] for c, cap, _, e, _, _ in BUZZER_LEADS}, **CASE_CAMERA)

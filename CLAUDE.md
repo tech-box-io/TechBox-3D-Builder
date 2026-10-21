@@ -435,7 +435,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
                                bundle.py, make_pdf.py (a guide as a 2D PDF), step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), motioncheck.py
-                               (wires during each move, 19 moments, against every part and each other; --trace names the bits of the two shapes blended), wirecheck.py
+                               (wires during each move, 19 moments or --moments N, against every part and each other, poses paced as the player paces them; --trace names the bits of the two shapes blended), wirecheck.py
                                (wires passing into parts or into each other, view by view, sampled every 0.2 mm); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video
     cad-sources.sha256         checksums of the source STEP files (kept out of git: too big for GitHub)
@@ -458,7 +458,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     LAC Build Instructions/    the LCD Alarm Clock (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lac.json, wire-paths.json,
                                lac.glb from "LAC Full Build.STEP" (the engineer's export, every part in several posed copies), cut down by the
                                kit's trim_source.py to lac-guide.glb (the parts the guide uses: the source both tools read); nano-mra.glb and
-                               usb-a-end.glb (the MRA's), f4.glb (F4 seated: the STEP has it only lying beside the base); f2.glb, f5.glb,
+                               usb-a-end.glb (the MRA's), breadboard-lsm.glb (the LSM's revised breadboard, its tabs on the a side and the column 30 end:
+                               Lee, 21 Oct 2026), f4.glb (F4 seated: the STEP has it only lying beside the base); f2.glb, f5.glb,
                                f6.glb from Lee's F2/F5/F6.STEP (19 Oct 2026), placed where TechBox's Cadasio project has them. Wire routes
                                re-drawn clear of every part and wire (docs/research/lac/scripts/routing/: a path search through the closed
                                case). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").

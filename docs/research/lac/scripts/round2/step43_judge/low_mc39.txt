@@ -1,0 +1,3 @@
+Step 43c  buzzer red    and switch tan    centre lines 0.19 mm apart at 0.62, near [671.2, 926.5, 1270.0]
+Step 43c  buzzer black  and lcd teal      centre lines 0.86 mm apart at 0.15, near [684.9, 934.3, 1358.6]
+checked 1 views in motion; 2 problems
