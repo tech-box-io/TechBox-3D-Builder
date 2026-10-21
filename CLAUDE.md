@@ -98,7 +98,8 @@ docstrings of `Guide.place` and `Guide.seat`):
   A close-up can be a picture made outside instead of a view of the model: `inset=dict(image='file.webp', ...)`, a file in the
   kit folder (the LSM's capacitor card, Step 6; published and bundled with the guide); and can draw parts faintly,
   `inset=dict(..., ghost={id: alpha})` (the LSM's matrix at 0.12 over the wires in D10's slot, Step 32). A close-up keeps clear of
-  the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14), and is
+  the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14), and of
+  its arrows, heads included (a take-apart's cue: the LSM deconstruction's four D11 posts, 21 Oct 2026), and is
   made smaller (to 85%, 72% or 60%) only where no full-size place is clear (the LSM's Step 6, labels both sides, in a narrow window);
   `inset=dict(..., side='right')` asks for its side of the model, tried at every size before any other (the LSM's capacitor picture,
   to the right of the capacitor, its leader not across it; the PMG's Steps 19c - 20c, `side='left'`). Nor does it cover the place it
@@ -331,17 +332,19 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026; the PMG's, 21 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026; the PMG's and the LSM's, 21 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
   `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
-  Full Build's title page. Then, as a rule the build in reverse (rulebook section 11 and Lee's conventions there: parts may go in
-  unison, every step has its own wording, a part once off is gone for good):
+  Full Build's title page (`take_apart(leave_out=[ids])`: parts the Full Build put away for good, which would otherwise come back as
+  its last view of them had them: the LSM's breadboard backing). Then, as a rule the build in reverse (rulebook section 11 and Lee's
+  conventions there: parts may go in unison, every step has its own wording, a part once off is gone for good):
   - `g.remove(caption, ids)`: the parts leave and disappear. Step N shows them where they are with one red arrow per unit (parts the
     Full Build put on together are one unit; two of a kind get an arrow each); Next plays them out the way the Full Build put them
     in, reversed (to where they hovered, by that step's camera), and they are gone; Prev brings them back. A part the Full Build
     did not move in, or one not in its seat, is pulled straight out the first free way. Parts riding on them go too, and so does a
     lead whose ends both go; a lead left with one end on screen is refused (unplug it first). `path=` / `paths=` / `direction=`
-    and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release), `alone=[ids]` (taken apart on its own),
+    and `hover=` by hand; `arrows=`, `eye=`, `inset=` (on Step N: a catch to release; `mark=`, `marks=`, `ghost=`, `side=` as a build's:
+    the LSM's three connectors under the matrix, the matrix drawn faintly), `alone=[ids]` (taken apart on its own),
     `new_camera=True` or `view_dir=` / `frame=` / `look_from=`; `wires={id: route or None}`; `in_turn=[[ids], ...]` (in order, each
     group once the one before has slid out and faded); `units=[[ids], ...]` (the arrows by
     hand: an arrow on the joystick, not the walls it carries); `wires_here={id: route}` (leads as drawn on this step only);
@@ -409,6 +412,15 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
   the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
   Run it after every Full Build change.
+  The LSM's (`deconstruction.py`, 24 steps, first draft 21 Oct 2026, the same request as the PMG's, "like the 3 breadboard wires"): the
+  Full Build in reverse, groups where Lee asked (the 64 stems, the four D11 posts, both D9, the button's two wires, the three breadboard
+  wires); the LED matrix stays wired until Step 19, since in the model the purple wire's pin in b19 is under the USB plug, which the
+  button blocks until D2 is out: so it is carried out over D4 and back, the Full Build's own moves (Steps 32, 30 and 26 walked back,
+  `carried_back()`), the box turned over with it for D5 and D3 as they went on (README question 20 asks Lee about a shorter order);
+  D2 out with the button, the USB cable, the button's wires, the nut and button on their own; the matrix pulled off its connectors
+  (`let_go=`), the three wires out together; the breadboard's parts. Its arrows take the sizes of TechBox's published LSM take-apart
+  (docs/research/lsm/decon/arrows/, as the PMG's), in turn where a part comes off in stages; it ends on D1 with the breadboard, then
+  the Full Build's parts list. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is

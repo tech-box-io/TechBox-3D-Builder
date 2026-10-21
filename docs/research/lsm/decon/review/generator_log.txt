@@ -1,0 +1,28 @@
+take_apart(): from steps.json as it ends (98 parts, 10 leads)
+Remove all 64 LED Stems from D8, D7 and D6.                remove 64 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove D8 from the four D11 posts.                         remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove D7 from the four D11 posts.                         remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+  NOTE: Push the tabs of the four D11 posts up o: 4 arrows (the published take-aparts show 2 at most: rulebook section 11)
+Push the tabs of the four D11 posts up out of the slots in remove 4 part(s), by hand, 4 arrow(s)
+Remove D6 from the tabs at the top of the walls.           remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Lift the LED Matrix, with D10 hooked under it, up out of t lift   1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Slide D10 toward D2 until its hooks come off the edges of  remove 1 part(s), by hand, 1 arrow(s)
+Carry the LED Matrix over D4 and set it down outside the b lift   1 part(s), by hand, 1 arrow(s)
+Remove both D9 pieces from the slots in D2 and D3.         remove 2 part(s), the Full Build's way, reversed, 2 arrow(s)
+Turn the box over. Remove D5 from the tabs of D1, D2 and D remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Swing D3 open, away from D1, then unhook its tabs from the remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Turn the box the right way up. Carry the LED Matrix back o lift   1 part(s), by hand
+Slide D4 off the tabs of D1 and D2, then lift it off the U remove 1 part(s), by hand, 1 arrow(s)
+Slide D2, with the Push Button, out of the slots in D1. Le lift   1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Disconnect the USB Cable from the Nano Board.              remove 2 part(s), the Full Build's way, reversed, 1 arrow(s), 1 lead(s) with them
+Disconnect the Push Button's red wire from j5 and its blac unplug 2 part(s), the Full Build's way, reversed
+Unscrew the nut from the Push Button and slide it off over remove 1 part(s), by hand, 1 arrow(s)
+Push the Push Button, wires first, out through the hole in remove 3 part(s), by hand, 1 arrow(s), 2 lead(s) with them
+Pull the LED Matrix off the connectors of the yellow, grey remove 1 part(s), by hand, 1 arrow(s)
+Disconnect the yellow, grey and purple wires from i2, i3 a remove 6 part(s), the Full Build's way, reversed, 3 lead(s) with them
+Remove the 330 Ω Resistor from a11 and a19.                remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Remove the Capacitor from j2 and j3.                       remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove the 12 kΩ Resistor from h3 and h16.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Remove the Nano Board from the breadboard.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+27 steps -> 52 views, 23 parts, 10 wires; wrote steps-deconstruction.json
+EXIT 0 peak 1073 MB

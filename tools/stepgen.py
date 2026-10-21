@@ -825,14 +825,17 @@ class Guide:
             own['camera'] = cam
 
     # -- a deconstruction guide: the Full Build taken apart (rulebook section 11)
-    def take_apart(self, full='steps.json', parts_list_at_end=False):
+    def take_apart(self, full='steps.json', parts_list_at_end=False, leave_out=()):
         """Begin a deconstruction guide (a guide of its own: Guide(steps_file='steps-deconstruction.json')) with the Full Build as it
         ends: every part where the Full Build leaves it, parts riding on others still riding, the leads as they are routed. Its
         title page is the Full Build's (the same camera; its subtitle is this guide's `part`). remove(), unplug() and lift() then
         take it apart, as a rule the build in reverse. The Full Build's steps file is read as its guide.py last wrote it: run that
         first, and this script again after any change to it (publish.py warns when the Full Build has changed since).
         parts_list_at_end=True: the Full Build's parts list pages, as they are there, after the Completed View (the MRA's: every part
-        counted back in once the kit is apart: Lee, 19 Oct 2026)."""
+        counted back in once the kit is apart: Lee, 19 Oct 2026).
+        leave_out=[ids]: parts the Full Build put away for good, which would otherwise come back as its last view of them had them
+        (the LSM's breadboard backing, peeled off in its Step 1): left out from the start, so that Step 1 glides from the title page
+        (a put_away() would make it cut in)."""
         from check_site import steps_stamp
         if self.steps_file == 'steps.json':
             raise ValueError('take_apart(): in a guide of its own (Guide(steps_file="steps-deconstruction.json")), not in the Full Build')
@@ -881,6 +884,14 @@ class Guide:
             for w, no in (v.get('wires') or {}).items():
                 if w not in wires_now and all(e is None or e in placed for e in (routes[no].get('a'), routes[no].get('b'))):
                     wires_now[w] = routes[no]
+        stray = [i for i in leave_out if i not in placed or (base and i in base['visible'])]
+        if stray:
+            raise ValueError(f'take_apart(leave_out=): not parts the Full Build put away (shown at its end, or never shown): {stray}')
+        if leave_out:
+            placed = [i for i in placed if i not in leave_out]
+            offsets = {i: p for i, p in offsets.items() if i not in leave_out}
+            carry = {i: c for i, c in carry.items() if i not in leave_out and c['by'] not in leave_out}
+            wires_now = {w: r for w, r in wires_now.items() if r.get('a') not in leave_out and r.get('b') not in leave_out}
         if end is None or end.get('cut'):
             self.log.append(f'  NOTE: take_apart(): {full} has no plain Completed View; each part is taken as the last step that showed it had it')
         self.taken = dict(file=full, stamp=steps_stamp(data), came=came, start=views[0], routes=routes,
@@ -912,7 +923,7 @@ class Guide:
               passes through); direction=[x, y, z] and hover=mm: a straight pull by hand.
           arrows: None (one per unit), [] (none: an eye instead, say), or [dict(tail, head, normal, part)] by hand (seated mm on `part`,
               drawn where it is now). eye=[ids or dict(anchor=...)], labels=[...] (none by default), caution=, review=, inset= (on Step N:
-              the catch to release).
+              the catch to release; mark=, marks=, ghost=, side= as place()'s, and arrows=[ids], the arrows it shows).
           view_dir= / frame= / look_from=, new_camera=True: a camera chosen for this step instead of the Full Build's; flip=True;
               keep_camera=True: the step before's camera, kept (two steps on one sub-assembly in the hand: Lee, 18 Oct 2026).
           arrow_scale=k: every arrow of the step k times its size; arrow_style={id: dict(scale=, like=id2, at=[x, y, z],
@@ -1824,7 +1835,9 @@ class Guide:
                 if s.get('inset'):                                         # (on Step N here: the catch to release before the part comes off)
                     I = s['inset']
                     inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
-                                 hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption', 'arrows') if k in I})
+                                 hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption', 'arrows', 'side') if k in I},
+                                 **({'marks': [dict(at=[round(float(x), 2) for x in at], half=float(half)) for at, half in I['marks']]} if I.get('marks') else {}),
+                                 **({'ghost': {i: float(v) for i, v in I['ghost'].items()}} if I.get('ghost') else {}))   # (as a build's)
                 common = dict(caption=s['caption'], text_key=s['text_key'], review=s['review'], camera=camera, _step=si,
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}),
                               **({'reappear': True} if s.get('reappear') else {}))

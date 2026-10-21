@@ -536,6 +536,12 @@ function buildInset(view) {
     const [px, py] = project(anchorOf(it, view), camera, W, H), lx = it.x + it.w / 2, ly = it.y + it.h;
     for (let k = 1; k < 12; k++) { const qx = lx + (px - lx) * k / 12, qy = ly + (py - ly) * k / 12; marks.push([qx - 3, qy - 3, qx + 3, qy + 3]); }
   }
+  for (const a of arrowsOf(view)) {               // (nor over the step's arrows, a take-apart's cue: one of the LSM's four D11 posts', 21 Oct 2026)
+    const [tx, ty] = project(a.tail, camera, W, H), [hx, hy] = project(a.head, camera, W, H);
+    const depth = new THREE.Vector3(...a.tail).applyMatrix4(projWorld || stage.world.matrixWorld).distanceTo(camera.position);
+    const pad = Math.max(10, 2 * (a.width || 4) * H / (2 * Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * depth) + 4);   // (its head, 4 widths across)
+    for (let k = 0; k <= 12; k++) { const qx = tx + (hx - tx) * k / 12, qy = ty + (hy - ty) * k / 12; marks.push([qx - pad, qy - pad, qx + pad, qy + pad]); }
+  }
   if (marks.length && clear) marks.push([clear.left - 8, clear.top - 8, clear.right + 8, clear.bottom + 8]);   // (nor, moved, over the instructions)
   marks.push([ax - 2, ay - 2, ax + 2, ay + 2]);   // (nor over the place it shows: asked for the side where that is, with no room beside it in a
   //                                                 narrow window, it covered it, the PMG's Steps 19c - 20c at 760 px; it is then made smaller there)

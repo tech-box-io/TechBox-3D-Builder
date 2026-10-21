@@ -3,7 +3,8 @@ LSM Build Instructions (Laser Stem Matrix, Full Build: the electronics on the op
 FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND OF NOTES DONE THE SAME DAY (docs/research/lsm/lee_notes_2026-10-19.md), AND THE SECOND
 ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was done for each note); THE THIRD ROUND 20 Oct 2026
 (docs/research/lsm/lee_notes_2026-10-20.md: a new D3, D8 seated higher, the V+ wire yellow, Steps 3, 6, 28 and 32); THE TITLE
-PAGE AS LEE'S PICTURE OF 21 Oct 2026 (docs/research/lsm/lee_notes_2026-10-21.md: the box closer and to the right of the middle). Build
+PAGE AS LEE'S PICTURE OF 21 Oct 2026 (docs/research/lsm/lee_notes_2026-10-21.md: the box closer and to the right of the middle); THE
+DECONSTRUCTION, FIRST DRAFT 21 Oct 2026 (deconstruction.py -> steps-deconstruction.json; see THE DECONSTRUCTION below). Build
 instructions generated from Lee's STEP files and TechBox's published Cadasio guide for the kit
 (instructions.online/?id=19075-laser_stem_matrix_lsm_-_full_build), in the same format and with the same player as the MRA and RCC
 guides. Not for distribution. The open questions are under QUESTIONS FOR LEE below.
@@ -49,6 +50,7 @@ Commands (from the project folder), after a change to the CAD or the guide:
     .venv.nosync/bin/python "LSM Build Instructions/make_atlas.py"    # colour-atlas-lsm.json
     .venv.nosync/bin/python "LSM Build Instructions/silkscreen.py"    # decals.json (the matrix's printing and label), then build_model
     .venv.nosync/bin/python "LSM Build Instructions/guide.py"         # steps.json, parts.json, model.glb
+    .venv.nosync/bin/python "LSM Build Instructions/deconstruction.py"   # steps-deconstruction.json, from steps.json: after every guide.py
     /usr/bin/python3 tools/serve.py "LSM Build Instructions" 8805     # then http://localhost:8805/player.html
 
 THE BUILD (40 numbered steps; the published guide's 38 and its order, with the house rules applied)
@@ -88,6 +90,34 @@ THE BUILD (40 numbered steps; the published guide's 38 and its order, with the h
   passes into a part. For a moment while they change shape, two wires brush against each other twice in Step 26 (under the matrix)
   and once in Step 32 (low in the box by D4).
 
+THE DECONSTRUCTION (24 numbered steps; first draft 21 Oct 2026, Lee: "take this LSM Full Build guide and create a Deconstruction Guide
+based on it. Same principles as you used for the MRA. Remembering some things can be removed in groups (like the 3 breadboard wires,
+etc.)"; www address laser-stem-matrix-deconstruction). The Full Build in reverse, as the MRA's, RCC's and PMG's, with parts in groups:
+the 64 stems, the four D11 posts, both D9, the button's two wires, and the three breadboard wires (the LED matrix pulled off their
+connectors, then all three out of i2, i3 and b19 at once). It opens on the Full Build's title page, ends on D1 with the breadboard
+(stuck on for good, as TechBox's published take-apart ends), followed by the Full Build's parts list; its website card is the Full
+Build's. The reasons for the order and the facts behind it: docs/research/lsm/decon/plan_final.md; the review:
+docs/research/lsm/decon/review/.
+- Steps 1 - 5, from the top: the stems (a caution: disconnect the USB cable from the computer first: the box closes round its plug,
+  so it cannot come out first as the MRA's, RCC's and PMG's power cables do), D8, D7, the four posts (their tabs pushed up out of D1 from
+  underneath, a close-up of a tab, then up out of D6), D6.
+- Steps 6 - 9, the LED matrix out of the box, still wired, the Full Build's moves reversed with its wires through the Full Build's own
+  shapes: lifted and held over the box; D10 slid off it and down; carried over D4 to lie outside; both D9 out.
+- Steps 10 - 13, the walls: the box turned over (with the matrix), D5 and D3 off as they went on; the right way up, the matrix
+  carried back over D4 to beside the end where D5 was (its wires lay over D4's top edge); D4 slid off its tabs and lifted.
+- Steps 14 - 18: D2 out with the button, still wired; the USB cable unplugged (its plug's way out runs into the button until D2 is
+  out); the button's two wires unplugged; the button on its own: the nut unscrewed (a turn a beat) and off over the wires, the button
+  pushed out of D2.
+- Steps 19 - 24: the LED matrix pulled off its wires' three connectors (a close-up of them under the matrix, drawn faintly); the three
+  wires out of the breadboard together (an eye on i2 / i3 and one on b19); the 330 Ohm resistor, the capacitor, the 12 kOhm resistor,
+  the Nano Board.
+- Arrows: each the size of the matching arrow in TechBox's published LSM take-apart (measured from its data:
+  docs/research/lsm/decon/arrows/), as Lee had the PMG's set the same day ("Examine the Cadasio"); a part that comes off in stages
+  shows an arrow for each, in turn, as the PMG's: D10 (slide, then down), D3 (swing, then slide), D4 (off its tabs, then up), the
+  matrix off its connectors (pull, then lift). A close-up keeps clear of the step's arrows as well as its labels.
+- Checked: wires at rest in every view (0 problems) and in every move (only the three brief touches of the Full Build's Steps 26 and
+  32, here played backwards in Steps 12 and 6); the run-through (52 views); every arrow on screen at 1280, 1000 and 768 px wide.
+
 QUESTIONS FOR LEE
 1. The LED stem's CAD (you mentioned the acrylic stem is missing): until it comes, each stem is a plain square rod of Cadasio's size.
 2. The USB cable: the LSM's right-angle Mini-B plug (as the published guide shows it). Its leg sits exactly where the purple wire's
@@ -99,8 +129,8 @@ QUESTIONS FOR LEE
 5. D2 is now plain wood like the other walls. If the real D2 is a different (brown) material, say so and it goes back.
 6. Cards: the capacitor's polarity and the LED matrix's pins are now 3D steps with close-ups (Steps 6 and 14) in place of the
    published guide's picture cards. The Mini USB Cable and LED Stems cards are not reproduced ("63x" is on the last step).
-7. Part guides: the published LSM has Parts 1 - 4 (and 1+2, 3+4). The draft is the Full Build only; Parts can be cut from it
-   (g.chapter()) when you want them, and a deconstruction guide after that.
+7. Part guides: the published LSM has Parts 1 - 4 (and 1+2, 3+4). Parts can be cut from the Full Build (g.chapter()) when you want
+   them (the deconstruction, 21 Oct 2026, is a guide of its own).
 8. The Nano Board's place: Cadasio moves its Nano 2.3 mm sideways in the steps; here it is in rows c and g (from the published Part
    1's "Pin D12 - c16" label and the circuit), which puts every wire on the right Nano pin. Worth a check against the real kit.
 9. Step 28 (D5): D5 goes on with the box upside down (as D3 in Step 27), so its code, now in view, reads upside down. The published
@@ -123,3 +153,19 @@ QUESTIONS FOR LEE
     latch heads; Cadasio's model the same). Is there a newer D8 (or D11)?
 18. (Answered) Step 6 turned to match the capacitor picture (and Step 7 with it).
 19. (Answered) c16 keeps its ring on the hole, its leader across the red line; the other hole labels are as they were.
+20. (Deconstruction) The order rests on question 2: in the model the purple wire's pin in b19 is under the USB plug's leg, so the three
+    wires can only come out after the USB cable, which can only come out once D2 is off, which needs D4 and D5 off first. So the
+    LED matrix stays wired to the breadboard until Step 19, and is carried out over D4 (Step 8) and back (Step 12), the box turned over
+    with it outside. TechBox's published take-apart unplugs the three wires early (b19 is free there). If the real b19 pin comes out
+    with the USB plug in, the take-apart can be shorter (about 22 steps): the matrix lifted out with its wires' pins after D9, no carry
+    back, no turning the box over with the matrix outside. Which?
+21. (Deconstruction) Steps 16 and 20 have eyes on the wires' ends; the MRA's take-apart carries the Full Build's hole labels instead
+    (j5 and j16; i2, i3 and b19). Labels here too?
+22. (Deconstruction) Does the LSM kit have a Pry Tool? If so, Step 24 gets the MRA's caution, "Use the Pry Tool to carefully remove the
+    Nano Board."
+23. (Deconstruction) The arrows take the published LSM take-apart's sizes (your PMG note), and the four D11 posts have an arrow each in
+    one step (the published guide takes them two and two). Keep both?
+24. (Deconstruction) D10 comes off the matrix where it is held over the box; the published guide takes it off with the matrix laid
+    aside on its own. Keep?
+25. TechBox writes American English in the MRA's take-apart ("center"); the LSM says "grey" (the grey wire). Change to "gray" across the
+    kit (Full Build, deconstruction, hover names)?

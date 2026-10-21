@@ -1,0 +1,5 @@
+Step 6c   wire grey     and wire purple   centre lines 0.48 mm apart at 0.55, near [609.6, 895.0, 1217.9]
+Step 12c  wire grey     and wire purple   centre lines 0.24 mm apart at 0.55, near [611.1, 882.5, 1232.2]
+Step 12c  wire purple   and wire white    centre lines 0.83 mm apart at 0.60, near [640.7, 913.0, 1239.8]
+checked 22 views in motion; 3 problems
+EXIT 0 peak 370 MB

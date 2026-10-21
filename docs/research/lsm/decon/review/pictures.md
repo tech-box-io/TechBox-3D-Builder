@@ -1,0 +1,54 @@
+# The pictures of the take-apart
+
+"LSM Build Instructions/pages/steps-deconstruction/NNN.png", drawn by player/js/pages.js as the player draws each view (2000 x 1163; close-ups are framed in the corner farthest from their spot, which is pages.js's own placement, not the player's):
+
+- 000.png: Start
+- 001.png: Step 1
+- 002.png: Step 1c
+- 003.png: Step 2
+- 004.png: Step 2c
+- 005.png: Step 3
+- 006.png: Step 3c
+- 007.png: Step 4
+- 008.png: Step 4c
+- 009.png: Step 5
+- 010.png: Step 5c
+- 011.png: Step 6
+- 012.png: Step 6c
+- 013.png: Step 7
+- 014.png: Step 7c
+- 015.png: Step 8
+- 016.png: Step 8c
+- 017.png: Step 9
+- 018.png: Step 9c
+- 019.png: Step 10
+- 020.png: Step 10c
+- 021.png: Step 11
+- 022.png: Step 11c
+- 023.png: Step 12
+- 024.png: Step 12c
+- 025.png: Step 13
+- 026.png: Step 13c
+- 027.png: Step 14
+- 028.png: Step 14c
+- 029.png: Step 15
+- 030.png: Step 15c
+- 031.png: Step 16
+- 032.png: Step 16c
+- 033.png: Step 17
+- 034.png: Step 17c
+- 035.png: Step 18
+- 036.png: Step 18c
+- 037.png: Step 19
+- 038.png: Step 19c
+- 039.png: Step 20
+- 040.png: Step 20c
+- 041.png: Step 21
+- 042.png: Step 21c
+- 043.png: Step 22
+- 044.png: Step 22c
+- 045.png: Step 23
+- 046.png: Step 23c
+- 047.png: Step 24
+- 048.png: Step 24c
+- 049.png: Completed View

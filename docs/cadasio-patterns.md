@@ -136,7 +136,7 @@ Section 14 says what the in-house player does today against each rule.
 - **In-house (Lee, 2026-10-20):** a part shown on its own beside a picture TechBox supplies is turned to match the picture (the LSM's
   capacitor, Step 6: its stripe on the left and the GND leg left, as Lee's picture), its labels placed as the picture's (under the
   legs), and the step that puts it in is seen the same way round (Step 7).
-- **In-house (Lee, 2026-10-19, second round):** a close-up of something under a part draws that part faintly (about a 90% fade) rather than leaving it out, and is seen from where the detail reads (the LSM's Step 32: the matrix faint over the wires in D10's slot, seen along the slot). A picture supplied by TechBox can be the close-up (the LSM's Step 6, the Capacitor breakout picture). A close-up never covers the step's labels or eyes (Step 14).
+- **In-house (Lee, 2026-10-19, second round):** a close-up of something under a part draws that part faintly (about a 90% fade) rather than leaving it out, and is seen from where the detail reads (the LSM's Step 32: the matrix faint over the wires in D10's slot, seen along the slot). A picture supplied by TechBox can be the close-up (the LSM's Step 6, the Capacitor breakout picture). A close-up never covers the step's labels or eyes (Step 14), nor its arrows (in-house, 21 Oct 2026: the LSM deconstruction's four D11 posts, one arrow hidden behind the close-up of a tab).
 - **In-house (Lee, 2026-10-19):** a part whose way round matters gets a step of its own first, alone in the hand, its legs labelled and a close-up of its mark with a red box (the LSM's capacitor: GND (-) and +, the grey stripe), in place of the published Capacitor card; a module's pins are shown on the module itself, turned to show them, labelled as printed, with a close-up (the LSM's LED matrix, its label V- IN V+), in place of a diagram card. The model carries the printing (a decal), so it matches the photographs.
 - **In-house (Lee, 2026-10-21):** a wire's `Step Nc` may have a close-up from above of the pin it has just gone onto, the new cap (or wire end) boxed in red among those already in, where Lee asks for one or the pin cannot be made out from the step's view (the LAC's Step 39c, b9, seen from nowhere in front; the PMG's Steps 17 - 20, the 4-digit display's wires on the I/O module, asked for by Lee "similar to a breakout image you did in the LAC", and Steps 21 - 25, the dot matrix display's, "the breakout highlight of the pin location, like you did on 17-20"). Not a rule for every wire: the PMG's button wires onto the same header have none. The close-up sits on the pin's side of the model, its leader not across the module (Steps 19c - 20c); where that side holds the wire's other device, on the other side, its leader along the module's edge (Steps 21c - 25c: on the left it covered the dot matrix display, in a narrow window its header too).
 
@@ -281,6 +281,15 @@ the joysticks, the radio module and the Nano Board), the 9V battery with its ada
 around them comes out, as the build plugged them in last (the wheel motors before L6, L7 and the I/O module). A cable unplugged and removed has one arrow, on the plug that is pulled, clear of the
 cable, and none on its far end. Wood that holds a part (the motors' L4 and L5) comes off that part in the hand, and the guide ends
 on the base (L1). Its card is the Full Build's (as the MRA's).
+
+**The LSM's deconstruction (first draft, 21 Oct 2026; Lee's request as for the PMG, "like the 3 breadboard wires, etc."; not yet
+reviewed by Lee):** the Full Build in reverse, with groups (the 64 stems, the four D11 posts, both D9, the button's two wires; the three
+breadboard wires as the PMG's, the device pulled off their connectors, then the wires out of the breadboard together), and Lee's PMG
+rulings of the same day applied by analogy: each arrow the size of the matching one in TechBox's published LSM take-apart, and an arrow
+per stage, in turn. Where the power cable cannot come out first (the LSM's box closes round its plug), Step 1's caution says to
+disconnect it from the computer. A module that must stay wired while the structure round it comes off is carried out the way the Full
+Build brought it in, and back where the order needs it (the LED matrix, over D4 and back, since in the model the b19 pin is under the
+USB plug: LSM README question 20 asks Lee about a shorter order).
 
 **Lee, 2026-10-21 (the PMG's deconstruction, "same principles as you used for the MRA"):** "some things can be removed in groups
 (like the breadboard wires, four buttons, four H9 parts, etc.)": parts the build put in one at a time come off together where they
