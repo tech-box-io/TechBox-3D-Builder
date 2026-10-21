@@ -213,7 +213,8 @@ function applyState(view, poses) {
   for (const id of view.visible) stage.setPose(id, (poses || view.offsets)[id] || ZERO);
   drawWires(flat(view) ? {} : view, poses || view.offsets);
 }
-// The right edge of the title page's logo and words, in the picture's pixels (they are a fixed size on the page).
+// The right edge of the title page's logo and words, in the picture's pixels (the logo in the top left corner, the words in the
+// bottom left: they grow and shrink with the window, between a smallest and a largest size).
 function titleRight() {
   const c = canvasEl.getBoundingClientRect(), range = document.createRange();
   let r = 0;
@@ -232,9 +233,8 @@ function titleRight() {
 // each camera (`fit`: left and right edges, top and bottom, in half frame heights, with the camera moved aside by each of fit.s
 // radii), and the player takes the first that keeps the parts within the frame's left, right and top edges (`whole`: the bottom
 // too, for the website's card picture; the guide's own may cut a cable off at the bottom, as Lee's picture of the RCC's title
-// page does), on the title page moved aside just enough to clear the logo and title, which do not shrink with the window
-// (clear_title: the RCC's title page punched in, as Lee asked on 17 Oct 2026, yet right in the LMS's frame).
-// In a window up to 600 px wide the title sits above the model, not beside it.
+// page does), on the title page moved aside just enough to clear the logo and title (clear_title: the RCC's title page punched in,
+// as Lee asked on 17 Oct 2026, yet right in the LMS's frame). In a window up to 600 px wide the model is not moved for them.
 function cameraFor(view, aspect, whole = false) {
   const c = view.camera, list = [...(!c.min_aspect || aspect >= c.min_aspect ? [c] : []), ...[].concat(c.otherwise || [])];
   if (!list.length) return {camera: c, shift: null};

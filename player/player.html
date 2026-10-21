@@ -25,13 +25,16 @@ select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#5560
 #resetview{position:fixed;top:14px;right:54px;background:none;border:0;cursor:pointer;z-index:5}
 .nofs #resetview{right:14px}.nofs #review{right:56px}
 @media (min-width:701px){.reviewing #instructions{max-width:min(560px,70vw,calc(100vw - 236px))}}   /* (below 701 px the caption is under the buttons) */
-#start{position:fixed;left:24px;top:24px;bottom:calc(var(--barh) + 24px);width:min(46%,520px);display:flex;flex-direction:column;justify-content:center;pointer-events:none}
-#logo{position:absolute;top:0;left:0;background:#00b0ef;color:#fff;font:900 34px/1 Impact,"Arial Black",sans-serif;letter-spacing:1px;padding:10px 18px;border-radius:12px}
-#logo.image{position:static;background:none;padding:0;border-radius:0;width:min(100%,360px);margin:0 0 18px}
+/* the title page: the logo in the top left corner, the title, part and copyright in the bottom left, clear of the model in the
+   middle; both grow and shrink with the window (or the LMS's frame), between a smallest and a largest size (Lee, 21 Oct 2026) */
+#start{position:fixed;left:24px;top:24px;right:24px;bottom:calc(var(--barh) + 16px);pointer-events:none}
+#logo{position:absolute;top:0;left:0;background:#00b0ef;color:#fff;font:900 clamp(20px,min(3.4vw,5.5vh),34px)/1 Impact,"Arial Black",sans-serif;letter-spacing:1px;padding:.3em .53em;border-radius:12px}
+#logo.image{background:none;padding:0;border-radius:0;width:clamp(110px,min(24vw,30vh),300px)}
 #logo.image img{display:block;width:100%;height:auto}
-#start h1{font:800 34px/1.1 "Arial Narrow",Arial,sans-serif;margin:0;color:#585858}
-#start h2{font:700 18px Arial;margin:4px 0 6px;color:#585858}
-#start small{font-size:11px;color:#333}
+#titleblock{position:absolute;left:0;bottom:0;max-width:min(60%,520px)}
+#start h1{font:800 clamp(18px,min(3.2vw,5.2vh),34px)/1.1 "Arial Narrow",Arial,sans-serif;margin:0;color:#585858}
+#start h2{font:700 clamp(12px,min(1.7vw,2.8vh),18px) Arial;margin:.25em 0 .35em;color:#585858}
+#start small{display:block;font-size:clamp(9px,min(1.05vw,1.7vh),11px);color:#333}
 /* the step's instructions: a box, with a button that reads them aloud; a caution under it when the step has one */
 #instructions{position:fixed;left:16px;top:14px;max-width:min(560px,70vw);display:flex;flex-direction:column;gap:8px;z-index:3}
 #caption{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.94);border:2px solid var(--blue);border-radius:10px;padding:8px 8px 8px 14px;font-size:18.4px;line-height:1.35}
@@ -94,7 +97,7 @@ select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#5560
 #loading{position:fixed;inset:0;display:grid;place-items:center;font-size:18px;color:#555;background:#fff;z-index:9}
 @media (max-width:700px){#instructions{top:46px;right:16px;max-width:none}}
 @media (max-width:420px){#caption{font-size:17.2px}.caution{font-size:15.5px}}
-@media (max-width:600px){:root{--barh:72px}#start{justify-content:flex-start;padding-top:64px;width:auto;right:24px}#start h1{font-size:24px}#logo{font-size:24px}#cardtext{font-size:19px}#cardbox.list #cardtext{font-size:16px}#cardbox{padding:18px 48px 18px 20px}select{font-size:16px}.rb.big{width:48px;height:48px}#bar{gap:8px;padding:0 8px}#gridwrap{padding:12px 12px 12px 12px}#gridclose{right:14px;top:58px}#partsview{padding:58px 12px 12px}}
+@media (max-width:600px){:root{--barh:72px}#start{left:16px;top:16px;right:16px}#titleblock{max-width:100%}#cardtext{font-size:19px}#cardbox.list #cardtext{font-size:16px}#cardbox{padding:18px 48px 18px 20px}select{font-size:16px}.rb.big{width:48px;height:48px}#bar{gap:8px;padding:0 8px}#gridwrap{padding:12px 12px 12px 12px}#gridclose{right:14px;top:58px}#partsview{padding:58px 12px 12px}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
 <link rel="modulepreload" href="./vendor/three/three.module.min.js">
@@ -103,7 +106,7 @@ select{flex:1;min-width:0;height:44px;font-size:20px;font-weight:600;color:#5560
 <main id="main" aria-label="Build guide">
 <div id="stage"></div>
 <svg id="overlay" aria-hidden="true"></svg>
-<div id="start" hidden><div id="logo">TECHBOX</div><h1 id="title"></h1><h2 id="subtitle"></h2><small id="copyright"></small></div>
+<div id="start" hidden><div id="logo">TECHBOX</div><div id="titleblock"><h1 id="title"></h1><h2 id="subtitle"></h2><small id="copyright"></small></div></div>
 <div id="instructions" hidden>
   <div id="caption" hidden><p id="captiontext"></p>
     <button type="button" class="speak" id="speak" aria-pressed="false" aria-label="Read the instructions aloud" title="Read aloud"><svg class="say" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06A9 9 0 0 0 14 3.23z"/></svg><svg class="stop" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg></button></div>
