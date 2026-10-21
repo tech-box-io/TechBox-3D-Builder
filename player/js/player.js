@@ -733,6 +733,8 @@ function go(i, animate = true) {
   $('caption').hidden = !showCaption; $('captiontext').textContent = to.caption || '';
   $('caution').hidden = !(to.caution && !flat(to)); $('cautiontext').textContent = to.caution || '';
   $('instructions').hidden = $('caption').hidden && $('caution').hidden;
+  $('cautionbtn').hidden = !(to.caution && !flat(to));
+  fitCaption();
   $('flag').hidden = !(to.review && $('rv').checked); $('flag').textContent = to.review ? 'Review: ' + to.review : '';
   stage.setLeadLines([]); stage.setArrows([]); stage.setMarks([]); svg.replaceChildren(); callouts = []; insetLeader = null; $('inset').hidden = true; tip.hidden = true; select(null);
   if (!sameView) marks = [];                 // (a resize redraws the same view: its picked dots stay)
@@ -1219,6 +1221,43 @@ addEventListener('keydown', e => {
   key();
 });
 addEventListener('resize', () => { stage.resize(); go(cur, false); });
+
+// ---------- in a frame (the LMS's embed), not full screen: the instruction on one line, the whole of it on request, and the caution as
+// its icon, opened on request (Lee, 21 Oct 2026, with TechBox's curriculum director); what the learner opens stays open from step
+// to step. Full screen (the guide's own button, an iPad included) or the guide on a page of its own shows both whole, as before.
+// ?embed=1 shows a guide so outside a frame, for checking. The announcement and reading aloud always give the whole of both.
+let captionOpen = false, cautionOpen = false;
+function setCompact() {
+  const inFrame = params.get('embed') === '1' || (() => { try { return window.top !== window.self; } catch (e) { return true; } })();
+  const was = document.documentElement.classList.contains('compact');
+  document.documentElement.classList.toggle('compact', inFrame && !document.fullscreenElement);
+  fitCaption();
+  if (was !== document.documentElement.classList.contains('compact') && views[cur]) relayout();   // (the size may have changed first)
+}
+function fitCaption() {
+  const compact = document.documentElement.classList.contains('compact'), c = $('caption'), t = $('captiontext');
+  $('caution').classList.toggle('open', compact && (cautionOpen || c.hidden));   // (no instruction box to hold its icon: the caution whole)
+  $('cautionbtn').setAttribute('aria-expanded', String(cautionOpen));
+  const say = (id, text) => { $(id).title = text; $(id).setAttribute('aria-label', text); };
+  say('cautionbtn', cautionOpen ? 'Caution: hide it' : 'Caution: show it');
+  c.classList.remove('open');                // (the chevron only where the instruction does not fit on its line)
+  const over = compact && !c.hidden && t.scrollWidth > t.clientWidth + 1;
+  c.classList.toggle('open', compact && captionOpen);
+  $('captionmore').hidden = !over;
+  $('captionmore').setAttribute('aria-expanded', String(captionOpen && over));
+  say('captionmore', captionOpen ? 'Show the instruction on one line' : 'Show the whole instruction');
+}
+function relayout() {                        // (labels and a close-up keep clear of the instructions: place them again)
+  const view = views[cur];
+  if (anim || flat(view)) return;
+  if (view.kind === 'hover' || view.kind === 'done') buildCallouts(view);
+  if (view.inset) buildInset(view);
+  stage.invalidate();
+}
+$('captionmore').onclick = () => { captionOpen = !captionOpen; fitCaption(); relayout(); };
+$('cautionbtn').onclick = () => { cautionOpen = !cautionOpen; fitCaption(); relayout(); };
+document.addEventListener('fullscreenchange', setCompact);
+setCompact();
 // The page that embeds the player (and only that page) may ask it to jump to a step.
 addEventListener('message', e => { if (e.source === window.parent && e.data && e.data.type === 'techbox-go' && Number.isInteger(e.data.index)) go(e.data.index, false); });
 

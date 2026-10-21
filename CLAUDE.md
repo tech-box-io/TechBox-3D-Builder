@@ -258,7 +258,10 @@ the same way, and publish warns about part pictures drawn from another model).
 - **The embed** (one guide per LMS page, the address with its closing slash, no `?step=`):
   `<iframe src="https://models.tech-box.io/<guide>/" title="<guide title>" allow="fullscreen" allowfullscreen loading="lazy"
   style="width:100%;height:min(80vh,720px);min-height:420px;border:0"></iframe>`. If the LMS ever adds a `sandbox`, it needs
-  `allow-scripts allow-same-origin`. Only the LMS may frame a guide, and nothing may frame the site's own pages, so an embed
+  `allow-scripts allow-same-origin`. In a frame, and not full screen, the player shows each step's instruction on one line with a
+  chevron to open it whole, and its caution as an icon, opened on request; what the learner opens stays open from step to step (Lee,
+  21 Oct 2026, with TechBox's curriculum director). Full screen (the guide's own button, an iPad's included), or the guide on its
+  own page, shows both whole as before. `?embed=1` shows a guide that way outside a frame, for checking (`/<guide>/?embed=1`). Only the LMS may frame a guide, and nothing may frame the site's own pages, so an embed
   can only ever show the one guide it names: render.yaml sends `X-Frame-Options: DENY` on every path and, for each guide, a
   `Content-Security-Policy: frame-ancestors <embed_origins>` on `/<guide>` and `/<guide>/*` (written by site_pages.py from
   `guides.json` between its "guide framing" lines; browsers obey the CSP over X-Frame-Options). Never put a CSP rule on `/*`:
