@@ -128,6 +128,9 @@ Section 14 says what the in-house player does today against each rule.
 **Pictures**
 - Any explanatory picture is a framed inset: white rounded rectangle, 5 px `#7fdbff` border, blue leader and ring to the feature, thin red rectangles inside marking the exact detail.
 - A real product photo with the pin names boxed, on a module's section card. A close-up render in the guide's own style on a step (a hidden face, a latch to release, a result to check).
+- **In-house (Lee, 2026-10-20):** a part shown on its own beside a picture TechBox supplies is turned to match the picture (the LSM's
+  capacitor, Step 6: its stripe on the left and the GND leg left, as Lee's picture), its labels placed as the picture's (under the
+  legs), and the step that puts it in is seen the same way round (Step 7).
 - **In-house (Lee, 2026-10-19, second round):** a close-up of something under a part draws that part faintly (about a 90% fade) rather than leaving it out, and is seen from where the detail reads (the LSM's Step 32: the matrix faint over the wires in D10's slot, seen along the slot). A picture supplied by TechBox can be the close-up (the LSM's Step 6, the Capacitor breakout picture). A close-up never covers the step's labels or eyes (Step 14).
 - **In-house (Lee, 2026-10-19):** a part whose way round matters gets a step of its own first, alone in the hand, its legs labelled and a close-up of its mark with a red box (the LSM's capacitor: GND (-) and +, the grey stripe), in place of the published Capacitor card; a module's pins are shown on the module itself, turned to show them, labelled as printed, with a close-up (the LSM's LED matrix, its label V- IN V+), in place of a diagram card. The model carries the printing (a decal), so it matches the photographs.
 
@@ -188,8 +191,9 @@ Section 14 says what the in-house player does today against each rule.
 - **In-house (Lee, 2026-10-20): wires seen together are clearly different colours.** Where the published colours are too alike, one
   is changed (the LSM's white jumper drawn yellow: beside the published light grey it was "very close"), in every step, its captions
   and its name on hover too.
-- **In-house (Lee, 2026-10-20): a label does not cover a red lead line.** Where a hole label's ring and leader would lie over the end
-  of a lead line that ends in the same hole, the leader stops beside the hole, without its ring (the LSM's c16, Step 3).
+- **In-house (Lee, 2026-10-20): a hole label's leader crosses a red lead line, never runs along it.** Where both end on one hole, the
+  label keeps its ring on the hole and its leader comes in from the side, at an angle to the lead line (the LSM's c16, Step 3; a first
+  try that stopped the leader beside the hole without its ring was not wanted).
 - **In-house (Lee, 2026-10-19): wires from one ribbon stay a ribbon**, side by side and apart only at their ends, rather than spreading out on their own ways ("somewhat confusing to look at"); neither crosses over the other's hole, so that a pin pushed in after its neighbour never comes down through it (the LSM's white and grey wires, i2 and i3).
 - **In-house (Lee, 2026-10-19): a wire that a part slides along lies dead straight there**, past where the part comes in (the LSM's matrix wires along under its edge, past where D10 comes up and slides along under them).
 - **In-house (Lee, 2026-10-19): a wired socket going onto a module's pin is shown with the module held so that its pin and the wire's other end, in the breadboard, are seen together**: the pin's label, the hole's label, an eye on the socket (the LSM's LED matrix held upright over the breadboard, Steps 15 - 17).

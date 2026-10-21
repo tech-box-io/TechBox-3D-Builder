@@ -50,9 +50,10 @@ Commands (from the project folder), after a change to the CAD or the guide:
 
 THE BUILD (40 numbered steps; the published guide's 38 and its order, with the house rules applied)
 - Steps 1 - 9, the breadboard: backing peeled off; onto D1; the Nano Board in rows c and g, columns 2 - 16, USB socket at column 16
-  (pin D12 in c16, as Part 1 of the published guide has it; c16's leader stops beside the hole, clear of its lead line); the 12 kOhm
-  resistor's legs bent, into h3 and h16; the capacitor on its own, its legs labelled VCC (+) and GND (-), one each side, with Lee's
-  capacitor picture as the close-up, then into j2 and j3, stripe in j3; the 330 Ohm resistor's
+  (pin D12 in c16, as Part 1 of the published guide has it; c16's leader comes in from the side, across its red lead line, not along
+  it); the 12 kOhm resistor's legs bent, into h3 and h16; the capacitor on its own, turned as Lee's capacitor picture shows it (stripe
+  and GND leg on the left), its legs labelled GND (-) and VCC (+) underneath, with the picture as the close-up, then into j2 and j3,
+  stripe in j3, seen the same way round; the 330 Ohm resistor's
   legs bent, into a11 and a19.
 - Steps 10 - 17, the LED matrix's wires: the three-wire ribbon's ends pulled apart; the yellow, grey and purple pins into i2, i3 and
   b19, one per step (i2 and i3 from Lee's framing; the yellow and grey wires stay side by side as a ribbon, leaving their pins away
@@ -115,7 +116,5 @@ QUESTIONS FOR LEE
 17. (Third round) D8 is 3.17 mm thick in the CAD, as the first D3 was, and its slots are 5.5 mm long, while the D11 posts leave 3.0 mm
     and their necks are 7.9 mm long: D8 sits 0.19 mm into the ledges and 1.2 mm into each post beside its slot (out of sight under the
     latch heads; Cadasio's model the same). Is there a newer D8 (or D11)?
-18. (Third round) Step 6: the capacitor picture is a mirror of the 3D view, and with GND (-) on the right it sits on the left, its leader
-    crossing the can. Turn the view to match the picture?
-19. (Third round) h3 (Step 5), a19 (Step 9), j2 and j3 (Step 7): their label rings cross the end of the red lead line as c16's did.
-    Change those as c16?
+18. (Answered) Step 6 turned to match the capacitor picture (and Step 7 with it).
+19. (Answered) c16 keeps its ring on the hole, its leader across the red line; the other hole labels are as they were.

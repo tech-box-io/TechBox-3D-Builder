@@ -288,10 +288,10 @@ g.place('Press the breadboard, sticky side down, onto D1 between its corner mark
 # column 16 (pin D12 in c16, as Part 1 of the published guide has it).
 NANO_PINS = [[ROW_X[r], 865.9, COL1_Z + (c - 1) * PITCH] for r in 'cg' for c in (2, 16)]
 g.place('Press the Nano Board into the breadboard: its pins in rows c and g, from column 2 to column 16, with its USB socket at column 16.',
-        # (c16's leader ends just to the right of the hole as seen, without a ring, so that it no longer covers the end of c16's red
-        # lead line: Lee, 20 Oct 2026)
+        # (c16's leader ends on the hole, where c16's red lead line ends, with its ring, and comes in from the right, across the red line
+        # rather than along it: Lee, 20 Oct 2026)
         move=[NANO], direction=[0, 1, 0], hover=35,
-        labels=[dict(id=BREADBOARD, text='c16', anchor=(np.array(hole('c16')) + [-1.06, 0.0, 1.06]).round(2).tolist(), ring=False), hole_label('g2')],
+        labels=[dict(hole_label('c16'), side='right'), hole_label('g2')],
         lines_at=[[p, [p[0], BOARD_TOP, p[2]]] for p in NANO_PINS],
         view_dir=[-0.5792, 0.5736, -0.5792], frame=([638.6, 888.0, 1192.0], 50.0))   # (closer, for the holes: Lee, 19 Oct 2026)
 # The resistors: each one's legs bent on its own first, then into its holes.
@@ -306,18 +306,22 @@ g.seat('Push the 12 kΩ resistor into h3 and h16.', [R12K], direction=[0, 1, 0],
 # so that the stripe and j3 show.
 STRIPE = [653.57, 878.67, 1174.02]                                  # the middle of the grey stripe (it faces +Z, towards j3)
 CAP_LEG = dict(gnd=[652.62, 868.0, 1172.97], plus=[652.62, 868.0, 1170.47])   # its legs, low down: into j3 and j2
-CAP_VIEW = [0.346, 0.574, 0.742]                                   # (25 degrees round from j3's side: the stripe and j3 both show)
+# Both steps from 35 degrees round from j3's side, as Lee's picture shows a capacitor (Lee, 20 Oct 2026): the stripe on the left of
+# the can, the GND leg on the left and VCC on the right (the picture has the stripe a little further round from the legs than the
+# CAD has it, so the legs are seen closer together than in the picture); Step 6 from 15 degrees up, as the picture, Step 7 from 35.
+CAP_VIEW = [0.4698, 0.5736, 0.671]
+CAP_LOOK = [0.554, 0.2588, 0.7912]
 g.place('The capacitor has a negative (-) leg and a positive (+) leg. The grey stripe down its side marks the negative leg, which goes to GND.',
-        show=[CAP], staged=True, single=True, lines=False, view_dir=[-0.646, 0.259, 0.718], frame=([653.6, 874.0, 1172.0], 13.0),   # (the stripe and both legs)
-        # (GND (-) to the right of its leg, VCC (+) as Lee's picture names it, to the left of its own: Lee, 20 Oct 2026)
-        labels=[dict(id=CAP, text='GND (-)', anchor=CAP_LEG['gnd'], side='right'), dict(id=CAP, text='VCC (+)', anchor=CAP_LEG['plus'])],
+        show=[CAP], staged=True, single=True, lines=False, view_dir=CAP_LOOK, frame=([653.6, 874.0, 1172.0], 13.0),   # (the stripe and both legs)
+        # (GND (-) and VCC (+) under their legs, as Lee's picture has them: Lee, 20 Oct 2026)
+        labels=[dict(id=CAP, text='GND (-)', anchor=CAP_LEG['gnd'], side='down-left'), dict(id=CAP, text='VCC (+)', anchor=CAP_LEG['plus'], side='down-right')],
         eye=[dict(id=CAP, anchor=STRIPE)],
-        # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card)
-        inset=dict(target=STRIPE, image='capacitor-card.webp', caption='The grey stripe marks the GND (-) leg',
+        # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card; its leader to the side of the can it is on)
+        inset=dict(target=[656.3, 879.5, 1172.5], image='capacitor-card.webp', caption='The grey stripe marks the GND (-) leg',
                    alt='A capacitor: the grey strip down its side is over the GND (-) leg; the other leg is VCC (+)'))
 g.seat('Push the capacitor into j2 and j3, its grey stripe in j3.', [CAP], direction=[0, 1, 0], hover=29,
        labels=[hole_label('j3'), hole_label('j2')], lines_at=[[652.5, 863.6, 1170.6], [652.5, 863.6, 1173.1]],   # (the legs' tips: Lee, 19 Oct 2026)
-       eye=[dict(id=CAP, anchor=STRIPE)],
+       eye=[dict(id=CAP, anchor=STRIPE, side='near-left')],   # (beside the stripe, which is on the left of the can as seen)
        caution="The capacitor's grey stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND).",
        view_dir=CAP_VIEW, frame=([652.6, 885.0, 1172.0], 28.0))
 g.place('Bend both legs of the 330 Ω resistor (orange, orange, black, black, brown) straight down.', show=[R330], staged=True, lines=False, frame=(mid(R330).tolist(), 18.0), view_dir=DIAG,
