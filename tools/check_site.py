@@ -266,7 +266,8 @@ def header_rules(text):
         if m.group(1) == 'path' and cur:
             rules.append(cur)
             cur = {}
-        cur[m.group(1)] = m.group(2).strip().strip('"\'')
+        v = m.group(2).strip()                     # (one pair of quotes off, not every quote: "default-src 'self'" keeps its own)
+        cur[m.group(1)] = v[1:-1] if len(v) >= 2 and v[0] == v[-1] and v[0] in '"\'' else v
     if cur:
         rules.append(cur)
     return [(r.get('path'), r.get('name'), r.get('value')) for r in rules if 'path' in r and 'name' in r]

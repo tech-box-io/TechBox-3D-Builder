@@ -211,6 +211,7 @@ the same way, and publish warns about part pictures drawn from another model).
     python3 tools/publish.py <guide> --note "what changed"   # freeze the guide as its next release and put it in site/<guide>/
     python3 tools/publish.py --kit <kit> --note "..."        # the same for every guide of a kit that has changed (the rest are left)
     python3 tools/check_site.py                              # site/ is exactly the releases on record (Render runs this before each deploy)
+    python3 tools/check_live.py --wait 15                    # after a push to live: the website as learners get it (releases, headers)
     /usr/bin/python3 tools/serve.py site                     # the site as Render serves it: http://localhost:8797/<guide>/
     python3 tools/publish.py <guide> --restore r3            # put an earlier release back (a roll-back); --take-down removes the guide
     python3 tools/publish.py --list                          # which release each guide has on the website
@@ -253,15 +254,19 @@ the same way, and publish warns about part pictures drawn from another model).
   `git push origin main:live` (Render
   deploys the branch `live`; `main` can be pushed at any time as a backup). If Lee declines, `--restore` the previous release
   (or `--take-down`) before committing. Push outside lesson hours: a learner who has a guide open during a deploy could get a
-  mix of old and new files.
+  mix of old and new files. Render deploys a few minutes after the push; `python3 tools/check_live.py --wait 15` then checks the
+  website as learners get it, until two checks in a row pass: each published guide byte for byte the release in site/, and every
+  page's headers as render.yaml says (who may frame it). `--base http://localhost:8797` checks `serve.py site` the same way.
 - **Caching:** every file is served `Cache-Control: no-cache` (render.yaml): browsers re-check each file when a guide opens
   (an unchanged file costs a short "not modified" answer), so a release reaches the next learner who opens the guide and there
   is never a cache to clear. Render needs no routine upkeep: deploys follow the push, the HTTPS certificate renews itself.
 - **On Render:** the GitHub repository must be private, with Render's GitHub App limited to it. Do not use Render's Rollback
   button (it switches automatic deploys off): roll back with `--restore` and push. A header deleted from render.yaml must also
-  be deleted in Render's dashboard. **A new LMS address** (a staging host, a new domain) goes into `guides.json`
+  be deleted in Render's dashboard. Render applies render.yaml's headers only when the Blueprint is synced (the Blueprint's page
+  in the dashboard, Manual Sync): on 21 Oct 2026 Parts 1 - 3 and both deconstructions went out without their framing header,
+  so the LMS could not show them, until Lee synced it; `check_live.py` names any header that differs. **A new LMS address** (a staging host, a new domain) goes into `guides.json`
   `embed_origins` (lower case, `https://`, no path), then `python3 tools/site_pages.py` (it rewrites render.yaml's rules and
-  `assets/frame-guard.js`), commit, push: no guide needs publishing again.
+  `assets/frame-guard.js`), commit, push, sync the Blueprint: no guide needs publishing again.
 - **The first deploy, in stages** (so that Render, the domain and the headers are tried with no guide online): create the GitHub
   repository private and empty (no README, licence or .gitignore), push `main`; push the site as it is, with no guide in it, to
   `live` (`git push origin main:live`: its landing page says "No guides are published yet"); in Render, New > Blueprint from this
@@ -470,7 +475,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     releases/                  every release ever published, frozen, with its record (never uploaded)
     render.yaml                the Render static site's configuration
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
-    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
+    tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, check_live.py (the live website against site/ and render.yaml), site_pages.py,
                                bundle.py, make_pdf.py (a guide as a 2D PDF), step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), motioncheck.py
                                (wires during each move, 19 moments or --moments N, against every part and each other, poses paced as the player paces them; --trace names the bits of the two shapes blended), wirecheck.py
                                (wires passing into parts or into each other, view by view, sampled every 0.2 mm); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
