@@ -631,7 +631,7 @@ class Guide:
         start_view: the title page's camera, when it should differ from the finished model's view: dict(azimuth=,
         elevation=, zoom=) (zoom < 1 is closer), or exactly dict(dir=, target=, radius=, shift=) (shift: the sideways move, in
         radii, the player prefers among framings that show the model as big; it moves the camera, so the model is seen from a
-        little round: the PMG's turns dir back to keep its look; 0 for a camera taken from a screenshot).
+        little round, so a camera meant to keep its look must turn dir back; 0 for a camera taken from a screenshot).
         min_aspect: the narrowest frame (width / height) that camera suits; on narrower ones the player uses the finished
         model's camera instead, or otherwise=dict(dir=, target=, radius=, shift=) if given. otherwise=[camera, ...] (closest
         first) instead: the generator works out where the parts reach on screen with each of them and with the finished

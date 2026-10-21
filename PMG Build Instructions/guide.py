@@ -1153,8 +1153,8 @@ _wires_42 = {**{w: [_spun_matrix.get(w, _bench_wires[w])] + [_held_wires[w]] * (
 assert all(len(x) == len(WAY_42) for x in [*_ride.values(), *_wires_42.values()])
 # Lee, 21 Oct 2026, after round 4: "For Step 42, let's make an exception for this step only ... let's do a fade and reappear in final
 # position transition, since the wiring is such a mess, and see how that looks." The module, all it carries, the USB cable's A end and
-# every wire fade out where they lie on the bench and fade in where Step 42 leaves them (`reappear`). False plays round 4's way again
-# (WAY_42, above), kept until Lee has seen this.
+# every wire fade out where they lie on the bench and fade in where Step 42 leaves them (`reappear`). Lee, having seen it: "Let's keep
+# the fade on 42." False would play round 4's way again (WAY_42, above: its shapes are still the ones the fade ends on).
 STEP42_REAPPEAR = True
 if STEP42_REAPPEAR:
     _ride = {MODULE: MODULE_HELD, USB_A: ZERO}
@@ -1224,15 +1224,14 @@ g.place('Fit H14 over the 4-digit display: set its two bottom tabs down onto the
         inset=dict(target=H14_TABS[0], dir=[0.15, 0.97, -0.2], radius=15.0, mark=6.0,       # (from above: the tab is behind the LEDs' top edge)
                    alt="Close-up of H14's tab resting in the top edge of the dot matrix display."),
         view_dir=[-0.65, 0.6, -0.46], frame=([552.0, 975.0, 1290.0], 78.0))
-# The Completed View: the finished game from the front, on the student's right (as published), framed on the case and its displays.
-g.end_view = dict(dir=[-0.7157, 0.5739, 0.398], target=[532.0, 935.0, 1292.0], radius=112.0)
-# The title page as it was (pinned in Lee's second round: the dot matrix's longer header arms widened the model's bounds by 4 mm),
-# the model to the right of the middle, as the MRA's (Lee, 21 Oct 2026: it sat left of it): shift, in radii, the way the player
-# prefers among frames that show the model as big (its middle 59 - 67% across in wide windows). The player moves the camera aside, so
-# the direction is turned back by the 16.5 degrees that moves it round the model (measured in the player): the model is seen from
-# exactly where it was in every landscape window (a review, 21 Oct: unturned, H11 and the cable's loop went out of sight). A phone held
-# upright, where the model fills the width and is not moved aside, sees it 12.5 degrees round. Was dir=[-0.5997, 0.5299, 0.5997].
-g.start_view = dict(dir=[-0.3999, 0.546, 0.7362], target=[574.4, 947.3, 1290.5], radius=150.5, shift=0.7)
+# The title page and the Completed View: one camera, solved from Lee's screenshot of the title page (21 Oct 2026: "On the starting
+# view / completed view, let's go for this camera position / zoom for the PMG"), the finished game from the front, on the student's
+# right, seen a little lower than before; not moved aside (shift=0), so it is seen from exactly that direction in every window.
+# Were: title page dir=[-0.3999, 0.546, 0.7362], target=[574.4, 947.3, 1290.5], radius=150.5, shift=0.7 (Lee's fifth round, moved
+# right); Completed View dir=[-0.7157, 0.5739, 0.398], target=[532.0, 935.0, 1292.0], radius=112.0.
+LEE_HERO = dict(dir=[-0.7723, 0.4726, 0.4246], target=[522.7, 912.3, 1235.3], radius=113.6)
+g.start_view = dict(LEE_HERO, shift=0)
+g.end_view = dict(LEE_HERO)
 # ================================================================ THE CASE (end)
 
 g.build()

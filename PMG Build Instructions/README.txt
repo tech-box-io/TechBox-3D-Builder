@@ -1,7 +1,7 @@
 PMG Build Instructions (Piano Memory Game, Full Build: the electronics wired on the bench, then the wooden case with the electronics
 fitted into it)
 
-FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct, the FOURTH and FIFTH on 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
+FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct, the FOURTH, FIFTH and SIXTH on 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
 Cadasio Build.STEP") and TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-piano_memory_game_pmg-full_build),
 in the same format as the MRA and RCC guides, with the same player. Not for distribution. Open questions are yellow Review notes on
 their steps (in the kit's player; the website copy leaves Review notes out) and are listed at the end of this file.
@@ -59,8 +59,8 @@ THE BUILD (48 steps, in the published guide's order)
   carried over the case and held in front, a beat for each (Step 46: the USB cable moves out over its wires), then hung on the hooks
   of H11 and H12 (Step 47).
 - Step 48: H14 over the 4-digit display: its two bottom tabs set down onto the top edge of the dot matrix display (lead lines and a
-  close-up on them), then its top swung in. The Completed View shows the game from the front, on the student's right, as the title
-  page does.
+  close-up on them), then its top swung in. The Completed View shows the game from the front, on the student's right, with the
+  title page's camera (Lee's screenshot: sixth round).
 
 LEE'S FIRST ROUND (19 Oct 2026; docs/research/pmg/round1_plan.md has the list and how each was done)
 Step numbers in Lee's notes are the first draft's: from its Step 3 on, the new number is one higher, and its Step 43 (pick up the
@@ -292,6 +292,22 @@ LEE'S FIFTH ROUND (21 Oct 2026, after the fourth)
   sizes; the title page at 1920 x 1000, 1440 x 900, 1440 x 714, 1000 x 634, 830 x 460, 760 x 720 and 375 x 812; the run-through on all
   99 views in the kit and as published to the test website (http://localhost:8799, release r10); and every other kit's run-through with
   the changed player (MRA 211 views and its deconstruction 151, RCC 61 and 42, LAC 116, LSM 82: no problems).
+
+LEE'S SIXTH ROUND (21 Oct 2026, after the fifth)
+- The title page and the Completed View: one camera, solved from Lee's screenshot of the title page ("On the starting view /
+  completed view, let's go for this camera position / zoom"): the game from the front, on the student's right, a little lower than
+  before (dir [-0.7723, 0.4726, 0.4246], target [522.7, 912.3, 1235.3], radius 113.6), not moved aside, so it is seen from exactly
+  that direction in every window. In a window the shape of Lee's the model lands where the screenshot has it (across 40 - 79%, down
+  11 - 89% of the picture above the bar); 59 - 66% across in landscape windows, 78% of the height; on a phone held upright it fills
+  the width. The Completed View has no logo or title, but the same camera frames it the same way: the model right of the middle there
+  too. The fifth round's shift and turned-back direction are gone. The website's card picture is made again from the new Completed
+  View (cut to the model, so it is centred there).
+- Step 42: Lee keeps the fade ("Let's keep the fade on 42"). Round 4's way is still in guide.py behind STEP42_REAPPEAR (its shapes
+  are the ones the fade ends on); the guide is unchanged there.
+- Checked: views compared with the guide before this round: only the title page's and the Completed View's cameras differ; both
+  views at 1920 x 1000, 1440 x 900, 1000 x 604 (Lee's window), 1000 x 634 in an LMS frame (?embed=1), 760 x 720 and 375 x 812 (the
+  logo and title clear); the run-through on all 99 views in the kit and as published to the test website (http://localhost:8799,
+  release r11).
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
