@@ -99,7 +99,8 @@ LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs
   with a reach; chosen per step clear of each other: round2/labels.md).
 - Lee's cameras, solved from his screenshots to the pixel (round2/cameras.md): Steps 16 - 18, 30 - 32, 33 - 34, 49 (F8's label up and to
   its right). b9 (Step 39) shows from no direction in front (the cameras of Steps 14, 20, 21 and 38 already show their holes whole,
-  from the first round), so Step 39c now has a close-up of it from above, the blue wire's pin in it.
+  from the first round), so Step 39c now has a close-up of it from above, the blue wire's pin in it; Step 38c the same close-up of b8,
+  the teal wire's pin in it (Lee, later the same day).
 - Wires going in through others: the white jumper (Step 13) is a low arch, and it and the dark red (Step 14) come in low from the front,
   5 mm up, under the purple and blue; the potentiometer's black lead (Step 32) runs under the tan's hump and is held 5 mm up; the LCD's
   GND and VCC wires go into other holes of the same rails (k = +2, +4: z 1290, 1295), clear of the green and black jumpers that lean over
@@ -115,7 +116,9 @@ LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs
 - The USB cable centred on both plugs (its ends came from the rim of the CAD's end faces).
 - Step 50: the LCD is stood on its header end, tips up and over it to stand upright out in front, comes in, and slides along its own length
   into F8's slots (it went in sideways, through F8's front); closer camera. Step 51 straightens it in the middle of F8's slots.
-- Step 53: the fourth lead line from F1's back, as the other three.
+- Step 53: the fourth lead line from F1's back, as the other three. Step 48 (Lee, later the same day): its four lead lines run from the
+  tops of the F7s' and F9's tabs to F4's underside (three ran on through F4's slots to 3.3 mm over its top, where the tabs' tops are
+  once it is down).
 - tools/motioncheck.py spaces a way's in-between poses as the player does (poseGap) and takes --moments (39 catches the quarters, where a
   step of two or four beats changes beat).
 

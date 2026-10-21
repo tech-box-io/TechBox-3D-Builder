@@ -86446,6 +86446,22 @@
      ]
     }
    },
+   "inset": {
+    "target": [
+     686.64,
+     897.11,
+     1324.26
+    ],
+    "dir": [
+     0.0796,
+     0.995,
+     0.0597
+    ],
+    "radius": 14.0,
+    "hide": [],
+    "mark": 1.0,
+    "alt": "Close-up from above: the teal wire's pin in b8, between the jumper wires and the Nano Board"
+   },
    "caption": "Connect the teal wire from SDA on the LCD screen to b8.",
    "text_key": "T1EF22BB5",
    "review": null,
@@ -96395,7 +96411,7 @@
     {
      "tip": [
       659.0,
-      957.8,
+      951.5,
       1233.3
      ],
      "mouth": [
@@ -96407,7 +96423,7 @@
     {
      "tip": [
       692.0,
-      957.8,
+      951.5,
       1232.9
      ],
      "mouth": [
@@ -96419,7 +96435,7 @@
     {
      "tip": [
       697.5,
-      957.8,
+      951.5,
       1355.4
      ],
      "mouth": [
@@ -96431,7 +96447,7 @@
     {
      "tip": [
       712.2,
-      954.7,
+      951.5,
       1356.1
      ],
      "mouth": [

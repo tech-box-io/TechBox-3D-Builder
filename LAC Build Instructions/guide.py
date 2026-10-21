@@ -958,7 +958,9 @@ g.put_away(LCD_MALE + LCD_FEMALE)
 LCD_DIR = [0.62, 0.62, 0.48]                                        # (from the front at the breadboard's end)
 # Each wire's step from LCD_DIR, but for SDA's, whose hole b8 shows whole only from 20 degrees further round and higher (sight lines as
 # for the jumpers, JUMPER_DIRS); SCL's hole b9 does not show from anywhere in front (the caps in a8 and a9 and the purple jumper stand in
-# front of it, the Nano behind it), so its step has a close-up from above on Step 39c, the blue wire's pin in b9.
+# front of it, the Nano behind it), so its step has a close-up from above on Step 39c, the blue wire's pin in b9; and SDA's the same
+# close-up of b8 on Step 38c (Lee, 21 Oct 2026: "a breakout image of the breadboard location for the wire like step 39 has").
+LCD_CLOSE_UP = ('teal', 'blue')
 LCD_DIRS = {'teal': [0.343, 0.766, 0.544]}
 
 
@@ -1116,7 +1118,7 @@ for k, (colour, male, label, fem, pin, lying_key, _, _) in enumerate(LCD_WIRES):
             wires=dict(prev, **{f'lcd {colour}': held}), wires_done={f'lcd {colour}': push},
             **({'inset': dict(target=top, dir=[0.08, 1.0, 0.06], radius=14.0, mark=1.0,
                               alt=f"Close-up from above: the {colour} wire's pin in {label}, between the jumper wires and the Nano Board")}
-               if colour == 'blue' else {}),
+               if colour in LCD_CLOSE_UP else {}),
             view_dir=view, frame=LCD_CAMERAS[colour])
 # ================================================================ THE LCD SCREEN (end)
 
@@ -1223,7 +1225,11 @@ g.place('Move F1, still face down, further out in front of the case and along to
 SW_OVER = {c: W.route(cad_line(k, cap)[::-1], a=SWITCH, b=cap, a_at=HOVER_F4, stretch=True) for (c, cap, _, _), k in zip(SWITCH_LEADS, ('NAUO149', 'NAUO148', 'NAUO147'))}
 g.place('Lift F4, with the switch, over the frame.', ride={F4: HOVER_F4}, lines=False, eye=[dict(id=F4, **near('down-left'))],
         wires_done={f'switch {c}': [SW_OVER[c], SW_OVER[c]] for c, *_ in SWITCH_LEADS}, **CASE_CAMERA)
-F4_LINES = [[659.0, 957.8, 1233.3], [692.0, 957.8, 1232.9], [697.5, 957.8, 1355.4], [712.2, 954.7, 1356.1]]   # (the tops of the F7s' and F9's tabs: Lee, 20 Oct 2026)
+# Each line from the top of an F7's or F9's tab (Lee, 20 Oct 2026) up to F4's underside over it (y 951.46 seated: Lee, 21 Oct 2026, Step
+# 48: three of them ran on through F4's slots to 3.3 mm over its top, where the tabs' tops are once it is down; as Step 53's do, they
+# stop at the panel).
+F4_UNDER = 951.46
+F4_LINES = [[[x, F4_UNDER, z], [x, y, z]] for x, y, z in [[659.0, 957.8, 1233.3], [692.0, 957.8, 1232.9], [697.5, 957.8, 1355.4], [712.2, 954.7, 1356.1]]]
 # Each lead's way from the seated switch down to its hole, clear of the others and of the jumpers (found by a path search through
 # the closed case, kept as control points).
 SW_SEATED_WAY = {'red': [[669.0, 921.7, 1263.0], [666.9, 920.0, 1266.0], [665.1, 918.5, 1269.2], [663.2, 917.3, 1272.8]],
