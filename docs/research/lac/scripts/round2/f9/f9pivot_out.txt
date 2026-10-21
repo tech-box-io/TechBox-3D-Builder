@@ -1,0 +1,8 @@
+F9 bounds [[689.09, 881.23, 1354.28], [720.29, 957.84, 1357.28]]
+F9 feet region x range 691.25 717.97 z 1354.28 1357.28
+F3 verts by F9 (x, y) [(np.float64(692.33), np.float64(884.61)), (np.float64(692.33), np.float64(887.61)), (np.float64(700.33), np.float64(884.61)), (np.float64(700.33), np.float64(887.61)), (np.float64(707.02), np.float64(884.61)), (np.float64(707.02), np.float64(887.61)), (np.float64(717.18), np.float64(884.61)), (np.float64(717.18), np.float64(887.61))]
+published swing at 0.6 0.64 [ 691.68  886.97 1356.6 ]
+published swing at 0.8 1.32 [ 691.01  886.18 1357.28]
+F3 watertight False F9 watertight False
+best pivots (penetration, dx, dy): [(1.2, np.float64(-4.0), np.float64(-4.0)), (1.2, np.float64(-4.0), np.float64(-3.5)), (1.2, np.float64(-4.0), np.float64(-3.0)), (1.2, np.float64(-4.0), np.float64(-2.5)), (1.2, np.float64(-4.0), np.float64(-2.0)), (1.2, np.float64(-4.0), np.float64(-1.5)), (1.21, np.float64(-4.0), np.float64(-1.0)), (1.21, np.float64(-4.0), np.float64(-0.5)), (1.21, np.float64(-4.0), np.float64(0.0)), (1.21, np.float64(-4.0), np.float64(0.5)), (1.21, np.float64(-4.0), np.float64(1.0)), (1.21, np.float64(-3.5), np.float64(-4.0))]
+exit 0, peak RSS 399 MB

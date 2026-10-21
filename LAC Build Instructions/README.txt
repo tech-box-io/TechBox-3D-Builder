@@ -2,8 +2,7 @@ LAC Build Instructions (LCD Alarm Clock, Full Build: the electronics on the brea
 
 FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
 guide for the kit (instructions.online/?id=19075-lac_full_build), in the same format and with the same player as the MRA and RCC
-guides (player/ was not changed). Not for distribution. Open questions are yellow Review notes on their steps (Step 45) and
-under QUESTIONS FOR LEE below.
+guides (player/ was not changed). Not for distribution. Open questions are under QUESTIONS FOR LEE below.
 
 HOW TO OPEN (Mac)
 1. Double-click "Open Prototype.command". A Terminal window opens and the guide opens in your browser (port 8793, so it can run
@@ -13,9 +12,9 @@ HOW TO OPEN (Mac)
 The controls are the MRA guide's: arrows step through, drag to rotate, scroll to zoom, Option-click a spot to copy where it is, the
 grid button shows every step, ?review=0 hides the Review notes.
 
-THE BUILD (56 steps, as numbered here. Steps 1 - 45 have the published numbers: Step 29 here lays F1 face down where the published
-Step 29 turns the knob (question 2), and Step 45 here is the published Steps 45 and 46, F9 (question 4). From Step 46 on, Step N here
-is the published Step N + 1.)
+THE BUILD (57 steps, with the published numbers: Step 29 here lays F1 face down where the published Step 29 turns the knob (question
+2). Until F9 was given its two published steps (Lee, 21 Oct 2026), a step from 46 on was numbered one lower here, as in Lee's notes of
+20 and 21 Oct 2026 before then; every number in this file is as now.)
 - Steps 1 - 7, the breadboard: its backing peeled off (it slides away below), stuck onto F3 (rails along F3's engraved edge); the Nano
   Board into rows c and g, columns 1 - 15 (c15, g1 labelled, as published); both 12 kΩ resistors shown with their legs straight, then
   bent (Step 4, 4c: the legs are drawn as wires, as the LSM's); each resistor from the (-) blue rail to h27, h29 (its lead lines from
@@ -40,9 +39,10 @@ is the published Step N + 1.)
   breadboard in one step; each wire runs from the breadboard over the jumpers and round where F9 will stand, as it will once the LCD is
   in, then in a lane of its own to its pin; SDA's step seen from further round, where b8 shows; b9 shows from nowhere in front, so
   Step 39c has a close-up from above of the blue wire's pin in it); the USB cable's right-angle end into the Nano Board (it hovers and plugs, as decided for the MRA),
-  the cable lying straight out behind the base to its A end, along the line on which F2's slit will come in (Step 55).
-- Steps 41 - 53, the box: the two F7s into F3; their tops spread apart (arrows; they are not lifted), the buzzer lifted, carried over
-  and lowered in between (its leads follow, a shape for each stop), let go; F9; F1 moved, still face down, further out in front and
+  the cable lying straight out behind the base to its A end, along the line on which F2's slit will come in (Step 56).
+- Steps 41 - 54, the box: the two F7s into F3; their tops spread apart (arrows; they are not lifted), the buzzer lifted, carried over
+  and lowered in between (its leads follow, a shape for each stop), let go; F9 hooked in by its front foot, tipped, and swung upright
+  (Steps 45 and 46, as published); F1 moved, still face down, further out in front and
   along to the F7s' end (as published, Step 47: out of the LCD's way; its leads then run between the F7s and F8); F4 lifted over the
   frame (the switch's leads follow) and lowered onto the tabs of the F7s and F9 (four lead lines, from the tab tops Lee gave); F8 slid
   in from the front; the LCD lifted off the table and slid out in front, stood up face to the front 40 mm out, and moved in until the
@@ -50,44 +50,44 @@ is the published Step N + 1.)
   which put the LCD into F4); then straightened, pushed 14.9 mm on through F8's notch and slid back into F9's notches (a close-up of
   them); its wires stay behind F9 all the way (the run round F9's back edge held still); F1 stood up in front of the box and pushed onto
   the tabs of F4 and F3 (Lee's lead line at F4's front tab).
-- Steps 54 - 56, the ends and the back, as published: F5 pushed onto the breadboard's end, the tabs of F1, F3 and F4 into its slots (six
+- Steps 55 - 57, the ends and the back, as published: F5 pushed onto the breadboard's end, the tabs of F1, F3 and F4 into its slots (six
   lead lines, two of them at F4's tabs as Lee gave them; seen low from the front as published, so that F5 does not hide them); F2, the case seen from behind: brought in swung out,
   the tabs at its slit end hooked into F5's slots, and swung shut onto the tabs of F3 and F4, its slit (open at the bottom) sliding along
   the USB cable, the cable following it (a Caution: the cable must sit in the slit; an eye on the cable in the slit, and a close-up of it
-  on Step 55c); F6 onto the other end, which locks them all. The Completed View is the closed box. Unlike the published Step 56, the
+  on Step 56c); F6 onto the other end, which locks them all. The Completed View is the closed box. Unlike the published Step 56, the
   case stays upright (published: laid on its front, F2 lowered from above; the player can turn a model only upside down), and F2 comes
   in 40 mm straight from behind and then 14 mm along itself (published: about 80 mm, diagonally from behind and F6's end), so that its
   slit slides along the cable lying straight out behind the case.
-- Checked (21 Oct 2026, after Lee's second round): the player's run-through check passes on every view (116 views, forwards,
+- Checked (21 Oct 2026, after Lee's second round): the player's run-through check passes on every view (118 views, forwards,
   backwards and jumping, 0 problems); at rest each wire is clear of the parts and of the other wires (tools/wirecheck.py: one touch
   of 0.04 mm, the purple jumper's cap held over its hole beside the blue's, Step 12); during the moves (tools/motioncheck.py, every
   move at 39 moments: twice as many as Lee's first round was checked at) no wire passes into a panel, and 22 moments in 96 moves
   are left: the purple jumper brushing the blue jumper's cap and wire by 0.6 - 0.8 mm as it goes in (Step 12), the switch's black
   and tan leads 0.8 mm apart as Step 17 starts, the orange and yellow jumpers 0.94 mm apart (Step 21c), the buzzer's black lead
   through the LCD's four wires for about 50 ms (Step 43c: question 11), and 16 where the potentiometer's leads brush the wires of
-  the bundle for a moment as their run in the case changes (Steps 46c and 52c, as after the first round). Lee's first round was
-  left at 63 moments of 19 per move; before it, 132. Cameras: only those of Steps 16 - 18, 30 - 35, 49 and 50 changed in this round.
+  the bundle for a moment as their run in the case changes (Steps 47c and 53c, as after the first round). Lee's first round was
+  left at 63 moments of 19 per move; before it, 132. Cameras: only those of Steps 16 - 18, 30 - 35, 50 and 51 changed in this round, and F9's two steps have the published one.
 
 LEE'S FIRST ROUND (20 Oct 2026)
 - The 12 kΩ resistor is named so everywhere (the parts list, labels, captions; "2x - 12 kΩ Resistor" on Step 4).
 - Colours: the knob's silver ring and the resistor's bands, the breadboard's legends, the USB plug's and the switch's marks are TechBox's
   Cadasio face copies laid 0.02 mm over the body; the body under them now takes their colour, so the black no longer shows through
   (colour-atlas-lac.json: "skin"). The potentiometer is pictured from its knob side in the parts list.
-- Cameras closer on what each step puts in (Steps 3 - 7, 9 - 18, 20 - 34, 36 - 41, 45, 50), labels moved off the parts and their
-  leaders apart (Steps 1, 3 - 7, 15, 22, 33, 34); lead lines where Lee gave them (Steps 5, 6, 48, 53, 54). Steps Lee did not name whose
+- Cameras closer on what each step puts in (Steps 3 - 7, 9 - 18, 20 - 34, 36 - 41, 45, 51), labels moved off the parts and their
+  leaders apart (Steps 1, 3 - 7, 15, 22, 33, 34); lead lines where Lee gave them (Steps 5, 6, 49, 54, 55). Steps Lee did not name whose
   camera changed: 26 and 28 share Steps 25 and 27's camera on F1 and the potentiometer (framed as before; the base behind them sits
-  differently, as F1 is held where Step 29 now lays it down); Step 46 is a new move. Step 35's is as it was. Step 40's close camera
+  differently, as F1 is held where Step 29 now lays it down); Step 47 is a new move. Step 35's is as it was. Step 40's close camera
   leaves the USB cable's A end off the screen (it is back in Step 41).
 - The moves: no part is turned about a far-off point any more (the buzzer's caps and the buzzer swung off the screen: Steps 33, 34,
   43); each lead has a shape for each stop of a move; the potentiometer's, the buzzer's and the LCD's wires are drawn from the
   breadboard, so that the run in the case is held still where both shapes share it: the LCD's round F9's back edge in every shape
-  (Steps 36 - 51), the potentiometer's as F1 is pushed on (Step 53: it dipped into F8), the buzzer's through the jumpers as it is
+  (Steps 36 - 52), the potentiometer's as F1 is pushed on (Step 54: it dipped into F8), the buzzer's through the jumpers as it is
   lowered onto its seat (Step 43, its last beat). The buzzer's leads turn out of the buzzer and into their holes over several mm (they
   had hairpins there). tools/motioncheck.py now turns a part between two poses as the player does (it turned every part about its
   middle, so it did not see those swings).
 - An independent review (three reviewers, each finding checked by a fourth: docs/research/lac/round1/review.md) found the rest of the
   above: holes still hidden from their step's camera (14, 20, 21, 38, 39), the jumpers and Step 33's red cap gliding in from off the
-  frame, the LCD ribbon's two ends crossing as each wire was connected, the LCD wires' run lifting through the jumpers in Step 50.
+  frame, the LCD ribbon's two ends crossing as each wire was connected, the LCD wires' run lifting through the jumpers in Step 51.
 - Research for the round: docs/research/lac/round1/ (how the LSM does what Lee asked for, the published guide's moves and cameras, the
   model's colour faults, why the wires misbehaved mid-move).
 
@@ -97,7 +97,7 @@ LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs
   holes unchanged); Step 1's camera and Step 2's corner lines kept where they were.
 - Labels and eyes beside their targets, not at the window's edges, in every step of the kit (guide.py near(): 'near-left', 'up-right' ...
   with a reach; chosen per step clear of each other: round2/labels.md).
-- Lee's cameras, solved from his screenshots to the pixel (round2/cameras.md): Steps 16 - 18, 30 - 32, 33 - 34, 49 (F8's label up and to
+- Lee's cameras, solved from his screenshots to the pixel (round2/cameras.md): Steps 16 - 18, 30 - 32, 33 - 34, 50 (F8's label up and to
   its right). b9 (Step 39) shows from no direction in front (the cameras of Steps 14, 20, 21 and 38 already show their holes whole,
   from the first round), so Step 39c now has a close-up of it from above, the blue wire's pin in it; Step 38c the same close-up of b8,
   the teal wire's pin in it (Lee, later the same day).
@@ -114,11 +114,17 @@ LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs
 - The LCD's ribbon (Step 35) laid clear of F1 and the potentiometer's leads, the view a little wider to take it in; its wires' ends are
   then put away, and each comes back on its own step (Steps 36 - 39), held over its hole, and is pushed in.
 - The USB cable centred on both plugs (its ends came from the rim of the CAD's end faces).
-- Step 50: the LCD is stood on its header end, tips up and over it to stand upright out in front, comes in, and slides along its own length
-  into F8's slots (it went in sideways, through F8's front); closer camera. Step 51 straightens it in the middle of F8's slots.
-- Step 53: the fourth lead line from F1's back, as the other three. Step 48 (Lee, later the same day): its four lead lines run from the
+- Step 51: the LCD is stood on its header end, tips up and over it to stand upright out in front, comes in, and slides along its own length
+  into F8's slots (it went in sideways, through F8's front); closer camera. Step 52 straightens it in the middle of F8's slots.
+- Step 54: the fourth lead line from F1's back, as the other three. Step 49 (Lee, later the same day): its four lead lines run from the
   tops of the F7s' and F9's tabs to F4's underside (three ran on through F4's slots to 3.3 mm over its top, where the tabs' tops are
   once it is down).
+- F9 (Lee, later the same day: "it does need to hook and rotate in as in the published guide"): two steps, as published. Step 45: held
+  upright out in front, slid back over its slots, tipped 25.8 degrees forwards about its front edge, and lowered until its front foot's
+  barb hooks under F3 (a beat each; a close-up on Step 45c with F3 drawn faintly, as F3's edge hides the hook). Step 46: swung upright
+  about that edge, its back foot down into its slot (an eye and a lead line on it). The published camera of both steps, its middle
+  moved over F9's way. Each foot has a 1 mm barb under F3: the back one passes into F3's edge by up to 1.3 mm for a moment as F9 is
+  swung upright (a snap fit; no turning point makes it less than 1.2), as in the published. Every step from 46 on is one higher.
 - tools/motioncheck.py spaces a way's in-between poses as the player does (poseGap) and takes --moments (39 catches the quarters, where a
   step of two or four beats changes beat).
 
@@ -156,7 +162,7 @@ QUESTIONS FOR LEE
    its pins, USB Cable). The MRA and RCC guides name each part with a label on its first step instead, which this draft does. Add the cards?
 2. The published Step 29 turns the knob to point at about 7 o'clock (a check, with only an eye). I left it out: what is it for?
 3. (Answered: the resistors' legs are now shown straight, then bent, as on the LSM.)
-4. Step 45 (Review note): F9 goes straight down into its slots in the CAD; the published guide hooks it in tilted and then stands it up.
+4. (Answered: F9 is hooked in and swung upright, as published: Steps 45 and 46.)
 5. The right-angle USB plug is the LAC's own (the MRA's and RCC's are straight): is that the cable in the kit?
 6. The jumper wires change length between lying loose and plugged in (the CAD routes them 50 - 90 mm); fine, as for the RCC's leads?
 7. When it is ready for the website: its address would be lcd-alarm-clock-full-build (kit lcd-alarm-clock), added to guides.json then.
@@ -166,10 +172,10 @@ QUESTIONS FOR LEE
    in without passing through them. Fine, or should they go back?
 11. Step 43: the buzzer's leads now pass over every jumper, lying and as the buzzer is carried in, except for one moment (about 50 ms,
    mid-carry) when the black lead passes through the LCD's four wires: those were laid over the lying black lead (Steps 36 - 39), so one
-   has to pass the other. Clean would take re-laying the LCD wires in front of the (-) blue rail (Steps 35 - 51), or playing Step 43 as
+   has to pass the other. Clean would take re-laying the LCD wires in front of the (-) blue rail (Steps 35 - 52), or playing Step 43 as
    a fade (the buzzer fading out and back in seated, as the PMG's Step 42), which no longer shows the carry. While the buzzer is held
    high, its leads look stiff for a moment (a long black line over the board, a red post behind the caps); softer shapes are possible.
-12. Step 49's label (up and to the right of F8, as asked) lands on F8 in windows under about 880 px wide (an iPad in the LMS is 768):
+12. Step 50's label (up and to the right of F8, as asked) lands on F8 in windows under about 880 px wide (an iPad in the LMS is 768):
    'up-left' is clear at every width.
 9. The potentiometer's knob: TechBox's Cadasio project draws a silver ring round the end of the knob (and a silver pointer groove), so
    the guide keeps it and only stops the black showing through. If the real knob is all black, it is a one-line change to make it so.

@@ -802,7 +802,7 @@ def buzzer_plugged(colour, cap, exit_, pose, way, stretch=False, hold=None):
 # jumpers' arches, then over the switch's tan lead by the (+) red rail and down in front of the switch to the buzzer. Black runs along the
 # front rails over the potentiometer's leads, the LCD's purple wire and the green jumper, over the switch's tan lead, to the buzzer. Both
 # pass in front of the switch (on its +x side where it is seated), so that neither is under one of the switch's leads before F4 is lifted
-# (Step 47): the buzzer is carried over the board, so its leads can only lie over what they cross, and the switch is then carried over
+# (Step 48): the buzzer is carried over the board, so its leads can only lie over what they cross, and the switch is then carried over
 # them (docs/research/lac/round2/step43_high.md: which crossings each motion allows). Drawn from the stub's end: no gap where the lead
 # meets it.
 BUZZER_SEAT_WAY = {'red': [[674.5, 891.3, 1235.6], [675.5, 892.6, 1239.0], [678.0, 894.5, 1241.8], [683.5, 899.5, 1246.0], [685.3, 903.5, 1249.5], [686.3, 907.5, 1253.0], [687.4, 911.0, 1256.5], [688.5, 914.5, 1260.0], [689.3, 919.5, 1262.5], [690.0, 923.8, 1265.0], [690.4, 927.8, 1268.2], [690.3, 931.5, 1272.0], [689.3, 934.6, 1275.3], [687.0, 935.6, 1278.3], [682.5, 935.4, 1280.6], [676.5, 934.0, 1282.3], [671.0, 931.0, 1284.0], [667.0, 927.8, 1286.2], [665.2, 926.0, 1289.0], [664.6, 925.6, 1293.5], [663.6, 925.0, 1298.5], [661.6, 923.8, 1303.0], [659.3, 921.6, 1307.0], [657.6, 917.8, 1311.8], [656.9, 913.2, 1317.5], [657.1, 909.3, 1323.5], [657.9, 907.4, 1329.0]],
@@ -1034,7 +1034,7 @@ def lcd_tail(head, fem, lcd_pose, controls, reach=3.0):
 
 
 # Every shape of a wire shares the seated CAD wire's run from the breadboard round F9's back edge (LCD_HEAD), lying too: the CAD's
-# lying wires run under the jumpers and its seated ones over them, so that changing from one to the other in Step 50 passed the run
+# lying wires run under the jumpers and its seated ones over them, so that changing from one to the other in Step 51 passed the run
 # through the jumpers (the review of Lee's first round). Lying, each wire goes on from there in a lane of its own, so that the four do
 # not cross: they come round F9's edge one above the other (GND on top) and go onto pins side by side (GND nearest), so each drops at
 # its own distance past F9's end (GND the furthest), runs along under the ones above it to its pin, and turns in to its cap.
@@ -1124,7 +1124,7 @@ for k, (colour, male, label, fem, pin, lying_key, _, _) in enumerate(LCD_WIRES):
 
 # ================================================================ THE USB CABLE (begin)
 # The right-angle Mini-B end goes into the Nano Board's socket (hover and plug, as decided for the MRA: section 13). The cable leaves
-# it towards the back and lies straight out behind the case, on the table, along the line on which F2's slit comes in (Step 55: F2 is
+# it towards the back and lies straight out behind the case, on the table, along the line on which F2's slit comes in (Step 56: F2 is
 # brought in from behind, swung out, its tabs are hooked into F5 and it swings shut, its slit, open at the bottom, sliding along the
 # cable); from then on it passes through the slit, and bends round to the A end. (The CAD's cable crosses F2's plane at z 1339.4,
 # y 890.8, through F3's edge, and lays the A end along the case, 9 mm under the table; here the cable passes 9 mm higher, in the
@@ -1203,12 +1203,31 @@ g.place('Lower the buzzer in between the two F7s, its ears into their slots.', m
         wires_done={f'buzzer {c}': [buzzer_plugged(c, cap, e, BUZZER_LIFT, BUZZER_LIFT_WAY[c], stretch=True, hold=BUZZER_LIFT_HOLD.get(c)),
                                     buzzer_high(c, cap, e), buzzer_clamped(c, cap, e)] for c, cap, _, e, _, _ in BUZZER_LEADS}, **CASE_CAMERA)
 g.place('Let go of the two F7s, so that they close on the buzzer.', ride={F7A: ZERO, F7B: ZERO}, lines=False, eye=[dict(id=F7A, **near('near-right')), dict(id=F7B, **near('down-left'))], **CASE_CAMERA)
-g.place('Push F9 down into the slots in F3 beside the end of the breadboard, its engraved side towards that end.', move=[F9], labels=[dict(id=F9, text='F9', **near('near-left', 0.035))],
-        review='The published guide hooks F9 in tilted and then stands it up (Steps 45, 46); in the CAD it goes straight down into its '
-               'slots, so it does here. Does the real part need the hook-and-swing?',
-        view_dir=[0.53, 0.66, 0.53], frame=([700.0, 945.0, 1330.0], 110.0))   # (from the side its code faces, as published; the model lower, F9 over it in frame)
+# F9 is hooked in and swung upright, as published (Steps 45 and 46; Lee, 21 Oct 2026: "it does need to hook and rotate in as in the
+# published guide"). Its feet each have a 1 mm barb that goes under F3, the front one forwards (+x), the back one backwards. Held upright
+# 104 mm out in front and 35 mm up, it slides back over its slots, tips 25.8 degrees forwards about its front edge on F3's top, and drops
+# 33 mm, so that its front foot goes down into its slot and its barb hooks under F3 (Step 45, a beat each, as the published's three); then
+# it swings upright about that edge, its back foot going down into its slot (Step 46: the back barb snaps under F3's edge, passing into F3
+# by up to 1.3 mm for a moment, as in the published; no turning point makes it less than 1.2). It rides on F3 (carry) until then; the
+# lead lines run from its feet to where they go into F3. (docs/research/lac/round1/published_motions.md: the published poses.)
+F9_EDGE = [720.13, 887.54, 1355.78]                                  # F9's front edge on F3's top: what it turns about
+F9_OUT = [103.9, 35.3, 0.0]
+F9_TIPPED = turned([0, 0, -1], 25.79, F9_EDGE, t=[-0.45, 32.96, 0.0])
+F9_HOOKED = turned([0, 0, -1], 25.79, F9_EDGE)
+F9_FEET = [[695.93, 881.23, 1355.78], [714.82, 881.23, 1355.78]]     # (the middle of each foot's end: back, front)
+F9_CAMERA = dict(view_dir=[0.529, 0.664, 0.53], frame=([735.0, 920.0, 1340.0], 114.5))   # (the published camera of both steps, its
+                                                                    # middle moved over F9's way: Cadasio's frame is wider than ours)
+g.carry([F9], by=F3, pose=F9_OUT, appear=False)
+g.place('Tip F9 towards the front and hook its front foot into its slot in F3 beside the end of the breadboard, its engraved side '
+        'towards that end.', appear=[F9], ride={F9: [[0.0, F9_OUT[1], 0.0], F9_TIPPED, F9_HOOKED]}, ride_beats=True,
+        lines_at=[[np.add(f, F9_OUT).round(2).tolist(), [f[0], 887.61, f[2]]] for f in F9_FEET], labels=[dict(id=F9, text='F9', **near('near-right', 0.06))],
+        inset=dict(target=[716.0, 885.5, 1355.8], dir=[0.15, 0.2, 0.97], radius=10.0, mark=3.0, ghost={F3: 0.25},   # (along F9's face, F3
+                   alt="Close-up, F3 drawn faintly: F9's front foot down through its slot, its barb hooked under F3"), **F9_CAMERA)   # faint: its edge hid the hook)
+g.place('Swing F9 upright, pressing its back foot down into its slot in F3.', ride={F9: ZERO},
+        lines_at=[[apply_pose(F9_HOOKED, [F9_FEET[0]])[0].round(2).tolist(), [F9_FEET[0][0], 887.61, F9_FEET[0][2]]]],
+        eye=[dict(anchor=unapply_pose(F9_HOOKED, [[699.49, 897.24, 1357.28]])[0].round(2).tolist(), id=F9, **near('down-right'))], **F9_CAMERA)
 
-# F1 is moved out of the way, as published (Step 46: to the far end), still face down: further out in front and along towards the F7s'
+# F1 is moved out of the way, as published (Step 47: to the far end), still face down: further out in front and along towards the F7s'
 # end, so that the potentiometer's leads run in between F7 and where F8 goes, behind F8 and the LCD (lying where it was, they crossed the
 # LCD's seat). Each lead's way: a path search through the case as it is once the LCD is in, F8's way in kept clear
 # (docs/research/lac/scripts/routing/).
@@ -1244,10 +1263,10 @@ g.place('Slide F8 into the slots in F4 and F3 from the front.', move=[F8], direc
 
 # The LCD into the case (Steps 51, 52 published; Lee, 20 Oct 2026: "the subtleties of how the LCD Display moves into the slots on F9
 # and F8"; Lee, 21 Oct 2026, Step 50: "slide into F8's slots along its length", "the left end of the display rotate up and over the
-# wire / header end instead of flipping under", "a slightly more zoomed in view"). Step 50, a beat each: stood on its header (F9) end,
+# wire / header end instead of flipping under", "a slightly more zoomed in view"). Step 51, a beat each: stood on its header (F9) end,
 # face to the front, its other end raised; tipped over that end, so that it stands upright, its F8 end angled in 14 degrees, 20 mm out
 # in front of the case; moved in, its board 9 mm short of F8; slid 12 mm along its own length until the board's end is in F8's notches
-# (the published angled pose, without its 2.14 mm lift, which put the LCD's top into F4's underside). Step 51: straightened, pushed
+# (the published angled pose, without its 2.14 mm lift, which put the LCD's top into F4's underside). Step 52: straightened, pushed
 # 14.9 mm further through F8's notches, and slid back 14.9 mm into F9's notches. The first two poses are written about the board's F9
 # end, so that the player turns the LCD about that end (it turns a part about the pose's `at`: player.js mixPose): the header end stays
 # by its wires while the other end goes up and over it. Moved in sideways (the last version), the board's ends went through the front
@@ -1296,7 +1315,7 @@ g.place('Stand the LCD screen up in front of the case, face to the front. Then m
         wires_done={f'lcd {c}': [LCD_LEADS[c][k] for k in ('on_end', 'out', 'inside', 'angled')] for c, *_ in LCD_WIRES},
         view_dir=LCD_IN_DIR, frame=([736.7, 938.8, 1396.5], 100.0))   # (the whole move, closer: Lee, 21 Oct 2026; was radius 130.6)
 F9_NOTCHES = [[712.1, 947.3, 1359.5], [712.1, 892.6, 1359.5]]       # the end of the LCD's board, where it goes into F9's two notches (seated)
-# (Step 51: straightened as it is pushed on through F8's notches, the board kept in the middle of them: through three poses between
+# (Step 52: straightened as it is pushed on through F8's notches, the board kept in the middle of them: through three poses between
 # the angled one and the straight one, the board's line crossing F8's middle plane, z 1265.97, at x 713.02; straight from one to the
 # other, turned about LCD_ANGLE_AT, the board's front face went 0.75 mm into the notches' front wall half way.)
 LCD_STRAIGHTENING = [tidy(compose(turned([0, 1, 0], 14.0 * (1 - k), [712.96, 919.52, 1263.4 + 17.47 * k], [0.06, 0.4 * k, 2.57 - 17.47 * k]),

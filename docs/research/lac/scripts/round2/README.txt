@@ -34,3 +34,8 @@ core.js cameraPose), and the hole sight-line tests are scripts/routing/sight.py.
                                                       run_bends.py (motioncheck's blending, the buzzer leads' sharpest bend at each
                                                       moment), player_tools.js (a steps copy played in the real player from thumbs/:
                                                       the buzzer against the caption box, pictures of moments); *.txt: the outputs quoted
+  f9/                                                 F9 hooked in and swung upright as published (Lee, 21 Oct 2026): f9check.py (F9 at
+                                                      11 moments of each stretch of the published poses against every part on screen at
+                                                      Step 45: clean, but for the back foot's barb in F3's edge, 1.3 mm, as it is swung
+                                                      upright), f9pivot.py (other turning points: none below 1.2 mm), feet.py (the outline
+                                                      of F9's feet and F3's slots); *_out.txt: their outputs

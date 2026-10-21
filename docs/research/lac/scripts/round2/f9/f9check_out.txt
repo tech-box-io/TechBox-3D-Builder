@@ -1,0 +1,12 @@
+F9 bounds [[689.09, 881.23, 1354.28], [720.29, 957.84, 1357.28]]
+F9 feet region x range 691.25 717.97 z 1354.28 1357.28
+F3 verts by F9 (x, y) [(np.float64(692.33), np.float64(884.61)), (np.float64(692.33), np.float64(887.61)), (np.float64(700.33), np.float64(884.61)), (np.float64(700.33), np.float64(887.61)), (np.float64(707.02), np.float64(884.61)), (np.float64(707.02), np.float64(887.61)), (np.float64(717.18), np.float64(884.61)), (np.float64(717.18), np.float64(887.61))]
+Step 45 checked
+Step 46 stretch 0 at 0.5: into [('NAUO2', 0.19)]
+Step 46 stretch 0 at 0.6: into [('NAUO2', 0.64)]
+Step 46 stretch 0 at 0.7: into [('NAUO2', 0.98)]
+Step 46 stretch 0 at 0.8: into [('NAUO2', 1.32)]
+Step 46 stretch 0 at 0.9: into [('NAUO2', 1.18)]
+Step 46 checked
+hooked: feet y range 883.4 897.57
+exit 0, peak RSS 365 MB

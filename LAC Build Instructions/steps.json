@@ -68807,6 +68807,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -68910,6 +68915,14 @@
      ]
     },
     "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
      "by": "NAUO2",
      "pose": [
       0.0,
@@ -93133,11 +93146,6 @@
       1389.92
      ]
     },
-    "NAUO45": [
-     0.0,
-     76.6,
-     0.0
-    ],
     "F4": [
      -82.7,
      17.3,
@@ -93337,29 +93345,34 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     103.9,
+     35.3,
+     0.0
     ]
    },
    "guides": [
     {
      "tip": [
-      696.3,
-      884.8,
+      799.8,
+      916.5,
       1355.8
      ],
      "mouth": [
-      696.3,
+      695.9,
       887.6,
       1355.8
      ]
     },
     {
      "tip": [
-      712.1,
-      884.7,
+      818.7,
+      916.5,
       1355.8
      ],
      "mouth": [
-      712.1,
+      714.8,
       887.6,
       1355.8
      ]
@@ -93369,8 +93382,8 @@
     {
      "id": "NAUO45",
      "text": "F9",
-     "side": "near-left",
-     "reach": 0.035,
+     "side": "near-right",
+     "reach": 0.06,
      "anchor": [
       704.1,
       919.7,
@@ -93557,18 +93570,24 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      103.9,
+      35.3,
+      0.0
+     ]
     }
    },
-   "caption": "Push F9 down into the slots in F3 beside the end of the breadboard, its engraved side towards that end.",
-   "text_key": "T0D6C7D99",
-   "review": "The published guide hooks F9 in tilted and then stands it up (Steps 45, 46); in the CAD it goes straight down into its slots, so it does here. Does the real part need the hook-and-swing?",
-   "moving": [
-    "NAUO45"
-   ],
+   "caption": "Tip F9 towards the front and hook its front foot into its slot in F3 beside the end of the breadboard, its engraved side towards that end.",
+   "text_key": "T783C125F",
+   "review": null,
+   "moving": [],
    "path": [
     [
      0.0,
-     76.6,
+     0.0,
      0.0
     ],
     [
@@ -93579,17 +93598,18 @@
    ],
    "camera": {
     "dir": [
-     0.5307,
-     0.6609,
-     0.5307
+     0.5286,
+     0.6635,
+     0.5296
     ],
     "target": [
-     700.0,
-     945.0,
-     1330.0
+     735.0,
+     920.0,
+     1340.0
     ],
-    "radius": 110.0
-   }
+    "radius": 114.5
+   },
+   "ride_beats": true
   },
   {
    "name": "Step 45c",
@@ -93867,6 +93887,1137 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": {
+     "t": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      25.79
+     ],
+     "at": [
+      720.13,
+      887.54,
+      1355.78
+     ]
+    }
+   },
+   "wires": {
+    "res1 leg 1": 6,
+    "res1 leg 2": 7,
+    "res2 leg 1": 8,
+    "res2 leg 2": 9,
+    "jumper black": 21,
+    "jumper green": 22,
+    "jumper purple": 23,
+    "jumper blue": 24,
+    "jumper white": 25,
+    "jumper dark_red": 26,
+    "switch red": 30,
+    "switch tan": 31,
+    "switch black": 32,
+    "jumper orange": 36,
+    "jumper yellow": 37,
+    "pot red": 47,
+    "pot tan": 48,
+    "pot black": 49,
+    "buzzer red": 79,
+    "buzzer black": 80,
+    "lcd purple": 63,
+    "lcd yellow": 66,
+    "lcd teal": 69,
+    "lcd blue": 72,
+    "usb cable": 74
+   },
+   "carry": {
+    "F4": {
+     "by": "NAUO2",
+     "pose": [
+      -82.7,
+      17.3,
+      -0.1
+     ]
+    },
+    "NAUO46": {
+     "by": "F4",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO11": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       78.97,
+       -10.43,
+       99.63
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       -90.0
+      ],
+      "at": [
+       722.33,
+       919.53,
+       1289.87
+      ]
+     }
+    },
+    "NAUO10": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       78.97,
+       -10.43,
+       99.63
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       -90.0
+      ],
+      "at": [
+       722.33,
+       919.53,
+       1289.87
+      ]
+     }
+    },
+    "NAUO146": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO12": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO13": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO94": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       -7.95,
+       -38.61,
+       79.15
+      ],
+      "r": [
+       -0.707107,
+       0.707107,
+       -0.0,
+       180.0
+      ],
+      "at": [
+       708.91,
+       946.54,
+       1331.16
+      ]
+     }
+    },
+    "NAUO97": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO98": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO99": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO100": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO42": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "r": [
+       0.0,
+       0.0,
+       -1.0,
+       25.79
+      ],
+      "at": [
+       720.13,
+       887.54,
+       1355.78
+      ]
+     },
+     "via": [
+      [
+       0.0,
+       35.3,
+       0.0
+      ],
+      {
+       "t": [
+        -0.45,
+        32.96,
+        0.0
+       ],
+       "r": [
+        0.0,
+        0.0,
+        -1.0,
+        25.79
+       ],
+       "at": [
+        720.13,
+        887.54,
+        1355.78
+       ]
+      }
+     ]
+    }
+   },
+   "inset": {
+    "target": [
+     716.0,
+     885.5,
+     1355.8
+    ],
+    "dir": [
+     0.1497,
+     0.1997,
+     0.9684
+    ],
+    "radius": 10.0,
+    "hide": [],
+    "mark": 3.0,
+    "alt": "Close-up, F3 drawn faintly: F9's front foot down through its slot, its barb hooked under F3",
+    "ghost": {
+     "NAUO2": 0.25
+    }
+   },
+   "caption": "Tip F9 towards the front and hook its front foot into its slot in F3 beside the end of the breadboard, its engraved side towards that end.",
+   "text_key": "T783C125F",
+   "review": null,
+   "moving": [],
+   "path": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "camera": {
+    "dir": [
+     0.5286,
+     0.6635,
+     0.5296
+    ],
+    "target": [
+     735.0,
+     920.0,
+     1340.0
+    ],
+    "radius": 114.5
+   },
+   "ride_beats": true
+  },
+  {
+   "name": "Step 46",
+   "kind": "hover",
+   "visible": [
+    "NAUO1",
+    "NAUO2",
+    "NANO",
+    "NAUO6",
+    "NAUO7",
+    "NAUO3",
+    "NAUO4",
+    "NAUO16",
+    "NAUO17",
+    "NAUO20",
+    "NAUO19",
+    "NAUO25",
+    "NAUO26",
+    "NAUO22",
+    "NAUO21",
+    "NAUO28",
+    "NAUO15",
+    "NAUO30",
+    "NAUO31",
+    "F4",
+    "NAUO46",
+    "NAUO47",
+    "NAUO49",
+    "NAUO48",
+    "NAUO53",
+    "NAUO52",
+    "NAUO56",
+    "NAUO55",
+    "NAUO11",
+    "NAUO34",
+    "NAUO33",
+    "NAUO14",
+    "NAUO10",
+    "NAUO146",
+    "NAUO12",
+    "NAUO13",
+    "NAUO58",
+    "NAUO62",
+    "NAUO59",
+    "NAUO94",
+    "NAUO82",
+    "NAUO97",
+    "NAUO84",
+    "NAUO98",
+    "NAUO86",
+    "NAUO99",
+    "NAUO93",
+    "NAUO100",
+    "NAUO122",
+    "USB_A",
+    "NAUO42",
+    "NAUO43",
+    "NAUO45"
+   ],
+   "offsets": {
+    "USB_A": {
+     "t": [
+      -24.97,
+      12.56,
+      -62.58
+     ],
+     "r": [
+      0.0,
+      1.0,
+      0.0,
+      -90.0
+     ],
+     "at": [
+      599.97,
+      876.35,
+      1389.92
+     ]
+    },
+    "F4": [
+     -82.7,
+     17.3,
+     -0.1
+    ],
+    "NAUO46": [
+     -82.7,
+     17.3,
+     -0.1
+    ],
+    "NAUO11": {
+     "t": [
+      78.97,
+      -10.43,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      1.0,
+      -90.0
+     ],
+     "at": [
+      722.33,
+      919.53,
+      1289.87
+     ]
+    },
+    "NAUO10": {
+     "t": [
+      78.97,
+      -10.43,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      1.0,
+      -90.0
+     ],
+     "at": [
+      722.33,
+      919.53,
+      1289.87
+     ]
+    },
+    "NAUO146": {
+     "t": [
+      77.28,
+      -12.13,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      724.03,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO12": {
+     "t": [
+      76.18,
+      -13.23,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      725.13,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO13": {
+     "t": [
+      68.74,
+      -20.65,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      732.56,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO94": {
+     "t": [
+      -7.95,
+      -38.61,
+      79.15
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      708.91,
+      946.54,
+      1331.16
+     ]
+    },
+    "NAUO97": {
+     "t": [
+      2.07,
+      -28.59,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      941.82,
+      1353.8
+     ]
+    },
+    "NAUO98": {
+     "t": [
+      4.66,
+      -26.0,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      939.24,
+      1353.8
+     ]
+    },
+    "NAUO99": {
+     "t": [
+      7.16,
+      -23.5,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      936.74,
+      1353.8
+     ]
+    },
+    "NAUO100": {
+     "t": [
+      9.72,
+      -20.94,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      934.18,
+      1353.8
+     ]
+    },
+    "NAUO42": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": {
+     "t": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      25.79
+     ],
+     "at": [
+      720.13,
+      887.54,
+      1355.78
+     ]
+    }
+   },
+   "guides": [
+    {
+     "tip": [
+      695.6,
+      892.4,
+      1355.8
+     ],
+     "mouth": [
+      695.9,
+      887.6,
+      1355.8
+     ]
+    }
+   ],
+   "labels": [],
+   "eye": [
+    {
+     "anchor": [
+      697.33,
+      887.29,
+      1357.28
+     ],
+     "id": "NAUO45",
+     "side": "down-right",
+     "reach": 0.05
+    }
+   ],
+   "wires": {
+    "res1 leg 1": 6,
+    "res1 leg 2": 7,
+    "res2 leg 1": 8,
+    "res2 leg 2": 9,
+    "jumper black": 21,
+    "jumper green": 22,
+    "jumper purple": 23,
+    "jumper blue": 24,
+    "jumper white": 25,
+    "jumper dark_red": 26,
+    "switch red": 30,
+    "switch tan": 31,
+    "switch black": 32,
+    "jumper orange": 36,
+    "jumper yellow": 37,
+    "pot red": 47,
+    "pot tan": 48,
+    "pot black": 49,
+    "buzzer red": 79,
+    "buzzer black": 80,
+    "lcd purple": 63,
+    "lcd yellow": 66,
+    "lcd teal": 69,
+    "lcd blue": 72,
+    "usb cable": 74
+   },
+   "carry": {
+    "F4": {
+     "by": "NAUO2",
+     "pose": [
+      -82.7,
+      17.3,
+      -0.1
+     ]
+    },
+    "NAUO46": {
+     "by": "F4",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO11": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       78.97,
+       -10.43,
+       99.63
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       -90.0
+      ],
+      "at": [
+       722.33,
+       919.53,
+       1289.87
+      ]
+     }
+    },
+    "NAUO10": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       78.97,
+       -10.43,
+       99.63
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       -90.0
+      ],
+      "at": [
+       722.33,
+       919.53,
+       1289.87
+      ]
+     }
+    },
+    "NAUO146": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO12": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO13": {
+     "by": "NAUO11",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO94": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       -7.95,
+       -38.61,
+       79.15
+      ],
+      "r": [
+       -0.707107,
+       0.707107,
+       -0.0,
+       180.0
+      ],
+      "at": [
+       708.91,
+       946.54,
+       1331.16
+      ]
+     }
+    },
+    "NAUO97": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO98": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO99": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO100": {
+     "by": "NAUO94",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO42": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": {
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "r": [
+       0.0,
+       0.0,
+       -1.0,
+       25.79
+      ],
+      "at": [
+       720.13,
+       887.54,
+       1355.78
+      ]
+     }
+    }
+   },
+   "caption": "Swing F9 upright, pressing its back foot down into its slot in F3.",
+   "text_key": "T3F116378",
+   "review": null,
+   "moving": [],
+   "path": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "camera": {
+    "dir": [
+     0.5286,
+     0.6635,
+     0.5296
+    ],
+    "target": [
+     735.0,
+     920.0,
+     1340.0
+    ],
+    "radius": 114.5
+   }
+  },
+  {
+   "name": "Step 46c",
+   "kind": "done",
+   "visible": [
+    "NAUO1",
+    "NAUO2",
+    "NANO",
+    "NAUO6",
+    "NAUO7",
+    "NAUO3",
+    "NAUO4",
+    "NAUO16",
+    "NAUO17",
+    "NAUO20",
+    "NAUO19",
+    "NAUO25",
+    "NAUO26",
+    "NAUO22",
+    "NAUO21",
+    "NAUO28",
+    "NAUO15",
+    "NAUO30",
+    "NAUO31",
+    "F4",
+    "NAUO46",
+    "NAUO47",
+    "NAUO49",
+    "NAUO48",
+    "NAUO53",
+    "NAUO52",
+    "NAUO56",
+    "NAUO55",
+    "NAUO11",
+    "NAUO34",
+    "NAUO33",
+    "NAUO14",
+    "NAUO10",
+    "NAUO146",
+    "NAUO12",
+    "NAUO13",
+    "NAUO58",
+    "NAUO62",
+    "NAUO59",
+    "NAUO94",
+    "NAUO82",
+    "NAUO97",
+    "NAUO84",
+    "NAUO98",
+    "NAUO86",
+    "NAUO99",
+    "NAUO93",
+    "NAUO100",
+    "NAUO122",
+    "USB_A",
+    "NAUO42",
+    "NAUO43",
+    "NAUO45"
+   ],
+   "offsets": {
+    "USB_A": {
+     "t": [
+      -24.97,
+      12.56,
+      -62.58
+     ],
+     "r": [
+      0.0,
+      1.0,
+      0.0,
+      -90.0
+     ],
+     "at": [
+      599.97,
+      876.35,
+      1389.92
+     ]
+    },
+    "F4": [
+     -82.7,
+     17.3,
+     -0.1
+    ],
+    "NAUO46": [
+     -82.7,
+     17.3,
+     -0.1
+    ],
+    "NAUO11": {
+     "t": [
+      78.97,
+      -10.43,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      1.0,
+      -90.0
+     ],
+     "at": [
+      722.33,
+      919.53,
+      1289.87
+     ]
+    },
+    "NAUO10": {
+     "t": [
+      78.97,
+      -10.43,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      1.0,
+      -90.0
+     ],
+     "at": [
+      722.33,
+      919.53,
+      1289.87
+     ]
+    },
+    "NAUO146": {
+     "t": [
+      77.28,
+      -12.13,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      724.03,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO12": {
+     "t": [
+      76.18,
+      -13.23,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      725.13,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO13": {
+     "t": [
+      68.74,
+      -20.65,
+      99.63
+     ],
+     "r": [
+      0.0,
+      0.0,
+      -1.0,
+      90.0
+     ],
+     "at": [
+      732.56,
+      919.53,
+      1235.26
+     ]
+    },
+    "NAUO94": {
+     "t": [
+      -7.95,
+      -38.61,
+      79.15
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      708.91,
+      946.54,
+      1331.16
+     ]
+    },
+    "NAUO97": {
+     "t": [
+      2.07,
+      -28.59,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      941.82,
+      1353.8
+     ]
+    },
+    "NAUO98": {
+     "t": [
+      4.66,
+      -26.0,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      939.24,
+      1353.8
+     ]
+    },
+    "NAUO99": {
+     "t": [
+      7.16,
+      -23.5,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      936.74,
+      1353.8
+     ]
+    },
+    "NAUO100": {
+     "t": [
+      9.72,
+      -20.94,
+      33.86
+     ],
+     "r": [
+      -0.707107,
+      0.707107,
+      -0.0,
+      180.0
+     ],
+     "at": [
+      703.6,
+      934.18,
+      1353.8
+     ]
+    },
+    "NAUO42": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -94047,18 +95198,24 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
-   "caption": "Push F9 down into the slots in F3 beside the end of the breadboard, its engraved side towards that end.",
-   "text_key": "T0D6C7D99",
-   "review": "The published guide hooks F9 in tilted and then stands it up (Steps 45, 46); in the CAD it goes straight down into its slots, so it does here. Does the real part need the hook-and-swing?",
-   "moving": [
-    "NAUO45"
-   ],
+   "caption": "Swing F9 upright, pressing its back foot down into its slot in F3.",
+   "text_key": "T3F116378",
+   "review": null,
+   "moving": [],
    "path": [
     [
      0.0,
-     76.6,
+     0.0,
      0.0
     ],
     [
@@ -94069,20 +95226,20 @@
    ],
    "camera": {
     "dir": [
-     0.5307,
-     0.6609,
-     0.5307
+     0.5286,
+     0.6635,
+     0.5296
     ],
     "target": [
-     700.0,
-     945.0,
-     1330.0
+     735.0,
+     920.0,
+     1340.0
     ],
-    "radius": 110.0
+    "radius": 114.5
    }
   },
   {
-   "name": "Step 46",
+   "name": "Step 47",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -94362,6 +95519,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "guides": [],
@@ -94556,6 +95718,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Move F1, still face down, further out in front of the case and along towards its other end, out of the way of the LCD screen.",
@@ -94615,7 +95785,7 @@
    }
   },
   {
-   "name": "Step 46c",
+   "name": "Step 47c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -94890,6 +96060,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -95070,6 +96245,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Move F1, still face down, further out in front of the case and along towards its other end, out of the way of the LCD screen.",
@@ -95129,7 +96312,7 @@
    }
   },
   {
-   "name": "Step 47",
+   "name": "Step 48",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -95401,6 +96584,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -95598,6 +96786,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Lift F4, with the switch, over the frame.",
@@ -95631,7 +96827,7 @@
    }
   },
   {
-   "name": "Step 47c",
+   "name": "Step 48c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -95906,6 +97102,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -96086,6 +97287,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "wire_via": {
@@ -96130,7 +97339,7 @@
    }
   },
   {
-   "name": "Step 48",
+   "name": "Step 49",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -96402,6 +97611,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -96629,6 +97843,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Lower F4 onto the tabs of the F7s and F9.",
@@ -96664,7 +97886,7 @@
    }
   },
   {
-   "name": "Step 48c",
+   "name": "Step 49c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -96934,6 +98156,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -97106,6 +98333,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Lower F4 onto the tabs of the F7s and F9.",
@@ -97141,7 +98376,7 @@
    }
   },
   {
-   "name": "Step 49",
+   "name": "Step 50",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -97417,6 +98652,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "guides": [
@@ -97628,6 +98868,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Slide F8 into the slots in F4 and F3 from the front.",
@@ -97663,7 +98911,7 @@
    }
   },
   {
-   "name": "Step 49c",
+   "name": "Step 50c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -97934,6 +99182,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -98106,6 +99359,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Slide F8 into the slots in F4 and F3 from the front.",
@@ -98141,7 +99402,7 @@
    }
   },
   {
-   "name": "Step 50",
+   "name": "Step 51",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -98412,6 +99673,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "guides": [],
@@ -98598,6 +99864,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Stand the LCD screen up in front of the case, face to the front. Then move it in and slide it along until the end of its board goes into the slots in F8, its other end angled out in front of F9.",
@@ -98632,7 +99906,7 @@
    "ride_beats": true
   },
   {
-   "name": "Step 50c",
+   "name": "Step 51c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -98900,6 +100174,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -99131,6 +100410,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "wire_via": {
@@ -99187,7 +100474,7 @@
    "ride_beats": true
   },
   {
-   "name": "Step 51",
+   "name": "Step 52",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -99458,6 +100745,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "guides": [
@@ -99637,6 +100929,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Straighten the LCD screen, pushing it on through the slots in F8, then slide it back until its board goes into the notches in F9.",
@@ -99749,7 +101049,7 @@
    ]
   },
   {
-   "name": "Step 51c",
+   "name": "Step 52c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -99950,6 +101250,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -100095,6 +101400,14 @@
      ]
     },
     "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
      "by": "NAUO2",
      "pose": [
       0.0,
@@ -100260,7 +101573,7 @@
    ]
   },
   {
-   "name": "Step 52",
+   "name": "Step 53",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -100458,6 +101771,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -100626,6 +101944,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Stand F1 up in front of the case, the knob on the outside.",
@@ -100659,7 +101985,7 @@
    }
   },
   {
-   "name": "Step 52c",
+   "name": "Step 53c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -100795,6 +102121,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -100920,6 +102251,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Stand F1 up in front of the case, the knob on the outside.",
@@ -100953,7 +102292,7 @@
    }
   },
   {
-   "name": "Step 53",
+   "name": "Step 54",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -101086,6 +102425,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -101250,6 +102594,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Push F1 onto the tabs of F4 and F3.",
@@ -101286,7 +102638,7 @@
    }
   },
   {
-   "name": "Step 53c",
+   "name": "Step 54c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -101412,6 +102764,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -101521,6 +102878,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Push F1 onto the tabs of F4 and F3.",
@@ -101557,7 +102922,7 @@
    }
   },
   {
-   "name": "Step 54",
+   "name": "Step 55",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -101686,6 +103051,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -101884,6 +103254,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Push F5 onto the end of the case by the breadboard: the tabs of F1, F3 and F4 go into its slots. Its engraved side faces out.",
@@ -101919,7 +103297,7 @@
    }
   },
   {
-   "name": "Step 54c",
+   "name": "Step 55c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -102046,6 +103424,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -102155,6 +103538,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Push F5 onto the end of the case by the breadboard: the tabs of F1, F3 and F4 go into its slots. Its engraved side faces out.",
@@ -102190,7 +103581,7 @@
    }
   },
   {
-   "name": "Step 55",
+   "name": "Step 56",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -102333,6 +103724,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -102496,6 +103892,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Turn the case so its back faces you. Hook the tabs at the slit end of F2 into the slots in F5, its engraved side facing out and its other end swung out, then swing F2 shut onto the tabs of F3 and F4.",
@@ -102581,7 +103985,7 @@
    "caution": "The USB cable must sit in the slit at the bottom of F2."
   },
   {
-   "name": "Step 55c",
+   "name": "Step 56c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -102709,6 +104113,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -102812,6 +104221,14 @@
      ]
     },
     "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
      "by": "NAUO2",
      "pose": [
       0.0,
@@ -102925,7 +104342,7 @@
    "caution": "The USB cable must sit in the slit at the bottom of F2."
   },
   {
-   "name": "Step 56",
+   "name": "Step 57",
    "kind": "hover",
    "visible": [
     "NAUO1",
@@ -103056,6 +104473,11 @@
      0.0
     ],
     "NAUO43": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "NAUO45": [
      0.0,
      0.0,
      0.0
@@ -103232,6 +104654,14 @@
       0.0,
       0.0
      ]
+    },
+    "NAUO45": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
     }
    },
    "caption": "Push F6 onto the other end of the case: the tabs of F1, F2, F3 and F4 go into its slots. Its engraved side faces out.",
@@ -103267,7 +104697,7 @@
    }
   },
   {
-   "name": "Step 56c",
+   "name": "Step 57c",
    "kind": "done",
    "visible": [
     "NAUO1",
@@ -103396,6 +104826,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -103499,6 +104934,14 @@
      ]
     },
     "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
      "by": "NAUO2",
      "pose": [
       0.0,
@@ -103669,6 +105112,11 @@
      0.0,
      0.0,
      0.0
+    ],
+    "NAUO45": [
+     0.0,
+     0.0,
+     0.0
     ]
    },
    "wires": {
@@ -103772,6 +105220,14 @@
      ]
     },
     "NAUO43": {
+     "by": "NAUO2",
+     "pose": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "NAUO45": {
      "by": "NAUO2",
      "pose": [
       0.0,
