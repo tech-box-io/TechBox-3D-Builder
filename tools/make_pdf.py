@@ -328,7 +328,9 @@ def build(kit, out, steps_file='steps.json'):
         items = sum(len(gr['items']) for gr in groups)
         avail_w, avail_h = PAGE_W - 2 * MARGIN, y - (MARGIN + 4)
         band = 20.0
-        for cols in range(4, 14):                 # the fewest columns whose grid fits the page (cells a little flatter if need be)
+        # the fewest columns whose grid fits the page (cells a little flatter if need be), and never fewer than 6, so that a page
+        # of a few parts (a Part guide's) draws them no larger than a full page does (the Full Build's pages have 6 - 8)
+        for cols in range(6, 14):
             cell_w = avail_w / cols
             rows = sum(-(-len(gr['items']) // cols) for gr in groups)
             room = (avail_h - len(groups) * (band + 10)) / max(rows, 1)

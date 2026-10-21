@@ -187,8 +187,8 @@ after the other, page numbers and TechBox's logo, as Cadasio exports its 2D inst
 arrows, labels, eyes and close-ups included, into the kit's `pages/<steps file>/` (kept out of git: made again for each PDF);
 `make_pdf.py` lays out the title page, the Parts List pages, the note cards, each step's instruction and caution and the
 Completed View, with a bookmark per step, and refuses pictures drawn from another version of the steps. Make the PDF again
-after any change to the guide. The MRA's Full Build and Deconstruction: `share/MRA PDF guides/` (211 and 151 pages, 21 Oct 2026);
-its Parts' once Lee has checked them.
+after any change to the guide. The MRA's, 21 Oct 2026, in `share/MRA PDF guides/`: Full Build 211 pages, Deconstruction 151, Parts 1 - 3
+35, 50 and 132. A Parts List page has at least 6 columns, so that a Part's page of a few parts draws them no larger than a full page does.
 
 ## Publishing: the website
 
