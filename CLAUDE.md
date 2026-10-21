@@ -176,6 +176,20 @@ beside it as well, for the LMS:
 is a snapshot: make a new one after changing the guide. (`bundle.py` takes a steps file as a third argument, for a guide other
 than the kit's `steps.json`.) Checkpoints are for review; learners get the website (below).
 
+A guide's 2D instructions, as a PDF (Lee, 21 Oct 2026: landscape, a page per view, Step N and Step Nc on pages of their own one
+after the other, page numbers and TechBox's logo, as Cadasio exports its 2D instructions): first draw the pictures in the player
+(`player.html?steps=<file>` for a guide other than steps.json), then lay out the PDF:
+
+    (0, eval)(await fetch('js/pages.js').then(r => r.text())); _pages()        // in the page; _pages.progress says how far it has got
+    .venv.nosync/bin/python tools/make_pdf.py "MRA Build Instructions Prototype" "share/<folder>/MRA Full Build.pdf" [steps file]
+
+`player/js/pages.js` (an authoring tool, never published) draws every view that shows the model as the player does, lead lines,
+arrows, labels, eyes and close-ups included, into the kit's `pages/<steps file>/` (kept out of git: made again for each PDF);
+`make_pdf.py` lays out the title page, the Parts List pages, the note cards, each step's instruction and caution and the
+Completed View, with a bookmark per step, and refuses pictures drawn from another version of the steps. Make the PDF again
+after any change to the guide. The MRA's Full Build and Deconstruction: `share/MRA PDF guides/` (211 and 151 pages, 21 Oct 2026);
+its Parts' once Lee has checked them.
+
 ## Publishing: the website
 
 Learners open the guides on TechBox's website, `https://models.tech-box.io` (a Render static site; TechBox's own LMS,
@@ -185,7 +199,7 @@ names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part
 The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
 16 Oct 2026): the landing page `/` shows each kit that has a guide on the site (its Full Build's picture), `/kits/<kit>/`
 shows that kit's guides (Full Build, Part 1 ..., Deconstruction), and a guide's card opens the guide. Nothing is offered for
-download (the 2D PDF guides will be, later). Each guide's card picture is its Completed View (a deconstruction's is its Full
+download (the 2D PDF guides will be, later: `tools/make_pdf.py`, above). Each guide's card picture is its Completed View (a deconstruction's is its Full
 Build's card, the same picture: Lee, 18 Oct 2026; make the Full Build's first): in the player, after the guide is final, `await _dev.card()` saves it into the kit's `cards/<steps file>.webp` (cut to the model with a margin, 1440 x 900; for a
 Part, `player.html?steps=steps-part-1.json`), with `cards/<steps file>.json`, the model it shows; publish copies it into the
 release (it warns when a guide has none, or one drawn from another model; `parts.html` notes its model in `parts/parts.json`
@@ -411,8 +425,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
 
     docs/                      the rulebook, its evidence, and the research reports (research/mra/ = this kit:
                                build videos, engraved codes, how the arm and claw go together, wires, pins, colours)
-    player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts; runthrough and camsolve:
-                               authoring tools, never published), vendor/three/
+    player/                    THE player, for every kit: player.html, parts.html, js/ (core, player, parts; runthrough, camsolve,
+                               pages: authoring tools, never published), vendor/three/
     guides.json                the kits and guides on the website: kits (name, code, folder), guides (kit, steps file, card label),
                                embed_origins (the LMS addresses that may frame a guide)
     site/                      the website (Render serves this folder only): the current release of each published guide
@@ -420,7 +434,7 @@ background) rather than through `.claude/launch.json`, which only attaches to it
     render.yaml                the Render static site's configuration
     Open Website Preview.command   serves the local copy of the website (share/Website preview/site) on 8797, by double-click
     tools/                     build_model.py, stepgen.py, wires.py, glbio.py, serve.py, publish.py, check_site.py, site_pages.py,
-                               bundle.py, step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), motioncheck.py
+                               bundle.py, make_pdf.py (a guide as a 2D PDF), step_text.py, step_to_glb.py, cut_part.py, step_tree.py (a STEP's assembly tree, read as text), motioncheck.py
                                (wires during each move, 19 moments, against every part and each other; --trace names the bits of the two shapes blended), wirecheck.py
                                (wires passing into parts or into each other, view by view, sampled every 0.2 mm); site_assets/ = the TechBox wordmark (copied from the LMS) for the site's pages
                                cadasio/ = scripts for studying published guides; video/ = stills from a build video

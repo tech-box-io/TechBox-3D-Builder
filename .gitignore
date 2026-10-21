@@ -52,6 +52,8 @@ MRA_Videos/
 *.key
 share/
 thumbs/
+# The pictures drawn for a guide's 2D PDF (player/js/pages.js -> tools/make_pdf.py): made again whenever a PDF is made
+/*/pages/
 # Research pictures: screenshots, the published Cadasio guides' step pictures, review contact sheets, build-video stills and
 # the pictures Lee attaches in chat. Working material that stays on this Mac (Lee, 19 Oct 2026: research files need not go to
 # GitHub). The notes (.md), data (.json) and scripts (.py) beside them stay in git: they are small, they are the record behind
