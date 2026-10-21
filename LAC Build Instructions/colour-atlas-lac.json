@@ -1,5 +1,5 @@
 {
- "_about": "Colours for the LAC's meshes that take their colours from an atlas, keyed by the mesh names of our CAD export (lac.glb), in the form tools/build_model.py colour_from_atlas reads (bbox_min / bbox_max, solids {name, min, max, colour}; each solid's box in its part's own frame, mm). Two sources. (1) The Nano Board, which the LAC shares with the MRA: the MRA's entry for nano_Varsayılan, copied unchanged from colour-atlas-mra.json (the LAC's Nano is the MRA's export of the same model, nano-mra.glb). (2) Everything else from TechBox's own published LAC Cadasio project (instructions.online 19075-lac_full_build, docs/research/lac/cadasio/raw), read per solid as tools/cadasio/atlas.py does: each solid's colour is the one it is shown with most often. Single-colour meshes are under _single_colour. Written 19 Oct 2026 (first draft).",
+ "_about": "Colours for the LAC's meshes that take their colours from an atlas, keyed by the mesh names of our CAD export (lac.glb), in the form tools/build_model.py colour_from_atlas reads (bbox_min / bbox_max, solids {name, min, max, colour}; each solid's box in its part's own frame, mm). Two sources. (1) The Nano Board, which the LAC shares with the MRA: the MRA's entry for nano_Varsayılan, copied unchanged from colour-atlas-mra.json (the LAC's Nano is the MRA's export of the same model, nano-mra.glb). (2) Everything else from TechBox's own published LAC Cadasio project (instructions.online 19075-lac_full_build, docs/research/lac/cadasio/raw), read per solid as tools/cadasio/atlas.py does: each solid's colour is the one it is shown with most often. Single-colour meshes are under _single_colour. Written 19 Oct 2026 (first draft). Cadasio's coloured face copies (Surface-Offset: the resistors' bands, the knob's silver, the breadboard's printing, the Mini-B plug's and the switch's marks) are marked skin, so the face underneath takes their colour (as the LSM's atlas; Lee, 20 Oct 2026: the bands and the knob's ring showed the body through).",
  "_source": "docs/research/lac/cadasio/raw/19075-lac_full_build.json; MRA Build Instructions Prototype/colour-atlas-mra.json (nano_Varsayılan)",
  "_single_colour": {
   "Resistor stem 3": "#a6a9aa",
@@ -54,7 +54,8 @@
      2.334
     ],
     "colour": "#ff0e00",
-    "shown": 88
+    "shown": 88,
+    "skin": true
    },
    {
     "name": "LAC Resistor 1-Surface-Offset1[5]",
@@ -69,7 +70,8 @@
      2.453
     ],
     "colour": "#a36315",
-    "shown": 88
+    "shown": 88,
+    "skin": true
    },
    {
     "name": "LAC Resistor 1-Surface-Offset1[4]",
@@ -84,7 +86,8 @@
      2.392
     ],
     "colour": "#a36315",
-    "shown": 88
+    "shown": 88,
+    "skin": true
    },
    {
     "name": "LAC Resistor 1-Surface-Offset1[3]",
@@ -99,7 +102,8 @@
      2.096
     ],
     "colour": "#ff0e00",
-    "shown": 88
+    "shown": 88,
+    "skin": true
    },
    {
     "name": "LAC Resistor 1-Surface-Offset1[2]",
@@ -114,7 +118,8 @@
      2.045
     ],
     "colour": "#000000",
-    "shown": 88
+    "shown": 88,
+    "skin": true
    }
   ],
   "cadasio_instance": "LAC Resistor 1.SLDPRT-2/LAC Resistor 1-1"
@@ -1854,7 +1859,8 @@
      -28.429
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[63]",
@@ -1869,7 +1875,8 @@
      -33.509
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[43]",
@@ -1884,7 +1891,8 @@
      2.051
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[20]",
@@ -1899,7 +1907,8 @@
      35.091
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[1]",
@@ -1914,7 +1923,8 @@
      35.84
     ],
     "colour": "#0074d9",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[15]",
@@ -1929,7 +1939,8 @@
      35.84
     ],
     "colour": "#0074d9",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[34]",
@@ -1944,7 +1955,8 @@
      12.231
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[131]",
@@ -1959,7 +1971,8 @@
      38.535
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[72]",
@@ -1974,7 +1987,8 @@
      -38.491
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[14]",
@@ -1989,7 +2003,8 @@
      39.905
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[126]",
@@ -2004,7 +2019,8 @@
      27.451
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[21]",
@@ -2019,7 +2035,8 @@
      32.531
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[74]",
@@ -2034,7 +2051,8 @@
      -38.498
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[104]",
@@ -2049,7 +2067,8 @@
      12.211
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[12]",
@@ -2064,7 +2083,8 @@
      39.905
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[95]",
@@ -2079,7 +2099,8 @@
      -0.469
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[25]",
@@ -2094,7 +2115,8 @@
      27.471
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[58]",
@@ -2109,7 +2131,8 @@
      -10.649
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[75]",
@@ -2124,7 +2147,8 @@
      -37.984
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[47]",
@@ -2139,7 +2163,8 @@
      -3.029
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[13]",
@@ -2154,7 +2179,8 @@
      39.905
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[84]",
@@ -2169,7 +2195,8 @@
      -15.709
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[115]",
@@ -2184,7 +2211,8 @@
      24.911
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[86]",
@@ -2199,7 +2227,8 @@
      -13.189
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[3]",
@@ -2214,7 +2243,8 @@
      38.527
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[108]",
@@ -2229,7 +2259,8 @@
      14.751
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[11]",
@@ -2244,7 +2275,8 @@
      39.905
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[46]",
@@ -2259,7 +2291,8 @@
      -3.029
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[35]",
@@ -2274,7 +2307,8 @@
      12.211
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[127]",
@@ -2289,7 +2323,8 @@
      17.291
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[120]",
@@ -2304,7 +2339,8 @@
      29.991
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[38]",
@@ -2319,7 +2355,8 @@
      7.151
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[96]",
@@ -2334,7 +2371,8 @@
      2.051
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[59]",
@@ -2349,7 +2387,8 @@
      -23.329
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[40]",
@@ -2364,7 +2403,8 @@
      4.591
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[26]",
@@ -2379,7 +2419,8 @@
      24.911
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[73]",
@@ -2394,7 +2435,8 @@
      -39.833
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[98]",
@@ -2409,7 +2451,8 @@
      4.591
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[22]",
@@ -2424,7 +2467,8 @@
      32.551
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[105]",
@@ -2439,7 +2483,8 @@
      12.231
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[69]",
@@ -2454,7 +2499,8 @@
      -38.478
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[99]",
@@ -2469,7 +2515,8 @@
      4.591
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[52]",
@@ -2484,7 +2531,8 @@
      -10.649
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[116]",
@@ -2499,7 +2547,8 @@
      27.451
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[110]",
@@ -2514,7 +2563,8 @@
      19.831
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[101]",
@@ -2529,7 +2579,8 @@
      7.131
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[90]",
@@ -2544,7 +2595,8 @@
      -5.549
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[61]",
@@ -2559,7 +2611,8 @@
      -25.869
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[117]",
@@ -2574,7 +2627,8 @@
      27.471
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[50]",
@@ -2589,7 +2643,8 @@
      -8.109
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[66]",
@@ -2604,7 +2659,8 @@
      -38.478
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[121]",
@@ -2619,7 +2675,8 @@
      29.991
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[109]",
@@ -2634,7 +2691,8 @@
      14.751
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[67]",
@@ -2649,7 +2707,8 @@
      -38.478
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[41]",
@@ -2664,7 +2723,8 @@
      4.591
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[16]",
@@ -2679,7 +2739,8 @@
      35.84
     ],
     "colour": "#ff0e00",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[60]",
@@ -2694,7 +2755,8 @@
      -28.429
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[129]",
@@ -2709,7 +2771,8 @@
      -8.109
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[71]",
@@ -2724,7 +2787,8 @@
      -38.001
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[32]",
@@ -2739,7 +2803,8 @@
      17.291
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[111]",
@@ -2754,7 +2819,8 @@
      19.851
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[102]",
@@ -2769,7 +2835,8 @@
      9.671
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[91]",
@@ -2784,7 +2851,8 @@
      -5.569
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[27]",
@@ -2799,7 +2867,8 @@
      24.931
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[93]",
@@ -2814,7 +2883,8 @@
      -3.029
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[56]",
@@ -2829,7 +2899,8 @@
      -18.249
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[106]",
@@ -2844,7 +2915,8 @@
      17.291
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[123]",
@@ -2859,7 +2931,8 @@
      35.071
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[5]",
@@ -2874,7 +2947,8 @@
      39.892
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[7]",
@@ -2889,7 +2963,8 @@
      39.886
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[62]",
@@ -2904,7 +2979,8 @@
      -30.949
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[17]",
@@ -2919,7 +2995,8 @@
      37.631
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[118]",
@@ -2934,7 +3011,8 @@
      32.551
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[81]",
@@ -2949,7 +3027,8 @@
      -23.329
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[44]",
@@ -2964,7 +3043,8 @@
      -0.469
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[8]",
@@ -2979,7 +3059,8 @@
      40.399
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[122]",
@@ -2994,7 +3075,8 @@
      35.091
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[82]",
@@ -3009,7 +3091,8 @@
      -20.809
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[28]",
@@ -3024,7 +3107,8 @@
      22.371
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[94]",
@@ -3039,7 +3123,8 @@
      -0.489
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[68]",
@@ -3054,7 +3139,8 @@
      -38.478
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[76]",
@@ -3069,7 +3155,8 @@
      -38.413
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[48]",
@@ -3084,7 +3171,8 @@
      -5.549
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[112]",
@@ -3099,7 +3187,8 @@
      22.371
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[103]",
@@ -3114,7 +3203,8 @@
      9.691
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[85]",
@@ -3129,7 +3219,8 @@
      -13.169
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[107]",
@@ -3144,7 +3235,8 @@
      17.291
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[87]",
@@ -3159,7 +3251,8 @@
      -10.649
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[45]",
@@ -3174,7 +3267,8 @@
      -0.489
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[124]",
@@ -3189,7 +3283,8 @@
      37.631
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[6]",
@@ -3204,7 +3299,8 @@
      38.55
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[83]",
@@ -3219,7 +3315,8 @@
      -18.249
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[36]",
@@ -3234,7 +3331,8 @@
      9.691
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[30]",
@@ -3249,7 +3347,8 @@
      19.831
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[2]",
@@ -3264,7 +3363,8 @@
      37.631
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[18]",
@@ -3279,7 +3379,8 @@
      37.631
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[119]",
@@ -3294,7 +3395,8 @@
      32.531
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[132]",
@@ -3309,7 +3411,8 @@
      39.42
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[128]",
@@ -3324,7 +3427,8 @@
      -25.869
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[37]",
@@ -3339,7 +3443,8 @@
      9.671
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[70]",
@@ -3354,7 +3459,8 @@
      -39.857
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[39]",
@@ -3369,7 +3475,8 @@
      7.131
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[97]",
@@ -3384,7 +3491,8 @@
      2.071
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[78]",
@@ -3399,7 +3507,8 @@
      -33.509
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[113]",
@@ -3414,7 +3523,8 @@
      22.371
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[29]",
@@ -3429,7 +3539,8 @@
      22.371
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[23]",
@@ -3444,7 +3555,8 @@
      29.991
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[9]",
@@ -3459,7 +3571,8 @@
      39.97
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[100]",
@@ -3474,7 +3587,8 @@
      7.151
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[53]",
@@ -3489,7 +3603,8 @@
      -13.169
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[89]",
@@ -3504,7 +3619,8 @@
      -8.109
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[77]",
@@ -3519,7 +3635,8 @@
      -36.049
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[49]",
@@ -3534,7 +3651,8 @@
      -5.569
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[10]",
@@ -3549,7 +3667,8 @@
      39.905
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[4]",
@@ -3564,7 +3683,8 @@
      40.382
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[51]",
@@ -3579,7 +3699,8 @@
      -8.109
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[19]",
@@ -3594,7 +3715,8 @@
      35.071
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[33]",
@@ -3609,7 +3731,8 @@
      14.751
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[88]",
@@ -3624,7 +3747,8 @@
      -10.649
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[125]",
@@ -3639,7 +3763,8 @@
      14.751
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[79]",
@@ -3654,7 +3779,8 @@
      -30.949
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[42]",
@@ -3669,7 +3795,8 @@
      2.071
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[31]",
@@ -3684,7 +3811,8 @@
      19.851
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[24]",
@@ -3699,7 +3827,8 @@
      29.991
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[54]",
@@ -3714,7 +3843,8 @@
      -13.189
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[92]",
@@ -3729,7 +3859,8 @@
      -3.029
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[64]",
@@ -3744,7 +3875,8 @@
      -36.049
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[55]",
@@ -3759,7 +3891,8 @@
      -15.709
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[114]",
@@ -3774,7 +3907,8 @@
      24.931
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[57]",
@@ -3789,7 +3923,8 @@
      -20.809
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[65]",
@@ -3804,7 +3939,8 @@
      -38.478
     ],
     "colour": "#000000",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    },
    {
     "name": "Breadboard-Surface-Offset3[130]",
@@ -3819,7 +3955,8 @@
      35.84
     ],
     "colour": "#ff0e00",
-    "shown": 97
+    "shown": 97,
+    "skin": true
    }
   ],
   "cadasio_instance": "Breadboard-1"
@@ -3954,7 +4091,8 @@
      17.014
     ],
     "colour": "#a6a9aa",
-    "shown": 10
+    "shown": 10,
+    "skin": true
    },
    {
     "name": "LAC Knob-Surface-Offset1[1]",
@@ -3969,7 +4107,8 @@
      2.98
     ],
     "colour": "#a6a9aa",
-    "shown": 10
+    "shown": 10,
+    "skin": true
    }
   ],
   "cadasio_instance": "LAC Knob-1"
@@ -4104,7 +4243,8 @@
      1.0
     ],
     "colour": "#ffffff",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    },
    {
     "name": "Rocker Switch-Surface-Offset2[1]",
@@ -4119,7 +4259,8 @@
      5.18
     ],
     "colour": "#1e1616",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    },
    {
     "name": "Rocker Switch-Surface-Offset1[1]",
@@ -4134,7 +4275,8 @@
      1.0
     ],
     "colour": "#ffffff",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    },
    {
     "name": "Rocker Switch-Surface-Offset2[2]",
@@ -4149,7 +4291,8 @@
      0.703
     ],
     "colour": "#181818",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    },
    {
     "name": "Rocker Switch-Surface-Offset1[4]",
@@ -4164,7 +4307,8 @@
      1.002
     ],
     "colour": "#ffffff",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    },
    {
     "name": "Rocker Switch-Surface-Offset1[3]",
@@ -4179,7 +4323,8 @@
      1.0
     ],
     "colour": "#ffffff",
-    "shown": 22
+    "shown": 22,
+    "skin": true
    }
   ],
   "cadasio_instance": "Rocker Switch-1"
@@ -4284,7 +4429,8 @@
      3.43
     ],
     "colour": "#a6a9aa",
-    "shown": 1
+    "shown": 1,
+    "skin": true
    },
    {
     "name": "USB Right Angle-Surface-Offset1[1]",
@@ -4299,7 +4445,8 @@
      3.32
     ],
     "colour": "#a6a9aa",
-    "shown": 1
+    "shown": 1,
+    "skin": true
    }
   ],
   "cadasio_instance": "USB Cable 2-1/USB Right Angle-1"

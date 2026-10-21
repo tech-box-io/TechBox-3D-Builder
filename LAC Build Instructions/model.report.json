@@ -2,11 +2,11 @@
  "summary": {
   "source": "lac-guide.glb",
   "source_bytes": 7431252,
-  "model_bytes": 1533108,
-  "triangles_in": 728052,
-  "triangles_out": 138049,
-  "edge_segments": 67749,
-  "meshes": 36,
+  "model_bytes": 1556872,
+  "triangles_in": 723364,
+  "triangles_out": 137511,
+  "edge_segments": 72075,
+  "meshes": 35,
   "parts_kept": 58,
   "parts_in_source": 58,
   "materials": [
@@ -57,15 +57,15 @@
    "used_by": 1,
    "solids": 133,
    "tris_in": 56640,
-   "tris_out": 22370,
-   "edge_segments": 18419,
+   "tris_out": 23012,
+   "edge_segments": 21752,
    "colours": [
     "#000000",
     "#0074d9",
     "#ff0e00",
     "#ffffff"
    ],
-   "note": "atlas match 99%"
+   "note": "atlas match 99%; 30605 faces under a skin recoloured"
   },
   {
    "mesh": "F3",
@@ -115,27 +115,15 @@
    "used_by": 2,
    "solids": 6,
    "tris_in": 9914,
-   "tris_out": 2191,
-   "edge_segments": 222,
+   "tris_out": 2102,
+   "edge_segments": 671,
    "colours": [
     "#000000",
     "#0074d9",
     "#a36315",
     "#ff0e00"
    ],
-   "note": "atlas match 100%"
-  },
-  {
-   "mesh": "Resistor stem 3",
-   "used_by": 4,
-   "solids": 1,
-   "tris_in": 1172,
-   "tris_out": 252,
-   "edge_segments": 35,
-   "colours": [
-    "#a6a9aa"
-   ],
-   "note": ""
+   "note": "atlas match 100%; 1150 faces under a skin recoloured"
   },
   {
    "mesh": "F1",
@@ -180,13 +168,13 @@
    "used_by": 1,
    "solids": 3,
    "tris_in": 4440,
-   "tris_out": 1690,
-   "edge_segments": 1021,
+   "tris_out": 1694,
+   "edge_segments": 1226,
    "colours": [
     "#1e1616",
     "#a6a9aa"
    ],
-   "note": "atlas match 100%"
+   "note": "atlas match 100%; 620 faces under a skin recoloured"
   },
   {
    "mesh": "Wire Cap V2",
@@ -245,14 +233,14 @@
    "used_by": 1,
    "solids": 7,
    "tris_in": 4723,
-   "tris_out": 1246,
-   "edge_segments": 592,
+   "tris_out": 1253,
+   "edge_segments": 596,
    "colours": [
     "#181818",
     "#1e1616",
     "#ffffff"
    ],
-   "note": "atlas match 86%"
+   "note": "atlas match 86%; 1494 faces under a skin recoloured"
   },
   {
    "mesh": "Piezo Buzzer",
@@ -413,13 +401,13 @@
    "used_by": 1,
    "solids": 3,
    "tris_in": 3592,
-   "tris_out": 1157,
-   "edge_segments": 535,
+   "tris_out": 1152,
+   "edge_segments": 561,
    "colours": [
     "#1e1616",
     "#a6a9aa"
    ],
-   "note": "atlas match 100%"
+   "note": "atlas match 100%; 792 faces under a skin recoloured"
   },
   {
    "mesh": "Paper",

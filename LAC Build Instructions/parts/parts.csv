@@ -2,7 +2,7 @@ name,quantity,image
 "Breadboard",1,Breadboard.png
 "F3",1,F3.png
 "Nano Board",1,Nano-Board.png
-"Resistor",2,Resistor.png
+"12 kΩ Resistor",2,12-k-Resistor.png
 "Real Time Clock",1,Real-Time-Clock.png
 "Breadboard Wire (M-M)",8,Breadboard-Wire-M-M.png
 "Breadboard Wire (M-F)",4,Breadboard-Wire-M-F.png

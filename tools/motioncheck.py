@@ -44,11 +44,14 @@ def main(argv):
                   extra_parts={i: (kit / e['glb'], e['pose']) for i, e in spec.get('extra_parts', {}).items()})  # has them: as wirecheck.py)
     routes, views = steps['routes'], steps['views']
     radius = {w: d['radius'] for w, d in steps['wires'].items()}
-    centre = {}
 
     def mix(a, b, k, part=None):
+        """Part of the way from pose a to pose b as the player mixes them (player.js mixPose): the turn spread evenly about b's pivot (a's
+        if b has none), that point moved in a straight line. A pose written as a turn about a far point (compose() without a pivot: the
+        origin) then swings its part round it, as it does on screen (LAC round 1, 20 Oct 2026: caps 1.4 m off screen)."""
         A, B = _matrix(a), _matrix(b)
-        c = centre.setdefault(part, model.inst[part].bounds.mean(0)) if part in model.inst else np.zeros(3)
+        turned = lambda p: isinstance(p, dict) and p.get('r') and p['r'][3]
+        c = np.asarray(((b if turned(b) else a).get('at') if (turned(a) or turned(b)) else None) or [0.0, 0.0, 0.0], float)
         R = Slerp([0, 1], Rotation.from_matrix([A[:3, :3], B[:3, :3]]))([k]).as_matrix()[0]
         M = np.eye(4)
         M[:3, :3] = R

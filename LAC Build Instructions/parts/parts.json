@@ -2,7 +2,7 @@
  "kit": "LCD Alarm Clock (LAC)",
  "part": "Full Build",
  "image_size": 500,
- "model": "790b1307a4b3",
+ "model": "b7bef0e02fe4",
  "parts": [
   {
    "name": "Breadboard",
@@ -20,9 +20,9 @@
    "image": "Nano-Board.png"
   },
   {
-   "name": "Resistor",
+   "name": "12 kΩ Resistor",
    "quantity": 2,
-   "image": "Resistor.png"
+   "image": "12-k-Resistor.png"
   },
   {
    "name": "Real Time Clock",

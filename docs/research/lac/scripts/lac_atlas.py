@@ -41,7 +41,8 @@ for k, r in refs.items():
         v = rv.get(refs[L]['ver'])
         if not v or v.get('versionMinX') in (None, 'None'): continue
         c = seen[L].most_common(1)[0][0] if seen[L] else (next((col[a] for a in chain(L) if a in col), None) or kd(v.get('versionMtlData')))
-        sol.append(dict(name=refs[L]['name'].split('/')[-1], min=[round(float(v['versionMin' + a]) * MM, 3) for a in 'XYZ'], max=[round(float(v['versionMax' + a]) * MM, 3) for a in 'XYZ'], colour=c, shown=sum(seen[L].values())))
+        sol.append(dict(name=refs[L]['name'].split('/')[-1], min=[round(float(v['versionMin' + a]) * MM, 3) for a in 'XYZ'], max=[round(float(v['versionMax' + a]) * MM, 3) for a in 'XYZ'], colour=c, shown=sum(seen[L].values()),
+                        **({'skin': True} if 'Surface-Offset' in refs[L]['name'] else {})))   # (a coloured face copy: the face under it takes its colour, as the LSM's make_atlas.py)
     if not sol: continue
     if not any(s['shown'] for s in sol):
         continue                                   # an instance never shown: try another

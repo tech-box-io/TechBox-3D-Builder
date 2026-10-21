@@ -39,9 +39,9 @@
       "_about": "the CAD's own wire bodies (the jumpers, the switch's, potentiometer's and buzzer's leads, the LCD's wires and the USB cable, in every pose the CAD has them): the player draws every wire itself, along the centre lines in wire-paths.json, so that it can move. Not the Dupont caps on their ends (Wire Cap / Wire Cap V2), which are parts."
     },
     {
-      "match": "^Part6\\^LAC Resistor 1\\.SLDPRT$",
+      "match": "^(Part6\\^LAC Resistor 1\\.SLDPRT|Resistor stem 3)$",
       "omit": true,
-      "_about": "each resistor's two straight legs: the CAD carries the legs both straight (as bought) and bent (Resistor stem 3, as they go into the breadboard), one over the other; the guide shows them bent"
+      "_about": "each resistor's legs, straight (as bought) and bent (Resistor stem 3, as they go into the breadboard): the CAD carries both, one over the other. guide.py draws the legs as wires instead, straight and then bent in Step 4, as the LSM's (Lee, 20 Oct 2026)"
     },
     {
       "match": "^nano_",
@@ -116,10 +116,10 @@
       "_about": "the RTC's coin cell"
     },
     {
-      "match": "^(LAC Resistor 1|Resistor stem 3)$",
+      "match": "^LAC Resistor 1$",
       "simplify_mm": 0.02,
       "outline": true,
-      "_about": "the 2 resistors: body and colour bands from the LAC atlas, legs silver"
+      "_about": "the 2 resistors: body and colour bands from the LAC atlas (the bands marked skin there); the legs are wires, drawn by guide.py"
     },
     {
       "match": "^(LAC Potentiometer|LAC Knob|LAC Nut|Washer)$",

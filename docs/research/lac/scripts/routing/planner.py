@@ -5,14 +5,14 @@ import heapq, itertools
 import trimesh
 from pot_common import *
 
-def surface_samples(view, skip=(), spacing=0.35, box=None):
+def surface_samples(view, skip=(), spacing=0.35, box=None, poses=None):
     v = VIEWS[view]
     pts, nrm = [], []
-    for i in v['visible']:
+    for i in list(v['visible']) + [i for i in (poses or {}) if i not in v['visible']]:
         if i in skip:
             continue
         m = M.inst[i]
-        off = v.get('offsets', {}).get(i)
+        off = (poses or {}).get(i, v.get('offsets', {}).get(i))
         V = apply_pose(off, m.vertices) if off is not None else np.asarray(m.vertices)
         if box is not None:
             lo, hi = V.min(0), V.max(0)
@@ -36,11 +36,11 @@ def wire_samples(view, exclude, extra=()):
     return np.vstack(P), np.concatenate(R)
 
 class Field:
-    def __init__(self, view, box, skip=(), exclude=POTW, extra=(), pitch=1.0):
+    def __init__(self, view, box, skip=(), exclude=POTW, extra=(), pitch=1.0, poses=None):
         self.lo, self.hi, self.h = np.asarray(box[0], float), np.asarray(box[1], float), pitch
         self.shape = tuple((np.ceil((self.hi - self.lo) / pitch)).astype(int) + 1)
         g = np.stack(np.meshgrid(*[self.lo[k] + np.arange(self.shape[k]) * pitch for k in range(3)], indexing='ij'), -1).reshape(-1, 3)
-        sp, sn = surface_samples(view, skip, box=(self.lo, self.hi))
+        sp, sn = surface_samples(view, skip, box=(self.lo, self.hi), poses=poses)
         t = cKDTree(sp); d, k = t.query(g, distance_upper_bound=12.0)
         d = np.where(np.isinf(d), 12.0, d)
         inside = np.zeros(len(g), bool); ok = k < len(sp)

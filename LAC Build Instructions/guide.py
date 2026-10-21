@@ -75,7 +75,7 @@ JUMPER_CAPS = [c for _, a, b, _ in JUMPERS_6 + JUMPERS_2 for c in (a[0], b[0])]
 LEAD_CAPS = [w[1] for w in SWITCH_LEADS + POT_LEADS + BUZZER_LEADS]
 LCD_MALE, LCD_FEMALE = [w[1] for w in LCD_WIRES], [w[3] for w in LCD_WIRES]
 
-NAMES = {BREADBOARD: 'Breadboard', F3: 'F3', RTC: 'Real Time Clock', COIN: 'Real Time Clock', RES1: 'Resistor', RES2: 'Resistor',
+NAMES = {BREADBOARD: 'Breadboard', F3: 'F3', RTC: 'Real Time Clock', COIN: 'Real Time Clock', RES1: '12 kΩ Resistor', RES2: '12 kΩ Resistor',
          F1: 'F1', POT: 'Potentiometer', NUT: 'Potentiometer', KNOB: 'Potentiometer', WASHER: 'Potentiometer', F7A: 'F7', F7B: 'F7', F8: 'F8',
          F9: 'F9', F4: 'F4', F5: 'F5', F2: 'F2', F6: 'F6', SWITCH: 'Rocker Switch', BUZZER: 'Alarm Buzzer', LCD: 'LCD Screen', USB_B: 'USB Cable', USB_A: 'USB Cable',
          PAPER: 'Breadboard', NANO: 'Nano Board', **{c: 'Breadboard Wire (M-M)' for c in JUMPER_CAPS},
@@ -100,7 +100,7 @@ CODES = {F3: ([0, 1, 0], [714.19, 887.48, 1234.4]), F1: ([1, 0, 0], [723.7, 895.
 WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'
 PART_GROUPS = [
     ('Parts List', 'Electronics', 'electronics', '#f9c0c0', '#ec8d8d',
-     lambda n: n in ('Breadboard', 'Nano Board', 'Resistor', 'Real Time Clock', 'Rocker Switch', 'Potentiometer', 'Alarm Buzzer', 'LCD Screen', 'USB Cable')),
+     lambda n: n in ('Breadboard', 'Nano Board', '12 kΩ Resistor', 'Real Time Clock', 'Rocker Switch', 'Potentiometer', 'Alarm Buzzer', 'LCD Screen', 'USB Cable')),
     ('Parts List', 'Wires', 'electronics', '#fde3b8', '#f2bb63', lambda n: n.startswith('Breadboard Wire')),
     ('Parts List (Cont.)', 'Case', 'wood', WOOD_BAND, WOOD_HALO, lambda n: re.fullmatch(r'F\d+', n)),
 ]
@@ -130,7 +130,8 @@ def parts_list(parts):
     return [dict(name=name, groups=groups) for name, groups in zip(names, pages.values())]
 
 
-PART_VIEWS = {'LCD Screen': {'dir': [0.8, 0.45, 0.4]}}              # (the parts list pictures the LCD from the front, its screen showing)
+PART_VIEWS = {'LCD Screen': {'dir': [0.8, 0.45, 0.4]},              # (the parts list pictures the LCD from the front, its screen showing,
+              'Potentiometer': {'dir': [0.5417, 0.6428, -0.5417]}}  # and the potentiometer from its knob's side: Lee, 20 Oct 2026)
 g = Guide(HERE, title='LCD Alarm Clock (LAC)', part='Full Build', names=NAMES, part_of=PART_OF, unlisted=UNLISTED, hover_names=HOVER_NAMES, part_views=PART_VIEWS,
           source='lac-guide.glb', codes=CODES, hero_azimuth=135,     # the finished clock from the front (F1: the screen and the knob), the knob's end
           parts_list=parts_list, copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
@@ -171,9 +172,36 @@ def hole_label(text, cap):
     return dict(text=text, anchor=[x, BB_TOP, z], id=BREADBOARD)
 
 
+def screen_x(p, view_dir):
+    """How far right a point is in a view from view_dir (world up)."""
+    right = unit(np.cross(-unit(view_dir), [0.0, 1.0, 0.0]))
+    return float(np.dot(np.asarray(p, float), right))
+
+
+def sides(labels, view_dir):
+    """Labels on spots side by side, the left one to the left of the view and the right one to the right, so that in a close frame
+    neither sits on the parts nor do their leaders cross (Lee, 20 Oct 2026)."""
+    out = [dict(l) for l in labels]
+    order = sorted(range(len(out)), key=lambda k: screen_x(out[k]['anchor'], view_dir))
+    out[order[0]]['side'], out[order[-1]]['side'] = 'left', 'right'
+    return out
+
+
+def away_from(label, part_point, view_dir):
+    """A label put on the side of the view away from a part (the switch, the potentiometer) that its wire comes from."""
+    return dict(label, side='right' if screen_x(label['anchor'], view_dir) > screen_x(part_point, view_dir) else 'left')
+
+
 def wire_at(cap):
     """Where a male cap standing in the breadboard holds its wire (the top of its pin, inside the housing; seated)."""
     return np.asarray(CAPS[cap]['wire_at'], float)
+
+
+def cap_mid(cap):
+    """The middle of a Dupont cap's housing (seated). A pose of the cap is written about it: the player turns a part about its pose's
+    `at` between two poses (player.js mixPose), and compose() writes the origin, 1.7 m away, unless it is given a pivot (Lee, 20 Oct
+    2026: the buzzer's caps swung off the screen in Steps 33 - 34)."""
+    return np.asarray(CAPS[cap]['box'], float).mean(0).round(2)
 
 
 def cad_line(key, start_cap=None):
@@ -220,10 +248,11 @@ g.rest_at([BREADBOARD], [0.0, BB_HOVER, 0.0])
 g.carry([PAPER], by=BREADBOARD)
 _plo, _phi = g.model.inst[PAPER].bounds
 BENCH_LOOK = [1, 1, -1]                                             # from the front, at the buzzer's end
+BENCH_DIAG = [0.5792, 0.5736, -0.5792]                              # (the three-quarter view BENCH_LOOK gives, for a frame of our own)
 _tail = [float(_phi[0]) - 4.0, float(_plo[1]) - 1.0, float(_plo[2]) + 4.0]   # (the arrow at the backing's front corner, out from under the breadboard)
 g.place('Begin with the breadboard. Peel the protective backing off its underside.', appear=[BREADBOARD], ride={PAPER: [0.0, -50.0, 0.0]}, lines=False,
         arrows=[dict(tail=_tail, head=[_tail[0], _tail[1] - 26.0, _tail[2]], normal=[0.71, 0.0, -0.71], part=PAPER)],
-        labels={BREADBOARD: 'Breadboard'}, look_from=BENCH_LOOK)
+        labels=[dict(id=BREADBOARD, text='Breadboard', side='top')], look_from=BENCH_LOOK)   # (clear of the arrow)
 g.put_away([PAPER])
 _lo, _hi = g.model.inst[BREADBOARD].bounds
 BB_CORNERS = [[x, float(_lo[1]), z] for x in (float(_lo[0]) + 2.0, float(_hi[0]) - 2.0) for z in (float(_lo[2]) + 2.0, float(_hi[2]) - 2.0)]
@@ -231,40 +260,71 @@ g.place('Stick the breadboard down onto F3, its red and blue rails along the sam
         path=[[0.0, BB_HOVER, 0.0], ZERO], lines_at=BB_CORNERS, labels={F3: 'F3'}, look_from=BENCH_LOOK)
 g.place('Press the Nano Board into the breadboard: its pins go in rows c and g, columns 1 to 15, with its USB socket at column 1.', move=[NANO],
         direction=[0, 1, 0], hover=40,
-        labels=[dict(id=NANO, text='Nano Board'), dict(text='c15', anchor=HOLES['c15'], id=BREADBOARD), dict(text='g1', anchor=HOLES['g1'], id=BREADBOARD)],
-        lines_at=[[[HOLES[h][0], 891.6, HOLES[h][2]], HOLES[h]] for h in ('c15', 'g1')], look_from=BENCH_LOOK)   # (each corner pin's tip, to its hole)
+        labels=[dict(id=NANO, text='Nano Board', side='top'), dict(text='c15', anchor=HOLES['c15'], id=BREADBOARD, side='right'),
+                dict(text='g1', anchor=HOLES['g1'], id=BREADBOARD, side='left')],   # (each hole's label to its own side, its leader across its lead line)
+        lines_at=[[[HOLES[h][0], 891.6, HOLES[h][2]], HOLES[h]] for h in ('c15', 'g1')],   # (each corner pin's tip, to its hole)
+        view_dir=BENCH_DIAG, frame=([676.5, 916.0, 1324.3], 50.0))   # (close on the Nano and its two corner holes, as the LSM's Step 3)
 
-# The resistors: their legs bent down first (one view: the published guide swaps a straight-legged model for a bent one, which the
-# player cannot; the CAD carries both, and the straight legs are left out of the model), then each pressed in from the (-) blue
-# rail to row h.
+# The resistors: their legs bent down first (Step 4: shown straight, as bought, then bent, as the LSM's: Lee, 20 Oct 2026), then each
+# pressed in from the (-) blue rail to row h. The legs are wires (the CAD's own legs, straight and bent, leave the model:
+# materials.json), so that they can bend. Measured from the CAD: the body x 677.03 - 688.03 on an axis at y 901.15 (RES2: 901.27,
+# 5.15 mm further to -z); each bent leg runs on from the body's end to over its hole and turns 8.0 mm straight down, its tip 3.96 mm
+# under the holes' tops (docs/research/lac/round1/lsm_techniques.md, section 1).
 RES_HOVER = 37.0
+LEG_R, LEG_RINGS, LEG_DROP = 0.315, 0.25, 8.0
+RES_LEG_ENDS = {   # per leg: where it leaves the body (0.4 mm inside its end), and the point over its hole where it turns down
+    RES1: [([687.63, 901.15, 1277.13], [699.20, 901.15, 1277.36]),     # to the (-) blue rail
+           ([677.43, 901.15, 1276.38], [666.18, 901.15, 1276.20])],    # to h27
+    RES2: [([687.63, 901.27, 1271.98], [699.20, 901.27, 1272.21]),
+           ([677.44, 901.27, 1271.23], [666.18, 901.27, 1271.05])]}    # to h29
+
+
+def legs(body, name):
+    """Each leg of a resistor as a wire tied to its body: straight out, as bought, or bent through 30, 60 and 90 degrees at the point
+    over its hole; every shape as long as the bent leg, so that the tip swings round rather than shrinking (as the LSM's)."""
+    straight_, bent = {}, {}
+    for k, (start, corner) in enumerate(RES_LEG_ENDS[body], 1):
+        wid = f'{name} leg {k}'
+        g.wire(wid, 'pin', LEG_R, name=NAMES[body])
+        start, corner = np.array(start), np.array(corner)
+        line = W.rounded([start, corner, corner - [0.0, LEG_DROP, 0.0]], radius=1.2, spacing=0.25)
+        n, run = W.length(line), float(np.linalg.norm(corner - start))
+        out = (corner - start) / run
+        shapes = [W.route(W.rounded([start, corner, corner + (out * np.cos(t) + [0.0, -np.sin(t), 0.0]) * (n - run)], radius=1.2, spacing=0.25),
+                          a=body, spacing=LEG_RINGS) for t in np.radians([30.0, 60.0])]
+        bent[wid] = [*shapes, W.route(line, a=body, spacing=LEG_RINGS)]
+        straight_[wid] = W.route(W.straight(start, out, n), a=body, spacing=LEG_RINGS)
+    return straight_, bent
+
+
+R1_STRAIGHT, R1_BENT = legs(RES1, 'res1')
+R2_STRAIGHT, R2_BENT = legs(RES2, 'res2')
+g.part_picture(NAMES[RES1], wires=[dict(colour='pin', radius=LEG_R, pts=r['pts']) for r in R1_STRAIGHT.values()])   # (pictured as bought)
 g.rest_at([RES1], [0.0, RES_HOVER, 0.0])
-_res = g.model.inst[RES1].bounds.mean(0)
+RES_MID = np.array([682.53, 901.15, 1276.77])                       # (the body's middle)
 g.in_hand = [RES1]                                                  # (shown on its own, as published: a view of the resistor alone)
-g.place('Bend the legs of both resistors down at right angles, like this, so that they fit the breadboard.', appear=[RES1], single=True, lines=False, staged=True,
-        labels={RES1: '2x Resistor'}, frame=((_res + [0.0, RES_HOVER, 0.0]).round(1).tolist(), 24.0), look_from=BENCH_LOOK,
-        review='The published guide shows the legs straight, then bent; this view shows them bent only (the player cannot swap a part '
-               'for another of a new shape). Enough?')
+g.place('Bend the legs of both 12 kΩ resistors (brown, red, black, red, brown) down at right angles, like this, so that they fit the breadboard.',
+        appear=[RES1], lines=False, staged=True, wires=R1_STRAIGHT, wires_done=R1_BENT,
+        labels=[dict(id=RES1, text='2x - 12 kΩ Resistor', anchor=[682.5, 903.5, 1276.8], side='up-left')],   # (on the body's top: the CAD's legs are not
+        eye=[dict(id=RES1, anchor=[682.5, 901.2, 1274.3], side='down-right')],                               # drawn; label and eye clear of the legs)
+        frame=((RES_MID + [0.0, RES_HOVER, 0.0]).round(1).tolist(), 24.0), look_from=BENCH_LOOK)   # (the straight legs span x 658.7 - 706.7)
 g.in_hand = []
 
-
-def resistor_lines(res):
-    """Each leg's tip, straight down into its hole."""
-    legs = [b for b in g.model.inst[res].split(only_watertight=False) if b.bounds[1][1] - b.bounds[0][1] > 6.0]
-    tips = sorted([[float(b.bounds.mean(0)[0]), float(b.bounds[0][1]), float(b.bounds.mean(0)[2])] for b in legs])
-    return [[t, [t[0], BB_TOP, t[2]]] for t in (tips[0], tips[-1])]
-
-
+RES_LEGS = {RES1: [[699.2, 893.1, 1277.5], [666.0, 893.1, 1276.3]], RES2: [[699.1, 893.3, 1272.2], [666.0, 893.3, 1271.0]]}   # (each leg's tip: Lee, 20 Oct 2026)
 for res, h in ((RES1, 'h27'), (RES2, 'h29')):
-    g.place(f"Press {'a' if res == RES1 else 'the other'} resistor into the breadboard, from the (-) blue rail to {h}.", move=[res],
+    g.place(f"Press {'a' if res == RES1 else 'the other'} 12 kΩ resistor into the breadboard, from the (-) blue rail to {h}.", move=[res],
             **(dict(path=[[0.0, RES_HOVER, 0.0], ZERO]) if res == RES1 else dict(direction=[0, 1, 0], hover=RES_HOVER)),
-            labels=[dict(text='(-) blue', anchor=[paths['breadboard']['rails']['- blue'], BB_TOP, HOLES[h][2] + 1.1], id=BREADBOARD), dict(text=h, anchor=HOLES[h], id=BREADBOARD)],
-            lines_at=resistor_lines(res), look_from=BENCH_LOOK)
+            labels=[dict(text='(-) blue', anchor=[paths['breadboard']['rails']['- blue'], BB_TOP, HOLES[h][2] + 1.1], id=BREADBOARD, side='left'),
+                    dict(text=h, anchor=HOLES[h], id=BREADBOARD, side='right')],   # (each to its own side, clear of the resistor)
+            lines_at=RES_LEGS[res], wires={k: v[-1] for k, v in R2_BENT.items()} if res == RES2 else None,
+            view_dir=BENCH_DIAG, frame=([682.7, 918.0, HOLES[h][2] + 0.6], 32.0))   # (close on the two holes and the resistor over them)
 
 # The real-time clock module (with its coin cell), its six pins along row j, j19 to j24.
 g.place('Press the real time clock module into row j, its pins from j19 to j24, with its coin cell facing the back.', move=[RTC, COIN], direction=[0, 1, 0], hover=34,
-        labels=[dict(id=RTC, text='Real Time Clock'), dict(text='j24', anchor=HOLES['j24'], id=BREADBOARD), dict(text='j19', anchor=HOLES['j19'], id=BREADBOARD)],
-        lines_at=[[[HOLES[h][0], 893.69, HOLES[h][2]], HOLES[h]] for h in ('j24', 'j19')], look_from=BENCH_LOOK)
+        labels=[dict(id=RTC, text='Real Time Clock', side='top'), dict(text='j24', anchor=HOLES['j24'], id=BREADBOARD, side='right'),
+                dict(text='j19', anchor=HOLES['j19'], id=BREADBOARD, side='left')],
+        lines_at=[[[HOLES[h][0], 893.69, HOLES[h][2]], HOLES[h]] for h in ('j24', 'j19')],
+        view_dir=BENCH_DIAG, frame=([660.0, 934.0, 1290.0], 52.0))   # (close on row j and the module over it)
 # ================================================================ THE BREADBOARD AND THE NANO BOARD (end)
 
 # ================================================================ JUMPER WIRES (begin)
@@ -298,8 +358,35 @@ def jumper_done(ca, cb, key):
     return W.route(line, a=ca, b=cb, stretch=True)
 
 
-def jumper_run(jumpers, z_mid, ribbon_caption, wire_caption, camera):
-    """The ribbon peeled apart, then each of its wires plugged in."""
+def frame_on(points, view_dir, margin=8.0, least=26.0):
+    """A camera from view_dir framing these points (assembly mm) closely: the middle of their box, the radius to the farthest plus a margin."""
+    pts = np.asarray(points, float)
+    mid = (pts.min(0) + pts.max(0)) / 2
+    return dict(view_dir=view_dir, frame=(mid.round(1).tolist(), round(max(least, float(np.linalg.norm(pts - mid, axis=1).max()) + margin), 1)))
+
+
+def held_over(caps):
+    """Where the holes of these caps are, and the caps held over them (for framing)."""
+    p = np.array([[wire_at(c)[0], BB_TOP, wire_at(c)[2]] for c in caps])
+    return np.vstack([p, p + [0.0, HOVER_MM + 12.0, 0.0]])
+
+
+def corners(part, pose=None):
+    """The corners of a part's box, where it is at `pose` (relative to its seat)."""
+    lo, hi = g.model.inst[part].bounds
+    return posed_line(pose, np.array([[x, y, z] for x in (lo[0], hi[0]) for y in (lo[1], hi[1]) for z in (lo[2], hi[2])]))
+
+
+def hole_camera(caps, view_dir, margin=8.0, least=26.0):
+    """A camera close on the holes a step's caps go into and on the caps held over them (as the LSM framed its breadboard steps: Lee,
+    20 Oct 2026, "zoom in so that we can better see the target slots")."""
+    return frame_on(held_over(caps), view_dir, margin, least)
+
+
+def jumper_run(jumpers, z_mid, ribbon_caption, wire_caption, view_dirs):
+    """The ribbon peeled apart, then each of its wires plugged in: the peeled wires are taken off the screen, and each step opens on its
+    wire held over its two holes (so that the step's camera can be close on them), then pushes it in. (As the LSM's: picked up off the
+    table, out of the close frame, each wire swept in from below it: the review of Lee's first round, 20 Oct 2026.)"""
     joined, apart = ribbon(jumpers, z_mid, RIBBON_PITCH), ribbon(jumpers, z_mid, SPLIT_PITCH)
     caps = [c for _, a, b, _ in jumpers for c in (a[0], b[0])]
     for colour, (ca, _), (cb, _), _ in jumpers:
@@ -310,13 +397,13 @@ def jumper_run(jumpers, z_mid, ribbon_caption, wire_caption, camera):
             wires={f'jumper {c}': joined[c][2] for c, *_ in jumpers}, wires_done={f'jumper {c}': apart[c][2] for c, *_ in jumpers},
             ride={c: apart[col][k] for col, (ca, _), (cb, _), _ in jumpers for k, c in ((0, ca), (1, cb))},
             frame=((mid + [8.0, 0.0, 0.0]).round(1).tolist(), 42.0), view_dir=[0.45, 0.8, -0.4])
+    g.put_away(caps)
     for k, (colour, (ca, la), (cb, lb), key) in enumerate(jumpers):
-        a, b, _ = apart[colour]
         done = jumper_done(ca, cb, key)
-        g.place(wire_caption.format(colour=colour.replace('_', ' '), a=la, b=lb), move=[ca, cb],
-                paths={ca: [a, UP, ZERO], cb: [b, UP, ZERO]}, lines=False,
-                labels=[hole_label(la, ca), hole_label(lb, cb)], eye=[dict(anchor=[FRONT_X + k * SPLIT_PITCH, TABLE_Y + 1.0, z_mid])],
-                wires_done={f'jumper {colour}': [done, done]}, **camera)
+        g.rest_at([ca, cb], UP)
+        g.place(wire_caption.format(colour=colour.replace('_', ' '), a=la, b=lb), move=[ca, cb], appear=[ca, cb],
+                paths={ca: [UP, ZERO], cb: [UP, ZERO]}, lines=False, labels=sides([hole_label(la, ca), hole_label(lb, cb)], view_dirs[colour]),
+                wires={f'jumper {colour}': done}, wires_done={f'jumper {colour}': done}, **hole_camera([ca, cb], view_dirs[colour]))
 
 
 # The jumper wires are kit parts, but in the CAD only their caps are parts (the wire is drawn): listed by hand, pictured straight with
@@ -326,16 +413,25 @@ _pa, _pb = np.asarray(_pic[2]['pts'][0], float), np.asarray(_pic[2]['pts'][-1], 
 g.list_part('Breadboard Wire (M-M)', ['NAUO16', 'NAUO17'], 8, after='Real Time Clock')
 g.part_picture('Breadboard Wire (M-M)', poses={'NAUO16': _pic[0], 'NAUO17': _pic[1]},
                wires=[dict(colour='jumper_black', radius=WIRE_R, pts=np.linspace(_pa, _pb, 40))])
-JUMPER_CAMERA = dict(view_dir=[0.62, 0.62, -0.48], frame=([710.0, 905.0, 1305.0], 74.0))
+# The jumpers' camera: from the front at the buzzer's end, 55 degrees up, looking down into the holes past the wires already in. A
+# wire whose holes a cap or a wire hides from there has its own, the nearest from which both its holes show whole: sight lines from the
+# player's own eye (core.js cameraPose, in windows from 16:9 to portrait) to 9 points over each hole, against every part and wire as
+# the player draws them (the review of Lee's first round, 20 Oct 2026: the dark red wire's (+) red hole half behind the white wire's
+# cap, i27 and i29 behind the green jumper and the switch's tan lead).
+JUMPER_DIR = [0.497, 0.819, -0.287]
+JUMPER_DIRS = {c: JUMPER_DIR for c, *_ in JUMPERS_6 + JUMPERS_2}
+JUMPER_DIRS.update({'dark_red': [0.369, 0.819, -0.439], 'orange': [0.299, 0.906, -0.299], 'yellow': [0.433, 0.866, -0.25]})
 jumper_run(JUMPERS_6, 1305.0, 'Peel six wires off the ribbon of jumper wires, one of each colour, and lay them side by side.',
-           'Connect the {colour} jumper wire from {a} to {b}.', JUMPER_CAMERA)
+           'Connect the {colour} jumper wire from {a} to {b}.', JUMPER_DIRS)
 # ================================================================ JUMPER WIRES (end)
 
 # ================================================================ THE ROCKER SWITCH (begin)
 # The switch is pushed into the square hole in F4 with F4 lying beside the base (the camera close on F4: published, F4 alone), then
 # its three leads are plugged in one at a time: red to j27, tan to the (+) red rail, black to j29. F4 lies at the CAD's place for it
 # (behind the base, raised, the leads hanging under it).
-FLAT_F4 = POSES['switch_flat_F4']                                   # F4 (and the switch in it) lying beside the base, relative to their seats
+# F4 (and the switch in it) lying behind the base, relative to their seats: the CAD's pose, 35 mm nearer the base, so that the switch's
+# leads can be seen close with the switch (Lee, 20 Oct 2026).
+FLAT_F4 = tidy(np.add(POSES['switch_flat_F4'], [35.0, 0.0, 0.0]))
 HOVER_F4 = POSES['switch_hover']                                    # F4 held over the frame, before it goes down onto the tabs
 SW_HOVER = 50.0                                                     # (published: 81.2 mm; less, so that the switch and its leads stay in the close frame)
 g.carry([F4], by=F3, pose=FLAT_F4, appear=False)
@@ -369,38 +465,42 @@ F4_FLAT_FRAME = (posed_line(FLAT_F4, [[_sw.mean(0)[0], 960.0, _sw.mean(0)[2]]])[
 g.place('Push the rocker switch, wires first, down into the square hole in F4 until it clicks in.', appear=[F4, SWITCH], ride={SWITCH: ZERO},
         lines_at=[[posed_line(FLAT_F4, [np.add(SW_TIP, [0.0, SW_HOVER, 0.0])])[0].round(2).tolist(),
                    posed_line(FLAT_F4, [[SW_TIP[0], 954.46, SW_TIP[2]]])[0].round(2).tolist()]],
-        labels={F4: 'F4', SWITCH: 'Rocker Switch'}, wires={f'switch {c}': switch_lead(c, cap, e, FLAT_F4) for c, cap, _, e in SWITCH_LEADS},
+        labels=[dict(id=F4, text='F4', side='left'), dict(id=SWITCH, text='Rocker Switch')], wires={f'switch {c}': switch_lead(c, cap, e, FLAT_F4) for c, cap, _, e in SWITCH_LEADS},
         frame=F4_FLAT_FRAME, view_dir=[0.45, 0.75, -0.48])
-SWITCH_CAMERA = dict(view_dir=[0.8, 0.42, -0.43], frame=([628.0, 928.0, 1272.0], 82.0))   # (from the front, low: the leads hang under F4)
+SWITCH_DIRS = {c: [0.557, 0.766, -0.321] for c in ('red', 'tan', 'black')}   # (from the front, 50 degrees up: each hole seen past the wires)
 # Each lead's way to its hole: down from the switch, across over F3's back edge in a lane of its own (keeping to the buzzer's side of
-# the clock module and clear of the other two), and down into its hole.
-SWITCH_WAY = {'red': [[566.0, 932.0, 1262.0], [620.0, 923.0, 1264.0], [654.0, 917.0, 1272.0]],
-              'tan': [[570.0, 931.0, 1254.0], [620.0, 924.0, 1256.0], [655.0, 919.0, 1262.0], [688.0, 917.0, 1266.0]],
-              'black': [[575.0, 930.0, 1258.5], [620.0, 922.0, 1260.5], [650.0, 916.0, 1265.0]]}
+# the clock module and clear of the other two), and down into its hole (a path search through every view the leads lie in, Steps 18 - 46).
+SWITCH_WAY = {'red': [[594.9, 937.4, 1261.6], [597.6, 935.6, 1263.4], [600.9, 934.1, 1264.9], [604.8, 933.3, 1265.7], [609.1, 932.8, 1266.0], [613.0, 932.5, 1266.0], [616.8, 932.3, 1266.0], [620.8, 932.1, 1266.0], [624.6, 931.9, 1266.1], [628.8, 931.4, 1266.6], [632.4, 930.2, 1267.8], [635.5, 928.2, 1269.8], [638.0, 926.3, 1271.7], [641.1, 924.1, 1273.5], [644.5, 922.4, 1274.6], [648.2, 920.7, 1274.9], [651.6, 919.3, 1275.0], [655.4, 917.6, 1275.1]],
+              'tan': [[602.0, 937.6, 1261.4], [605.7, 936.5, 1262.5], [609.8, 936.1, 1262.9], [613.8, 936.0, 1263.0], [617.8, 936.0, 1263.0], [621.7, 936.0, 1263.0], [625.7, 936.0, 1263.0], [629.7, 936.0, 1263.0], [633.7, 936.0, 1263.0], [637.6, 935.9, 1263.1], [641.8, 935.4, 1263.6], [645.4, 934.3, 1264.7], [648.2, 932.7, 1266.3], [651.4, 930.9, 1268.1], [654.9, 929.6, 1269.4], [659.0, 929.1, 1269.9], [662.8, 928.7, 1270.0], [667.0, 928.0, 1270.0], [670.5, 926.8, 1270.0], [674.4, 925.3, 1270.0], [678.1, 923.6, 1270.0], [681.5, 922.1, 1270.0], [685.3, 920.3, 1270.0], [689.0, 918.6, 1270.0], [692.8, 916.9, 1270.0]],
+              'black': [[610.7, 939.0, 1258.0], [614.4, 938.3, 1258.0], [618.8, 938.0, 1258.0], [622.7, 938.0, 1258.0], [626.7, 937.9, 1258.0], [630.5, 937.4, 1258.1], [634.3, 936.2, 1258.5], [637.6, 934.1, 1259.6], [640.5, 931.5, 1261.3], [642.9, 929.1, 1262.9], [645.4, 926.6, 1264.4], [648.3, 923.9, 1266.1], [650.9, 921.7, 1267.5], [654.1, 919.5, 1268.9], [657.3, 917.3, 1270.0]]}
 for colour, cap, label, exit_ in SWITCH_LEADS:
-    start = compose(FLAT_F4, switch_hang(cap, exit_))
     done = switch_lead(colour, cap, exit_, FLAT_F4, SWITCH_WAY[colour])
-    g.place(f"Connect the switch's {colour} wire to {label}.", move=[cap], path=[start, UP, ZERO], lines=False,
-            labels=[hole_label(label, cap)], eye=[cap], wires_done={f'switch {colour}': [done, done]}, **SWITCH_CAMERA)
+    # (as each step opens the cap is taken from where it hangs and held over its hole, so that the camera can be close on the switch
+    # and the hole: Lee, 20 Oct 2026)
+    g.place(f"Connect the switch's {colour} wire to {label}.", move=[cap], path=[UP, ZERO], lines=False,
+            labels=[away_from(hole_label(label, cap), corners(SWITCH, FLAT_F4).mean(0), SWITCH_DIRS[colour])], eye=[dict(id=cap, side='top')],
+            wires={f'switch {colour}': done}, wires_done={f'switch {colour}': done},
+            **frame_on(np.vstack([corners(SWITCH, FLAT_F4), held_over([cap])]), SWITCH_DIRS[colour], least=40.0))
 # ================================================================ THE ROCKER SWITCH (end)
 
 # ================================================================ JUMPER WIRES, 2 (begin)
 jumper_run(JUMPERS_2, 1305.0, 'Peel two wires off the ribbon of jumper wires, an orange and a yellow, and lay them side by side.',
-           'Connect the {colour} jumper wire from {a} to {b}.', JUMPER_CAMERA)
+           'Connect the {colour} jumper wire from {a} to {b}.', JUMPER_DIRS)
 # ================================================================ JUMPER WIRES, 2 (end)
 
 # ================================================================ THE POTENTIOMETER AND F1 (begin)
 # The potentiometer comes with its knob, nut and washer on: they come off one at a time (as published), the potentiometer goes through
 # the round hole in F1 from the back, and they go back on in the opposite order. This is done with F1 standing upright well in front of
 # the base (BUILD), the camera close on it. Then F1 is laid face down beside the base for its leads to be plugged in.
-BUILD = [150.0, 35.0, 1.1]                                        # F1 held upright 150 mm in front of its seat, 35 mm up (its leads hang below it)
+# F1 held upright 100 mm in front of its seat and 100 mm along, 35 mm up (its leads hang below it), just behind where it is laid face down
+# in Step 29.
+BUILD = [100.0, 35.0, 100.0]
 FRONT_OUT = POSES['F1_hover_front']                                 # F1 upright in front of the box, before it goes on (the CAD's)
-FLAT_BESIDE = POSES['F1_flat_beside']                               # F1 face down beside the base, past the breadboard's end (the CAD's)
-FLAT_OTHER_END = POSES['F1_flat_other_end']                         # F1 face up beyond the buzzer's end (the CAD's)
 PULLED = [-79.0, 0.0, 0.0]                                          # the potentiometer behind F1, before it goes through (published: 79 mm)
 OFF_MM = 38.0                                                       # how far the knob, nut and washer slide off the shaft (published: 37.6 - 37.9 mm)
 ON_MM = 60.0                                                        # how far out each goes back on from (published: 56 - 61 mm)
 DELIVERED = {KNOB: [4.611, 0.0, 0.0], NUT: [-3.0, 0.0, 0.0], WASHER: [-3.0, 0.0, 0.0]}   # (on the potentiometer as it comes: the knob as the CAD's "assembled" one; nut and washer against its body)
+g.part_picture('Potentiometer', poses=DELIVERED)                    # (the parts list pictures it as it comes)
 # F1 and the potentiometer both ride on F3 and are moved together (the same pose for each): a part riding on one whose own carrier
 # is not on screen yet (the potentiometer before F1 appears) is mis-placed by the generator once something rides on it in turn.
 g.carry([F1], by=F3, pose=BUILD, appear=False)
@@ -423,12 +523,14 @@ for colour, cap, _, exit_, _ in POT_LEADS:
     g.carry([cap], by=POT, pose=pot_cap_rel(cap, exit_))
 
 
+# Each potentiometer lead is drawn from its cap to its pin, in every shape (Lee, 20 Oct 2026: as F1 was pushed on, a lead drawn from its
+# pin dipped into F8; drawn from the hole, the run in the case is held still: pot_plugged).
 def pot_hanging(colour, cap, exit_, f1_pose, pot_rel=ZERO):
     """A potentiometer lead hanging straight down from its pin, with F1 at f1_pose and the potentiometer at pot_rel on it."""
     pose = compose(f1_pose, pot_rel)
     e = np.asarray(exit_, float)
-    line = posed_line(pose, W.resample(np.linspace(e, e - [0.0, PLEN, 0.0], 14), 1.0))
-    return W.route(line, a=POT, b=cap, a_at=pose, b_at=compose(pose, pot_cap_rel(cap, exit_)), stretch=True)
+    line = posed_line(pose, W.resample(np.linspace(e - [0.0, PLEN, 0.0], e, 14), 1.0))
+    return W.route(line, a=cap, b=POT, a_at=compose(pose, pot_cap_rel(cap, exit_)), b_at=pose)   # (not stretched: carried whole as F1 turns)
 
 
 _pot = g.model.inst[POT].bounds
@@ -436,59 +538,90 @@ SHAFT = [float(_pot[1][0]), 919.53, 1235.26]                        # the shaft'
 BUILD_SIDE = [0.35, 0.45, -0.82]                                     # (across the shaft, from the buzzer's end)
 POT_ALONE = dict(view_dir=BUILD_SIDE, frame=(posed_line(np.add(BUILD, PULLED).tolist(), [[735.0, 916.0, 1235.0]])[0].round(1).tolist(), 42.0))
 BUILD_LOOK = dict(view_dir=BUILD_SIDE, frame=(posed_line(BUILD, [[722.0, 925.0, 1275.0]])[0].round(1).tolist(), 98.0))
+# The nut is spun off and on, as the LSM's (Lee, 20 Oct 2026): two turns, a quarter turn per pose (the player turns the shorter way between
+# two poses), its move along the shaft shared out evenly, over two beats (the breadboard, seated, keeps still for them: STAY). Seen from the
+# shaft's tip, positive degrees about +x are counter-clockwise (coming off), negative clockwise (going on).
+NUT_AT = [725.13, 919.53, 1235.26]                                  # the nut's middle, seated, on the shaft's axis (which runs along +x)
+STAY = dict(move=[BREADBOARD], paths={BREADBOARD: [ZERO] * 3})      # (two beats, 1.6 s)
+
+
+def nut_turns(x0, x1, sign, turns=2):
+    """The nut's poses from x0 to x1 mm along the shaft (relative to its seat), `turns` whole turns, a quarter turn each."""
+    n = 4 * turns
+    return [turned([1, 0, 0], sign * 90.0 * k, NUT_AT, [round(x0 + (x1 - x0) * k / n, 2), 0.0, 0.0]) for k in range(1, n + 1)]
+
+
+# Each arrow along the shaft, from just past its tip (Steps 23, 24: Lee) or the knob's face (Step 22): seated mm on the potentiometer.
+TIP_ARROW = dict(tail=np.add(SHAFT, [1.0, 0.0, 0.0]).round(2).tolist(), head=np.add(SHAFT, [31.0, 0.0, 0.0]).round(2).tolist(), normal=[0.0, 0.48, -0.88], part=POT)
+KNOB_ARROW = dict(TIP_ARROW, tail=[746.67, 919.53, 1235.26], head=[776.67, 919.53, 1235.26])
 for part, name, verb in ((KNOB, 'knob', 'Pull the knob off'), (NUT, 'nut', 'Unscrew the nut and take it off'), (WASHER, 'washer', 'Take the washer off')):
-    c = g.model.inst[part].bounds.mean(0)
-    here = posed_line(np.add(np.add(BUILD, PULLED), DELIVERED[part]).tolist(), [c])[0]
     first = part == KNOB
+    off = np.add(DELIVERED[part], [OFF_MM, 0.0, 0.0]).tolist()
     g.place(f"{'Begin the front panel with the potentiometer. ' if first else ''}{verb} the potentiometer's shaft.", appear=[POT] if first else [],
-            ride={part: np.add(DELIVERED[part], [OFF_MM, 0.0, 0.0]).tolist()}, lines=False,
-            arrows=[dict(tail=(here + [4.0, 0.0, 0.0]).round(2).tolist(), head=(here + [34.0, 0.0, 0.0]).round(2).tolist(), normal=[0.0, 0.48, -0.88], part=F3)],
-            labels={POT: 'Potentiometer'} if first else [], **({'wires': {f'pot {c_}': pot_hanging(c_, cap, e, BUILD, PULLED) for c_, cap, _, e, _ in POT_LEADS}} if first else {}),
+            **(dict(STAY, ride={NUT: nut_turns(DELIVERED[NUT][0], off[0], +1)}) if part == NUT else dict(ride={part: off})), lines=False,
+            arrows=[KNOB_ARROW if first else TIP_ARROW],
+            labels=[dict(id=POT, text='Potentiometer', side='top')] if first else [],   # (above: its leader clear of the knob)
+            **({'wires': {f'pot {c_}': pot_hanging(c_, cap, e, BUILD, PULLED) for c_, cap, _, e, _ in POT_LEADS}} if first else {}),
             **POT_ALONE)
     g.put_away([part])
+TAB_SLOT = [722.6, 919.7, 1243.1]                                  # F1's small cutout beside the round hole, the potentiometer's tab in it (seated)
 g.place("Push the potentiometer's shaft through the round hole in F1 from the back, its little tab in the slot beside the hole.", appear=[F1],
+        inset=dict(target=posed_line(BUILD, [TAB_SLOT])[0].round(2).tolist(), dir=[0.95, 0.25, 0.18], radius=9.0, mark=2.0,
+                   alt="Close-up of the front of F1: the potentiometer's little tab in the small slot beside the round hole"),   # (as published, Step 25c: Lee)
         ride={POT: BUILD}, lines_at=[[posed_line(np.add(BUILD, PULLED).tolist(), [SHAFT])[0].round(2).tolist(), posed_line(BUILD, [[723.83, 919.53, 1235.26]])[0].round(2).tolist()]],
         labels={F1: 'F1'}, wires_done={f'pot {c_}': pot_hanging(c_, cap, e, BUILD) for c_, cap, _, e, _ in POT_LEADS}, **BUILD_LOOK)
 for part, name in ((WASHER, 'washer'), (NUT, 'nut'), (KNOB, 'knob')):
     g.carry([part], by=POT, pose=[ON_MM, 0.0, 0.0], appear=False)
     c = g.model.inst[part].bounds.mean(0)
     g.place(f"Put the {name} back on the shaft{', and tighten it against F1' if part == NUT else (', pushing it all the way on' if part == KNOB else ' against F1')}.",
-            appear=[part], ride={part: ZERO}, lines_at=[[posed_line(np.add(BUILD, [ON_MM, 0.0, 0.0]).tolist(), [c - [float(g.model.inst[part].bounds[1][0] - g.model.inst[part].bounds[0][0]) / 2, 0.0, 0.0]])[0].round(2).tolist(),
+            appear=[part], **(dict(STAY, ride={NUT: nut_turns(ON_MM, 0.0, -1)[:-1] + [ZERO]}) if part == NUT else dict(ride={part: ZERO})),
+            lines_at=[[posed_line(np.add(BUILD, [ON_MM, 0.0, 0.0]).tolist(), [c - [float(g.model.inst[part].bounds[1][0] - g.model.inst[part].bounds[0][0]) / 2, 0.0, 0.0]])[0].round(2).tolist(),
                                                         posed_line(BUILD, [SHAFT])[0].round(2).tolist()]],
             labels=[], **BUILD_LOOK)
-# F1 is laid face down beside the base, its potentiometer's leads towards the breadboard (as the CAD has it, and the published guide).
-POT_CAMERA = dict(view_dir=[0.55, 0.7, 0.45], frame=([680.0, 905.0, 1440.0], 105.0))
+# F1 is laid face down in front of the breadboard's end, tipped forward from where it stood (Lee, 20 Oct 2026: closer, smoother, no stop
+# part-way), so that its potentiometer's leads lie towards their holes, about 90 mm away. (The CAD and the published guide lay it face
+# down past the breadboard's end, the potentiometer some 240 mm from its holes.) Its leads keep their straight shape and turn with it.
+F1_MIDDLE = [722.33, 919.53, 1289.87]                               # F1's middle, seated
+F1_DOWN = tidy(turned([0, 0, 1], -90.0, F1_MIDDLE, [78.97, -10.43, 99.63]))   # face down, x 763 - 839, z 1307 - 1472, the pins at x 788.6 pointing -x
 
 
 def pot_flat_lead(colour, cap, exit_):
-    """A potentiometer lead with F1 face down beside the base: straight out from its pin along F1's back (the CAD's)."""
-    return pot_hanging(colour, cap, exit_, FLAT_BESIDE)
+    """A potentiometer lead with F1 face down: straight out from its pin (the shape it hangs in, turned with F1)."""
+    return pot_hanging(colour, cap, exit_, F1_DOWN)
 
 
-ASIDE = [150.0, 35.0, 225.0]                                        # (on the way: carried along, still upright, past the end of the base, then laid down)
-g.place('Lay F1 face down beside the end of the base, as shown, with the potentiometer at the end nearer the breadboard.',
-        ride={F1: [ASIDE, FLAT_BESIDE], POT: [ASIDE, FLAT_BESIDE]}, ride_beats=True, lines=False, eye=[F1],
-        wires_done={f'pot {c}': [pot_hanging(c, cap, e, ASIDE), pot_flat_lead(c, cap, e)] for c, cap, _, e, _ in POT_LEADS},
-        view_dir=[0.55, 0.7, 0.45], frame=([745.0, 930.0, 1420.0], 185.0))
-# Each lead's way to its hole: out along F1's back, up over the buzzer and the LCD lying beside the base (and their wires), past
-# the end of F9 (where F9 will stand: x < 689), and down into its hole. The black lead crosses over the other two (its pin is at the
-# other side of them from its hole).
-POT_WAY = {'tan': [[668.0, 917.0, 1560.0], [680.5, 920.0, 1530.0], [682.0, 921.0, 1460.0], [681.5, 921.0, 1400.0], [681.5, 921.0, 1365.0], [682.5, 921.0, 1352.0], [686.0, 920.5, 1341.0]],
-           'red': [[668.0, 917.0, 1566.0], [684.5, 920.0, 1532.0], [684.5, 921.0, 1460.0], [684.0, 921.0, 1400.0], [684.0, 921.0, 1365.0], [685.0, 921.0, 1352.0], [691.5, 920.5, 1340.0]],
-           'black': [[660.0, 916.0, 1556.0], [672.0, 921.0, 1535.0], [682.5, 925.5, 1505.0], [688.5, 923.0, 1465.0], [687.5, 921.5, 1400.0], [686.8, 921.5, 1365.0], [687.5, 921.5, 1352.0], [694.5, 921.0, 1341.0]]}
+g.place('Lay F1 face down in front of the end of the breadboard, as shown, the potentiometer\'s wires towards the breadboard.',
+        ride={F1: F1_DOWN, POT: F1_DOWN}, **STAY, lines=False, eye=[F1],
+        wires_done={f'pot {c}': pot_flat_lead(c, cap, e) for c, cap, _, e, _ in POT_LEADS},
+        **frame_on(np.vstack([corners(F1, BUILD), corners(F1, F1_DOWN)]), [0.55, 0.62, 0.56], margin=4.0))
+# Each lead's way to its hole: on from its pin over F3's front edge and down into its hole, clear of the other leads and wires (a path
+# search through every view the leads lie in: docs/research/lac/scripts/routing/).
+POT_WAY = {'red': [[776.8, 914.8, 1329.0], [772.9, 915.0, 1329.0], [768.9, 915.0, 1329.0], [764.5, 915.0, 1329.0], [760.5, 915.0, 1329.0], [756.5, 915.0, 1329.0], [752.5, 915.0, 1329.0], [748.5, 915.0, 1329.0], [744.5, 915.0, 1329.0], [740.5, 915.0, 1329.0], [736.5, 915.0, 1329.0], [732.5, 915.0, 1329.0], [728.5, 915.0, 1329.0], [724.5, 915.0, 1329.0], [720.5, 915.0, 1329.0], [716.5, 915.0, 1329.0], [712.6, 915.0, 1328.9], [708.8, 915.0, 1328.5], [704.6, 915.0, 1327.8], [700.9, 915.0, 1327.5], [697.1, 915.0, 1328.8]],
+           'tan': [[775.9, 914.8, 1335.0], [771.5, 915.0, 1335.0], [767.5, 915.0, 1335.0], [763.5, 915.0, 1335.0], [759.5, 915.0, 1335.0], [755.6, 915.0, 1335.0], [751.6, 915.0, 1335.0], [747.6, 915.0, 1335.0], [743.6, 915.0, 1335.0], [739.6, 915.0, 1335.0], [735.7, 915.0, 1335.0], [731.7, 915.1, 1334.9], [727.9, 915.3, 1334.7], [723.7, 915.7, 1334.4], [720.0, 916.2, 1334.2], [716.0, 917.2, 1334.0], [712.0, 918.3, 1334.0], [708.3, 919.1, 1334.0], [704.2, 919.5, 1334.0], [700.1, 919.2, 1334.0], [696.6, 918.2, 1333.7], [692.9, 916.7, 1333.2]],
+           'black': [[775.8, 914.8, 1340.0], [771.9, 915.0, 1340.0], [767.5, 915.0, 1340.0], [763.5, 915.0, 1340.0], [759.5, 915.0, 1340.0], [755.5, 915.0, 1340.0], [751.5, 915.0, 1340.0], [747.6, 915.0, 1340.0], [743.6, 915.0, 1340.0], [739.6, 915.0, 1340.0], [735.6, 915.0, 1340.0], [731.6, 915.0, 1340.0], [727.6, 915.0, 1340.0], [723.7, 915.0, 1339.8], [719.9, 915.0, 1339.4], [715.9, 915.0, 1338.3], [712.0, 915.0, 1336.9], [708.6, 915.0, 1335.4], [704.9, 915.0, 1333.5]]}
 
 
-def pot_plugged(colour, cap, exit_, f1_pose, way):
+def pot_plugged(colour, cap, exit_, f1_pose, way, shared=None):
+    """A potentiometer lead from its hole up through `way` (given from the pin) to its pin, F1 at f1_pose. With `shared` (a point on it):
+    the run from the hole to there stays put as F1 moves (b_from) and is kept as the lead changes shape (tail_from); else `stretch`."""
     e = posed_line(f1_pose, [exit_])[0]
     d = unit(posed_line(f1_pose, [np.add(exit_, [0.0, -1.0, 0.0])])[0] - e)
-    return W.route(into_hole(cap, e, d, way), a=POT, b=cap, a_at=f1_pose, stretch=True)
+    line = into_hole(cap, e, d, way)[::-1]
+    if shared is None:
+        return W.route(line, a=cap, b=POT, b_at=f1_pose, stretch=True)
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))]
+    k = round(float(s[int(np.argmin(np.linalg.norm(line - np.asarray(shared, float), axis=1)))]), 1)
+    return W.route(line, a=cap, b=POT, b_at=f1_pose, b_from=k, tail_from=k)
 
 
+POT_DIR = [0.62, 0.62, 0.48]                                        # (from the front at the breadboard's end: the potentiometer and the holes)
 for colour, cap, label, exit_, _ in POT_LEADS:
-    start = compose(FLAT_BESIDE, pot_cap_rel(cap, exit_))
-    done = pot_plugged(colour, cap, exit_, FLAT_BESIDE, POT_WAY[colour])
-    g.place(f"Connect the potentiometer's {colour} wire to {label}.", move=[cap], path=[start, UP, ZERO], lines=False,
-            labels=[hole_label(label, cap)], eye=[cap], wires_done={f'pot {colour}': [done, done]}, **POT_CAMERA)
+    done = pot_plugged(colour, cap, exit_, F1_DOWN, POT_WAY[colour])
+    # (as each step opens the cap is taken from where its lead lies and held over its hole)
+    g.place(f"Connect the potentiometer's {colour} wire to {label}.", move=[cap], path=[UP, ZERO], lines=False,
+            labels=[away_from(hole_label(label, cap), corners(POT, F1_DOWN).mean(0), POT_DIR)], eye=[dict(id=cap, side='top')],
+            wires={f'pot {colour}': done}, wires_done={f'pot {colour}': done},
+            **frame_on(np.vstack([corners(POT, F1_DOWN), held_over([cap])]), POT_DIR, least=40.0))
 # ================================================================ THE POTENTIOMETER AND F1 (end)
 
 # ================================================================ THE BUZZER (begin)
@@ -511,21 +644,110 @@ for colour, cap, _, exit_, _, _ in BUZZER_LEADS:
     g.carry([cap], by=BUZZER, pose=buzzer_cap_rel(cap, exit_))
 
 
+# Each buzzer lead is drawn from its cap to the buzzer, in every shape (as the potentiometer's): the run held in the breadboard then
+# stays put while the buzzer moves (b_from).
 def buzzer_straight(colour, cap, exit_):
     e = np.asarray(exit_, float)
-    line = posed_line(BUZZER_LYING, W.resample(np.linspace(e, e - [0.0, BLEN, 0.0], 12), 1.0))
-    return W.route(line, a=BUZZER, b=cap, a_at=BUZZER_LYING, b_at=compose(BUZZER_LYING, buzzer_cap_rel(cap, exit_)), stretch=True)
+    line = posed_line(BUZZER_LYING, W.resample(np.linspace(e - [0.0, BLEN, 0.0], e, 12), 1.0))
+    return W.route(line, a=cap, b=BUZZER, a_at=compose(BUZZER_LYING, buzzer_cap_rel(cap, exit_)), b_at=BUZZER_LYING, stretch=True)
 
 
-BUZZER_CAMERA = dict(view_dir=[0.7, 0.55, 0.45], frame=([668.0, 905.0, 1362.0], 72.0))
+# Each lead's way to its hole, the buzzer lying (Steps 33 - 42) and lifted 60 mm over where it lies (Step 43): short and smooth, clear
+# of the parts and the other wires (a path search; Lee, 20 Oct 2026: the CAD's lying leads loop out sideways, and blending the straight
+# leads into them threw them off the screen; the red one had a kink by the breadboard). Held over its seat (Step 43), each lead goes
+# from the buzzer to the CAD's clamped lead and then along it (BUZZER_UP_WAY: buzzer_over_seat).
+BUZZER_WAY = {'red': [[647.2, 901.2, 1399.0], [647.8, 901.9, 1394.1], [647.8, 902.0, 1389.2], [647.8, 902.0, 1384.2], [647.8, 902.0, 1379.2], [647.9, 902.0, 1374.3], [648.1, 902.3, 1369.0], [648.5, 902.6, 1364.2], [648.8, 903.1, 1359.0], [648.8, 903.7, 1354.3], [649.1, 904.7, 1349.3], [650.1, 905.6, 1344.7], [652.5, 906.0, 1340.3], [655.8, 906.0, 1336.5]],
+              'black': [[648.9, 897.0, 1393.1], [652.2, 897.0, 1389.5], [655.7, 897.0, 1386.0], [659.2, 897.1, 1382.5], [662.7, 897.4, 1379.0], [666.5, 897.8, 1375.2], [669.9, 898.0, 1371.8], [673.5, 898.0, 1368.3], [677.0, 898.0, 1364.9], [681.0, 898.3, 1361.5], [684.5, 899.2, 1358.7], [688.0, 901.4, 1355.6], [690.9, 904.1, 1352.7], [693.6, 907.0, 1349.8], [696.0, 910.3, 1346.4]]}
+BUZZER_LIFT_WAY = {'red': [[645.7, 951.9, 1397.4], [645.9, 949.6, 1393.0], [646.6, 946.6, 1389.0], [648.0, 943.5, 1385.8], [650.5, 940.5, 1382.3], [653.0, 937.9, 1378.8], [655.0, 935.3, 1375.5], [656.4, 932.1, 1371.7], [656.8, 928.5, 1367.9], [656.8, 925.0, 1364.4], [656.8, 921.5, 1360.8], [656.8, 918.2, 1357.2], [656.8, 915.4, 1353.4], [656.8, 913.0, 1348.9], [656.8, 911.1, 1344.2], [657.1, 909.5, 1339.5], [658.5, 907.9, 1335.1]],
+                   'black': [[648.2, 954.7, 1393.7], [651.0, 952.0, 1390.8], [653.8, 949.1, 1387.9], [656.7, 946.2, 1385.0], [659.6, 943.3, 1382.1], [662.5, 940.5, 1379.2], [665.4, 937.6, 1376.3], [668.3, 934.7, 1373.4], [671.1, 931.8, 1370.6], [674.0, 929.0, 1367.6], [677.3, 926.3, 1364.4], [680.4, 924.4, 1361.3], [683.9, 922.7, 1357.8], [687.1, 921.2, 1354.6], [690.6, 919.5, 1351.1], [693.7, 917.9, 1347.8], [696.7, 916.1, 1344.1]]}
+BUZZER_UP_WAY = {'red': [[672.0, 931.4, 1237.3], [671.8, 927.4, 1240.5], [671.8, 923.8, 1243.7], [671.8, 920.2, 1247.2], [671.8, 916.7, 1250.7], [671.8, 913.2, 1254.2], [671.8, 909.3, 1257.9], [672.2, 905.5, 1261.2]],
+                 'black': [[678.8, 930.9, 1237.3], [678.9, 926.7, 1240.1], [678.9, 922.5, 1243.0], [678.9, 918.8, 1246.2], [678.9, 915.2, 1249.6], [678.9, 911.7, 1253.1], [678.8, 907.9, 1257.0], [678.2, 904.6, 1260.2]]}
+BUZZER_LIFT = tidy(compose([0.0, 60.0, 0.0], BUZZER_LYING, BUZZER_LYING['at']))   # (about the buzzer's own middle, as BUZZER_LYING is)
+BUZZER_UP = [0.0, 45.0, 0.0]
+
+
+BUZZER_ABOVE = {'red': 2.5, 'black': 5.0}                           # (how far each goes straight down into its hole, over the cap's top: red
+                                                                    # into j4 under the yellow jumper, whose centre line is 913 over j4)
+BUZZER_OUT = 3.0                                                    # (straight out of the buzzer before a lead turns)
+BUZZER_RISE = {'red': 2.2, 'black': 0.0}                            # (red then rises over the black lead beside it, which it turns across)
+BUZZER_J_MM = 36.0                                                  # (Step 43: where on the CAD's clamped lead the lead joins it, from the buzzer)
+
+
+def buzzer_line(colour, cap, exit_, pose, way):
+    """A buzzer lead from its exit (the buzzer at `pose`): 3 mm straight out, through `way`, over a crest 1.5 mm above the top of its
+    straight drop and 4.5 mm short of it, and down into its hole. The controls within 8 mm of the run out and 7 mm (across) of the drop
+    are left out, so that the lead turns over several mm (the review of Lee's first round: the path search's controls there made
+    hairpins, and the drop's top a crease)."""
+    q = posed_line(pose, [exit_, np.add(exit_, [0.0, -1.0, 0.0])])
+    e, d = q[0], unit(q[1] - q[0])
+    above = BUZZER_ABOVE[colour]
+    first, top = e + d * BUZZER_OUT, wire_at(cap) + [0.0, 4.0 + above, 0.0]
+    across = lambda p: float(np.hypot(p[0] - top[0], p[2] - top[2]))
+    keep = [np.asarray(p, float) for p in way if np.linalg.norm(np.asarray(p, float) - first) > 8.0 and across(p) > 7.0]
+    rise = [first + d * 2.0 + [0.0, BUZZER_RISE[colour], 0.0]] if BUZZER_RISE[colour] else []
+    h = top - (keep[-1] if keep else first)
+    h[1] = 0.0
+    return into_hole(cap, e, d, rise + keep + [top - unit(h) * 4.5 + [0.0, 1.5, 0.0]], lift=BUZZER_OUT, above=above)
+
+
+def shared_to(line, point):
+    """How far along `line` (from its first point) its point nearest `point` is."""
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))]
+    return round(float(s[int(np.argmin(np.linalg.norm(line - np.asarray(point, float), axis=1)))]), 1)
+
+
+def buzzer_plugged(colour, cap, exit_, pose, way, stretch=False):
+    """A buzzer lead plugged in (buzzer_line), drawn from the hole: its straight drop held in the hole (b_from) and shared between
+    shapes (tail_from); the rest carried whole with the buzzer (no stretch: it turns with it). With `stretch` (the buzzer lifted, Step
+    43): matched to the next shape by share of length instead, so that its run over the seat grows along the lead rather than fanning out
+    from the top of the drop (where it dipped into the resistors)."""
+    line = buzzer_line(colour, cap, exit_, pose, way)[::-1]
+    k = BUZZER_ABOVE[colour] + 4.0
+    return W.route(line, a=cap, b=BUZZER, b_at=pose, b_from=k, **({'stretch': True} if stretch else {'tail_from': k}))
+
+
+def clamped_from_buzzer(cap, key):
+    """The CAD's lead with the buzzer clamped between the F7s, from the buzzer to the cap, every 1 mm; and where it is BUZZER_J_MM along."""
+    line = W.resample(cad_line(key, cap)[::-1], 1.0)
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))]
+    return line, int(np.searchsorted(s, BUZZER_J_MM))
+
+
+def buzzer_over_seat(colour, cap, exit_, key):
+    """A buzzer lead with the buzzer held over its seat (BUZZER_UP): from its exit through BUZZER_UP_WAY to the CAD's clamped lead,
+    BUZZER_J_MM from the buzzer, then along it into its hole (a path search: docs/research/lac/scripts/routing/plan_buzz_up.py). Drawn
+    from the hole, the run from the hole to there held still (b_from) and kept (tail_from) as the buzzer is lowered onto its seat, so
+    that it does not pass through the jumper and LCD wires (the review of Lee's first round)."""
+    L, j = clamped_from_buzzer(cap, key)
+    e, d = np.add(exit_, BUZZER_UP), np.array([0.0, -1.0, 0.0])
+    body = W.smooth([e + d * BUZZER_OUT, *[np.asarray(c, float) for c in BUZZER_UP_WAY[colour]], L[j]], start_dir=d,
+                    end_dir=unit(L[j + 2] - L[j]), spacing=0.5)
+    line = W.resample(W.join(W.straight(e, d, BUZZER_OUT), body, L[j:]), 1.0)[::-1]
+    k = shared_to(line, L[j])
+    return W.route(line, a=cap, b=BUZZER, b_at=BUZZER_UP, b_from=k, tail_from=k)
+
+
+def buzzer_clamped(cap, key):
+    """A buzzer lead as the CAD has it with the buzzer clamped between the F7s, drawn from the hole; the run from the hole to where
+    the lead over the seat joins it (buzzer_over_seat) is held still and kept as the buzzer comes down."""
+    L, j = clamped_from_buzzer(cap, key)
+    line = L[::-1]
+    k = shared_to(line, L[j])
+    return W.route(line, a=cap, b=BUZZER, b_from=k, tail_from=k)
+
+
+BUZZER_DIR = [-0.412, 0.746, 0.523]                                 # (from behind at the breadboard's end, as published: the buzzer and the holes)
 for k, (colour, cap, label, exit_, lying_key, _) in enumerate(BUZZER_LEADS):
-    start = compose(BUZZER_LYING, buzzer_cap_rel(cap, exit_))
-    done = W.route(cad_line(lying_key, cap)[::-1], a=BUZZER, b=cap, a_at=BUZZER_LYING, stretch=True)
+    start = compose(BUZZER_LYING, buzzer_cap_rel(cap, exit_), cap_mid(cap))
+    done = buzzer_plugged(colour, cap, exit_, BUZZER_LYING, BUZZER_WAY[colour])
+    # (the red cap comes in from beside j4, 5 mm up, under the yellow jumper's arch over j4: held over j4 it stood in the arch)
     g.place(f"{'Lay the alarm buzzer beside the base, past the end of the breadboard. ' if k == 0 else ''}Connect the buzzer's {colour} wire to {label}.",
-            move=[cap], path=[start, UP, ZERO], lines=False, appear=[BUZZER] if k == 0 else [],
-            labels=([dict(id=BUZZER, text='Alarm Buzzer')] if k == 0 else []) + [hole_label(label, cap)], eye=[cap],
-            wires={f'buzzer {c}': buzzer_straight(c, cp, e) for c, cp, _, e, _, _ in BUZZER_LEADS} if k == 0 else None,
-            wires_done={f'buzzer {colour}': [done, done]}, **BUZZER_CAMERA)
+            move=[cap], path=[start, via([-14.0, 5.0, 0.0]), [0.0, 5.0, 0.0], ZERO] if colour == 'red' else [start, UP, ZERO], lines=False,
+            appear=[BUZZER, cap] if k == 0 else [],                   # (the cap on screen where it lies as the step opens)
+            labels=([dict(id=BUZZER, text='Alarm Buzzer', side='top')] if k == 0 else []) + [away_from(hole_label(label, cap), corners(BUZZER, BUZZER_LYING).mean(0), BUZZER_DIR)],
+            eye=[dict(id=cap, side='near-left')], wires={f'buzzer {c}': buzzer_straight(c, cp, e) for c, cp, _, e, _, _ in BUZZER_LEADS} if k == 0 else None,
+            wires_done={f'buzzer {colour}': [done, done]},
+            **frame_on(np.vstack([corners(BUZZER, BUZZER_LYING), held_over([cap]), [posed_line(start, [wire_at(cap)])[0]]]), BUZZER_DIR, least=40.0))
 # ================================================================ THE BUZZER (end)
 
 # ================================================================ THE LCD SCREEN (begin)
@@ -544,22 +766,24 @@ def fem_centre(cap):
     return np.asarray(CAPS[cap]['box'], float).mean(0)
 
 
-LCD_Z = 1250.0                                                      # the LCD ribbon's middle (in front of the base, at the buzzer's end)
+LCD_X, LCD_Z = 733.0, 1320.0                                        # the LCD ribbon's near wire and its middle: in front of F3's edge, near the
+                                                                    # LCD's header and the holes (Lee, 20 Oct 2026: the holes closer)
 
 
 def lcd_ribbon(pitch):
     """Each LCD wire lying on the table in front of the base: {colour: (male cap's pose, female cap's pose relative to the lying LCD,
-    the straight route)}. The male end towards +z, its pin pointing +z; the female end towards -z, its open end -z (as on its pin)."""
+    the straight route)}. The male end towards the breadboard (-z), its pin pointing -z; the female end towards the lying LCD's header
+    (+z), its open end +z: turned as the lying LCD is, so that it goes onto its pin without spinning round. (Lee's first round: the
+    other way round, each wire's two ends crossed over as it was connected.)"""
     out = {}
     for k, (colour, male, _, fem, *_ ) in enumerate(LCD_WIRES):
-        x = FRONT_X + k * pitch
-        pm = np.array([x, TABLE_Y + 0.875, LCD_Z + RIBBON_MM / 2])
-        pf = np.array([x, TABLE_Y + 0.875, LCD_Z - RIBBON_MM / 2])
-        m = lying(male, pm, [0, 0, 1])
-        f_world = tidy(pf - fem_centre(fem))
-        f_rel = tidy(relative_pose(LCD_LYING, f_world, fem_centre(fem).round(2)))
+        x = LCD_X + k * pitch
+        pm = np.array([x, TABLE_Y + 0.875, LCD_Z - RIBBON_MM / 2])
+        pf = np.array([x, TABLE_Y + 0.875, LCD_Z + RIBBON_MM / 2])
+        m = lying(male, pm, [0, 0, -1])
+        f_rel = tidy((unapply_pose(LCD_LYING, pf[None])[0] - fem_centre(fem)).round(3).tolist())
         f_world = compose(LCD_LYING, f_rel, fem_centre(fem).round(2))                  # (where that puts it, as the generator composes it)
-        out[colour] = (m, f_rel, W.route(W.resample(np.linspace(pf, pm, 12), 1.0), a=fem, b=male, a_at=f_world, b_at=m, stretch=True))
+        out[colour] = (m, f_rel, W.route(W.resample(np.linspace(pm, pf, 12), 1.0), a=male, b=fem, a_at=m, b_at=f_world, stretch=True))
     return out
 
 
@@ -568,31 +792,113 @@ joined, apart = lcd_ribbon(RIBBON_PITCH), lcd_ribbon(SPLIT_PITCH)
 _m, _f = LCD_WIRES[0][1], LCD_WIRES[0][3]
 _line = np.asarray(joined['purple'][2]['pts'], float)
 g.list_part('Breadboard Wire (M-F)', [_m, _f], 4, after='Breadboard Wire (M-M)')
-g.part_picture('Breadboard Wire (M-F)', poses={_m: joined['purple'][0], _f: joined['purple'][2]['a_ref']},
+g.part_picture('Breadboard Wire (M-F)', poses={_m: joined['purple'][0], _f: joined['purple'][2]['b_ref']},
                wires=[dict(colour='jumper_purple', radius=WIRE_R, pts=np.linspace(_line[0], _line[-1], 40))])
 for colour, male, _, fem, *_ in LCD_WIRES:
     g.carry([male], by=BREADBOARD, pose=joined[colour][0], appear=False)
     g.carry([fem], by=LCD, pose=joined[colour][1], appear=False)
-_mid = np.array([FRONT_X + 1.5 * RIBBON_PITCH, TABLE_Y + 1.0, LCD_Z])
+_mid = np.array([LCD_X + 1.5 * RIBBON_PITCH, TABLE_Y + 1.0, LCD_Z])
 g.place('Lay the LCD screen face down beside the base. Then peel four wires off the ribbon of male-female wires and lay them side by side.',
         appear=[LCD] + LCD_MALE + LCD_FEMALE, lines=False, labels={LCD: 'LCD Screen'}, eye=[dict(anchor=_mid.round(2).tolist())],
         wires={f'lcd {c}': joined[c][2] for c, *_ in LCD_WIRES}, wires_done={f'lcd {c}': apart[c][2] for c, *_ in LCD_WIRES},
         ride={**{m: apart[c][0] for c, m, *_ in LCD_WIRES}, **{f: apart[c][1] for c, _, _, f, *_ in LCD_WIRES}},
-        frame=([700.0, 905.0, 1330.0], 110.0), view_dir=[0.62, 0.62, 0.48])
-LCD_CAMERA = dict(view_dir=[0.62, 0.62, 0.48], frame=([700.0, 905.0, 1330.0], 110.0))
+        frame=([700.0, 905.0, 1330.0], 110.0), view_dir=[0.62, 0.62, 0.48])   # (the camera Lee saw: he did not ask for this step's)
+LCD_DIR = [0.62, 0.62, 0.48]                                        # (from the front at the breadboard's end)
+# Each wire's step from LCD_DIR, but for SDA's, whose hole b8 shows whole only from 20 degrees further round and higher (sight lines as
+# for the jumpers, JUMPER_DIRS); SCL's hole b9 does not show from anywhere in front (the caps in a8 and a9 and the purple jumper stand in
+# front of it, the Nano behind it), so its step has a close-up from above on Step 39c, the blue wire's pin in b9.
+LCD_DIRS = {'teal': [0.343, 0.766, 0.544]}
 
 
-def lcd_route(key, fem, male, lcd_pose):
-    line = cad_line(key, male)[::-1]                                # (from the female end, on the LCD, to the male end)
-    return W.route(line, a=fem, b=male, a_at=lcd_pose, stretch=True)
+def fem_end(fem, lcd_pose=None):
+    """The middle of the end of a female cap its wire comes out of (the end away from its pin, +z seated) and the way out of it, with the
+    LCD at lcd_pose."""
+    box = np.asarray(CAPS[fem]['box'], float)
+    end = [box[:, 0].mean(), box[:, 1].mean(), box[1, 2]]
+    p = posed_line(lcd_pose, [end, np.add(end, [0.0, 0.0, 1.0])])
+    return p[0], unit(p[1] - p[0])
 
 
+def into_fem(line, fem, lcd_pose):
+    """A CAD wire's line from its female end, made to start 4 mm inside the cap and leave it along its axis (the CAD's teal and blue
+    wires stop 2 mm short of their caps: Lee, 20 Oct 2026, "empty space")."""
+    end, out = fem_end(fem, lcd_pose)
+    line = np.asarray(line, float)
+    keep = line[np.linalg.norm(line - end, axis=1) > 3.5]
+    keep = keep[np.argmin(np.linalg.norm(keep - end, axis=1)):]   # (from the first point clear of the cap's end)
+    head = W.smooth([end - out * 4.0, end + out * 1.5, keep[0], keep[min(2, len(keep) - 1)]], start_dir=out, spacing=0.5)
+    return W.resample(W.join(head, keep[min(2, len(keep) - 1):]), 1.0)
+
+
+# The LCD's wires run from the breadboard (male end, a) to the header (female end, b). The run from the breadboard round F9's back edge
+# (where the wires go once the LCD is in, between F9 and F5) is held still while the LCD is moved: the wire follows the LCD only from
+# there on (b_from), and changes shape between stops from there on (tail_from). (Lee, 20 Oct 2026: drawn from the female end and
+# stretched, the run behind F9 followed the LCD by 84 % and went through F9 as the LCD went in.)
+def behind_f9(line):
+    """The first point of a line from the breadboard that has come round F9's back edge (x < 689) to 3 mm past F9's far face (z > 1360.3)."""
+    return next(i for i, p in enumerate(line) if p[2] > 1360.3 and p[0] < 689.0)
+
+
+def lcd_line(key, male, fem, lcd_pose):
+    """A CAD wire's line from the breadboard (its male end) into its female cap, the LCD at lcd_pose."""
+    return into_fem(cad_line(key, male)[::-1], fem, lcd_pose)[::-1]
+
+
+def lcd_lead(line, fem, male, lcd_pose, at):
+    """An LCD wire along `line` (from the breadboard), the LCD at lcd_pose: the run up to the point nearest `at` stays put."""
+    line = W.resample(line, 1.0)
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))]
+    k = round(float(s[int(np.argmin(np.linalg.norm(line - np.asarray(at, float), axis=1)))]), 1)
+    return W.route(line, a=male, b=fem, b_at=lcd_pose, b_from=k, tail_from=k)
+
+
+def lcd_tail(head, fem, lcd_pose, controls, reach=3.0):
+    """`head` (from the breadboard round F9's back edge), then through `controls` into the female cap with the LCD at lcd_pose, the last
+    `reach` mm along the cap's axis and 4 mm into it."""
+    end, out = fem_end(fem, lcd_pose)
+    body = W.smooth([head[-1], *[np.asarray(c, float) for c in controls], end + out * reach], start_dir=unit(head[-1] - head[-3]),
+                    end_dir=-out, spacing=0.5)
+    return W.join(head, body, np.array([end + out * reach, end - out * 4.0]))
+
+
+# Every shape of a wire shares the seated CAD wire's run from the breadboard round F9's back edge (LCD_HEAD), lying too: the CAD's
+# lying wires run under the jumpers and its seated ones over them, so that changing from one to the other in Step 50 passed the run
+# through the jumpers (the review of Lee's first round). Lying, each wire goes on from there in a lane of its own, so that the four do
+# not cross: they come round F9's edge one above the other (GND on top) and go onto pins side by side (GND nearest), so each drops at
+# its own distance past F9's end (GND the furthest), runs along under the ones above it to its pin, and turns in to its cap.
+LCD_LANE_Z = {'purple': 1371.0, 'yellow': 1368.0, 'teal': 1365.0, 'blue': 1362.0}
+
+
+def lying_lane(colour, fem, head):
+    """The control points of an LCD wire's lane from the end of its shared run to its pin on the lying LCD."""
+    h, z = head[-1], LCD_LANE_Z[colour]
+    end, out = fem_end(fem, LCD_LYING)
+    x, y, xd = end[0], end[1], h[0] + 1.5
+    return [[h[0] + 0.8, h[1], (h[2] + z) / 2], [xd, h[1] - 1.0, z], [xd, (h[1] + y) / 2, z], [xd + 2.0, y + 0.4, z], [x - 2.5, y, z], [x, y, z + 3.0]]
+
+
+LCD_HEAD, LCD_LYING_LEAD = {}, {}
+for colour, male, _, fem, _, lying_key, _, seated_key in LCD_WIRES:
+    _seated = lcd_line(seated_key, male, fem, None)
+    LCD_HEAD[colour] = _seated[:behind_f9(_seated) + 1]
+    LCD_LYING_LEAD[colour] = lcd_lead(lcd_tail(LCD_HEAD[colour], fem, LCD_LYING, lying_lane(colour, fem, LCD_HEAD[colour])), fem, male, LCD_LYING,
+                                      LCD_HEAD[colour][-1])
 for k, (colour, male, label, fem, pin, lying_key, _, _) in enumerate(LCD_WIRES):
-    done = lcd_route(lying_key, fem, male, LCD_LYING)
-    x = FRONT_X + k * SPLIT_PITCH
+    done = LCD_LYING_LEAD[colour]
+    x = LCD_X + k * SPLIT_PITCH
+    header = posed_line(LCD_LYING, [fem_centre(fem)])[0]           # (the pin on the lying LCD)
+    view = LCD_DIRS.get(colour, LCD_DIR)
+    hole = away_from(hole_label(label, male), header, view)
+    loose = posed_line(apart[colour][0], [wire_at(male)])[0]         # (the wire's male end, lying)
+    top = [round(float(wire_at(male)[0]), 2), BB_TOP, round(float(wire_at(male)[2]), 2)]
     g.place(f"Connect the {colour} wire from {pin} on the LCD screen to {label}.", move=[male], paths={male: [apart[colour][0], UP, ZERO]},
-            ride={fem: [F_OFF, ZERO]}, ride_beats=True, lines=False, labels=[dict(text=pin, anchor=fem_centre(fem).round(2).tolist(), id=LCD), hole_label(label, male)],
-            eye=[dict(anchor=[x, TABLE_Y + 1.0, LCD_Z])], wires_done={f'lcd {colour}': [done, done]}, **LCD_CAMERA)
+            ride={fem: [F_OFF, ZERO]}, ride_beats=True, lines=False,
+            labels=[dict(text=pin, anchor=fem_centre(fem).round(2).tolist(), id=LCD, side='left' if hole['side'] == 'right' else 'right'), hole],
+            eye=[dict(anchor=[x, TABLE_Y + 1.0, LCD_Z])], wires_done={f'lcd {colour}': [done, done]},
+            **({'inset': dict(target=top, dir=[0.08, 1.0, 0.06], radius=14.0, mark=1.0,
+                              alt=f"Close-up from above: the {colour} wire's pin in {label}, between the jumper wires and the Nano Board")}
+               if colour == 'blue' else {}),
+            **frame_on(np.vstack([[header, loose, [x, TABLE_Y, LCD_Z + RIBBON_MM / 2]], held_over([male])]), view, least=40.0))   # (close: Lee)
 # ================================================================ THE LCD SCREEN (end)
 
 # ================================================================ THE USB CABLE (begin)
@@ -643,7 +949,7 @@ def usb_cable(out=0.0, f2=None):
 
 g.place("Plug the USB cable's small end into the Nano Board's USB socket, the cable towards the back.", move=[USB_B], appear=[USB_A], path=[[0.0, 0.0, USB_OUT], ZERO],
         lines_at=[[[676.34, 903.89, 1337.64], [676.34, 903.89, 1345.07]]], labels={USB_B: 'USB Cable'},
-        wires=usb_cable(USB_OUT), wires_done=usb_cable(), view_dir=[-0.62, 0.6, 0.5], frame=([628.0, 900.0, 1350.0], 70.0))   # (from behind: the LCD lies in front; the A end in frame)
+        wires=usb_cable(USB_OUT), wires_done=usb_cable(), view_dir=[-0.45, 0.45, 0.77], frame=([672.0, 906.0, 1352.0], 32.0))   # (close, into the socket: Lee)
 # ================================================================ THE USB CABLE (end)
 
 # ================================================================ THE CASE (begin)
@@ -655,50 +961,87 @@ g.carry([F7A, F7B], by=F3, pose=[0.0, F7_HOVER, 0.0], appear=False)
 F7_TAB = {F7A: [658.83, 881.23, 1228.4], F7B: [691.68, 881.23, 1238.0]}
 CASE_CAMERA = dict(view_dir=[0.55, 0.55, -0.63], frame=([690.0, 915.0, 1270.0], 110.0))
 g.place('Push the two F7s down into the slots in F3 by the end of the breadboard, their engraved sides facing out.', appear=[F7A, F7B], ride={F7A: ZERO, F7B: ZERO},
-        lines_at=[[np.add(t, [0.0, F7_HOVER, 0.0]).tolist(), [t[0], 887.61, t[2]]] for t in F7_TAB.values()], labels={F7A: '2x F7'}, **CASE_CAMERA)
+        lines_at=[[np.add(t, [0.0, F7_HOVER, 0.0]).tolist(), [t[0], 887.61, t[2]]] for t in F7_TAB.values()], labels={F7A: '2x F7'},
+        view_dir=CASE_CAMERA['view_dir'], frame=([678.0, 948.0, 1262.0], 110.0))   # (as the case's camera, the model lower: the F7s and where they hover centred)
 SPREAD = 15.0                                                       # (published: about 15 degrees)
-TILT_A = turned([0, 0, 1], SPREAD, [657.33, 887.61, 1233.2], [0.0, 2.6, 0.0])
-TILT_B = turned([0, 0, 1], -SPREAD, [693.18, 887.61, 1233.2], [0.0, 2.6, 0.0])
+TILT_A = turned([0, 0, 1], SPREAD, [657.33, 887.61, 1233.2])
+TILT_B = turned([0, 0, 1], -SPREAD, [693.18, 887.61, 1233.2])
 g.place('Spread the tops of the two F7s apart.', ride={F7A: TILT_A, F7B: TILT_B}, lines=False,
         arrows=[dict(tail=[655.0, 945.0, 1233.2], head=[628.0, 945.0, 1233.2], normal=[0, 1, 0], part=F3),
                 dict(tail=[695.5, 945.0, 1233.2], head=[722.5, 945.0, 1233.2], normal=[0, 1, 0], part=F3)], **CASE_CAMERA)
-BUZZER_UP = [0.0, 45.0, 0.0]
-g.place('Lower the buzzer in between the two F7s, its ears into their slots.', move=[BUZZER], path=[BUZZER_LYING, via(compose([0.0, 60.0, 0.0], BUZZER_LYING)), BUZZER_UP, ZERO],
+# (lifted, carried over and lowered: a stop each, its leads keeping pace stop by stop, then clamped as the CAD has them)
+g.place('Lower the buzzer in between the two F7s, its ears into their slots.', move=[BUZZER], path=[BUZZER_LYING, BUZZER_LIFT, BUZZER_UP, ZERO],
         lines=False, eye=[BUZZER],
-        wires_done={f'buzzer {c}': [W.route(cad_line(k2, cap)[::-1], a=BUZZER, b=cap, stretch=True)] * 2 for c, cap, _, _, _, k2 in BUZZER_LEADS}, **CASE_CAMERA)
+        wires_done={f'buzzer {c}': [buzzer_plugged(c, cap, e, BUZZER_LIFT, BUZZER_LIFT_WAY[c], stretch=True), buzzer_over_seat(c, cap, e, k2),
+                                    buzzer_clamped(cap, k2)] for c, cap, _, e, _, k2 in BUZZER_LEADS}, **CASE_CAMERA)
 g.place('Let go of the two F7s, so that they close on the buzzer.', ride={F7A: ZERO, F7B: ZERO}, lines=False, eye=[F7A, F7B], **CASE_CAMERA)
 g.place('Push F9 down into the slots in F3 beside the end of the breadboard, its engraved side towards that end.', move=[F9], labels={F9: 'F9'},
         review='The published guide hooks F9 in tilted and then stands it up (Steps 45, 46); in the CAD it goes straight down into its '
-               'slots, so it does here. Does the real part need the hook-and-swing?', **CASE_CAMERA)
+               'slots, so it does here. Does the real part need the hook-and-swing?',
+        view_dir=[0.53, 0.66, 0.53], frame=([700.0, 945.0, 1330.0], 110.0))   # (from the side its code faces, as published; the model lower, F9 over it in frame)
 
-# F1 is carried round to the far end (the buzzer's) and laid face up there, its potentiometer's leads re-routed (the CAD's).
-F1_MID = [70.0, 40.0, -100.0]                                      # (on the way round: upright, in front of the box)
-POT_OTHER = {c: W.route(cad_line(k, cap)[::-1], a=POT, b=cap, a_at=FLAT_OTHER_END, stretch=True) for c, cap, _, _, k in POT_LEADS}
-g.place('Move F1 round to the other end of the base and lay it face up there.', ride={F1: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END], POT: [compose(FRONT_OUT, F1_MID), FLAT_OTHER_END]}, ride_beats=True, lines=False, eye=[F1],
-        wires_done={f'pot {c}': [POT_OTHER[c], POT_OTHER[c]] for c, *_ in POT_LEADS}, view_dir=[0.62, 0.62, 0.48], frame=([700.0, 915.0, 1300.0], 200.0))
+# F1 is moved out of the way, as published (Step 46: to the far end), still face down: further out in front and along towards the F7s'
+# end, so that the potentiometer's leads run in between F7 and where F8 goes, behind F8 and the LCD (lying where it was, they crossed the
+# LCD's seat). Each lead's way: a path search through the case as it is once the LCD is in, F8's way in kept clear
+# (docs/research/lac/scripts/routing/).
+F1_ASIDE = tidy(turned([0, 0, 1], -90.0, F1_MIDDLE, [135.97, -10.43, 14.63]))
+ASIDE_WAY = {'red': [[832.9, 914.9, 1244.0], [827.9, 915.0, 1244.0], [822.9, 915.0, 1244.0], [817.9, 915.0, 1244.0], [812.9, 915.0, 1244.0], [807.9, 915.0, 1244.0], [802.9, 915.0, 1244.0], [797.9, 915.0, 1244.0], [792.5, 915.1, 1243.9], [787.7, 915.3, 1243.7], [783.0, 915.7, 1243.3], [777.7, 915.9, 1243.1], [772.7, 916.0, 1243.0], [767.7, 916.0, 1243.0], [762.7, 916.0, 1243.0], [757.7, 916.0, 1243.0], [752.7, 916.0, 1243.0], [747.7, 916.0, 1243.0], [742.7, 916.0, 1243.0], [737.7, 916.0, 1243.0], [732.9, 916.3, 1243.0], [727.8, 917.3, 1243.0], [722.8, 918.6, 1243.0], [718.3, 919.5, 1243.1], [713.4, 919.9, 1244.0], [709.4, 920.0, 1247.2], [707.4, 920.1, 1251.6], [705.2, 920.6, 1256.0], [702.4, 921.8, 1259.9], [700.1, 923.2, 1264.5], [699.9, 923.9, 1269.1], [701.4, 924.0, 1273.8], [703.5, 924.0, 1278.4], [704.7, 924.0, 1283.4], [705.0, 924.0, 1288.3], [705.0, 924.0, 1293.3], [705.0, 924.0, 1298.3], [705.0, 924.0, 1303.3], [704.7, 923.7, 1308.6], [703.8, 922.9, 1313.0], [702.0, 921.4, 1317.8], [700.0, 920.0, 1321.9], [697.7, 918.5, 1326.3]],
+              'tan': [[831.9, 914.9, 1250.0], [826.9, 915.0, 1250.0], [821.9, 915.0, 1250.0], [816.9, 915.0, 1250.0], [811.9, 915.0, 1250.0], [806.9, 915.0, 1250.0], [801.9, 915.0, 1250.0], [796.5, 914.9, 1249.9], [791.9, 914.4, 1249.4], [787.1, 912.8, 1247.8], [782.8, 911.1, 1246.1], [778.0, 910.2, 1245.2], [773.1, 910.0, 1245.0], [768.1, 910.0, 1245.0], [763.1, 910.0, 1245.0], [758.2, 910.0, 1245.0], [753.2, 910.0, 1245.0], [748.2, 910.0, 1245.0], [743.2, 910.0, 1245.0], [738.2, 910.0, 1245.0], [733.2, 910.0, 1245.0], [728.3, 910.0, 1244.7], [723.1, 910.0, 1244.1], [718.4, 910.0, 1243.5], [713.1, 910.0, 1244.1], [709.3, 910.0, 1247.1], [706.9, 910.0, 1251.3], [704.0, 910.0, 1255.6], [700.8, 910.0, 1259.2], [697.3, 910.0, 1262.8], [694.3, 910.0, 1267.0], [692.5, 910.0, 1271.8], [692.0, 910.0, 1276.6], [692.0, 910.0, 1281.6], [692.0, 910.0, 1286.6], [692.0, 910.0, 1291.6], [692.1, 910.0, 1296.5], [692.7, 910.4, 1301.6], [693.8, 911.4, 1306.3], [694.7, 912.7, 1311.0], [694.9, 913.7, 1315.9], [694.5, 914.0, 1320.6], [692.9, 914.1, 1325.4]],
+              'black': [[831.9, 914.9, 1255.0], [826.9, 915.0, 1255.0], [822.0, 915.0, 1255.0], [816.5, 915.0, 1255.0], [811.5, 915.0, 1255.0], [806.5, 915.0, 1255.0], [801.5, 915.0, 1255.0], [796.5, 915.0, 1255.0], [791.5, 915.0, 1255.0], [786.5, 915.0, 1255.0], [781.5, 915.0, 1255.0], [776.5, 915.0, 1255.0], [771.5, 915.0, 1255.0], [766.6, 915.0, 1255.0], [761.6, 915.0, 1255.0], [756.6, 915.0, 1255.0], [751.6, 915.0, 1255.0], [746.6, 915.0, 1255.0], [741.7, 915.0, 1254.8], [736.6, 915.0, 1253.9], [732.5, 915.0, 1251.8], [728.3, 915.0, 1248.5], [724.4, 915.0, 1245.9], [719.6, 915.0, 1244.2], [714.7, 915.0, 1244.0], [710.2, 915.0, 1246.2], [707.8, 915.0, 1250.5], [705.7, 915.3, 1255.1], [703.0, 916.2, 1259.1], [700.5, 917.7, 1263.1], [699.4, 918.7, 1267.7], [700.0, 918.8, 1273.1], [701.8, 918.3, 1277.6], [703.7, 917.5, 1282.1], [704.8, 917.1, 1287.0], [705.0, 917.0, 1291.9], [705.0, 917.0, 1296.9], [705.0, 917.0, 1301.9], [705.0, 917.0, 1306.8], [704.9, 917.0, 1311.8], [704.5, 917.0, 1316.6], [703.5, 916.7, 1321.6], [701.9, 915.9, 1326.6]]}
+POT_ASIDE = {c: pot_plugged(c, cap, e, F1_ASIDE, ASIDE_WAY[c]) for c, cap, _, e, _ in POT_LEADS}
+g.place('Move F1, still face down, further out in front of the case and along towards its other end, out of the way of the LCD screen.',
+        ride={F1: F1_ASIDE, POT: F1_ASIDE}, **STAY, lines=False, eye=[F1], wires_done={f'pot {c}': POT_ASIDE[c] for c in POT_ASIDE},
+        **frame_on(np.vstack([corners(F1, F1_DOWN), corners(F1, F1_ASIDE), corners(F9)]), [0.55, 0.62, 0.56], margin=4.0))
 
 # F4: lifted over the frame (the switch's leads re-routed, the CAD's), then lowered onto the tabs of the F7s and F9.
 SW_OVER = {c: W.route(cad_line(k, cap)[::-1], a=SWITCH, b=cap, a_at=HOVER_F4, stretch=True) for (c, cap, _, _), k in zip(SWITCH_LEADS, ('NAUO149', 'NAUO148', 'NAUO147'))}
 g.place('Lift F4, with the switch, over the frame.', ride={F4: HOVER_F4}, lines=False, eye=[F4],
         wires_done={f'switch {c}': [SW_OVER[c], SW_OVER[c]] for c, *_ in SWITCH_LEADS}, **CASE_CAMERA)
-F4_SLOTS = [[693.64, 1355.78], [697.62, 1355.78], [658.83, 1238.01], [691.68, 1228.36]]   # (over the tabs of F9 (x2) and the F7s, as published)
+F4_LINES = [[659.0, 957.8, 1233.3], [692.0, 957.8, 1232.9], [697.5, 957.8, 1355.4], [712.2, 954.7, 1356.1]]   # (the tops of the F7s' and F9's tabs: Lee, 20 Oct 2026)
 # Each lead's way from the seated switch down to its hole, clear of the others and of the jumpers (found by a path search through
 # the closed case, kept as control points).
 SW_SEATED_WAY = {'red': [[669.0, 921.7, 1263.0], [666.9, 920.0, 1266.0], [665.1, 918.5, 1269.2], [663.2, 917.3, 1272.8]],
                 'tan': [[685.0, 921.7, 1262.1], [687.9, 919.6, 1264.4], [690.5, 917.8, 1266.2], [693.7, 916.1, 1268.1]],
                 'black': [[682.1, 919.2, 1257.5], [679.2, 917.0, 1259.1], [676.3, 915.7, 1261.5], [673.4, 915.1, 1263.6], [669.8, 914.8, 1265.6], [666.3, 914.5, 1267.3]]}
 SW_SEATED = {c: W.route(into_hole(cap, exit_, [0, -1, 0], SW_SEATED_WAY[c]), a=SWITCH, b=cap, stretch=True) for c, cap, _, exit_ in SWITCH_LEADS}
-g.place('Lower F4 onto the tabs of the F7s and F9.', move=[F4], path=[HOVER_F4, ZERO], lines_at=[[[x, 951.46, z], [x, 957.84, z]] for x, z in F4_SLOTS],
+g.place('Lower F4 onto the tabs of the F7s and F9.', move=[F4], path=[HOVER_F4, ZERO], lines_at=F4_LINES,
         wires_done={f'switch {c}': SW_SEATED[c] for c in SW_SEATED}, **CASE_CAMERA)
 g.place('Slide F8 into the slots in F4 and F3 from the front.', move=[F8], direction=[1, 0, 0], hover=94, labels={F8: 'F8'}, **CASE_CAMERA)   # (published: 94.2 mm)
 
-# The LCD: stood up in front of the box and brought in, 15 mm short of F9 (the CAD's), then slid into F9's notches.
-LCD_STAND_ROUTE = {c: lcd_route(k, f, m, LCD_STANDING) for c, m, _, f, _, _, k, _ in LCD_WIRES}
-LCD_SEAT_ROUTE = {c: lcd_route(k, f, m, None) for c, m, _, f, _, _, _, k in LCD_WIRES}
-g.place('Stand the LCD screen up, face to the front, and bring it into the front of the case.', ride={LCD: [np.add(LCD_STANDING, [40.0, 0.0, 0.0]).tolist(), LCD_STANDING]}, ride_beats=True,
-        lines=False, eye=[LCD], wires_done={f'lcd {c}': [LCD_STAND_ROUTE[c]] * 2 for c in LCD_STAND_ROUTE}, view_dir=[0.62, 0.62, 0.48], frame=([705.0, 915.0, 1320.0], 110.0))
-g.place("Slide the LCD screen along until its board goes into the notches in F9 and F8.", move=[LCD], path=[LCD_STANDING, ZERO], wires_done={f'lcd {c}': LCD_SEAT_ROUTE[c] for c in LCD_SEAT_ROUTE},
-        view_dir=[0.62, 0.62, 0.48], frame=([705.0, 915.0, 1320.0], 110.0))
+# The LCD into the case (Steps 51, 52 published; Lee, 20 Oct 2026: "the subtleties of how the LCD Display moves into the slots on F9
+# and F8"): lifted off the table and slid out in front, still face down; stood up, face to the front, 40 mm out in front of the case, the
+# end by F8 angled in 14 degrees; moved in until that end is in F8's notch, the other end angled out in front of F9 (the published pose,
+# without its 2.14 mm lift, which put the LCD's top into F4's underside) (Step 49); then straightened, pushed 14.9 mm further through
+# F8's notch, and slid back 14.9 mm into F9's notches (Step 50). Its wires stay behind F9: the run from the breadboard round F9's back
+# edge is the seated CAD wire's in every shape, and from there each wire runs along F9's far face to the header.
+LCD_MID = [713.01, 919.52, 1311.22]                                 # the LCD's middle, seated
+LCD_ANGLE_AT = [723.37, 921.6, 1265.11]                             # the upright the LCD is turned about: 3 mm in front of F8, at its notch
+LCD_ANGLED = turned([0, 1, 0], 14.0, LCD_ANGLE_AT)                  # (published: 14.0 degrees)
+LCD_OUT = tidy(compose([40.0, 0.0, 0.0], LCD_ANGLED, LCD_MID))      # 40 mm out in front (turned about its middle on the way: the player
+                                                                    # turns a part about its pose's `at`)
+LCD_LIFTED = tidy(compose([55.0, 25.0, 10.0], LCD_LYING, LCD_LYING['at']))   # off the table, out in front, clear of F1
+LCD_LEADS = {}
+for colour, male, _, fem, _, _, standing_key, seated_key in LCD_WIRES:
+    seated = lcd_line(seated_key, male, fem, None)
+    head = LCD_HEAD[colour]                                         # (the shared run: on to just round F9's back edge)
+    y = fem_end(fem)[0][1]                                          # (the wire's height at the header)
+    LCD_LEADS[colour] = dict(
+        out=lcd_lead(lcd_tail(head, fem, LCD_OUT, [[700.0, y, 1362.5], [722.0, y, 1366.0], [748.0, y, 1369.0]], reach=6.0), fem, male, LCD_OUT, head[-1]),
+        angled=lcd_lead(lcd_tail(head, fem, LCD_ANGLED, [[700.0, y, 1362.5], [716.0, y, 1366.5]], reach=6.0), fem, male, LCD_ANGLED, head[-1]),
+        standing=lcd_lead(lcd_tail(head, fem, LCD_STANDING, [[697.0, y, 1362.0], [703.6, y, 1358.5]]), fem, male, LCD_STANDING, head[-1]),
+        seated=lcd_lead(seated, fem, male, None, head[-1]))
+LCD_IN_DIR = [0.62, 0.62, 0.48]                                     # (from the front at the breadboard's end, as before)
+g.place('Stand the LCD screen up in front of the case, face to the front, and move it in until the end of its board by F8 goes into the '
+        'notch in F8, its other end angled out in front of F9.', ride={LCD: [LCD_LIFTED, LCD_OUT, LCD_ANGLED]}, ride_beats=True, lines=False,
+        eye=[LCD], wires_done={f'lcd {c}': [LCD_LYING_LEAD[c], LCD_LEADS[c]['out'], LCD_LEADS[c]['angled']] for c, *_ in LCD_WIRES},
+        **frame_on(np.vstack([corners(LCD, LCD_LYING), corners(LCD, LCD_LIFTED), corners(LCD, LCD_OUT), corners(LCD, LCD_ANGLED)]), LCD_IN_DIR, margin=2.0))
+F9_NOTCHES = [[712.1, 947.3, 1359.5], [712.1, 892.6, 1359.5]]       # the end of the LCD's board, where it goes into F9's two notches (seated)
+g.place("Straighten the LCD screen, pushing it on through the notch in F8, then slide it back until its board goes into the notches in F9.",
+        move=[LCD], path=[LCD_ANGLED, LCD_STANDING, ZERO], lines_at=F9_NOTCHES,
+        wires_done={f'lcd {c}': [LCD_LEADS[c]['standing'], LCD_LEADS[c]['seated']] for c in LCD_LEADS},
+        inset=dict(target=[713.1, 919.5, 1356.5], dir=[0.6, 0.3, 0.75], radius=34.0, marks=[([712.1, 947.3, 1356.5], 3.0), ([712.1, 892.6, 1356.5], 3.0)],
+                   alt="Close-up of F9: the ends of the LCD screen's board in its two notches"),   # (as published, Step 52)
+        view_dir=LCD_IN_DIR, frame=([705.0, 915.0, 1320.0], 110.0))
 
 # F1: stood up in front of the box (the CAD's), then pushed onto the tabs of F4 and F3.
 # Each lead's way through the closed case to its hole, seated (found by a path search, kept as control points): from the pins down
@@ -711,11 +1054,14 @@ F1_FRONT_WAY = {'black': [[781.2, 900.0, 1240.0], [771.3, 900.0, 1240.0], [761.5
                 'red': [[781.7, 900.0, 1233.0], [771.7, 900.0, 1233.0], [761.7, 900.0, 1233.0], [751.5, 900.2, 1233.6], [742.5, 902.1, 1236.7], [733.6, 903.0, 1241.0], [724.3, 903.0, 1245.2], [715.1, 903.0, 1249.4]],
                 'tan': [[781.6, 903.1, 1237.0], [771.5, 904.0, 1237.0], [761.5, 904.0, 1237.0], [751.8, 904.6, 1237.1], [741.9, 906.5, 1237.7], [731.8, 907.0, 1238.2], [722.2, 907.0, 1240.3], [713.0, 907.0, 1244.4]]}
 F1_UP_WAY = {c: F1_FRONT_WAY[c] + F1_IN_WAY[c][1 if c == 'tan' else 2:] for c in F1_IN_WAY}
-POT_UP = {c: pot_plugged(c, cap, e, FRONT_OUT, F1_UP_WAY[c]) for c, cap, _, e, _ in POT_LEADS}
-POT_IN = {c: pot_plugged(c, cap, e, None, F1_IN_WAY[c]) for c, cap, _, e, _ in POT_LEADS}
+F1_SHARED = {c: F1_IN_WAY[c][1 if c == 'tan' else 2] for c in F1_IN_WAY}   # (where the two ways meet: on from there to the hole they are one)
+POT_UP = {c: pot_plugged(c, cap, e, FRONT_OUT, F1_UP_WAY[c], F1_SHARED[c]) for c, cap, _, e, _ in POT_LEADS}
+POT_IN = {c: pot_plugged(c, cap, e, None, F1_IN_WAY[c], F1_SHARED[c]) for c, cap, _, e, _ in POT_LEADS}
 g.place('Stand F1 up in front of the case, the knob on the outside.', ride={F1: FRONT_OUT, POT: FRONT_OUT}, lines=False, eye=[F1],
         wires_done={f'pot {c}': [POT_UP[c]] * 1 for c in POT_UP}, view_dir=[0.62, 0.55, -0.56], frame=([720.0, 915.0, 1270.0], 120.0))
-g.place('Push F1 onto the tabs of F4 and F3.', move=[F1, POT], path=[FRONT_OUT, ZERO], wires_done={f'pot {c}': POT_IN[c] for c in POT_IN},
+F1_LINES = [[[721.0, 886.1, 1321.6], [723.8, 886.1, 1321.6]], [[720.8, 886.1, 1258.1], [723.8, 886.1, 1258.1]],   # (F3's tabs, F4's at the
+            [[720.9, 953.0, 1258.1], [723.8, 953.0, 1258.1]], [727.2, 952.1, 1321.4]]                      # buzzer's end, F4's front tab: Lee)
+g.place('Push F1 onto the tabs of F4 and F3.', move=[F1, POT], path=[FRONT_OUT, ZERO], wires_done={f'pot {c}': POT_IN[c] for c in POT_IN}, lines_at=F1_LINES,
         view_dir=[0.62, 0.55, -0.56], frame=([720.0, 915.0, 1270.0], 120.0))
 
 # The ends and the back, as published (Steps 55 - 57): F5 onto the end by the breadboard; F2's hooks into F5's slots with F2 swung out,
@@ -724,7 +1070,8 @@ g.place('Push F1 onto the tabs of F4 and F3.', move=[F1, POT], path=[FRONT_OUT, 
 END_CAMERA = dict(view_dir=[0.82, 0.4, 0.42], frame=([683.0, 919.0, 1320.0], 115.0))   # (low, from the front, as published: from further round F5 hides its lines)
 F5_TABS = [[722.33, 949.8, 1372.45], [722.33, 888.4, 1372.45], [663.68, 886.11, 1369.24], [701.78, 886.11, 1369.24]]   # F1's two hooks, F3's two tabs
 g.place("Push F5 onto the end of the case by the breadboard: the tabs of F1, F3 and F4 go into its slots. Its engraved side faces out.", move=[F5],
-        direction=[0, 0, 1], hover=56, lines_at=[[[x, y, 1366.07], [x, y, z]] for x, y, z in F5_TABS], labels={F5: 'F5'}, **END_CAMERA)   # (published: 56.0 mm)
+        direction=[0, 0, 1], hover=56, lines_at=[[[x, y, 1366.07], [x, y, z]] for x, y, z in F5_TABS] + [[702.5, 952.7, 1369.2], [663.5, 952.5, 1369.2]],   # (+ F4's: Lee)
+        labels={F5: 'F5'}, **END_CAMERA)   # (published: 56.0 mm)
 F2_HOOKS = [[643.13, 949.8, 1372.45], [643.13, 888.4, 1372.45]]    # the hooks at F2's end by F5
 g.place("Turn the case so its back faces you. Hook the tabs at the slit end of F2 into the slots in F5, its engraved side facing out and "
         "its other end swung out, then swing F2 shut onto the tabs of F3 and F4.", move=[F2], path=[swung(F2_OFF), swung(F2_HOOK), swung(), ZERO],
