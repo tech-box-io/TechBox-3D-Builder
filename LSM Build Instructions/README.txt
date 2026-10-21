@@ -24,6 +24,8 @@ sub-millimetre corrections made to Cadasio's placements, are in docs/research/ls
 - The LSM's own: the wood D1 - D11, the breadboard, the LED matrix, the resistors, the capacitor, the push button and its nut, the
   jumpers' male pins, and the right-angle Mini-B plug (the MRA's is straight, and a straight plug would run into the push button).
 - The 64 LED stems are drawn as plain 3.175 mm square rods 66.675 mm long (Cadasio's size): their CAD is not in the files yet.
+- The breadboard's joining tabs on the sides the real one has them (Lee, 20 Oct 2026): two on the a side and three on the row 30 end
+  (the CAD has them on the j side and the row 1 end); assemble.py moves them and closes the openings.
 - D3 is Lee's updated part (LSM_D3.STEP, 20 Oct 2026, converted to lsm-d3.glb): 3.0 mm thick (the first was 3.175), longer end tabs,
   the latches' spring cuts and the slots reshaped; placed where the first D3 was (the same part frame).
 - D8 sits with its top just under the D11 posts' top latches (Lee, 20 Oct 2026; Cadasio had it 2.1 mm lower). D8 is 3.17 mm thick in
@@ -52,7 +54,7 @@ THE BUILD (40 numbered steps; the published guide's 38 and its order, with the h
 - Steps 1 - 9, the breadboard: backing peeled off; onto D1; the Nano Board in rows c and g, columns 2 - 16, USB socket at column 16
   (pin D12 in c16, as Part 1 of the published guide has it; c16's leader comes in from the side, across its red lead line, not along
   it); the 12 kOhm resistor's legs bent, into h3 and h16; the capacitor on its own, turned as Lee's capacitor picture shows it (stripe
-  and GND leg on the left), its legs labelled GND (-) and VCC (+) underneath, with the picture as the close-up, then into j2 and j3,
+  and GND leg on the left), its legs labelled GND (-) and VCC (+) underneath, with the picture as the close-up on its right, then into j2 and j3,
   stripe in j3, seen the same way round; the 330 Ohm resistor's
   legs bent, into a11 and a19.
 - Steps 10 - 17, the LED matrix's wires: the three-wire ribbon's ends pulled apart; the yellow, grey and purple pins into i2, i3 and

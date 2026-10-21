@@ -1279,7 +1279,9 @@ class Guide:
         inset marks: inset=dict(..., marks=[([x, y, z], half-width mm), ...]) draws a red box round each of several spots instead of
                     the one `mark` round the target (the LSM's four slots in D1). inset=dict(..., ghost={id: alpha}) draws those parts
                     faintly in the close-up (the LSM's matrix over D10's slot); inset=dict(..., image='file.webp') shows a picture made
-                    outside, a file in the kit folder, instead of a view of the model (the LSM's capacitor card).
+                    outside, a file in the kit folder, instead of a view of the model (the LSM's capacitor card). inset=dict(..., side='right')
+                    asks for the side of the model it goes on ('left', 'right', 'top', 'bottom'), where it fits clear of the labels (the
+                    LSM's Step 6: beside the side of the capacitor its leader goes to).
         one_off_camera: True when this step's camera (view_dir= / frame=) is a one-off: the steps after it choose theirs
                     as if it had the camera the generator would have given it (so pinning one step's camera, from a
                     screenshot, leaves the next steps' cameras as they were).
@@ -1895,7 +1897,7 @@ class Guide:
             if s.get('inset'):
                 I = s['inset']
                 inset = dict(target=[round(float(x), 2) for x in I['target']], dir=_unit(I.get('dir', camera['dir'])).round(4).tolist(), radius=float(I.get('radius', 20.0)),
-                             hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption') if k in I},
+                             hide=list(I.get('hide', [])), **{k: I[k] for k in ('mark', 'alt', 'caption', 'side') if k in I},
                              **({'marks': [dict(at=[round(float(x), 2) for x in at], half=float(half)) for at, half in I['marks']]} if I.get('marks') else {}),
                              **({'ghost': {i: float(v) for i, v in I['ghost'].items()}} if I.get('ghost') else {}),
                              **(self._inset_image(I['image']) if I.get('image') else {}))

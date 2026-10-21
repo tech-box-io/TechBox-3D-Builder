@@ -273,12 +273,14 @@ def jumper(w, m_pose, f_pose_, mids=(), skip=(), lead=3.0, stretch=True, fixed=N
 BOARD_UP = [0.0, 49.0, 0.0]
 g.rest_at([BREADBOARD], BOARD_UP)
 g.carry([BACKING], by=BREADBOARD)
-_bb = box(BREADBOARD)
+# (The breadboard's body, without its joining tabs, which assemble.py moved to the a side and the row 30 end: Lee, 20 Oct 2026. Step 1's
+# arrow and camera stay where they were with the tabs on the other sides.)
+_bb = np.array([[611.18, 862.4, 1163.9], [665.93, 871.92, 1245.58]])
 g.place('Peel the protective backing off the bottom of the breadboard.', appear=[BREADBOARD], ride={BACKING: [0.0, -40.0, 0.0]}, lines=False,
         labels={BREADBOARD: 'Breadboard'},
         # (Longer, at the corner nearest the camera, so that it shows under the breadboard: Lee, 19 Oct 2026.)
-        arrows=[dict(tail=[_bb[0][0] + 4.0, _bb[0][1] - 1.0, _bb[0][2] + 4.0], head=[_bb[0][0] + 4.0, _bb[0][1] - 46.0, _bb[0][2] + 4.0],
-                     normal=[-0.7071, 0, -0.7071], part=BACKING, width=4.0)])
+        arrows=[dict(tail=[615.18, 861.4, 1166.57], head=[615.18, 816.4, 1166.57], normal=[-0.7071, 0, -0.7071], part=BACKING, width=4.0)],
+        view_dir=[-0.5792, 0.5736, -0.5792], frame=([639.2, 896.1, 1204.2], 56.0))
 g.put_away([BACKING])
 # D1 appears in place; the breadboard (sticky side down) is pressed onto it, between its corner marks.
 CORNERS = [[x, 862.4, z] for x in (_bb[0][0] + 1.0, _bb[1][0] - 1.0) for z in (_bb[0][2] + 1.0, _bb[1][2] - 1.0)]
@@ -316,8 +318,9 @@ g.place('The capacitor has a negative (-) leg and a positive (+) leg. The grey s
         # (GND (-) and VCC (+) under their legs, as Lee's picture has them: Lee, 20 Oct 2026)
         labels=[dict(id=CAP, text='GND (-)', anchor=CAP_LEG['gnd'], side='down-left'), dict(id=CAP, text='VCC (+)', anchor=CAP_LEG['plus'], side='down-right')],
         eye=[dict(id=CAP, anchor=STRIPE)],
-        # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card; its leader to the side of the can it is on)
-        inset=dict(target=[656.3, 879.5, 1172.5], image='capacitor-card.webp', caption='The grey stripe marks the GND (-) leg',
+        # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card; to the right of the capacitor, its leader to the
+        # can's right side, not across it: Lee, 20 Oct 2026)
+        inset=dict(target=[656.3, 879.5, 1172.5], image='capacitor-card.webp', side='right', caption='The grey stripe marks the GND (-) leg',
                    alt='A capacitor: the grey strip down its side is over the GND (-) leg; the other leg is VCC (+)'))
 g.seat('Push the capacitor into j2 and j3, its grey stripe in j3.', [CAP], direction=[0, 1, 0], hover=29,
        labels=[hole_label('j3'), hole_label('j2')], lines_at=[[652.5, 863.6, 1170.6], [652.5, 863.6, 1173.1]],   # (the legs' tips: Lee, 19 Oct 2026)
@@ -625,7 +628,10 @@ g.place('Stand D2, with the button, on D1: its tabs go into the slots along the 
 # D4 comes down from above (Lee, 19 Oct 2026), the USB cable into the notch at its foot, to just outside its place, then goes on over the
 # tabs of D1 and D2: those go through closed slots in D4, so it cannot be lowered straight into place.
 g.place('Lower D4 beside the end of D1, the USB cable in the notch at its foot, then push it onto the tabs of D1 and D2.', move=[D4], labels={D4: 'D4'},
-        path=[[-8.0, 65.0, 0.0], [-8.0, 0.0, 0.0], ZERO], **BASE_CAMERA)
+        path=[[-8.0, 65.0, 0.0], [-8.0, 0.0, 0.0], ZERO],
+        # (the generator's four lines, kept as they were: after the breadboard's tabs moved it picked another tab of D4 for one of them)
+        lines_at=[[[597.3, 861.8, 1253.4], [594.4, 861.8, 1253.4]], [[597.4, 901.4, 1253.4], [594.4, 901.4, 1253.4]],
+                  [[597.3, 860.9, 1232.8], [594.5, 860.9, 1232.8]], [[597.4, 861.7, 1156.6], [597.0, 861.7, 1156.6]]], **BASE_CAMERA)
 
 # ---- The LED matrix's three wires from here on (Lee, 19 Oct 2026: they went through D4, the D9s and D10). Inside the box each runs
 # from its pin under the end of D9 nearest D3 (the white and grey wires over the Nano Board's ICSP pins, which leave 1.8 mm under the

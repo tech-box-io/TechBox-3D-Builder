@@ -489,10 +489,12 @@ AXIS_MAPS = [(p, s) for p in ((0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0,
              for s in ((1, 1, 1), (1, 1, -1), (1, -1, 1), (1, -1, -1), (-1, 1, 1), (-1, 1, -1), (-1, -1, 1), (-1, -1, -1))]
 
 
-def colour_from_atlas(boxes, atlas):
+def colour_from_atlas(boxes, atlas, frame=None):
     """Match each component box to the atlas solid with the closest box, trying every axis mapping.
 
-    boxes: (n, 2, 3) component min/max in mm. Returns (list of hex colours, fraction closely matched, which are skins).
+    boxes: (n, 2, 3) component min/max in mm. frame: the box (mm, the mesh's own frame) to line up with the atlas's, where the mesh's
+    own box is no longer the CAD's (materials.json "atlas_frame": the LSM breadboard, its tabs moved to other sides).
+    Returns (list of hex colours, fraction closely matched, which are skins).
     Atlas entries with "solid": null are marks printed on a solid, not solids: see flat_marks().
     """
     solids = [s for s in atlas['solids'] if s.get('solid', 0) is not None]
@@ -501,7 +503,7 @@ def colour_from_atlas(boxes, atlas):
     acol = [s['colour'] for s in solids]
     askin = np.array([bool(s.get('skin')) for s in solids])
     alo, ahi = np.array(atlas['bbox_min']), np.array(atlas['bbox_max'])
-    lo, hi = boxes[:, 0].min(0), boxes[:, 1].max(0)
+    lo, hi = (boxes[:, 0].min(0), boxes[:, 1].max(0)) if frame is None else (np.array(frame[0], float), np.array(frame[1], float))
     best = None
     for perm, sign in AXIS_MAPS:
         perm, sign = list(perm), np.array(sign)
@@ -583,7 +585,7 @@ def colour_components(rule, mats, V, F, labels, n_comp):
     note = ''
     skin = np.zeros(n_comp, dtype=bool)
     if 'atlas' in rule:
-        cols, score, atlas_skin = colour_from_atlas(boxes, mats.atlas(rule['atlas']))
+        cols, score, atlas_skin = colour_from_atlas(boxes, mats.atlas(rule['atlas']), rule.get('atlas_frame'))
         note = f'atlas match {score:.0%}'
         if cols is not None and score >= rule.get('atlas_min_match', 0.6):
             swap = rule.get('atlas_colours', {})          # e.g. {"#cccccc": "pin"}: this kit's choice for one of the atlas's colours

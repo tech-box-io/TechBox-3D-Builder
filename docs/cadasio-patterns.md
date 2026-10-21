@@ -128,6 +128,8 @@ Section 14 says what the in-house player does today against each rule.
 **Pictures**
 - Any explanatory picture is a framed inset: white rounded rectangle, 5 px `#7fdbff` border, blue leader and ring to the feature, thin red rectangles inside marking the exact detail.
 - A real product photo with the pin names boxed, on a module's section card. A close-up render in the guide's own style on a step (a hidden face, a latch to release, a result to check).
+- **In-house (Lee, 2026-10-20):** a close-up sits on the side of the part its leader goes to, so that the leader does not cross the
+  part (the LSM's capacitor picture, to the right of the capacitor).
 - **In-house (Lee, 2026-10-20):** a part shown on its own beside a picture TechBox supplies is turned to match the picture (the LSM's
   capacitor, Step 6: its stripe on the left and the GND leg left, as Lee's picture), its labels placed as the picture's (under the
   legs), and the step that puts it in is seen the same way round (Step 7).

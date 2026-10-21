@@ -90,7 +90,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   kit folder (the LSM's capacitor card, Step 6; published and bundled with the guide); and can draw parts faintly,
   `inset=dict(..., ghost={id: alpha})` (the LSM's matrix at 0.12 over the wires in D10's slot, Step 32). A close-up keeps clear of
   the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14), and is
-  made smaller (to 85%, 72% or 60%) only where no full-size place is clear (the LSM's Step 6, labels both sides, in a narrow window).
+  made smaller (to 85%, 72% or 60%) only where no full-size place is clear (the LSM's Step 6, labels both sides, in a narrow window);
+  `inset=dict(..., side='right')` asks for its side of the model, tried at every size before any other (the LSM's capacitor picture,
+  to the right of the capacitor, its leader not across it).
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
@@ -432,7 +434,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                sub-millimetre corrections; Lee's second round (19 Oct 2026) remade the LED matrix's pin header (a
                                right-angle surface-mount one, as photographed) and lowered the matrix onto the D9s (assemble.py), and
                                silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). D3 is Lee's
-                               updated part (LSM_D3.STEP -> lsm-d3.glb, 20 Oct 2026); D8 raised to just under the D11 posts' latches.
+                               updated part (LSM_D3.STEP -> lsm-d3.glb, 20 Oct 2026); D8 raised to just under the D11 posts' latches; the
+                               breadboard's tabs moved to the a side and the row 30 end (assemble.py).
                                Server on port 8805 ("Open Prototype.command").
     PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
                                decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses), routing.py (Lee's first round: every set of jumper wires shown together laid as
@@ -467,6 +470,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
   `"regions"` colours faces by where they are in the mesh's own frame, for a purchased part modelled as one solid; with
   `"cut": true` the triangles crossing the box's faces are split first, so a band ends on a straight line (the RCC battery's); with
   `"round": "xy"` only the faces within the ellipse the box holds across those two axes (a round window: the LSM's corner LED).
+  `"atlas_frame"` (a box in the mesh's own frame) lines a mesh up with the colour atlas by that box instead of its own, for a mesh whose
+  outline was changed after the atlas was made (the LSM breadboard, its tabs moved by assemble.py).
   `"move_engraving"` moves a wood part's engraved code elsewhere on its face (and can turn it the right way up), for a part
   the CAD has engraved in the wrong place (R8): the pocket is filled in and the code drawn there instead. `"fill_holes"`
   ({instance: [points on the holes' axes, assembly mm]}) fills round pin holes in a plate that nothing passes through any

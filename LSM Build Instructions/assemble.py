@@ -293,6 +293,94 @@ parts['D10']['place'][0, 3] += 0.58
 
 # the breadboard and its backing sheet: where Cadasio has them
 add('BREADBOARD', from_mesh(EL, 'Breadboard'), at('Breadboard-1'), 'lsm-electronics.glb Breadboard', 'Breadboard-1')
+
+
+def move_breadboard_tabs(part):
+    """The breadboard's joining tabs on the sides the real one has them (Lee, 20 Oct 2026): the CAD has two on the j side and three on
+    the row 1 end; they belong on the a side and the row 30 end, which the CAD has plain (no grooves). The tabs are cut from the body
+    (faces beyond the side's plane), the openings left in the j side and the row 1 end closed flat, and the tabs mirrored across the
+    board onto the a side and the row 30 end, as a mesh of their own ("Breadboard tabs", coloured as the body in materials.json: the
+    body's colours come from the atlas, matched by the mesh's original box, materials.json "atlas_frame")."""
+    name, V, N, F, m = part['meshes'][0]
+    P = part['place']
+    W = (P @ np.c_[V, np.ones(len(V))].T).T[:, :3]
+    T = F.reshape(-1, 3)
+    tri = W[T]
+    fn = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    area = np.linalg.norm(fn, axis=1) / 2
+    fn = fn / np.maximum(1e-12, np.linalg.norm(fn, axis=1))[:, None]
+    C = tri.mean(1)
+
+    def plane(axis, sign):                            # the side's flat face: of the faces facing that way, the value with most area
+        sel = fn[:, axis] * sign > 0.99
+        vals, inv = np.unique(np.round(C[sel, axis], 2), return_inverse=True)
+        return float(vals[np.bincount(inv, weights=area[sel]).argmax()])
+    x0, x1, z0, z1 = W[:, 0].min(), plane(0, 1), plane(2, -1), W[:, 2].max()
+    tab_j, tab_1 = C[:, 0] > x1 + 0.2, C[:, 2] < z0 - 0.2
+    keep = ~(tab_j | tab_1)
+    used, remap = np.unique(T[keep], return_inverse=True)
+    bodyV, bodyN, bodyF = W[used], (P[:3, :3] @ N[used].T).T, remap.reshape(-1, 3)
+    # the openings: each tab's root outline, on the side's plane, closed with a flat fan
+    caps_V, caps_F = [], []
+    weld = np.unique(np.round(W / 1e-3).astype(np.int64), axis=0, return_inverse=True)[1].reshape(-1)   # (positions, welded to 1 micron)
+    TW, nw = weld[T], int(weld.max()) + 1
+    # the body's open edges once the tabs are cut away: each opening's outline, exactly as the body has it (so that the patch's edges
+    # meet the body's and no outline is drawn where a tab was)
+    ek = np.sort(np.vstack([TW[keep][:, [0, 1]], TW[keep][:, [1, 2]], TW[keep][:, [2, 0]]]), axis=1)
+    eu, ec = np.unique(ek, axis=0, return_counts=True)
+    first_pos = np.zeros((nw, 3)); first_pos[weld] = W
+    border_pts = first_pos[np.unique(eu[ec == 1].ravel())]
+    for sel, axis, value, normal in ((tab_j, 0, x1, [1.0, 0.0, 0.0]), (tab_1, 2, z0, [0.0, 0.0, -1.0])):
+        faces = np.flatnonzero(sel)
+        e = np.vstack([TW[faces][:, [0, 1]], TW[faces][:, [1, 2]]])
+        lab = connected_components(coo_matrix((np.ones(len(e)), (e[:, 0], e[:, 1])), shape=(nw, nw)), directed=False)[1]
+        groups = lab[TW[faces, 0]]
+        for c in np.unique(groups):
+            ids = np.unique(T[faces[groups == c]].ravel())
+            root = W[ids][np.abs(W[ids, axis] - value) < 0.02]   # (the plane is read to 0.01 mm)
+            if len(root) < 3:
+                continue
+            lo_r, hi_r = root.min(0) - 0.05, root.max(0) + 0.05
+            root = border_pts[np.all((border_pts >= lo_r) & (border_pts <= hi_r), axis=1) & (np.abs(border_pts[:, axis] - value) < 0.02)]
+            root = np.unique(np.round(root, 5), axis=0)
+            if len(root) < 3:
+                continue
+            mid = root.mean(0)
+            u, w = [k for k in range(3) if k != axis]
+            ang = np.arctan2(root[:, w] - mid[w], root[:, u] - mid[u])
+            ring = root[np.argsort(ang)]
+            base = len(bodyV) + sum(len(v) for v, n in caps_V)
+            pts, k = np.vstack([mid, ring]), len(ring)
+            fan = np.array([[0, 1 + i, 1 + (i + 1) % k] for i in range(k)])
+            a, b, cc = pts[fan].transpose(1, 0, 2)
+            if np.dot(np.cross(b - a, cc - a).sum(0), normal) < 0:      # (outward, as the side's face)
+                fan = fan[:, [0, 2, 1]]
+            caps_V.append((pts, np.tile(normal, (k + 1, 1))))
+            caps_F.append(fan + base)
+    capV = np.vstack([v for v, n in caps_V]) if caps_V else np.zeros((0, 3))
+    capN = np.vstack([n for v, n in caps_V]) if caps_V else np.zeros((0, 3))
+    bodyV, bodyN = np.vstack([bodyV, capV]), np.vstack([bodyN, capN])
+    bodyF = np.vstack([bodyF] + caps_F) if caps_F else bodyF
+    # the tabs, mirrored across the board: the j side's onto the a side, the row 1 end's onto the row 30 end
+    tabsV, tabsN, tabsF = [], [], []
+    for sel, axis, s in ((tab_j, 0, x0 + x1), (tab_1, 2, z0 + z1)):
+        faces = np.flatnonzero(sel)
+        used, remap = np.unique(T[faces], return_inverse=True)
+        tv, tn = W[used].copy(), (P[:3, :3] @ N[used].T).T
+        tv[:, axis] = s - tv[:, axis]
+        tn[:, axis] = -tn[:, axis]
+        base = sum(len(v) for v in tabsV)
+        tabsV.append(tv); tabsN.append(tn); tabsF.append(remap.reshape(-1, 3)[:, [0, 2, 1]] + base)
+    inv = np.linalg.inv(P)
+    own = lambda X: (inv @ np.c_[X, np.ones(len(X))].T).T[:, :3]
+    turn = lambda Nn: (inv[:3, :3] @ Nn.T).T
+    part['meshes'] = [(name, own(bodyV), turn(bodyN), bodyF.reshape(-1), m),
+                      ('Breadboard tabs', own(np.vstack(tabsV)), turn(np.vstack(tabsN)), np.vstack(tabsF).reshape(-1), m)]
+    print(f'breadboard: {int(tab_j.sum())} + {int(tab_1.sum())} tab faces moved (j side x {x1:.2f} -> a side x {x0:.2f}; '
+          f'row 1 end z {z0:.2f} -> row 30 end z {z1:.2f}); {len(caps_F)} openings closed')
+
+
+move_breadboard_tabs(parts['BREADBOARD'])
 add('BACKING', from_mesh(FB, 'Paper'), at('Paper-1'), 'lsm-fullbuild-raw.glb Paper', 'Paper-1')
 
 # The LED matrix: Cadasio's, 0.2 mm across as Cadasio shows it seated, and 1.10 mm lower, resting on the tops of the two D9 (Cadasio

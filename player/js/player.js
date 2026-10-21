@@ -430,7 +430,10 @@ function buildInset(view) {
   const R = screenRect(view, camera, W, H), [ax, ay] = project(I.target, camera, W, H), capH = I.caption ? 24 : 0;
   let boxH = h + 12 + capH + 8, boxW = w + 20;
   const room = {right: W - R.x1, left: R.x0, top: R.y0 - 70, bottom: H - R.y1};
-  const side = Object.keys(room).sort((a, b) => room[b] - room[a])[0];
+  // the sides by room; a close-up may ask for its side (`side`: the LSM's capacitor picture, right of the capacitor, so that its leader
+  // does not cross it: Lee, 20 Oct 2026), tried first wherever it fits
+  const sides = Object.keys(room).sort((a, b) => (b === I.side) - (a === I.side) || room[b] - room[a]);
+  const side = sides[0];
   const clear = onScreenInstructions();         // (not over the instructions)
   const placeAt = s => {
     let x = s === 'right' ? R.x1 + Math.max(24, (W - R.x1 - boxW) / 2) : s === 'left' ? Math.min(R.x0 - boxW - 24, (R.x0 - boxW) / 2) : ax - boxW / 2;   // (in the middle of the free space)
@@ -454,11 +457,13 @@ function buildInset(view) {
   if (marks.length && covered(x, y) > 0) {
     // (and if nowhere is clear at full size, a little smaller, down to 60%: a view with labels on both sides in a narrow window, the
     // LSM's Step 6 at 1000 px)
+    // (a side asked for is tried at every size before any other side)
     let best = [x, y, covered(x, y), boxW, boxH];
-    for (const k of [1, 0.85, 0.72, 0.6]) {
+    const passes = [...(I.side ? [1, 0.85, 0.72, 0.6].map(k => [k, [I.side]]) : []), ...[1, 0.85, 0.72, 0.6].map(k => [k, sides])];
+    for (const [k, these] of passes) {
       boxW = Math.round(w * k) + 20; boxH = Math.round(h * k) + 12 + capH + 8;
       const tries = [];
-      for (const s of Object.keys(room).sort((a, b) => room[b] - room[a])) {
+      for (const s of these) {
         const [sx, sy] = placeAt(s);
         tries.push([sx, sy]);
         if (s === 'left' || s === 'right') tries.push([sx, Math.max(70, clear && sx < clear.right + 8 && sx + boxW > clear.left - 8 ? clear.bottom + 12 : 70)], [sx, H - boxH - 12]);

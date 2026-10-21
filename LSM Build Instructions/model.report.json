@@ -1,12 +1,12 @@
 {
  "summary": {
   "source": "lsm.glb",
-  "source_bytes": 19190544,
-  "model_bytes": 1696048,
-  "triangles_in": 603332,
-  "triangles_out": 136665,
-  "edge_segments": 80097,
-  "meshes": 30,
+  "source_bytes": 19192048,
+  "model_bytes": 1697796,
+  "triangles_in": 603352,
+  "triangles_out": 136647,
+  "edge_segments": 80099,
+  "meshes": 31,
   "parts_kept": 98,
   "parts_in_source": 98,
   "materials": [
@@ -193,9 +193,9 @@
    "mesh": "Breadboard",
    "used_by": 1,
    "solids": 133,
-   "tris_in": 56640,
-   "tris_out": 23030,
-   "edge_segments": 21365,
+   "tris_in": 56610,
+   "tris_out": 22962,
+   "edge_segments": 21307,
    "colours": [
     "#000000",
     "#0074d9",
@@ -203,6 +203,18 @@
     "#ffffff"
    ],
    "note": "atlas match 98%; 30605 faces under a skin recoloured"
+  },
+  {
+   "mesh": "Breadboard tabs",
+   "used_by": 1,
+   "solids": 5,
+   "tris_in": 50,
+   "tris_out": 50,
+   "edge_segments": 60,
+   "colours": [
+    "#ffffff"
+   ],
+   "note": ""
   },
   {
    "mesh": "Paper",
