@@ -388,7 +388,8 @@ were fetched (docs/research/pmg/cadasio/raw, decon_digest, decon_thumbs, decon_s
   MRA's and the RCC's); each display and the I/O module in two steps (the Full Build's two, each by its own camera: our player keeps
   one camera per step); the electronics taken apart on their own between the buttons and H6, and the display before the buttons
   (the published guide finishes the case first, then the electronics on the bench left to right: buttons, then display); it ends on
-  H1 (the published one ends on the bare I/O module, its H2 and H3 vanishing unexplained).
+  H1 (the published one ends on the bare I/O module, its H2 and H3 vanishing unexplained). Lee, asked whether the order should follow
+  the published one too: "Keep the current step order; the arrows were what needed changing."
 - New in the generator and the player (for every kit; only this guide uses it): arrow_style then= (arrows in turn, checked: stages
   after the first, in order, every moving part with as many) and dims=; core.js setArrowAlphas; the run-through checks such arrows (on
   before their turn, solid while due, gone after their stage, and after Prev half-way); stills draw them all. An independent review

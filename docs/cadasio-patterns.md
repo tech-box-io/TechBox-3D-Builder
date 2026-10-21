@@ -296,7 +296,8 @@ stage's (H11 and H12 toward H1); as the step plays, the next stage's arrow appea
 as its own plays. A still of the step (the step list, the 2D PDF) shows them all at once. The PMG's arrows take the published guide's
 sizes, step by step (docs/research/pmg/deconstruction/published_arrows.txt: mostly 30 - 116 mm long, 4 - 12 mm thick), not the in-house
 15 - 40 mm set for the MRA; groups have one arrow (the four keys, the four buttons off their wires), and the buttons out of their pockets
-an eye, as published.
+an eye, as published. The step order stays the in-house one (Lee, the same day: "Keep the current step order; the arrows were what
+needed changing"): the power cable first, the electronics taken apart on their own before the case's last plates, ending on H1.
 
 ## 12. Numeric defaults
 
