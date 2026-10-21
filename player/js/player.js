@@ -30,8 +30,8 @@ if (data.meta.logo) {                        // a logo file in the kit folder re
   img.onload = () => { img.alt = 'TechBox'; $('logo').replaceChildren(img); $('logo').classList.add('image'); reposeTitle(); };
   img.src = data.meta.logo;
 }
-// The title page's camera depends on how wide the logo and title are (see cameraFor): look again once the logo and the fonts are in.
-function reposeTitle() { if (views[cur] && views[cur].kind === 'start' && views[cur].camera.clear_title) go(cur, false); }
+// The title page's camera depends on where the logo and title are (see framedPose): look again once the logo and the fonts are in.
+function reposeTitle() { if (views[cur] && views[cur].kind === 'start') go(cur, false); }
 if (document.fonts) document.fonts.ready.then(reposeTitle);
 const flat = v => v.kind === 'card';         // a view with no model on screen: a note card, or the parts list (a card with `parts`)
 const stepCount = views.filter(v => /^Step \d+$/.test(v.name)).length;
@@ -213,52 +213,126 @@ function applyState(view, poses) {
   for (const id of view.visible) stage.setPose(id, (poses || view.offsets)[id] || ZERO);
   drawWires(flat(view) ? {} : view, poses || view.offsets);
 }
-// The right edge of the title page's logo and words, in the picture's pixels (the logo in the top left corner, the words in the
-// bottom left: they grow and shrink with the window, between a smallest and a largest size).
-function titleRight() {
-  const c = canvasEl.getBoundingClientRect(), range = document.createRange();
-  let r = 0;
-  for (const id of ['logo', 'title', 'subtitle', 'copyright']) {
-    const el = $(id);
-    if (!el || el.closest('[hidden]')) continue;
-    range.selectNodeContents(el);
-    const b = id === 'logo' ? el.getBoundingClientRect() : range.getBoundingClientRect();   // (the logo's own box: the text badge is padded)
-    if (b.width) r = Math.max(r, b.right - c.left);
+// ---------- the title page and the Completed View: their own camera at every shape of window (Lee, 21 Oct 2026)
+// The camera a guide gives these two views (one solved from Lee's screenshot, or the finished model's corner) keeps its direction
+// whatever the window or the LMS's frame: the player moves it back only as far as the window needs, so that every part is in the
+// frame (on the title page clear of the logo, top left, and of the title, bottom left), and moves it sideways where that lets the
+// model be bigger. No other camera is switched to, so the view does not jump as the window changes, and the model fills about the
+// same share of it. (Measured on points sampled on the parts themselves, made once as the model loads; worked out only when one
+// of the two views opens or the window changes size, never per frame.) A guide's `min_aspect` / `otherwise` cameras are no longer
+// used here; the bottom may still be cut on a title page whose camera says `clear_title` (Lee's picture of the RCC's).
+let partPoints = null;                       // part id -> Float32Array [x, y, z, ...]: a sample of its vertices, seated, assembly mm
+function samplePoints() {
+  partPoints = new Map();
+  const v = new THREE.Vector3();
+  for (const [id, o] of stage.parts) {
+    const meshes = [];
+    o.traverse(m => { if (m.isMesh && !m.userData.hull && !m.userData.decal && m.geometry.attributes.position) meshes.push(m); });
+    const total = meshes.reduce((n, m) => n + m.geometry.attributes.position.count, 0), step = Math.max(1, Math.ceil(total / 200));
+    const pts = [];
+    for (const m of meshes) {
+      const pos = m.geometry.attributes.position;
+      for (let i = 0; i < pos.count; i += step) { v.fromBufferAttribute(pos, i).applyMatrix4(m.matrixWorld); pts.push(v.x, v.y, v.z); }
+    }
+    partPoints.set(id, new Float32Array(pts));
   }
-  return r;
 }
-// The camera a view takes in a frame of this shape, and (title page) how far it is moved aside. A camera framed for one shape of
-// window (the title page's, from a screenshot) says how narrow a frame it suits (min_aspect); then come its `otherwise`: one, or
-// a list, closest first, ending with the finished model's. With a list the generator notes where the parts reach on screen with
-// each camera (`fit`: left and right edges, top and bottom, in half frame heights, with the camera moved aside by each of fit.s
-// radii), and the player takes the first that keeps the parts within the frame's left, right and top edges (`whole`: the bottom
-// too, for the website's card picture; the guide's own may cut a cable off at the bottom, as Lee's picture of the RCC's title
-// page does), on the title page moved aside just enough to clear the logo and title (clear_title: the RCC's title page punched in,
-// as Lee asked on 17 Oct 2026, yet right in the LMS's frame). In a window up to 600 px wide the model is not moved for them.
-function cameraFor(view, aspect, whole = false) {
-  const c = view.camera, list = [...(!c.min_aspect || aspect >= c.min_aspect ? [c] : []), ...[].concat(c.otherwise || [])];
-  if (!list.length) return {camera: c, shift: null};
-  if (!list.some(x => x.fit)) return {camera: list[0], shift: null};                   // (as before)
-  if (aspect < 1) return {camera: list[list.length - 1], shift: null};                   // (a frame taller than wide: the whole model)
-  const title = view.kind === 'start' && c.clear_title && !matchMedia('(max-width: 600px)').matches, m = 0.03;
-  const left = title ? (titleRight() + 16 - stage.width / 2) / (stage.height / 2) : m - aspect;
-  for (const cam of list) {
-    for (let k = 0; cam.fit && k < cam.fit.s.length && (title || k === 0); k++)
-      if (cam.fit.l[k] >= left && cam.fit.r[k] <= aspect - m && cam.fit.t[k] <= 1 - m && (!whole || cam.fit.b[k] >= m - 1)) return {camera: cam, shift: cam.fit.s[k]};
+samplePoints();                              // (now, with every part in its seat and the model the right way up)
+// The logo's and the title's boxes on the title page, in half frame heights from the middle of the picture (y up), with a gap.
+function titleBoxes() {
+  const c = canvasEl.getBoundingClientRect(), W = c.width, H = c.height, gap = 12, out = [], range = document.createRange();
+  for (const ids of [['logo'], ['title', 'subtitle', 'copyright']]) {
+    let l = Infinity, t = Infinity, r = -Infinity, b = -Infinity;
+    for (const id of ids) {
+      const el = $(id); if (!el || el.closest('[hidden]')) continue;
+      range.selectNodeContents(el);
+      const box = id === 'logo' ? el.getBoundingClientRect() : range.getBoundingClientRect();   // (the words themselves, not their line)
+      if (!box.width) continue;
+      l = Math.min(l, box.left); t = Math.min(t, box.top); r = Math.max(r, box.right); b = Math.max(b, box.bottom);
+    }
+    if (r > l) out.push([(l - gap - c.left - W / 2) / (H / 2), (H / 2 - (b + gap - c.top)) / (H / 2), (r + gap - c.left - W / 2) / (H / 2), (H / 2 - (t - gap - c.top)) / (H / 2)]);
   }
-  return {camera: list[list.length - 1], shift: null};
+  return out;                                // [[left, bottom, right, top], ...]
+}
+const framed = new Map();                    // (one answer per view, shape of window and place of the title)
+function framedPose(view, aspect, whole) {
+  const c = view.camera, title = view.kind === 'start', boxes = title ? titleBoxes() : [];
+  const key = `${views.indexOf(view)}|${view.kind}|${aspect.toFixed(4)}|${whole}|${boxes.map(b => b.map(x => x.toFixed(3)).join()).join(';')}`;
+  const pose0 = stage.cameraPose(c, 1e6);    // (as far back as fits the view's sphere top to bottom: the frame's shape is allowed for below)
+  if (framed.has(key)) { const {by, k} = framed.get(key); return placed(c, pose0, by, k); }
+  const T = pose0.target, D = pose0.position.distanceTo(T);
+  const eye = new THREE.PerspectiveCamera(); eye.position.copy(pose0.position); eye.lookAt(T); eye.updateMatrixWorld();
+  const right = new THREE.Vector3().setFromMatrixColumn(eye.matrixWorld, 0), up = new THREE.Vector3().setFromMatrixColumn(eye.matrixWorld, 1);
+  const fwd = T.clone().sub(pose0.position).normalize(), tanh = Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2));
+  const {q, at} = stage.worldFor(c), turned = q.angleTo(ONE) > 1e-6, M = new THREE.Matrix4(), p = new THREE.Vector3();
+  const A = [], B = [], C = [];              // each point: across, up and away, from the target (mm)
+  for (const id of view.visible) {
+    const pts = partPoints.get(id); if (!pts) continue;
+    stage.poseMatrix(view.offsets[id] || null, M);
+    for (let i = 0; i < pts.length; i += 3) {
+      p.set(pts[i], pts[i + 1], pts[i + 2]).applyMatrix4(M);
+      if (turned) p.sub(at).applyQuaternion(q).add(at);
+      p.sub(T); A.push(p.dot(right)); B.push(p.dot(up)); C.push(p.dot(fwd));
+    }
+  }
+  const m = 0.03, cutBottom = title && c.clear_title && !whole, r = c.radius, N = A.length, aR = (aspect - m) * tanh, vR = (1 - m) * tanh;
+  // With the camera moved aside by `by` and back k times, a point is at (A + by, B) / ((C + D k) tanh) on screen: in the frame from
+  // the least k each of its edges allows, and inside a logo or title box for a range of k, worked out exactly (no search).
+  const frameK = by => {
+    let k = 1;
+    for (let i = 0; i < N; i++) {
+      const X = A[i] + by, Y = B[i], c0 = C[i];
+      const kx = ((X < 0 ? -X : X) / aR - c0) / D, ky = ((Y > 0 ? Y : cutBottom ? 0 : -Y) / vR - c0) / D;
+      if (kx > k) k = kx;
+      if (ky > k) k = ky;
+    }
+    return k;
+  };
+  const boxK = (by, rects, k) => {           // the least k, from k up, with no point inside a box
+    const bad = [];
+    for (let i = 0; i < N; i++) {
+      const X = A[i] + by, Y = B[i];
+      for (let j = 0; j < rects.length; j++) {   // inside while l < gX < rr and b < gY < t, g = 1 / ((C + D k) tanh) > 0
+        const [l, b, rr, t] = rects[j];
+        let lo = 0, hi = Infinity;
+        if (X > 0) { lo = l / X; hi = rr / X; } else if (X < 0) { lo = rr / X; hi = l / X; } else if (!(l < 0 && rr > 0)) continue;
+        if (Y > 0) { lo = Math.max(lo, b / Y); hi = Math.min(hi, t / Y); } else if (Y < 0) { lo = Math.max(lo, t / Y); hi = Math.min(hi, b / Y); } else if (!(b < 0 && t > 0)) continue;
+        if (lo < 0) lo = 0;
+        if (hi <= lo) continue;
+        const k2 = lo > 0 ? (1 / (lo * tanh) - C[i]) / D : Infinity;   // (g falls as k grows: the larger g ends the range)
+        if (k2 > k) bad.push((1 / (hi * tanh) - C[i]) / D, k2);
+      }
+    }
+    const order = [...Array(bad.length / 2).keys()].sort((x, y) => bad[2 * x] - bad[2 * y]);
+    for (const n of order) { if (bad[2 * n] > k) break; if (bad[2 * n + 1] > k) k = bad[2 * n + 1] + 1e-4; }
+    return k;
+  };
+  const prefer = title ? (c.shift ?? 0) : 0;
+  let best = null;
+  for (const rects of boxes.length ? [boxes, []] : [[]]) {   // (if the logo and title leave no room at all, the frame alone)
+    const shifts = [...Array(53).keys()].map(n => Math.round((n * 0.05 - 1) * 100) / 100).sort((x, y) => Math.abs(x - prefer) - Math.abs(y - prefer));
+    for (const sr of shifts) {               // (nearest the shift the guide asks first: the others then rarely need the boxes worked out)
+      const by = sr * r, nudge = 0.002 * Math.abs(sr - prefer);   // (the biggest model; then the shift the guide asks)
+      let k = frameK(by);
+      if (k > 8 || (best && k + nudge >= best.score)) continue;   // (it cannot do better than the best so far)
+      if (rects.length) k = boxK(by, rects, k);
+      if (k <= 8 && (!best || k + nudge < best.score)) best = {by, k, score: k + nudge};
+    }
+    if (best) break;
+  }
+  if (!best) best = {by: 0, k: 1};
+  framed.set(key, best);
+  return placed(c, pose0, best.by, best.k);
+}
+function placed(c, pose0, by, k) {         // the view's camera moved aside by `by` mm and back k times as far
+  const side = new THREE.Vector3().crossVectors(new THREE.Vector3(...c.dir).normalize(), new THREE.Vector3(0, 1, 0)).normalize();
+  const {q} = stage.worldFor(c); side.applyQuaternion(q);
+  const target = pose0.target.clone().addScaledVector(side, by);
+  return {target, position: target.clone().add(pose0.position.clone().sub(pose0.target).multiplyScalar(k))};
 }
 function poseFor(view, aspect, whole = false) {
-  const {camera, shift} = cameraFor(view, aspect, whole);
-  const pose = stage.cameraPose(camera, aspect);
-  if (view.kind === 'start') {               // leave the left of the title page for the logo and title, as far as the frame has room to spare
-    const dir = new THREE.Vector3(...camera.dir).normalize(), r = camera.radius;
-    const spare = pose.position.distanceTo(pose.target) * Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * aspect - r;
-    const by = shift != null ? shift * r : Math.max(0, Math.min((camera.shift ?? 0.6) * r, spare));   // (shift: how far, in radii, the guide asks)
-    const side = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().multiplyScalar(by);
-    pose.target.add(side); pose.position.add(side);
-  }
-  return pose;
+  if (view.kind === 'start' || view.kind === 'end') return framedPose(view, aspect, whole);
+  return stage.cameraPose(view.camera, aspect);
 }
 
 // ---------- labels: a fixed spot on screen for each, chosen once per step; only the leader follows the part
@@ -1182,5 +1256,5 @@ $('resetview').onclick = resetView;
 if (controls) controls.addEventListener('start', () => { camSwing = null; });
 const frame = now => stage.frame(now, stepAnimation(now) || swingCamera(now));
 (function tick(now) { requestAnimationFrame(tick); frame(now); })(performance.now());
-window._player = {views, go, stage, frame, renderThumb, thumbs, speak, get index() { return cur; },
+window._player = {views, go, stage, frame, renderThumb, poseFor, thumbs, speak, get index() { return cur; },
                   get timing() { return anim ? {dur: anim.dur, moveAt: anim.moveAt, moveDur: anim.moveDur, fade: anim.fade} : null; }, awayTiming};   // handle for tests and debugging

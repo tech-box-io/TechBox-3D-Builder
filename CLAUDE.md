@@ -59,12 +59,13 @@ docstrings of `Guide.place` and `Guide.seat`):
   the light and the controls stay upright; a run of such steps shares one turn, so the model stays put between them,
   and a stretch of them seen from one corner shares one framing (Lee, 14 Oct 2026); `own_frame=True` (place(), remove())
   frames one such step on its own (the MRA's Step 88, C8 slid in from the side, so that the rest of the claw is framed close).
-  `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one taken from a
-  screenshot, with the narrowest window it suits, `min_aspect`, and `otherwise=` for narrower ones; or `otherwise=[...]`, wider
-  cameras closest first: the generator notes where the parts reach on screen with each (`fit`), and the player takes the first
-  that keeps them within the frame's sides and top (the card picture: the bottom too), on the title page (`clear_title=True`)
-  moved aside just enough to clear the title, which is a fixed size on the page: the RCC's title page and Completed View, punched
-  in yet right in the LMS's frame),
+  `Guide(start_view=, end_view=)` give the title page and the Completed View their own camera (one solved from Lee's screenshot,
+  or by default the finished model's corner). The player keeps that camera's direction at every shape of window or LMS frame
+  (Lee, 21 Oct 2026: no jump to another view as the window changes): it moves it back only as far as the frame needs, so every part
+  is in it (on the title page also clear of the logo, top left, and the title, bottom left, both of which scale with the frame), and
+  moves it sideways where that lets the model be bigger, worked out exactly from points sampled on the parts (`framedPose`). The
+  bottom may be cut on a title page whose camera says `clear_title=True` (Lee's picture of the RCC's, the cable running off). The
+  older `min_aspect`, `otherwise=` and the generator's `fit` are still written but no longer used by the player. These views
   can leave parts off them (`hide=`) and can show parts turned or moved there (`poses={id: pose}`; the Completed View then cuts
   in rather than gliding from the last step). The RCC's controller is instead turned in the build itself from Step 29
   (`rest_at` + `carry`), so that the Completed View glides.
