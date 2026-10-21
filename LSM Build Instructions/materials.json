@@ -25,7 +25,7 @@
     "wire_black": "#2d2926",
     "wire_purple": "#4e008e",
     "wire_grey": "#cad1ee",
-    "wire_white": "#f2f2f2",
+    "wire_yellow": "#ffdc00",
     "grey": "#a6a9aa",
     "ink": "#1e1616",
     "cable_black": "#2d2926"
@@ -64,9 +64,10 @@
   "_notes": {
     "unconfirmed": [
       "LED stems white #ffffff (published).",
-      "Jumper wires white / light grey #cad1ee / purple #4e008e (published), the push button's leads red #ef3340 / black #2d2926 (published, the house pre-wired lead colours)."
+      "Jumper wires light grey #cad1ee / purple #4e008e (published), the push button's leads red #ef3340 / black #2d2926 (published, the house pre-wired lead colours)."
     ],
     "decided": [
+      "The LED matrix's V+ jumper wire yellow #ffdc00 (the house yellow, as the MRA's), not the published white (20 Oct 2026: Lee, 'the light grey/blue is very close to the white wire color').",
       "D2 plain wood on both faces, as the other walls (19 Oct 2026: Lee read the published guide's brown outer face as bad lighting on D2; Cadasio's brown is a 0.127 mm sheet laid over that face in SolidWorks, and Lee's newer D2 has none)."
     ]
   }

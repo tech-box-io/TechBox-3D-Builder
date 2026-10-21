@@ -12,6 +12,8 @@ exact holes the guide names. Converted once with tools/step_to_glb.py (kept out 
     lsm-wood.glb          <- LSM_WoodSteps.STEP          (the eleven kinds of wood part, D1 - D11)
     lsm-electronics.glb   <- LSM_Electronics.STEP        (LED matrix, breadboard, resistors, capacitor, jumper caps)
     lsm-fullbuild-raw.glb <- LSM Lab - Full Build.STEP   (the push button with its nut, the right-angle Mini-B plug, the backing sheet)
+    lsm-d3.glb            <- LSM_D3.STEP                 (D3 as Lee updated it, 20 Oct 2026: 3.0 mm thick, longer end tabs, the latches'
+                                                          spring cuts and the slots reshaped; in the old D3's own frame)
 From the MRA (Lee, 19 Oct 2026: use the MRA's or RCC's version of a part where they have it): the Nano Board (mra.glb NAUO126, as the
 RCC's Nanos) and the USB cable's A end (usb-a-end.glb; the LSM's "USB Cable end" is the same model). The jumper caps are the MRA's
 model already ("Wire Cap"). The LED stems are not in any of the files: each is drawn as the 3.175 x 66.675 x 3.175 mm rod Cadasio's
@@ -253,7 +255,7 @@ def from_sub(path, node_name, only=None, rename=None):
 
 # wood: D-codes as engraved (Cadasio's tooltips: "Housing Base - Part D1" ...)
 for part_id, mesh, inst in [('D1', 'LSM_Bottom_r1', 'LSM_Bottom_r1-1'), ('D2', 'LSM_Side3_r2', 'LSM_Side3_r2-1'),
-                            ('D3', 'LSM_Side1_r8', 'LSM_Side1_r8-1'), ('D4', 'LSM_Side2_r2', 'LSM_Side2_r2-1'),
+                            ('D4', 'LSM_Side2_r2', 'LSM_Side2_r2-1'),
                             ('D5', 'LSM_Side4_r2', 'LSM_Side4_r2-1'), ('D6', 'LSM_Lens_Bottom', 'LSM_Lens_Bottom-3'),
                             ('D7', 'LSM_Lens_Middle', 'LSM_Lens_Middle-2'), ('D8', 'LSM_Lens_Top', 'LSM_Lens_Top-1'),
                             ('D9_A', 'LSM_MatrixSupportLong_r3', 'LSM_MatrixSupportLong_r3-2'),
@@ -262,15 +264,30 @@ for part_id, mesh, inst in [('D1', 'LSM_Bottom_r1', 'LSM_Bottom_r1-1'), ('D2', '
                             ('D11_A', 'LSM_LensSupport_r2', 'LSM_LensSupport_r2-2'), ('D11_B', 'LSM_LensSupport_r2', 'LSM_LensSupport_r2-3'),
                             ('D11_C', 'LSM_LensSupport_r2', 'LSM_LensSupport_r2-1'), ('D11_D', 'LSM_LensSupport_r2', 'LSM_LensSupport_r2-4')]:
     add(part_id, from_mesh(WOOD, mesh, main_solid=True), at(inst), f'lsm-wood.glb {mesh} (its plate)', inst)
+# D3 from Lee's updated part (20 Oct 2026), where Cadasio has the old one (the same part frame: its face at own z 0 and its outline
+# agree but for the changes).
+add('D3', from_mesh(KIT / 'lsm-d3.glb', 'LSM_D3', main_solid=True), at('LSM_Side1_r8-1'), 'lsm-d3.glb LSM_D3 (Lee, 20 Oct 2026)', 'LSM_Side1_r8-1')
+# In line with D2, which has the same outline (Cadasio has the old D3 0.25 mm towards D4 of D2; with the new D3's slot for D1's middle
+# tab exactly the tab's width, the tab passed 0.25 mm into it: an independent review, 20 Oct 2026).
+parts['D3']['place'][0, 3] += 0.253
 # D4 and D5 centred on the tabs of D2 and D3 (Cadasio has D4 0.19 mm towards D3 and D5 0.22 mm towards D2, so that D2's 3 mm
-# tabs bind on the edges of their 3 mm slots; D3 is 3.17 mm thick in the CAD, in 3 mm slots).
+# tabs bind on the edges of their 3 mm slots; the first D3 was 3.17 mm thick, in 3 mm slots; Lee's of 20 Oct 2026 is 3.0 mm).
 parts['D4']['place'][2, 3] += 0.19
 parts['D5']['place'][2, 3] -= 0.215
 # D8 in line with D6 and D7 (Cadasio has it 0.81 mm towards D3: D6 and D7 fit between D3 and D2 exactly, and so must D8).
 parts['D8']['place'][2, 3] += 0.81
+# D8 up against the D11 posts' top latches (Lee, 20 Oct 2026: "the top of D8 should be just under the top latch's bottom face on
+# D11"): Cadasio has its top at y 930.27, 2.11 mm under the latches' bottom faces (y 932.38); each post's neck between its ledge
+# (y 929.38) and its latch is 3.0 mm, and D8 is 3.17 mm thick in the CAD, so with its top 0.02 mm under the latch it sits 0.19 mm
+# into the ledge, out of sight under it.
+parts['D8']['place'][1, 3] += 2.09
 # The four shelf posts at one height (Cadasio has two of them 0.6 and 1.0 mm low: they stand on D1 like the other two).
 for part_id in ('D11_C', 'D11_D'):
     parts[part_id]['place'][1, 3] = parts['D11_A']['place'][1, 3]
+# The two D9 supports flush with the outer faces of D2 and D3 at both ends (Cadasio had them flush with the first D3, 3.175 mm thick,
+# and 0.18 / 0.24 mm short of D2's outer face; the new D3 is 3.0 mm, its inner face where the first one's was).
+parts['D9_A']['place'][2, 3] += 0.176
+parts['D9_B']['place'][2, 3] += 0.237
 # D10 centred between D4 and D5 (Lee, 19 Oct 2026: "it should be more centered"; Cadasio has it 0.58 mm towards D4 of the middle).
 parts['D10']['place'][0, 3] += 0.58
 

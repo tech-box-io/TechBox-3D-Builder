@@ -5,7 +5,7 @@
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
   "logo": "logo.webp"
  },
- "model": "model.glb?v=f7aca23ca749",
+ "model": "model.glb?v=cec93cf3beb6",
  "fov": 45.0,
  "frame_padding": 1.08,
  "names": {
@@ -16,8 +16,8 @@
   "R12K": "12 k\u03a9 Resistor",
   "CAP": "Capacitor",
   "R330": "330 \u03a9 Resistor",
-  "J_WHITE_M": "White Breadboard Wire",
-  "J_WHITE_F": "White Breadboard Wire",
+  "J_WHITE_M": "Yellow Breadboard Wire",
+  "J_WHITE_F": "Yellow Breadboard Wire",
   "J_GREY_M": "Grey Breadboard Wire",
   "J_GREY_F": "Grey Breadboard Wire",
   "J_PURPLE_M": "Purple Breadboard Wire",
@@ -131,19 +131,19 @@
    "name": "330 \u03a9 Resistor"
   },
   "wire white": {
-   "colour": "#f2f2f2",
+   "colour": "#ffdc00",
    "radius": 0.62,
-   "name": "Breadboard Wire (M-F)"
+   "name": "Yellow Breadboard Wire"
   },
   "wire grey": {
    "colour": "#cad1ee",
    "radius": 0.62,
-   "name": "Breadboard Wire (M-F)"
+   "name": "Grey Breadboard Wire"
   },
   "wire purple": {
    "colour": "#4e008e",
    "radius": 0.62,
-   "name": "Breadboard Wire (M-F)"
+   "name": "Purple Breadboard Wire"
   },
   "lead red": {
    "colour": "#ef3340",
@@ -51738,10 +51738,11 @@
      "id": "BREADBOARD",
      "text": "c16",
      "anchor": [
-      629.58,
+      628.52,
       871.92,
-      1206.01
-     ]
+      1207.07
+     ],
+     "ring": false
     },
     {
      "id": "BREADBOARD",
@@ -52112,11 +52113,12 @@
       652.62,
       868.0,
       1172.97
-     ]
+     ],
+     "side": "right"
     },
     {
      "id": "CAP",
-     "text": "+",
+     "text": "VCC (+)",
      "anchor": [
       652.62,
       868.0,
@@ -53230,8 +53232,8 @@
    "still": [
     "J_WHITE_M"
    ],
-   "caption": "Push the white wire's pin into i2.",
-   "text_key": "T40D37934",
+   "caption": "Push the yellow wire's pin into i2.",
+   "text_key": "T9F28565B",
    "review": null,
    "moving": [
     "J_WHITE_M"
@@ -53355,8 +53357,8 @@
     "wire purple": 23
    },
    "carry": {},
-   "caption": "Push the white wire's pin into i2.",
-   "text_key": "T40D37934",
+   "caption": "Push the yellow wire's pin into i2.",
+   "text_key": "T9F28565B",
    "review": null,
    "moving": [
     "J_WHITE_M"
@@ -53952,8 +53954,8 @@
    "wires": {},
    "carry": {},
    "cut": true,
-   "caption": "Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. The white wire goes on V+, the purple wire on IN and the grey wire on V-.",
-   "text_key": "T84D74BF6",
+   "caption": "Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. The yellow wire goes on V+, the purple wire on IN and the grey wire on V-.",
+   "text_key": "T70E0B9D3",
    "review": null,
    "moving": [],
    "path": [
@@ -54169,8 +54171,8 @@
     }
    },
    "cut": true,
-   "caption": "Push the white wire's socket onto the V+ pin of the LED matrix.",
-   "text_key": "TF2B40387",
+   "caption": "Push the yellow wire's socket onto the V+ pin of the LED matrix.",
+   "text_key": "T55AD8C36",
    "review": null,
    "moving": [],
    "path": [
@@ -54326,8 +54328,8 @@
      ]
     }
    },
-   "caption": "Push the white wire's socket onto the V+ pin of the LED matrix.",
-   "text_key": "TF2B40387",
+   "caption": "Push the yellow wire's socket onto the V+ pin of the LED matrix.",
+   "text_key": "T55AD8C36",
    "review": null,
    "moving": [],
    "path": [
@@ -59875,9 +59877,9 @@
      "id": "D3",
      "text": "D3",
      "anchor": [
-      640.1,
+      636.2,
       882.0,
-      1153.5
+      1153.7
      ]
     }
    ],
@@ -60293,6 +60295,18 @@
     },
     {
      "tip": [
+      682.8,
+      861.1,
+      1233.2
+     ],
+     "mouth": [
+      682.8,
+      861.1,
+      1233.2
+     ]
+    },
+    {
+     "tip": [
       682.5,
       864.8,
       1254.2
@@ -60301,6 +60315,42 @@
       685.9,
       864.8,
       1254.2
+     ]
+    },
+    {
+     "tip": [
+      682.5,
+      899.0,
+      1253.4
+     ],
+     "mouth": [
+      685.9,
+      899.0,
+      1253.4
+     ]
+    },
+    {
+     "tip": [
+      682.6,
+      865.4,
+      1155.5
+     ],
+     "mouth": [
+      682.6,
+      865.4,
+      1155.5
+     ]
+    },
+    {
+     "tip": [
+      682.6,
+      899.5,
+      1155.2
+     ],
+     "mouth": [
+      682.6,
+      899.5,
+      1155.2
      ]
     }
    ],
@@ -60661,50 +60711,50 @@
    "guides": [
     {
      "tip": [
-      618.6,
-      887.1,
-      1155.1
-     ],
-     "mouth": [
-      618.6,
-      900.6,
-      1155.1
-     ]
-    },
-    {
-     "tip": [
       618.7,
       887.6,
-      1253.3
+      1253.4
      ],
      "mouth": [
       618.7,
       900.7,
-      1253.3
+      1253.4
      ]
     },
     {
      "tip": [
-      657.3,
-      887.1,
-      1155.1
+      618.8,
+      887.3,
+      1155.2
      ],
      "mouth": [
-      657.3,
-      900.7,
-      1155.1
+      618.8,
+      900.5,
+      1155.2
      ]
     },
     {
      "tip": [
       657.4,
-      887.6,
-      1253.3
+      887.3,
+      1155.2
+     ],
+     "mouth": [
+      657.4,
+      900.7,
+      1155.2
+     ]
+    },
+    {
+     "tip": [
+      657.4,
+      887.4,
+      1253.4
      ],
      "mouth": [
       657.4,
       900.6,
-      1253.3
+      1253.4
      ]
     }
    ],
@@ -60715,7 +60765,7 @@
      "anchor": [
       617.1,
       889.2,
-      1196.3
+      1196.5
      ]
     }
    ],
@@ -62147,14 +62197,11 @@
     ],
     "radius": 15.0,
     "hide": [],
-    "alt": "Close-up along the slot in D10, the LED matrix faint: the three wires lie in the slot",
+    "alt": "Close-up of the end of D10, the LED matrix and D4 faint: the three wires go down through its slot",
     "caption": "The wires lie in the slot in D10",
     "ghost": {
      "MATRIX": 0.12,
-     "D4": 0.25,
-     "J_WHITE_F": 0.12,
-     "J_GREY_F": 0.12,
-     "J_PURPLE_F": 0.12
+     "D4": 0.25
     }
    },
    "caption": "Lower the LED matrix, with D10, into the box: the ends of D10 go into the slots in D4 and D5.",
@@ -64600,49 +64647,49 @@
     {
      "tip": [
       674.7,
-      927.1,
-      1166.2
+      929.2,
+      1166.7
      ],
      "mouth": [
       674.7,
-      930.2,
-      1166.2
+      932.3,
+      1166.7
      ]
     },
     {
      "tip": [
       601.7,
-      927.4,
-      1166.2
+      929.3,
+      1165.7
      ],
      "mouth": [
       601.7,
-      930.2,
-      1166.2
+      932.3,
+      1165.7
      ]
     },
     {
      "tip": [
       601.7,
-      927.3,
-      1242.4
+      929.4,
+      1241.9
      ],
      "mouth": [
       601.7,
-      930.2,
-      1242.4
+      932.3,
+      1241.9
      ]
     },
     {
      "tip": [
       674.7,
-      927.2,
-      1242.4
+      929.3,
+      1242.9
      ],
      "mouth": [
       674.7,
-      930.2,
-      1242.4
+      932.3,
+      1242.9
      ]
     }
    ],
@@ -64652,7 +64699,7 @@
      "text": "D8",
      "anchor": [
       639.1,
-      930.3,
+      932.4,
       1203.5
      ]
     }
@@ -65100,12 +65147,12 @@
     {
      "tip": [
       608.6,
-      914.7,
+      915.8,
       1175.8
      ],
      "mouth": [
       608.6,
-      917.1,
+      918.1,
       1175.8
      ]
     }

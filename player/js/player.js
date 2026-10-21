@@ -427,7 +427,8 @@ function buildInset(view) {
   $('insetcap').textContent = I.caption || '';
   // where: the side of the model with the most room, level with the place it shows
   camera.updateMatrixWorld(true);
-  const R = screenRect(view, camera, W, H), [ax, ay] = project(I.target, camera, W, H), boxH = h + 12 + (I.caption ? 24 : 0) + 8, boxW = w + 20;
+  const R = screenRect(view, camera, W, H), [ax, ay] = project(I.target, camera, W, H), capH = I.caption ? 24 : 0;
+  let boxH = h + 12 + capH + 8, boxW = w + 20;
   const room = {right: W - R.x1, left: R.x0, top: R.y0 - 70, bottom: H - R.y1};
   const side = Object.keys(room).sort((a, b) => room[b] - room[a])[0];
   const clear = onScreenInstructions();         // (not over the instructions)
@@ -451,16 +452,22 @@ function buildInset(view) {
   if (marks.length && clear) marks.push([clear.left - 8, clear.top - 8, clear.right + 8, clear.bottom + 8]);   // (nor, moved, over the instructions)
   const covered = (x, y) => marks.reduce((s, [x0, y0, x1, y1]) => s + Math.max(0, Math.min(x + boxW, x1) - Math.max(x, x0)) * Math.max(0, Math.min(y + boxH, y1) - Math.max(y, y0)), 0);
   if (marks.length && covered(x, y) > 0) {
-    const tries = [];
-    for (const s of Object.keys(room).sort((a, b) => room[b] - room[a])) {
-      const [sx, sy] = placeAt(s);
-      tries.push([sx, sy]);
-      if (s === 'left' || s === 'right') tries.push([sx, Math.max(70, clear && sx < clear.right + 8 && sx + boxW > clear.left - 8 ? clear.bottom + 12 : 70)], [sx, H - boxH - 12]);
-      else tries.push([12, sy], [W - boxW - 12, sy]);
+    // (and if nowhere is clear at full size, a little smaller, down to 60%: a view with labels on both sides in a narrow window, the
+    // LSM's Step 6 at 1000 px)
+    let best = [x, y, covered(x, y), boxW, boxH];
+    for (const k of [1, 0.85, 0.72, 0.6]) {
+      boxW = Math.round(w * k) + 20; boxH = Math.round(h * k) + 12 + capH + 8;
+      const tries = [];
+      for (const s of Object.keys(room).sort((a, b) => room[b] - room[a])) {
+        const [sx, sy] = placeAt(s);
+        tries.push([sx, sy]);
+        if (s === 'left' || s === 'right') tries.push([sx, Math.max(70, clear && sx < clear.right + 8 && sx + boxW > clear.left - 8 ? clear.bottom + 12 : 70)], [sx, H - boxH - 12]);
+        else tries.push([12, sy], [W - boxW - 12, sy]);
+      }
+      for (const [tx, ty] of tries) { const c = covered(tx, ty); if (c < best[2]) best = [tx, ty, c, boxW, boxH]; if (!c) break; }
+      if (!best[2]) break;
     }
-    let best = [x, y, covered(x, y)];
-    for (const [tx, ty] of tries) { const c = covered(tx, ty); if (c < best[2]) best = [tx, ty, c]; if (!c) break; }
-    [x, y] = best;
+    [x, y, , boxW, boxH] = best;
   }
   Object.assign(box.style, {left: x + 'px', top: y + 'px', width: boxW + 'px'});
   box.hidden = false;

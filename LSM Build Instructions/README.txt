@@ -1,7 +1,8 @@
 LSM Build Instructions (Laser Stem Matrix, Full Build: the electronics on the open base, the housing, the LED matrix, shelves and stems)
 
 FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND OF NOTES DONE THE SAME DAY (docs/research/lsm/lee_notes_2026-10-19.md), AND THE SECOND
-ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was done for each note). Build
+ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was done for each note); THE THIRD ROUND 20 Oct 2026
+(docs/research/lsm/lee_notes_2026-10-20.md: a new D3, D8 seated higher, the V+ wire yellow, Steps 3, 6, 28 and 32). Build
 instructions generated from Lee's STEP files and TechBox's published Cadasio guide for the kit
 (instructions.online/?id=19075-laser_stem_matrix_lsm_-_full_build), in the same format and with the same player as the MRA and RCC
 guides. Not for distribution. The open questions are under QUESTIONS FOR LEE below.
@@ -23,7 +24,12 @@ sub-millimetre corrections made to Cadasio's placements, are in docs/research/ls
 - The LSM's own: the wood D1 - D11, the breadboard, the LED matrix, the resistors, the capacitor, the push button and its nut, the
   jumpers' male pins, and the right-angle Mini-B plug (the MRA's is straight, and a straight plug would run into the push button).
 - The 64 LED stems are drawn as plain 3.175 mm square rods 66.675 mm long (Cadasio's size): their CAD is not in the files yet.
-- Colours: the published guide's, solid by solid (colour-atlas-lsm.json, made by make_atlas.py), the MRA's for the Nano. D2 is
+- D3 is Lee's updated part (LSM_D3.STEP, 20 Oct 2026, converted to lsm-d3.glb): 3.0 mm thick (the first was 3.175), longer end tabs,
+  the latches' spring cuts and the slots reshaped; placed where the first D3 was (the same part frame).
+- D8 sits with its top just under the D11 posts' top latches (Lee, 20 Oct 2026; Cadasio had it 2.1 mm lower). D8 is 3.17 mm thick in
+  the CAD and the posts leave 3.0 mm for it, so it sits 0.19 mm into the ledge under it, out of sight.
+- Colours: the published guide's, solid by solid (colour-atlas-lsm.json, made by make_atlas.py), the MRA's for the Nano; the LED
+  matrix's V+ jumper wire yellow, not the published white, which was too like the light grey one beside it (Lee, 20 Oct 2026). D2 is
   plain wood like the other walls (Lee read the published guide's brown outer face as bad lighting). The capacitor is painted by
   region (black can, silver ends, silver stripe over the negative leg): the published guide's silver layers let black show through
   on its top. The wood is roughened as on every kit.
@@ -35,6 +41,7 @@ sub-millimetre corrections made to Cadasio's placements, are in docs/research/ls
   matrix rests on the two D9 (the published assembly left it 1.1 mm above them), D10 is centred between D4 and D5, and the USB
   cable's A end lies 60 mm further out, so that D4 slides on over the cable rather than through the A end.
 Commands (from the project folder), after a change to the CAD or the guide:
+    .venv.nosync/bin/python tools/step_to_glb.py "LSM Build Instructions/LSM_D3.STEP" "LSM Build Instructions/lsm-d3.glb"   # a new D3
     .venv.nosync/bin/python "LSM Build Instructions/assemble.py"      # lsm.glb, after a new STEP (convert it first, see assemble.py)
     .venv.nosync/bin/python "LSM Build Instructions/make_atlas.py"    # colour-atlas-lsm.json
     .venv.nosync/bin/python "LSM Build Instructions/silkscreen.py"    # decals.json (the matrix's printing and label), then build_model
@@ -43,14 +50,15 @@ Commands (from the project folder), after a change to the CAD or the guide:
 
 THE BUILD (40 numbered steps; the published guide's 38 and its order, with the house rules applied)
 - Steps 1 - 9, the breadboard: backing peeled off; onto D1; the Nano Board in rows c and g, columns 2 - 16, USB socket at column 16
-  (pin D12 in c16, as Part 1 of the published guide has it); the 12 kOhm resistor's legs bent, into h3 and h16; the capacitor on its
-  own, its legs labelled GND (-) and + with a close-up of its grey stripe, then into j2 and j3, stripe in j3; the 330 Ohm resistor's
+  (pin D12 in c16, as Part 1 of the published guide has it; c16's leader stops beside the hole, clear of its lead line); the 12 kOhm
+  resistor's legs bent, into h3 and h16; the capacitor on its own, its legs labelled VCC (+) and GND (-), one each side, with Lee's
+  capacitor picture as the close-up, then into j2 and j3, stripe in j3; the 330 Ohm resistor's
   legs bent, into a11 and a19.
-- Steps 10 - 17, the LED matrix's wires: the three-wire ribbon's ends pulled apart; the white, grey and purple pins into i2, i3 and
-  b19, one per step (i2 and i3 from Lee's framing; the white and grey wires stay side by side as a ribbon, leaving their pins away
+- Steps 10 - 17, the LED matrix's wires: the three-wire ribbon's ends pulled apart; the yellow, grey and purple pins into i2, i3 and
+  b19, one per step (i2 and i3 from Lee's framing; the yellow and grey wires stay side by side as a ribbon, leaving their pins away
   from the row, so that neither crosses the other's hole); the LED matrix turned over, its three pins labelled (each named at a
   different place along it, so that the leaders do not cross), with a close-up of the header and label; then the matrix held upright
-  over the breadboard, header at the top, and the white socket onto V+, the purple onto IN, the grey onto V-: each step names the
+  over the breadboard, header at the top, and the yellow socket onto V+, the purple onto IN, the grey onto V-: each step names the
   pin and the hole the wire's other end is in, with an eye on the socket.
 - Steps 18 - 24, the button and the USB cable: the button's nut off (turning two turns as it comes off; the arrow from the nut's back
   face); the button through D2 from its engraved side; the nut back on (turning); the red lead into j5 and the black into j16, one per
@@ -100,8 +108,14 @@ QUESTIONS FOR LEE
     published guide's, 16 x 8.5 x 50 mm. It looks large next to the small parts on the breadboard.
 13. (Second round) Step 25: D4 comes down from above, as asked, but stops beside its place and is then pushed 8 mm on: D1's and D2's
     tabs go through closed slots in D4, so it cannot be lowered straight in (the published guide pushes it on sideways too).
-14. (Second round) Step 28: the lead lines are your two (D1 and D2); the generator's two lines to D3's tabs are gone, and the caption
-    now names D1, D2 and D3. Bring the D3 lines back?
+14. (Answered, third round) Step 28: your six lead lines, two each to D1, D2 and D3; the caption names D1, D2 and D3.
 15. (Second round) Steps 23 - 25: the A end lies 60 mm further out than needed now that D4 comes from above. Bring it in (closer
     framing for these steps, the cable moved in every later step)?
 16. (Second round) Step 28 now opens about 15% wider than Step 27, which you had zoomed in. Zoom Step 28 to match?
+17. (Third round) D8 is 3.17 mm thick in the CAD, as the first D3 was, and its slots are 5.5 mm long, while the D11 posts leave 3.0 mm
+    and their necks are 7.9 mm long: D8 sits 0.19 mm into the ledges and 1.2 mm into each post beside its slot (out of sight under the
+    latch heads; Cadasio's model the same). Is there a newer D8 (or D11)?
+18. (Third round) Step 6: the capacitor picture is a mirror of the 3D view, and with GND (-) on the right it sits on the left, its leader
+    crossing the can. Turn the view to match the picture?
+19. (Third round) h3 (Step 5), a19 (Step 9), j2 and j3 (Step 7): their label rings cross the end of the red lead line as c16's did.
+    Change those as c16?

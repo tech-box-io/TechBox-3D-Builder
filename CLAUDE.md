@@ -89,7 +89,8 @@ docstrings of `Guide.place` and `Guide.seat`):
   A close-up can be a picture made outside instead of a view of the model: `inset=dict(image='file.webp', ...)`, a file in the
   kit folder (the LSM's capacitor card, Step 6; published and bundled with the guide); and can draw parts faintly,
   `inset=dict(..., ghost={id: alpha})` (the LSM's matrix at 0.12 over the wires in D10's slot, Step 32). A close-up keeps clear of
-  the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14).
+  the step's labels and eyes and their leaders (another side, or higher or lower; Lee, 19 Oct 2026: the LSM's Steps 6 and 14), and is
+  made smaller (to 85%, 72% or 60%) only where no full-size place is clear (the LSM's Step 6, labels both sides, in a narrow window).
   Per-part `paths=` may use `via()`. A wire that changes route through as many routes as the moving part has stops keeps
   pace with it stop by stop (the MRA's extension wire onto row 10).
   For a plug carried to its row in stages, draw each stage as the plugged lead cut short with the plug on its end (the MRA's
@@ -430,8 +431,9 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                the stems are drawn from Cadasio's box until their CAD comes. docs/research/lsm/cad_study.md has the
                                sub-millimetre corrections; Lee's second round (19 Oct 2026) remade the LED matrix's pin header (a
                                right-angle surface-mount one, as photographed) and lowered the matrix onto the D9s (assemble.py), and
-                               silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). Server on
-                               port 8805 ("Open Prototype.command").
+                               silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). D3 is Lee's
+                               updated part (LSM_D3.STEP -> lsm-d3.glb, 20 Oct 2026); D8 raised to just under the D11 posts' latches.
+                               Server on port 8805 ("Open Prototype.command").
     PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
                                decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses), routing.py (Lee's first round: every set of jumper wires shown together laid as
                                ribbons, then settled clear of each other and of the parts on screen; checked during each motion too by

@@ -1,11 +1,11 @@
 {
  "summary": {
   "source": "lsm.glb",
-  "source_bytes": 19183552,
-  "model_bytes": 1692964,
-  "triangles_in": 603124,
-  "triangles_out": 136457,
-  "edge_segments": 79989,
+  "source_bytes": 19190544,
+  "model_bytes": 1696048,
+  "triangles_in": 603332,
+  "triangles_out": 136665,
+  "edge_segments": 80097,
   "meshes": 30,
   "parts_kept": 98,
   "parts_in_source": 98,
@@ -66,19 +66,6 @@
    "tris_in": 2916,
    "tris_out": 2916,
    "edge_segments": 1352,
-   "colours": [
-    "ink",
-    "wood"
-   ],
-   "note": "edges roughened by up to 0.1 mm"
-  },
-  {
-   "mesh": "LSM_Side1_r8",
-   "used_by": 1,
-   "solids": 1,
-   "tris_in": 2600,
-   "tris_out": 2600,
-   "edge_segments": 1128,
    "colours": [
     "ink",
     "wood"
@@ -183,6 +170,19 @@
    "tris_in": 924,
    "tris_out": 924,
    "edge_segments": 390,
+   "colours": [
+    "ink",
+    "wood"
+   ],
+   "note": "edges roughened by up to 0.1 mm"
+  },
+  {
+   "mesh": "LSM_D3",
+   "used_by": 1,
+   "solids": 1,
+   "tris_in": 2808,
+   "tris_out": 2808,
+   "edge_segments": 1236,
    "colours": [
     "ink",
     "wood"
