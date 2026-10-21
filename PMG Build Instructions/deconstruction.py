@@ -117,7 +117,7 @@ def off_the_pins(caps):
 # (arrow_style then=), as its auto-advancing frames do: H14, H12 and H11 (toward H1, then up: Lee), H10, H7, H6, H5.
 PUBLISHED = dict(usb=(42.2, 8.2), h14=(29.0, 5.2), matrix=(62.2, 8.5), display=(29.1, 5.5), module=(83.6, 2.1),
                  h13=(74.4, 6.1), h12=(37.6, 4.5), h12_up=(43.1, 5.3), h11=(46.1, 6.2), h11_up=(57.2, 6.1), h10=(52.4, 6.7),
-                 h10_out=(116.1, 6.9), keys=(109.5, 11.8), h8=(71.7, 6.9), h7=(45.2, 8.0), h6=(34.5, 4.8), h5=(34.8, 3.8),
+                 h10_out=(116.1, 6.9), keys=(109.5, 11.8), h8=(71.7, 6.9), h7=(45.2, 8.0), h6=(34.5, 4.8), h5=(34.8, 6.2),
                  buttons=(44.7, 9.7), matrix_off=(45.1, 6.7), display_off=(30.6, 6.1), matrix_wires=(65.9, 7.3),
                  button_wires=(50.9, 7.0), display_wires=(43.3, 7.0), nano=(28.5, 3.0), h4=(105.0, 7.6), h1=(84.0, 7.8))
 size = lambda key, **more: dict(dims=PUBLISHED[key], **more)

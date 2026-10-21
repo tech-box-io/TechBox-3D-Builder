@@ -398,7 +398,8 @@ were fetched (docs/research/pmg/cadasio/raw, decon_digest, decon_thumbs, decon_s
 - Checked: the run-through on all 56 views of the take-apart and on every other guide with the changed player (PMG Full Build 99, MRA
   211, its deconstruction 151 and Parts 35, 50, 132, RCC 61 and 42, LAC 116, LSM 82 and its deconstruction 52: no problems); every
   changed step as it opens, with each later arrow while it is due, and its still; the RCC's and MRA's deconstructions regenerate
-  unchanged; published to the test website (release r2).
+  unchanged; published to the test website (release r2). Then H5's arrows corrected to the published 6.2 mm thick (the first measure
+  took an unused arrow of the same length: the LSM session's check of every published arrow), release r3.
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three

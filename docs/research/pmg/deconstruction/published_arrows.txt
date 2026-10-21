@@ -17,7 +17,8 @@ Published PMG take-apart: every arrow shown, frame by frame (length, shaft width
 [033] Transition   L 115.9 w 8.01 head 32.0x27.2 -Z on H7-1
 [037] Step 13      L 34.5 w 4.76 head 19.0x16.2 -Y (down) on H6-1
 [038] Transition   L 114.6 w 4.25 head 17.0x14.4 -Z on H6-1
-[040] Step 14      L 34.8 w 3.76 head 15.1x12.8 -Y (down) on H5-1
+[040] Step 14      L 34.8 w 6.19 head 24.7x21.0 -Y (down) on H5-1   (Arrow 3D_straight_18: corrected 21 Oct 2026; matched by length, the
+                   first listing took Arrow 3D_straight_1, also 34.8 mm, w 3.76, which no frame shows: the LSM session's check)
 [041] Transition   L 102.7 w 8.18 head 32.7x27.8 -Y (down) & -Z on H5-1
 [043] Step 15      L 105.0 w 7.58 head 30.3x25.8 +X on H4v2-1
 [045] Step 16      L 84.0 w 7.82 head 31.3x26.6 -X on H1-1
