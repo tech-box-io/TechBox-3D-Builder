@@ -22,6 +22,17 @@
     "uncommitted_changes": false
    },
    "was": "r1"
+  },
+  {
+   "when": "2026-10-21T16:32:07",
+   "action": "published",
+   "release": "r3",
+   "note": "Base Servo (No Dot) in its labels, on hover and in the parts list; Parts 1 - 3 first published (Lee, 21 Oct 2026)",
+   "source": {
+    "commit": "518aed58648fba66bc78e18c5018733d1a30d7cf",
+    "uncommitted_changes": false
+   },
+   "was": "r2"
   }
  ]
 }
