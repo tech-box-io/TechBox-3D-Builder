@@ -1224,14 +1224,21 @@ g.place('Fit H14 over the 4-digit display: set its two bottom tabs down onto the
         inset=dict(target=H14_TABS[0], dir=[0.15, 0.97, -0.2], radius=15.0, mark=6.0,       # (from above: the tab is behind the LEDs' top edge)
                    alt="Close-up of H14's tab resting in the top edge of the dot matrix display."),
         view_dir=[-0.65, 0.6, -0.46], frame=([552.0, 975.0, 1290.0], 78.0))
-# The title page and the Completed View: one camera, solved from Lee's screenshot of the title page (21 Oct 2026: "On the starting
-# view / completed view, let's go for this camera position / zoom for the PMG"), the finished game from the front, on the student's
-# right, seen a little lower than before; not moved aside (shift=0), so it is seen from exactly that direction in every window.
+# The title page: the camera solved from Lee's screenshot of it (21 Oct 2026: "On the starting view / completed view, let's go for
+# this camera position / zoom for the PMG"; the Completed View then centred, below), the finished game from the front, on the
+# student's right, seen a little lower than before. shift=0: the player moves it aside only where that lets the model be bigger (windows near
+# square or upright: 1 degree round at 900 x 880, 8 on a phone held upright); in wider windows it is seen from exactly there.
+# The Completed View has no logo or title beside the model, and centres it (Lee, the same day: "Centre the model on the Completed
+# View; keep the title page as it is"): seen from the same place as the title page (the eye 3.4 mm from it in windows 1.2 times as
+# wide as the picture is tall or more, every landscape size measured), turned to look at the model's middle, at the same distance
+# (radius). The same faces show; the picture is turned about 4 degrees more level than the title page's, and the model is 75% of
+# the frame's height (the title page's, off to the side, is stretched a little by the perspective to 78%). Only moving the camera
+# sideways would have shown the model 8 degrees round from Lee's view. The player hardly moves it aside in any window (6 mm, 0.6
+# degrees from Lee's view, on a phone held upright, where the title page is the one moved aside).
 # Were: title page dir=[-0.3999, 0.546, 0.7362], target=[574.4, 947.3, 1290.5], radius=150.5, shift=0.7 (Lee's fifth round, moved
 # right); Completed View dir=[-0.7157, 0.5739, 0.398], target=[532.0, 935.0, 1292.0], radius=112.0.
-LEE_HERO = dict(dir=[-0.7723, 0.4726, 0.4246], target=[522.7, 912.3, 1235.3], radius=113.6)
-g.start_view = dict(LEE_HERO, shift=0)
-g.end_view = dict(LEE_HERO)
+g.start_view = dict(dir=[-0.7723, 0.4726, 0.4246], target=[522.7, 912.3, 1235.3], radius=113.6, shift=0)
+g.end_view = dict(dir=[-0.8363, 0.459, 0.2999], target=[546.0, 915.1, 1274.2], radius=113.6)
 # ================================================================ THE CASE (end)
 
 g.build()
