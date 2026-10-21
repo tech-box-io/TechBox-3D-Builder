@@ -507,12 +507,14 @@ MATRIX_RUN = dict(view_dir=[0.474, 0.829, 0.296], frame=([672.0, 898.0, 1338.0],
 
 
 def wire_step(wire, caption, appear=(), labels_more=(), caution=None, camera=None, review=None, park=None,
-              module_label=dict(side='up-right'), device_label=None, close_up=False):
+              module_label=dict(side='up-right'), device_label=None, close_up=False, close_up_dir=(0.06, 1.0, 0.1)):
     """One wire: it lies loose at the parking spot (an eye on it), then its two caps are lifted, held over their pins and pushed on.
     A label at each pin, at the top of the pin (measured: make_source.py), on the device and on the module (Lee's first round).
     close_up: on Step Nc, a close-up from above of the module's pin with the new cap on it, boxed in red (as the LAC's breadboard holes:
     Lee's fourth round, Steps 17 - 20); or the side of the model to put it on ('left': Steps 19 - 20, where the pin is at the module's
-    left end; on the right, the side with most room, its leader ran across the module and the caps just put on: a review, 21 Oct)."""
+    left end; on the right, the side with most room, its leader ran across the module and the caps just put on: a review, 21 Oct).
+    close_up_dir: where the close-up looks from (from above; the dot matrix's from the G side, [-0.4, 0.9, 0.15]: from above, the wire
+    just put on V11 rose between the camera and G11 and the close-up of Step 22c showed only that wire: a review, 21 Oct)."""
     device, row = WIRE_DEVICE[wire], WIRE_ROW[wire]
     a, b = DEV_CAP[wire], MOD_CAP[wire]
     park = dict(dict(x=PARK_X, z=LOOSE_Z, along='z', eye=0.0), **(park or {}))   # (where the loose wire lies; eye: mm along it from its middle)
@@ -526,7 +528,7 @@ def wire_step(wire, caption, appear=(), labels_more=(), caution=None, camera=Non
     inset = None
     if close_up:
         top = np.asarray(apply_pose(MODULE_BENCH, pin_tip(b)), float)
-        inset = dict(target=top.round(2).tolist(), dir=[0.06, 1.0, 0.1], radius=13.0, mark=1.6,
+        inset = dict(target=top.round(2).tolist(), dir=list(close_up_dir), radius=13.0, mark=1.6,
                      alt=f"Close-up from above: the {WIRE_PIN[wire]} wire's cap on {row} of the I/O module, among the caps already in",
                      **({'side': close_up} if isinstance(close_up, str) else {}))
     g.place(caption, appear=list(appear) + [a, b], ride=ride, wires=loose_route, wires_done=routes, lines=False, labels=labels,
@@ -588,6 +590,8 @@ MATRIX_LABELS = {'VCC': (dict(side='up-left', reach=0.03), dict(side='up-right',
 #                                                                                                         S11, near-left, met DIN at the LMS's size)
                  'CS': (dict(side='up-left', reach=0.03), dict(side='near-right', reach=0.035)),
                  'CLK': (dict(side='up-left', reach=0.025), dict(side='near-right', reach=0.025))}   # (closer: S13 met CLK)
+MATRIX_CLOSE_UP = 'right'                                          # (on the left it covered the dot matrix display, in a narrow
+#                                                                     window its header too; on the right its leader runs along the module's top edge)
 for wire in MATRIX_WIRES:
     first = wire == MATRIX_WIRES[0]
     module_label, device_label = MATRIX_LABELS[WIRE_PIN[wire]]
@@ -596,7 +600,8 @@ for wire in MATRIX_WIRES:
                                                                        anchor=[531.1, 941.6, 1251.0], reach=0.12)] if first else [],
               camera=MATRIX_RUN, park=dict(x=680.0, z=1356.0, along='x', gap=1338.0, eye=18.0, eye_place=dict(side='near-right', reach=0.025)),   # (in the
 #                                                                                    gap between them, across it: Lee's second round)
-              module_label=module_label, device_label=device_label)
+              module_label=module_label, device_label=device_label, close_up=MATRIX_CLOSE_UP,   # (as Steps 17 - 20's: Lee, 21 Oct 2026)
+              close_up_dir=(-0.4, 0.9, 0.15))
 
 # Step 25: the USB cable, its right-angle plug pushed into the Nano Board's socket (as published: hover and plug, one lead line), its A
 # end lying on the bench. Seen from behind the module, as published (the plug goes in along -z, at the module's +z end: side on).
@@ -1146,9 +1151,17 @@ _held_wires.update({w: head_first(_held_wires[w]) for w in _firsts})
 _bench_cable = head_first(_bench_cable)
 _wires_42 = {**{w: [_spun_matrix.get(w, _bench_wires[w])] + [_held_wires[w]] * (len(WAY_42) - 1) for w in ALL_WIRES}, 'usb cable': _cables}
 assert all(len(x) == len(WAY_42) for x in [*_ride.values(), *_wires_42.values()])
+# Lee, 21 Oct 2026, after round 4: "For Step 42, let's make an exception for this step only ... let's do a fade and reappear in final
+# position transition, since the wiring is such a mess, and see how that looks." The module, all it carries, the USB cable's A end and
+# every wire fade out where they lie on the bench and fade in where Step 42 leaves them (`reappear`). False plays round 4's way again
+# (WAY_42, above), kept until Lee has seen this.
+STEP42_REAPPEAR = True
+if STEP42_REAPPEAR:
+    _ride = {MODULE: MODULE_HELD, USB_A: ZERO}
+    _wires_42 = {**{w: _held_wires[w] for w in ALL_WIRES}, 'usb cable': _cables[-1]}
 g.place("Pick up the I/O module, with everything plugged into it, and hold it over the back of H4, its USB end at the top. Lay the USB "
         "cable's other end on the table behind the case.",
-        ride=_ride, ride_beats=True,                                  # (a beat each: see WAY_42)
+        ride=_ride, ride_beats=not STEP42_REAPPEAR, reappear=STEP42_REAPPEAR,   # (a beat each: see WAY_42; or fade and reappear)
         lines=False, labels=[], eye=[MODULE],
         wires={**_bench_wires, 'usb cable': _bench_cable},            # (the same shapes as Step 41c's, drawn to be bent: see above)
         review=("The module goes on H4 USB end up, as in the published guide. Your STEP has it USB end down, its power socket on H5's tongue. "
@@ -1213,8 +1226,13 @@ g.place('Fit H14 over the 4-digit display: set its two bottom tabs down onto the
         view_dir=[-0.65, 0.6, -0.46], frame=([552.0, 975.0, 1290.0], 78.0))
 # The Completed View: the finished game from the front, on the student's right (as published), framed on the case and its displays.
 g.end_view = dict(dir=[-0.7157, 0.5739, 0.398], target=[532.0, 935.0, 1292.0], radius=112.0)
-# The title page as it was (pinned in Lee's second round: the dot matrix's longer header arms widened the model's bounds by 4 mm).
-g.start_view = dict(dir=[-0.5997, 0.5299, 0.5997], target=[574.4, 947.3, 1290.5], radius=150.5)
+# The title page as it was (pinned in Lee's second round: the dot matrix's longer header arms widened the model's bounds by 4 mm),
+# the model to the right of the middle, as the MRA's (Lee, 21 Oct 2026: it sat left of it): shift, in radii, the way the player
+# prefers among frames that show the model as big (its middle 59 - 67% across in wide windows). The player moves the camera aside, so
+# the direction is turned back by the 16.5 degrees that moves it round the model (measured in the player): the model is seen from
+# exactly where it was in every landscape window (a review, 21 Oct: unturned, H11 and the cable's loop went out of sight). A phone held
+# upright, where the model fills the width and is not moved aside, sees it 12.5 degrees round. Was dir=[-0.5997, 0.5299, 0.5997].
+g.start_view = dict(dir=[-0.3999, 0.546, 0.7362], target=[574.4, 947.3, 1290.5], radius=150.5, shift=0.7)
 # ================================================================ THE CASE (end)
 
 g.build()

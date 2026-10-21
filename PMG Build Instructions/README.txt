@@ -1,7 +1,7 @@
 PMG Build Instructions (Piano Memory Game, Full Build: the electronics wired on the bench, then the wooden case with the electronics
 fitted into it)
 
-FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct, the FOURTH on 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
+FIRST DRAFT 19 Oct 2026; LEE'S FIRST AND SECOND ROUNDS done the same evening, the THIRD on 20 - 21 Oct, the FOURTH and FIFTH on 21 Oct (below). Build instructions generated from Lee's STEP ("PMG Full 3D
 Cadasio Build.STEP") and TechBox's published Cadasio guide for the kit (instructions.online/?id=19075-piano_memory_game_pmg-full_build),
 in the same format as the MRA and RCC guides, with the same player. Not for distribution. Open questions are yellow Review notes on
 their steps (in the kit's player; the website copy leaves Review notes out) and are listed at the end of this file.
@@ -38,7 +38,8 @@ THE BUILD (48 steps, in the published guide's order)
   (Lee's screenshot of Step 22): its printed pin names beside its header, the module's pins; the module's labels up and to its left,
   the matrix's to the right of its pin, under the wire before (Lee's fourth round), the eye to the right of the loose wire; each wire lies across the gap between the matrix and the module before it goes in. A beat each: the matrix's cap
   rises straight up to its place 5 mm off its pin (under the wires already in) while the module's comes through the gap, upright,
-  above the pins' height; the module's slides along its column, 10.5 mm above the pins, to over its pin; both pushed on.
+  above the pins' height; the module's slides along its column, 10.5 mm above the pins, to over its pin; both pushed on. On each
+  Step Nc a close-up from above of the module's pin, its new cap boxed in red, as Steps 17 - 20's (Lee's fifth round).
 - Step 26: the USB cable's right-angle plug into the Nano Board; its A end lies on the bench. A caution: set the module aside.
 - Steps 27 - 31: the case on its own (as published): H1, then H2, H3 and H4 pushed on; the case turned over for H5 and H6, each hooked
   into H2's windows and swung into H3's notches (a beat for each, seen from the front, by H1).
@@ -50,11 +51,8 @@ THE BUILD (48 steps, in the published guide's order)
   lowered (the keys' camera for all three, close); H11 and H12 down into H10 and back into H4 (each from a front corner, close); H13
   down its slope.
 - Steps 42 - 47: the electronics into the case, each picked up first (an eye), then placed: the I/O module held over the back of H4
-  (Step 42, seen from straight behind, five beats: the module lifted and spun flat a quarter turn, its USB end swinging through
-  the corner between the blue button's wires and the dot matrix display's, the USB cable's A end lifted out of that corner with it;
-  the module stood up onto H4 while the A end goes up with it, over its top to the display's side; then the A end straight down
-  beside the 4-digit display, set down and slid in under the display's end to its place behind the case, the cable between the black
-  button's wires and the display's)
+  (Step 42, seen from straight behind: the module, all it carries, the USB cable's A end and every wire fade out on the bench and
+  fade in where the step leaves them, a beat each: Lee's fifth round, this step only)
   and lowered onto it (its label to its left); the 4-digit display passed under the dot matrix display's wires into the space
   behind the module, lifted up behind the case, over the top and held over its place, a beat for each, in one step (Step 44), then
   lowered into the notches of H11 and H12 (Step 45); the dot matrix display lifted,
@@ -257,6 +255,42 @@ LEE'S FOURTH ROUND (21 Oct 2026; Lee's step numbers, unchanged)
   moments: only Step 42c differs from round 3); labels at four window sizes (48 labelled views: none overlapping, crossing or under
   the caption box); cameras changed only on Step 42 (both views), checked view by view against the guide as it was before the round;
   the close-ups at four window sizes; the run-through on all 99 views in the kit and as published to the test website (http://localhost:8799, release r8); and every other kit's run-through with
+  the changed player (MRA 211 views and its deconstruction 151, RCC 61 and 42, LAC 116, LSM 82: no problems).
+
+LEE'S FIFTH ROUND (21 Oct 2026, after the fourth)
+- The title page: the model to the right of the middle, as the MRA's (it sat left of it). The player frames the title page itself (as
+  big as the window allows, clear of the logo and the title); the guide now says which way it prefers among frames as big (shift 0.7
+  of the view's radius): the model's middle 59 - 67% across in landscape windows (it was 44 - 50%), the same size. The player does
+  this by moving the camera aside, which on its own showed the model 16.5 degrees round (H11 and the cable's loop went out of sight:
+  the review, below); the camera's direction is turned back by as much, so the model is seen from exactly where it was in every
+  landscape window (measured: 0.0 degrees at 1920 x 1000, 1440 x 900, 1000 x 634, 830 x 460 and 760 x 720). A phone held upright,
+  where the model fills the width and is not moved aside, now sees it 12.5 degrees round.
+- Steps 21 - 25: on each Step Nc a close-up of the module's pin the wire has just gone onto (V11, G11, S11, S12, S13), its cap boxed
+  in red, as Steps 17 - 20's, seen from above and from the G side (straight from above, as 17 - 20's, the wire just put on V11 rose
+  between the camera and G11: Step 22c's showed only that wire). On the module's right: on its left, the pin's side, the close-up covered the dot matrix
+  display (in an iPad's frame, its header too, where the wire's other end is); on the right both devices stay in view at every
+  window size, and its leader runs along the module's top edge to the pin (an exception to the rulebook's close-up placement,
+  recorded there).
+- Step 42, as Lee asked, for this step only: nothing moves. The module with all it carries (the Nano Board, the plug, the caps), the
+  USB cable's A end and every wire fade out where they lie on the bench (one beat, 0.8 s) and fade in where the step leaves them, the
+  module held over H4 and the A end on the table behind the case (a beat); going back, the same the other way. The published guides
+  move wired things so too (rulebook section 4: complete copies cross-fade); this guide otherwise moves them, and its other steps
+  still do. Recorded in the rulebook as Lee's exception. The camera is round 4's, from straight behind (framed for the way the module
+  used to take; it could now be closer, unasked). Round 4's way is kept in guide.py behind STEP42_REAPPEAR = True: set it False and
+  run guide.py to see it again.
+- The player, every kit: a step may ask for this (`reappear`, guide.py's g.place(..., reappear=True)): what changes place, and its
+  wires, fade out where they are and in where they end. Next or Prev pressed during it takes things on from where it ends (or, back,
+  where it began), never through the wires. No other guide asks for it; tools/motioncheck.py, check_caps.py and check_motion.py
+  skip such a step (nothing passes through anything).
+- An independent review (21 Oct 2026: round5/verify/review_raw.json, its pictures in round5/verify/raw; three reviewers, each finding
+  checked by a second) found, and this was changed: Step 22c's close-up showed only the VCC wire (now seen from the G side); the title
+  page's model was seen 16.5 degrees round (now turned back); Next or Prev during Step 42's fade-out made the module glide through the
+  wires into the next step (now it starts from where the fade would end).
+- Checked: every view at rest (wirecheck.py: 0 problems in 99 views); views compared with the guide before this round, by content:
+  only the title page (its camera), Steps 21c - 25c (the close-ups) and Steps 42 - 42c (the fade) differ; Step 42c's fade frame by
+  frame forwards and back, and Next or Prev pressed half-way (where the module is, to the millimetre); the close-ups at four window
+  sizes; the title page at 1920 x 1000, 1440 x 900, 1440 x 714, 1000 x 634, 830 x 460, 760 x 720 and 375 x 812; the run-through on all
+  99 views in the kit and as published to the test website (http://localhost:8799, release r10); and every other kit's run-through with
   the changed player (MRA 211 views and its deconstruction 151, RCC 61 and 42, LAC 116, LSM 82: no problems).
 
 HOW IT WAS MADE

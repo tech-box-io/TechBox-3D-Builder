@@ -79,7 +79,9 @@ docstrings of `Guide.place` and `Guide.seat`):
   spot, played as the step opens and as it completes: a check that parts move freely), `single=True` (one view, no Step Nc; an
   `inset=` is then drawn on that view), `ghost={id: alpha}` (parts see-through on Step N, turning solid again on Step Nc: the LSM's
   D1 from below, the posts' tabs in its slots), `inset=dict(..., marks=[(point, half-width), ...])` (a red box round each of several
-  spots: the LSM's four slots in D1). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
+  spots: the LSM's four slots in D1), `reappear=True` (nothing moves: what changes place, its riders and its wires fade out where
+  they are and fade in where they end, a beat each, as the published guides move wired things; the PMG's Step 42, the I/O module
+  onto H4 with every wire on it: Lee, 21 Oct 2026, that step only; motioncheck.py skips it). A wire route may ask for its tube's rings closer than the default 1.5 mm (`W.route(spacing=)`,
   0.25 for the LSM's resistor legs, whose bends looked pinched). A label or an eye may ask for its place:
   `dict(..., side=)` a side of the model ('left', 'right', 'top', 'bottom') or a place beside its own spot ('up-right', 'up-left',
   'down-right', 'down-left', 'near-left', 'near-right', 'near-above', 'near-below'; `reach=` how far, a share of the view's width,

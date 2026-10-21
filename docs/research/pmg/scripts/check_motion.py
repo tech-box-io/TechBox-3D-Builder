@@ -119,6 +119,9 @@ names = [v['name'] for v in views]
 for name in sys.argv[1:]:
     i = names.index(name)
     v, before = views[i], views[i - 1]
+    if v.get('reappear') and v.get('kind') == 'done':   # (`reappear`: fades out where it was and in where it ends; nothing moves)
+        print(f'{name}: fades out and in where it ends (reappear): nothing moves')
+        continue
     worst, touching = {}, {}
     for t in np.linspace(0.05, 0.95, 19):
         lines = {}

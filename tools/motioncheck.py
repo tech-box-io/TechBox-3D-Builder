@@ -129,6 +129,8 @@ def main(argv):
         v, before = views[i], views[i - 1]
         if v.get('cut'):                        # (a view after a put-away opens without a glide: nothing moves into it)
             continue
+        if v.get('reappear') and v.get('kind') == 'done':   # (`reappear`: fades out where it was and in where it ends; nothing moves)
+            continue
         stops_of = lambda pid: ((v.get('path_stops') or {}).get(pid)) if v.get('paths') and pid in v['paths'] else v.get('stops')
         # (the moving parts move into the step's done view; in its opening view they stand where they hover)
         ways = {pid: (v.get('paths') or {}).get(pid) or v['path'] for pid in v.get('moving') or []} if v.get('kind') == 'done' else {}

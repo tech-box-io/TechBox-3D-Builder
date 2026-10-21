@@ -1,0 +1,600 @@
+{
+ "summary": "Independent review of the PMG's fifth-round changes (title page, Steps 21c-25c close-ups, Step 42 fade) and the player's new reappear transition",
+ "agentCount": 15,
+ "logs": [
+  "generator: 4 lower findings not verified",
+  "player: 1 lower findings not verified"
+ ],
+ "result": {
+  "results": [
+   {
+    "lens": "requests",
+    "met": [
+     "Title page, the model now sits right of the middle like the MRA's. I measured the model's pixel extent in each picture (folder docs/research/pmg/round5/verify/raw). At 1440x900 its middle is 62.3% across (before_title_1440x900.png: 44.6%; the MRA's mra_title_1440x900.png: 63.1%). At the other sizes: 1920x1000 60.3%, 1440x714 59.4%, 1000x634 61.9%, 760x720 68.1%. The model's height on screen is unchanged at 1440x900 (y 262-745 in both). In every picture the model's left edge (x 457 or more) is right of the title and logo boxes (right edge at most x 450), and its right edge stays inside the frame (up to 92.7%, against the MRA's 94.9%). At 375x812 the model is centred (48.8%) and fills the width, clear of the logo (y 22-70) and the title (y 1005 and below). In steps.json only the Start camera changed (shift 0.7, guide.py:1228). The player already prefers the guide's shift among framings that give the same size (player.js:310-318).",
+     "Steps 21c-25c: each Step Nc now has an inset with mark 1.6 aimed at the pin in its caption (V11, G11, S11, S12, S13: steps.json views 43-51), with the same camera direction and radius as 17c-20c. In 21c, 23c, 24c and 25c (r5_w*_Step21c/23c/24c/25c.png at all four widths) the red box sits on the new cap among those already in. The G/V/S row letters and the column numbers next to it can be read, as in round4 after_w*_Step17c-20c.png.",
+     "Close-up placement (21c-25c): on the right it leaves the dot matrix display, the wire's run and the module's pin in view at every width. At 1000 and 760 wide it covers the right part of the I/O module and part of the 4-digit display's wire bundle, but not the step's pin or the new wire. The leader runs from the box's left edge over the module's top strip to the pin, as Step 17c's did. The README's reason (on the left it covered the dot matrix display) is plausible, and the exception is written into the rulebook (docs/cadasio-patterns.md, section 6).",
+     "Step 42: forwards, the pictures read as fade-out-and-reappear. In r5_w1000_fwd42c_0000-1000.png the module, Nano Board, USB plug, its A end, the module-end caps and all 22 wires fade out on the bench (0-0.5). They fade in where Step 42c leaves them, the module held over H4 and the A end behind the case (0.55-1.0). Steps 42 and 42c have the same camera (dir [0.8387, 0.5446, 0], target [638, 1012, 1323], radius 126), so the view stays still. Nothing moves, so nothing passes through anything. Going back (r5_w1000_back42c_*.png) plays the same in reverse.",
+     "Step 42, nothing that stays fades: only the 25 parts whose pose differs between 42 and 42c fade (module NAUO78, NANO, USB NAUO282/283, 21 module-end caps). The dot matrix's caps (NAUO134-138), the 4-digit display's caps (NAUO259-262), both displays and the case keep the same pose and stay solid (steps.json views 84/85).",
+     "The new player code matches its description. It runs only on an animated hover->done (or done->hover) of a reappear view, lasts 2 x FADE_MS, and holds the poses at start, then at end (km=e=0/1). A fade cut short is cleared at the next go() (player.js:753). At the end it clears fades and puts back the view's ghost (player.js:919-920). publish.py strips only review and text_key (AUTHORING_KEYS, line 61), so the website copy keeps reappear and will play the fade.",
+     "Scope: compared with HEAD by content, steps.json differs only in Start (camera), Steps 21c-25c (inset) and Steps 42/42c (reappear; carry and wire_via reduced). The wire_via changes in Steps 44c-47c are route indices renumbered with the same route content. This matches the README. STEP42_REAPPEAR (guide.py:1154) keeps round 4's WAY_42 intact behind the switch."
+    ],
+    "findings": [
+     {
+      "id": "F1",
+      "severity": "high",
+      "where": "Step 22c close-up (steps.json view 45, inset target [653.61, 887.97, 1310.94]; from guide.py:600 close_up=MATRIX_CLOSE_UP); pictures docs/research/pmg/round5/verify/raw/r5_w760|w1000|w1440|w1920_Step22c.png",
+      "title": "Step 22c's close-up shows only the brown VCC wire: G11 and the new GND cap cannot be seen",
+      "evidence": "At all four widths the close-up is almost filled by a huge brown band (the VCC wire put on V11 in Step 21) and the green GND wire across its top. The red box sits in the middle of the brown band with no pin, cap or header inside it (e.g. r5_w1440_Step22c.png, close-up at x 1008-1428, red box at about 1205-1235, 218-248). No row letters or column numbers can be seen. Steps 21c and 23c, with the same camera direction and radius, show their pins clearly, so the cause is G11's position: the close-up's camera (dir [0.06, 0.99, 0.10]) looks down past V11's wire as it rises next to G11. This is the reverse of what Lee asked for ('the breakout highlight of the pin location, like you did on 17-20'), and the README says the close-ups were checked at four window sizes.",
+      "suggestion": "Give Step 22c its own close-up camera, so that V11's rising wire is not between the camera and G11. Tilt it the other way (towards -x, or from the S-row side), or lower and turn it so the brown wire lies behind the pin. Then look at r5_*_Step22c again at all four widths. If the wire cannot be avoided, a close-up that draws wires faintly would need player support: inset ghost= takes parts only.",
+      "verdict": {
+       "real": true,
+       "severity": "medium",
+       "reason": "I checked this and could not refute it. The Step 22c pictures were saved at 13:22, after steps.json was written at 13:16, so they show the current guide. In r5_w760, r5_w1000 and r5_w1920_Step22c.png the close-up is almost all a flat brown band, the VCC wire, with the green GND wire curving across the top. The red box sits in the middle of the brown, with no pin, cap, header or row number inside it (in r5_w1440_Step22c.png the box is at about x 1205-1235, y 218-248). Steps 21c and 23c use the same close-up camera (steps.json views 43 and 47: dir [0.0596, 0.9933, 0.0993], radius 13) and clearly show the yellow header, the V/G/S letters, the 11/12/13 numbers and the boxed cap. So 22c is the only one that fails. The cause is where G11 is: its target, [653.61, 887.97, 1310.94], is 2.5 mm from V11's, and the brown wire put on V11 in Step 21 rises between the camera and G11. The red box is built by wire_step() (guide.py:527-531) and called from guide.py:600 with close_up=MATRIX_CLOSE_UP. The README's fifth-round section (lines 265-269, 281-282) says the close-ups were checked at four window sizes and does not mention 22c's close-up being blocked, so it does not already cover this. For a student, the close-up on that step points at a brown blob and does not show where G11 is. That falls short of what Lee asked for (\"the breakout highlight of the pin location, like you did on 17-20\"). The main view still has its G11 label and leader, so the step is not wrong, only the close-up is useless. That is why I put it at medium rather than high."
+      }
+     },
+     {
+      "id": "F2",
+      "severity": "low",
+      "where": "PMG guide.py:1228 (g.start_view shift=0.7); player.js placed() lines 326-331; README 'LEE'S FIFTH ROUND', first bullet",
+      "title": "The title-page shift also turns the model about 12-14 degrees, which the README does not mention",
+      "evidence": "placed() moves the camera itself sideways by shift x radius = 105 mm. At the framed distance (393 mm x 1.08 padding x k, with k at least 1) the model is then seen 11-14 degrees off its old axis. Compare before_title_1440x900.png with r5_title_1440x900.png. Before, H11's label and the USB cable loop above H14 show, and H2's side is wide with its label readable at about (845,555). Now H11 and the loop are gone, the key side is seen more face-on, and H2's side is near edge-on with its label squeezed at about (1095,555). The README says only that the model is 'the same size'. Lee asked only for the model to be moved right, and the view was the one pinned in round 2.",
+      "suggestion": "Tell Lee the title picture is now seen from a slightly different angle, so they can judge it. If the old angle should stay, move the picture rather than the camera (a projection or view offset), or re-pin dir so the shifted view matches the old look.",
+      "verdict": {
+       "real": true,
+       "severity": "low",
+       "reason": "Confirmed. In player/js/placed() the camera itself moves: both the target and the camera move by `by` = shift x radius (0.7 x 150.5 = about 105 mm along dir x up), and the camera keeps its direction. This is not a pan of the picture. The model is now seen from a different place, so the parallax and what is hidden change. The pictures show it plainly. In before_title_1440x900.png the right (H2) side face is wide, about x 760-870, and H2's label is at about (845,555). H11's label and the cable loop behind H14 are visible, and the keys are seen at a steep slant. In r5_title_1440x900.png the H2 side is close to edge-on, a sliver at about x 1080-1135 with its label squeezed. H11 and the loop are hidden. The keys and the 4-digit display are seen much more face-on, so the H9 labels can now be read. The before picture's model sat left of the middle, so the old framing was already shifted the other way. The total sideways change in camera position is therefore about one radius or more, which fits the reviewer's 11-15 degree estimate at a distance of about 400-450 mm. The README (LEE'S FIFTH ROUND, first bullet, lines 261-264) and the guide.py comment at line 1225 describe only a move to the right at \"the same size\". They do not mention that the title picture is now seen from a different angle than the view pinned in round 2. Lee asked only for the model to be moved right. The new look may be acceptable or even better, but it is a visible change Lee should be told about. Nothing here harms a student."
+      }
+     },
+     {
+      "id": "F3",
+      "severity": "low",
+      "where": "PMG README.txt:272-273; CLAUDE.md:83; docs/cadasio-patterns.md:389 (against the rulebook's own lines 79 and 427); r5_w1000_fwd42c_0450.png and 0500.png",
+      "title": "The docs call the Step 42 fade the same as the published guides' cross-fade, but it fades out fully before fading in",
+      "evidence": "The rulebook says the published guides move wired things by cross-fading complete copies (line 79: 'complete copies (part + its routed wires) cross-fade'; line 427). The README ('The published guides move wired things so too'), CLAUDE.md and the new rulebook row present this as the same. The player instead fades everything out over 0.8 s, then in over 0.8 s (player.js:860). In between (fwd42c_0450-0550) the module and every wire are gone. The dot matrix and the 4-digit display lie on the bench with bare caps and nothing plugged in, which could briefly read as 'unplugged' to a student. This is not against Lee's wording ('fade and reappear'), but the docs' claim does not match what plays.",
+      "suggestion": "Reword the three docs to say it fades out, then in, unlike Cadasio's simultaneous cross-fade. Offer Lee the overlapping cross-fade as an alternative to try if the empty moment looks odd.",
+      "verdict": {
+       "real": false,
+       "severity": "none",
+       "reason": "The finding's facts hold, but the docs already describe the motion accurately, so this is not a real defect.\n\nWhat the finding gets right: player/js/player.js:860 holds the motion at its start for the first FADE_MS while the parts fade out, then at its end for the second FADE_MS while they fade in. One copy is gone before the other appears. r5_w1000_fwd42c_0500.png shows the bench at the halfway point: the module, the USB A end and every wire are gone, and the dot matrix and 4-digit display are left with bare caps (0300 still shows them part-faded). Cadasio's swap is different: one overlapping 800 ms cross-fade (evidence doc line 853, \"in one 800 ms step\").\n\nWhy it is not real:\n1. All three docs say it happens in sequence. README 272-273: \"fade out where they lie on the bench (one beat, 0.8 s) and fade in where the step leaves them ... (a beat)\". CLAUDE.md 83: \"fade out where they are and fade in where they end, a beat each\". Rulebook 389: \"fades out where it lies and fades in where it is held\". No reader of these lines would expect one overlapping cross-fade.\n2. The phrase \"as the published guides move wired things (section 4)\" is about the kind of move: a swap of whole copies instead of tweening wired things along a path. That is what rulebook line 79 contrasts (\"moved by swapping poses ... They are tweened only before any wire constrains them\"). The comparison is loose about timing, but the docs do not claim the same timing.\n3. Lee asked for a \"fade and reappear in final position transition ... and see how that looks\". Fading out and then fading in is the literal reading of that. The moment with nothing plugged in is part of the look Lee asked to judge, not a departure from it.\n4. A student sees none of these docs. On screen the step's caption names everything that moves, and the empty moment lasts well under a second inside a 1.6 s transition Lee is about to review.\n\nAt most this is a wording nicety in internal docs. Offering Lee an overlapping cross-fade is a reasonable follow-up idea, but it is not a defect."
+      }
+     },
+     {
+      "id": "F4",
+      "severity": "low",
+      "where": "PMG README.txt:283; PMG Build Instructions/thumbs/ (36 files, 13:08-13:23 today)",
+      "title": "README has an unfilled placeholder, and the kit's thumbs/ folder is left behind",
+      "evidence": "README line 283 reads 'the run-through on all 99 views in the kit and @PUBLISHED5@; ...', a template token never filled in (round 4's text names the published test website and release). 'PMG Build Instructions/thumbs/' holds this round's working pictures (f42_*.png, b42_*.png, _helpers.js), and CLAUDE.md says 'Delete thumbs/ afterwards.'",
+      "suggestion": "Fill in the published check (address and release) or remove the clause once publishing is done. Delete thumbs/ when the round's checks are finished.",
+      "verdict": {
+       "real": false,
+       "severity": "low",
+       "reason": "Both facts are true, but neither is a defect yet, and neither affects a student or what Lee asked for.\n\n1. The README token is real. \"PMG Build Instructions/README.txt\" line 283 contains \"@PUBLISHED5@\". It is an @NAME@ marker for a step that has not run yet, not a forgotten edit. Round 4's text, in the same diff, says \"as published to the test website (http://localhost:8799, release r8)\", so this round's marker is waiting for the same thing. The test publish has not happened:\n   - The last entry in \"share/Test guides preview/releases/piano-memory-game-full-build/history.json\" is r9 (13:12, note \"the player: title page, framing, embedded pills\"). That publish was not this round's.\n   - The test site's steps.json (in site/piano-memory-game-full-build/) and r9/steps.json both contain no \"reappear\", so Step 42's fade has not gone out.\n   - The README was saved at 13:21; the time of this review was 13:33.\n   So the README cannot name a release yet. This is the round's own publish-then-fill-in step in the memory's routine (publish --to \"share/Test guides preview\"), still to come. It would only be a problem if it were left in after publishing, and that cannot be shown now.\n\n2. The thumbs folder is real. \"PMG Build Instructions/thumbs/\" holds 36 working files from 13:08 to 13:23: f42_*, b42_*, m*_Step21c/25c, title_pmg_*, _helpers.js. It is ignored by git (.gitignore:54 `thumbs/`), so it can never be committed or published, and publish only copies listed content. CLAUDE.md's \"Delete thumbs/ afterwards\" is end-of-round tidying, and the round is not finished: its test publish is still pending, as above. Leaving the folder for a few minutes changes nothing for a student or Lee.\n\nSince both are pending steps of an unfinished round, not wrong output, I am marking this not real."
+      }
+     }
+    ],
+    "unverified": []
+   },
+   {
+    "lens": "player",
+    "met": [
+     "Other kits are unaffected. The new paths only run when `rv` is set (player.js:839), and no other steps file has `reappear`. Counts per file: LAC, LSM, MRA steps and steps-deconstruction, RCC steps and steps-deconstruction all 0; the PMG steps.json has 2 (views 84 'Step 42' and 85 'Step 42c'). Without `reappear` the code behaves exactly as before: `ec = e` (858), `shown` stays null (891), `faded` is unchanged (917), and km/e are computed as before.",
+     "Jumping to the step (step list, select box, First/Last, LMS 'techbox-go', ?step=) calls go(i, false). `forward` and `backward` both need `animate`, so `rv` is null. Step 42 and 42c have no wiggle or moving parts (`moving: []`), so `playing` is false and the parts are placed at once.",
+     "A resize calls go(cur, false) (player.js:1242). go() clears every fade (`stage.clearFades()`, just after 754) and replaces the running animation with an instant one, so a resize half-way lands cleanly on the end state, as it does on any other step.",
+     "End of the step and what it leaves behind. On the last frame `k` is 1, so the hold-at-start/hold-at-end branch (860) is skipped: km = e = 1 and liveOffsets are the end poses. `faded` now includes `reappear`, so clearFades runs and ghosts are put back (917-919). Step 42 gets its lead lines, arrows and labels/eye back when you return to it, and an Nc close-up or labels would be built as on any step (920-922).",
+     "Camera and model turn ease over the whole 1.6 s (`ec = ease(k)`, used at 861 and 905-912). Step 42 and 42c share one camera (dir [0.8387, 0.5446, 0], target [638, 1012, 1323], radius 126). The camera change from 41c to 42 is an ordinary step. In the back42c frames the camera holds still.",
+     "Wire blending at we = 0 and 1. In the first half `changing` is true with f = 0, so each wire is drawn on its Step 42 route, set to the Step 42 poses: the shape it had at rest. In the second half (we = 1) each wire is on its 42c route. Routes 146-176 use tail_from: at f = 0 the two-part resampling stays on the same polyline. 42c no longer has wire_via. `beats` becomes 2 (1600 / STEP_MS), but `paced()` still returns exactly 0 or 1 when km is 0 or 1.",
+     "What actually changes place fades as intended. Comparing offsets between 42 and 42c, the parts that differ are the module NAUO78, NANO, the Mini-B plug NAUO282, the A end NAUO283, CAP_V4-7 and NAUO95-119. They show in the frames as: r5_w1000_fwd42c_0000 at the bench; _0450 a pale ghost; _0500 gone; _0700 fading in over H4 with the A end on the table; _1000 solid. The back42c frames play it in reverse.",
+     "The visible set is the same in 41c, 42 and 42c, and the wire keys are the same in 42 and 42c. So nothing pops in or out at t = 0 on Step 42 itself, and `routes[to.wires[w]]` always resolves; no steps file has a null wire.",
+     "publish.py strips only AUTHORING_KEYS = ('review', 'text_key') (publish.py:61), so `reappear` reaches published guides.",
+     "The runthrough still checks Step 42 and 42c end states in every direction (fwd, back, jump): visible parts, where each part sits (with a tolerance), lead lines, wire count, labels, eyes, arrows, close-up and caution. `_dev.show(name, k)` scales by `T.dur`, which go() updates to 1600 ms, so the k-fraction frames in the evidence are right."
+    ],
+    "findings": [
+     {
+      "id": "F1",
+      "severity": "medium",
+      "where": "player/js/player.js:841-842 (same() / parts), with composePose 69-80 and mixPose 57-66",
+      "title": "'Changes place' is decided by comparing JSON text, so parts that stay put still fade",
+      "evidence": "parts = keys(end) where JSON.stringify(start) !== JSON.stringify(end). `start` is the live pose from the previous frame. For a rider on a turned carrier, composePose builds that pose in the player: full-precision floats with `at` = the part's bounding-sphere centre. It can never match steps.json's 2-decimal pose. Step 42: the dot matrix caps NAUO134-138 and the 4-digit display caps NAUO259-262 ride with pose [0,0,0] on NAUO81 and NAUO79 (both turned 40 deg). Their offsets are identical in 42 and 42c, yet they are selected and faded. In r5_w1000_fwd42c_0300/0450/0550 the dot matrix caps go see-through, then pale; at _0500 its header pins stand bare. On the 4-digit display the cap edge lines vanish mid-way. The 12 button caps at the other ends of the same faded wires (NAUO86-93, CAP_GND1-4) ride on carriers with no offset, so composePose returns the steps.json pose itself and they stay solid. So whether a part fades depends on how its pose was computed, not on whether it moves. Any part with a turned offset at rest would also be caught: mixPose(a, a, 1) rebuilds the axis and angle from a quaternion, e.g. 0.57735 becomes 0.5773502691896258. A kit that turns parts on the bench would fade stationary parts on any `reappear` step. Neither the code comment ('those whose pose differs') nor the README's 'the module with all it carries' describes this.",
+      "suggestion": "Compare where the two poses put the part instead of their text, as runthrough.js does. Map the part's sphere centre and an offset point through stage.poseMatrix(start) and stage.poseMatrix(end), and count the part as moved if either point shifts by more than about 0.05 mm. Do not use poseGap(): it ignores `at`, and composePose writes a different pivot than steps.json, so it would still mismatch. If the display caps should fade with their wires, say so (e.g. add riders whose wires fade) and make the button caps match.",
+      "verdict": {
+       "real": false,
+       "severity": "low",
+       "reason": "The code path is as described, but in this guide its only visible effect is harmless, so the finding does not hold up as a defect.\n\nWhat I confirmed:\n- player/js/player.js:841-842 picks the parts to fade by comparing JSON text. `start[id]` comes from the previous frame's `liveOffsets` (line 759). In steps.json, Step 42 and Step 42c (views 84/85) give the nine caps NAUO134-138 and NAUO259-262 the carry pose [0,0,0] on NAUO81 and NAUO79, and both carriers are turned 40 deg. For those caps, composePose (lines 69-80) builds a pose with full-precision floats and `at` set to the sphere centre, so the text never matches steps.json and the nine caps are faded even though they do not move.\n- NAUO81 and NAUO79 themselves ride on NAUO63, which has no offset, so composePose returns the steps.json pose unchanged and they stay solid.\n- The pictures match this: r5_w1000_fwd42c_0300 shows the dot matrix caps pale, and _0500 shows its header pins bare.\n\nWhy it does not matter here:\n- Each of the nine affected caps is the display-side end of a wire that ends on the I/O module. The module moves (NAUO78, NANO and the others differ between 42 and 42c), so every one of those wires fades anyway.\n- What a student sees is each whole jumper wire, cap included, fading out and back in. That fits Lee's request to fade the messy wiring and reappear in place. Nothing jumps, nothing ends up in the wrong place, and frame _1000 shows every cap back on its pin.\n- The inconsistency with the button caps (NAUO86-93, CAP_GND1-4) cannot be seen in Step 42. The buttons sit inside the closed case and are not visible from the step's straight-behind camera (frames _0000 and _1000).\n- No other parts are affected. Of the parts in Step 42 that are turned but do not move, only these nine caps are mis-selected. NAUO79 and NAUO81 compare equal.\n- The wider claim (stationary turned parts in another kit would fade) is hypothetical. No other guide uses `reappear`.\n\nThis is fragile code worth hardening by comparing where the two poses put the part, not their text. It is not a defect a student or Lee would notice in this round."
+      }
+     },
+     {
+      "id": "F2",
+      "severity": "medium",
+      "where": "player/js/player.js:715 (turnAround only for `away`), 759 (start from liveOffsets), 870-879 (riders rebuilt from carry poses)",
+      "title": "Next or Prev during the 1.6 s fade brings back the tangle, or flashes the end state",
+      "evidence": "turnAround only covers deconstruction steps (`from.away` / `to.away`), and during the first 0.8 s liveOffsets still hold the bench poses (km = 0). (a) Next during that half: double-click, or holding ArrowRight (1237). go(43) starts NAUO78 from liveOffsets, the turned bench pose, because `was` is true (797-799). Step 43 moves the module (`moving: [NAUO78]`), so it slides from the bench up to H4 in one 0.8 s move. Its wires keep routes 156-177 (43.wires == 42c.wires), so they are not 'changing' and are drawn as the 42c routes stretched from H4 down to the moving module: the tangle Lee asked to hide. (b) Prev during that half: go() clears the fades, so everything snaps solid. The rider loop ignores `start` and places NAUO78 at throughPoses([42c carry pose, 42 carry pose], e = 0), the held position over H4. The A end NAUO283 likewise goes to its 42c spot. So the learner sees the 42c end state, solid with all its wires, then watches it fade out and back in at the bench. (c) Prev during the second half also snaps the partly faded parts to solid before fading them out again. Normal steps share the general interrupt behaviour, but on this step it undoes the reason for the fade, and the step is twice as long, so interruptions are more likely.",
+      "suggestion": "In go(), when the previous animation was a `reappear` still running: for the reverse step (prev.to === from && prev.src === to), treat it like turnAround (t0 = now - (dur - elapsed)). The fade curve is symmetric, so the opacity and the half carry over unchanged. For any other destination, finish it first (e.g. call stepAnimation(prev.t0 + prev.dur) before computing `start`), so the next step starts from the end poses, not the bench.",
+      "verdict": {
+       "real": false,
+       "severity": "low",
+       "reason": "The code reading is correct, but this is how the player already handles any step that is interrupted. The reappear change does not introduce it, and makes this step less exposed to it than round 4 was.\n\nWhat I confirmed in /Users/lee-johnson/Desktop/Claude_Cadasio/player/js/player.js:\n- Next (line 1215) and ArrowRight (line 1237) call go() at once, with no guard while a step is still playing.\n- turnAround (line 715) only applies to deconstruction steps (`away`).\n- In the first half of the reappear (lines 859-860), km = e = 0, so liveOffsets keep the bench poses.\n- (a) Next in that half: go(86) takes start[NAUO78] = liveOffsets, the turned bench pose (lines 757-760). In steps.json, Step 43 has no carry for NAUO78 and its offsets for NAUO78 are [0, 102.3, 0.2], the same as 42c's, and 43.wires equals 42c.wires (routes 156-177). So the module mixPoses from the bench to over H4 in 800 ms, solid (clearFades at line 754). The 42c routes are skinned to it (skinned(), lines 113-143) and the A end NAUO283 snaps. Confirmed.\n- (b) Prev in that half: the rider loop (lines 869-878) uses `was` = the 42c carry pose with e = 0. So NAUO78 shows solid at the held pose and fades out, then fades in on the bench. Confirmed.\n- (c) Prev in the second half: the partly faded parts pop to solid. Confirmed.\n\nWhy it does not count as a defect of this round:\n1. Every build step behaves this way. Interrupting a step restarts from liveOffsets with no turn-around, and riders ignore `start`.\n2. Round 4's Step 42 (HEAD steps.json: 42c carries 4 vias for NAUO78 and NAUO283, plus wire_via, so 5 beats, about 4 s) had the same artefacts:\n   - A double-click early in its first beat also glided the module from near the bench to the held pose, with the held routes skinned.\n   - Prev mid-step also jumped the rider to the held pose: the staged branch with back = true, then `was` = the 42c pose.\n3. With reappear, the window where Next brings back the glide is the first 0.8 s only. Round 4's whole 4 s motion was exposed. Past 0.8 s, liveOffsets already hold the final poses and Next is clean.\n4. It needs a second Next or Prev within 0.8 s. A brief solid glide or flash follows and the state then settles correctly. Lee's request (\"see how that looks\") is about the normal transition, which these changes implement.\n\nThe suggested fix (a reverse turn-around, or finishing the reappear before starting the next step) would be a nice robustness improvement. It is not a problem this change introduced, and it does not undermine what Lee asked for."
+      }
+     },
+     {
+      "id": "F3",
+      "severity": "low",
+      "where": "player/js/player.js:754, 797, 832 (fresh), 875-876, 895-900 (ghost loop)",
+      "title": "Latent: a reappear step with ghosts, new parts or new riders would not fade them",
+      "evidence": "None of these arise on Step 42 (the visible sets match, no ghost, no fresh riders), but stepgen documents place(..., reappear=True) as a general option. (1) The ghost loop runs after the reappear fades and calls stage.setFade for every ghost id, guarded only by `anim.fade`. A ghost part that also changes place would have its fade overwritten (no fade out or in), and any ghost alpha jumps at half-way because e is forced to 0 or 1. (2) A part new on Nc (`appear`) has start = end, so it is not selected: it shows solid at its end place from t = 0, before the others have faded out. A part dropped on Nc vanishes at t = 0. (3) A fresh rider rides its carrier from the start and is never faded, so it shows solid at the carrier's old place for the first half, a place it never was. (4) A wire only in Nc is selected and faded, but in the first half it has no `from` route, so it is drawn on its Nc route stretched to the start poses (a wire that was never there, fading out). (5) single=True with reappear=True is silently ignored (there is no Step Nc to play it).",
+      "suggestion": "In the reappear branch: skip ghost blending for anim.reappear.parts; hide appearing parts and fresh riders for the first half and fade them in during the second; fade leaving parts and wires out during the first half; draw wires that are new on Nc only in the second half. Or have stepgen refuse reappear together with appear/ghost/single.",
+      "verdict": {
+       "real": false,
+       "severity": "none",
+       "reason": "The code reading is roughly right, but nothing reaches a student and nothing touches Lee's request.\n\nThe finding itself says none of the five cases happens on Step 42. I checked that against the files and it holds:\n\n- **Only Step 42 uses it.** Steps 42 and 42c (views 84 and 85 in \"PMG Build Instructions/steps.json\") are the only views with reappear.\n- **Nothing appears, leaves or is ghosted.** Neither view has ghost, appear or single, and both show the same 68 parts.\n- **No new riders.** Both views have the same set of riders, each on the same carrier. Only the poses of NAUO78 and NAUO283 change.\n- **The same wires.** Both views list the same wire keys.\n\nIn player/js/player.js (lines 839-845 and 856-860), only Step 42 can take the reappear branch. Lee asked for the fade-and-reappear \"for this step only\", and tools/stepgen.py (lines 1299-1301) documents reappear as Step 42's exception, not as something every step may use. So cases (1)-(5) are about steps that don't exist. They would only matter if someone later added reappear to a step with ghosts, parts appearing on Step Nc, new riders or single=True. That is a possible future guard in stepgen, not a defect in this change."
+      }
+     },
+     {
+      "id": "F4",
+      "severity": "low",
+      "where": "player/js/runthrough.js:7-37, 62-95",
+      "title": "The runthrough checks only the end state of a reappear step, not the fade or the restored opacity",
+      "evidence": "check() looks at visibility, poses, lines, wires, labels, arrows, close-up and caution after the animation ends. Nothing looks at material opacity at rest, and the mid-animation checks run only for `leaving` steps (62-95). If `faded` lost `|| !!anim.reappear`, parts would be left on their see-through copies at about 0.999 opacity and the runthrough would pass. If steps.json lost `reappear`, Step 42 would glide the module through the wires to the same end state and the runthrough would also pass. F1 (stationary caps fading) is not caught either. The fade was verified by eye only (README: 'Step 42c's fade frame by frame').",
+      "suggestion": "Add a reappear block like the `leaving` one. Forwards: at FADE_MS/2 each part that changes place is still at its start pose with opacity 0.25-0.75; at 1.5 x FADE_MS it is at its end pose with opacity 0.25-0.75; parts that do not change place keep opacity 1 throughout; at the end every part is at opacity 1. Backwards: the same in reverse. Reuse the existing alpha() helper.",
+      "verdict": {
+       "real": false,
+       "severity": "none",
+       "reason": "The gap is real, but it is not a defect. player/js/runthrough.js does check reappear steps only at rest. Its mid-animation block, from line 62 on, runs only for views with `leaving`. But every case the finding names is hypothetical (\"if `faded` lost...\", \"if steps.json lost `reappear`\"). None of them happens in the current code. In the player.js diff, the end of the animation sets `faded = !!anim.fade || !!anim.reappear` and then calls stage.clearFades(), so the parts and wires are restored to full opacity. Step 42's two views carry reappear. The last frame of the forward transition, docs/research/pmg/round5/verify/raw/r5_w1000_fwd42c_1000.png, shows the module, the Nano, the cable and every wire solid in their final places. The README's round-5 Checked line says the fade was checked \"frame by frame forwards and back\" and the run-through ran on all 99 views. It does not claim the run-through checks the fade, so that is stated accurately. Neither a student nor Lee's one-step \"see how that looks\" request is affected. At most it is a suggestion for a future regression check. F1 (stationary caps fading) is a separate finding and is not established here."
+      }
+     }
+    ],
+    "unverified": [
+     {
+      "id": "F5",
+      "severity": "low",
+      "where": "PMG Build Instructions/README.txt:283; share/Test guides preview/site/piano-memory-game-full-build/steps.json",
+      "title": "README still has the placeholder '@PUBLISHED5@'; the 8799 preview has the new player but round 4's steps",
+      "evidence": "README line 283 says 'the run-through on all 99 views in the kit and @PUBLISHED5@'. The template marker was never filled in, so the round's checks claim a published run-through that is not recorded. The Test guides preview's steps.json (13:12) is older than the kit's (13:16). Compared view by view it lacks round 5's changes: the title page's shift, the Step 21c inset, and reappear on Step 42 and 42c (it still has round 4's ride_beats and wire_via). Its js/player.js already has the reappear code. Lee's review page (localhost:8799) would therefore show none of this round. This may simply be a pending workflow step.",
+      "suggestion": "Republish with --to \"share/Test guides preview\", run the runthrough there (including Step 42 forward and back), then replace @PUBLISHED5@ with the actual result."
+     }
+    ]
+   },
+   {
+    "lens": "generator",
+    "met": [
+     "Title page: steps.json Start camera is unchanged except for \"shift\": 0.7 (dir/target/radius identical to HEAD). guide.py:1228 passes it through, stepgen.py:1961 writes it, and player.js:310-317 uses it only for the title page (title = view.kind === 'start') as a tie-break among equally large framings. Pictures: r5_title_1440x900.png has the model's middle at about 62% across (before_title_1440x900.png: about 44%; mra_title_1440x900.png: about 63%). The model is the same height (262-746 px against 262-745 before). 375x812 still fills the width. 1440x714, 1000x634 and 760x720 all sit right of the blue middle line, clear of the logo and title boxes.",
+     "Steps 21c-25c: each now has an inset with the same dir, radius and mark as 17c-20c, aimed at V11, G11, S11, S12 and S13 (its alt names the pin). Steps 21-25 have no other change. In r5_w760/w1000/w1440/w1920_Step21c..25c.png the red box sits on the new cap (e.g. the teal CLK cap on S13 in r5_w1440_Step25c.png), and the dot matrix and its header stay uncovered.",
+     "By content (routes resolved), steps.json differs from HEAD only in the Start camera, the 21c-25c insets and Steps 42/42c. The other differences in route numbers (Steps 43-48, Completed View) are renumbering only. Routes went from 259 to 250 (the 9 in-between routes of WAY_42 dropped), and all 250 are referenced, so no dead routes are left.",
+     "Step 42/42c: both views carry reappear: true and no ride_beats. 42c carry has no via (NAUO78 by NAUO63 at [0, 102.3, 0.2]; NAUO283 at ZERO), and wire_via is gone. All 22 of 42c's wires match round 4's final routes by content, and every one changes route from 42. The camera is identical to round 4's (dir [0.8387,0.5446,0], radius 126). publish.py strips only review/text_key (AUTHORING_KEYS, line 61), so reappear survives publishing.",
+     "STEP42_REAPPEAR = False reproduces round 4. With False, _ride and _wires_42 keep their five-stop lists (the assert at guide.py:1149 still holds), ride_beats becomes True and reappear False, which are exactly HEAD's arguments. stepgen adds nothing when reappear is False (stepgen.py:1522, 1887), and the player falls back to ec = e with no reappear branch, so its maths is unchanged.",
+     "player.js: the fade goes the right way. fadeCurve runs 1 to 0 (line 12), so the first half fades out at the start poses (km = e = 0) and the second fades in at the end poses. At the switch both halves are at alpha 0, and the fades are cleared at k >= 1. Wire blending uses paced(1), which is e here, so no in-between stops are played, as the stepgen docstring says. Frames r5_w1000_fwd42c_0000..1000 and back42c_* show the module, Nano Board, USB cable and wires fading out on the bench and back in over H4. H4, H13 and the two displays stay solid.",
+     "motioncheck.py (line 148) and check_caps.py (line 135) skip a done view with reappear, the same way they already skip a cut view. Steps 42 (hover, 41c to 42) and 43 are still checked.",
+     "The README's view counts (PMG 99, MRA 211/151, RCC 61/42, LAC 116, LSM 82) match the current steps files. No other guide uses reappear. No view in any kit has a null wire, so routes[to.wires[w]] in the reappear filter cannot be handed a null."
+    ],
+    "findings": [
+     {
+      "id": "F1",
+      "severity": "medium",
+      "where": "PMG Build Instructions/README.txt:283",
+      "title": "Unfilled placeholder in the fifth round's Checked line",
+      "evidence": "README line 283 reads \"the run-through on all 99 views in the kit and @PUBLISHED5@\". The token was never replaced. As written, the README records a check of the published copy (round 4's line named the test website and release r8) whose target is a placeholder, so it is not clear that the check was run.",
+      "suggestion": "After publishing to share/Test guides preview, put in the real wording (e.g. \"as published to the test website (http://localhost:8799, release r9)\"), or remove the claim if the published copy was not checked.",
+      "verdict": {
+       "real": false,
+       "severity": "low",
+       "reason": "The token is really there. Line 283 of /Users/lee-johnson/Desktop/Claude_Cadasio/PMG Build Instructions/README.txt reads \"the run-through on all 99 views in the kit and @PUBLISHED5@\". Round 4's line 257 has real wording in that place (\"as published to the test website (http://localhost:8799, release r8)\").\n\nIt is a deliberate marker for a step that has not run yet, not a false claim:\n- The test website has no round-5 PMG release. In share/Test guides preview/releases/piano-memory-game-full-build/ the newest release is r9, published 13:12:55 with the note \"the player: title page, framing, embedded pills\". Its steps.json has no \"reappear\" key (grep count 0). The kit's current steps.json has 2 and was written later, at 13:16.\n- The README was written at 13:21, after r9.\n- Publishing to the test site is under way right now: releases/.lock is dated 13:36 and other guides' release folders were updated at 13:18 to 13:36.\n- The @...@ form is a fill-in template marker, so the publish and its run-through come later in the workflow and the wording gets filled in then.\n\nThe marker does not affect any student. Nothing that regenerates or publishes a guide reads README.txt, and it is not part of the published guide. It also has nothing to do with Lee's three requests (title page shift, close-ups on Steps 21-25, Step 42 reappear). It would only matter if the round were reported to Lee with the marker still in place. That is a reminder for the orchestrator to fill it in after the publish, not a defect in the change under review."
+      }
+     },
+     {
+      "id": "F2",
+      "severity": "low",
+      "where": "CLAUDE.md:82-84; docs/cadasio-patterns.md:389 (section 14, Wiring row); PMG README.txt:272-273; tools/stepgen.py:1299-1301; player.js:836-838",
+      "title": "Docs say this matches the published guides' cross-fade, but the player fades one after the other (and says 'onto H4' for a step that holds it over H4)",
+      "evidence": "CLAUDE.md says \"as the published guides move wired things\", the rulebook \"as the published guides move wired things (section 4)\", and the README \"The published guides move wired things so too (rulebook section 4: complete copies cross-fade)\". Section 4 and the evidence file say Cadasio cross-fades the two copies together within one 800 ms step (show=fade/hide=fade on 1037 of 1037). The player does it in sequence: 800 ms fading out at the old place, then 800 ms fading in at the new (player.js:845, 860). In r5_w1000_fwd42c_0500.png neither copy is on screen: no module, Nano Board, USB cable or wires. Separately, CLAUDE.md ('the I/O module onto H4'), stepgen and player.js ('lifted onto H4') and the rulebook describe Step 42 as putting the module onto H4. Step 42 holds it over H4; Step 43 lowers it onto H4 (README:271).",
+      "suggestion": "Write it as \"fade out, then fade in (the published guides cross-fade the two copies at once)\", or drop the comparison. Say 'over H4' / 'held over H4'.",
+      "verdict": {
+       "real": false,
+       "severity": "low",
+       "reason": "The facts check out, but this is wording in internal docs and comments. It changes nothing a student sees and nothing Lee asked for.\n\n(1) The published guides cross-fade at once and the player fades one after the other. Rulebook line 79 says Cadasio swaps complete copies by cross-fade. The evidence file says show=fade and hide=fade within one 800 ms step on all 1037 steps. player.js:844 makes the reappear step 2 x FADE_MS long, and line 858 holds the motion at its start for the first FADE_MS and at its end for the second. So the player fades out first, then fades in. In r5_w1000_fwd42c_0500.png only H4/H13, the dot matrix and the display are on screen. The module, the Nano Board, the USB cable and the wires are all gone. Saying \"as the published guides move wired things\" (CLAUDE.md:83, rulebook:389) is therefore loose. Its gist still holds: in both, wired things are faded rather than tweened. The README (272-273) also gives the exact timing (\"one beat, 0.8 s ... a beat\") next to \"complete copies cross-fade\", so a careful reader can see the difference.\n\n(2) \"onto H4\" is wrong for Step 42. steps.json gives Step 42/42c as \"hold it over the back of H4\" and Step 43 as \"Lower the I/O module onto the back of H4\". CLAUDE.md:83-84, rulebook:389, stepgen.py:1299 and player.js:836 say \"onto H4\". The README (271) correctly says \"held over H4\". All four slips are in authoring docs and code comments. The step text students read is right.\n\nWhat Lee asked for, a fade and reappear for Step 42 only, is what the player does. A wording fix would be good tidy-up, but it does not meet the bar of mattering to a student or to Lee's request."
+      }
+     },
+     {
+      "id": "F3",
+      "severity": "low",
+      "where": "player/js/player.js:841-842",
+      "title": "The rule for which parts fade compares pose strings, so parts that stay put can fade too",
+      "evidence": "`same = (a, b) => JSON.stringify(a || ZERO) === JSON.stringify(b || ZERO)` compares start[id], the live pose from the last animation, with the stored end pose. Live poses of turned parts, and of anything riding on a turned part, come from mixPose/composePose: full-precision floats, a recomputed axis, and `at` set to the bounding-sphere centre. Stored offsets are rounded. So a part that does not move can count as changed. Example: the dot matrix's five device-end caps (NAUO134-138) ride on NAUO81 at [0,0,0], and their 42 and 42c offsets are identical ({'t': [111.28, -29.98, 145.85], 'r': [0,0,1,40.0004], 'at': [537.09, 959.56, 1218.77]} for NAUO134). They still fade out and back in at the same spot: semi-transparent in fwd42c_0300, bare grey pins in 0500, back in 0700. The button wires' far-end caps (riding on buttons at ZERO) compare equal and stay solid. Harmless in Step 42, because those wires fade anyway. But the documented rule is 'parts whose pose differs', and in another kit a still part with a turned pose would blink out and back.",
+      "suggestion": "Decide by distance, as awayTiming already does: !same becomes poseGap(start[id], end[id]) > 1e-3, or compare from.offsets[id] with to.offsets[id].",
+      "verdict": {
+       "real": false,
+       "severity": "none",
+       "reason": "The mechanism is real, but it does no harm here. player.js:841-842 compares poses as JSON strings. start[id] is liveOffsets from the last animation (player.js:752). For a part riding on a turned carrier, that pose is rebuilt by composePose (player.js:69-80) with full floats and `at` set to the part's sphere centre, so it never matches the rounded stored offset. In steps.json, Step 42 (view 84) and Step 42c (view 85) store the same offsets for the dot matrix's device-end caps NAUO134-138 (riding NAUO81, turned 40 deg) and for the 4-digit display's caps NAUO259-262 (riding NAUO79, turned 40 deg). Even so, these caps would fade. r5_w1000_fwd42c_0500.png shows the dot matrix with bare pins where 0000 shows the black cap housing. Nothing else that stays put is affected. NAUO79 and NAUO81 ride NAUO63 at ZERO, and composePose then returns the stored pose itself, so they compare equal and stay solid in 0500. Every cap that fades belongs to a jumper wire whose route changes in 42c: 'dot matrix display VCC/GND/DIN/CS/CLK' and the '4-digit display' wires are all in the changed-wire list, so they fade too. Each jumper (wire and cap) therefore fades out and back in as one unit. Leaving the caps solid would show loose caps on the pins with no wire for 0.8 s, which looks worse. The finding admits it is harmless in Step 42. Its other case, a still part in another kit, is hypothetical: Lee asked for this \"for this step only\", and the README (line 278) says no other guide uses `reappear`. The README's wording, \"what changes place, and its wires\", is slightly loose but shows nothing wrong to a student or to Lee."
+      }
+     },
+     {
+      "id": "F4",
+      "severity": "low",
+      "where": "player/js/player.js:753-759 with 860",
+      "title": "Next or Prev in the first 0.8 s of the fade makes the wired module glide through the wires",
+      "evidence": "During the first half of the reappear animation, km = e = 0, so liveOffsets hold the bench poses. If the student presses Next to Step 43 before 800 ms, go() clears the fades (line 753) and takes start[id] = liveOffsets[id] (line 759). Step 43 then opens with the module, its riders and its wires fully solid, gliding in 800 ms from the bench to the held pose, with the wires blending from 42c's held routes. That is the passage through the wires that reappear was added to avoid. Prev during the first half of the backward fade does the same from the held pose into 41c.",
+      "suggestion": "In go(), when the animation being cut short has anim.reappear, take start from that animation's end pose (anim.end / the reappear view's offsets) rather than liveOffsets.",
+      "verdict": {
+       "real": true,
+       "severity": "low",
+       "reason": "I tried to refute this by reading the code and could not. In /Users/lee-johnson/Desktop/Claude_Cadasio/player/js/player.js:\n\n- Nothing blocks a click while a step is still playing. Line 1215 is `$('next').onclick = () => go(cur + 1)`, line 1216 is the same for Prev, and line 1237 does the same for the arrow keys.\n- For the first FADE_MS (800 ms) of a reappear animation, stepAnimation() sets km = e = 0 (line 860). So liveOffsets (line 863) holds the start poses. The riders get the same treatment through composePose and `was`, since paced(1) returns e = 0.\n- steps.json, views 84-86: on Step 42 and 42c, NAUO78 (the I/O module) rides on NAUO63. Its pose is the bench pose on Step 42 (a 120\u00b0 turn) and [0, 102.3, 0.2] on Step 42c. On Step 43 it is a hover view with moving = [NAUO78] and the same offset [0, 102.3, 0.2].\n\nWhat happens if Next is pressed to reach Step 43 during the fade-out:\n- go() clears the fades (line 753), so the faded parts and wires turn solid at once.\n- was(NAUO78) is true, so start = liveOffsets, which is still the bench pose (line 759).\n- The step is done-to-hover, so it gets no `ways`. The block at line 787 skips NAUO78 because it was already on screen.\n- So stepAnimation() runs mixPose(bench, held, e) over 800 ms. The Nano, plug and caps follow it as riders. The wires stay tied to their ends by skinned(), so they stretch and bend with the module.\n\nPrev in the first 800 ms of going back from Step 42c to Step 42 does the same in reverse. liveOffsets holds the pose over H4, and go(41c) (from a hover view, so no ways) glides the module from there to the bench.\n\nThe turnAround handling (line 715) covers only deconstruction (`away`) steps, not reappear. The README's fifth-round section describes only the uninterrupted fade (\"going back, the same the other way\"), not this case.\n\nSo a student who presses Next twice quickly (or holds the arrow key) sees the module and its wires pop solid and swing through each other: the motion Lee asked this step to replace. This only happens within 0.8 s of the previous press, so it is minor. The suggested fix (start from the reappear view's end poses when such an animation is cut short) fits the code."
+      }
+     }
+    ],
+    "unverified": [
+     {
+      "id": "F5",
+      "severity": "low",
+      "where": "PMG Build Instructions/guide.py:591, 600; README.txt:266-268; docs/cadasio-patterns.md (section 6, in-house 2026-10-21)",
+      "title": "The close-ups' right-hand side for Steps 21c-25c is described as a choice but is not pinned",
+      "evidence": "MATRIX_CLOSE_UP = True, so the 21c-25c insets in steps.json carry no 'side'. The player picks 'the side of the model with the most room' (buildInset, player.js:516-519: room = {right, left, top, bottom}). The README says \"on the right both devices stay in view at every window size\", and the rulebook records a deliberate exception: \"on the other side, its leader along the module's edge\". The saved evidence covers four landscape widths (r5_w760/1000/1440/1920). In a portrait frame (a phone in the LMS iframe), bottom or top can have the most room, and the close-up is then centred over or under the pin.",
+      "suggestion": "Set MATRIX_CLOSE_UP = 'right' (wire_step already takes a side string; Step Nc has no labels for it to dodge), or change 'at every window size' to the sizes actually checked."
+     },
+     {
+      "id": "F6",
+      "severity": "low",
+      "where": "PMG Build Instructions/README.txt:281-283",
+      "title": "The title-page sizes listed as checked don't match the saved pictures",
+      "evidence": "The README says the title page was checked \"at 1440 x 900, 1000 x 690, 830 x 460, 700 x 650 and 375 x 812\" (the same list as commit a59ae16's message). docs/research/pmg/round5/verify/raw holds r5_title at 1440x900, 1440x714, 1000x634, 1920x1000, 760x720 and 375x812. There is no picture at 1000x690, 830x460 or 700x650. 830x460 is the short, wide frame where the title box limits the framing most.",
+      "suggestion": "List the sizes actually checked this round, or save the 830x460 / 700x650 / 1000x690 pictures alongside the others."
+     },
+     {
+      "id": "F7",
+      "severity": "low",
+      "where": "docs/research/pmg/scripts/check_motion.py (view loop, about lines 118-151)",
+      "title": "The PMG's own motion check was not given the reappear skip",
+      "evidence": "The README (HOW IT WAS MADE, line 299: \"during the motions: check_motion.py\") and the CLAUDE.md layout entry name check_motion.py as the PMG's motion check. Only tools/motioncheck.py and check_caps.py got `if v.get('reappear') and v.get('kind') == 'done': continue`. Run on \"Step 42c\", check_motion.py still blends each riding part from its 42 pose to its 42c pose (line 141: through([was, *via, pose], k)), so it would report contacts for a straight glide the player no longer plays.",
+      "suggestion": "Add the same skip to check_motion.py, or drop it from the README and CLAUDE.md as superseded by tools/motioncheck.py."
+     },
+     {
+      "id": "F8",
+      "severity": "low",
+      "where": "tools/stepgen.py:632-633 (Guide docstring, start_view)",
+      "title": "stepgen's description of start_view shift no longer matches what the player does with it",
+      "evidence": "The docstring says shift is \"how far, in radii, the player moves the view sideways to leave room for the title\". Since a59ae16 the player only prefers it among equally large framings (player.js:310-317, nudge = 0.002 * |sr - prefer|) and picks whatever shift makes the model biggest. That is why the MRA's shift=0 title page still sits right of the middle. guide.py's new comment (1226-1227) describes it correctly. This round is the first to set a non-zero shift on a dir/target/radius start_view, so the stale docstring now misleads about a value in use.",
+      "suggestion": "Reword the docstring: 'shift: the sideways placement, in radii, the player prefers among framings that show the model equally large (0: centred)'."
+     }
+    ]
+   }
+  ]
+ },
+ "workflowProgress": [
+  {
+   "type": "workflow_phase",
+   "index": 1,
+   "title": "Review"
+  },
+  {
+   "type": "workflow_phase",
+   "index": 2,
+   "title": "Verify"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 1,
+   "label": "review:requests",
+   "phaseIndex": 1,
+   "phaseTitle": "Review",
+   "agentId": "ac57cf6c3adc89ad1",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792603420067,
+   "queuedAt": 1792603420041,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604019090,
+   "tokens": 249792,
+   "toolCalls": 83,
+   "durationMs": 599022,
+   "resultPreview": "{\"met\":[\"Title page, the model now sits right of the middle like the MRA's. I measured the model's pixel extent in each picture (folder docs/research/pmg/round5/verify/raw). At 1440x900 its middle is 62.3% across (before_title_1440x900.png: 44.6%; the MRA's mra_title_1440x900.png: 63.1%). At the other sizes: 1920x1000 60.3%, 1440x714 59.4%, 1000x634 61.9%, 760x720 68.1%. The model's height on scre\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 2,
+   "label": "review:player",
+   "phaseIndex": 1,
+   "phaseTitle": "Review",
+   "agentId": "a502e1d5b1622c569",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792603420067,
+   "queuedAt": 1792603420041,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604202953,
+   "tokens": 216464,
+   "toolCalls": 49,
+   "durationMs": 781695,
+   "resultPreview": "{\"met\":[\"Other kits are unaffected. The new paths only run when `rv` is set (player.js:839), and no other steps file has `reappear`. Counts per file: LAC, LSM, MRA steps and steps-deconstruction, RCC steps and steps-deconstruction all 0; the PMG steps.json has 2 (views 84 'Step 42' and 85 'Step 42c'). Without `reappear` the code behaves exactly as before: `ec = e` (858), `shown` stays null (891), \u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 3,
+   "label": "review:generator",
+   "phaseIndex": 1,
+   "phaseTitle": "Review",
+   "agentId": "ad5cfdfce6956ca00",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792603420067,
+   "queuedAt": 1792603420041,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604173580,
+   "tokens": 254306,
+   "toolCalls": 73,
+   "durationMs": 752322,
+   "resultPreview": "{\"met\":[\"Title page: steps.json Start camera is unchanged except for \\\"shift\\\": 0.7 (dir/target/radius identical to HEAD). guide.py:1228 passes it through, stepgen.py:1961 writes it, and player.js:310-317 uses it only for the title page (title = view.kind === 'start') as a tie-break among equally large framings. Pictures: r5_title_1440x900.png has the model's middle at about 62% across (before_tit\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 4,
+   "label": "verify:requests:F1",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a08ca9f079f0b5061",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604021960,
+   "queuedAt": 1792604021940,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "medium",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604057677,
+   "tokens": 94066,
+   "toolCalls": 11,
+   "durationMs": 35716,
+   "resultPreview": "{\"real\":true,\"severity\":\"medium\",\"reason\":\"I checked this and could not refute it. The Step 22c pictures were saved at 13:22, after steps.json was written at 13:16, so they show the current guide. In r5_w760, r5_w1000 and r5_w1920_Step22c.png the close-up is almost all a flat brown band, the VCC wire, with the green GND wire curving across the top. The red box sits in the middle of the brown, with\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 5,
+   "label": "verify:requests:F2",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "ad8647834516988dc",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604021960,
+   "queuedAt": 1792604021940,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604081345,
+   "tokens": 99332,
+   "toolCalls": 10,
+   "durationMs": 58266,
+   "resultPreview": "{\"real\":true,\"severity\":\"low\",\"reason\":\"Confirmed. In player/js/placed() the camera itself moves: both the target and the camera move by `by` = shift x radius (0.7 x 150.5 = about 105 mm along dir x up), and the camera keeps its direction. This is not a pan of the picture. The model is now seen from a different place, so the parallax and what is hidden change. The pictures show it plainly. In befo\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 6,
+   "label": "verify:requests:F3",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "ae1ce4eb9f7f59ff4",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604021960,
+   "queuedAt": 1792604021940,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "none",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604055804,
+   "tokens": 87130,
+   "toolCalls": 6,
+   "durationMs": 32724,
+   "resultPreview": "{\"real\":false,\"severity\":\"none\",\"reason\":\"The finding's facts hold, but the docs already describe the motion accurately, so this is not a real defect.\\n\\nWhat the finding gets right: player/js/player.js:860 holds the motion at its start for the first FADE_MS while the parts fade out, then at its end for the second FADE_MS while they fade in. One copy is gone before the other appears. r5_w1000_fwd4\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 7,
+   "label": "verify:requests:F4",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a5a01edff9ce6188a",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604021961,
+   "queuedAt": 1792604021940,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604056590,
+   "tokens": 82207,
+   "toolCalls": 5,
+   "durationMs": 33510,
+   "resultPreview": "{\"real\":false,\"severity\":\"low\",\"reason\":\"Both facts are true, but neither is a defect yet, and neither affects a student or what Lee asked for.\\n\\n1. The README token is real. \\\"PMG Build Instructions/README.txt\\\" line 283 contains \\\"@PUBLISHED5@\\\". It is an @NAME@ marker for a step that has not run yet, not a forgotten edit. Round 4's text, in the same diff, says \\\"as published to the test websit\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 8,
+   "label": "verify:generator:F1",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a091a978e1f967dce",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604175696,
+   "queuedAt": 1792604175689,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604207807,
+   "tokens": 83249,
+   "toolCalls": 6,
+   "durationMs": 32110,
+   "resultPreview": "{\"real\":false,\"severity\":\"low\",\"reason\":\"The token is really there. Line 283 of /Users/lee-johnson/Desktop/Claude_Cadasio/PMG Build Instructions/README.txt reads \\\"the run-through on all 99 views in the kit and @PUBLISHED5@\\\". Round 4's line 257 has real wording in that place (\\\"as published to the test website (http://localhost:8799, release r8)\\\").\\n\\nIt is a deliberate marker for a step that ha\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 9,
+   "label": "verify:generator:F2",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a5146cb267a776fa0",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604175696,
+   "queuedAt": 1792604175690,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604218915,
+   "tokens": 92363,
+   "toolCalls": 6,
+   "durationMs": 43216,
+   "resultPreview": "{\"real\":false,\"severity\":\"low\",\"reason\":\"The facts check out, but this is wording in internal docs and comments. It changes nothing a student sees and nothing Lee asked for.\\n\\n(1) The published guides cross-fade at once and the player fades one after the other. Rulebook line 79 says Cadasio swaps complete copies by cross-fade. The evidence file says show=fade and hide=fade within one 800 ms step \u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 10,
+   "label": "verify:generator:F3",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "ad1b552c9d888955c",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604175696,
+   "queuedAt": 1792604175690,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "none",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604246842,
+   "tokens": 104101,
+   "toolCalls": 10,
+   "durationMs": 71143,
+   "resultPreview": "{\"real\":false,\"severity\":\"none\",\"reason\":\"The mechanism is real, but it does no harm here. player.js:841-842 compares poses as JSON strings. start[id] is liveOffsets from the last animation (player.js:752). For a part riding on a turned carrier, that pose is rebuilt by composePose (player.js:69-80) with full floats and `at` set to the part's sphere centre, so it never matches the rounded stored of\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 11,
+   "label": "verify:generator:F4",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a01bda6005d51f34f",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604175696,
+   "queuedAt": 1792604175690,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604301466,
+   "tokens": 109668,
+   "toolCalls": 12,
+   "durationMs": 125766,
+   "resultPreview": "{\"real\":true,\"severity\":\"low\",\"reason\":\"I tried to refute this by reading the code and could not. In /Users/lee-johnson/Desktop/Claude_Cadasio/player/js/player.js:\\n\\n- Nothing blocks a click while a step is still playing. Line 1215 is `$('next').onclick = () => go(cur + 1)`, line 1216 is the same for Prev, and line 1237 does the same for the arrow keys.\\n- For the first FADE_MS (800 ms) of a reap\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 12,
+   "label": "verify:player:F1",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "a0ea9aebf8ab492b8",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604204940,
+   "queuedAt": 1792604204930,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604314610,
+   "tokens": 109501,
+   "toolCalls": 12,
+   "durationMs": 109668,
+   "resultPreview": "{\"real\":false,\"severity\":\"low\",\"reason\":\"The code path is as described, but in this guide its only visible effect is harmless, so the finding does not hold up as a defect.\\n\\nWhat I confirmed:\\n- player/js/player.js:841-842 picks the parts to fade by comparing JSON text. `start[id]` comes from the previous frame's `liveOffsets` (line 759). In steps.json, Step 42 and Step 42c (views 84/85) give the\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 13,
+   "label": "verify:player:F2",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "aa7a4b584af612991",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604204941,
+   "queuedAt": 1792604204931,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "low",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604393358,
+   "tokens": 123491,
+   "toolCalls": 14,
+   "durationMs": 188412,
+   "resultPreview": "{\"real\":false,\"severity\":\"low\",\"reason\":\"The code reading is correct, but this is how the player already handles any step that is interrupted. The reappear change does not introduce it, and makes this step less exposed to it than round 4 was.\\n\\nWhat I confirmed in /Users/lee-johnson/Desktop/Claude_Cadasio/player/js/player.js:\\n- Next (line 1215) and ArrowRight (line 1237) call go() at once, with \u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 14,
+   "label": "verify:player:F3",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "acab259e99820d9dd",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604204941,
+   "queuedAt": 1792604204931,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "none",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604227883,
+   "tokens": 86018,
+   "toolCalls": 4,
+   "durationMs": 22937,
+   "resultPreview": "{\"real\":false,\"severity\":\"none\",\"reason\":\"The code reading is roughly right, but nothing reaches a student and nothing touches Lee's request.\\n\\nThe finding itself says none of the five cases happens on Step 42. I checked that against the files and it holds:\\n\\n- **Only Step 42 uses it.** Steps 42 and 42c (views 84 and 85 in \\\"PMG Build Instructions/steps.json\\\") are the only views with reappear.\\\u2026"
+  },
+  {
+   "type": "workflow_agent",
+   "index": 15,
+   "label": "verify:player:F4",
+   "phaseIndex": 2,
+   "phaseTitle": "Verify",
+   "agentId": "ae37c96c3c3e58fcc",
+   "model": "claude-opus-5-5",
+   "state": "done",
+   "startedAt": 1792604204941,
+   "queuedAt": 1792604204931,
+   "attempt": 1,
+   "lastToolName": "StructuredOutput",
+   "lastToolSummary": "none",
+   "promptPreview": "You are reviewing changes to TechBox's in-house 3D build guides (repository /Users/lee-johnson/Desktop/Claude_Cadasio; CLAUDE.md explains\nthe project). The guide is the Piano Memory Game (PMG), folder \"PMG Build Instructions\". Lee (who reviews the guides; use they/them) asked,\nverbatim:\n\n\"The Starting image has the model a little too far to the left - it's even past the center of the screen. Let's\u2026",
+   "promptFramed": true,
+   "lastProgressAt": 1792604232159,
+   "tokens": 87346,
+   "toolCalls": 6,
+   "durationMs": 27213,
+   "resultPreview": "{\"real\":false,\"severity\":\"none\",\"reason\":\"The gap is real, but it is not a defect. player/js/runthrough.js does check reappear steps only at rest. Its mid-animation block, from line 62 on, runs only for views with `leaving`. But every case the finding names is hypothetical (\\\"if `faded` lost...\\\", \\\"if steps.json lost `reappear`\\\"). None of them happens in the current code. In the player.js diff, \u2026"
+  }
+ ],
+ "totalTokens": 1879034,
+ "totalToolCalls": 307
+}

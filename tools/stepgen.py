@@ -629,8 +629,9 @@ class Guide:
         code, seated): the camera then prefers a side from which the codes of the parts coming in can be read.
         hero_azimuth: the side the title page and the finished model are seen from (degrees about the vertical; 0 = from +Z).
         start_view: the title page's camera, when it should differ from the finished model's view: dict(azimuth=,
-        elevation=, zoom=) (zoom < 1 is closer), or exactly dict(dir=, target=, radius=, shift=) (shift: how far, in
-        radii, the player moves the view sideways to leave room for the title; 0 for a camera taken from a screenshot).
+        elevation=, zoom=) (zoom < 1 is closer), or exactly dict(dir=, target=, radius=, shift=) (shift: the sideways move, in
+        radii, the player prefers among framings that show the model as big; it moves the camera, so the model is seen from a
+        little round: the PMG's turns dir back to keep its look; 0 for a camera taken from a screenshot).
         min_aspect: the narrowest frame (width / height) that camera suits; on narrower ones the player uses the finished
         model's camera instead, or otherwise=dict(dir=, target=, radius=, shift=) if given. otherwise=[camera, ...] (closest
         first) instead: the generator works out where the parts reach on screen with each of them and with the finished
@@ -1215,7 +1216,7 @@ class Guide:
               appear_after=(), appear=(), staged=False, lines=True, lines_to=None, lines_at=None, axial=False, eye=(),
               focus=None, focus_pad=1.6, wires=None, wires_done=None, ride=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
               caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False,
-              ride_beats=False, labels_done=None):
+              ride_beats=False, labels_done=None, reappear=False):
         """Add one part (or move one sub-assembly) into place. With no `move`, a step where only wires change.
 
         move:       ids that travel in this step (new parts appear hovering; parts already on screen move as a group).
@@ -1296,6 +1297,9 @@ class Guide:
         labels_done: labels on Step Nc, once the step has played: ids, {id: text} or dicts, as `labels` (an anchor is found where none
                     is given): the PMG's push buttons named by colour once they are in the case upside down and only their backs show
                     (Lee, 20 Oct 2026). Step N keeps its own `labels`. Not on a single=True step (it has no Step Nc).
+        reappear:   True for a step whose way could not be shown cleanly: nothing moves; what changes place, and its wires, fade out
+                    where they are and fade in where they end, a beat each (the PMG's Step 42, the I/O module lifted onto H4 with all
+                    its wires: Lee, 21 Oct 2026, that step only). Its ride=, paths= and wires_done= in-between stops are not played.
         """
         if self.taken:
             raise ValueError('place(): a deconstruction guide takes parts off (remove(), unplug(), lift()); it puts nothing on')
@@ -1357,7 +1361,7 @@ class Guide:
         self._record(caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                      wires, wires_done, lines_at is not None, riders=riders, ride=ride, stops=stops, frame=frame, look_from=look_from, flip=flip, view_dir=view_dir, paths=paths,
                      caution=caution, arrows=arrows, inset=inset, wiggle=wiggle, one_off_camera=one_off_camera, single=single, ghost=ghost,
-                     own_frame=own_frame, ride_beats=ride_beats, labels_done=labels_done)
+                     own_frame=own_frame, ride_beats=ride_beats, labels_done=labels_done, reappear=reappear)
 
     @staticmethod
     def _arrow_dims(reach, size):
@@ -1486,7 +1490,7 @@ class Guide:
     def _record(self, caption, move, show, appear, new, path, anchors, labels, eye, review, staged, appear_after, auto, free, focus, focus_pad,
                 wires, wires_done, by_hand, from_hand=False, riders=None, ride=None, stops=None, frame=None, look_from=None, flip=False, view_dir=None, paths=None,
                 caution=None, arrows=None, inset=None, wiggle=False, one_off_camera=False, single=False, ghost=None, own_frame=False,
-                ride_beats=False, labels_done=None):
+                ride_beats=False, labels_done=None, reappear=False):
         if single and labels_done:
             raise ValueError('labels_done= labels Step Nc, and a single=True step has none')
         riders = dict(riders or {})
@@ -1516,6 +1520,7 @@ class Guide:
                                caution=caution, arrows=list(arrows or []), inset=dict(inset) if inset else None, wiggle=bool(wiggle),
                                one_off_camera=bool(one_off_camera), single=bool(single), **({'ghost': {i: float(a) for i, a in ghost.items()}} if ghost else {}),
                                **({'own_frame': True} if own_frame else {}), **({'ride_beats': True} if ride_beats else {}),
+                               **({'reappear': True} if reappear else {}),
                                **({'labels_done': [dict(i) if isinstance(i, dict) else dict(id=i, text=(labels_done[i] if isinstance(labels_done, dict)
                                                                                                         else self.names.get(i, i))) for i in labels_done]}
                                   if labels_done else {})))
@@ -1880,6 +1885,8 @@ class Guide:
                 common['wiggle'] = True
             if s.get('ride_beats'):                                         # (a riding part's in-between places: a beat each)
                 common['ride_beats'] = True
+            if s.get('reappear'):                                           # (fades out where it was, in where it ends: see place())
+                common['reappear'] = True
             if s['stops'] and len(s['stops']) < len(s['path']):
                 common['stops'] = s['stops']
             if s['staged']:

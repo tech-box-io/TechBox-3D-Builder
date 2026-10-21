@@ -706,6 +706,9 @@ function go(i, animate = true) {
   i = Math.max(0, Math.min(views.length - 1, i));
   const from = views[cur], to = views[i], sameView = i === cur;
   const flying = new Set((anim && anim.leaving) || []);   // (parts still on their way out of a removal that is being played)
+  // (a `reappear` step cut short: as if it had played, so that the next step does not move its parts from where they were through
+  // everything, the very move the fade is there to avoid: a review, 21 Oct 2026)
+  if (anim && anim.reappear && liveOffsets) for (const id in anim.end) liveOffsets[id] = anim.end[id];
   // After the bench test is put away the build starts afresh: no part glides over from the view before (`cut`).
   if ((i === cur + 1 && to.cut) || (i === cur - 1 && from.cut)) animate = false;
   const forward = animate && i === cur + 1, backward = animate && i === cur - 1;
@@ -833,6 +836,17 @@ function go(i, animate = true) {
           cam: animate ? {p0: camera.position.clone(), t0: controls.target.clone(), p1: pose.position, t1: pose.target} : {p0: pose.position.clone(), t0: pose.target.clone(), p1: pose.position, t1: pose.target},
           world: turning ? {q0: w0.q.clone(), q1: w1.q.clone(), at0: (w0.q.angleTo(ONE) < 1e-6 ? w1.at : w0.at).clone(), at1: (w1.q.angleTo(ONE) < 1e-6 ? w0.at : w1.at).clone()} : null};
   if (!turning) turnWorld(w1.q, w1.at);
+  // A step that asks for it (`reappear`: the PMG's Step 42, the I/O module lifted onto H4 with all its wires, whose way there
+  // could not be shown without the wires passing through one another: Lee, 21 Oct 2026) does not move anything: what changes
+  // place, and its wires, fade out where they are, then fade in where they end, a beat each; back, the same the other way.
+  const rv = forward && from.kind === 'hover' && to.kind === 'done' && to.reappear ? to : backward && from.kind === 'done' && to.kind === 'hover' && from.reappear ? from : null;
+  if (rv && playing) {
+    const same = (a, b) => JSON.stringify(a || ZERO) === JSON.stringify(b || ZERO);
+    const parts = Object.keys(end).filter(id => !same(start[id], end[id]));
+    const wires = Object.keys(to.wires || {}).filter(w => (from.wires || {})[w] !== to.wires[w] || [routes[to.wires[w]].a, routes[to.wires[w]].b].some(e => parts.includes(e)));
+    anim.reappear = {parts, wires};
+    anim.dur = anim.moveDur = 2 * FADE_MS; anim.moveAt = 0;
+  }
   stage.invalidate();
 }
 const vA = new THREE.Vector3(), vB = new THREE.Vector3(), sA = new THREE.Spherical(), sB = new THREE.Spherical();
@@ -843,8 +857,11 @@ function stepAnimation(now) {
   if (!anim) return false;
   const t = Math.max(0, now - anim.t0);      // (a frame can be stamped just before the click)
   const k = anim.dur ? Math.min(1, t / anim.dur) : 1;   // the whole: the motion, and a fade before or after it
-  const km = anim.moveDur ? Math.min(1, Math.max(0, (t - anim.moveAt) / anim.moveDur)) : 1, e = ease(km);   // the motion
-  if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, e), aW.lerpVectors(w.at0, w.at1, e)); }
+  let km = anim.moveDur ? Math.min(1, Math.max(0, (t - anim.moveAt) / anim.moveDur)) : 1, e = ease(km);   // the motion
+  const ec = anim.reappear ? ease(k) : e;    // (the camera and the model's turn: over the whole, even where nothing moves)
+  let shown = null;                          // (`reappear`: where it was until half-way, then where it ends; how solid it is now)
+  if (anim.reappear && k < 1) { const half = t < FADE_MS; km = e = half ? 0 : 1; shown = half ? fadeCurve(t / FADE_MS) : 1 - fadeCurve((t - FADE_MS) / FADE_MS); }
+  if (anim.world) { const w = anim.world; turnWorld(qW.slerpQuaternions(w.q0, w.q1, ec), aW.lerpVectors(w.at0, w.at1, ec)); }
   liveOffsets = {};
   for (const id in anim.end) { const o = anim.ways[id] ? alongPath(anim.ways[id], km, anim.stops[id]) : mixPose(anim.start[id], anim.end[id], e); liveOffsets[id] = o; stage.setPose(id, o); }
   // Something passing through as many stretches as the step has beats keeps pace with the moving parts' stops, stop by stop: a
@@ -874,6 +891,10 @@ function stepAnimation(now) {
     for (const id in f.parts) stage.setFade(id, alpha(f.parts[id]));
     alphas = Object.fromEntries(Object.entries(f.wires).map(([w, at]) => [w, alpha(at)]));
   }
+  if (shown != null) {
+    for (const id of anim.reappear.parts) stage.setFade(id, shown);
+    alphas = Object.fromEntries(anim.reappear.wires.map(w => [w, shown]));
+  }
   // A part shown see-through on a view (`ghost`: {id: alpha}, to see what is behind it: the posts' tabs through D1 from below),
   // blending from the view before's value to this view's over the motion (a Step Nc without it: the part fades back to solid).
   const g0 = (anim.from && anim.from.ghost) || {}, g1 = anim.to.ghost || {};
@@ -884,19 +905,19 @@ function stepAnimation(now) {
   drawWires(flat(anim.to) ? {} : leads, liveOffsets, anim.from, we, anim.wireVia, alphas);
   if (anim.cam) {                            // swing around the target rather than cutting through the model
     const c = anim.cam;
-    controls.target.lerpVectors(c.t0, c.t1, e);
+    controls.target.lerpVectors(c.t0, c.t1, ec);
     vA.subVectors(c.p0, c.t0); vB.subVectors(c.p1, c.t1);
     if (k >= 1 || vA.length() < 1e-6) camera.position.copy(c.p1);
     else {                                   // turn about the vertical and tilt separately, so a big swing never goes over the top
       sA.setFromVector3(vA); sB.setFromVector3(vB);
       let turn = sB.theta - sA.theta;
       if (turn > Math.PI) turn -= 2 * Math.PI; else if (turn < -Math.PI) turn += 2 * Math.PI;
-      camera.position.setFromSphericalCoords(sA.radius + (sB.radius - sA.radius) * e, sA.phi + (sB.phi - sA.phi) * e, sA.theta + turn * e).add(controls.target);
+      camera.position.setFromSphericalCoords(sA.radius + (sB.radius - sA.radius) * ec, sA.phi + (sB.phi - sA.phi) * ec, sA.theta + turn * ec).add(controls.target);
     }
     camera.lookAt(controls.target);
   }
   if (k >= 1) {
-    const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade; anim = null;
+    const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade || !!anim.reappear; anim = null;
     if (gone) stage.setVisible(view.visible);   // (the parts taken off have gone)
     if (faded) stage.clearFades();
     for (const id in view.ghost || {}) stage.setFade(id, view.ghost[id]);   // (see-through as the view has it, once the step has played)
