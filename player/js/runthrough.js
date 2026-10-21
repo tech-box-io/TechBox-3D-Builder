@@ -24,7 +24,7 @@ window._runthrough = () => {
     const wantWires = view.kind === 'card' ? 0 : Object.keys(view.wires || {}).length;
     if (tubes !== wantWires) problems.push(`${tag} ${view.name}: ${tubes} wires drawn, expected ${wantWires}`);
     const texts = document.querySelectorAll('#overlay text').length, eyes = document.querySelectorAll('#overlay g').length;
-    const wantTexts = view.kind === 'hover' ? (view.labels || []).length : 0, wantEyes = view.kind === 'hover' ? (view.eye || []).length : 0;
+    const wantTexts = view.kind === 'hover' || view.kind === 'done' ? (view.labels || []).length : 0, wantEyes = view.kind === 'hover' ? (view.eye || []).length : 0;
     if (texts !== wantTexts || eyes !== wantEyes) problems.push(`${tag} ${view.name}: ${texts} labels and ${eyes} eyes, expected ${wantTexts} and ${wantEyes}`);
     const arrows = st.arrows.children.length, wantArrows = view.kind === 'hover' ? (view.arrows || []).length : 0;
     if (arrows !== wantArrows) problems.push(`${tag} ${view.name}: ${arrows} arrows, expected ${wantArrows}`);

@@ -5,8 +5,10 @@ part's in-between places included when the view says ride_beats; and as many mom
 crossing that lasts a tenth of a second). Lee's second round, 19 Oct 2026: in Steps 17 - 25 the module's cap passed through the I/O
 board and the Nano Board on its way to its pin, which the wire-only check did not see; an independent review (20 Oct) found crossings
 at the end of a beat that 19 even moments missed. A part's depth is how far a cap's corner is inside it (a thin board can only be
-entered by half its thickness: any entry is a pass-through). Large parts carried as riders (the module in Step 42) give false
-cap-against-wire hits: their box holds the wires.
+entered by half its thickness: any entry is a pass-through). A part riding unmoved on a part that moves (the Nano Board, the USB plug and
+the caps on the module as it is carried in Step 42) is tested against every part that does not move with it, the same moving carrier
+(round 3's review, 20 Oct 2026: they were not tested at all). A rider that carries others (the module, its caps on it) is not tested
+against the wires by its box, which holds theirs (false hits); the wires are tested against its mesh as against any part.
 
     .venv.nosync/bin/python docs/research/pmg/scripts/check_caps.py "PMG Build Instructions" [--samples 201] ["Step 18c" ...]
 """
@@ -92,6 +94,10 @@ def main(argv):
             return X @ np.linalg.inv(_matrix(ref)) if ref is not None else X
         A, B = mv(r.get('a'), r.get('a_ref')), mv(r.get('b'), r.get('b_ref'))
         wb = ramp(u)[:, None] if r.get('b') else np.zeros((len(p), 1))
+        if r.get('a_whole') is not None or r.get('b_whole') is not None:   # (wholly with a up to a_whole mm, with b from b_whole: player.js)
+            lo, hi = max(r.get('a_whole') or 0, r.get('b_from') or 0), r['b_whole'] if r.get('b_whole') is not None else s[-1]
+            t = np.clip((s - lo) / max(1e-6, hi - lo), 0, 1)
+            wb = (t * t * (3 - 2 * t))[:, None] if r.get('b') else np.zeros((len(p), 1))
         wa = 1 - wb if r.get('a') else np.zeros((len(p), 1))
         out = p.copy()
         for X, w, end in ((A, wa, p[0]), (B, wb, p[-1])):
@@ -159,15 +165,26 @@ def main(argv):
                 return M[pid]
             for pid in carry:
                 placed(pid)
+
+            def moved_on(pid):                     # (a rider moved to a new place on its carrier; one whose place is the same plays no
+                c = carry.get(pid)                 #  in-between places, in the player as here)
+                was = prior.get(pid, {}).get('pose') if c and prior.get(pid, {}).get('by') == c['by'] else None
+                return was is not None and was != c['pose']
+
+            def root(pid, depth=0):                # (the part whose move carries it: itself if it moves on its own, else its carrier's)
+                c = carry.get(pid)
+                if pid in ways or moved_on(pid):
+                    return pid
+                return root(c['by'], depth + 1) if c is not None and depth < 8 else None
             for pid, c in carry.items():           # (the moving caps against the parts on screen)
-                was = prior.get(pid, {}).get('pose') if prior.get(pid, {}).get('by') == c['by'] else None
-                if was is None or was == c['pose'] or pid not in model.inst:
+                if pid not in model.inst or root(pid) is None:
                     continue
+                fixed = not moved_on(pid)          # (riding unmoved on a moving carrier: against what does not move with it)
                 V = np.asarray(model.inst[pid].vertices)
                 V = V[::max(1, len(V) // 400)]
                 Wp = V @ M[pid][:3, :3].T + M[pid][:3, 3]
                 for part in v.get('visible', []):
-                    if part == pid or part.startswith('STEM_') or part not in model.inst:
+                    if part == pid or part.startswith('STEM_') or part not in model.inst or (fixed and root(part) == root(pid)):
                         continue
                     mesh, X = model.inst[part], M.get(part)
                     q = Wp if X is None else Wp @ np.linalg.inv(X)[:3, :3].T + np.linalg.inv(X)[:3, 3]
@@ -244,10 +261,11 @@ def main(argv):
                                 x = int(np.argmin(np.linalg.norm(pa + (pb - pa) * f - pt, axis=1)))
                                 traced[key] = f'leg {leg} f {f:.2f}: sample {x}/{len(pa)} from {pa[x].round(1).tolist()} to {pb[x].round(1).tolist()}'
             for pid, c in carry.items():           # (the moving caps against the other wires)
-                was = prior.get(pid, {}).get('pose') if prior.get(pid, {}).get('by') == c['by'] else None
-                if was is None or was == c['pose'] or pid not in model.inst:
+                if not moved_on(pid) or pid not in model.inst:
                     continue
                 lo, hi = model.inst[pid].bounds
+                if any(x.get('by') == pid for x in carry.values()):   # (it carries others: its box holds their wires; they are tested
+                    continue                                          #  against its mesh above)
                 Xi = np.linalg.inv(M[pid])
                 for w, pts in lines.items():
                     r = routes[(v.get('wires') or {})[w]]

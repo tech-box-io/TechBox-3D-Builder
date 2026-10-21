@@ -119,9 +119,19 @@ function skinned(route, poses, endsOnly = false) {
     const p = route.pts[i];
     let x = p[0], y = p[1], z = p[2];
     if (A || B) {
-      // how much this point goes with the part at the far end: none at all before `b_from` mm (a lead held in a slot there)
-      const u = route.b_from ? (route.s[i] * route.len - route.b_from) / Math.max(1e-6, route.len - route.b_from) : route.s[i];
-      const wb = route.b ? ramp(u) : 0, wa = route.a ? 1 - wb : 0;
+      // how much this point goes with the part at the far end: none at all before `b_from` mm (a lead held in a slot there); or,
+      // given `a_whole` / `b_whole` (mm from the first end), wholly with `a` up to the one and wholly with `b` from the other, so that a
+      // run lying over a part that turns turns with it (the PMG's Step 42: the dot matrix's wires over the module's USB plug)
+      let wb;
+      if (route.a_whole != null || route.b_whole != null) {
+        const lo = Math.max(route.a_whole || 0, route.b_from || 0), hi = route.b_whole != null ? route.b_whole : route.len;
+        const t = Math.min(1, Math.max(0, (route.s[i] * route.len - lo) / Math.max(1e-6, hi - lo)));
+        wb = route.b ? t * t * (3 - 2 * t) : 0;
+      } else {
+        const u = route.b_from ? (route.s[i] * route.len - route.b_from) / Math.max(1e-6, route.len - route.b_from) : route.s[i];
+        wb = route.b ? ramp(u) : 0;
+      }
+      const wa = route.a ? 1 - wb : 0;
       if (endsOnly) {
         if (dA && wa) { x += wa * dA[0]; y += wa * dA[1]; z += wa * dA[2]; }
         if (dB && wb) { x += wb * dB[0]; y += wb * dB[1]; z += wb * dB[2]; }
@@ -339,7 +349,7 @@ const labelsOf = view => showLabels ? (view.labels || []) : (view.labels || []).
 const BACKING = 'rgba(255,255,255,0.92)';
 function buildCallouts(view) {
   svg.replaceChildren(); callouts = [];
-  if (view.kind !== 'hover' || !(labelsOf(view).length || (view.eye && view.eye.length))) return;
+  if (!(view.kind === 'hover' || view.kind === 'done') || !(labelsOf(view).length || (view.eye && view.eye.length))) return;   // (Step Nc: labels_done)
   const W = stage.width, H = stage.height;
   camera.updateMatrixWorld(true);
   const {items, size, pad} = layoutCallouts(view, camera, W, H, {keepClear: onScreenInstructions});   // laid out once, for the view as the step opens
@@ -511,7 +521,7 @@ function speak() {
 for (const b of speakButtons) b.onclick = speak;
 function announce(view, i) {
   const where = view.kind === 'start' ? 'Title page' : view.kind === 'end' ? 'Completed View' : view.name;
-  const labels = view.kind === 'hover' ? labelsOf(view).map(l => l.text) : [];
+  const labels = view.kind === 'hover' || view.kind === 'done' ? labelsOf(view).map(l => l.text) : [];
   const words = view.kind === 'start' ? wordsOf(view) : view.parts ? `${view.parts.reduce((n, g) => n + g.items.length, 0)} kinds of part; the list is on the page.` : wordsOf(view);
   $('announce').textContent = `${where}, ${i + 1} of ${views.length}. ${words}${labels.length ? ` Labels: ${labels.join(', ')}.` : ''}`;
   canvasEl.setAttribute('aria-label', flat(view) ? 'No model on this page' : `3D view of the model, ${where}${labels.length ? ': ' + labels.join(', ') : ''}. Drag to turn it.`);
@@ -814,6 +824,7 @@ function stepAnimation(now) {
     if (faded) stage.clearFades();
     for (const id in view.ghost || {}) stage.setFade(id, view.ghost[id]);   // (see-through as the view has it, once the step has played)
     if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
+    else if (view.kind === 'done' && view.labels) buildCallouts(view);   // (labels on Step Nc, once it has played: the PMG's buttons in the case)
     if (view.inset) buildInset(view);
   }
   return true;
@@ -922,7 +933,7 @@ function renderThumb(i, size) {               // (size [w, h]: a picture of that
     const text = view.parts ? view.name : view.caption, list = !view.parts && text.includes('\n');
     ctx.fillStyle = '#111'; ctx.font = `600 ${list ? 13 : 22}px Arial, Helvetica, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; wrapText(ctx, text, W / 2, H / 2, W - 40, list ? 16 : 28);
   }
-  else if (view.kind === 'hover') { projWorld = turn; drawCalloutsOn(ctx, view, cam, W, H); projWorld = null; }   // (uses the same label switch as the main view)
+  else if (view.kind === 'hover' || (view.kind === 'done' && view.labels)) { projWorld = turn; drawCalloutsOn(ctx, view, cam, W, H); projWorld = null; }   // (uses the same label switch as the main view)
   if (size) return canvas;
   thumbs[i] = canvas.toDataURL('image/webp', 0.82);
   const img = grid.children[i] && grid.children[i].querySelector('img');

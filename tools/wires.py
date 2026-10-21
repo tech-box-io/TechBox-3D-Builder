@@ -13,7 +13,8 @@ import json
 import numpy as np
 
 
-def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False, spacing=None, tail_from=None):
+def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, fade=None, stretch=False, spacing=None, tail_from=None,
+          a_whole=None, b_whole=None):
     """A route as steps.json stores it.
 
     a, b: the part ids at the first and last point. The wire moves with them: the first part of its
@@ -37,6 +38,9 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
     bit keeps its distance from the last end instead of the first: the run from the first end to there (the same in both
     shapes) stays put, and so does the run at the far end, under the part it is carried by (the LSM's LED matrix, lifted and
     moved with its wires under it: Lee, 19 Oct 2026); what is longer in one shape than in the other is taken up between the two.
+    a_whole, b_whole: millimetres from the first point up to which the wire moves wholly with `a`, and from which wholly with `b`
+    (blending between; by default it blends along its whole length): a run that lies over a part as it turns, turned with it (the
+    PMG's Step 42: the dot matrix's wires over the module's USB plug, and the USB cable out of the plug, while the module turns).
     """
     out = dict(pts=np.round(np.asarray(points, float), 2).tolist(), a=a, b=b)
     if b_from:
@@ -54,6 +58,10 @@ def route(points, a=None, b=None, mark=None, a_at=None, b_at=None, b_from=None, 
         out['spacing'] = float(spacing)
     if tail_from is not None:
         out['tail_from'] = float(tail_from)
+    if a_whole is not None:
+        out['a_whole'] = float(a_whole)
+    if b_whole is not None:
+        out['b_whole'] = float(b_whole)
     return out
 
 

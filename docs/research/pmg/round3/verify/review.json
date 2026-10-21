@@ -1,0 +1,438 @@
+{
+ "about": "review of round 3, first try (20 Oct 2026): each reviewer's findings, and the second reviewers' verdicts on them (workflow output, as returned)",
+ "result": {
+  "results": [
+   {
+    "lens": "requests",
+    "met": [
+     "Request 1, Steps 19-20, the I/O module pin: met at all four sizes. At 760x720, 1000x634, 1440x714 and 1920x1000 the V9 leader ends on a bare pin just left of the black S9 cap, and the G9 leader ends on the pin at the board's outer edge beside the new purple VCC cap. Checked in raw/v4lbl_<size>_Step19.png and _Step20.png, zoomed 3-4x. The display's VCC pin end is also visible in Step 19. The loose wire, its eye and the VCC/GND labels are all in frame. (The display side of Step 20 and the display's printed back are not: see findings.)",
+     "Request 2, Step 33c: met at all four sizes and in the step-list picture (labels_w*.png, raw/v4lbl_w1440x714_Step33c.png, labels_steplist.png). Blue, White, Yellow and Black sit on the left, top to bottom, in the same order as the buttons. The four leaders run parallel and never cross, and each ends in a ring on its own button's back. The order agrees with the caption ('white next to the blue one, then yellow, then black nearest H3'). At 760x720 the labels lie over the case on white boxes and are still readable. The player change only adds the 'done' case to buildCallouts, announce and renderThumb, so hover views are unchanged.",
+     "Request 3, Step 37: met. The three lines now run unbroken across the tops of the yellow, white and blue caps to the H4 slots, exactly as Step 36's line runs across the black cap; before, they disappeared into the caps. Checked zoomed at 1920x1000, 1000x634 and 760x720 (raw/v4lbl_*_Step37.png against _Step36.png). steps.json guides: tip [590.2, 914.2, z] to mouth [587.4, 914.2, z], the same height as Step 36's H4 guide.",
+     "Request 4, Step 42: partly met. The A end no longer crosses the bench through the bundles: it rises, goes over the module and comes down beside it. From the new front-high camera the case hides the button wires behind H4 for most of the turn (motion_Step42c.png, motion_Step42c_w1000_caption.png). Not resolved: the A end goes under the caption box at the LMS's size, the cable still crosses the 4-digit display's wires in the last two beats, the module board passes through its own wires mid-turn, and the end picture is ambiguous. See findings.",
+     "No other regressions found. steps.json compared with HEAD view by view: only Steps 19, 19c, 20, 20c (camera), 33c (labels), 37 (guides) and 42/42c (camera, ride_beats, carry via, wire_via) changed. The labels and cameras of Steps 4-15 (up-right), 17-18, 21-25 (left/below) and 43 (Nano I/O Module, near-left) are unchanged, and every other view's wire geometry is identical once route indices are resolved. The one regression is the display's printed back in Steps 19-20 (finding below)."
+    ],
+    "findings": [
+     {
+      "step": "Step 42c (beats 7-8, t=0.75-1.0) and the Step 42c rest view",
+      "window": "all sizes (seen at 1920 and 1000x634)",
+      "problem": "The USB cable still passes through wires: in the set-down and slide-in beats it cuts through all four of the 4-digit display's wires, right beside the display's header. The step then comes to rest with the A end drawn over that header and its cable running down over the plug's own body, so it does not read as 'on the table behind the case'. This is the crossing Lee complained about, now confined to the end of the step, and the note to Lee (README third round) does not mention it; it mentions only the middle third of the turn.",
+      "evidence": "motion_check_201.txt: 'Step 42c 4-digit display VCC and usb cable centre lines 0.15 mm apart at 0.84, near [658.6, 923.9, 1247.9]', with DIO 0.33 at 0.84, GND 0.39 at 0.84 and CLK 0.43 at 0.92. Also at t=0.07 the cable passes 0.38-1.66 mm from five dot matrix wires (CS, GND, DIN, VCC, CLK near [653, 930, 1338.6]). raw/v4mot_Step42c_0875.png and _0938.png (zoomed): the cable descends through the yellow/black/pink display bundle. raw/v4mot_Step42c_0813.png: the cable laid along the hanging A plug. raw/v4mot_Step42c_1000.png: at rest the A end sits on the display's header, with the cable over the plug body.",
+      "severity": 2,
+      "fix": "In guide.py, Step 42's wires_done: the via points of usb_held('usb cable, the A end set down', USB_A_WAY[2], [[630,1080,1262],[672,1040,1250],[678,960,1249]]) bring the cable down at z~1249-1250, straight through the display wires' run (~[658, 924, 1248]). Move that descent beyond the display wires (z ~1230, or x >= 700). Set the A end down farther out (USB_A_WAY[2] = compose([45, 0, -12], ZERO, _mid_a)) so the slide-in stays under the wires (y < 915) the whole way. Settle the lifted cable against the matrix wires in lifted_layout(), as usb_held() does with R.settle(fixed=...), to clear t=0.07. Then run `tools/motioncheck.py 'PMG Build Instructions' 'Step 42c'` and expect no 'usb cable' lines. For the rest view, let usb_cable(MODULE_HELD, None) leave the A plug's back end towards the camera (-x) before rising to the module, so the cable does not lie over the plug. If the plug still overlaps the display header, turn view_dir about Y by 10-15 degrees and keep whichever direction separates them on screen. Tell Lee about the end beat."
+     },
+     {
+      "step": "Step 42c (beats 6-7, t~0.69-0.81: the A end at the top of its lift)",
+      "window": "1000x634 (LMS), 760x720, 1440x714; clipped at the top edge at 1920x1000",
+      "problem": "At the top of its lift the USB A end leaves the clear part of the frame. At the LMS's 1000x634 it passes under the caption box (raw/v4mot1000_Step42c_0690.png shows the plug washed out inside the box, and at 0.875 the cable's loop is still under it). At 1920 its tip touches the top edge of the canvas (in raw/v4mot_Step42c_0750.png the drawn content starts at y=0). The caption box covers the left 40% (1440) to 71% (760) of the width, and the peak is at 37-40% of the width, so at 760 and 1440 it is under the box too. The kit's own convention, used for the display caps in Steps 17-18, is to stay low enough to clear the caption box in the LMS's frame.",
+      "evidence": "Bounding boxes of the drawn content in raw/v4mot_Step42c_*.png: top y = 226 at 0.375, 46 at 0.688, 0 at 0.750. raw/v4mot1000_Step42c_0690.png: the A end overlaps the caption box (x 755-1170, y 20-165 of 1500x951). steps.json Step 42c carry NAUO283 via: lifted [-70.4, 179.3, 152.9] and carried over [32, 177, 0]. The carried-over centre is about 106 mm up the screen from the frame target, against a frame radius of 112: screen-up for view_dir [-0.5248, 0.848, -0.0738] is about [0.84, 0.53, 0.12].",
+      "severity": 2,
+      "fix": "In guide.py USB_A_WAY, drop the +32 mm x on the carried-over stop (compose([0.0, 177.0, 0.0], ZERO, _mid_a)); that alone is about 27 mm of screen height. Lower the lift and carry heights to just clear the module's top edge (the cable's 'over the top' via points are at y~1082). If the A end is still under the box, move Step 42's frame target about 20 mm up the screen, frame=([632, 1003, 1292], 112). Then check v4mot1000 and a 760x720 run at t=0.69-0.81: the plug's top must stay below the caption box's bottom edge."
+     },
+     {
+      "step": "Step 42c (beats 2-3, t~0.19-0.33: the module turning)",
+      "window": "all",
+      "problem": "In the middle of the turn the module's own board, with its header pins, passes 6.4-7.7 mm through every one of its 21 wires near the caps, and the wires dip about 1.4 mm into the module and up to 6.8 mm into the Nano Board. This adds to the button bundles passing one another. On screen the board is seen edge-on with loops of wire crossing in front of and behind it (raw/v4mot_Step42c_0313.png and _0375.png). The README reports only the bundles passing one another, which understates it.",
+      "evidence": "motion_check_201.txt: 'cap NAUO78 through wire 4-digit display GND 7.69 mm at 0.250', with the same for all 21 wires at 6.42-7.69 mm between 0.22 and 0.325. 'dot matrix display CLK into NANO 6.77 mm at 0.32'. 'wire into NAUO78' about 1.3-2.1 mm for 30 wires around 0.30. NAUO78 is MODULE (guide.py line 45).",
+      "severity": 2,
+      "fix": "Turn in smaller steps where the wire shapes change from one arrangement to the other. In guide.py, TURNING = [between(MODULE_LIFTED, MODULE_HELD, f, _mid_module) for f in (1/3, 1/2, 2/3)], and add a turning_layout() case for the half-way pose: carry the lifted shapes there, then settle them with settled(...) against the held shapes carried back. Extend _stages and the module's ride list to match. The overshoot from blending between carried shapes grows with the turn per beat (about r(1 - cos(angle/2))), so halving the turn per beat cuts the ~7.7 mm to about 2 mm. To keep the step near 6.4 s, the A end's 'lifted' and 'carried over' stops could become one beat. Re-run motioncheck and the ray test from the camera, and tell Lee what is left."
+     },
+     {
+      "step": "Step 20 (and 20c)",
+      "window": "all sizes",
+      "problem": "The display's destination pin (GND) cannot be seen. From DISPLAY_PINS_RUN the display's right-angle header is seen almost end-on: the caps already on it (CLK, DIO and now VCC) stack one in front of another, and the GND leader ends on the base of the purple VCC cap. The module pin was fixed, but the same problem now appears at the display end. Under DISPLAY_RUN all four header pins were seen side by side.",
+      "evidence": "raw/v4lbl_w1920x1000_Step20.png cropped at (1350-1460, 400-500) and enlarged 6x: the lowest cyan pixel of the GND leader is at (1387, 473), on the purple cap, and no bare pin shows below it. raw/v4lbl_w760x720_Step20.png shows the same. Compare round2/verify3/raw/v3mot_w1920_Step20c_100.png, where the four caps sit side by side on the printed header.",
+      "severity": 2,
+      "fix": "Re-run the ray test that found DISPLAY_PINS_RUN with more targets: V9, G9, the display's VCC and GND pin tips (pin_tip(DEV_CAP[wire])) and the caps already on the header, keeping only directions that see all of them. Start from a direction between the two runs, e.g. view_dir ~ [0.425, 0.897, 0.122] (the normalised sum of DISPLAY_RUN and DISPLAY_PINS_RUN). If no single camera works for both, give Step 20 its own camera via wire_step(camera=...)."
+     },
+     {
+      "step": "Steps 19-20",
+      "window": "all sizes",
+      "problem": "Regression of Lee's second-round request ('the Step 17-20 view showing the display's printed back'). From the new camera the display is seen nearly edge-on: the printed pin names (CLK, DIO, VCC, GND) next to its header are unreadable specks, and the display no longer looks like the board seen in Steps 17-18. This also breaks the in-house rule (rulebook section 13, Lee 2026-10-19) that a board whose pin names are printed on its back is wired from a camera that shows its back. The README tells Lee the opposite: 'framed a little wider so the display, its printed back and the loose wire fit'.",
+      "evidence": "raw/v4lbl_w1920x1000_Step19.png cropped at (1330-1800, 150-520): the blue PCB is a narrow strip and the printing is illegible. round2/verify3/raw/v3mot_w1920_Step19c_000.png: CLK/DIO/VCC/GND printing readable under DISPLAY_RUN. PMG README.txt, third-round paragraph.",
+      "severity": 2,
+      "fix": "Use the same camera search as the previous finding, and also require the display's printed back to face the camera: its normal within about 55-60 degrees of view_dir (DISPLAY_RUN is about 63 degrees from DISPLAY_PINS_RUN). If no direction sees V9/G9 and the printing together, keep the pin camera and say so to Lee as a trade-off. Either way, correct the README sentence."
+     },
+     {
+      "step": "Steps 19-20",
+      "window": "760x720 and 1000x634",
+      "problem": "Small layout problems from the new framing. (1) The display's top corner reaches under the caption box at 760x720 and just touches its edge at 1000x634. (2) The module_label 'up-left' carried over from DISPLAY_RUN puts V9/G9 on a white box over the blue button's board and wires, though there is white space to the left. (3) The eye ('near-below', reach 0.05) covers the lower half of the loose wire, including the cap that goes to V9/G9.",
+      "evidence": "raw/v4lbl_w760x720_Step20.png crop (480-800, 80-360): the display corner is above the caption box's bottom line. raw/v4lbl_w1000x634_Step19.png: display top at ~y 105-130 against the box bottom at ~130; V9 label at (400-485, 430-480) over the button board; eye at (870-970, 630-680) over the wire's lower end.",
+      "severity": 1,
+      "fix": "In guide.py, DISPLAY_PINS_RUN frame ([672, 905, 1262], 74) -> radius about 78, or move the target about 5 mm up the screen (about [-0.26, 0.64, -0.72] for this view_dir). For the VCC/GND wires pass module_label=dict(side='left', reach=0.10) and park eye_place=dict(side='near-right', reach=0.06), keeping DISPLAY_RUN's values for Steps 17-18."
+     },
+     {
+      "step": "Step 42 / 42c",
+      "window": "760x720",
+      "problem": "The dot matrix display runs off the right edge of the frame at the narrow window: radius 112 is fitted to the height, and the matrix lies far to the screen right.",
+      "evidence": "raw/v4lbl_w760x720_Step42.png: the matrix runs to x=1140 (the canvas edge) and its right-hand module is cut off.",
+      "severity": 1,
+      "fix": "Move Step 42's frame target a few mm towards the matrix (screen right), or raise the radius to about 120, and check 760x720 against 1000x634. Combine this with the frame change suggested for the A end's peak."
+     },
+     {
+      "step": "Step 33c (docs and process)",
+      "window": "n/a",
+      "problem": "Labels on a Step Nc break two written rules: 'Step Nc is clean' (rulebook section 2 line 45 and the wiring section, 'No annotation on Step Nc') and 'never a part name ... at most 2 labels'. Lee asked for this, but docs/cadasio-patterns.md was not updated (CLAUDE.md: 'When Lee states a new convention, add it to the rulebook'). The player change also requires the runthrough on every kit and a fresh website preview; round 3's verify folder and README show no record of either.",
+      "evidence": "git status: docs/cadasio-patterns.md unchanged. CLAUDE.md gained the labels_done line. The PMG README third round says nothing about other kits' run-throughs; round 2's says 'every other kit's run-through with the changed player'.",
+      "severity": 1,
+      "fix": "Add an in-house line to section 6 / 13 of docs/cadasio-patterns.md: 'Lee, 2026-10-20: parts that can no longer be told apart once placed (the PMG's push buttons upside down in the case) are named on Step Nc by colour labels (labels_done=), one per part.' Run _runthrough() on the MRA, RCC, LAC, LSM and PMG (including Parts and deconstructions), and remake the test website preview."
+     }
+    ],
+    "verdicts": [
+     {
+      "index": 0,
+      "real": true,
+      "reason": "Confirmed. motion_check_201.txt lines 195, 235, 240 and 243 show the USB cable's centre line 0.15-0.43 mm from all four 4-digit display wires at t=0.84-0.92, near [658, 924, 1248]. The tube radii are 1.75 and 0.625 mm, so this is a real pass-through. Lines 239, 245 and 259-261 show it passing the five dot matrix wires at t=0.07. The crossing point sits directly above the A end's seated place (cad-geometry: middle [667, 892, 1246], x 642-692). The 'set down' via points [672,1040,1250] and [678,960,1249] in guide.py:1041 bring the cable straight down through the display bundle at z~1249. raw/v4mot_Step42c_0875.png (zoomed) shows the cable coming down across the yellow/black/purple bundle beside the header. The README's third-round note says the cable no longer sweeps through the bundles and lists only the middle third of the turn as not cured, so Lee is not told about this end beat, even though it is the cable-through-wires effect he named. The rest-view part is weaker. Seen from this high camera, the plug points away (+x), and the cable leaves its back end and loops up over it. That is a projection effect, not a modelling error. It does still read poorly beside the display's header.",
+      "fix": "guide.py Step 42 (lines 1027-1041): (1) Bring the 'set down' cable down outside the display bundle. Replace the via points [[630,1080,1262],[672,1040,1250],[678,960,1249]] with a run that descends at z<=1232 (or x>=700), clear of the display wires' run near [658,924,1248]. (2) Set the A end down farther out, e.g. USB_A_WAY[2] = compose([45.0, 0.0, -12.0], ZERO, _mid_a), so that the slide-in to ZERO stays below the wires (plug top y<915) the whole way. (3) For t=0.07, give the lifted stage's cable and the matrix wires a shape that clears at the in-between moments, e.g. settle the carried matrix wires against the cable at a half-lifted pose as well. Re-run `.venv.nosync/bin/python tools/motioncheck.py 'PMG Build Instructions' 'Step 42c'` and docs/research/pmg/scripts/check_caps.py --samples 201 'Step 42c', and expect no 'usb cable' lines. Only Step 42's own stages change: no other step's camera and no seated pose (ZERO is used from Step 43 on). Add the end beat to the README's 'Not cured' sentence if anything remains."
+     },
+     {
+      "index": 1,
+      "real": true,
+      "reason": "Confirmed at the LMS's size. In motion_Step42c_w1000_caption.png at t=0.690 the A end is washed out inside the caption box, and at t=0.875 the top of the cable's loop touches the box's bottom edge. In raw/v4mot_Step42c_0750.png the drawn content starts at y=0: the plug is cut at the top of the canvas. The 'carried over' stop is compose([32,177,0], ZERO, _mid_a). I recomputed it from cad-geometry.json against Step 42's camera: about 106 mm up the screen from the frame target (radius 112) and 55 mm left. Screen-up for this view_dir is [0.84, 0.53, 0.118], so each mm of +x lifts the plug 0.84 mm on screen. The kit already keeps carried parts clear of the caption box in Steps 17-20 (README, second round). Step 42's camera is new this round and Lee named the step, so changing its framing is in scope.",
+      "fix": "guide.py:1027. Drop most of the +x on the stops above the case: USB_A_WAY[1] = compose([0.0, 177.0, 0.0], ZERO, _mid_a), about 27 mm lower on screen. Lower the lift and carry height to just clear the module's top edge (its cable vias are at y~1082), e.g. +150 instead of +190/+177. Let the 'set down' stop carry the +x (or the [45, 0, -12] from finding 0). If the plug is still under the box, move only Step 42's frame target about 20 mm up the screen: frame=([632.0, 1003.0, 1292.0], 112.0) on Step 42 (line 1043). It shares no camera with another step, so no other step changes. Check the A end's top at t=0.69-0.81 at 1000x634 and 760x720 (below the caption box's bottom edge) and at 1920 (inside the canvas). Check the case still reads at the bottom. Do this together with finding 0, since both edit USB_A_WAY."
+     },
+     {
+      "index": 2,
+      "real": false,
+      "reason": "The main claim is a known false positive. The '6.4-7.7 mm through every one of its 21 wires' lines are check_caps.py's cap-against-wire test (line 291). That test compares wire points with the carried part's axis-aligned bounding box, not its mesh. The script's own docstring says: 'Large parts carried as riders (the module in Step 42) give false cap-against-wire hits: their box holds the wires.' The wires plug into the module's pins, so they are always inside its box. The same 7.69 mm lines appear in round 2's Step 42c (round2/motion_check.txt), which notes 'Step 42c's cap hits are the module's own box (false)'. The 'up to 6.8 mm into the Nano Board' figure is from the mesh-based test and is real: one dot matrix wire (CLK) at t=0.32. The ~1.4 mm hits mean the wire centres are about 0.8 mm inside the module (wire radius 0.625). Both are in the same middle beat the README already reports as not cured. Both are smaller than before this round: round 2 had the matrix CLK at 7.72 mm into the Nano and several matrix wires 4-7 mm into the Nano and into the Mini-B plug. The 'about 2 mm' estimate for halving the turn is based on the false 7.7 mm figure. The frames at 0.313 and 0.375 show the board edge-on with wires looping round it, as wires plugged into a turning board must. The visible crossings are the bundle crossings already reported.",
+      "fix": "No change needed for the box hits. Optionally, for honesty with Lee, widen the README's 'Not cured' sentence: in the middle third of the turn one dot matrix wire also passes into the Nano Board for a moment. Also make check_caps.py skip the cap-vs-wire box test for a rider that is the module, so the output stops reporting these false hits."
+     },
+     {
+      "index": 3,
+      "real": true,
+      "reason": "Confirmed. I cropped raw/v4lbl_w1920x1000_Step20.png (1330-1600 x 150-520, 3x). The GND leader ends at about (1388, 472), on the bottom of the purple VCC cap, and no bare pin shows below it. From DISPLAY_PINS_RUN the right-angle header is seen almost end-on, so the caps stack one in front of another. The 760x720 picture shows the same, and the 1728-wide frame v4mot_Step20c_0000 shows at most a few pixels of grey. In Step 19 (one bare pin visible below two caps) the VCC destination can still be made out. Under DISPLAY_RUN (round2/verify3/raw/v3mot_w1920_Step20c_100.png) the four caps sat side by side on the printed header. The new camera fixed the module end (Lee's complaint) but hid the display end in Step 20. That is the same occluded-destination problem Lee raised, on the same step he named.",
+      "fix": "Re-run the ray-test camera search for Steps 19-20 with more targets: V9 and G9 (pin_tip(MOD_CAP[w])); the display's VCC and GND pin tips (pin_tip(DEV_CAP[w])), with the caps already on in each step (CLK and DIO for Step 19; CLK, DIO and VCC for Step 20) in the scene; and the loose wire. Keep only directions with a clear line to every target, and among them prefer the one nearest DISPLAY_PINS_RUN. A starting point is the normalised sum of the two runs, [0.425, 0.897, 0.122]. If no single direction works for both steps, give Step 20 its own camera through wire_step(camera=...), since Lee named Steps 19-20. Leave DISPLAY_RUN on Steps 17-18. Diff every view's camera against a pre-edit steps.json so that only Steps 19, 19c, 20 and 20c change. Re-check that the display caps' plug-in motion still clears the wires already in (check_caps.py on 19c and 20c)."
+     },
+     {
+      "index": 4,
+      "real": true,
+      "reason": "Confirmed. In raw/v4lbl_w1920x1000_Step19.png (1:1 crop of the display) the board is a steep, narrow strip, and the printed CLK/DIO/VCC/GND beside the header are a few illegible pixels. Under DISPLAY_RUN (round2/verify3/raw/v3mot_w1920_Step19c_000.png) they are readable even in a 900-px frame. The angle between DISPLAY_RUN and DISPLAY_PINS_RUN is 62.7 degrees (dot product 0.459). Rulebook line 364 (Lee, 2026-10-19, PMG): 'A board whose pin names are printed on its back is wired from a camera that shows its back and the module's pins'. The brief lists 'the Step 17-20 view showing the display's printed back' as a must-not-regress item. The README says the new framing fits 'the display, its printed back and the loose wire'. That suggests the printing is still shown, and it is not readable. Lee asked for a camera change, so a trade-off may be acceptable, but it has to be stated to Lee, not hidden.",
+      "fix": "Use the same search as finding 3 with one more constraint: the display back's outward normal within about 55-60 degrees of view_dir, so the printed names are readable. If a direction meets all the constraints, use it for Steps 19-20 (or 20 alone, as in finding 3). If none does, keep the pin camera and tell Lee plainly: 'Steps 19-20 now show V9/G9 but the display's printed pin names are seen edge-on; the VCC and GND labels name the pins instead.' Either way, correct the README third-round sentence ('framed a little wider so the display, its printed back and the loose wire fit'). Steps 17-18 keep DISPLAY_RUN."
+     },
+     {
+      "index": 5,
+      "real": true,
+      "reason": "Confirmed, minor. At 1000x634 (Step 19) the display's top corner is at about y 105 and x 720-815, under the caption box (bottom about 130, right edge 865). At 760x720 (Step 20) the display top is at about y 118, under the box (bottom 130, right 810). At 1000x634 the V9 label sits on the blue button's board and wires, with white space to its left. The eye ('near-below', reach 0.05, chosen for DISPLAY_RUN) covers the lower end of the loose wire and its cap. At 760 it covers the wire's lower middle. All of this follows from the new camera and the settings carried over from DISPLAY_RUN (guide.py:559-561: module_label up-left 0.08, eye_place near-below 0.05).",
+      "fix": "Do this after the camera for Steps 19-20 is settled (findings 3 and 4), because these placements depend on it. In the DISPLAY_WIRES loop (guide.py:556-561), pass VCC/GND-only values: module_label=dict(side='left', reach=0.10), and park=dict(..., eye_place=dict(side='near-right', reach=0.06)) or whichever side clears the wire. Keep DISPLAY_RUN's values for CLK/DIO (Steps 17-18). Frame the pin camera so the display clears the caption box at 760x720 and 1000x634: radius about 78, or move the target about 5 mm up the screen. Re-render Steps 19 and 20 at the four sizes and in the step list."
+     },
+     {
+      "index": 6,
+      "real": false,
+      "reason": "The observation is accurate: in raw/v4lbl_w760x720_Step42.png the dot matrix runs off the right edge at the iPad-portrait size. It is not a defect for this step. The matrix lies on the bench and does not move in Step 42. The step's subject (the module, its wires and their way over H4) is fully in frame at every size. Step 42 also crops the case at the bottom at every window size by design, as the foreground. Cropping a still bench part at the narrowest window is cosmetic and does not hide anything the student acts on.",
+      "fix": "None on its own. If Step 42's frame target is moved for finding 1, check that 760x720 does not crop the module or the A end's way, and prefer a shift that also brings the matrix in where it costs nothing."
+     },
+     {
+      "index": 7,
+      "real": true,
+      "reason": "Confirmed, process. Labels on Step 33c depart from rulebook section 2 (line 45, 'Step Nc is clean', allowing only a rare single 'check this' cue) and from line 183 ('No annotation on Step Nc'). git status shows docs/cadasio-patterns.md unchanged. CLAUDE.md gained only the labels_done feature line. CLAUDE.md requires adding Lee's new conventions to the rulebook and saying which rule a kit breaks and why. The README mentions labels_done but not that it is an exception to 'Step Nc is clean'. On the player change: I checked every kit's steps files, and no done view outside PMG Step 33c has labels or eyes. The change in player.js is gated on view.kind==='done' with labels, so other kits are unaffected today. The CLAUDE.md rule to run the check on every kit after a player change still applies. The test preview's PMG copy dates from round 2 (01:22), so the round-3 publish is still to come and not yet a defect.",
+      "fix": "Add to docs/cadasio-patterns.md section 13 (with the PMG's other decisions, line 364) and note it at section 2 line 45: 'Decided (Lee, 2026-10-20, the PMG): parts that can no longer be told apart once placed (the push buttons upside down in the case) are named on Step Nc, one colour label per part (labels_done=), an exception to \"Step Nc is clean\".' Add one line to the README's third round saying it breaks that rule at Lee's request. Run `(0, eval)(await fetch('js/runthrough.js').then(r => r.text())); _dev.freeze(); _runthrough()` on the MRA, RCC, LAC, LSM and PMG, including the MRA and RCC Parts and deconstructions. Then publish the round to 'share/Test guides preview' as usual."
+     }
+    ]
+   },
+   {
+    "lens": "step42-motion",
+    "met": [
+     "Request 4 (Step 42), judged on motion_Step42c.png, raw/v4mot_Step42c_0000 to 1000, motion_Step42c_w1000_caption.png, raw/v4mot1000_Step42c_0690.png and the 'Step 42c' lines of motion_check_201.txt: PARTLY MET. What now works: the lift is a clean straight-up beat. Beats 5 and 6 keep the USB cable above the module, with no cable-to-wire hits from 0.5 to 0.75, so the cable no longer sweeps across the bench through every bundle. From the new front-high camera the case hides the lower runs of the button leads. What does not work yet: beat 3 still holds 94 of the step's 123 real problems (144 listed, minus 21 'cap NAUO78 through wire' lines, which are the box-test false positives that check_caps.py's docstring describes). In the last two beats (0.84 and 0.92) the USB cable passes through the 4-digit display's leads, in plain sight at the display's header. At the LMS's 1000x634 the A end goes behind the caption box from about 0.66 to 0.79.",
+     "Requests 1 to 3 and the earlier rounds' non-regression checks were outside this lens (Step 42c's motion only) and were not judged."
+    ],
+    "findings": [
+     {
+      "step": "Step 42c, beat 3 (t 0.25-0.375, the middle third of the turn)",
+      "window": "all sizes (raw/v4mot_Step42c_0313.png, 0375.png)",
+      "problem": "The re-dress from the bench layout (bundles side by side) to the held layout (nested) happens while the module's component side faces the camera. All 21 leads are attached on that side. The crossings therefore happen in full view, and some leads also pass through parts: 'dot matrix display CLK into NANO 6.77 mm at 0.32', and every lead goes about 1.3-1.6 mm into NAUO78.",
+      "evidence": "Breakdown of the 123 real problems in 42c: beat 3 has 63 wire-to-wire and 31 wire-into-part. Beats 1, 2, 4, 7 and 8 together have 29. The turn is one slerp of 120 degrees about (1,1,1), so the board normal is R(theta)x and its dot with the camera direction [-0.5248, 0.848, -0.0738] is: theta 120: 0.85, 80: 0.50, 60: 0.24 (middle of beat 3), 40: -0.04, 0: -0.52. During beat 3 the leads' side faces the viewer at 60-87 degrees off the view axis; it turns away only in beat 4. In frame 0313 the Nano's top and the pin rows show while the button loops swap.",
+      "severity": 4,
+      "fix": "(a) Cheap, changes no shape at rest: in turning_layout(1), build the 2/3 stage as carried(_lifted, MODULE_LIFTED, TURNING[1]) instead of carrying _held_lines back. Beats 2 and 3 are then both carries of the bench arrangement, and the re-dress falls in beat 4, where the board goes from edge-on (-0.04) to facing away (-0.52) over H4, with the board and the case in front of the leads. (b) Fixes the crossing itself rather than hiding it: replace the single slerp with two turns. First a roll of 90 degrees about the module's long axis (world z, Rz(-90): it tips back onto its back edge, components to the back). The rows lie along that axis, so each button bundle stays in its own z-slab and nothing crosses. Then a spin of 90 degrees in the board's own plane about world x (Rx(-90), USB end coming up); Rx(-90)*Rz(-90)*bench = held (checked). A turn about x keeps every point's x, whether carried or fixed. So if the rolled layout is drawn with each bundle in the x layer it has when held (NEST_X 610.5, 614.1, 617.7, 621.3, the display at D_X 624.5, the matrix beyond the Nano's x 618; about 4 mm apart, since a row's three wires stand one behind another when rolled), no two bundles can meet during the spin. The matrix layer also stays clear of the Nano. Do the roll and the carry to above H4 first, so the spin is a pure turn about x with no x travel. Roll in steps of 45 degrees or less. From this camera the spin reads as a flat quarter turn, and the leads stay behind the board (dot product -0.52 throughout)."
+     },
+     {
+      "step": "Step 42c, USB A end set down and slid in (beats 7-8, t 0.75-1.0)",
+      "window": "all sizes (raw/v4mot_Step42c_0875.png, 0938.png; crop of the display header)",
+      "problem": "The USB cable passes through the 4-digit display's leads where they leave the header. This is the last motion of the step, and the eye is following it.",
+      "evidence": "motion_check_201.txt reports usb cable vs 4-digit display VCC 0.15 mm, DIO 0.33 mm and GND 0.39 mm at 0.84, and CLK 0.43 mm at 0.92, near [658.6, 923.9, 1247.9]; the limit is 2.14 mm. A ray from there to the camera passes x 600 at y 1017, z 1240, clear of the display and the module, so the crossing is in sight. In the frames the cable is drawn across the header. Cause: set-down route 236 comes down behind the leads (x 674-684) and hooks under their start at [658.2, 900.9, 1247.6] to the exit at x 674.2. The final route 237 is Step 43 at rest and so is fixed; it rises in front of the leads (x 612-642, z 1247-1251). The leads' first 17 mm (x 652-659, y 921-940, z 1245-1262) sit right across the cable's band, so a slide from behind can only carry the cable to the front by going through them. No choice of in-between shapes avoids that.",
+      "severity": 4,
+      "fix": "Bring the A end down on the side where the cable ends, then lay it back under the leads. I measured these against the wires at rest in 42c. No wire lies above y 1056 for x 628-660, z 1236-1385, so the A end can be carried over the module's back there. The gap in front of the leads (x 634-651, z 1238-1254) is free of every other wire from the table up to y 1110. Hang the A end from its cable, exit up (Rz(-90): a_out then points up, the way a held plug hangs), and lower it down that gap until it stands on its back end, middle at about (646, 913, 1246). Then lay it back into its place with a 90-degree turn about z, its back end sliding along the table under the leads. On a straight middle path the body's axis stays at least 4.9 mm from every wire centre line, which clears its 8.5 mm thickness; add a via so the back end does not dip below the table. At each stop, draw the cable as route 237 cut short at the exit (the MRA's cut_lead way, or refit_ends), so it stays on the front-left of the leads throughout. The display PCB's edge near z 1238-1242 and the caps still need check_caps."
+     },
+     {
+      "step": "Step 42c, middle beat and all turning beats (blending of the leads)",
+      "window": "all sizes",
+      "problem": "Every lead in this step is a `stretch` route. The player blends such routes by equal shares of their length and carries them by their ends' moves only, without turning them. In beat 3 the lengths jump a lot: blue GND 209 to 326 mm, white OUT 204 to 277, matrix CS 109 to 189. As a result the run inside the case slides along itself, the leads at the module slide by about 20 mm relative to their pins, and their shapes are translated rather than turned while the board turns 40 degrees.",
+      "evidence": "Resampling stage 2 and stage 3 evenly, blue GND's point at x 569 under the keys (index 61) is blended with x 598 behind H4. Its run in the case ends at index 95 in one stage and 61 in the other. This matches 'blue GND / blue VCC / blue OUT / white GND into NAUO68 (H7) 0.28-0.61 mm at 0.31-0.32' at x 572.7, inside the case. Near the module, a point 35 mm from the pins is blended with one 55 mm from them. In player.js, skinned(route, poses, endsOnly) translates stretch shapes, and b_from only sets the weights, not the matching. This is the likely cause of the uniform 1.3-1.6 mm of every lead into NAUO78 at 0.09-0.32.",
+      "severity": 3,
+      "fix": "Give Step 42's in-between routes, and its first and last route, stretch=False with tail_from. For the button leads, tail_from = their b_from (82-84 mm, the run in the case, the same in every stage). The case run then stays exactly put, the change in length comes out at H4's exit (hidden by the case from this camera), and the leads at the module are matched by distance from their pins and turned with the module. For the display and matrix leads, use tail_from a few mm out of their device pins. No shape at rest changes. Step 43's blend stays 'even' as long as its mounted routes keep stretch. Run motioncheck afterwards: CLAUDE.md warns that a long lead turned with its plug can fold."
+     },
+     {
+      "step": "Step 42c, A end carried over (beats 6-7, about t 0.66-0.80)",
+      "window": "1000x634 with caption (motion_Step42c_w1000_caption.png at 0.690); the top edge is also clipped at 1920x1000 (raw/v4mot_Step42c_0750.png)",
+      "problem": "The USB A end, the thing beats 6-7 are about, goes behind the caption box at the LMS size and partly off the top of the canvas.",
+      "evidence": "USB_A_WAY[1] = ZERO+(32,177,0) puts the A end at x 674-724, y about 1070. With this camera, screen-up is about 0.84x + 0.53y + 0.12z (mm from the target [615,992,1290]). The A end therefore spans +86 to +129 mm, while the caption box's bottom at 1000x634 is about +70 mm and the canvas top about +117 mm. Horizontally it is at -51 to -58 mm, inside the box's range. In the 0.690 picture the plug's tip already shows faintly under the box.",
+      "severity": 3,
+      "fix": "Carry it lower and further forward. At x 648 or less and y about 1060 (the slab above y 1056 is clear of every wire) its top sits at about +66 mm, under the box. Holding it hanging rather than pointing back (along x) also saves about 42 mm of screen height. This fits the way proposed for the set-down above. Re-check at 760x720. Otherwise, enlarge this step's frame radius a little, keeping the same view_dir."
+     },
+     {
+      "step": "Step 42c, beat 1 (the lift, t 0-0.125)",
+      "window": "all sizes",
+      "problem": "As the module rises, the USB plug and the start of its cable, and the Nano Board, rise into the matrix and display leads that lie over them on the bench.",
+      "evidence": "usb cable vs dot matrix CS/GND/DIN/VCC/CLK centre lines 0.38-1.66 mm apart (limit 2.14) at 0.07, near [653, 928-939, 1338.6]. 4-digit display DIO into NANO 1.42 mm at 0.10, GND into NAUO78 1.44 mm at 0.09, CLK and DIO 0.15 mm apart at 0.06. Cause: lifted_layout's carried() weights each lead by a smoothstep of its share from the device end, so the run over the plug (about 0.4 of a matrix lead) rises only about 21 mm of the module's 60, while the plug rises the full 60. Both shapes are moved only by their ends' moves, so over the lift the gap changes linearly: gap(f) = bench gap + f x (lifted rise there - 60). Here it closes at about f = 0.66, which matches t 0.07.",
+      "severity": 2,
+      "fix": "In lifted_layout, carry the matrix leads at weight 1 from where they reach the USB plug, and the display leads from where they pass over the Nano Board (a start point like the s0 the button leads have). The gap then never shrinks during the lift. No shape at rest changes."
+     },
+     {
+      "step": "Step 42c, the USB cable over the whole step",
+      "window": "all sizes (frames 0438, 0500, 0875)",
+      "problem": "The drawn length of the USB cable swings back and forth, so it reads as an elastic band. It balloons into a large arc over the dot matrix display in beat 4, shrinks, then stands up in a tall loop beside the A end in beat 7.",
+      "evidence": "Route lengths 118, then 230 to 237: 76, 109, 157, 267, 316, 129, 89, 259, 192 mm. The 316 mm is _held_cable_bench, which goes 'over the top, down beyond the bundles' to the bench A end at z 1374. The 259 mm is the set-down loop, which rises to y 1006 at x 684.",
+      "severity": 2,
+      "fix": "Keep the length near the final 192 mm. Draw the hanging and set-down stops as route 237 cut short at the exit, and optionally lift the A end off the bench during beat 4, alongside the last third of the turn. That removes the 316 mm arc and one beat."
+     },
+     {
+      "step": "Step 42c, beats 4-5 (t 0.375-0.625)",
+      "window": "all sizes (crop of raw/v4mot_Step42c_0500.png)",
+      "problem": "The cable leaves the right-angle Mini-B plug toward -z, runs 8 mm, and doubles back +z over the module. From this high camera the two runs overlap into a flat paddle with a rounded tip, 10-15 mm to the left of the plug. It looks like a fin, not a cable. It is the nearest and largest object in those frames.",
+      "evidence": "usb_held: start + sdir*8 (sdir = -z when held), then via [611,1082,1300] (bench) or [611,1084,1310] (A end lifted): a U-turn rising only 8 mm for a 3.5 mm cable.",
+      "severity": 2,
+      "fix": "Open the loop (for example via [604,1092,1258], [606,1098,1285], then over), so its two runs separate on screen. Or, once the A end goes to the left early as proposed above, let the cable leave -z and go straight there."
+     },
+     {
+      "step": "Step 42c, checks behind the numbers",
+      "window": "n/a",
+      "problem": "Two gaps in the checks. First, the sweep of the Nano Board, the USB plug and the 21 module-end caps against the case during the turn is not checked. Second, the problem count includes known false positives.",
+      "evidence": "check_caps.py skips any rider whose pose on its carrier is unchanged ('was == c[\"pose\"]: continue'), so it skips NANO, USB_B and every MOD_CAP; only the module's own mesh (clear) and the A end are tested against parts. Of the 144 Step 42c lines, 21 are 'cap NAUO78 through wire', the box-test false positives its docstring names. Real: 37 wire-into-part and 86 wire-to-wire.",
+      "severity": 2,
+      "fix": "In check_caps, treat a rider as moving when its carrier moves, and test NANO, USB_B and the MOD_CAPs against H4, H10 and H13 during beats 2-4. Drop the box test for large riders, or use their mesh. Quote the real count (123) when reporting to Lee."
+     }
+    ],
+    "verdicts": [
+     {
+      "index": 0,
+      "real": true,
+      "reason": "I could not refute it. The figures in motion_check_201.txt match exactly: 144 Step 42c lines, of which 21 are 'cap NAUO78 through wire' and 123 are real. Beat 3 (t 0.25-0.375) holds 63 wire-to-wire and 31 wire-into-part problems; beats 1, 2, 4, 7 and 8 together hold 29. steps.json carries the module turning 120, 80, 40, 0 degrees about (1,1,1). The leads attach on the side that faces +x when seated (NEST_X 610-621, D_X 624.5, module middle x 600.7). The dot product of the board normal with the camera direction [-0.5248, 0.848, -0.0738] is 0.85 at 120, 0.50 at 80, 0.24 at 60, -0.04 at 40 and -0.52 at 0, as the finding says. So for the whole of beat 3 the pin side is turned toward the viewer. The 0313 and 0375 frames show the bundles crossing above the case, in the open. The residual was reported to Lee, but Lee never accepted it, and it is exactly what request 4 asks to fix.",
+      "fix": "Fix (a): in guide.py turning_layout() (lines 1009-1017), build the k == 1 stage the same way as k == 0: frm, lines, cable = (MODULE_LIFTED, _lifted, _lifted_cable), carried to TURNING[1]. Beats 2 and 3 then only carry the bench arrangement round with the board. The change from side by side to nested falls in beat 4, where the board goes from edge-on (-0.04) to facing away (-0.52) and stands between the camera and the pins. No shape at rest, camera or other kit changes. Afterwards run check_caps.py --samples 201 \"Step 42c\" and the author's ray test from the Step 42 camera. Accept the change only if the in-sight count drops below the current 53 overall and 38 in the middle beat. If bundles still cross in sight in beat 4, apply the finding's (b). First roll the module 90 degrees about world z, in steps of 45 degrees or less. Then carry it above H4. Then spin it 90 degrees about world x. Before the spin, lay each bundle in its held x layer (NEST_X, then D_X, then the matrix beyond x 618). Rx(-90)·Rz(-90) maps the bench pose to the held pose (I checked: x->z, y->x, z->y)."
+     },
+     {
+      "index": 1,
+      "real": true,
+      "reason": "Confirmed. motion_check_201.txt has usb cable against 4-digit display VCC 0.15 mm, DIO 0.33 mm and GND 0.39 mm at 0.84, and CLK 0.43 mm at 0.92. In steps.json, set-down route 236 comes down behind the leads (x 677.7 -> 659.2, y 959 -> 911, z about 1248), passing about 5 mm behind their header run (x 658.6, y 921.6-928.8, z 1245-1251). It then hooks under them to the A exit at x 674.2. Final route 237 (Step 43 at rest) lies wholly at x 611-642, in front of the leads. So the slide from 236 to 237 must carry the cable through the leads, whatever the in-between shapes. The 0875 and 0938 crops show the cable drawn first in front of the yellow, purple and red leads, then behind the yellow one, then in front again. Nothing hides the spot from the camera.",
+      "fix": "Change the A end's way (guide.py lines 1027-1042) so that the cable never goes behind the display's leads. Carry the A end over the module's back (no wire lies above y 1056 for x 628-660). Lower it hanging, exit up, down the free gap in front of the leads (x 634-651, z 1238-1254) until it stands at about (646, 913, 1246). Then lay it into ZERO with a 90-degree turn about z, its far end sliding along the table under the leads; add a via so it does not dip below the table. Drop the via [678, 960, 1249]. At each stop, draw the cable as route 237 cut short at the exit (refit_ends, or the MRA's cut_lead way). Route 237, Step 43 and every camera stay as they are. Check with check_caps.py --samples 201 \"Step 42c\" (no 'usb cable vs 4-digit display' lines; USB_A clear of the display PCB and caps) and with wirecheck at the new stops."
+     },
+     {
+      "index": 2,
+      "real": true,
+      "reason": "I could not refute the mechanism. Every Step 42 and 42c lead route is stretch=True; the button leads also carry b_from (82-84 mm). In player.js drawWires (lines 163-177), a wire changes route by even shares of its length when either route is stretch, and skinned(..., endsOnly) carries the shape only by its end points' moves, without turning it. The lengths in beat 3 are as stated: blue GND 209 -> 326 mm, white OUT 204 -> 277, matrix CS 109 -> 189. With 240 samples, blue GND's run in the case ends at sample 94 in one stage and 60 in the other. Its sample 63 at x 570.9 (in the case) is blended with x 600.8 (behind H4), which matches 'blue GND into NAUO68 0.61 mm at 0.31, x 572.7'. The uniform 1.3-1.6 mm 'into NAUO78' fits a lead passing through the 1.6 mm board (depth is at most half the thickness plus the wire radius). Leads that are not turned while the board turns 40 degrees per beat explain beats 2-4. The one beat-1 case (0.09, during the lift) is better explained by finding 4. The attribution is therefore partial, but the defect is real.",
+      "fix": "Give Step 42's routes the tail_from matching, and only Step 42's: its hover routes, the four _stages and the repeated held stage. A flag in as_routes() would do it, e.g. tail=True giving stretch=False, tail_from=b_from for button leads and tail_from of about 7 mm (just past the device's lead) for display and matrix leads. The run in the case then stays exactly put, the change of length comes out at H4's exit, and the leads near the module are matched by distance from their pins and turned with it. Keep stretch=True on Step 41c's and Step 43's routes, so those changes still blend evenly (even = ra.stretch or rb.stretch). This needs no player change and touches no other kit. Run check_caps.py --samples 201 \"Step 42c\" afterwards and look for folded long leads (CLAUDE.md warns about this), especially the matrix leads in beats 2-3."
+     },
+     {
+      "index": 3,
+      "real": true,
+      "reason": "Confirmed in the pictures. In motion_Step42c_w1000_caption.png at 0.690, the A end's tip already shows faintly under the caption box at its right edge. At 0.750, the stop USB_A_WAY[1] (exit at [674.2, 1070.5, 1247.2] in route 235), the A end is further left and at least as high, so it sits inside the box's range. In raw/v4mot_Step42c_0750.png (1920x1000) the metal tip is cut off at the top of the canvas. The screen-up direction for this camera, (y - 0.848c) normalised, is [0.84, 0.53, 0.12], which matches the finding. With it, the exit sits at about +86 mm and the tip at about +128 mm above the target, beyond the canvas top at about +117 mm.",
+      "fix": "Carry the A end lower and nearer the front: x 648 or less, y about 1060, held hanging (exit up) rather than lying along x. Its top is then about +66 mm on screen, under the box's bottom at about +70 mm at 1000x634. This shares the way proposed in fix 1. Check the frames at t 0.69-0.75 at 760x720, 1000x634, 1440x714 and 1920x1000, with the caption box drawn. Only if that is not enough, enlarge Step 42's frame radius a little, keeping its view_dir. This camera is new this round and Lee asked about it, but a wider frame shrinks the action at rest, so changing the way is the better fix."
+     },
+     {
+      "index": 4,
+      "real": true,
+      "reason": "Confirmed. motion_check_201.txt has usb cable against dot matrix CS 0.38 mm, GND 0.48, DIN 1.58, VCC 1.58 and CLK 1.66 at 0.07 (limit about 2.1); 4-digit display DIO into NANO 1.42 mm at 0.10; GND into NAUO78 1.44 at 0.09; CLK and DIO 0.15 mm apart at 0.06. All are in beat 1, the lift. In carried() (guide.py lines 945-959), s0 is 0 for display and matrix leads, so the run over the plug and the Nano gets a smoothstep weight well below 1, while the plug and the Nano rise the full 60 mm. In the crops, the matrix leads run over the plug at t 0 and under it at t 0.125 (settle pushed them below), so the plug must pass through them in between. It is in plain view at the module's end.",
+      "fix": "In carried() as called from lifted_layout(), give the display and matrix leads a full-carry point, as s0 does for the button leads. The weight should reach 1 where the matrix leads pass over the USB plug (near [651-656, 924, 1326-1346], BENCH_MATRIX_WAY) and where the display leads pass over the Nano Board (BENCH_DISPLAY_WAY[0], [664, 917, 1258]), and rise from 0 at the device's pins to there. The run over the plug and the Nano then rises the full 60 mm with them and keeps its side of them. Only the lifted stage changes (t 0.125 in the animation); no view at rest or camera changes. Run check_caps.py --samples 201 \"Step 42c\" and confirm the beat-1 lines are gone."
+     },
+     {
+      "index": 5,
+      "real": true,
+      "reason": "The figures are right: routes 118 and 230-237 are 76, 108, 156, 267, 316, 129, 89, 259 and 192 mm. In the frames, the 316 mm _held_cable_bench shape ('over the top, down beyond the bundles', guide.py lines 1005-1006) makes the large arc over the dot matrix display at 0.438-0.5. It collapses to 129 mm in beat 5 as the A end rises and comes 117 mm nearer the plug. In beat 7 the 259 mm set-down shape stands up as a tall loop at 0.875. CLAUDE.md does allow a stretch lead to change length, which is why this is minor. But a 3.5-fold swing within one step is visible, and it adds to the confusion Lee described. It is cosmetic: the cable crosses no wire in beats 4-6.",
+      "fix": "Fold this into fixes 1 and 3 rather than doing it separately. Draw the A end's stops as route 237 cut short at the exit, so the length stays between about 130 and 200 mm. Remove the 316 mm shape by lifting the A end off the bench during beat 4, alongside the last third of the turn (one beat fewer), or by drawing the held-with-A-on-bench cable along a shorter way. No camera or shape at rest changes."
+     },
+     {
+      "index": 6,
+      "real": true,
+      "reason": "Confirmed. usb_held() starts the cable at plug_exit plus 8 mm along sdir (-z when held), then the via [611,1082,1300] (route 233) or [611,1084,1310] (route 234). That is a U-turn rising only about 8 mm for a 3.5 mm cable. From this camera, which looks mostly down (dir y 0.848), the two runs overlap. The 0438 and 0500 crops show a flat black paddle with a rounded tip to the left of the plug, and the 0563 and 0625 composites show it too. It reads as a fin, not a cable.",
+      "fix": "In the usb_held() calls for the held stages (_held_cable_bench and 'the A end lifted'), open the loop. For example, use vias [604,1092,1258], [606,1098,1285] and then over, so the two runs separate on screen. Or, once the A end goes to the left early (fixes 1, 3 and 5), let the cable leave toward -z and run straight there without doubling back. Check the settle report ('settled among 21 held') and check_caps.py --samples 201 \"Step 42c\"."
+     },
+     {
+      "index": 7,
+      "real": true,
+      "reason": "Confirmed in docs/research/pmg/scripts/check_caps.py. Both rider tests skip any rider whose pose on its carrier is unchanged ('if was is None or was == c[\"pose\"] ... continue'). NANO and NAUO282 (the USB plug) ride NAUO78 at [0,0,0] in both views, so neither is ever tested against the case while the module turns over H4. The module caps are skipped the same way if they ride NAUO78 at a fixed pose. The docstring itself names the module box test's cap-against-wire hits as false positives; there are 21 such lines. The real count is 123 (37 wire-into-part, 86 wire-to-wire), not 144. Nothing shows the Nano or the plug actually hitting the case. This is a gap in the checks, not a found collision.",
+      "fix": "In check_caps.py, also test a rider whose pose on its carrier is fixed when its carrier moves. Transform its mesh vertices by M[pid] and test them against the visible case parts (H4, H10, H13 and the rest) during beats 1-4 of Step 42c, which covers NANO, NAUO282 and the module caps. For large riders such as NAUO78, drop the box cap-against-wire test or use the mesh distance. This is a research script, so no guide, player or other kit changes. When reporting to Lee, give 123 real problems (37 wire-into-part, 86 wire-to-wire) plus the ray-test in-sight counts, not 144."
+     }
+    ]
+   },
+   {
+    "lens": "code",
+    "met": [
+     "Request 1 (Steps 19-20, V9/G9 hidden): met for the module pin. In raw/v4lbl_w1000x634_Step19.png, raw/v4lbl_w760x720_Step19.png and raw/v4lbl_w1920x1000_Step20.png the V9/G9 ring sits on a bare pin next to the S8/S9 caps, with no wire in front of it. Steps 17-18 keep DISPLAY_RUN, and a diff of every view's camera against HEAD's steps.json changes only Steps 19, 19c, 20, 20c, 42 and 42c. The cost is a regression on the display side (finding 1).",
+     "Request 2 (Step 33c, a callout per button colour): met. Blue, White, Yellow and Black sit on the left, top to bottom, each ring on its own button's back, in the same order as the caption. Their leaders do not cross at 1000x634 and 760x720, where they lie over H1's edge on their white backing. The step-list picture raw/v4lbl_thumb_Step33c.png shows them too. A scan of every */steps*.json shows no other done view with labels or eye in any kit, so the player change is opt-in. publish.py strips only review and text_key, so labels on done views reach the published copy, and bundle.py passes them through. A jump, a step back and a resize all rebuild them, because go() -> stepAnimation reaches k>=1 on every path. announce() reads them, and runthrough.js counts them. For the flip step, label_anchor's eye is in assembly space, which matches cameraPose (dir turned by the same q as the model), so the anchors are right for a turned-over step.",
+     "Request 3 (Step 37's three lead lines): met. The steps.json guides are now three tip/mouth pairs at y 914.2, the same as Step 36's H4 line, one at each key's z. In a crop of raw/v4lbl_w1000x634_Step37.png the lines run unbroken over the caps' tops, as Step 36's line does over the black cap (raw/v4lbl_w1000x634_Step36.png). The caps no longer cut them.",
+     "Request 4 (Step 42 animation): partly met. In motion_Step42c_w1000_caption.png the old sweep of the cable across every bundle is gone: the module lifts, turns and is held, then the A end goes over the top. The 22 wire_via lists and both ride lists each have 7 in-between stops plus the final one, so they match the 8 ride_beats. The pose maths in between() and carried() matches player.js mixPose (turn about the module's middle, middle in a straight line). Problems remain with the caption box, the end state and the residual penetrations (findings 2-4).",
+     "Earlier-round items that must not regress, checked: labels on Steps 4-15 (unchanged in the views diff), Steps 21-25 (unchanged), and Step 43 (camera and label unchanged in the diff). Steps 17-20 showing the display's printed back: REGRESSED for 19-20 (finding 1)."
+    ],
+    "findings": [
+     {
+      "step": "Steps 19 and 20",
+      "window": "all sizes (raw/v4lbl_w1920x1000_Step19.png, v4lbl_w1000x634_Step19.png, v4lbl_w760x720_Step19.png)",
+      "problem": "The new DISPLAY_PINS_RUN camera shows the module pin, but it sees the 4-digit display's printed back almost edge-on. The printed CLK/DIO/VCC/GND beside its header can no longer be read. Lee asked for this view in round 2 (Steps 17-20 show the display's printed back and the module's pins), and rulebook section 13 (PMG) says a board whose pin names are printed on its back is wired from a camera that shows its back. The README claims the display's printed back fits in the frame and does not name the rule being broken, as CLAUDE.md requires. Also, at 760x720 the top of the display touches the bottom of the caption box.",
+      "evidence": "A crop of v4lbl_w1920x1000_Step19.png around the display shows the blue PCB foreshortened, with no legible pin names. Compare round2/verify3/raw/v3lbl_w1000x634_Step17.png, where the back is face-on and CLK/DIO/VCC/GND read clearly. guide.py:498 view_dir [0.2198, 0.766, 0.604] against DISPLAY_RUN [0.507, 0.766, -0.396]. In v4lbl_w760x720_Step19.png the PCB top is at y≈125 and the caption box bottom at y≈130.",
+      "severity": 3,
+      "fix": "Re-run the ray-test search limited to directions that also face the display's back (for example view_dir · back normal ≥ 0.5) and take the best one that still sees V9/G9. Failing that, keep the new camera and add an `inset=` close-up of the display's printed header (boxed in red, as the PMG's Step 3 does) on Steps 19-20, frame a little lower for 760 wide, tell Lee about the trade-off, and name the rule broken in the README."
+     },
+     {
+      "step": "Step 42c (beats 6-7)",
+      "window": "1000x634 (LMS) with the caption box",
+      "problem": "The USB A end, lifted 190 mm straight up above the module, goes under the caption box while it is carried over, and the cable's loop is still at the box's bottom edge when the end is set down. In the player the caption is HTML over the canvas, so the cable end disappears behind the instructions at the LMS's size. The kit's own convention keeps carried parts clear of the caption box in the LMS frame (README: the display's cap 'low enough to stay clear of the caption box').",
+      "evidence": "raw/v4mot1000_Step42c_0690.png: the A end's top lies inside the caption box (box spans y 0-110 of 634, A end from y≈25). raw/v4mot1000_Step42c_0875.png: the cable loop reaches y≈95-110. guide.py USB_A_WAY: compose([0.0, 190.0, 0.0], USB_A_BENCH, ...) and compose([32.0, 177.0, 0.0], ...).",
+      "severity": 3,
+      "fix": "Lower USB_A_WAY[0] and [1] (for example 190 -> about 120-130 and 177 -> about 110-120, still clear of the module's top and the bundles) and move the matching usb_held via points down with them. Re-render 42c at 1000x634 and 760x720 with the caption box to confirm the end and the loop stay below it."
+     },
+     {
+      "step": "Step 42c (end state) / Step 42",
+      "window": "all sizes",
+      "problem": "The caption ends 'Lay the USB cable's other end on the table behind the case', but from the new front-high camera the table behind the case is hidden by the case. When the step completes, the A end has dropped out of sight behind H13/H10. At t=0.875 it hangs upright in mid-air beside the 4-digit display, crossing in front of the display's wires on screen. That is the same 'passing through wires' look Lee complained about, now for the cable end, and the student never sees where it ends up.",
+      "evidence": "raw/v4mot_Step42c_1000.png: the cable runs down behind the case and the A end is not visible. raw/v4mot1000_Step42c_0875.png: the A end sits beside the display's header, in front of its yellow/black wires.",
+      "severity": 3,
+      "fix": "Give the end state a visible A end. Options: a close-up (`inset=` on Step 42c) of the A end on the table behind H4. Or set the A end down to the side where this camera sees it before it slides in. Or ask Lee whether the A end should be a step of its own (rulebook: one part per step) with a camera from behind; the module's lift and turn would keep this camera."
+     },
+     {
+      "step": "Step 42c (beats 2-3, the turn)",
+      "window": "motion (motion_check_201.txt)",
+      "problem": "The note to Lee says only that the button bundles pass one another in the middle third of the turn. The motion check also reports wires passing into the boards: the dot matrix CLK wire goes 6.77 mm into the Nano Board at 0.32, and every one of the 21 jumper wires goes 1.3-1.5 mm into the I/O module board (NAUO78) and the Nano at 0.19-0.32. This is better than round 2 (up to 7.7 mm into the Nano), but not cured and not reported. The 7.69 mm 'cap NAUO78 through wire' lines are the module's own box (false), as round 2's note says.",
+      "evidence": "motion_check_201.txt lines 118-150: 'Step 42c dot matrix display CLK into NANO 6.77 mm at 0.32 of the motion', 'blue VCC into NAUO78 1.44 mm at 0.31', and so on. round2/motion_check.txt for comparison: CLK into NANO 7.72 mm.",
+      "severity": 2,
+      "fix": "In carried(), make the run nearest the module move rigidly with it (weight 1 over the last ~25 mm, for example u = clip((s - s0) / (s_end - 25 - s0))), or add a settled shape halfway through beat 3 (TURNING in quarters). Then re-run motioncheck and the ray test from the new camera, and tell Lee about any board penetration still in sight, not only the bundles."
+     },
+     {
+      "step": "Shared generator (Part guides)",
+      "window": "n/a (code)",
+      "problem": "There is a latent Part-guide bug from labels on done views. _chapters copies own['labels'] into every view of the step that already has a 'labels' key (stepgen.py:2172: `if key in own and key in v: v[key] = own[key]`). Before this round only hover views had that key; now a done view with labels_done has it too. So a step with labels_done plus g.in_part(view_dir=/frame=/look_from=) would show Step N's labels (anchored at hover poses) on the Part's Step Nc instead of labels_done. Separately, labels_done anchors are never recomputed for the Part's own camera (part_eye), as hover labels are at stepgen.py:1860-1865. PMG has no Parts today, but MRA and RCC do, and CLAUDE.md now advertises labels_done generally.",
+      "evidence": "stepgen.py:1863-1865 (own.update(camera=part_cam, labels=again(s['labels']), ...)); `common` carries `_part` onto both the hover and the done view; stepgen.py:2172-2174; stepgen.py:1915-1918 anchors labels_done only with the Full Build `eye`.",
+      "severity": 2,
+      "fix": "In the done branch, when part_cam is set, store own['labels_done'] re-anchored with label_anchor(..., part_eye, shown_done, done). In _chapters apply own['labels'] / own['eye'] only to views with kind == 'hover', and own['labels_done'] to the done view."
+     },
+     {
+      "step": "Rulebook (docs/cadasio-patterns.md section 6)",
+      "window": "n/a",
+      "problem": "Step 33c breaks three written label rules: 'only a destination ... Never ... a part name, a wire colour', 'two on screen at most' and 'Only on Step N'. CLAUDE.md requires naming the rule a kit breaks and adding Lee's new convention to the rulebook. docs/cadasio-patterns.md is unchanged in the working tree. The PMG README mentions labels_done but names no rule.",
+      "evidence": "git status: docs/cadasio-patterns.md not modified. cadasio-patterns.md:113-114 ('Only on `Step N`', 'two on screen at most'). steps.json Step 33c has 4 labels: Black, Yellow, White, Blue.",
+      "severity": 2,
+      "fix": "Add an 'In-house (Lee, 2026-10-20)' line under section 6 Text labels: parts that look alike once turned over (the PMG's push buttons, only their backs showing) are named by colour on Step Nc, one label each, on one side, in the order of their places (labels_done). Note in the PMG README which rules this departs from."
+     },
+     {
+      "step": "Shared generator API (labels_done)",
+      "window": "n/a (code)",
+      "problem": "CLAUDE.md documents `labels_done=[...] (as labels)`, but the {id: text} mapping that `labels` accepts is silently turned into CAD part names. The comprehension iterates the dict's keys and uses self.names.get(i, i), dropping the given text. labels_done is also silently ignored on a single=True step, because the `continue` comes before the done view is built.",
+      "evidence": "stepgen.py:1517: `[dict(i) if isinstance(i, dict) else dict(id=i, text=self.names.get(i, i)) for i in labels_done]`. Compare stepgen.py:1507 for `labels` (`labels[i] if isinstance(labels, dict) else ...`). stepgen.py:1910-1913 (single -> continue).",
+      "severity": 1,
+      "fix": "Mirror the labels normalization: `text=(labels_done[i] if isinstance(labels_done, dict) else self.names.get(i, i))`. Raise or log a warning when single=True and labels_done are both given."
+     },
+     {
+      "step": "Step 42 code (guide.py)",
+      "window": "n/a (code)",
+      "problem": "Hidden coupling between the module's ride and the A end's. USB_A's ride is `[USB_A_BENCH] * 4 + USB_A_WAY`, where 4 must equal len([MODULE_LIFTED, *TURNING, MODULE_HELD]), and `_turning = [turning_layout(k) for k in (0, 1)]` with ('one', 'two')[k] fixes the turn at thirds. If TURNING is changed (for example to quarters, to settle the mid-turn), the wires_done lists and the module's ride follow len(_stages) but the A end's ride does not. The player then paces only the rides whose stop count equals the beats (paced(n) needs n === beats), so the A end would drift over the whole step. There are no shared-mutable-default problems: the repeated poses and routes are never mutated (pose_out and route_no copy or serialise).",
+      "evidence": "guide.py: ride={MODULE: [MODULE_LIFTED, *TURNING, MODULE_HELD] + [MODULE_HELD] * len(USB_A_WAY), USB_A: [USB_A_BENCH] * 4 + USB_A_WAY}; player.js stepAnimation `paced = n => { if (beats > 1 && n === beats) ...`.",
+      "severity": 1,
+      "fix": "Set n_mod = 2 + len(TURNING) and use [USB_A_BENCH] * n_mod. Build _turning from range(len(TURNING)), taking the carried source from the lifted shapes for the first half and the held shapes for the second. Assert that every ride list and every wires_done list has the same length."
+     },
+     {
+      "step": "Step 33c (screen reader)",
+      "window": "announcement / canvas aria-label",
+      "problem": "The labels are announced in BUTTONS order, 'Labels: Black, Yellow, White, Blue'. The caption and the screen give the order from the blue button's pocket towards H3: blue, white, yellow, black. A screen-reader user hears the reverse of the caption's order.",
+      "evidence": "steps.json Step 33c labels order: NAUO76 Black, NAUO83 Yellow, NAUO84 White, NAUO85 Blue. player.js announce() joins labelsOf(view) in array order.",
+      "severity": 1,
+      "fix": "Order labels_done as the caption does (blue first), for example by sorting zip(BUTTONS, COLOURS) by distance from the blue pocket. The on-screen layout sorts by anchor y anyway, so the picture does not change."
+     },
+     {
+      "step": "Shared player (guards)",
+      "window": "n/a (code)",
+      "problem": "The four places that decide on callouts for a done view do not agree. buildCallouts now draws a done view's `eye`. stepAnimation and renderThumb call it only when `view.labels` exists. runthrough.js expects 0 eyes on any done view. A done view with labels and an eye would draw an eye that the run-through then reports; one with only an eye would draw nothing. No current view has either, so nothing is broken today.",
+      "evidence": "player.js:342 `!(view.kind === 'hover' || view.kind === 'done') || !(labelsOf(view).length || (view.eye && view.eye.length))`; player.js:817 and 926 `view.kind === 'done' && view.labels`; runthrough.js:27 `wantEyes = view.kind === 'hover' ? ... : 0`.",
+      "severity": 1,
+      "fix": "Use one predicate, for example `const calloutsFor = v => v.kind === 'hover' ? {labels: labelsOf(v), eye: v.eye || []} : v.kind === 'done' ? {labels: labelsOf(v), eye: []} : null`, in buildCallouts, layoutCallouts' callers, renderThumb and the run-through."
+     },
+     {
+      "step": "Verification record (player change)",
+      "window": "n/a",
+      "problem": "CLAUDE.md says a player change must be checked with _runthrough on every kit. The round-2 README section records 'every other kit's run-through with the changed player'; round 3 has no 'Checked:' line, and docs/research/pmg/round3 holds only pictures and motion_check_201.txt. There is no record of a run-through for MRA, RCC, LAC or LSM, for PMG's 99 views, or for the published test copy after this player change. Separately, the authoring captures in 'PMG Build Instructions/thumbs/' (165 files, last written 20 Oct 22:51) are still there, though CLAUDE.md says to delete thumbs/ afterwards.",
+      "evidence": "PMG README.txt round-3 section (no 'Checked:' line); ls docs/research/pmg/round3/verify; ls 'PMG Build Instructions/thumbs' (165 files).",
+      "severity": 1,
+      "fix": "Run `_dev.freeze(); _runthrough()` on PMG (Full Build and the copy published to the test preview) and on MRA, RCC, LAC and LSM (with their Parts and deconstructions), add a 'Checked:' line to the round-3 README section, and delete PMG's thumbs/."
+     },
+     {
+      "step": "Steps 19c and 20c (motion seen from the new side)",
+      "window": "1920 (motion_Step19c.png); not rendered at LMS size",
+      "problem": "The loose wire's way in (the display's cap 'in its own lane above the wires already in') was planned to read from DISPLAY_RUN's side. From the new side, the purple wire crosses the yellow/black CLK/DIO pair on screen at about t=0.6-0.75. This may read as passing through them, which is Lee's complaint in Step 42. The geometry is unchanged from round 2 (the same 0.46 mm DIO-into-cap contact at 0.66), so only the reading has changed. Steps 19c and 20c were not rendered with the caption at 1000x634 or 760x720.",
+      "evidence": "motion_Step19c.png frames t=0.625 and 0.750. motion_check_201.txt:99-104 match round2/motion_check.txt's Step 19c and 20c lines.",
+      "severity": 1,
+      "fix": "Render 19c and 20c at 1000x634 and 760x720 with the caption box. If the crossing reads as passing through, move the display cap's lane to the far side of the CLK/DIO pair as seen from the new camera (park['x'] / lift_a), then re-run the motion check."
+     }
+    ],
+    "verdicts": [
+     {
+      "index": 0,
+      "real": true,
+      "reason": "Confirmed. A crop of raw/v4lbl_w1920x1000_Step19.png shows the display's PCB almost edge-on, and none of its printed pin names can be read. Compare round2/verify3/raw/v3lbl_w1000x634_Step17.png, where CLK/DIO/VCC/GND read clearly. The rulebook's section 13 PMG row (cadasio-patterns.md:364) says 'A board whose pin names are printed on its back is wired from a camera that shows its back and the module's pins'. The README's round-3 line says the frame was widened 'so the display, its printed back and the loose wire fit in the LMS's frame' and names no broken rule. The caption problem is worse than reported. At 1000x634 (the LMS) the display's top corner sits about 18 CSS px under the caption box in Steps 19 and 20 (raw/v4lbl_w1000x634_Step20.png, crop: the corner is faded above the box's bottom edge). At 760x720 it touches the box. At 1000x634 the model spans image y 105-795 of 951, while the space between the caption box and the bottom bar is only 167-820, so at this radius it cannot fit. Lee did ask for a camera change on Steps 19-20, so the trade-off is legitimate, but it has to be stated to Lee.",
+      "fix": "1. Re-run the ray-test search for Steps 19-20 limited to directions that also face the display's printed back (view_dir · back normal ≥ ~0.5, where DISPLAY_RUN [0.507, 0.766, -0.396] is the face-on reference). Keep the best direction that still sees V9 and G9 unobstructed. 2. If no such direction exists, keep DISPLAY_PINS_RUN and add a framed close-up of the display's printed header, VCC/GND boxed in red as in Step 3 (place() draws an `inset=` on Step Nc, so it goes on 19c/20c). 3. Either way, widen or lower the frame (radius 74 -> about 80, or the frame centre a few mm higher) so the display clears the caption box at 1000x634 and 760x720. Re-render both sizes with the caption box. 4. Only DISPLAY_PINS_RUN changes (Steps 19-20, which Lee named). Diff every other view's camera against a saved steps.json. 5. In the README, name the rule departed from (rulebook section 13, PMG row) and add a Steps 19-20 exception to that row (Lee, 20 Oct 2026)."
+     },
+     {
+      "index": 1,
+      "real": true,
+      "reason": "Confirmed. In raw/v4mot1000_Step42c_0690.png the caption box spans image y 20-167 of 951, and the lifted A end runs from about y 55 to 230, so its top half is behind the box. #caption is rgba(255,255,255,.94) (player.html:37), so in the player it is effectively hidden. At 0.875 the cable loop reaches about y 140, inside the box. The kit has a written convention for this: the README says carried parts in Steps 17-20 stay clear of the caption box in the LMS's frame. From the steps.json carry: the A end's middle is lifted from y≈881 to y≈1071 (USB_A_WAY[0], +190) and carried at y≈1069 ([32, 177, 0] from its seat).",
+      "fix": "Do not take the reviewer's numbers (120-130 mm) as given. The held module's top and the cable's over-the-top via points are at y≈1070-1084, so a lift that low may put the A end into the module, plug or bundles. Instead: (a) lower USB_A_WAY[0] and [1] only to the least that keeps the A end and its cable clear (try about -30 to -40 mm), and move the usb_held via points of those two stages down to match. If that is not enough, (b) raise Step 42's frame centre (y 992 -> about 1020-1030) so the action sits lower on screen. There is room above the bottom bar, and the case is only cut off a little more. Step 42's camera is new this round and Lee named the step, but diff every other camera. Re-render 42c with the caption box at 1000x634 and 760x720, at t≈0.69 and 0.875, and re-run motioncheck for 42c."
+     },
+     {
+      "index": 2,
+      "real": false,
+      "reason": "Refuted as stated. At t=1.0 the A end is visible (crops of raw/v4mot1000_Step42c_1000.png and raw/v4mot_Step42c_1000.png). It lies beside the 4-digit display's header, under its wires, which is what USB_A_WAY intends ('slid in under its wires'). The table behind the case is not hidden: the display and the dot matrix lie on that same table and are in view throughout. 'Hangs upright in mid-air' at 0.875 is a misreading of depth. USB_A_WAY[2] is the seat pose moved [32, 0, 0], so the A end is lying on the table pointing away from the camera, and a camera 58° up draws that as vertical. The display's wires are drawn over it there, so it reads as lying under them, not passing through. One related problem is real but separate: motion_check_201.txt lines 195, 235, 240 and 243 show the USB cable's centre line 0.15-0.43 mm from the 4-digit display's VCC/DIO/GND/CLK wires at 0.84-0.92, near [658.6, 923.9, 1247.9]. So the cable does pass through that bundle while the A end is set down (beat 7), and the README does not mention it.",
+      "fix": "No change for visibility. For the separate cable/bundle crossing at 0.84: move the 'A end set down' via points ([672, 1040, 1250], [678, 960, 1249]) and/or USB_A_WAY[2] further from the display's bundle (more +x, or set down a little beyond the bundle's end before sliding in). Re-run motioncheck on 42c until no usb cable line is under the cable radius plus the wire radius, and re-check 0.81-0.94 from the Step 42 camera."
+     },
+     {
+      "index": 3,
+      "real": true,
+      "reason": "Confirmed as a reporting gap. motion_check_201.txt:118-150 lists 'dot matrix display CLK into NANO 6.77 mm at 0.32', and every jumper wire 1.3-1.5 mm into NAUO78 (and some into the Nano) at 0.19-0.32. The README round-3 'Not cured' note names only the button bundles passing one another. Unlike round 2's motion_check.txt, the round-3 file has no header saying what is left. The summary to Lee gave counts (144, of which 53 in sight), which partly covers it, but nowhere does it say that wires dip into the boards. The reviewer's carried() fix would probably not help. carried() already weights the module end smoothly up to 1 (rigid near the module), so the dip comes from the player blending two different settled shapes while the module turns, not from the carried shapes.",
+      "fix": "In the README's Step 42 'Not cured' note, add that in the same middle third of the turn the jumper wires dip up to ~1.5 mm into the I/O board near their caps and one dot matrix wire (CLK) up to ~6.8 mm into the Nano Board. Give motion_check_201.txt a header as round 2's has, separating the false NAUO78 'cap through wire' lines (the module's own box). Optional geometry fix: add a settled stage halfway through that beat (the turn in quarters). Fix finding 7's coupling first, then re-run motioncheck and the ray test from the new camera."
+     },
+     {
+      "index": 4,
+      "real": true,
+      "reason": "The code path is as described. In _chapters (stepgen.py:2172-2174), `for key in ('labels','eye','inset'): if key in own and key in v: v[key] = own[key]` now matches done views too, because a done view with labels_done has a 'labels' key. `own` gets 'labels' only when in_part() gives a camera (stepgen.py:1860-1865). In the done branch (1915-1918), labels_done anchors use only the Full Build `eye`. The reviewer's premise is wrong, though: no kit has Parts today (no g.chapter() or in_part() in the MRA or RCC guide.py, no steps-part-*.json). So the bug is latent. It is still reachable through two documented options together (in_part(view_dir=/frame=/look_from=) plus labels_done).",
+      "fix": "In the done branch, when part_cam is set, store own['labels_done'] = labels_done re-anchored with label_anchor(self.model, id, part_eye, shown_done, done), only for items that had no anchor given. `own` is shared by both views through `common`, so key it separately. In _chapters, apply own['labels'] and own['eye'] only when v['kind'] == 'hover', and own['labels_done'] (if present) to 'labels' when v['kind'] == 'done'. Minimal alternative: raise a clear error when a step has both labels_done and an in_part camera. No current steps file changes either way; regenerate PMG and diff steps.json to confirm."
+     },
+     {
+      "index": 5,
+      "real": true,
+      "reason": "Confirmed. docs/cadasio-patterns.md is unchanged in the working tree and contains no labels_done or Step Nc label convention. Step 33c's four colour labels depart from section 6 (cadasio-patterns.md:113-114: 'only a destination ... Never ... a part name, a wire colour', 'two on screen at most', 'Only on Step N'), and from 'Step Nc is clean' (line 45) and 'No annotation on Step Nc' (line 183). The PMG README's round-3 note mentions `labels_done=` but names none of these rules. CLAUDE.md requires naming the broken rule and adding Lee's new convention to the rulebook.",
+      "fix": "Add to the PMG row of section 13 (cadasio-patterns.md:364), or as an 'In-house (Lee, 2026-10-20)' line under section 6 Text labels, something like: 'Parts that look alike once turned over (the PMG's push buttons, only their backs showing) are named by colour on Step Nc, one label each, on one side, in the order the caption gives (labels_done=).' In the PMG README's Step 33c line, say it departs from section 6 ('Only on Step N', 'two on screen at most', no part names) and from 'Step Nc is clean', at Lee's request."
+     },
+     {
+      "index": 6,
+      "real": true,
+      "reason": "Confirmed. stepgen.py:1517 normalises labels_done with `dict(id=i, text=self.names.get(i, i)) for i in labels_done`, so a {id: text} mapping iterates its keys and silently drops the given text. `labels` honours the mapping (line 1507: `labels[i] if isinstance(labels, dict)`), and CLAUDE.md documents `labels_done=[...] (as labels)`. In the views loop, `if s.get('single'): ... continue` (1910-1913) comes before labels_done is read, so on a single=True step labels_done is silently dropped. It is latent: the only use (the PMG's Step 33) passes a list of dicts on a two-view step.",
+      "fix": "Line 1517: `text=(labels_done[i] if isinstance(labels_done, dict) else self.names.get(i, i))`, the same as labels. In place() (or _record), raise ValueError when single=True and labels_done are both given (labels_done needs a Step Nc). Regenerate PMG; steps.json should not change."
+     },
+     {
+      "index": 7,
+      "real": true,
+      "reason": "Confirmed by reading guide.py:1009-1037. USB_A's ride is `[USB_A_BENCH] * 4 + USB_A_WAY`, where the 4 must equal len([MODULE_LIFTED, *TURNING, MODULE_HELD]). `_turning = [turning_layout(k) for k in (0, 1)]` and `('one', 'two')[k]` hard-code two in-between turn stages, while `_stages` zips _turning with TURNING (so it silently truncates). The player paces a ride only when its stop count equals the beats (player.js:767 `paced = n => ... n === beats`, beats taken from the longest via list, line 723). Any other ride is eased over the whole step. Nothing is wrong today, but finding 3's likely fix (turning in quarters) would set the A end and the wires drifting.",
+      "fix": "Define `n_mod = 2 + len(TURNING)` and use `[USB_A_BENCH] * n_mod`. Build `_turning` over `range(len(TURNING))`, taking the lifted shapes as the carried source for the first half and the held shapes for the second (a name from the index, not ('one','two')[k]). Assert that every ride list and every wires_done list in Step 42 has the same length (n_mod + len(USB_A_WAY)). With TURNING unchanged, steps.json must come out identical."
+     },
+     {
+      "index": 8,
+      "real": true,
+      "reason": "Confirmed. In steps.json, Step 33c's labels are ordered Black, Yellow, White, Blue (BUTTONS order). player.js announce() (line 514) joins labelsOf(view) in array order, so a screen reader hears 'Labels: Black, Yellow, White, Blue.' The caption gives the order blue, white, yellow, black, and on screen they read Blue, White, Yellow, Black from top to bottom. This is minor.",
+      "fix": "In guide.py Step 33, build labels_done in the caption's order: `[dict(id=b, text=c.title(), side='left') for b, c in reversed(list(zip(BUTTONS, COLOURS)))]`. layoutCallouts sorts each side group by anchor y (player.js `group.sort(... a.ay - b.ay ...)`), so the picture and the step-list thumbnail do not change; only the announcement order does. Regenerate and check that only Step 33c's label order changed in steps.json."
+     },
+     {
+      "index": 9,
+      "real": false,
+      "reason": "Not a reachable defect. The guards do differ on 'eye' for done views, but no generator path puts an eye on a done view: all three done-view builders in stepgen.py (around lines 1790, 1820 and 1919) build it without one, and _chapters only overwrites keys a view already has. Every steps file in the repository (MRA, RCC, LAC, LSM and PMG, deconstructions included) has no done view with an eye, and the only done view with labels is PMG Step 33c. For every view that exists, buildCallouts, stepAnimation, renderThumb and runthrough.js agree.",
+      "fix": "None needed. If desired, tidy buildCallouts to ignore view.eye when view.kind === 'done' so that one predicate holds. That is a shared-player change and needs the run-through on every kit, which this unreachable case does not justify now."
+     },
+     {
+      "index": 10,
+      "real": true,
+      "reason": "Confirmed. The README's round-3 section has no 'Checked:' line, unlike round 2's ('every other kit's run-through with the changed player'). docs/research/pmg/round3 holds only verify/ (pictures and motion_check_201.txt), with no run-through record. player/js/player.js and runthrough.js are modified (shared player), which CLAUDE.md says requires _runthrough on every kit. 'PMG Build Instructions/thumbs/' holds 165 files (last written 20 Oct 22:51). They are in active use, so this is an end-of-round task rather than an error so far. No kit currently has Part guides, so the run-through scope is each kit's steps.json plus the MRA and RCC deconstructions.",
+      "fix": "Before reporting the round done: run `(0, eval)(await fetch('js/runthrough.js').then(r => r.text())); _dev.freeze(); _runthrough()` on PMG's player.html and on its copy published to the test preview (8799), and on MRA, RCC, LAC and LSM, including steps-deconstruction.json for MRA and RCC. Add a 'Checked:' line to the README's round-3 section listing these. Then delete 'PMG Build Instructions/thumbs/' (and LAC's thumbs/ if that work is done)."
+     },
+     {
+      "index": 11,
+      "real": false,
+      "reason": "Refuted on the evidence. Crops of raw/v4mot_Step19c_0625/0750/0875 and raw/v4mot_Step20c_0500-0875 show the loose wire's display cap coming in beside the CLK/DIO pair and passing behind it. That is correct depth: from this side the VCC and GND pins lie beyond DIO and CLK, so the wire has to pass behind them, and the renderer draws it behind. It does not read as passing through. The contacts in the motion check (19c: 0.46 mm DIO into the cap at 0.66; 20c: 0.50 mm VCC into the cap at 0.66) are the same as round 2's. Round 2's motion_check.txt header recorded and accepted them as 'side-by-side contacts of 0.0 - 0.8 mm between a cap and its neighbour's wire ... (Steps ... 18 - 20)'. That 19c/20c were not rendered at LMS size is a gap in verification, not a defect; the caption problem those sizes would show is the display's top at rest, already covered in finding 0.",
+      "fix": "None for the motion. When finding 0's camera or frame changes, render 19c and 20c at 1000x634 and 760x720 with the caption box as part of that check."
+     }
+    ]
+   }
+  ]
+ }
+}

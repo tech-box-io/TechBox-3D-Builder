@@ -1,0 +1,270 @@
+docs/research/pmg/scripts/check_caps.py over every PMG view in motion, 201 moments each (21 Oct 2026, the second pass of Lee's
+third round, after the review in ../verify/). 260 lines. Compared with the reviewed first pass (../verify/motion_check_201.txt, 298
+lines), only Step 42c differs: 144 -> 106 (29 wire into part, 77 wire against wire, no cap lines: the module's own box is no longer
+reported against its wires, and the Nano Board, the USB plug and the caps riding on the module, tested now against the case as the
+module turns, are clear). Step 42c by beat (each 0.1 of the motion): 1 in beat 1 (the lift), 4 in beat 2, 25 in beat 3, 76 in beat 4
+(the last third of the turn, where the wires change from their bench shapes to those over H4), none in beats 5 - 10 (the USB A end's
+way). A ray test from the step's camera puts 77 of the 106 in sight (52 of beat 4's), against 101 of 123 placed ones in the first pass.
+Every other step's lines are those of the first pass, unchanged.
+
+Step 2c   cap NAUO86     into NAUO87        0.01 mm at 0.055
+Step 2c   cap NAUO87     into NAUO86        0.01 mm at 0.055
+Step 2c   cap NAUO96     into CAP_V4        0.01 mm at 0.005
+Step 2c   cap CAP_GND3   into NAUO93        0.01 mm at 0.005
+Step 2c   cap NAUO98     into NAUO100       0.01 mm at 0.005
+Step 2c   cap NAUO93     into CAP_GND3      0.01 mm at 0.005
+Step 2c   cap NAUO92     into CAP_GND4      0.01 mm at 0.005
+Step 2c   cap CAP_GND4   into NAUO92        0.01 mm at 0.005
+Step 2c   cap CAP_V4     into NAUO96        0.00 mm at 0.095
+Step 2c   cap NAUO87     into CAP_GND1      0.00 mm at 0.100
+Step 2c   cap CAP_GND1   into NAUO87        0.00 mm at 0.100
+Step 2c   cap CAP_GND1   into NAUO88        0.00 mm at 0.100
+Step 2c   cap NAUO97     into CAP_V5        0.00 mm at 0.070
+Step 2c   cap NAUO88     into CAP_GND1      0.00 mm at 0.100
+Step 2c   cap NAUO88     into NAUO89        0.00 mm at 0.090
+Step 2c   cap CAP_V5     into NAUO97        0.00 mm at 0.070
+Step 2c   cap CAP_V5     into NAUO99        0.00 mm at 0.035
+Step 2c   cap NAUO89     into NAUO88        0.00 mm at 0.090
+Step 2c   cap NAUO89     into CAP_GND2      0.00 mm at 0.100
+Step 2c   cap NAUO99     into CAP_V5        0.00 mm at 0.035
+Step 2c   cap CAP_GND2   into NAUO89        0.00 mm at 0.100
+Step 2c   cap CAP_GND2   into NAUO90        0.00 mm at 0.095
+Step 2c   cap NAUO90     into CAP_GND2      0.00 mm at 0.095
+Step 2c   cap NAUO90     into NAUO91        0.00 mm at 0.105
+Step 2c   cap NAUO91     into NAUO90        0.00 mm at 0.105
+Step 2c   cap NAUO91     into CAP_GND3      0.00 mm at 0.100
+Step 2c   cap NAUO100    into NAUO98        0.00 mm at 0.085
+Step 2c   cap CAP_GND3   into NAUO91        0.00 mm at 0.100
+Step 2c   cap NAUO93     into NAUO92        0.00 mm at 0.090
+Step 2c   cap NAUO92     into NAUO93        0.00 mm at 0.090
+Step 2c   cap NAUO101    into NAUO102       0.00 mm at 0.025
+Step 2c   cap NAUO102    into NAUO101       0.00 mm at 0.025
+Step 4c   cap NAUO86     into NAUO76        0.03 mm at 0.650
+Step 5c   black VCC     into NAUO87        0.36 mm at 0.50 of the motion, near [642.7, 923.6, 1274.6]
+Step 5c   black VCC     into NAUO96        0.29 mm at 0.49 of the motion, near [656.2, 899.9, 1290.9]
+Step 5c   cap NAUO87     through wire black VCC                 0.64 mm at 0.500
+Step 5c   cap NAUO96     through wire black VCC                 0.10 mm at 0.495
+Step 6c   black OUT     into CAP_GND1      0.41 mm at 0.50 of the motion, near [642.7, 924.3, 1277.3]
+Step 6c   cap CAP_GND1   into NAUO76        0.00 mm at 0.995
+Step 6c   cap CAP_GND1   through wire black OUT                 0.71 mm at 0.510
+Step 7c   cap NAUO88     into NAUO83        0.01 mm at 0.995
+Step 8c   yellow VCC    into NAUO89        0.32 mm at 0.49 of the motion, near [641.7, 927.2, 1287.1]
+Step 8c   yellow VCC    into NAUO99        0.31 mm at 0.49 of the motion, near [656.2, 899.9, 1293.4]
+Step 8c   cap NAUO89     into NAUO83        0.07 mm at 0.575
+Step 8c   cap NAUO89     through wire yellow VCC                0.17 mm at 0.490
+Step 8c   cap NAUO99     through wire yellow VCC                0.12 mm at 0.495
+Step 9c   yellow OUT    into CAP_GND2      0.21 mm at 0.49 of the motion, near [642.0, 926.9, 1289.7]
+Step 9c   cap CAP_GND2   into NAUO83        0.06 mm at 0.575
+Step 9c   cap CAP_GND2   through wire yellow OUT                0.16 mm at 0.495
+Step 10c  cap NAUO90     into NAUO84        0.03 mm at 0.640
+Step 11c  white VCC     into NAUO91        0.54 mm at 0.49 of the motion, near [641.7, 928.8, 1301.1]
+Step 11c  white VCC     into NAUO100       0.32 mm at 0.49 of the motion, near [656.2, 899.9, 1295.9]
+Step 11c  cap NAUO91     into NAUO84        0.02 mm at 0.690
+Step 11c  cap NAUO91     through wire white VCC                 0.35 mm at 0.495
+Step 11c  cap NAUO100    through wire white VCC                 0.15 mm at 0.490
+Step 11c  white OUT     and white VCC     centre lines 0.73 mm apart at 0.49, near [653.8, 910.0, 1296.0]
+Step 12c  white OUT     into CAP_GND3      0.60 mm at 0.49 of the motion, near [641.6, 928.7, 1303.6]
+Step 12c  cap CAP_GND3   into NAUO84        0.02 mm at 0.570
+Step 12c  cap CAP_GND3   through wire white OUT                 0.42 mm at 0.495
+Step 12c  white GND     and white VCC     centre lines 1.11 mm apart at 0.50, near [654.6, 908.2, 1295.9]
+Step 13c  cap NAUO93     into NAUO85        0.04 mm at 0.575
+Step 14c  blue VCC      into NAUO92        0.75 mm at 0.49 of the motion, near [641.7, 928.6, 1315.2]
+Step 14c  blue VCC      into NAUO101       0.42 mm at 0.49 of the motion, near [656.2, 900.7, 1298.3]
+Step 14c  cap NAUO92     into NAUO85        0.02 mm at 0.915
+Step 14c  cap NAUO92     through wire blue VCC                  0.61 mm at 0.495
+Step 14c  cap NAUO101    through wire blue VCC                  0.24 mm at 0.490
+Step 14c  blue OUT      and blue VCC      centre lines 0.18 mm apart at 0.49, near [652.9, 911.8, 1300.9]
+Step 15c  blue OUT      into CAP_GND4      0.83 mm at 0.49 of the motion, near [641.6, 928.4, 1317.7]
+Step 15c  cap CAP_GND4   into NAUO85        0.02 mm at 0.915
+Step 15c  cap CAP_GND4   through wire blue OUT                  0.73 mm at 0.495
+Step 16c  cap NAUO260    into NAUO259       0.25 mm at 0.280
+Step 16c  cap NAUO261    into NAUO260       0.25 mm at 0.270
+Step 16c  cap NAUO262    into NAUO261       0.25 mm at 0.275
+Step 16c  cap NAUO134    into NAUO135       0.25 mm at 0.280
+Step 16c  cap NAUO135    into NAUO136       0.25 mm at 0.280
+Step 16c  cap NAUO136    into NAUO137       0.25 mm at 0.275
+Step 16c  cap NAUO137    into NAUO138       0.25 mm at 0.280
+Step 16c  cap NAUO262    into NAUO134       0.01 mm at 0.355
+Step 16c  cap NAUO114    into NAUO113       0.01 mm at 0.005
+Step 16c  cap NAUO134    into NAUO262       0.01 mm at 0.355
+Step 16c  cap NAUO138    into NAUO137       0.01 mm at 0.005
+Step 16c  cap NAUO259    into NAUO260       0.00 mm at 0.390
+Step 16c  cap NAUO260    into NAUO261       0.00 mm at 0.385
+Step 16c  cap NAUO261    into NAUO262       0.00 mm at 0.385
+Step 16c  cap NAUO113    into NAUO114       0.00 mm at 0.080
+Step 16c  cap NAUO116    into NAUO117       0.00 mm at 0.075
+Step 16c  cap NAUO135    into NAUO134       0.00 mm at 0.390
+Step 16c  cap NAUO117    into NAUO116       0.00 mm at 0.075
+Step 16c  cap NAUO117    into NAUO115       0.00 mm at 0.040
+Step 16c  cap NAUO136    into NAUO135       0.00 mm at 0.390
+Step 16c  cap NAUO115    into NAUO117       0.00 mm at 0.040
+Step 16c  cap NAUO137    into NAUO136       0.00 mm at 0.390
+Step 16c  cap NAUO118    into NAUO119       0.00 mm at 0.050
+Step 16c  cap NAUO119    into NAUO118       0.00 mm at 0.050
+Step 17c  cap NAUO259    into NAUO79        0.05 mm at 0.920
+Step 18c  4-digit display CLK into NAUO260       0.49 mm at 0.84 of the motion, near [659.5, 927.4, 1254.9]
+Step 18c  cap NAUO260    into NAUO79        0.05 mm at 0.995
+Step 18c  cap NAUO260    through wire 4-digit display CLK       0.46 mm at 0.640
+Step 19c  4-digit display DIO into NAUO261       0.46 mm at 0.66 of the motion, near [659.5, 925.1, 1253.9]
+Step 19c  cap NAUO261    into NAUO79        0.05 mm at 0.875
+Step 19c  cap NAUO261    through wire 4-digit display DIO       0.47 mm at 0.840
+Step 20c  4-digit display VCC into NAUO262       0.50 mm at 0.66 of the motion, near [659.6, 922.6, 1253.2]
+Step 20c  cap NAUO262    into NAUO79        0.05 mm at 0.875
+Step 20c  cap NAUO262    through wire 4-digit display VCC       0.45 mm at 0.680
+Step 26c  cap NAUO282    into NANO          0.88 mm at 0.995
+Step 32c  blue GND      and blue OUT      centre lines 0.05 mm apart at 0.53, near [646.9, 896.9, 1298.5]
+Step 32c  blue GND      and blue VCC      centre lines 0.06 mm apart at 0.53, near [647.2, 897.1, 1298.4]
+Step 32c  blue OUT      and blue VCC      centre lines 0.07 mm apart at 0.52, near [647.3, 896.9, 1298.4]
+Step 33c  black OUT     and black VCC     centre lines 0.01 mm apart at 0.35, near [636.0, 900.9, 1276.5]
+Step 33c  yellow GND    and yellow VCC    centre lines 0.03 mm apart at 0.60, near [639.3, 894.8, 1293.4]
+Step 33c  black GND     and black VCC     centre lines 0.04 mm apart at 0.62, near [632.9, 893.1, 1288.1]
+Step 33c  yellow OUT    and yellow VCC    centre lines 0.05 mm apart at 0.52, near [648.8, 896.6, 1292.9]
+Step 33c  white OUT     and white VCC     centre lines 0.05 mm apart at 0.37, near [648.6, 897.5, 1294.6]
+Step 33c  yellow GND    and yellow OUT    centre lines 0.05 mm apart at 0.58, near [642.9, 895.8, 1293.4]
+Step 33c  white GND     and white VCC     centre lines 0.06 mm apart at 0.61, near [636.4, 893.2, 1296.7]
+Step 33c  white GND     and white OUT     centre lines 0.12 mm apart at 0.59, near [642.3, 895.9, 1295.8]
+Step 33c  black GND     and black OUT     centre lines 0.14 mm apart at 0.61, near [635.4, 893.7, 1289.2]
+Step 42c  dot matrix display DIN into NAUO282       4.29 mm at 0.26 of the motion, near [629.5, 1026.3, 1314.1]
+Step 42c  dot matrix display GND into NAUO282       4.08 mm at 0.26 of the motion, near [630.3, 1026.6, 1315.6]
+Step 42c  dot matrix display CS into NAUO78        2.99 mm at 0.33 of the motion, near [626.9, 1018.0, 1316.1]
+Step 42c  dot matrix display CLK into NAUO78        2.75 mm at 0.33 of the motion, near [622.5, 1018.9, 1313.4]
+Step 42c  dot matrix display CLK into NAUO282       2.64 mm at 0.26 of the motion, near [623.6, 1031.0, 1309.1]
+Step 42c  dot matrix display GND into NAUO78        2.36 mm at 0.26 of the motion, near [631.4, 1010.5, 1323.5]
+Step 42c  dot matrix display DIN into NAUO78        2.25 mm at 0.27 of the motion, near [628.3, 1013.1, 1320.9]
+Step 42c  dot matrix display CS into NAUO282       2.09 mm at 0.26 of the motion, near [623.5, 1030.9, 1308.1]
+Step 42c  dot matrix display VCC into NAUO282       1.72 mm at 0.15 of the motion, near [637.7, 988.2, 1328.5]
+Step 42c  dot matrix display VCC into NANO          1.46 mm at 0.34 of the motion, near [618.9, 1034.3, 1297.5]
+Step 42c  yellow VCC    into NAUO78        1.45 mm at 0.28 of the motion, near [615.9, 995.2, 1268.3]
+Step 42c  white GND     into NAUO78        1.45 mm at 0.25 of the motion, near [619.5, 989.9, 1274.1]
+Step 42c  blue OUT      into NAUO78        1.45 mm at 0.33 of the motion, near [614.5, 998.3, 1269.9]
+Step 42c  blue GND      into NAUO78        1.45 mm at 0.35 of the motion, near [611.3, 997.2, 1268.6]
+Step 42c  yellow OUT    into NAUO78        1.44 mm at 0.32 of the motion, near [616.3, 994.2, 1268.7]
+Step 42c  white VCC     into NAUO78        1.44 mm at 0.26 of the motion, near [618.1, 992.2, 1271.4]
+Step 42c  white OUT     into NAUO78        1.43 mm at 0.34 of the motion, near [614.6, 993.2, 1269.9]
+Step 42c  yellow GND    into NAUO78        1.43 mm at 0.34 of the motion, near [612.6, 995.6, 1265.5]
+Step 42c  dot matrix display VCC into NAUO78        1.42 mm at 0.34 of the motion, near [619.3, 1015.5, 1313.3]
+Step 42c  dot matrix display CLK into NANO          1.41 mm at 0.33 of the motion, near [624.0, 1027.3, 1306.4]
+Step 42c  blue VCC      into NAUO78        1.40 mm at 0.34 of the motion, near [612.4, 1000.5, 1268.4]
+Step 42c  dot matrix display CS into NANO          1.40 mm at 0.33 of the motion, near [625.4, 1028.9, 1304.1]
+Step 42c  black VCC     into NAUO78        1.38 mm at 0.34 of the motion, near [613.1, 992.8, 1264.0]
+Step 42c  black OUT     into NAUO78        1.34 mm at 0.33 of the motion, near [614.5, 993.1, 1262.8]
+Step 42c  black GND     into NAUO78        1.05 mm at 0.34 of the motion, near [612.8, 993.3, 1261.4]
+Step 42c  white VCC     into NAUO67        0.89 mm at 0.24 of the motion, near [600.8, 900.2, 1307.2]
+Step 42c  white GND     into NAUO67        0.66 mm at 0.24 of the motion, near [601.1, 900.2, 1302.2]
+Step 42c  blue GND      into NAUO67        0.64 mm at 0.24 of the motion, near [600.6, 900.0, 1324.7]
+Step 42c  yellow VCC    into NAUO67        0.40 mm at 0.24 of the motion, near [601.2, 899.8, 1276.7]
+Step 42c  dot matrix display GND and dot matrix display VCC centre lines 0.02 mm apart at 0.07, near [648.3, 930.1, 1358.3]
+Step 42c  yellow OUT    and yellow VCC    centre lines 0.07 mm apart at 0.25, near [621.1, 987.0, 1272.0]
+Step 42c  dot matrix display DIN and dot matrix display GND centre lines 0.07 mm apart at 0.35, near [643.8, 1050.1, 1284.5]
+Step 42c  dot matrix display CS and dot matrix display VCC centre lines 0.08 mm apart at 0.24, near [641.8, 946.3, 1349.0]
+Step 42c  black OUT     and yellow VCC    centre lines 0.08 mm apart at 0.35, near [611.7, 927.6, 1272.7]
+Step 42c  black OUT     and white OUT     centre lines 0.09 mm apart at 0.35, near [618.6, 1011.6, 1270.4]
+Step 42c  black OUT     and black VCC     centre lines 0.10 mm apart at 0.34, near [601.8, 896.8, 1252.5]
+Step 42c  white GND     and white OUT     centre lines 0.11 mm apart at 0.15, near [624.6, 939.9, 1291.4]
+Step 42c  blue VCC      and white GND     centre lines 0.12 mm apart at 0.34, near [613.0, 1001.3, 1268.1]
+Step 42c  black OUT     and yellow GND    centre lines 0.12 mm apart at 0.35, near [610.3, 959.5, 1268.3]
+Step 42c  dot matrix display CLK and dot matrix display VCC centre lines 0.13 mm apart at 0.26, near [637.3, 957.2, 1343.0]
+Step 42c  blue OUT      and yellow GND    centre lines 0.14 mm apart at 0.34, near [622.9, 1015.2, 1268.0]
+Step 42c  white OUT     and yellow OUT    centre lines 0.14 mm apart at 0.35, near [620.3, 1017.8, 1271.1]
+Step 42c  dot matrix display CLK and dot matrix display GND centre lines 0.14 mm apart at 0.35, near [644.2, 1021.6, 1300.5]
+Step 42c  white OUT     and white VCC     centre lines 0.15 mm apart at 0.34, near [603.5, 897.3, 1304.8]
+Step 42c  white VCC     and yellow VCC    centre lines 0.16 mm apart at 0.35, near [613.5, 994.5, 1267.7]
+Step 42c  blue GND      and white GND     centre lines 0.16 mm apart at 0.35, near [613.8, 1002.9, 1267.2]
+Step 42c  black VCC     and white OUT     centre lines 0.16 mm apart at 0.35, near [621.3, 1015.5, 1269.9]
+Step 42c  black GND     and blue GND      centre lines 0.16 mm apart at 0.35, near [617.4, 1015.2, 1266.8]
+Step 42c  4-digit display DIO and 4-digit display VCC centre lines 0.17 mm apart at 0.25, near [654.4, 953.7, 1256.6]
+Step 42c  blue OUT      and blue VCC      centre lines 0.18 mm apart at 0.35, near [618.3, 909.6, 1293.8]
+Step 42c  dot matrix display CS and dot matrix display DIN centre lines 0.18 mm apart at 0.36, near [646.4, 1022.7, 1299.3]
+Step 42c  dot matrix display CLK and dot matrix display CS centre lines 0.19 mm apart at 0.24, near [625.2, 1020.7, 1317.2]
+Step 42c  blue OUT      and white VCC     centre lines 0.19 mm apart at 0.25, near [619.7, 990.6, 1273.2]
+Step 42c  white OUT     and yellow VCC    centre lines 0.19 mm apart at 0.25, near [627.3, 996.7, 1272.0]
+Step 42c  blue GND      and blue OUT      centre lines 0.20 mm apart at 0.15, near [622.4, 945.9, 1295.3]
+Step 42c  white GND     and yellow OUT    centre lines 0.20 mm apart at 0.35, near [611.6, 972.4, 1271.1]
+Step 42c  yellow GND    and yellow OUT    centre lines 0.21 mm apart at 0.25, near [629.5, 998.9, 1270.6]
+Step 42c  black GND     and black VCC     centre lines 0.22 mm apart at 0.34, near [623.4, 1011.2, 1265.5]
+Step 42c  black GND     and white OUT     centre lines 0.22 mm apart at 0.34, near [623.4, 1012.7, 1268.9]
+Step 42c  blue VCC      and yellow GND    centre lines 0.22 mm apart at 0.35, near [620.3, 1019.0, 1267.0]
+Step 42c  blue VCC      and yellow VCC    centre lines 0.22 mm apart at 0.35, near [615.7, 1004.9, 1267.6]
+Step 42c  dot matrix display DIN and dot matrix display VCC centre lines 0.23 mm apart at 0.35, near [642.6, 945.8, 1348.5]
+Step 42c  blue OUT      and white GND     centre lines 0.23 mm apart at 0.26, near [616.0, 988.0, 1273.5]
+Step 42c  white OUT     and yellow GND    centre lines 0.23 mm apart at 0.26, near [629.8, 1002.4, 1271.3]
+Step 42c  blue OUT      and white OUT     centre lines 0.23 mm apart at 0.35, near [617.9, 1006.9, 1269.2]
+Step 42c  blue OUT      and yellow VCC    centre lines 0.24 mm apart at 0.35, near [621.0, 1014.6, 1268.3]
+Step 42c  blue GND      and white VCC     centre lines 0.24 mm apart at 0.35, near [614.7, 994.3, 1267.2]
+Step 42c  blue GND      and blue VCC      centre lines 0.25 mm apart at 0.24, near [613.1, 978.8, 1279.6]
+Step 42c  black GND     and black OUT     centre lines 0.26 mm apart at 0.24, near [629.3, 994.8, 1268.5]
+Step 42c  black GND     and yellow OUT    centre lines 0.27 mm apart at 0.34, near [624.9, 1011.2, 1267.5]
+Step 42c  black GND     and yellow VCC    centre lines 0.28 mm apart at 0.35, near [619.9, 1016.5, 1268.7]
+Step 42c  yellow GND    and yellow VCC    centre lines 0.29 mm apart at 0.34, near [622.9, 1015.0, 1269.0]
+Step 42c  white GND     and white VCC     centre lines 0.29 mm apart at 0.35, near [612.7, 975.3, 1268.2]
+Step 42c  white VCC     and yellow OUT    centre lines 0.29 mm apart at 0.35, near [611.0, 961.6, 1272.3]
+Step 42c  black VCC     and yellow VCC    centre lines 0.29 mm apart at 0.35, near [611.6, 950.8, 1270.7]
+Step 42c  blue VCC      and yellow OUT    centre lines 0.29 mm apart at 0.35, near [613.4, 987.9, 1269.8]
+Step 42c  blue GND      and yellow VCC    centre lines 0.31 mm apart at 0.35, near [612.9, 992.8, 1268.1]
+Step 42c  blue VCC      and white VCC     centre lines 0.33 mm apart at 0.35, near [618.6, 1013.6, 1267.1]
+Step 42c  blue GND      and yellow GND    centre lines 0.34 mm apart at 0.35, near [618.3, 1019.3, 1267.1]
+Step 42c  black VCC     and white GND     centre lines 0.35 mm apart at 0.35, near [614.9, 1006.4, 1267.1]
+Step 42c  white GND     and yellow VCC    centre lines 0.39 mm apart at 0.35, near [612.8, 992.0, 1268.1]
+Step 42c  black VCC     and yellow OUT    centre lines 0.40 mm apart at 0.35, near [621.6, 1015.0, 1269.4]
+Step 42c  blue OUT      and yellow OUT    centre lines 0.41 mm apart at 0.35, near [619.6, 1010.6, 1268.7]
+Step 42c  blue VCC      and white OUT     centre lines 0.41 mm apart at 0.35, near [614.7, 977.9, 1269.3]
+Step 42c  black OUT     and yellow OUT    centre lines 0.42 mm apart at 0.35, near [617.8, 1010.7, 1270.1]
+Step 42c  white VCC     and yellow GND    centre lines 0.43 mm apart at 0.35, near [620.4, 1019.6, 1267.5]
+Step 42c  black GND     and yellow GND    centre lines 0.45 mm apart at 0.35, near [616.1, 1013.3, 1266.3]
+Step 42c  white GND     and yellow GND    centre lines 0.46 mm apart at 0.36, near [617.6, 1022.4, 1268.3]
+Step 42c  dot matrix display CS and dot matrix display GND centre lines 0.47 mm apart at 0.35, near [644.6, 1024.6, 1297.9]
+Step 42c  black VCC     and yellow GND    centre lines 0.48 mm apart at 0.35, near [611.8, 912.1, 1270.1]
+Step 42c  black VCC     and blue OUT      centre lines 0.49 mm apart at 0.35, near [620.8, 1015.0, 1269.0]
+Step 42c  blue GND      and yellow OUT    centre lines 0.53 mm apart at 0.35, near [612.5, 981.2, 1270.3]
+Step 42c  black VCC     and white VCC     centre lines 0.56 mm apart at 0.35, near [618.1, 1013.6, 1268.0]
+Step 42c  black OUT     and white VCC     centre lines 0.64 mm apart at 0.35, near [614.0, 993.3, 1267.3]
+Step 42c  black GND     and blue OUT      centre lines 0.67 mm apart at 0.35, near [621.2, 1014.6, 1268.3]
+Step 42c  black OUT     and white GND     centre lines 0.69 mm apart at 0.35, near [612.6, 984.9, 1268.1]
+Step 42c  black GND     and white GND     centre lines 0.71 mm apart at 0.35, near [617.0, 1016.6, 1267.4]
+Step 42c  blue GND      and white OUT     centre lines 0.72 mm apart at 0.35, near [614.1, 965.6, 1271.4]
+Step 42c  dot matrix display CLK and dot matrix display DIN centre lines 0.82 mm apart at 0.36, near [646.3, 1017.5, 1302.9]
+Step 42c  black VCC     and blue GND      centre lines 0.87 mm apart at 0.35, near [616.2, 1009.3, 1266.8]
+Step 42c  black GND     and white VCC     centre lines 0.89 mm apart at 0.35, near [619.5, 1016.2, 1267.3]
+Step 42c  4-digit display GND and 4-digit display VCC centre lines 1.00 mm apart at 0.14, near [658.3, 929.9, 1251.1]
+Step 42c  4-digit display CLK and 4-digit display DIO centre lines 1.01 mm apart at 0.35, near [647.8, 981.0, 1261.4]
+Step 42c  black GND     and blue VCC      centre lines 1.05 mm apart at 0.35, near [619.2, 1015.7, 1266.9]
+Step 42c  black OUT     and blue OUT      centre lines 1.05 mm apart at 0.35, near [619.5, 1011.2, 1269.9]
+Step 42c  dot matrix display VCC and usb cable     centre lines 1.34 mm apart at 0.33, near [613.2, 1050.3, 1289.9]
+Step 43c  dot matrix display DIN and dot matrix display VCC centre lines 0.03 mm apart at 0.49, near [658.8, 977.6, 1300.8]
+Step 43c  dot matrix display CS and dot matrix display DIN centre lines 0.04 mm apart at 0.49, near [660.2, 971.7, 1311.2]
+Step 43c  blue OUT      and blue VCC      centre lines 0.09 mm apart at 0.53, near [592.9, 895.3, 1331.4]
+Step 43c  dot matrix display CLK and dot matrix display CS centre lines 0.11 mm apart at 0.49, near [659.9, 973.6, 1308.6]
+Step 43c  dot matrix display CLK and dot matrix display DIN centre lines 0.11 mm apart at 0.49, near [660.5, 971.5, 1310.0]
+Step 43c  dot matrix display CS and dot matrix display GND centre lines 0.11 mm apart at 0.49, near [660.3, 972.3, 1309.2]
+Step 43c  dot matrix display CLK and dot matrix display VCC centre lines 0.14 mm apart at 0.51, near [660.5, 972.6, 1306.5]
+Step 43c  dot matrix display CLK and dot matrix display GND centre lines 0.15 mm apart at 0.49, near [660.3, 972.5, 1308.8]
+Step 43c  dot matrix display DIN and dot matrix display GND centre lines 0.16 mm apart at 0.48, near [659.0, 975.2, 1307.8]
+Step 43c  dot matrix display CS and dot matrix display VCC centre lines 0.17 mm apart at 0.51, near [660.9, 972.3, 1305.5]
+Step 43c  white OUT     and white VCC     centre lines 0.65 mm apart at 0.51, near [591.0, 895.4, 1307.6]
+Step 43c  dot matrix display GND and dot matrix display VCC centre lines 0.90 mm apart at 0.48, near [658.2, 975.8, 1307.6]
+Step 44c  cap NAUO79     into NAUO261       0.12 mm at 0.995
+Step 44c  cap NAUO79     into NAUO260       0.10 mm at 0.995
+Step 44c  cap NAUO79     into NAUO262       0.09 mm at 0.995
+Step 44c  cap NAUO79     into NAUO259       0.08 mm at 0.005
+Step 44c  4-digit display DIO and 4-digit display VCC centre lines 0.05 mm apart at 0.35, near [624.5, 950.2, 1314.4]
+Step 44c  4-digit display GND and 4-digit display VCC centre lines 0.12 mm apart at 0.12, near [629.7, 936.6, 1285.6]
+Step 44c  4-digit display CLK and 4-digit display DIO centre lines 0.13 mm apart at 0.37, near [624.0, 953.7, 1309.8]
+Step 44c  4-digit display DIO and 4-digit display GND centre lines 0.18 mm apart at 0.61, near [608.1, 1025.2, 1333.6]
+Step 44c  4-digit display CLK and 4-digit display VCC centre lines 0.20 mm apart at 0.36, near [624.7, 950.6, 1310.9]
+Step 44c  4-digit display CLK and 4-digit display GND centre lines 0.22 mm apart at 0.12, near [630.4, 935.6, 1283.5]
+Step 46c  dot matrix display CS and dot matrix display DIN centre lines 0.03 mm apart at 0.83, near [605.1, 981.1, 1238.9]
+Step 46c  dot matrix display DIN and dot matrix display GND centre lines 0.05 mm apart at 0.83, near [599.9, 980.1, 1234.3]
+Step 46c  dot matrix display VCC and usb cable     centre lines 0.09 mm apart at 0.73, near [622.9, 970.1, 1257.0]
+Step 46c  dot matrix display CS and dot matrix display GND centre lines 0.12 mm apart at 0.83, near [602.4, 983.4, 1236.2]
+Step 46c  dot matrix display CLK and dot matrix display GND centre lines 0.12 mm apart at 0.83, near [602.5, 983.1, 1236.4]
+Step 46c  dot matrix display GND and dot matrix display VCC centre lines 0.13 mm apart at 0.46, near [648.6, 979.7, 1287.3]
+Step 46c  dot matrix display CLK and dot matrix display DIN centre lines 0.13 mm apart at 0.83, near [604.4, 981.8, 1238.3]
+Step 46c  dot matrix display CLK and dot matrix display CS centre lines 0.16 mm apart at 0.83, near [603.2, 982.7, 1237.0]
+Step 46c  dot matrix display DIN and usb cable     centre lines 0.17 mm apart at 0.77, near [622.9, 970.7, 1257.1]
+Step 46c  dot matrix display CS and usb cable     centre lines 0.18 mm apart at 0.78, near [619.1, 971.4, 1258.2]
+Step 46c  dot matrix display DIN and dot matrix display VCC centre lines 0.18 mm apart at 0.83, near [607.8, 973.4, 1240.7]
+Step 46c  dot matrix display GND and usb cable     centre lines 0.20 mm apart at 0.58, near [623.2, 969.3, 1256.8]
+Step 46c  dot matrix display CS and dot matrix display VCC centre lines 0.25 mm apart at 0.83, near [604.4, 977.0, 1237.4]
+Step 46c  dot matrix display CLK and usb cable     centre lines 0.27 mm apart at 0.79, near [617.6, 971.7, 1258.7]
+Step 46c  dot matrix display CLK and dot matrix display VCC centre lines 0.29 mm apart at 0.83, near [604.4, 980.0, 1237.2]
+checked 79 views in motion; 260 problems

@@ -86,6 +86,11 @@ docstrings of `Guide.place` and `Guide.seat`):
   places (`ride={id: [via, ..., final]}`) a beat each, its wires keeping pace (the PMG's display under the dot matrix's wires, up and
   over the case); without it a ride plays within one beat. (A step whose moving part has as many stops as the ride has stretches
   paces the ride the same way: the LSM's Step 26, D4 given a way that stays put, `paths={D4: [ZERO] * 5}`, for four beats.)
+  `labels_done=[...]` (as `labels`) puts labels on Step Nc, drawn once the step has played, announced with it and in its step-list
+  picture: the PMG's push buttons named by colour once they are in the case upside down and only their backs show (Step 33c).
+  A wire's route may say how it bends with its end parts (W.route): `b_whole=` / `a_whole=` (mm from its first point) from where on it
+  moves wholly with `b`, up to where wholly with `a`, instead of by shares of its length, so that a run lying over a part that turns
+  turns with it (the PMG's Step 42: the dot matrix's wires over the module's USB plug, the USB cable out of the plug).
   A close-up can be a picture made outside instead of a view of the model: `inset=dict(image='file.webp', ...)`, a file in the
   kit folder (the LSM's capacitor card, Step 6; published and bundled with the guide); and can draw parts faintly,
   `inset=dict(..., ghost={id: alpha})` (the LSM's matrix at 0.12 over the wires in D10's slot, Step 32). A close-up keeps clear of

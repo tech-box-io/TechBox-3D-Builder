@@ -91,6 +91,10 @@ def main(argv):
             return X @ np.linalg.inv(_matrix(ref)) if ref is not None else X
         A, B = mv(r.get('a'), r.get('a_ref')), mv(r.get('b'), r.get('b_ref'))
         wb = ramp(u)[:, None] if r.get('b') else np.zeros((len(p), 1))
+        if r.get('a_whole') is not None or r.get('b_whole') is not None:   # (wholly with a up to a_whole mm, with b from b_whole: player.js)
+            lo, hi = max(r.get('a_whole') or 0, r.get('b_from') or 0), r['b_whole'] if r.get('b_whole') is not None else s[-1]
+            t = np.clip((s - lo) / max(1e-6, hi - lo), 0, 1)
+            wb = (t * t * (3 - 2 * t))[:, None] if r.get('b') else np.zeros((len(p), 1))
         wa = 1 - wb if r.get('a') else np.zeros((len(p), 1))
         out = p.copy()
         for X, w, end in ((A, wa, p[0]), (B, wb, p[-1])):
