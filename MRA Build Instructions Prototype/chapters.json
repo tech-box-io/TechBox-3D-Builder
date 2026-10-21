@@ -1,7 +1,7 @@
 {
  "_about": "The Part guides cut from this kit's Full Build (stepgen.py chapter()): for each, its file, its first and last step in the Full Build, the parts it brings in, and its step names -> the Full Build's.",
  "full_build": "steps.json",
- "run": "67d16d6da64e",
+ "run": "d0f96f6cb130",
  "chapters": [
   {
    "slug": "part-1",

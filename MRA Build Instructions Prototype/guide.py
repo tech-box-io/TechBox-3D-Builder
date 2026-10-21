@@ -83,9 +83,11 @@ PART_VIEWS = {'R1': {'roll': 180}, 'B1': {'roll': 180}, 'B2': {'roll': 180}, 'B8
               'Elbow Servo': {'dir': [0.4, -0.8, -0.45]}, 'Shoulder Servo': {'dir': [0.4, 0.8, 0.45]}, 'Claw Servo': {'dir': [-0.8, 0.45, -0.4], 'roll': 180}}
 
 # The coloured dot on three of the servos tells them apart (TechBox's Testing Checklist); a motor's label says which (Lee, 14 Oct 2026).
-DOT = {'Elbow Servo': 'Black Dot', 'Shoulder Servo': 'White Dot', 'Claw Servo': 'Blue Dot'}
+# The Base Servo, which has none, is "Base Servo (No Dot)" in its labels, on hover and in the parts list, as in the captions (Lee,
+# 21 Oct 2026: "Base Servo (No Dot) is our choice").
+DOT = {'Base Servo': 'No Dot', 'Elbow Servo': 'Black Dot', 'Shoulder Servo': 'White Dot', 'Claw Servo': 'Blue Dot'}
 dotted = lambda name: f'{name} ({DOT[name]})' if name in DOT else name
-# The servos' names, on hover and click as in their labels ("Elbow Servo (Black Dot)"; the Base Servo has no dot): the curriculum
+# The servos' names, on hover and click as in their labels ("Elbow Servo (Black Dot)", "Base Servo (No Dot)"): the curriculum
 # director's names (Lee, 19 Oct 2026; they were "X Motor"). The parts list keeps the name and shows the dot as its tag.
 SERVO_HOVER = {i: dotted(NAMES[m]) for m, ids in ((BASE_MOTOR, (BASE_MOTOR, BASE_PLUG)), (ELBOW_MOTOR, (ELBOW_MOTOR, ELBOW_PLUG)),
                                                   (SHOULDER_MOTOR, (SHOULDER_MOTOR, SHOULDER_PLUG)), (CLAW_MOTOR, (CLAW_MOTOR, CLAW_PLUG))) for i in ids}
@@ -723,7 +725,7 @@ horn_way = [horn_pose(-28, 1.5, 52), horn_pose(-24, 1.5, 17.45),    # hovering a
             horn_pose(0, 0, 8.45),                                 # level and centred: R1 is between the horn and the motor's body
             [0, 8.4, 0], [0, 0, 0]]                                # a quarter turn about the shaft, then set down
 g.place("Begin with R1. Angle the base motor's servo horn through the slot in R1, then turn the motor and set it into the slot. The wire end of the motor lines up with the notch in the cut-out.",
-        move=[BASE_MOTOR, BASE_HORN], show=[R1], path=horn_way, labels={R1: 'R1', BASE_MOTOR: 'Base Servo'},
+        move=[BASE_MOTOR, BASE_HORN], show=[R1], path=horn_way, labels={R1: 'R1', BASE_MOTOR: dotted('Base Servo')},
         lines_at=[[[181.0, 89.4, 140.9], [163.7, 103.0, 124.3]]],
         wires=routes(BASE_LEAD, base_up, a=BASE_MOTOR, b=BASE_PLUG, b_at=BASE_PLUG_UP))
 g.place('Slide R2 over the base motor so its tabs enter the slots in R1.', move=[R2])
@@ -748,11 +750,11 @@ UNDER_TURRET = dict(flip=True, frame=([163.0, 98.0, 141.0], 82.0))
 # (An arrow along the slot in B2 rather than lead lines, Lee, 14 Oct 2026: from the round end of the cut-out, where the motor
 # ends up, out through the mouth of the slot towards the motor; just under B2, on the side that is seen.)
 g.place('Once R1 - R6 are together, slide B2 in between the servo horn and R5 / R6, until the motor sits in the round cut-out.',   # (Lee's wording, 15 Oct 2026, second note)
-        move=[B2], direction=[0, 0, 1], hover=60, labels={B2: 'B2', BASE_HORN: 'Base Servo'}, **UNDER_TURRET,
+        move=[B2], direction=[0, 0, 1], hover=60, labels={B2: 'B2', BASE_HORN: dotted('Base Servo')}, **UNDER_TURRET,
         arrows=[dict(tail=[163.67, 88.0, 140.85], head=[163.67, 88.0, 92.0], normal=[0, -1, 0])])
 # B1 comes up from below: two lines from the ends of its horn-shaped cut-out to the horn, two at the plates' corners.
 g.place('Place B2 onto B1 so the servo horn fits into the cut-out in B1.', move=[B1], direction=[0, -1, 0],
-        labels={B1: 'B1', BASE_HORN: 'Base Servo'}, flip=True, frame=([150.0, 84.0, 141.0], 112.0),   # (the same side, a little wider: B1 is large)
+        labels={B1: 'B1', BASE_HORN: dotted('Base Servo')}, flip=True, frame=([150.0, 84.0, 141.0], 112.0),   # (the same side, a little wider: B1 is large)
         lines_at=[[146.2, 88.6, 140.9], [181.2, 88.6, 140.9], [-26.0, 90.5, 94.5], [214.3, 90.5, 187.1]],
         caution='If the servo horn is not lined up, you may need to adjust it so that it fits in the B1 slot.')
 # Screws thread into the wood, so the CAD cannot give their direction: set by hand. One is shown close up, then the rest.
@@ -820,7 +822,7 @@ BROWN_TO_G = 'Very important: the brown wire goes on G, the pin nearest the edge
 # The plug is lifted clear of the joystick wires, brought upright over row 5 and pushed straight down onto the pins.
 g.place('Reconnect the base motor to Row 5. Remember brown to G, red to V, and orange to S.', move=[BASE_PLUG],   # ("Row": Lee, 15 Oct 2026)
         path=[BASE_PLUG_SLOT, via([35, 62, 0]), [0, 45, 0], [0, 0, 0]],
-        labels=[dict(text='Row 5', anchor=ROW5, id=MODULE, ring=False), dict(text='Base Servo', id=BASE_PLUG)], lines=False,
+        labels=[dict(text='Row 5', anchor=ROW5, id=MODULE, ring=False), dict(text=dotted('Base Servo'), id=BASE_PLUG)], lines=False,
         view_dir=[-0.527, 0.7929, -0.306], frame=([84.2, 131.5, 137.4], 69.0),   # (the camera of Lee's screenshot of Step 41c, 14 Oct 2026, solved within 6 px)
         wires_done=routes(BASE_LEAD, base_plugged, a=BASE_MOTOR, b=BASE_PLUG, b_from=IN_SLOT),
         caution=BROWN_TO_G)

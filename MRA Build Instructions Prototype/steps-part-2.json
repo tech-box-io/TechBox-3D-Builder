@@ -5,7 +5,7 @@
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
   "review_notes": false,
   "logo": "logo.webp",
-  "run": "67d16d6da64e",
+  "run": "d0f96f6cb130",
   "chapter": "part-2"
  },
  "model": "model.glb?v=46ec7559894a",
@@ -32,9 +32,9 @@
   "NAUO95": "Breadboard Wire (F-F)",
   "NAUO110": "Breadboard Wire (F-F)",
   "NAUO98": "Breadboard Wire (F-F)",
-  "NAUO45": "Base Servo",
-  "NAUO46": "Base Servo",
-  "NAUO83": "Base Servo",
+  "NAUO45": "Base Servo (No Dot)",
+  "NAUO46": "Base Servo (No Dot)",
+  "NAUO83": "Base Servo (No Dot)",
   "NAUO58": "Elbow Servo (Black Dot)",
   "NAUO59": "Elbow Servo (Black Dot)",
   "NAUO84": "Elbow Servo (Black Dot)",
@@ -71,17 +71,17 @@
   "base brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "base red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "base orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "elbow brown": {
    "colour": "#975100",
@@ -33141,7 +33141,8 @@
       {
        "name": "Base Servo",
        "qty": 1,
-       "picture": "parts/Base-Servo.png"
+       "picture": "parts/Base-Servo.png",
+       "tag": "No Dot"
       }
      ]
     },
@@ -34020,7 +34021,7 @@
     },
     {
      "id": "NAUO45",
-     "text": "Base Servo",
+     "text": "Base Servo (No Dot)",
      "anchor": [
       157.7,
       101.4,
@@ -35895,7 +35896,7 @@
     },
     {
      "id": "NAUO46",
-     "text": "Base Servo",
+     "text": "Base Servo (No Dot)",
      "anchor": [
       164.7,
       90.5,
@@ -36203,7 +36204,7 @@
     },
     {
      "id": "NAUO46",
-     "text": "Base Servo",
+     "text": "Base Servo (No Dot)",
      "anchor": [
       164.0,
       89.5,
@@ -41963,7 +41964,7 @@
      "ring": false
     },
     {
-     "text": "Base Servo",
+     "text": "Base Servo (No Dot)",
      "id": "NAUO83",
      "anchor": [
       51.8,

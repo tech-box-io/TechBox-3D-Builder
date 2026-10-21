@@ -3,7 +3,7 @@
   "title": "Mini Robot Arm (MRA)",
   "part": "Deconstruction",
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
-  "taken_from": "8d85e7dc427d",
+  "taken_from": "cd5480e2cbfe",
   "full_build": "steps.json",
   "logo": "logo.webp"
  },
@@ -12,9 +12,9 @@
  "frame_padding": 1.08,
  "names": {
   "NAUO10": "R1",
-  "NAUO45": "Base Servo",
-  "NAUO46": "Base Servo",
-  "NAUO83": "Base Servo",
+  "NAUO45": "Base Servo (No Dot)",
+  "NAUO46": "Base Servo (No Dot)",
+  "NAUO83": "Base Servo (No Dot)",
   "NAUO11": "R2",
   "NAUO12": "R3",
   "NAUO13": "R4",
@@ -125,17 +125,17 @@
   "base brown": {
    "colour": "#975100",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "base red": {
    "colour": "#bd291f",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "base orange": {
    "colour": "#ff9d07",
    "radius": 0.5,
-   "name": "Base Servo"
+   "name": "Base Servo (No Dot)"
   },
   "elbow brown": {
    "colour": "#975100",
@@ -139648,7 +139648,8 @@
       {
        "name": "Base Servo",
        "qty": 1,
-       "picture": "parts/Base-Servo.png"
+       "picture": "parts/Base-Servo.png",
+       "tag": "No Dot"
       },
       {
        "name": "Elbow Servo",
