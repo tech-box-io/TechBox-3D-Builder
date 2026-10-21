@@ -2,7 +2,8 @@ LSM Build Instructions (Laser Stem Matrix, Full Build: the electronics on the op
 
 FIRST DRAFT 19 Oct 2026; LEE'S FIRST ROUND OF NOTES DONE THE SAME DAY (docs/research/lsm/lee_notes_2026-10-19.md), AND THE SECOND
 ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was done for each note); THE THIRD ROUND 20 Oct 2026
-(docs/research/lsm/lee_notes_2026-10-20.md: a new D3, D8 seated higher, the V+ wire yellow, Steps 3, 6, 28 and 32). Build
+(docs/research/lsm/lee_notes_2026-10-20.md: a new D3, D8 seated higher, the V+ wire yellow, Steps 3, 6, 28 and 32); THE TITLE
+PAGE AS LEE'S PICTURE OF 21 Oct 2026 (docs/research/lsm/lee_notes_2026-10-21.md: the box closer and to the right of the middle). Build
 instructions generated from Lee's STEP files and TechBox's published Cadasio guide for the kit
 (instructions.online/?id=19075-laser_stem_matrix_lsm_-_full_build), in the same format and with the same player as the MRA and RCC
 guides. Not for distribution. The open questions are under QUESTIONS FOR LEE below.
@@ -51,6 +52,8 @@ Commands (from the project folder), after a change to the CAD or the guide:
     /usr/bin/python3 tools/serve.py "LSM Build Instructions" 8805     # then http://localhost:8805/player.html
 
 THE BUILD (40 numbered steps; the published guide's 38 and its order, with the house rules applied)
+- The title page: the finished box from D5 and D2's corner, without the USB cable, large and to the right of the middle, as Lee's
+  picture of 21 Oct 2026 (its camera solved from it); in a window taller than wide it is centred.
 - Steps 1 - 9, the breadboard: backing peeled off; onto D1; the Nano Board in rows c and g, columns 2 - 16, USB socket at column 16
   (pin D12 in c16, as Part 1 of the published guide has it; c16's leader comes in from the side, across its red lead line, not along
   it); the 12 kOhm resistor's legs bent, into h3 and h16; the capacitor on its own, turned as Lee's capacitor picture shows it (stripe

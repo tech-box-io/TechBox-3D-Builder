@@ -94,11 +94,13 @@ g = Guide(HERE, title='Laser Stem Matrix (LSM)', part='Full Build', names=NAMES,
 M = g.model.inst
 box = lambda i: M[i].bounds
 mid = lambda i: M[i].bounds.mean(0)
-# The title page: the finished kit from D5 and D2's corner, framed on the box, closer and higher in the frame than the finished model's
-# own camera (Lee, 19 Oct 2026: "a little low and could be zoomed in a bit more"), without the USB cable (as the MRA's title page).
-# The Completed View keeps the first draft's camera, with the USB cable.
+# The title page: the finished kit from D5 and D2's corner, without the USB cable (as the MRA's title page). Lee's picture of 21 Oct
+# 2026 (docs/research/lsm/lee_images_2026-10-21/1.webp, a 2000 x 1091 window): the same corner, the box a little closer than on 19 Oct
+# and to the right of the middle, solved from it (the camera moved aside, so D2 is seen a little more face on). Other windows keep the
+# direction; the player brings the box back to the middle only where that keeps it bigger (a window taller than wide). The Completed
+# View keeps the first draft's camera.
 HERO_DIR = [0.5997, 0.5299, 0.5997]
-g.start_view = dict(dir=HERO_DIR, target=[638.5, 898.5, 1204.5], radius=84.0, hide=[USB_A, USB_B])
+g.start_view = dict(dir=HERO_DIR, target=[598.9, 896.5, 1239.5], radius=82.6, hide=[USB_A, USB_B])
 g.end_view = dict(dir=HERO_DIR, target=[602.9, 912.5, 1204.3], radius=114.1)
 
 # ---------------------------------------------------------------- the breadboard's holes (assembly mm; as assemble.py)
