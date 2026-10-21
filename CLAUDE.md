@@ -293,7 +293,15 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   step in the Full Build, the parts it brings in, and its step names -> the Full Build's (for "Part 2, Step 5"; null for a card
   only the Part has). A Part's steps are the Full Build's, with their order, wording and cameras, numbered from Step 1. It has its
   own title page and Completed View, both showing the model as that Part leaves it (by default from the finished model's corner,
-  framed on what the Part shows), and a Parts List of only the parts new in it (a Part with none has no Parts List). Take a
+  framed on what the Part shows), and a Parts List of only the parts new in it (a Part with none has no Parts List), and of
+  those it puts back after an earlier Part took them off, named in `chapter(..., relist=[ids])` (Lee, 21 Oct 2026: the MRA's servos,
+  unplugged after the electronics test, listed again where they are fitted; what an earlier Part only put together and set aside
+  whole, the Nano Board in the I/O module, is not). The last Part, which ends where the build does, shows the Full Build's
+  Completed View as its own (not its last step's view, which may be a sub-assembly in the hand: the MRA's T block); the MRA's Part
+  3 also has the Full Build's title-page camera (`start_view=g.start_view, end_view=g.end_view`). A card only the Full Build has
+  (`note(only_in='full')`: the MRA's Testing Checklist, in no Part) leaves the Full Build as it was; the Part's view after it starts
+  afresh. The MRA's Parts (21 Oct 2026): Part 1 the electronics (Steps 1 - 16), Part 2 the base and controller (18 - 40), Part 3
+  the arm and claw (41 - 104). Take a
   `chapter()` line out and the next run removes that Part's file. The log notes a Part that begins inside a turned-over run or a
   sub-assembly built in the hand, and a caption that names a step by its (Full Build) number.
 - **A change in one Part only** (Lee, 17 Oct 2026): `g.in_part(caption=, caution=, view_dir= / frame= / look_from=)`, written just

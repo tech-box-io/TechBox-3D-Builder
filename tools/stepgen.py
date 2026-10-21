@@ -764,13 +764,16 @@ class Guide:
         self.wire_defs[wire_id] = dict(colour=self.palette.get(colour, colour), radius=float(radius), **({'name': name} if name else {}))
 
     # -- step kinds
-    def chapter(self, slug, part, start_view=None, end_view=None):
+    def chapter(self, slug, part, start_view=None, end_view=None, relist=()):
         """From here on, until the next chapter() (or the end), the steps are also a Part guide of their own, written by the same
         run to steps-<slug>.json (Lee, 16 Oct 2026: "Part guides"). Its core steps are this Full Build's own, with their wording
         and cameras, numbered from Step 1; it gets its own title page, a Parts List of only the parts new in it (the parts
         earlier Parts brought in are not listed again), and its own Completed View. Its title page and Completed View show the
         model as the Part leaves it. part: how its title page names it under the guide's title (e.g. "Part 1: The Controller").
         start_view / end_view: as Guide's, for this Part (default: the finished model's corner, framing what the Part shows).
+        relist: ids that an earlier Part had and took off again, which this Part puts back: its Parts List lists them again (the
+        MRA's servos, unplugged after the electronics test and fitted again in Parts 2 and 3: Lee, 21 Oct 2026). What an earlier
+        Part only put together and set aside whole (the Nano Board in the I/O module) is not listed again.
         The run also writes chapters.json, the map from each Part's steps to the Full Build's (for "Part 2, Step 5" edits).
         Call it before the first step of the Part, in the Full Build's guide.py only (a guide with steps_file='steps.json')."""
         if self.steps_file != 'steps.json':
@@ -784,7 +787,8 @@ class Guide:
             raise ValueError(f'chapter({slug!r}): {theirs.name} is a guide of its own (not a Part): give the chapter another name')
         if self.chapters and self.chapters[-1]['at'] == len(self.steps):
             raise ValueError(f'chapter({slug!r}): the chapter before it ({self.chapters[-1]["slug"]}) has no steps')
-        self.chapters.append(dict(slug=slug, part=part, at=len(self.steps), start_view=dict(start_view or {}), end_view=dict(end_view or {})))
+        self.chapters.append(dict(slug=slug, part=part, at=len(self.steps), start_view=dict(start_view or {}), end_view=dict(end_view or {}),
+                                  relist=list(relist)))
 
     def note(self, caption, review=None, caution=None, only_in=None):
         """A text-only card (no 3D), for things the model cannot show. caution: as in place().
@@ -1652,7 +1656,7 @@ class Guide:
 
         poses_out = lambda poses: {i: pose_out(p) for i, p in poses.items()}
         views = [dict(name='Start', kind='start', visible=used, offsets={})]
-        visible, camera, n, cut = [], None, 0, False
+        visible, camera, n, cut, part_cut = [], None, 0, False, False
         carry_on = None                                  # the camera the next step's choice carries on from (see one_off_camera)
         parked, wires, riding = {}, {}, {}               # poses of parts lying aside; current route of each wire; parts riding with another
 
@@ -1703,6 +1707,8 @@ class Guide:
                                   **({'caution': s['caution']} if s.get('caution') else {})))
                 if not only:                                               # (a card is a clean break already; but one guide alone has this one)
                     cut = False
+                elif only == 'full' and cut:                               # (only the Full Build has it: there it is the clean break, and the
+                    cut, part_cut = False, True                            #  Parts, which leave it out, start the next view afresh instead)
                 continue
             if s['kind'] == 'takeoff':                                     # a deconstruction step: parts taken off, unplugged or set aside
                 shown = [i for i in visible if i in s['alone']] if s['alone'] is not None else list(visible)
@@ -1774,8 +1780,9 @@ class Guide:
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}))
                 views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=[], labels=s['labels'], eye=s['eye'],
                                   wires=wires_in({**wires, **s['wires_here']}, shown), carry=carry_here, moving=[], path=[ZERO, ZERO], **({'arrows': arrows} if arrows else {}),
-                                  **({'inset': inset} if inset else {}), **({'cut': True} if cut else {}), **common))
-                cut = False
+                                  **({'inset': inset} if inset else {}), **({'cut': True} if cut else {}), **({'_part_cut': True} if part_cut else {}),
+                                  **common))
+                cut = part_cut = False
                 going = [i for i in s['leave'] if i in shown]
                 with_them = {w: wires[w] for w in s['lead_off'] if wires.get(w) is not None}
                 lead_routes = {w: route_no(r) for w, r in with_them.items() if wires_in({w: r}, shown)}
@@ -1822,8 +1829,8 @@ class Guide:
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'_part': dict(s['in_part'])} if s.get('in_part') else {}))
                 views.append(dict(name=f'Step {n}', kind='hover', visible=list(visible), offsets=poses_out(still), guides=[], wires=wires_in(wires, visible),
                                   labels=[dict(id=s['like'], text=f"{len(s['ids'])}x", anchor=anchor)], eye=[dict(id=s['like'], anchor=anchor)],
-                                  **({'cut': True} if cut else {}), **common))
-                cut = False
+                                  **({'cut': True} if cut else {}), **({'_part_cut': True} if part_cut else {}), **common))
+                cut = part_cut = False
                 visible.extend(i for i in s['ids'] if i not in visible)
                 views.append(dict(name=f'Step {n}c', kind='done', visible=list(visible), offsets=poses_out(still), wires=wires_in(wires, visible), **common))
                 continue
@@ -1901,8 +1908,8 @@ class Guide:
             views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(hover), guides=s['guides'], labels=s['labels'], eye=s['eye'],
                               **({'ghost': dict(s['ghost'])} if s.get('ghost') else {}),
                               wires=wires_in(wires, shown), carry=carry_hover, **({'arrows': arrows} if arrows else {}), **({'cut': True} if cut else {}),
-                              **({'still': stay} if stay else {}), **common))
-            cut = False
+                              **({'_part_cut': True} if part_cut else {}), **({'still': stay} if stay else {}), **common))
+            cut = part_cut = False
             after = [i for i in s['appear_after'] if i not in visible]
             visible.extend(after)
             shown_done = shown + [i for i in after if i not in shown]
@@ -2125,7 +2132,7 @@ class Guide:
         chapters = self._chapters(views, routes, parts, first_view, steps_end, special, used) if self.chapters else []
         views[:] = [v for v in views if v.get('_only') != 'part']          # (a card only its Part guide shows: note(only_in='part'))
         for v in views:
-            for key in ('_step', '_only', '_part'):
+            for key in ('_step', '_only', '_part', '_part_cut'):
                 v.pop(key, None)
         if self.parts_list:                                 # the parts list, on pages of its own after the title page
             for k, page in enumerate(self.parts_list(parts)):
@@ -2167,9 +2174,17 @@ class Guide:
                 if views[k2].get('_only') == 'full' and 0 < k2 < len(views) - 1 and views[k2 - 1].get('camera', {}).get('flip') and views[k2 + 1].get('camera', {}).get('flip'):
                     self.log.append(f"  NOTE: chapter {c['slug']!r}: the card {views[k2]['caption'][:30]!r}, left out of the Part, sits between turned-over steps")
             core = [copy.deepcopy(v) for v in views[a:b] if v.get('_only') != 'full']
+            for v in core:                                   # (the view after a card only the Full Build has: here it starts afresh)
+                if v.pop('_part_cut', None):
+                    v['cut'] = True
             state = next((v for v in reversed(core) if v['kind'] in ('hover', 'done')), None)
             if state is None:
                 raise SystemExit(f"chapter {c['slug']!r}: it has no step that shows the model")
+            if end_at == len(self.steps) and steps_end < len(views) and views[steps_end]['kind'] == 'end':
+                state = views[steps_end]                     # (the last Part ends where the build does: its model is the Completed View's,
+                                                             #  not the last step's, which may show a sub-assembly in the hand: the MRA's T block)
+            elif self.steps[state['_step']].get('staged'):
+                self.log.append(f"  NOTE: chapter {c['slug']!r} ends inside a sub-assembly built in the hand: its title page and Completed View show only that")
             order = list(dict.fromkeys(v['_step'] for v in core))         # (numbered from 1, step by step: a card only the Part has counts too)
             renamed = {}
             for v in core:
@@ -2200,7 +2215,11 @@ class Guide:
             before = [v for v in views[1:a] if v['kind'] in ('hover', 'done', 'card')]
             seen = {i for v in before for i in v.get('visible', [])}
             shown = {i for v in core for i in v.get('visible', [])}
-            new_ids = [i for i in used if i in shown and i not in seen]
+            relist = list(c.get('relist', ()))
+            for i in relist:                                  # (a typo, or a part this Part does not put back)
+                if i not in shown or i not in seen:
+                    raise SystemExit(f"chapter {c['slug']!r}: relist {i!r} is {'not shown in it' if i not in shown else 'new in it anyway (no earlier Part has it)'}")
+            new_ids = [i for i in used if i in shown and (i not in seen or i in relist)]
             ch_parts = []
             for p in parts:                                   # this Part's own parts: the kinds it brings in, as many as it brings
                 ids = [i for i in p['ids'] if i in new_ids]

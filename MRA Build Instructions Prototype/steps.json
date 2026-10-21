@@ -4,7 +4,8 @@
   "part": "Full Build",
   "copyright": "\u00a9 TechBox. A division of TARIS Industries, LLC. All Rights Reserved.",
   "review_notes": false,
-  "logo": "logo.webp"
+  "logo": "logo.webp",
+  "run": "67d16d6da64e"
  },
  "model": "model.glb?v=46ec7559894a",
  "fov": 45.0,

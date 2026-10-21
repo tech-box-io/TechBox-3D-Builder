@@ -9,6 +9,9 @@
   },
   "guides": {
     "mini-robot-arm-full-build": {"kit": "mini-robot-arm", "steps": "steps.json", "label": "Full Build"},
+    "mini-robot-arm-part-1": {"kit": "mini-robot-arm", "steps": "steps-part-1.json", "label": "Part 1"},
+    "mini-robot-arm-part-2": {"kit": "mini-robot-arm", "steps": "steps-part-2.json", "label": "Part 2"},
+    "mini-robot-arm-part-3": {"kit": "mini-robot-arm", "steps": "steps-part-3.json", "label": "Part 3"},
     "mini-robot-arm-deconstruction": {"kit": "mini-robot-arm", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
     "remote-controlled-car-full-build": {"kit": "remote-controlled-car", "steps": "steps.json", "label": "Full Build"},
     "remote-controlled-car-deconstruction": {"kit": "remote-controlled-car", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},

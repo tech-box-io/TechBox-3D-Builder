@@ -61,6 +61,24 @@ services:
       - path: /mini-robot-arm-full-build/*
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-1
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-1/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-2
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-2/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-3
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /mini-robot-arm-part-3/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
       - path: /mini-robot-arm-deconstruction
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"

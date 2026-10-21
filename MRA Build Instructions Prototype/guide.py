@@ -642,6 +642,12 @@ def bench_lead(ids, motor, pose, plug_info, plug_id, plug_pose=None, height=170.
     return routes(ids, lines, a=motor, b=plug_id, a_at=pose, b_at=plug_pose)
 
 
+# The Full Build is also cut into three Part guides (Lee, 21 Oct 2026): Part 1 the electronics on the bench (Steps 1 - 16), Part 2
+# the base and the controller (Steps 18 - 40), Part 3 the arm and the claw (Steps 41 - 104). The Testing Checklist (Step 17) is the
+# Full Build's only. A Part's parts list is what is new in it, and what it puts back after Part 1 took it off: the servos, unplugged
+# after the test (the Base Servo in Part 2, the other three in Part 3), and the USB cable, unplugged after the test. What Part 1 put
+# together and Part 2 builds in whole (the Nano Board in the I/O module, the joysticks wired to it) is not listed again.
+g.chapter('part-1', part='Part 1: The Electronics')
 g.place('Begin the electronics with the I/O module. Press the Nano Board into it, its USB socket at the same end as the power socket.',
         move=[NANO], show=[MODULE], labels={NANO: 'Nano Board', MODULE: 'Nano I/O Module'})
 
@@ -686,9 +692,10 @@ g.note('Testing Checklist\nGo through the following checklist to make sure you h
        '•  Moving the right joystick forward and back made the Elbow servo (black dot) move.\n'
        '•  Moving the right joystick side to side made the Claw servo (blue dot) move.\n'
        '•  Each servo stopped moving when the joystick was released.\n'
-       '•  The Mini-USB cable was disconnected from the nano after testing.')   # (the checklist's dot colours are right: Lee, 14 Oct 2026)
+       '•  The Mini-USB cable was disconnected from the nano after testing.', only_in='full')   # (the checklist's dot colours are right: Lee, 14 Oct 2026; in no Part: Lee, 21 Oct 2026)
 # The four plugs come off their rows together, straight up, as they went on (the reverse of four plugging steps; one step,
 # as Lee asked, 14 Oct 2026).
+g.chapter('part-2', part='Part 2: The Base and Controller', relist=[BASE_MOTOR])
 g.place('Unplug all four servo motor wires from the I/O module.', ride={b[2]: lifted(b[5], 40.0) for b in BENCH}, lines=False, eye=[ELBOW_PLUG],
         focus=[MODULE, NANO] + [i for b in BENCH for i in b[:3]], focus_pad=1.05,
         caution='Set the servos and the I/O module aside for now. You will use them again in a bit.')
@@ -840,6 +847,9 @@ def horn_leading(hub, horn, inwards, way):
 g.in_hand = [i for i in g.in_hand if i not in JUMPER_CAPS]         # (seat() leaves the joysticks' wire caps "in hand", so they would show in every sub-assembly view from here on)
 A6_FACE = [-0.742, 0.670, 0.0]                                      # the way the engraved face of A6 looks
 upper_arm = [A6, A7, A9_NEAR_A7, A7_SCREW, A8, A9_NEAR_A8, A8_SCREW]
+# (Part 3 ends where the Full Build does: its title page and Completed View are the Full Build's own)
+g.chapter('part-3', part='Part 3: The Arm and Claw', relist=[ELBOW_MOTOR, SHOULDER_MOTOR, CLAW_MOTOR, USB_B],
+          start_view=g.start_view, end_view=g.end_view)
 g.place('Press A7 onto the two tabs of A6 nearest the A6 code. The code on A7 faces out, with its A at the same end as the A6 code.',
         move=[A7], show=[A6], against=[A6], staged=True)
 # (The line follows the tip of the A9's stem right through A6. With the automatic line, which stops at the face of A6, the camera

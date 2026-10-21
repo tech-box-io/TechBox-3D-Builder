@@ -1,0 +1,481 @@
+{
+ "_about": "The Part guides cut from this kit's Full Build (stepgen.py chapter()): for each, its file, its first and last step in the Full Build, the parts it brings in, and its step names -> the Full Build's.",
+ "full_build": "steps.json",
+ "run": "67d16d6da64e",
+ "chapters": [
+  {
+   "slug": "part-1",
+   "part": "Part 1: The Electronics",
+   "file": "steps-part-1.json",
+   "first": "Step 1",
+   "last": "Step 16c",
+   "parts": [
+    {
+     "name": "Nano I/O Module",
+     "qty": 1
+    },
+    {
+     "name": "Nano Board",
+     "qty": 1
+    },
+    {
+     "name": "Joystick",
+     "qty": 2
+    },
+    {
+     "name": "Breadboard Wire (F-F)",
+     "qty": 8
+    },
+    {
+     "name": "Base Servo",
+     "qty": 1
+    },
+    {
+     "name": "Elbow Servo",
+     "qty": 1
+    },
+    {
+     "name": "Shoulder Servo",
+     "qty": 1
+    },
+    {
+     "name": "Claw Servo",
+     "qty": 1
+    },
+    {
+     "name": "USB Cable",
+     "qty": 1
+    }
+   ],
+   "views": {
+    "Step 1": "Step 1",
+    "Step 1c": "Step 1c",
+    "Step 2": "Step 2",
+    "Step 2c": "Step 2c",
+    "Step 3": "Step 3",
+    "Step 3c": "Step 3c",
+    "Step 4": "Step 4",
+    "Step 4c": "Step 4c",
+    "Step 5": "Step 5",
+    "Step 5c": "Step 5c",
+    "Step 6": "Step 6",
+    "Step 6c": "Step 6c",
+    "Step 7": "Step 7",
+    "Step 7c": "Step 7c",
+    "Step 8": "Step 8",
+    "Step 8c": "Step 8c",
+    "Step 9": "Step 9",
+    "Step 9c": "Step 9c",
+    "Step 10": "Step 10",
+    "Step 10c": "Step 10c",
+    "Step 11": "Step 11",
+    "Step 11c": "Step 11c",
+    "Step 12": "Step 12",
+    "Step 12c": "Step 12c",
+    "Step 13": "Step 13",
+    "Step 13c": "Step 13c",
+    "Step 14": "Step 14",
+    "Step 14c": "Step 14c",
+    "Step 15": "Step 15",
+    "Step 15c": "Step 15c",
+    "Step 16": "Step 16",
+    "Step 16c": "Step 16c"
+   }
+  },
+  {
+   "slug": "part-2",
+   "part": "Part 2: The Base and Controller",
+   "file": "steps-part-2.json",
+   "first": "Step 18",
+   "last": "Step 40c",
+   "parts": [
+    {
+     "name": "Base Servo",
+     "qty": 1
+    },
+    {
+     "name": "R1",
+     "qty": 1
+    },
+    {
+     "name": "R2",
+     "qty": 1
+    },
+    {
+     "name": "R3",
+     "qty": 1
+    },
+    {
+     "name": "R4",
+     "qty": 1
+    },
+    {
+     "name": "R5",
+     "qty": 1
+    },
+    {
+     "name": "R6",
+     "qty": 1
+    },
+    {
+     "name": "B2",
+     "qty": 1
+    },
+    {
+     "name": "B1",
+     "qty": 1
+    },
+    {
+     "name": "6mm Hex Screw",
+     "qty": 6
+    },
+    {
+     "name": "B3",
+     "qty": 1
+    },
+    {
+     "name": "B4",
+     "qty": 1
+    },
+    {
+     "name": "B5",
+     "qty": 1
+    },
+    {
+     "name": "B6",
+     "qty": 2
+    },
+    {
+     "name": "B7",
+     "qty": 1
+    },
+    {
+     "name": "B8",
+     "qty": 1
+    }
+   ],
+   "views": {
+    "Step 1": "Step 18",
+    "Step 1c": "Step 18c",
+    "Step 2": "Step 19",
+    "Step 2c": "Step 19c",
+    "Step 3": "Step 20",
+    "Step 3c": "Step 20c",
+    "Step 4": "Step 21",
+    "Step 4c": "Step 21c",
+    "Step 5": "Step 22",
+    "Step 5c": "Step 22c",
+    "Step 6": "Step 23",
+    "Step 6c": "Step 23c",
+    "Step 7": "Step 24",
+    "Step 7c": "Step 24c",
+    "Step 8": "Step 25",
+    "Step 8c": "Step 25c",
+    "Step 9": "Step 26",
+    "Step 9c": "Step 26c",
+    "Step 10": "Step 27",
+    "Step 10c": "Step 27c",
+    "Step 11": "Step 28",
+    "Step 11c": "Step 28c",
+    "Step 12": "Step 29",
+    "Step 12c": "Step 29c",
+    "Step 13": "Step 30",
+    "Step 13c": "Step 30c",
+    "Step 14": "Step 31",
+    "Step 14c": "Step 31c",
+    "Step 15": "Step 32",
+    "Step 15c": "Step 32c",
+    "Step 16": "Step 33",
+    "Step 16c": "Step 33c",
+    "Step 17": "Step 34",
+    "Step 17c": "Step 34c",
+    "Step 18": "Step 35",
+    "Step 18c": "Step 35c",
+    "Step 19": "Step 36",
+    "Step 19c": "Step 36c",
+    "Step 20": "Step 37",
+    "Step 20c": "Step 37c",
+    "Step 21": "Step 38",
+    "Step 21c": "Step 38c",
+    "Step 22": "Step 39",
+    "Step 22c": "Step 39c",
+    "Step 23": "Step 40",
+    "Step 23c": "Step 40c"
+   }
+  },
+  {
+   "slug": "part-3",
+   "part": "Part 3: The Arm and Claw",
+   "file": "steps-part-3.json",
+   "first": "Step 41",
+   "last": "Step 104c",
+   "parts": [
+    {
+     "name": "Elbow Servo",
+     "qty": 1
+    },
+    {
+     "name": "Shoulder Servo",
+     "qty": 1
+    },
+    {
+     "name": "Claw Servo",
+     "qty": 1
+    },
+    {
+     "name": "USB Cable",
+     "qty": 1
+    },
+    {
+     "name": "6mm Hex Screw",
+     "qty": 9
+    },
+    {
+     "name": "A6",
+     "qty": 1
+    },
+    {
+     "name": "A7",
+     "qty": 1
+    },
+    {
+     "name": "A9",
+     "qty": 2
+    },
+    {
+     "name": "16mm Hex Screw",
+     "qty": 4
+    },
+    {
+     "name": "A8",
+     "qty": 1
+    },
+    {
+     "name": "A1",
+     "qty": 1
+    },
+    {
+     "name": "A2",
+     "qty": 1
+    },
+    {
+     "name": "A3",
+     "qty": 1
+    },
+    {
+     "name": "10mm Hex Screw",
+     "qty": 8
+    },
+    {
+     "name": "R8",
+     "qty": 1
+    },
+    {
+     "name": "A4",
+     "qty": 1
+    },
+    {
+     "name": "A5",
+     "qty": 1
+    },
+    {
+     "name": "R7",
+     "qty": 1
+    },
+    {
+     "name": "A10",
+     "qty": 1
+    },
+    {
+     "name": "A11",
+     "qty": 1
+    },
+    {
+     "name": "A12",
+     "qty": 1
+    },
+    {
+     "name": "A13",
+     "qty": 1
+    },
+    {
+     "name": "C3",
+     "qty": 1
+    },
+    {
+     "name": "C1",
+     "qty": 1
+    },
+    {
+     "name": "C2",
+     "qty": 1
+    },
+    {
+     "name": "C4",
+     "qty": 1
+    },
+    {
+     "name": "C5",
+     "qty": 1
+    },
+    {
+     "name": "C6",
+     "qty": 1
+    },
+    {
+     "name": "C7",
+     "qty": 1
+    },
+    {
+     "name": "C9",
+     "qty": 1
+    },
+    {
+     "name": "C8",
+     "qty": 1
+    },
+    {
+     "name": "Servo Extension Wire",
+     "qty": 1
+    },
+    {
+     "name": "T1",
+     "qty": 2
+    },
+    {
+     "name": "T2",
+     "qty": 2
+    }
+   ],
+   "views": {
+    "Step 1": "Step 41",
+    "Step 1c": "Step 41c",
+    "Step 2": "Step 42",
+    "Step 2c": "Step 42c",
+    "Step 3": "Step 43",
+    "Step 3c": "Step 43c",
+    "Step 4": "Step 44",
+    "Step 4c": "Step 44c",
+    "Step 5": "Step 45",
+    "Step 5c": "Step 45c",
+    "Step 6": "Step 46",
+    "Step 6c": "Step 46c",
+    "Step 7": "Step 47",
+    "Step 7c": "Step 47c",
+    "Step 8": "Step 48",
+    "Step 8c": "Step 48c",
+    "Step 9": "Step 49",
+    "Step 9c": "Step 49c",
+    "Step 10": "Step 50",
+    "Step 10c": "Step 50c",
+    "Step 11": "Step 51",
+    "Step 11c": "Step 51c",
+    "Step 12": "Step 52",
+    "Step 12c": "Step 52c",
+    "Step 13": "Step 53",
+    "Step 13c": "Step 53c",
+    "Step 14": "Step 54",
+    "Step 14c": "Step 54c",
+    "Step 15": "Step 55",
+    "Step 15c": "Step 55c",
+    "Step 16": "Step 56",
+    "Step 16c": "Step 56c",
+    "Step 17": "Step 57",
+    "Step 17c": "Step 57c",
+    "Step 18": "Step 58",
+    "Step 18c": "Step 58c",
+    "Step 19": "Step 59",
+    "Step 19c": "Step 59c",
+    "Step 20": "Step 60",
+    "Step 20c": "Step 60c",
+    "Step 21": "Step 61",
+    "Step 21c": "Step 61c",
+    "Step 22": "Step 62",
+    "Step 22c": "Step 62c",
+    "Step 23": "Step 63",
+    "Step 23c": "Step 63c",
+    "Step 24": "Step 64",
+    "Step 24c": "Step 64c",
+    "Step 25": "Step 65",
+    "Step 25c": "Step 65c",
+    "Step 26": "Step 66",
+    "Step 26c": "Step 66c",
+    "Step 27": "Step 67",
+    "Step 27c": "Step 67c",
+    "Step 28": "Step 68",
+    "Step 28c": "Step 68c",
+    "Step 29": "Step 69",
+    "Step 29c": "Step 69c",
+    "Step 30": "Step 70",
+    "Step 30c": "Step 70c",
+    "Step 31": "Step 71",
+    "Step 31c": "Step 71c",
+    "Step 32": "Step 72",
+    "Step 32c": "Step 72c",
+    "Step 33": "Step 73",
+    "Step 33c": "Step 73c",
+    "Step 34": "Step 74",
+    "Step 34c": "Step 74c",
+    "Step 35": "Step 75",
+    "Step 35c": "Step 75c",
+    "Step 36": "Step 76",
+    "Step 37": "Step 77",
+    "Step 37c": "Step 77c",
+    "Step 38": "Step 78",
+    "Step 38c": "Step 78c",
+    "Step 39": "Step 79",
+    "Step 39c": "Step 79c",
+    "Step 40": "Step 80",
+    "Step 40c": "Step 80c",
+    "Step 41": "Step 81",
+    "Step 41c": "Step 81c",
+    "Step 42": "Step 82",
+    "Step 42c": "Step 82c",
+    "Step 43": "Step 83",
+    "Step 43c": "Step 83c",
+    "Step 44": "Step 84",
+    "Step 44c": "Step 84c",
+    "Step 45": "Step 85",
+    "Step 45c": "Step 85c",
+    "Step 46": "Step 86",
+    "Step 46c": "Step 86c",
+    "Step 47": "Step 87",
+    "Step 47c": "Step 87c",
+    "Step 48": "Step 88",
+    "Step 48c": "Step 88c",
+    "Step 49": "Step 89",
+    "Step 49c": "Step 89c",
+    "Step 50": "Step 90",
+    "Step 50c": "Step 90c",
+    "Step 51": "Step 91",
+    "Step 51c": "Step 91c",
+    "Step 52": "Step 92",
+    "Step 52c": "Step 92c",
+    "Step 53": "Step 93",
+    "Step 53c": "Step 93c",
+    "Step 54": "Step 94",
+    "Step 54c": "Step 94c",
+    "Step 55": "Step 95",
+    "Step 55c": "Step 95c",
+    "Step 56": "Step 96",
+    "Step 56c": "Step 96c",
+    "Step 57": "Step 97",
+    "Step 57c": "Step 97c",
+    "Step 58": "Step 98",
+    "Step 58c": "Step 98c",
+    "Step 59": "Step 99",
+    "Step 59c": "Step 99c",
+    "Step 60": "Step 100",
+    "Step 60c": "Step 100c",
+    "Step 61": "Step 101",
+    "Step 61c": "Step 101c",
+    "Step 62": "Step 102",
+    "Step 62c": "Step 102c",
+    "Step 63": "Step 103",
+    "Step 63c": "Step 103c",
+    "Step 64": "Step 104",
+    "Step 64c": "Step 104c"
+   }
+  }
+ ]
+}
