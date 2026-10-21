@@ -87,6 +87,33 @@ window._runthrough = () => {
     }]));
     P.frame(t + 1e6); check(i - 1, 'back');
   });
+  // A part that comes off in stages (`staged_arrows`: the PMG's H11 and H12, toward H1, then up): Step N's arrow shows as the step
+  // starts, the arrow of each later stage while the stage before it plays, and none once the step has played.
+  P.views.forEach((v, i) => {
+    if (!v.staged_arrows || i === 0) return;
+    const beats = Math.max(1, ...Object.entries(v.paths || {}).map(([id, w]) => ((v.path_stops || {})[id] || w).length - 1));
+    P.go(i - 1, false); P.frame(performance.now() + 1e6);
+    P.go(i, true); const t = performance.now(), beat = P.timing.moveDur / beats, first = (P.views[i - 1].arrows || []).length;
+    const solid = k => { const m = st.arrows.children[k]; return !!m && m.visible && (m.material.opacity == null || m.material.opacity > 0.5); };
+    const shownNow = k => { const m = st.arrows.children[k]; return !!m && m.visible && (m.material.opacity == null || m.material.opacity > 0.05); };
+    const checks = [[beat * 0.05, () => { for (let k = 0; k < first; k++) if (!solid(k)) problems.push(`staged ${v.name}: Step N's arrow is not shown as the step starts`); }]];
+    (P.views[i - 1].arrows || []).forEach((a, k) => { if (a.stage >= 1) checks.push([beat * (a.stage - 0.1), () => { if (!solid(k)) problems.push(`staged ${v.name}: Step N's arrow of stage ${a.stage} has gone before its stage`); }]); });
+    let from = first;
+    for (const g of v.staged_arrows) {
+      const ks = g.arrows.map((_, j) => from + j); from += g.arrows.length;
+      checks.push([beat * (g.stage - 1) + 2, () => { if (ks.some(shownNow)) problems.push(`staged ${v.name}: the arrow of stage ${g.stage} shows before its turn`); }]);
+      checks.push([beat * (g.stage - 1 + 0.75), () => { if (!ks.every(solid)) problems.push(`staged ${v.name}: the arrow of stage ${g.stage} is not shown while the stage before it plays`); }]);
+      checks.push([beat * (g.stage + 0.8), () => { if (ks.some(shownNow)) problems.push(`staged ${v.name}: the arrow of stage ${g.stage} is still shown after its own stage`); }]);
+    }
+    run(t, checks);
+    P.frame(t + 1e6);
+    if (st.arrows.children.some(m => m.visible)) problems.push(`staged ${v.name}: an arrow is still shown once the step has played`);
+    // Prev half-way through: Step N comes back with its own arrows, solid
+    P.go(i - 1, false); P.frame(performance.now() + 1e6); P.go(i, true); const t2 = performance.now(); P.frame(t2 + beat * 0.5);
+    P.go(i - 1, true); P.frame(performance.now() + 1e6);
+    if (st.arrows.children.length !== first || !st.arrows.children.every(m => m.visible && (m.material.opacity == null || m.material.opacity >= 0.999)))
+      problems.push(`staged ${v.name}: after Prev half-way, Step N's arrows are not all back and solid`);
+  });
   return {views: n, problems: problems.length, first: problems.slice(0, 12)};
 };
 

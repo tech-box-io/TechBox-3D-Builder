@@ -101052,7 +101052,7 @@
      ],
      "head": [
       611.18,
-      1006.78,
+      1018.98,
       1284.04
      ],
      "normal": [
@@ -101060,7 +101060,7 @@
       0.0,
       0.0
      ],
-     "width": 3.2,
+     "width": 8.2,
      "part": "NAUO282"
     }
    ],
@@ -103290,6 +103290,32 @@
    "leaving": [
     "NAUO74"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        576.27,
+        1009.0,
+        1290.49
+       ],
+       "head": [
+        594.92,
+        1031.21,
+        1290.49
+       ],
+       "normal": [
+        -0.6794,
+        0.5703,
+        -0.4618
+       ],
+       "width": 5.2,
+       "part": "NAUO74"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Swing the top of H14 out from over H11 and H12, then lift its two bottom tabs off the top edge of the dot matrix display.",
    "text_key": "T512EADB8",
@@ -103984,21 +104010,21 @@
    "arrows": [
     {
      "tail": [
-      533.08,
-      974.19,
-      1287.13
+      533.0,
+      974.0,
+      1338.0
      ],
      "head": [
-      534.18,
-      1007.91,
-      1287.18
+      535.04,
+      1036.17,
+      1338.09
      ],
      "normal": [
       -0.7266,
       0.0248,
       -0.6866
      ],
-     "width": 3.2,
+     "width": 8.5,
      "part": "NAUO81"
     }
    ],
@@ -105619,7 +105645,7 @@
      ],
      "head": [
       528.04,
-      1037.32,
+      1059.52,
       1288.5
      ],
      "normal": [
@@ -105627,7 +105653,7 @@
       0.0,
       0.3768
      ],
-     "width": 3.2,
+     "width": 8.5,
      "part": "NAUO81"
     }
    ],
@@ -107283,8 +107309,8 @@
       1293.47
      ],
      "head": [
-      559.92,
-      1007.54,
+      557.78,
+      1021.47,
       1293.47
      ],
      "normal": [
@@ -107292,7 +107318,7 @@
       -0.0493,
       0.946
      ],
-     "width": 1.6,
+     "width": 5.5,
      "part": "NAUO79"
     }
    ],
@@ -109050,7 +109076,7 @@
      ],
      "head": [
       560.05,
-      1027.12,
+      1036.73,
       1293.47
      ],
      "normal": [
@@ -109058,7 +109084,7 @@
       0.0,
       0.019
      ],
-     "width": 1.95,
+     "width": 5.5,
      "part": "NAUO79"
     }
    ],
@@ -110873,15 +110899,15 @@
      ],
      "head": [
       600.73,
-      1004.04,
-      1290.69
+      1047.64,
+      1290.78
      ],
      "normal": [
       0.7077,
       -0.0014,
       0.7066
      ],
-     "width": 3.2,
+     "width": 2.1,
      "part": "NAUO78"
     }
    ],
@@ -114935,8 +114961,8 @@
       1290.49
      ],
      "head": [
-      533.68,
-      1007.22,
+      504.51,
+      1031.67,
       1290.49
      ],
      "normal": [
@@ -114944,7 +114970,7 @@
       0.6237,
       -0.5809
      ],
-     "width": 3.2,
+     "width": 6.1,
      "part": "NAUO75"
     }
    ],
@@ -117265,22 +117291,23 @@
    "arrows": [
     {
      "tail": [
-      558.13,
-      1007.67,
-      1271.02
+      526.0,
+      960.0,
+      1268.5
      ],
      "head": [
-      558.13,
-      1039.93,
-      1271.02
+      488.4,
+      960.0,
+      1268.5
      ],
      "normal": [
-      -0.7071,
       0.0,
-      -0.7071
+      0.7037,
+      -0.7105
      ],
-     "width": 3.2,
-     "part": "NAUO77"
+     "width": 4.5,
+     "part": "NAUO77",
+     "stage": 0
     }
    ],
    "caption": "Slide H12 forward until it comes out of H4, then lift it out of the slot in H10.",
@@ -118454,6 +118481,32 @@
    "leaving": [
     "NAUO77"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        537.4,
+        965.0,
+        1268.5
+       ],
+       "head": [
+        537.4,
+        1008.1,
+        1268.5
+       ],
+       "normal": [
+        -0.7071,
+        0.0,
+        -0.7071
+       ],
+       "width": 5.3,
+       "part": "NAUO77"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Slide H12 forward until it comes out of H4, then lift it out of the slot in H10.",
    "text_key": "T65084273",
@@ -119603,22 +119656,23 @@
    "arrows": [
     {
      "tail": [
-      538.0,
-      972.0,
+      526.0,
+      960.0,
       1312.5
      ],
      "head": [
-      538.0,
-      1006.41,
+      479.9,
+      960.0,
       1312.5
      ],
      "normal": [
-      -0.7071,
       0.0,
-      0.7071
+      0.7037,
+      0.7105
      ],
-     "width": 3.2,
-     "part": "NAUO62"
+     "width": 6.2,
+     "part": "NAUO62",
+     "stage": 0
     }
    ],
    "caption": "Slide H11 forward until it comes out of H4, then lift it out of the slot in H10.",
@@ -120791,6 +120845,32 @@
    "leaving": [
     "NAUO62"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        538.3,
+        965.0,
+        1312.5
+       ],
+       "head": [
+        538.3,
+        1022.2,
+        1312.5
+       ],
+       "normal": [
+        -0.7071,
+        0.0,
+        0.7071
+       ],
+       "width": 6.1,
+       "part": "NAUO62"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Slide H11 forward until it comes out of H4, then lift it out of the slot in H10.",
    "text_key": "TBAB5300E",
@@ -121939,22 +122019,23 @@
    "arrows": [
     {
      "tail": [
-      561.76,
-      940.83,
-      1290.49
+      519.0,
+      936.0,
+      1290.5
      ],
      "head": [
-      565.95,
-      974.67,
-      1290.49
+      525.44,
+      988.0,
+      1290.5
      ],
      "normal": [
       -0.7385,
       0.0914,
       -0.668
      ],
-     "width": 3.2,
-     "part": "NAUO64"
+     "width": 6.7,
+     "part": "NAUO64",
+     "stage": 0
     }
    ],
    "caption": "Lift the front of H10 off H2 and H3, then unhook its rear tabs from the slots in H4.",
@@ -123190,6 +123271,32 @@
    "leaving": [
     "NAUO64"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        520.8,
+        944.96,
+        1290.49
+       ],
+       "head": [
+        407.17,
+        968.78,
+        1290.49
+       ],
+       "normal": [
+        0.1246,
+        0.5942,
+        -0.7946
+       ],
+       "width": 6.9,
+       "part": "NAUO64"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Lift the front of H10 off H2 and H3, then unhook its rear tabs from the slots in H4.",
    "text_key": "T473112A0",
@@ -124339,77 +124446,20 @@
      "tail": [
       461.42,
       914.86,
-      1240.48
+      1290.47
      ],
      "head": [
-      421.42,
+      351.92,
       914.86,
-      1240.48
+      1290.47
      ],
      "normal": [
       0.0,
       0.7037,
       -0.7105
      ],
-     "width": 3.2,
+     "width": 11.8,
      "part": "NAUO72"
-    },
-    {
-     "tail": [
-      461.42,
-      914.86,
-      1273.82
-     ],
-     "head": [
-      421.42,
-      914.86,
-      1273.82
-     ],
-     "normal": [
-      0.0,
-      0.7037,
-      -0.7105
-     ],
-     "width": 3.2,
-     "part": "NAUO71"
-    },
-    {
-     "tail": [
-      461.42,
-      914.86,
-      1307.16
-     ],
-     "head": [
-      421.42,
-      914.86,
-      1307.16
-     ],
-     "normal": [
-      0.0,
-      0.7037,
-      -0.7105
-     ],
-     "width": 3.2,
-     "part": "NAUO70"
-    },
-    {
-     "tail": [
-      461.42,
-      914.86,
-      1340.42
-     ],
-     "head": [
-      421.42,
-      914.86,
-      1340.42
-     ],
-     "normal": [
-      0.0,
-      0.7037,
-      -0.7105
-     ],
-     "width": 3.2,
-     "part": "NAUO69"
     }
    ],
    "caption": "Slide all four piano keys (H9) out of the slots in H4 and back through H8 to the front.",
@@ -126778,7 +126828,7 @@
      ],
      "head": [
       541.13,
-      973.05,
+      1004.75,
       1290.49
      ],
      "normal": [
@@ -126786,7 +126836,7 @@
       0.0,
       -0.7071
      ],
-     "width": 3.2,
+     "width": 6.9,
      "part": "NAUO61"
     }
    ],
@@ -129092,21 +129142,22 @@
     {
      "tail": [
       518.14,
-      892.06,
-      1290.49
+      885.58,
+      1291.46
      ],
      "head": [
       518.14,
-      852.06,
-      1290.49
+      840.58,
+      1295.73
      ],
      "normal": [
-      -0.9701,
-      0.0,
-      -0.2425
+      -0.9536,
+      -0.0285,
+      -0.2998
      ],
-     "width": 3.2,
-     "part": "NAUO68"
+     "width": 8.0,
+     "part": "NAUO68",
+     "stage": 0
     }
    ],
    "caption": "Turn the case over. Swing H7 up out of the notches in H3, then unhook its tabs from the windows in H2.",
@@ -130358,6 +130409,32 @@
    "leaving": [
     "NAUO68"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        518.14,
+        886.46,
+        1220.16
+       ],
+       "head": [
+        518.14,
+        886.46,
+        1174.96
+       ],
+       "normal": [
+        -0.8165,
+        -0.5774,
+        0.0
+       ],
+       "width": 8.0,
+       "part": "NAUO68"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Turn the case over. Swing H7 up out of the notches in H3, then unhook its tabs from the windows in H2.",
    "text_key": "TE7560CFE",
@@ -131124,7 +131201,16 @@
    },
    "guides": [],
    "labels": [],
-   "eye": [],
+   "eye": [
+    {
+     "id": "NAUO83",
+     "anchor": [
+      505.7,
+      904.9,
+      1275.4
+     ]
+    }
+   ],
    "wires": {
     "black VCC": 92,
     "black OUT": 93,
@@ -131506,84 +131592,6 @@
      0.0,
      0.0
     ]
-   ],
-   "arrows": [
-    {
-     "tail": [
-      506.26,
-      894.59,
-      1241.7
-     ],
-     "head": [
-      506.26,
-      870.03,
-      1241.7
-     ],
-     "normal": [
-      0.0227,
-      0.0,
-      -0.9997
-     ],
-     "width": 2.46,
-     "part": "NAUO76"
-    },
-    {
-     "tail": [
-      506.36,
-      894.86,
-      1274.25
-     ],
-     "head": [
-      506.36,
-      870.3,
-      1274.25
-     ],
-     "normal": [
-      0.0227,
-      0.0,
-      -0.9997
-     ],
-     "width": 2.46,
-     "part": "NAUO83"
-    },
-    {
-     "tail": [
-      506.23,
-      894.99,
-      1306.87
-     ],
-     "head": [
-      506.23,
-      870.43,
-      1306.87
-     ],
-     "normal": [
-      0.0227,
-      0.0,
-      -0.9997
-     ],
-     "width": 2.46,
-     "part": "NAUO84"
-    },
-    {
-     "tail": [
-      506.09,
-      893.59,
-      1339.38
-     ],
-     "head": [
-      506.09,
-      869.03,
-      1339.38
-     ],
-     "normal": [
-      0.0227,
-      0.0,
-      -0.9997
-     ],
-     "width": 2.46,
-     "part": "NAUO85"
-    }
    ],
    "caption": "Press the four push buttons out of their pockets in H6 and set them on the table beside the I/O module. Leave their wires connected.",
    "text_key": "TB142CE31",
@@ -134652,16 +134660,16 @@
       1374.63
      ],
      "head": [
-      648.26,
+      648.25,
       942.49,
-      1410.21
+      1419.73
      ],
      "normal": [
       0.8241,
       0.5664,
       0.0007
      ],
-     "width": 3.2,
+     "width": 6.7,
      "part": "NAUO81"
     }
    ],
@@ -137472,16 +137480,16 @@
       1194.55
      ],
      "head": [
-      661.54,
+      661.55,
       924.85,
-      1176.17
+      1163.95
      ],
      "normal": [
       0.8241,
       0.5664,
       0.0009
      ],
-     "width": 1.84,
+     "width": 6.1,
      "part": "NAUO79"
     }
    ],
@@ -137496,10 +137504,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -138891,10 +138899,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -140121,79 +140129,22 @@
    "arrows": [
     {
      "tail": [
-      641.14,
-      965.2,
-      1275.86
+      641.16,
+      965.31,
+      1296.79
      ],
      "head": [
-      640.83,
-      980.2,
-      1275.94
+      640.26,
+      1010.0,
+      1297.02
      ],
      "normal": [
       0.9596,
-      0.0183,
+      0.0179,
       0.2808
      ],
-     "width": 1.6,
+     "width": 9.7,
      "part": "NAUO76"
-    },
-    {
-     "tail": [
-      641.18,
-      965.21,
-      1289.74
-     ],
-     "head": [
-      640.88,
-      980.2,
-      1289.82
-     ],
-     "normal": [
-      0.9597,
-      0.0176,
-      0.2806
-     ],
-     "width": 1.6,
-     "part": "NAUO83"
-    },
-    {
-     "tail": [
-      641.18,
-      965.2,
-      1303.73
-     ],
-     "head": [
-      640.88,
-      980.2,
-      1303.81
-     ],
-     "normal": [
-      0.9596,
-      0.0177,
-      0.2807
-     ],
-     "width": 1.6,
-     "part": "NAUO84"
-    },
-    {
-     "tail": [
-      641.15,
-      965.2,
-      1317.83
-     ],
-     "head": [
-      640.85,
-      980.2,
-      1317.9
-     ],
-     "normal": [
-      0.9596,
-      0.0178,
-      0.2809
-     ],
-     "width": 1.6,
-     "part": "NAUO85"
     }
    ],
    "caption": "Pull the four push buttons off the ends of their wires.",
@@ -140207,10 +140158,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -141520,10 +141471,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -142372,16 +142323,7 @@
    },
    "guides": [],
    "labels": [],
-   "eye": [
-    {
-     "id": "CAP_V7",
-     "anchor": [
-      603.8,
-      932.5,
-      1273.4
-     ]
-    }
-   ],
+   "eye": [],
    "wires": {
     "black VCC": 113,
     "black OUT": 114,
@@ -142596,6 +142538,65 @@
      0.0
     ]
    ],
+   "arrows": [
+    {
+     "tail": [
+      648.29,
+      930.49,
+      1364.63
+     ],
+     "head": [
+      648.29,
+      996.39,
+      1364.63
+     ],
+     "normal": [
+      0.9578,
+      -0.0,
+      0.2873
+     ],
+     "width": 7.3,
+     "part": "NAUO116"
+    },
+    {
+     "tail": [
+      641.44,
+      944.28,
+      1296.72
+     ],
+     "head": [
+      641.44,
+      995.18,
+      1296.72
+     ],
+     "normal": [
+      0.9578,
+      0.0,
+      0.2873
+     ],
+     "width": 7.0,
+     "part": "CAP_V4"
+    },
+    {
+     "tail": [
+      658.61,
+      931.2,
+      1241.35
+     ],
+     "head": [
+      658.61,
+      974.5,
+      1241.35
+     ],
+     "normal": [
+      0.9578,
+      -0.0,
+      0.2873
+     ],
+     "width": 7.0,
+     "part": "NAUO111"
+    }
+   ],
    "caption": "Unplug all 21 breadboard wires from the I/O module.",
    "text_key": "T6798C37D",
    "review": null,
@@ -142607,10 +142608,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -145159,10 +145160,10 @@
     ],
     "target": [
      665.0,
-     915.0,
+     925.0,
      1290.0
     ],
-    "radius": 90.0
+    "radius": 96.0
    },
    "isolated": true
   },
@@ -145247,7 +145248,7 @@
      ],
      "head": [
       673.01,
-      922.55,
+      931.92,
       1306.21
      ],
      "normal": [
@@ -145255,7 +145256,7 @@
       0.0,
       -0.7071
      ],
-     "width": 1.91,
+     "width": 3.0,
      "part": "NANO"
     }
    ],
@@ -145434,21 +145435,22 @@
     {
      "tail": [
       518.17,
-      895.06,
-      1290.49
+      888.57,
+      1291.46
      ],
      "head": [
       518.17,
-      855.06,
-      1290.49
+      854.23,
+      1294.72
      ],
      "normal": [
-      -0.9701,
-      0.0,
-      -0.2425
+      -0.9536,
+      -0.0285,
+      -0.2998
      ],
-     "width": 3.2,
-     "part": "NAUO60"
+     "width": 4.8,
+     "part": "NAUO60",
+     "stage": 0
     }
    ],
    "cut": true,
@@ -145611,6 +145613,32 @@
    "leaving": [
     "NAUO60"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        518.17,
+        889.46,
+        1220.16
+       ],
+       "head": [
+        518.17,
+        889.46,
+        1185.66
+       ],
+       "normal": [
+        -0.8165,
+        -0.5774,
+        0.0
+       ],
+       "width": 4.8,
+       "part": "NAUO60"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "With the case still upside down, swing H6 up out of the notches in H3, then unhook its tabs from the windows in H2.",
    "text_key": "T55D936FF",
@@ -145673,21 +145701,22 @@
     {
      "tail": [
       532.26,
-      897.97,
-      1290.49
+      891.52,
+      1291.46
      ],
      "head": [
       532.26,
-      857.97,
-      1290.49
+      856.88,
+      1294.78
      ],
      "normal": [
-      -0.9701,
-      0.0,
-      -0.2425
+      -0.9535,
+      -0.0287,
+      -0.3001
      ],
-     "width": 3.2,
-     "part": "NAUO67"
+     "width": 3.8,
+     "part": "NAUO67",
+     "stage": 0
     }
    ],
    "caption": "Swing H5 up out of the notches in H3, then unhook its tabs from the windows in H2.",
@@ -145848,6 +145877,32 @@
    "leaving": [
     "NAUO67"
    ],
+   "staged_arrows": [
+    {
+     "stage": 1,
+     "arrows": [
+      {
+       "tail": [
+        532.26,
+        892.42,
+        1220.16
+       ],
+       "head": [
+        532.26,
+        892.42,
+        1185.36
+       ],
+       "normal": [
+        -0.8165,
+        -0.5774,
+        0.0
+       ],
+       "width": 3.8,
+       "part": "NAUO67"
+      }
+     ]
+    }
+   ],
    "away": true,
    "caption": "Swing H5 up out of the notches in H3, then unhook its tabs from the windows in H2.",
    "text_key": "TE57C48C3",
@@ -145913,7 +145968,7 @@
       1290.49
      ],
      "head": [
-      632.36,
+      697.36,
       928.22,
       1290.49
      ],
@@ -145922,7 +145977,7 @@
       0.7037,
       0.7105
      ],
-     "width": 3.2,
+     "width": 7.6,
      "part": "NAUO73"
     }
    ],
@@ -146045,7 +146100,7 @@
       1222.22
      ],
      "head": [
-      635.72,
+      679.85,
       912.69,
       1222.22
      ],
@@ -146054,7 +146109,7 @@
       0.7037,
       -0.7105
      ],
-     "width": 3.2,
+     "width": 7.8,
      "part": "NAUO66"
     }
    ],
@@ -146175,7 +146230,7 @@
       1358.67
      ],
      "head": [
-      634.97,
+      679.85,
       912.69,
       1358.67
      ],
@@ -146184,7 +146239,7 @@
       0.7037,
       0.7105
      ],
-     "width": 3.2,
+     "width": 7.8,
      "part": "NAUO65"
     }
    ],

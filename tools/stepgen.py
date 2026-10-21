@@ -917,7 +917,10 @@ class Guide:
               keep_camera=True: the step before's camera, kept (two steps on one sub-assembly in the hand: Lee, 18 Oct 2026).
           arrow_scale=k: every arrow of the step k times its size; arrow_style={id: dict(scale=, like=id2, at=[x, y, z],
               shift=[dx, dy, dz], face=[x, y, z], keep=True)}: the arrow of the unit with that part, by hand (_arrow_out); like=id2:
-              as big as id2's own arrow (a screw's as its part's, Lee's third round).
+              as big as id2's own arrow (a screw's as its part's, Lee's third round); dims=(length, width) in mm (the PMG's, as TechBox's
+              published take-apart has them); then=[dict(stage=k, dims=, at=, shift=, face=, keep=), ...]: arrows shown in turn as the
+              step plays, each along stage k of the way, drawn where the part is as that stage begins, showing while the stage before it
+              plays and going as its own plays (the published take-apart's arrow swap: the PMG's H12 slid toward H1, then lifted).
           wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
               drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
@@ -1085,6 +1088,18 @@ class Guide:
                     ways[i] = [w[0]] * before + list(w) + [w[-1]] * wait
                     stops[i] = list(range(before)) + [before + k for k in st] + [before + n + j for j in range(1, wait + 1)]
         final = {i: w[-1] for i, w in ways.items()}
+        thens = {i: st for i, st in (arrow_style or {}).items() if st.get('then')}   # (arrows shown in turn, stage by stage: the player
+        if thens:                                     #  times them by the step's beats, so every part moving has as many stages)
+            legs = {i: len(stops.get(i, range(len(ways[i])))) - 1 for i in movers if i in ways}
+            if in_turn or len(set(legs.values())) > 1:
+                raise ValueError(f'{how}({caption[:30]!r}): arrow_style then= needs every part that moves to go in as many stages, '
+                                 f'and no in_turn= ({legs})')
+            n = max(legs.values()) if legs else 0
+            for i, st in thens.items():
+                first, ks = st.get('stage'), [int(t['stage']) for t in st['then']]
+                if first is None or not 0 <= int(first) < n or ks != sorted(set(ks)) or any(not int(first) < k < n for k in ks):
+                    raise ValueError(f'{how}({caption[:30]!r}): arrow_style then= stages come after the first arrow\'s stage= ({first}), '
+                                     f'in order, within the {n} stages of the way ({ks})')
 
         # where the unplugged plugs ride from now on, and what the leads do
         ride_after = {}
@@ -1774,7 +1789,7 @@ class Guide:
                     reach = float(np.linalg.norm(apply_pose(p1, self._pivot(j)) - apply_pose(p0, self._pivot(j))))
                     v = np.asarray(self.model.inst[j].vertices)
                     return self._arrow_dims(reach, float(np.linalg.norm(v.max(0) - v.min(0))))
-                arrows, eyes = [], []
+                arrows, eyes, staged = [], [], {}
                 for unit in s['units']:
                     style = dict(next((s['arrow_style'][i] for i in unit if i in s['arrow_style']), {}))
                     style.setdefault('scale', s['arrow_scale'])
@@ -1783,8 +1798,20 @@ class Guide:
                     a = self._arrow_out(unit, here, {i: stage(i, style.get('stage')) for i in unit}, camera, shown, style)
                     if a and a.pop('end_on', False):                       # (it would point at the camera: an eye on the part instead)
                         eyes.append(dict(id=unit[0]))
-                    elif a:
-                        arrows.append(dict(a, part=unit[0]))                 # (the part it is on: a close-up may show only that one's)
+                    elif a:                                                # (the part it is on: a close-up may show only that one's; and, with
+                        if style.get('then') and style.get('stage') is None:   #  arrows of later stages, the stage it is along, for the player)
+                            raise ValueError(f"{s['caption'][:30]!r}: arrow_style then= needs the first arrow's stage= too")
+                        arrows.append(dict(a, part=unit[0], **({'stage': int(style['stage'])} if style.get('then') else {})))
+                    for then in style.get('then') or []:                   # (and the arrows of its later stages, shown in turn as it plays)
+                        k = int(then['stage'])
+                        at_k = {i: s['ways'][i][list(s['stops'].get(i, range(len(s['ways'][i]))))[k]] for i in unit if i in s['ways']}
+                        sty = dict(then)
+                        sty.setdefault('scale', style['scale'])
+                        b = self._arrow_out(unit, {**here, **at_k}, {i: stage(i, k) for i in unit}, camera, shown, sty)
+                        if b and b.pop('end_on', False):
+                            self.log.append(f"  NOTE: {s['caption'][:40]}: the arrow of stage {k} would point at the camera: left out (keep=True)")
+                        elif b:
+                            staged.setdefault(k, []).append(dict(b, part=unit[0]))
                 s['eye'] = s['eye'] + [e for e in eyes if all(e['id'] != x.get('id') for x in s['eye'])]
                 for item in s['labels'] + s['eye']:                        # leaders end on a spot this camera can see
                     if 'id' in item and 'anchor' not in item:
@@ -1830,6 +1857,7 @@ class Guide:
                                   paths={i: [pose_out(p) for p in way] for i, way in s['ways'].items()}, **({'path_stops': held} if held else {}),
                                   **({'leaving': going} if going else {}), **({'leaving_wires': lead_routes} if lead_routes else {}),
                                   **({'wire_via': {w: [route_no(r) for r in rs] for w, rs in s['wire_via'].items() if w in wires}} if s.get('wire_via') else {}),
+                                  **({'staged_arrows': [dict(stage=k, arrows=staged[k]) for k in sorted(staged)]} if staged else {}),
                                   away=True, **common))
                 for i in s['leave']:                                       # the state from here on
                     parked.pop(i, None)

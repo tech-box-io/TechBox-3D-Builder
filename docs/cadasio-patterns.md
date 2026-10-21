@@ -289,6 +289,15 @@ wired modules lifted out of the case still wired; each device pulled off the end
 together; the Nano Board last of the electronics), within the in-house principles above (the power cable first; the electronics
 taken apart on their own, then back to the case; it ends on the base, H1, with the Full Build's parts list after it).
 
+**Lee, 2026-10-21 (the PMG's take-apart, first round: "H12 and H11's removal have the arrow going upward, which is right, but there's
+a motion toward H1 required first before the lift ... the arrow sizes and sequencing need refinement. Examine the Cadasio"):** a part
+that comes off in stages shows an arrow for each, in turn, as the published take-apart's auto-advancing frames do: Step N the first
+stage's (H11 and H12 toward H1); as the step plays, the next stage's arrow appears while the stage before it plays (then up), and goes
+as its own plays. A still of the step (the step list, the 2D PDF) shows them all at once. The PMG's arrows take the published guide's
+sizes, step by step (docs/research/pmg/deconstruction/published_arrows.txt: mostly 30 - 116 mm long, 4 - 12 mm thick), not the in-house
+15 - 40 mm set for the MRA; groups have one arrow (the four keys, the four buttons off their wires), and the buttons out of their pockets
+an eye, as published.
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |

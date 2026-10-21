@@ -1,0 +1,30 @@
+Published PMG take-apart: every arrow shown, frame by frame (length, shaft width, head width, head length, mm)
+[001] Step 1       L 15.8 w 5.22 head 20.9x17.7 -X & +Y (up) on H14-1 | L 29.0 w 5.24 head 20.9x17.8 -X & +Y (up) on H14-1
+[002] Transition   L 64.4 w 8.77 head 35.1x29.8 +X & +Y (up) on H14-1
+[005] Transition   L 62.2 w 8.54 head 34.2x29.0 +Y (up) on LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-9
+[010] Transition   L 29.1 w 5.46 head 21.8x18.6 +Y (up) on Display TM1637-7
+[014] Step 4       L 83.6 w 2.13 head 10.6x18.1 +Y (up) on Ensamblaje_Shield_NANO-2
+[017] Step 5       L 74.4 w 6.14 head 24.6x20.9 -X & +Y (up) on H13v2-1
+[019] Step 6       L 37.6 w 4.47 head 17.9x15.2 -X on H12v2-2
+[020] Transition   L 43.1 w 5.27 head 21.1x17.9 +Y (up) on H12v2-2
+[022] Step 7       L 46.1 w 6.15 head 24.6x20.9 -X on H11v2-1
+[023] Transition   L 57.2 w 6.14 head 24.5x20.9 +Y (up) on H11v2-1
+[025] Step 8       L 52.4 w 6.71 head 26.8x22.8 +Y (up) on H10-1
+[026] Transition   L 116.1 w 6.86 head 27.5x23.3 -X on H10-1
+[028] Step 9       L 109.5 w 11.8 head 47.2x40.1 -X on PMG_PianoKey_Aug25-3
+[030] Step 10      L 71.7 w 6.9 head 27.6x23.5 +Y (up) on H8-1
+[032] Step 11      L 45.2 w 8.0 head 32.0x27.2 -Y (down) on H7-1
+[033] Transition   L 115.9 w 8.01 head 32.0x27.2 -Z on H7-1
+[037] Step 13      L 34.5 w 4.76 head 19.0x16.2 -Y (down) on H6-1
+[038] Transition   L 114.6 w 4.25 head 17.0x14.4 -Z on H6-1
+[040] Step 14      L 34.8 w 3.76 head 15.1x12.8 -Y (down) on H5-1
+[041] Transition   L 102.7 w 8.18 head 32.7x27.8 -Y (down) & -Z on H5-1
+[043] Step 15      L 105.0 w 7.58 head 30.3x25.8 +X on H4v2-1
+[045] Step 16      L 84.0 w 7.82 head 31.3x26.6 -X on H1-1
+[047] Step 17      L 45.1 w 6.7 head 26.8x22.8 +Z on LED Matrix 32x8 - 4 Modules 8x8 with MAX7219-1
+[049] Step 18      L 65.9 w 7.32 head 29.3x24.9 +Y (up) on V11 to VCC^PMG Full 3D Cadasio Build-3
+[051] Step 19      L 42.2 w 8.23 head 32.9x28.0 +Z on USB Cable end-1
+[053] Step 20      L 44.7 w 9.73 head 38.9x33.1 +Y (up) on Big Button Module-2
+[055] Step 21      L 30.6 w 6.12 head 24.5x20.8 -Z on Display TM1637-4
+[057] Step 22      L 50.9 w 6.97 head 27.9x23.7 +Y (up) on Part44^PMG Full 3D Cadasio Build-1 | L 43.3 w 6.97 head 27.9x23.7 +Y (up) on Wire Cap-14
+[059] Step 23      L 28.5 w 2.96 head 11.9x10.1 +Y (up) on nano-3

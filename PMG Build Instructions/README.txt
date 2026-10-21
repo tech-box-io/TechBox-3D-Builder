@@ -366,6 +366,40 @@ docs/research/pmg/deconstruction/ (the Full Build mapped step by step, the take-
   as in the Full Build's own Steps 46c, 44c, 43c, 32c and 33c (the same pairs and places, mirrored in time), not new here;
   the RCC's and MRA's deconstructions regenerate unchanged with the new generator; published to the test website (release r1).
 
+THE DECONSTRUCTION, LEE'S FIRST ROUND (21 Oct 2026)
+Lee: "H12 and H11's removal have the arrow going upward, which is right, but there's a motion toward H1 required first before the lift.
+... The deconstruction guide is largely good, but the arrow sizes and sequencing need refinement. Examine the Cadasio linked here"
+(TechBox's published take-apart, instructions.online/?id=19075-piano-memory-game-deconstruction). Its data and its 61 step pictures
+were fetched (docs/research/pmg/cadasio/raw, decon_digest, decon_thumbs, decon_sheets) and every arrow measured
+(docs/research/pmg/deconstruction/published_arrows.txt).
+- Arrows in turn, as the published guide's auto-advancing frames swap them: a part that comes off in stages shows Step N's arrow for
+  the first stage; as the step plays, the next stage's arrow appears while the first plays, and goes as its own plays. H12 and H11:
+  toward H1 (from each plate's front edge), then up (from its face). H10: its front up (at its front edge), then out over the keys.
+  H7, H6, H5: swung up, then out of H2's windows (the second as long as the first: ours comes 5 mm out of the windows, where the
+  published plate slides 140 mm along itself). H14: its swing out comes towards the camera, so an eye on its wood as before, then its
+  tabs' lift off the dot matrix display's edge as an arrow (ours leaves forward, the Full Build's way reversed; the published H14 leaves
+  backward, over the stand). The still pictures (the step list, the 2D PDF) show every stage's arrow at once.
+- Sizes: every arrow as long and thick as the matching published one (mostly 30 - 116 mm long, 4 - 12 mm thick), where the in-house
+  rule of 18 Oct (for the MRA) was 15 - 40 mm and at most 3.2 mm. H14's lift arrow is the published first arrows' size (its 64 mm
+  one ran out of this close view). Groups as published: one arrow for the four keys and for the four buttons pulled off their wires;
+  an eye, no arrow, for the buttons out of their pockets (an arrow there hid a button); an arrow over each wire bundle's free ends.
+  The dot matrix display's arrow off its hooks starts at its far end (from its middle it rose across the 4-digit display).
+- Step order unchanged. Where it differs from the published guide: the USB cable first (power off before anything is handled, as the
+  MRA's and the RCC's); each display and the I/O module in two steps (the Full Build's two, each by its own camera: our player keeps
+  one camera per step); the electronics taken apart on their own between the buttons and H6, and the display before the buttons
+  (the published guide finishes the case first, then the electronics on the bench left to right: buttons, then display); it ends on
+  H1 (the published one ends on the bare I/O module, its H2 and H3 vanishing unexplained).
+- New in the generator and the player (for every kit; only this guide uses it): arrow_style then= (arrows in turn, checked: stages
+  after the first, in order, every moving part with as many) and dims=; core.js setArrowAlphas; the run-through checks such arrows (on
+  before their turn, solid while due, gone after their stage, and after Prev half-way); stills draw them all. An independent review
+  (two reviewers) found, and this was changed: H14's arrows ran against our motion; the buttons' arrow hid a button; Step 19's arrow
+  touched the frame (the closer camera now has room above); the arrows of Steps 3, 10, 11 and 12 placed as published; the stills lost
+  the later arrows; small code points (an arrow skipped for zero length shifted the others' fades; a clash of names).
+- Checked: the run-through on all 56 views of the take-apart and on every other guide with the changed player (PMG Full Build 99, MRA
+  211, its deconstruction 151 and Parts 35, 50, 132, RCC 61 and 42, LAC 116, LSM 82 and its deconstruction 52: no problems); every
+  changed step as it opens, with each later arrow while it is due, and its still; the RCC's and MRA's deconstructions regenerate
+  unchanged; published to the test website (release r2).
+
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
   displays, four dot matrices, 139 wire caps, 114 wire bodies). make_source.py cuts it down to pmg-guide.glb (17 MB): one copy of each

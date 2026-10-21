@@ -348,7 +348,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     `keep_camera=True` (the step before's camera: two steps on one sub-assembly). Two of a kind get an arrow each only if they do
     not touch (a motor and its horn, named alike, are one). A sub-assembly taken apart in the hand after sliding off (not turned)
     keeps the Full Build's in-hand cameras, moved with it. Arrows (Lee, 18 Oct 2026: smaller than the published ones): sized to the
-    part, 15 - 40 mm long and 1.6 - 3.2 mm thick; along the longest stage of its way (the module's slide, not the nudge before it);
+    part, 15 - 40 mm long and 1.6 - 3.2 mm thick (the PMG's instead the size of the matching arrow in TechBox's published PMG take-apart,
+    `dims=`: Lee, 21 Oct 2026, "examine the Cadasio"); along the longest stage of its way (the module's slide, not the nudge before it);
     moved on along it until the camera can see it; and one that would point at the camera becomes an eye on the part. A plug moved
     on its lead (walked back) has an eye, no arrow, as an unplug; several things at once can have an eye each (the eight breadboard
     wires: one at each joystick's ends and one at the module's). A part the camera cannot see gets a close-up from the other side
@@ -356,7 +357,12 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     By hand, per step (Lee's third round, 18 Oct 2026): `arrow_scale=k` (every arrow of the step), `arrow_style={id: dict(scale=,
     like=id2 (as big as id2's own arrow: a screw's as its part's), at=[x, y, z] (where its tail is: the top of R7, the edge of B2's
     cut-out), shift=[dx, dy, dz] (raised clear of wires), face=, keep=True (an arrow even towards the camera: the A9s), stage=k (along stage k
-    of its way, 0 the first, not the longest: the RCC's joysticks pulled back out of their sockets))}`. `let_go=[ids]` (remove() and
+    of its way, 0 the first, not the longest: the RCC's joysticks pulled back out of their sockets), dims=(length, width) in mm,
+    then=[dict(stage=k, dims=, at=, ...), ...] (arrows shown in turn as the step plays, each along a later stage of the way and drawn
+    where the part is as that stage begins: it fades in while the stage before it plays and out as its own plays, as the published
+    take-apart's auto-advancing frames swap arrows; Step N's own arrow, with its stage=, stays until its stage plays. The PMG's H12 and
+    H11, toward H1, then up: Lee, 21 Oct 2026; also H14, H10, H7, H6, H5. A still of the step, in the step list and the 2D PDF, draws
+    every stage's arrow at once. Every part the step moves must go in as many stages; no in_turn=))}`. `let_go=[ids]` (remove() and
     lift()): parts riding on what leaves that stay where they are, resting from then on (the caps of a device's jumper wires, the
     device pulled off them: the PMG's displays and push buttons, as TechBox's published take-apart does; the wires stay on the
     module until a later step takes them off it).
