@@ -10,7 +10,8 @@
 # After the first deploy, look at the headers:
 #   for p in / /kits/mini-robot-arm /404.html /mini-robot-arm-full-build /mini-robot-arm-full-build/ /mini-robot-arm-full-build/steps.json; do
 #     echo "== $p"; curl -sI "https://models.tech-box.io$p" | grep -i -E '^(HTTP|content-security-policy|x-frame-options|cache-control)'; done
-# (a guide: content-security-policy: frame-ancestors https://edu.tech-box.io, and x-frame-options: DENY, which browsers ignore
+# (a guide: content-security-policy: frame-ancestors followed by guides.json's embed_origins, e.g. https://edu.tech-box.io
+# https://techbox-front.vercel.app, and x-frame-options: DENY, which browsers ignore
 # when that CSP is there; every other page: x-frame-options: DENY and no CSP;
 # Cache-Control: no-cache everywhere; .js comes as a JavaScript type). Repeat over a few minutes (Render's CDN) and expect the
 # same answers every time; then try a real embed from the LMS, and a frame from anywhere else, which must stay blank.
