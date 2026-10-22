@@ -22,6 +22,17 @@
     "uncommitted_changes": false
    },
    "was": "r1"
+  },
+  {
+   "when": "2026-10-22T14:09:23",
+   "action": "published",
+   "release": "r3",
+   "note": "The current player (Lee, 22 Oct 2026: every guide on the newest player); the steps, model and pictures as in the release before",
+   "source": {
+    "commit": "e7e1a17727652fb361d1d58aa7779060fd5d51f4",
+    "uncommitted_changes": false
+   },
+   "was": "r2"
   }
  ]
 }

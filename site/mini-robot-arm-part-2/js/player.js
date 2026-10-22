@@ -536,6 +536,12 @@ function buildInset(view) {
     const [px, py] = project(anchorOf(it, view), camera, W, H), lx = it.x + it.w / 2, ly = it.y + it.h;
     for (let k = 1; k < 12; k++) { const qx = lx + (px - lx) * k / 12, qy = ly + (py - ly) * k / 12; marks.push([qx - 3, qy - 3, qx + 3, qy + 3]); }
   }
+  for (const a of arrowsOf(view)) {               // (nor over the step's arrows, a take-apart's cue: one of the LSM's four D11 posts', 21 Oct 2026)
+    const [tx, ty] = project(a.tail, camera, W, H), [hx, hy] = project(a.head, camera, W, H);
+    const depth = new THREE.Vector3(...a.tail).applyMatrix4(projWorld || stage.world.matrixWorld).distanceTo(camera.position);
+    const pad = Math.max(10, 2 * (a.width || 4) * H / (2 * Math.tan(THREE.MathUtils.degToRad((data.fov || 45) / 2)) * depth) + 4);   // (its head, 4 widths across)
+    for (let k = 0; k <= 12; k++) { const qx = tx + (hx - tx) * k / 12, qy = ty + (hy - ty) * k / 12; marks.push([qx - pad, qy - pad, qx + pad, qy + pad]); }
+  }
   if (marks.length && clear) marks.push([clear.left - 8, clear.top - 8, clear.right + 8, clear.bottom + 8]);   // (nor, moved, over the instructions)
   marks.push([ax - 2, ay - 2, ax + 2, ay + 2]);   // (nor over the place it shows: asked for the side where that is, with no room beside it in a
   //                                                 narrow window, it covered it, the PMG's Steps 19c - 20c at 760 px; it is then made smaller there)
@@ -577,7 +583,7 @@ const partsText = view => view.parts.map(g => `${g.title}: ` + g.items.map(p => 
 function wordsOf(view) {
   if (view.kind === 'start') return `${data.meta.title}. ${data.meta.part}.`;
   if (view.parts) return `${view.name}. ${partsText(view)}.`;
-  if (view.kind === 'end') return 'The finished model.';
+  if (view.kind === 'end') return data.views.some(v => v.away) ? 'What is left of the model.' : 'The finished model.';   // (a take-apart ends on its base)
   return [view.caption, view.caution && `Caution: ${view.caution}`].filter(Boolean).join(' ');
 }
 // What the speech engine is given: the same words, with the build's shorthand spelled out.
@@ -849,6 +855,14 @@ function go(i, animate = true) {
     anim.dur = anim.moveDur = 2 * FADE_MS; anim.moveAt = 0;
     if (turnAround) anim.t0 = performance.now() - Math.max(0, anim.dur - elapsed);   // (a take-apart's fade turned round half-way: on from there)
   }
+  // A part that comes off in stages (the PMG's H11 and H12: slid toward H1, then lifted, as TechBox's published take-apart shows it):
+  // Step N's arrow is the first stage's; as the step plays, the arrow of each later stage shows while the stage before it plays,
+  // and goes as its own plays (`staged_arrows` on Step Nc). Played backwards, none: Step N's arrow comes back as the step is reached.
+  if (forward && playing && !anim.reappear && from.kind === 'hover' && to.kind === 'done' && to.staged_arrows) {
+    const list = [...arrowsOf(from).map(a => [a.stage || 0, true, a]), ...to.staged_arrows.flatMap(g => g.arrows.map(a => [g.stage, false, a]))];
+    anim.staged = {list: list.map(x => x[2]), at: list.map(x => x[0]), shown: list.map(x => x[1])};
+    stage.setArrows(anim.staged.list);
+  }
   stage.invalidate();
 }
 const vA = new THREE.Vector3(), vB = new THREE.Vector3(), sA = new THREE.Spherical(), sB = new THREE.Spherical();
@@ -871,6 +885,10 @@ function stepAnimation(now) {
   // (the LSM's LED matrix lifted over D4, carried across and laid down, its wires keeping pace); anything else over the whole step.
   const beats = anim.moveDur ? Math.max(1, Math.round(anim.moveDur / STEP_MS)) : 1;
   const paced = n => { if (beats > 1 && n === beats) { const b = Math.min(beats - 1, Math.floor(km * beats)); return (b + ease(km * beats - b)) / beats; } return e; };
+  if (anim.staged) {                         // (the arrows of a part coming off in stages, in turn: see go())
+    const b = Math.min(beats - 1, Math.floor(km * beats)), u = km >= 1 ? 1 : km * beats - b, ramp = x => ease(Math.max(0, Math.min(1, x)));
+    stage.setArrowAlphas(anim.staged.at.map((s, i) => s === b ? 1 - ramp(u / 0.6) : s > b && (anim.staged.shown[i] || s === b + 1) ? (anim.staged.shown[i] ? 1 : ramp(u / 0.4)) : 0));   // (Step N's: until its stage plays)
+  }
   const carry = anim.to.carry || {}, before = (anim.from && anim.from.carry) || {}, back = !!anim.wireVia;
   for (const id in carry) {                  // a part riding with another goes wherever that part is in this frame
     if (!(id in anim.end)) continue;
@@ -919,8 +937,9 @@ function stepAnimation(now) {
     camera.lookAt(controls.target);
   }
   if (k >= 1) {
-    const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade || !!anim.reappear; anim = null;
+    const view = anim.to, gone = anim.leaving.length > 0, faded = !!anim.fade || !!anim.reappear, inTurn = !!anim.staged; anim = null;
     if (gone) stage.setVisible(view.visible);   // (the parts taken off have gone)
+    if (inTurn && view.kind !== 'hover') stage.setArrows([]);   // (the arrows shown in turn have all gone with their stages)
     if (faded) stage.clearFades();
     for (const id in view.ghost || {}) stage.setFade(id, view.ghost[id]);   // (see-through as the view has it, once the step has played)
     if (view.kind === 'hover') { stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view)); buildCallouts(view); }
@@ -1010,6 +1029,9 @@ function renderPartsThumb(i) {
   const img = grid.children[i] && grid.children[i].querySelector('img');
   if (img) img.src = thumbs[i];
 }
+// A still picture of a step whose part comes off in stages (the step list, the 2D PDF: player/js/pages.js) shows every stage's arrow at
+// once, Step N's own with those shown in turn as the step plays (`staged_arrows`): a still cannot play them one after the other.
+const stillArrows = i => { const v = views[i], d = views[i + 1]; return v.kind === 'hover' && d && d.kind === 'done' && d.staged_arrows ? [...arrowsOf(v), ...d.staged_arrows.flatMap(g => g.arrows)] : arrowsOf(v); };
 function renderThumb(i, size) {               // (size [w, h]: a picture of that size, returned and not kept: the website's card picture)
   const view = views[i], W = size ? size[0] : 480, H = size ? size[1] : 300;
   if (view.parts && !size) return renderPartsThumb(i);
@@ -1017,13 +1039,13 @@ function renderThumb(i, size) {               // (size [w, h]: a picture of that
   const {canvas, camera: cam} = stage.snapshot(W, H, {setup: c => {
     const before = {q: stage.world.quaternion.clone(), position: stage.world.position.clone()}, picked = stage.highlighted();
     stage.setHighlight([]);                  // (a part picked on screen is not picked in the pictures)
-    applyState(view); stage.setLeadLines(leadLines(view)); stage.setArrows(arrowsOf(view));
+    applyState(view); stage.setLeadLines(leadLines(view)); stage.setArrows(stillArrows(i));
     if (!flat(view)) stage.setWorld(stage.worldFor(view.camera));
     turn = stage.world.matrixWorld.clone();
     const pose = poseFor({...view, kind: view.kind === 'start' ? 'end' : view.kind}, W / H, !!size);   // (the card: the whole model)
     c.position.copy(pose.position); c.lookAt(pose.target); c.updateMatrixWorld(true);
     return () => {
-      const now = views[cur]; applyState(now, liveOffsets); stage.setLeadLines(anim ? [] : leadLines(now)); stage.setArrows(anim ? [] : arrowsOf(now));
+      const now = views[cur]; applyState(now, liveOffsets); stage.setLeadLines(anim ? [] : leadLines(now)); stage.setArrows(anim ? (anim.staged ? anim.staged.list : []) : arrowsOf(now));
       stage.world.quaternion.copy(before.q); stage.world.position.copy(before.position); stage.world.updateMatrixWorld(true);
       stage.setHighlight(picked);
     };

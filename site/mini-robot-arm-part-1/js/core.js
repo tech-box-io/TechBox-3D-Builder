@@ -301,8 +301,8 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
   const arrows = new THREE.Group();
   world.add(arrows);
   function setArrows(list) {
-    for (const a of [...arrows.children]) { a.geometry.dispose(); arrows.remove(a); }
-    for (const {tail, head, normal = [0, 1, 0], width = 4} of list || []) {
+    for (const a of [...arrows.children]) { a.geometry.dispose(); if (a.material !== arrowMaterial) a.material.dispose(); arrows.remove(a); }
+    for (const [index, {tail, head, normal = [0, 1, 0], width = 4}] of (list || []).entries()) {
       const t = new THREE.Vector3(...tail), d = new THREE.Vector3(...head).sub(t), L = d.length();
       if (L < 1e-6) continue;
       d.divideScalar(L);
@@ -311,8 +311,19 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
       const g = new THREE.BufferGeometry().setFromPoints([at(0, -b), at(L - hl, -b), at(L - hl, b), at(0, b), at(L - hl, -hw), at(L, 0), at(L - hl, hw)]);
       g.setIndex([0, 1, 2, 0, 2, 3, 4, 5, 6]);
       const m = new THREE.Mesh(g, arrowMaterial);
-      m.raycast = () => {}; m.userData.arrow = true;
+      m.raycast = () => {}; m.userData.arrow = true; m.userData.index = index;   // (its place in the list: setArrowAlphas)
       arrows.add(m);
+    }
+    dirty = true;
+  }
+  // How solid each arrow set by setArrows() is now, in its order (a take-apart's arrows shown in turn as a step plays): an arrow
+  // given less than 1 gets a see-through copy of the arrows' look; 1 (or none given) puts the shared one back.
+  function setArrowAlphas(alphas) {
+    for (const m of arrows.children) {
+      const i = m.userData.index, a = alphas[i] == null ? 1 : Math.max(0, Math.min(1, alphas[i]));
+      if (a >= 1) { if (m.material !== arrowMaterial) { m.material.dispose(); m.material = arrowMaterial; } m.visible = true; continue; }
+      if (m.material === arrowMaterial) { m.material = arrowMaterial.clone(); m.material.transparent = true; m.material.depthWrite = false; }
+      m.material.opacity = a; m.visible = a > 0.005;
     }
     dirty = true;
   }
@@ -474,7 +485,7 @@ export async function createStage(container, {modelUrl, fov = 45, padding = 1.08
 
   const setLight = v => { LIGHT.copy(v).normalize(); dirty = true; };   // every material shares this one light direction
   return {THREE, renderer, scene, camera, controls, root, assembly, parts, materials, edgeMaterial, lineMaterial, world, worldFor, setWorld, toWorld, fromWorld, setHighlight, highlighted: () => picked,
-          setOffset, setPose, poseMatrix, setVisible, setFade, clearFades, boundsOf, cameraPose, setLeadLines, setArrows, arrows, setWires, setMarks, wireGroup, setLight, invalidate, resize, frame, snapshot,
+          setOffset, setPose, poseMatrix, setVisible, setFade, clearFades, boundsOf, cameraPose, setLeadLines, setArrows, setArrowAlphas, arrows, setWires, setMarks, wireGroup, setLight, invalidate, resize, frame, snapshot,
           onRender: fn => listeners.push(fn), get width() { return width; }, get height() { return height; },
           contextLost: () => renderer.getContext().isContextLost(),
           info: () => ({calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, lines: renderer.info.render.lines, pixelRatio})};
