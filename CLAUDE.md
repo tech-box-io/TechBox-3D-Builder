@@ -433,22 +433,23 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   the published one showed, or where a published tail was inside a part). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
   swaps models; their wire shapes (laid aside, loose) are drawn and measured in the kit's `wire_shapes.py`. It ends on D1 with the
   breadboard, then straight to the Full Build's parts list (no Completed View). Run it after every Full Build change.
-  The LAC's (`deconstruction.py`, 47 steps, first draft 21 Oct 2026: Lee's "convert / remake" of TechBox's published take-apart,
-  19075-lac_deconstruction, 47 steps): one wire per step, as published; its order where our model allows it, the Full Build walked back
-  (every lead keeps a route the Full Build drew: `leads()`, `stages_back()`, `ride_back()` read them from steps.json; `to_hanging()` takes
-  an unplugged lead on to hang from its part, as before the Full Build plugged it in). F6, F2 (the USB cable walked back out of its slit),
-  F5; the USB cable as soon as its plug can come out (Step 1's caution, as the LSM's); F1 pulled forward and laid aside, still wired; the
-  LCD screen out of F9's notches, then out of the case to lie face down, still wired (the Full Build's two steps); F8; F4 with the switch
-  lifted off and moved out behind the case, still wired; the Full Build's Steps 47 - 41 reversed (F1 moved in front of the breadboard, F9
-  tipped and lifted, the F7s spread, the buzzer out to lie beside the base, the F7s out: the buzzer must be out before any lead near it
-  moves); then each wired part as the Full Build wired them, reversed: the LCD's four wires (the published GND / VCC / SDA / SCL labels)
-  and the LCD, the buzzer's leads and the buzzer, the potentiometer's leads, F1 picked up and held upright and the potentiometer taken
-  apart on its own (knob, nut, washer, out of F1), the yellow and orange wires (before the switch's leads; the published takes them last,
-  where purple, blue and green lift through orange), the switch's leads and the switch out of F4 on its own, the other six jumper wires;
-  the real time clock module, each resistor, the Nano Board, from the published guide's one view of them (its arrows; from the Full
-  Build's jumper camera, 55 degrees up, the up arrows faced the camera and became eyes); it ends on F3 with the breadboard, then the Full
-  Build's parts list. Not mirrored: the published storage refit (its Steps 16 - 18), its rolled views, its cross-fades between posed
-  copies. Arrows the published sizes (docs/research/lac/decon/published_geometry.md), in turn for F9. Run it after every Full Build change.
+  The LAC's (`deconstruction.py`, 50 steps, first draft 21 Oct 2026, Lee's first round 22 Oct: his "convert / remake" of TechBox's
+  published take-apart, 19075-lac_deconstruction, 47 steps): one wire per step (for this kit only: Lee); the Full Build walked back where
+  Lee did not order otherwise (every lead keeps a route the Full Build drew: `leads()`, `stages_back()`, `ride_back()` read them from
+  steps.json; `to_hanging()` takes an unplugged lead on to hang from its part, as before the Full Build plugged it in). F6, F2 (the USB
+  cable walked back out of its slit), F5; the USB cable as soon as its plug can come out (Step 1's caution, as the LSM's); F1 pulled
+  forward and laid aside, still wired; the LCD screen out of F9's notches, then out of the case to lie face down, still wired; F8; F4 with
+  the switch lifted off and moved out behind the case, still wired; F1 moved in front of the breadboard, the F7s spread, the buzzer out
+  to lie beside the base still wired, the F7s out (the buzzer's black lead lies over the potentiometer's leads); the potentiometer, as
+  Lee asked: its leads, F1 picked up, the knob, nut and washer off to wait in a row along the shaft, the potentiometer out of F1, and the
+  washer, nut and knob back on it (`lift()` and `lift(ride_on=)`, as the LSM's nut); the LCD's four wires (the published GND / VCC / SDA /
+  SCL labels) and the LCD; the buzzer's leads and the buzzer; F9 (arrows in turn, an eye on its rear latch, a close-up of its front
+  foot); the yellow and orange wires (before the switch's leads; the published takes them last, where purple, blue and green lift through
+  orange); the switch's leads; the switch out of F4 on its own, its clips squeezed (a close-up with a red box on each); the other six
+  jumper wires; the real time clock module, each resistor, the Nano Board (the Pry Tool caution), from the published guide's one view of
+  them; then straight to the Full Build's parts list (no Completed View). Not mirrored: the published rolled views and its cross-fades
+  between posed copies. Arrows the published sizes (docs/research/lac/decon/published_geometry.md), alike parts alike, in turn for F9.
+  Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is

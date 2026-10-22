@@ -332,6 +332,16 @@ in a step of its own (the push button's nut, screwed back on once the button is 
 replaced onto the push button"); this is the one exception to a part once off being gone for good. A take-apart may go straight from
 its last step to the parts list, with no Completed View (`take_apart(completed_view=False)`).
 
+**Lee, 2026-10-22 (the LAC's take-apart, notes on its first draft, remade from the published one):** one wire per step, for this kit only,
+"given the excess number of wires" (the PMG's and LSM's groups stay theirs). The order follows the published where Lee named it: the
+potentiometer's wires, then the potentiometer out of F1, before F9; F9 last of its sub-assembly, "after the Potentiometer / Buzzer and
+LCD Display are all removed". The potentiometer's washer, nut and knob go back on it once it is out of F1, a step each (as the LSM's
+nut on its button: the published LAC does the same). A latch that holds a part gets an eye "as well" as the part's arrows (F9's lower
+rear latch); clips that must be squeezed get the instruction and a close-up with a red box on each (the rocker switch's, under F4). An
+arrow along a panel's edge starts at that edge and lies parallel to it, as published (F1's lower edge), and starts outside the part's
+surface, never in it (F2; the nut's arrow, not in the potentiometer's body); none reaches into the instruction boxes (F4: shorter than
+the published). A part the kit uses but the model does not show still gets its caution (the Pry Tool for the Nano Board).
+
 ## 12. Numeric defaults
 
 | Setting | Default | Basis |
