@@ -199,7 +199,8 @@ after any change to the guide. The MRA's, 21 Oct 2026, in `share/MRA PDF guides/
 ## Publishing: the website
 
 Learners open the guides on TechBox's website, `https://models.tech-box.io` (a Render static site; TechBox's own LMS,
-`https://edu.tech-box.io`, embeds a guide by iframe). One fixed address per guide: `https://models.tech-box.io/<guide>/`, the
+`https://edu.tech-box.io`, embeds a guide by iframe, and so may its dev LMS, `https://techbox-front.vercel.app`: Lee, 22 Oct 2026;
+only that exact host, not Vercel's preview addresses or a local copy of the LMS). One fixed address per guide: `https://models.tech-box.io/<guide>/`, the
 names in `guides.json` (Lee's: `mini-robot-arm-full-build`, `mini-robot-arm-part-1` ..., `mini-robot-arm-deconstruction`, `remote-controlled-car-full-build`,
 `remote-controlled-car-part-1` ..., `remote-controlled-car-deconstruction`). An address in the LMS must never change.
 The site's own pages, made by `tools/site_pages.py` after every publish (header and footer copied from the LMS, Lee
