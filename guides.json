@@ -5,7 +5,8 @@
     "mini-robot-arm": {"name": "Mini Robot Arm", "code": "MRA", "folder": "MRA Build Instructions Prototype"},
     "remote-controlled-car": {"name": "Remote Controlled Car", "code": "RCC", "folder": "RCC Build Instructions"},
     "laser-stem-matrix": {"name": "Laser Stem Matrix", "code": "LSM", "folder": "LSM Build Instructions"},
-    "piano-memory-game": {"name": "Piano Memory Game", "code": "PMG", "folder": "PMG Build Instructions"}
+    "piano-memory-game": {"name": "Piano Memory Game", "code": "PMG", "folder": "PMG Build Instructions"},
+    "lcd-alarm-clock": {"name": "LCD Alarm Clock", "code": "LAC", "folder": "LAC Build Instructions"}
   },
   "guides": {
     "mini-robot-arm-full-build": {"kit": "mini-robot-arm", "steps": "steps.json", "label": "Full Build"},
@@ -18,6 +19,8 @@
     "laser-stem-matrix-full-build": {"kit": "laser-stem-matrix", "steps": "steps.json", "label": "Full Build"},
     "laser-stem-matrix-deconstruction": {"kit": "laser-stem-matrix", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
     "piano-memory-game-full-build": {"kit": "piano-memory-game", "steps": "steps.json", "label": "Full Build"},
-    "piano-memory-game-deconstruction": {"kit": "piano-memory-game", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"}
+    "piano-memory-game-deconstruction": {"kit": "piano-memory-game", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"},
+    "lcd-alarm-clock-full-build": {"kit": "lcd-alarm-clock", "steps": "steps.json", "label": "Full Build"},
+    "lcd-alarm-clock-deconstruction": {"kit": "lcd-alarm-clock", "steps": "steps-deconstruction.json", "label": "Deconstruction", "script": "deconstruction.py"}
   }
 }
