@@ -287,7 +287,9 @@ g.remove('Disconnect the three breadboard wires from the V+, IN, and V- pins on 
          arrow_style={MATRIX: arrow('Step 15', at=[640.0, 941.0, 1204.0])},   # (the published size)
          eye=[dict(id=WS.FEMALE['purple'], side='near-left')],       # (the published eye)
          caution="Hold the three black connectors while you pull the LED Matrix's pins out of them. Do not pull on the wires themselves.",
-         view_dir=[-0.893, -0.4496, -0.0207], frame=([643.5, 942.9, 1196.6], 47.5))   # (Lee's view)
+         view_dir=[-0.893, -0.4496, -0.0207], frame=([643.5, 952.9, 1196.6], 57.0))   # (Lee's view, its angle: aimed 10 mm higher and
+                                                                    #  drawn back a little, so that the board and the connectors clear
+                                                                    #  the caution box in windows down to 1000 x 680: Lee, 22 Oct 2026)
 # The three wires, still in the breadboard, laid out of the way, out over the box's open end where D4 was and onto the table (Lee, 22 Oct
 # 2026: "Add a step that lays the three wires over the side of the box, still in the breadboard, before the D9s come out"): each keeps
 # its run in the box, under D9_A, and turns out over D1's edge, its connector set down on the table (wire_shapes.py: DRAPED; the run in

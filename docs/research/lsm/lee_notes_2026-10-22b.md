@@ -105,3 +105,10 @@ Checks:
 - The run-through: 53 views, 0 problems.
 - Arrows: all clear at 1280 x 800, and at 1024 x 768 all but Step 1's. Step 11's is 2 px under the caution box at 768 x 560 (was 43).
 - Changed views: Steps 11 (camera, arrow, eye) and 12c - 14 (the connectors' places); no other camera.
+
+Then, on release 6 (Lee): "Yes, lower Step 11's view a little so the board and connectors clear the caution box in smaller windows,
+keeping the same angle." Done: the same direction, aimed 10 mm higher and drawn back from radius 47.5 to 57 (frame ([643.5, 952.9,
+1196.6], 57.0)). The board and the connectors now clear the caution box (the instruction box above it runs to three lines) by 42 px
+at 1024 x 768, more at 1280 x 800, and about 10 px at 1000 x 680. The D9 stays in view at the bottom left, as in Lee's picture:
+raising the aim alone, by 16 mm, pushed it out of the frame. A 768 x 560 window is too small to clear without changing the framing
+(README question 29). Only Step 11's camera changed. The run-through: 53 views, 0 problems.

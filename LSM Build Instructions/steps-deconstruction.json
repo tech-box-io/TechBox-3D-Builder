@@ -23833,10 +23833,10 @@
     ],
     "target": [
      643.5,
-     942.9,
+     952.9,
      1196.6
     ],
-    "radius": 47.5
+    "radius": 57.0
    },
    "caution": "Hold the three black connectors while you pull the LED Matrix's pins out of them. Do not pull on the wires themselves."
   },
@@ -23973,10 +23973,10 @@
     ],
     "target": [
      643.5,
-     942.9,
+     952.9,
      1196.6
     ],
-    "radius": 47.5
+    "radius": 57.0
    },
    "caution": "Hold the three black connectors while you pull the LED Matrix's pins out of them. Do not pull on the wires themselves."
   },
