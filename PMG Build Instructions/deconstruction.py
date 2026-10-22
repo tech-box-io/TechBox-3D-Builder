@@ -208,9 +208,11 @@ for device, caption in ((MATRIX, 'Pull the dot matrix display off the ends of it
     away = -off_the_pins(caps_on(device))                                      #  ride on nothing once let go)
     ends = np.mean([centre(c, where(c)) for c in caps_on(device)], axis=0)   # (the ends of its wires, on its pins)
     g.remove(caption, [device], let_go=caps_on(device), alone=shown, path=[_shifted(where(device), away * 30.0)],
-             arrow_style={device: size('matrix_off', at=(ends + away * 10.0 + [0.0, 18.0, 0.0]).round(2).tolist())} if device == MATRIX
+             arrow_style={device: size('matrix_off', at=(ends + away * 10.0 + [0.0, 40.0, 0.0]).round(2).tolist())} if device == MATRIX
              else {device: size('display_off')},                    # (the dot matrix display's from its pins, above the board: at its far
-             #                                                        end, its arrow left the view in a narrow window)
+             #                                                        end, its arrow left the view in a narrow window; 40 mm up, its head
+             #                                                        clears the board's top: at 18 half of it, tilted towards the camera,
+             #                                                        went into the display, Lee, 21 Oct 2026)
              **(BENCH_VIEW if device == MATRIX else CLOSER))
 g.remove('Pull the four push buttons off the ends of their wires.', BUTTONS, let_go=[c for b in BUTTONS for c in caps_on(b)],
          alone=[i for i in HARNESS + DEVICE_CAPS + MODULE_CAPS if i in g.placed], units=[BUTTONS], keep_camera=True,

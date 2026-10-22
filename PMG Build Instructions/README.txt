@@ -417,6 +417,10 @@ animation. / Step 11 - Same as Step 10".
   nothing wrong in what plays; two small points were changed: a stage= of another part in the same step is renumbered with the rest
   beats too (no guide has one yet), and stepgen.py's remove() docstring describes the new timing. The LSM's deconstruction, committed
   by its session, was made with this rest beat already (its D10, D3, D4 and cable steps). Published to the test website (release r4).
+- Then Lee: "Step 17 - the arrow is partially occluded into the Dot Matrix display". Its arrow was 2.7 mm above the board's top and
+  tilted towards the camera, so the lower half of its head (13 mm each side of the shaft) went into the display. Now it is 40 mm
+  above the pins' ends (it was 18), its head about 14 mm clear of the top, still from the pin end along the pull. Checked at 1440 and
+  760 wide; only Step 17 changed, no camera; the run-through on all 56 views. Published to the test website (release r5).
 
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
