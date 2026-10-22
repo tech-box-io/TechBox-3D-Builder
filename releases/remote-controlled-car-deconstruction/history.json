@@ -11,6 +11,16 @@
     "uncommitted_changes": false
    },
    "was": null
+  },
+  {
+   "when": "2026-10-22T12:28:14",
+   "action": "published",
+   "release": "r2",
+   "note": "Lee, 22 Oct 2026: no Completed View; the Full Build's parts list pages after Step 20c, as the other kits' (and the current player)",
+   "source": {
+    "commit": "f2bed23ca25ca9245bbb460fb941b0356dc33143",
+    "uncommitted_changes": false
+   }
   }
  ]
 }

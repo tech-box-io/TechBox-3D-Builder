@@ -33,6 +33,16 @@
     "uncommitted_changes": false
    },
    "was": "r2"
+  },
+  {
+   "when": "2026-10-22T12:28:09",
+   "action": "published",
+   "release": "r4",
+   "note": "Lee, 22 Oct 2026: no Completed View; Step 73c leads straight to the parts list (and the current player)",
+   "source": {
+    "commit": "f2bed23ca25ca9245bbb460fb941b0356dc33143",
+    "uncommitted_changes": false
+   }
   }
  ]
 }
