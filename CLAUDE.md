@@ -156,6 +156,7 @@ Run from this folder. The Python environment is `.venv.nosync` (the Desktop is i
     .venv.nosync/bin/python "MRA Build Instructions Prototype/deconstruction.py"   # then the deconstruction, made from the Full Build
     .venv.nosync/bin/python "RCC Build Instructions/deconstruction.py"            # (the RCC's, likewise, after its guide.py)
     .venv.nosync/bin/python "PMG Build Instructions/deconstruction.py"            # (the PMG's, likewise, after its guide.py)
+    .venv.nosync/bin/python "LAC Build Instructions/deconstruction.py"            # (the LAC's, likewise, after its guide.py)
     .venv.nosync/bin/python tools/build_model.py "MRA Build Instructions Prototype" # after editing materials.json or replacing the CAD
     .venv.nosync/bin/python "MRA Build Instructions Prototype/silkscreen.py"       # after editing the module's printing (then build_model)
     /usr/bin/python3 tools/serve.py "MRA Build Instructions Prototype" 8791         # local server; then open http://localhost:8791/player.html
@@ -337,7 +338,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
 - **When Lee asks for a change to a step in a Part, ask whether it should also be in the Full Build** (and so in every guide
   that shares the step) **or in that Part only**, unless Lee has said; then say which was done. A Part's Start, Completed View,
   title card and Parts List are that Part's alone. Lee may name a step as "Part 2, Step 5" or by its Full Build number.
-- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026; the PMG's and the LSM's, 21 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
+- **A deconstruction guide** (the MRA's and the RCC's, first drafts 18 Oct 2026; the PMG's, the LSM's and the LAC's, 21 Oct 2026) is a script of its own in the kit folder (e.g. `deconstruction.py`, named in its
   `guides.json` entry as `"script"`): `Guide(..., part='Deconstruction', steps_file='steps-deconstruction.json')`, then
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
   Full Build's title page (`take_apart(leave_out=[ids])`: parts the Full Build put away for good, which would otherwise come back as
@@ -431,6 +432,22 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   the published one showed). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
   swaps models; their wire shapes (laid aside, loose) are drawn and measured in the kit's `wire_shapes.py`. It ends on D1 with the
   breadboard, then the Full Build's parts list. Run it after every Full Build change.
+  The LAC's (`deconstruction.py`, 47 steps, first draft 21 Oct 2026: Lee's "convert / remake" of TechBox's published take-apart,
+  19075-lac_deconstruction, 47 steps): one wire per step, as published; its order where our model allows it, the Full Build walked back
+  (every lead keeps a route the Full Build drew: `leads()`, `stages_back()`, `ride_back()` read them from steps.json; `to_hanging()` takes
+  an unplugged lead on to hang from its part, as before the Full Build plugged it in). F6, F2 (the USB cable walked back out of its slit),
+  F5; the USB cable as soon as its plug can come out (Step 1's caution, as the LSM's); F1 pulled forward and laid aside, still wired; the
+  LCD screen out of F9's notches, then out of the case to lie face down, still wired (the Full Build's two steps); F8; F4 with the switch
+  lifted off and moved out behind the case, still wired; the Full Build's Steps 47 - 41 reversed (F1 moved in front of the breadboard, F9
+  tipped and lifted, the F7s spread, the buzzer out to lie beside the base, the F7s out: the buzzer must be out before any lead near it
+  moves); then each wired part as the Full Build wired them, reversed: the LCD's four wires (the published GND / VCC / SDA / SCL labels)
+  and the LCD, the buzzer's leads and the buzzer, the potentiometer's leads, F1 picked up and held upright and the potentiometer taken
+  apart on its own (knob, nut, washer, out of F1), the yellow and orange wires (before the switch's leads; the published takes them last,
+  where purple, blue and green lift through orange), the switch's leads and the switch out of F4 on its own, the other six jumper wires;
+  the real time clock module, each resistor, the Nano Board, from the published guide's one view of them (its arrows; from the Full
+  Build's jumper camera, 55 degrees up, the up arrows faced the camera and became eyes); it ends on F3 with the breadboard, then the Full
+  Build's parts list. Not mirrored: the published storage refit (its Steps 16 - 18), its rolled views, its cross-fades between posed
+  copies. Arrows the published sizes (docs/research/lac/decon/published_geometry.md), in turn for F9. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
@@ -509,7 +526,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                Lee, 21 Oct 2026), f4.glb (F4 seated: the STEP has it only lying beside the base); f2.glb, f5.glb,
                                f6.glb from Lee's F2/F5/F6.STEP (19 Oct 2026), placed where TechBox's Cadasio project has them. Wire routes
                                re-drawn clear of every part and wire (docs/research/lac/scripts/routing/: a path search through the closed
-                               case). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
+                               case). deconstruction.py -> steps-deconstruction.json (the take-apart, made from the Full Build: first draft
+                               21 Oct 2026; docs/research/lac/decon/). Research: docs/research/lac/. Server on port 8793 ("Open Prototype.command").
     LSM Build Instructions/    the Laser Stem Matrix (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-lsm.json (make_atlas.py),
                                lsm.glb made by the kit's assemble.py: Lee's STEPs hold no working assembly (the loose parts files
                                LSM_WoodSteps / LSM_Electronics, a Full Build export missing the Nano, D4 - D10 and the stems), so each part is

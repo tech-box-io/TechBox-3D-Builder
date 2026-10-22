@@ -1,6 +1,6 @@
 LAC Build Instructions (LCD Alarm Clock, Full Build: the electronics on the breadboard, wired one wire at a time, then the box)
 
-FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
+FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). DECONSTRUCTION, first draft 21 Oct 2026 (THE DECONSTRUCTION below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
 guide for the kit (instructions.online/?id=19075-lac_full_build), in the same format and with the same player as the MRA and RCC
 guides (player/ was not changed). Not for distribution. Open questions are under QUESTIONS FOR LEE below.
 
@@ -11,6 +11,7 @@ HOW TO OPEN (Mac)
 2. When you are done, close the Terminal window. No internet connection is needed.
 The controls are the MRA guide's: arrows step through, drag to rotate, scroll to zoom, Option-click a spot to copy where it is, the
 grid button shows every step, ?review=0 hides the Review notes.
+The deconstruction: player.html?steps=steps-deconstruction.json (the same server).
 
 THE BUILD (57 steps, with the published numbers: Step 29 here lays F1 face down where the published Step 29 turns the knob (question
 2). Until F9 was given its two published steps (Lee, 21 Oct 2026), a step from 46 on was numbered one lower here, as in Lee's notes of
@@ -67,6 +68,46 @@ THE BUILD (57 steps, with the published numbers: Step 29 here lays F1 face down 
   through the LCD's four wires for about 50 ms (Step 43c: question 11), and 16 where the potentiometer's leads brush the wires of
   the bundle for a moment as their run in the case changes (Steps 47c and 53c, as after the first round). Lee's first round was
   left at 63 moments of 19 per move; before it, 132. Cameras: only those of Steps 16 - 18, 30 - 35, 50 and 51 changed in this round, and F9's two steps have the published one.
+
+THE DECONSTRUCTION (47 numbered steps, as the published; first draft 21 Oct 2026. Lee: "we need to make a deconstruction guide for this
+LAC as well. Here is the published version of the guide that we need to convert / remake here: instructions.online/?id=19075-lac_deconstruction")
+deconstruction.py -> steps-deconstruction.json; open it with player.html?steps=steps-deconstruction.json. TechBox's published take-apart
+(47 steps) remade on our Full Build: one wire per step, as published; its order where our model allows it; every step a caption of its
+own; each arrow the published one's size (an arrow per stage, in turn, for F9: the tip, then the lift; one arrow where a lead changes
+shape on the way: F2, F4 and the buzzer; the up arrows only for the F7s, as published). It opens on the Full Build's title page,
+ends on F3 with the breadboard (stuck on for good, as published), followed by the Full Build's parts list; its website card would be the
+Full Build's. Every wire keeps a shape the Full Build drew (each route is one of the Full Build's); the steps walk the Full Build back,
+except that the USB cable comes out at Step 4 (power first), and that one wire a step keeps the published order where it clears.
+The plan and its reasons: docs/research/lac/decon/plan.md (the published guide mapped onto ours: study_map.md; its cameras, arrows and
+poses in our frame: published_geometry.md).
+- Steps 1 - 4: F6, F2 (the USB cable back out of its slit as F2 swings out and slides off), F5 (Step 1's caution: unplug the USB cable
+  from the computer first; the closed case holds its plug); then the USB cable, as soon as its plug can come out (published: Step 25).
+- Steps 5 - 10: F1 pulled forward and laid face down aside, still wired; the LCD screen out of F9's notches (a close-up of them), then
+  out of the case and laid face down, still wired (two steps, as the Full Build brought it in); F8; F4 lifted off with the switch and
+  moved out behind the case, still wired (held up where the Full Build held it).
+- Steps 11 - 15 (the Full Build's Steps 47 - 41 backwards): F1 moved in front of the breadboard's end (not in the published: ours lies
+  face down where the published one lies face up, and the potentiometer's leads were plugged in with it there); F9 tipped, then lifted (a close-up of its
+  front foot under F3); the F7s spread; the buzzer lifted out to lie beside the case, still wired; the F7s let close, then pulled out.
+- Steps 16 - 23: the LCD's four wires, one a step (GND, VCC, SDA, SCL labelled on its pins, as published), the LCD; the buzzer's red and
+  black leads, the buzzer.
+- Steps 24 - 31: the potentiometer's black, tan and red leads (each left hanging from it, as before the Full Build plugged it in); F1
+  picked up and held upright (not in the published: see Step 11); on its own: the knob, the nut (unscrewed), the washer (seen as the
+  published sees them), and the potentiometer pushed out of F1's back.
+- Steps 32 - 47: the yellow and orange jumper wires; the switch's black, tan and red leads, the switch pushed out of F4 (on its own); the
+  white, dark red, purple, blue, green and black jumper wires; the real time clock module; each 12 kΩ resistor; the Nano Board. Steps 38
+  - 47 share one camera, as the published's Steps 36 - 47 do.
+- Not taken from the published guide: putting the washer, nut and knob back on the potentiometer for storage (its Steps 16 - 18:
+  nothing is refitted); its views turned on their side (F2, the potentiometer: our player keeps up as up); its fades between copies of
+  a part in two places (here the parts move); its order where it would pass our wires through each other (the potentiometer's and the
+  LCD's wires before the buzzer is out; the orange jumper last, over purple, blue and green; the switch's leads before orange and yellow).
+- Checked (21 Oct 2026): the player's run-through check passes on every view (98 views, forwards, backwards and jumping, 0 problems);
+  at rest every wire is clear of the parts and of the other wires (tools/wirecheck.py, 0 problems); during the moves (tools/motioncheck.py,
+  39 moments a move) 19 brief contacts, 17 of them the Full Build's own, played backwards (Steps 6c, 11c and 14c are its Steps 53c,
+  47c and 43c), and two small new ones: the potentiometer's black lead against its tan for a moment as it is unplugged (Step 24c,
+  0.65 mm) and the switch's black and tan leads (Step 35c, as the Full Build's Step 17). An independent review (three reviewers, each
+  finding checked by a fourth: docs/research/lac/decon/review/) moved arrows and eyes off the parts and cables they covered (Steps 2, 3,
+  7, 9, 11 - 16, 34 - 43), framed Steps 6, 21 and 28 - 30 afresh, and reworded Steps 2, 6, 10 - 12, 14 and 44; looked at 1280 x 800
+  and 768 x 1024.
 
 LEE'S FIRST ROUND (20 Oct 2026)
 - The 12 kΩ resistor is named so everywhere (the parts list, labels, captions; "2x - 12 kΩ Resistor" on Step 4).
@@ -178,6 +219,38 @@ QUESTIONS FOR LEE
    high, its leads look stiff for a moment (a long black line over the board, a red post behind the caps); softer shapes are possible.
 12. Step 50's label (up and to the right of F8, as asked) lands on F8 in windows under about 880 px wide (an iPad in the LMS is 768):
    'up-left' is clear at every width.
+13. (Deconstruction) One wire per step, as the published (47 steps), or in groups as your rule of 21 Oct for the PMG and the LSM's draft
+   (32 steps: the LCD's four wires at once, each part's leads at once, orange and yellow together, the other six jumper wires
+   together, both resistors)? The draft follows the published.
+14. (Deconstruction) The USB cable at Step 4 (power first, as soon as its plug can come out; Step 1 says to unplug it from the computer),
+   or where the published has it, after F9 (its Step 25)?
+15. (Deconstruction) The order after F4: the published unplugs the potentiometer, then the LCD, then takes F9, the USB cable, the F7s
+   and the buzzer; ours takes F9, the F7s and the buzzer out first, then the LCD's wires, the buzzer's, the potentiometer's, as our
+   Full Build put them in, reversed. In the published order our potentiometer's and LCD's wires would pass through the buzzer's black
+   wire, and purple, blue and green through orange (so orange and yellow come first here). Fine?
+16. (Deconstruction) The potentiometer: our F1 lies face down (knob down) where the published lies face up, so the draft moves F1 in
+   front of the breadboard (Step 11), unplugs its three wires (each left hanging from it), then picks F1 up and holds it upright (Step
+   27) to take off the knob, nut and washer, as the Full Build put them on. Two steps more than the published. Fine?
+17. (Deconstruction) The published puts the washer, nut and knob back on the loose potentiometer for storage (its Steps 16 - 18). Left
+   out (your rule: nothing refitted). A note card at the end instead ("Put the washer, nut and knob back on the potentiometer to
+   store it")?
+18. (Deconstruction) The LCD screen out in two steps (Steps 7 and 8: out of F9's notches, then out of the case and laid down, as the
+   Full Build brought it in), or one, as published?
+19. (Deconstruction) The GND / VCC / SDA / SCL labels on the LCD's wire steps (Steps 16 - 19; the published guide's only text): keep?
+20. (Deconstruction) Arrows: an arrow per stage, in turn (your PMG rule), cannot be combined with a wire that changes shape stage by
+   stage, so F2, F4 and the buzzer (Steps 2, 10, 14) have one arrow; a small generator change would allow both (it touches every kit):
+   want it? Step 15: the F7s close, then lift; the published draws only the up arrows, so does the draft (F7A's where it will be once
+   closed, as F4 is held up over its spread top). Add an inward arrow first?
+21. (Deconstruction) The LCD screen and the buzzer, once off their wires, lift 30 mm and fade, with an eye (published: they fade where
+   they lie). Fine?
+22. (Deconstruction) Two Review notes: Step 37, does the rocker switch have clips to squeeze before it can be pushed out of F4?
+   Step 47, does the LAC kit have a Pry Tool (if so, the MRA's and LSM's caution)?
+23. (Deconstruction, and Full Build Steps 29c - 32) The potentiometer's unplugged leads stick straight out from it, as the Full Build
+   draws them before they are plugged in. Droop them onto the table instead (a change in the Full Build, which the take-apart follows)?
+24. (Deconstruction) Two small brushes for a moment: the potentiometer's black lead against its tan as it is unplugged (Step 24) and
+   the switch's black and tan leads (Step 35). Fine, or unplug the tan first in each?
+25. (Deconstruction) Its website address: lcd-alarm-clock-deconstruction (with the kit lcd-alarm-clock and lcd-alarm-clock-full-build,
+   question 7)?
 9. The potentiometer's knob: TechBox's Cadasio project draws a silver ring round the end of the knob (and a silver pointer groove), so
    the guide keeps it and only stops the black showing through. If the real knob is all black, it is a one-line change to make it so.
 
@@ -192,5 +265,8 @@ FILES
   f2.glb, f5.glb, f6.glb        the back and end panels, from Lee's F2.STEP, F5.STEP, F6.STEP (extra parts; the STEPs stay out of git,
                                 their checksums in cad-sources.sha256)
   steps.json, parts.json, model.glb, model.report.json, parts/   generated; do not edit by hand
+  deconstruction.py             the take-apart (run it after guide.py: .venv.nosync/bin/python "LAC Build Instructions/deconstruction.py")
+  steps-deconstruction.json     generated by it; do not edit by hand
   logo.webp                     the title page's logo (the RCC's)
-  Research: docs/research/lac/ (cad_study.md; cadasio/ the published guide's data and step pictures; scripts/).
+  Research: docs/research/lac/ (cad_study.md; cadasio/ the published guide's data and step pictures; scripts/; decon/ the take-apart:
+  the published guide's data and pictures, the studies, the plan, the review).

@@ -1,0 +1,65 @@
+take_apart(): from steps.json as it ends (57 parts, 25 leads)
+Pull F6 off the end of the case nearest the knob.          remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Swing the free end of F2 out from the case. Then slide F2  remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Pull F5 off the other end of the case.                     remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Unplug the USB cable's small end from the Nano Board's USB remove 2 part(s), the Full Build's way, reversed, 1 arrow(s), 1 lead(s) with them
+  WARNING: Pull F1 forward off the tabs of F3 and F: F4 looks plugged into a part that is lifted, and stays behind: list it with them
+  WARNING: Pull F1 forward off the tabs of F3 and F: LCD Screen looks plugged into a part that is lifted, and stays behind: list it with them
+Pull F1 forward off the tabs of F3 and F4. Leave the poten lift   2 part(s), the Full Build's way, reversed, 1 arrow(s)
+Lay F1 face down in front of the case, toward the end wher lift   1 part(s), by hand
+Slide the LCD screen toward F8 until its board comes out o lift   1 part(s), the Full Build's way, reversed
+Slide the LCD screen out of the slots in F8, bring it out  lift   1 part(s), by hand
+Slide F8 out of the slots in F3 and F4, toward the front.  remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Lift F4, with the rocker switch, off the tabs of the F7s a lift   1 part(s), by hand, 1 arrow(s)
+Move F1, still face down, back in front of the end of the  lift   1 part(s), by hand
+Tip the top of F9 toward the front to lift its back foot o remove 1 part(s), by hand, 1 arrow(s)
+Gently pull the tops of the two F7s apart to free the alar lift   2 part(s), by hand
+Lift the alarm buzzer out from between the two F7s and lay lift   1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Let the two F7s close, then pull them up out of their slot remove 2 part(s), by hand, 2 arrow(s)
+Disconnect the purple wire from GND on the LCD screen and  remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the yellow wire from VCC on the LCD screen and  remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the teal wire from SDA on the LCD screen and fr remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the blue wire from SCL on the LCD screen and fr remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Remove the LCD screen.                                     remove 1 part(s), by hand
+Disconnect the buzzer's red wire from j4.                  unplug 1 part(s), the Full Build's way, reversed
+Disconnect the buzzer's black wire from (-) blue.          unplug 1 part(s), the Full Build's way, reversed
+Remove the alarm buzzer.                                   remove 3 part(s), by hand, 2 lead(s) with them
+Disconnect the potentiometer's black wire from (-) blue.   unplug 1 part(s), by hand
+Disconnect the potentiometer's tan wire from a5.           unplug 1 part(s), by hand
+Disconnect the potentiometer's red wire from (+) red.      unplug 1 part(s), by hand
+Pick up F1 with the potentiometer and hold it upright, the lift   1 part(s), by hand
+Pull the knob straight off the end of the potentiometer's  remove 1 part(s), by hand, 1 arrow(s)
+Unscrew the nut and slide it off the shaft.                remove 1 part(s), by hand, 1 arrow(s)
+Slide the washer off the shaft.                            remove 1 part(s), by hand, 1 arrow(s)
+Push the potentiometer out through the back of F1.         remove 4 part(s), by hand, 1 arrow(s), 3 lead(s) with them
+Disconnect the yellow jumper wire from j3 and i29.         remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the orange jumper wire from j1 and i27.         remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the switch's black wire from j29.               unplug 1 part(s), by hand
+Disconnect the switch's tan wire from (+) red.             unplug 1 part(s), by hand
+Disconnect the switch's red wire from j27.                 unplug 1 part(s), by hand
+Push the rocker switch up out of the square hole in F4.    remove 4 part(s), by hand, 1 arrow(s), 3 lead(s) with them
+Disconnect the white jumper wire from a14 and (-) blue.    remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the dark red jumper wire from a12 and (+) red.  remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the purple jumper wire from a8 and i22.         remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the blue jumper wire from a9 and i21.           remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the green jumper wire from (-) blue and i24.    remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Disconnect the black jumper wire from i23 and (+) red.     remove 2 part(s), the Full Build's way, reversed, 1 lead(s) with them
+Pull the real time clock module out of row j, j19 to j24.  remove 2 part(s), the Full Build's way, reversed, 1 arrow(s)
+Pull a 12 kΩ resistor out of (-) blue and h27.             remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Pull the other 12 kΩ resistor out of (-) blue and h29.     remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Remove the Nano Board from the breadboard.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+  NOTE: Pull F6 off the end of the case nearest : the Full Build's camera leaves out USB Cable, lying aside (new_camera=True, or alone=)
+  NOTE: Pull F5 off the other end of the case.: the Full Build's camera leaves out USB Cable, lying aside (new_camera=True, or alone=)
+  NOTE: Slide the LCD screen toward F8 until its: the Full Build's camera leaves out F1, lying aside (new_camera=True, or alone=)
+  NOTE: Slide F8 out of the slots in F3 and F4, : the Full Build's camera leaves out F1, LCD Screen, lying aside (new_camera=True, or alone=)
+  NOTE: Lift the alarm buzzer out from between t: the Full Build's camera leaves out F1, LCD Screen, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the purple wire from GND on t: the Full Build's camera leaves out F4, F1, Alarm Buzzer, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the yellow wire from VCC on t: the Full Build's camera leaves out F4, F1, Alarm Buzzer, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the teal wire from SDA on the: the Full Build's camera leaves out F4, F1, Alarm Buzzer, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the blue wire from SCL on the: the Full Build's camera leaves out F4, F1, Alarm Buzzer, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the buzzer's red wire from j4: the Full Build's camera leaves out F4, F1, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the buzzer's black wire from : the Full Build's camera leaves out F4, F1, Alarm Buzzer, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the yellow jumper wire from j: the Full Build's camera leaves out F4, lying aside (new_camera=True, or alone=)
+  NOTE: Disconnect the orange jumper wire from j: the Full Build's camera leaves out F4, lying aside (new_camera=True, or alone=)
+50 steps -> 98 views, 23 parts, 25 wires; wrote steps-deconstruction.json
+exit 0, peak RSS 1956 MB
