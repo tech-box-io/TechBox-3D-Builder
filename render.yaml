@@ -121,4 +121,16 @@ services:
       - path: /piano-memory-game-deconstruction/*
         name: Content-Security-Policy
         value: "frame-ancestors https://edu.tech-box.io"
+      - path: /lcd-alarm-clock-full-build
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /lcd-alarm-clock-full-build/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /lcd-alarm-clock-deconstruction
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
+      - path: /lcd-alarm-clock-deconstruction/*
+        name: Content-Security-Policy
+        value: "frame-ancestors https://edu.tech-box.io"
       # END guide framing
