@@ -34,7 +34,8 @@ USB_B, USB_A = 'USB_B', 'USB_A'                                     # the USB ca
 JUMPERS = ['white', 'grey', 'purple']                               # the three-wire jumper ribbon, in ribbon order
 # The colour each is drawn in and called by: the first was drawn white, too like the light grey one beside it, so it is yellow (Lee,
 # 20 Oct 2026); the code still calls it 'white' (its caps are J_WHITE_M / J_WHITE_F in lsm.glb).
-SHOWN = dict(white='yellow', grey='grey', purple='purple')
+SHOWN = dict(white='yellow', grey='gray', purple='purple')   # (TechBox writes American English: "gray", Lee, 21 Oct 2026)
+WIRE_COLOUR = dict(white='wire_yellow', grey='wire_grey', purple='wire_purple')   # (materials.json's palette names, not the words shown)
 MALE = {w: f'J_{w.upper()}_M' for w in JUMPERS}                     # each wire's pin (into the breadboard) ...
 FEMALE = {w: f'J_{w.upper()}_F' for w in JUMPERS}                   # ... and socket (onto the LED matrix's pins)
 STEMS = [f'STEM_{k:02d}' for k in range(1, 65)]
@@ -49,8 +50,8 @@ NAMES = {D1: 'D1', D2: 'D2', D3: 'D3', D4: 'D4', D5: 'D5', D6: 'D6', D7: 'D7', D
          **{MALE[w]: 'Breadboard Wire (M-F)' for w in JUMPERS}, **{FEMALE[w]: 'Breadboard Wire (M-F)' for w in JUMPERS}}
 PART_OF = {BACKING: BREADBOARD, NUT: BUTTON, RED_PIN: BUTTON, BLACK_PIN: BUTTON}   # (the backing comes on the breadboard; the nut and the leads on the button)
 UNLISTED = [USB_A] + list(MALE.values()) + list(FEMALE.values())    # named on hover only (the USB cable is listed by its Mini-B plug; the jumper's caps by hand)
-HOVER_NAMES = {MALE['white']: 'Yellow Breadboard Wire', FEMALE['white']: 'Yellow Breadboard Wire', MALE['grey']: 'Grey Breadboard Wire',
-               FEMALE['grey']: 'Grey Breadboard Wire', MALE['purple']: 'Purple Breadboard Wire', FEMALE['purple']: 'Purple Breadboard Wire'}
+HOVER_NAMES = {MALE['white']: 'Yellow Breadboard Wire', FEMALE['white']: 'Yellow Breadboard Wire', MALE['grey']: 'Gray Breadboard Wire',
+               FEMALE['grey']: 'Gray Breadboard Wire', MALE['purple']: 'Purple Breadboard Wire', FEMALE['purple']: 'Purple Breadboard Wire'}
 
 # The parts list after the title page (as the MRA's and RCC's): one band per kind of part; the wood's bands blue-grey.
 WOOD_BAND, WOOD_HALO = '#dbe4ef', '#8ea6c4'
@@ -202,7 +203,7 @@ JUMPER_R = 0.62
 JUMPER_HOLES = dict(white='i2', grey='i3', purple='b19')            # V+ (to VIN), V- (to GND), IN (from D7 through the 330 Ω resistor)
 MATRIX_PINS = dict(white='V+', purple='IN', grey='V-')              # (the published guide's badges: V+, "V-In", V-)
 for w in JUMPERS:
-    g.wire(f'wire {w}', f'wire_{SHOWN[w]}', JUMPER_R, name=f'{SHOWN[w].capitalize()} Breadboard Wire')   # (named by its colour on hover, as its ends)
+    g.wire(f'wire {w}', WIRE_COLOUR[w], JUMPER_R, name=f'{SHOWN[w].capitalize()} Breadboard Wire')   # (named by its colour on hover, as its ends)
 M_EXIT = {w: np.array([hole(JUMPER_HOLES[w])[0], 879.92, hole(JUMPER_HOLES[w])[2]]) for w in JUMPERS}
 F_EXIT = {w: np.array([mid(FEMALE[w])[0], mid(FEMALE[w])[1], box(FEMALE[w])[1][2]]) for w in JUMPERS}
 F_TIP = {w: np.array([mid(FEMALE[w])[0], mid(FEMALE[w])[1], box(FEMALE[w])[0][2]]) for w in JUMPERS}   # (its open end, on the pin)
@@ -315,19 +316,19 @@ CAP_LEG = dict(gnd=[652.62, 868.0, 1172.97], plus=[652.62, 868.0, 1170.47])   # 
 # CAD has it, so the legs are seen closer together than in the picture); Step 6 from 15 degrees up, as the picture, Step 7 from 35.
 CAP_VIEW = [0.4698, 0.5736, 0.671]
 CAP_LOOK = [0.554, 0.2588, 0.7912]
-g.place('The capacitor has a negative (-) leg and a positive (+) leg. The grey stripe down its side marks the negative leg, which goes to GND.',
+g.place('The capacitor has a negative (-) leg and a positive (+) leg. The gray stripe down its side marks the negative leg, which goes to GND.',
         show=[CAP], staged=True, single=True, lines=False, view_dir=CAP_LOOK, frame=([653.6, 874.0, 1172.0], 13.0),   # (the stripe and both legs)
         # (GND (-) and VCC (+) under their legs, as Lee's picture has them: Lee, 20 Oct 2026)
         labels=[dict(id=CAP, text='GND (-)', anchor=CAP_LEG['gnd'], side='down-left'), dict(id=CAP, text='VCC (+)', anchor=CAP_LEG['plus'], side='down-right')],
         eye=[dict(id=CAP, anchor=STRIPE)],
         # (Lee's own picture, 19 Oct 2026, as the published guide's Capacitor card; to the right of the capacitor, its leader to the
         # can's right side, not across it: Lee, 20 Oct 2026)
-        inset=dict(target=[656.3, 879.5, 1172.5], image='capacitor-card.webp', side='right', caption='The grey stripe marks the GND (-) leg',
-                   alt='A capacitor: the grey strip down its side is over the GND (-) leg; the other leg is VCC (+)'))
-g.seat('Push the capacitor into j2 and j3, its grey stripe in j3.', [CAP], direction=[0, 1, 0], hover=29,
+        inset=dict(target=[656.3, 879.5, 1172.5], image='capacitor-card.webp', side='right', caption='The gray stripe marks the GND (-) leg',
+                   alt='A capacitor: the gray strip down its side is over the GND (-) leg; the other leg is VCC (+)'))
+g.seat('Push the capacitor into j2 and j3, its gray stripe in j3.', [CAP], direction=[0, 1, 0], hover=29,
        labels=[hole_label('j3'), hole_label('j2')], lines_at=[[652.5, 863.6, 1170.6], [652.5, 863.6, 1173.1]],   # (the legs' tips: Lee, 19 Oct 2026)
        eye=[dict(id=CAP, anchor=STRIPE, side='near-left')],   # (beside the stripe, which is on the left of the can as seen)
-       caution="The capacitor's grey stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND).",
+       caution="The capacitor's gray stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND).",
        view_dir=CAP_VIEW, frame=([652.6, 885.0, 1172.0], 28.0))
 g.place('Bend both legs of the 330 Ω resistor (orange, orange, black, black, brown) straight down.', show=[R330], staged=True, lines=False, frame=(mid(R330).tolist(), 18.0), view_dir=DIAG,
         labels={R330: '330 Ω Resistor'}, eye=[R330], wires=R330_STRAIGHT, wires_done=R330_BENT)
@@ -465,7 +466,7 @@ PIN_X = dict(white=608.24, purple=610.78, grey=613.32)               # V+, IN, V
 PIN_Y, PIN_TIP_Z = 894.333, 1190.06
 ALONG_PIN = dict(grey=1183.4, purple=1186.2, white=1189.4)
 g.place('Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. '
-        'The yellow wire goes on V+, the purple wire on IN and the grey wire on V-.',
+        'The yellow wire goes on V+, the purple wire on IN and the gray wire on V-.',
         show=[MATRIX], staged=True, single=True, lines=False, flip=True, view_dir=[-0.18, -0.8, 0.57], frame=([628.0, 895.0, 1199.0], 36.0),
         labels=[dict(id=MATRIX, text=MATRIX_PINS[w], anchor=[PIN_X[w], PIN_Y, ALONG_PIN[w]]) for w in ('grey', 'purple', 'white')],
         # (its ring on the label by the pins' tips, so that it is not taken for a fourth pin's: an independent review, 19 Oct 2026)

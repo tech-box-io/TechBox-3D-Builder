@@ -583,7 +583,7 @@ const partsText = view => view.parts.map(g => `${g.title}: ` + g.items.map(p => 
 function wordsOf(view) {
   if (view.kind === 'start') return `${data.meta.title}. ${data.meta.part}.`;
   if (view.parts) return `${view.name}. ${partsText(view)}.`;
-  if (view.kind === 'end') return 'The finished model.';
+  if (view.kind === 'end') return data.views.some(v => v.away) ? 'What is left of the model.' : 'The finished model.';   // (a take-apart ends on its base)
   return [view.caption, view.caution && `Caution: ${view.caution}`].filter(Boolean).join(' ');
 }
 // What the speech engine is given: the same words, with the build's shorthand spelled out.

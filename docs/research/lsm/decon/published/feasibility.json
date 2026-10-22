@@ -1,0 +1,3579 @@
+{
+ "method": "Can our LSM model be taken apart in the order of TechBox's published Cadasio take-apart (19075)? Each published move, swept in our\nmodel (the exact CAD the generator's collision tests use: \"LSM Build Instructions/lsm.glb\", via tools/stepgen.Model) against every part\nstill there at that point and the wires drawn as tubes from steps.json's routes.\n\n    .venv.nosync/bin/python -I docs/research/lsm/decon/published/feasibility.py [out.json]\n\nReads only lsm.glb and steps.json; writes only feasibility.json beside this file (and prints the log). No generator run. Peak memory\nabout 0.7 GB.\n\nThe sweep (rays, as tools/stepgen.blocked does, with numbers instead of a yes / no): points on the moving part (vertices and surface\nsamples, set `tol` mm in from its surface) are cast along the move into each obstacle, and points of the obstacle in the swept region,\nset in the same way, are cast back into the moving part. A ray that meets a face turned towards it is a contact after `t` mm of\ntravel; a second ray finds where it leaves the obstacle, so `depth` = how far the part would be inside it by the end of the move\n(min(reach - t, thickness)). A contact counts when it goes deeper than 0.4 mm (the generator's own press-fit allowance).\n\nThe model's joints are drawn tight: many tabs are 0.1 - 0.5 mm wider than their slots (`at rest` below: how far a part already lies\ninside the other), and sliding such a tab along its slot reads as contact. So each contact is measured again with the points set\nfurther in (tol 0.2 ... 4 mm): `catch` = the largest tol at which it still collides, about how far the obstacle reaches across the\npart's way (an overlap at rest of i mm reads as a catch of up to about 1.7 i; a hook or lip that stands proud by h reads as about h).\n\nEach move gets one verdict:\n  FREE      no contact with a catch of 0.6 mm or more.\n  LATCH     every such contact begins within the first 1.2 mm of the move: the part is held where it is by a hook, barb, detent or\n            latch and comes free once that is released (in the kit: squeezed or flexed by hand). tools/stepgen.blocked() ignores a first\n            contact this close (its snug_fit), so the generator lets the move through, as the Full Build's own checks did.\n  BLOCKED   a contact with a catch of 0.6 mm or more begins later along the way: the part runs into something.\n`generator` = what tools/stepgen.blocked() (the check behind remove()'s warning) says of the same move against the parts (not wires).",
+ "results": [
+  {
+   "label": "P1 the 64 stems up 62.5",
+   "moving": [
+    "STEM_01",
+    "STEM_02",
+    "STEM_03",
+    "STEM_04",
+    "STEM_05",
+    "STEM_06",
+    "STEM_07",
+    "STEM_08",
+    "STEM_09",
+    "STEM_10",
+    "STEM_11",
+    "STEM_12",
+    "STEM_13",
+    "STEM_14",
+    "STEM_15",
+    "STEM_16",
+    "STEM_17",
+    "STEM_18",
+    "STEM_19",
+    "STEM_20",
+    "STEM_21",
+    "STEM_22",
+    "STEM_23",
+    "STEM_24",
+    "STEM_25",
+    "STEM_26",
+    "STEM_27",
+    "STEM_28",
+    "STEM_29",
+    "STEM_30",
+    "STEM_31",
+    "STEM_32",
+    "STEM_33",
+    "STEM_34",
+    "STEM_35",
+    "STEM_36",
+    "STEM_37",
+    "STEM_38",
+    "STEM_39",
+    "STEM_40",
+    "STEM_41",
+    "STEM_42",
+    "STEM_43",
+    "STEM_44",
+    "STEM_45",
+    "STEM_46",
+    "STEM_47",
+    "STEM_48",
+    "STEM_49",
+    "STEM_50",
+    "STEM_51",
+    "STEM_52",
+    "STEM_53",
+    "STEM_54",
+    "STEM_55",
+    "STEM_56",
+    "STEM_57",
+    "STEM_58",
+    "STEM_59",
+    "STEM_60",
+    "STEM_61",
+    "STEM_62",
+    "STEM_63",
+    "STEM_64"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 62.5,
+   "verdict": "BLOCKED",
+   "generator_flags": false,
+   "contacts": {
+    "D8": {
+     "rest_overlap": 0.18,
+     "hit": true,
+     "first": 0.66,
+     "depth": 3.15,
+     "at": [
+      669.46,
+      929.19,
+      1190.75
+     ],
+     "catch_capped": true,
+     "catch": 1.25,
+     "first_real": 0.66,
+     "at_real": [
+      669.46,
+      929.19,
+      1191.8
+     ],
+     "kind": "latch"
+    },
+    "D7": {
+     "rest_overlap": 0.19,
+     "hit": true,
+     "first": 0.07,
+     "depth": 2.98,
+     "at": [
+      615.59,
+      913.5,
+      1208.05
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 1.22,
+     "at_real": [
+      615.41,
+      913.5,
+      1200.88
+     ],
+     "kind": "blocked"
+    },
+    "D6": {
+     "rest_overlap": 0.18,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P2 D8 up 54.1",
+   "moving": [
+    "D8"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 54.1,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D11_D": {
+     "rest_overlap": 1.12,
+     "hit": true,
+     "first": 0.06,
+     "depth": 3.15,
+     "at": [
+      600.31,
+      932.42,
+      1170.11
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.07,
+     "at_real": [
+      602.13,
+      932.43,
+      1170.19
+     ],
+     "kind": "latch"
+    },
+    "D11_C": {
+     "rest_overlap": 1.12,
+     "hit": true,
+     "first": 0.06,
+     "depth": 3.15,
+     "at": [
+      600.31,
+      932.42,
+      1246.31
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.07,
+     "at_real": [
+      602.13,
+      932.43,
+      1246.39
+     ],
+     "kind": "latch"
+    },
+    "D11_B": {
+     "rest_overlap": 1.11,
+     "hit": true,
+     "first": 0.06,
+     "depth": 3.15,
+     "at": [
+      676.15,
+      932.42,
+      1162.29
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.07,
+     "at_real": [
+      674.33,
+      932.43,
+      1162.21
+     ],
+     "kind": "latch"
+    },
+    "D11_A": {
+     "rest_overlap": 1.11,
+     "hit": true,
+     "first": 0.06,
+     "depth": 3.15,
+     "at": [
+      676.15,
+      932.42,
+      1238.49
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.07,
+     "at_real": [
+      674.33,
+      932.43,
+      1238.41
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P3 D7 up 67.8",
+   "moving": [
+    "D7"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 67.8,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P4 D5 +X 54.1",
+   "moving": [
+    "D5"
+   ],
+   "dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "reach": 54.1,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D3": {
+     "rest_overlap": 0.15,
+     "hit": true,
+     "first": 0.04,
+     "depth": 2.98,
+     "at": [
+      682.55,
+      903.73,
+      1153.86
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.29,
+     "at_real": [
+      682.51,
+      904.66,
+      1155.98
+     ],
+     "kind": "latch"
+    },
+    "D10": {
+     "rest_overlap": 0.21,
+     "hit": true,
+     "first": 0.18,
+     "depth": 2.98,
+     "at": [
+      682.69,
+      896.88,
+      1202.97
+     ],
+     "catch_capped": false,
+     "catch": 0.2,
+     "first_real": null,
+     "at_real": null,
+     "kind": "tight"
+    },
+    "D2": {
+     "rest_overlap": 0.11,
+     "hit": true,
+     "first": 0.04,
+     "depth": 2.98,
+     "at": [
+      682.55,
+      903.73,
+      1254.75
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.22,
+     "at_real": [
+      682.51,
+      904.66,
+      1252.0
+     ],
+     "kind": "latch"
+    },
+    "D1": {
+     "rest_overlap": 0.12,
+     "hit": true,
+     "first": 0.04,
+     "depth": 2.98,
+     "at": [
+      682.55,
+      862.29,
+      1238.86
+     ],
+     "catch_capped": false,
+     "catch": 0.2,
+     "first_real": null,
+     "at_real": null,
+     "kind": "tight"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P5 D4 -X 75.2",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "reach": 75.2,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D3": {
+     "rest_overlap": 0.43,
+     "hit": true,
+     "first": 0.5,
+     "depth": 2.98,
+     "at": [
+      593.91,
+      904.38,
+      1153.88
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.5,
+     "at_real": [
+      593.91,
+      904.38,
+      1154.68
+     ],
+     "kind": "latch"
+    },
+    "D10": {
+     "rest_overlap": 0.16,
+     "hit": true,
+     "first": 0.18,
+     "depth": 2.98,
+     "at": [
+      594.23,
+      896.02,
+      1202.98
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.22,
+     "at_real": [
+      594.19,
+      899.68,
+      1202.98
+     ],
+     "kind": "latch"
+    },
+    "D6": {
+     "rest_overlap": 0.42,
+     "hit": false
+    },
+    "D2": {
+     "rest_overlap": 0.41,
+     "hit": true,
+     "first": 0.43,
+     "depth": 2.98,
+     "at": [
+      593.98,
+      904.02,
+      1254.73
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.43,
+     "at_real": [
+      593.98,
+      904.02,
+      1253.93
+     ],
+     "kind": "latch"
+    },
+    "D1": {
+     "rest_overlap": 0.42,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P5 alt: the Full Build's Step 25 reversed / stage 1",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "reach": 8.0,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D3": {
+     "rest_overlap": 0.43,
+     "hit": true,
+     "first": 0.5,
+     "depth": 2.98,
+     "at": [
+      593.91,
+      904.38,
+      1153.88
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.5,
+     "at_real": [
+      593.91,
+      904.38,
+      1154.68
+     ],
+     "kind": "latch"
+    },
+    "D10": {
+     "rest_overlap": 0.16,
+     "hit": true,
+     "first": 0.18,
+     "depth": 2.98,
+     "at": [
+      594.23,
+      896.02,
+      1202.98
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.22,
+     "at_real": [
+      594.19,
+      899.68,
+      1202.98
+     ],
+     "kind": "latch"
+    },
+    "D6": {
+     "rest_overlap": 0.42,
+     "hit": false
+    },
+    "D2": {
+     "rest_overlap": 0.41,
+     "hit": true,
+     "first": 0.43,
+     "depth": 2.98,
+     "at": [
+      593.98,
+      904.02,
+      1254.73
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.43,
+     "at_real": [
+      593.98,
+      904.02,
+      1253.93
+     ],
+     "kind": "latch"
+    },
+    "D1": {
+     "rest_overlap": 0.42,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P5 alt: the Full Build's Step 25 reversed / stage 2",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 65.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P6/7 D11_C up 86.5",
+   "moving": [
+    "D11_C"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 86.5,
+   "verdict": "BLOCKED",
+   "generator_flags": false,
+   "contacts": {
+    "D6": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 41.56,
+     "depth": 2.98,
+     "at": [
+      602.07,
+      900.98,
+      1248.44
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 41.56,
+     "at_real": [
+      602.07,
+      900.98,
+      1247.64
+     ],
+     "kind": "blocked"
+    },
+    "D1": {
+     "rest_overlap": 0.02,
+     "hit": true,
+     "first": 0.02,
+     "depth": 2.98,
+     "at": [
+      602.93,
+      859.4,
+      1248.07
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      602.13,
+      859.4,
+      1248.07
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 D11_D up 88.8",
+   "moving": [
+    "D11_D"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 88.8,
+   "verdict": "BLOCKED",
+   "generator_flags": false,
+   "contacts": {
+    "D6": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 41.56,
+     "depth": 2.98,
+     "at": [
+      602.07,
+      900.98,
+      1172.24
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 41.56,
+     "at_real": [
+      602.07,
+      900.98,
+      1171.44
+     ],
+     "kind": "blocked"
+    },
+    "D1": {
+     "rest_overlap": 0.02,
+     "hit": true,
+     "first": 0.02,
+     "depth": 2.98,
+     "at": [
+      602.93,
+      859.4,
+      1171.87
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      602.13,
+      859.4,
+      1171.87
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 D11_A up 84.5",
+   "moving": [
+    "D11_A"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 84.5,
+   "verdict": "BLOCKED",
+   "generator_flags": false,
+   "contacts": {
+    "D6": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 41.56,
+     "depth": 2.98,
+     "at": [
+      674.4,
+      900.98,
+      1236.36
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 41.56,
+     "at_real": [
+      674.4,
+      900.98,
+      1237.16
+     ],
+     "kind": "blocked"
+    },
+    "D1": {
+     "rest_overlap": 0.02,
+     "hit": true,
+     "first": 0.02,
+     "depth": 2.98,
+     "at": [
+      673.53,
+      859.4,
+      1236.73
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      674.33,
+      859.4,
+      1236.73
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 D11_B up 70.5",
+   "moving": [
+    "D11_B"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 70.5,
+   "verdict": "BLOCKED",
+   "generator_flags": false,
+   "contacts": {
+    "D6": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 41.56,
+     "depth": 2.98,
+     "at": [
+      674.4,
+      900.98,
+      1160.16
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 41.56,
+     "at_real": [
+      674.4,
+      900.98,
+      1160.96
+     ],
+     "kind": "blocked"
+    },
+    "D1": {
+     "rest_overlap": 0.02,
+     "hit": true,
+     "first": 0.02,
+     "depth": 2.98,
+     "at": [
+      673.53,
+      859.4,
+      1160.53
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      674.33,
+      859.4,
+      1160.53
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 alt: all four posts, tabs up out of D1 (6.38), then up 78.62 / stage 1",
+   "moving": [
+    "D11_A",
+    "D11_B",
+    "D11_C",
+    "D11_D"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 6.38,
+   "verdict": "LATCH",
+   "generator_flags": false,
+   "contacts": {
+    "D1": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 0.02,
+     "depth": 2.98,
+     "at": [
+      602.93,
+      859.4,
+      1248.24
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      602.13,
+      859.4,
+      1248.24
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 alt: all four posts, tabs up out of D1 (6.38), then up 78.62 / stage 2",
+   "moving": [
+    "D11_A",
+    "D11_B",
+    "D11_C",
+    "D11_D"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 78.62,
+   "verdict": "BLOCKED",
+   "generator_flags": true,
+   "contacts": {
+    "D6": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 35.22,
+     "depth": 2.98,
+     "at": [
+      602.93,
+      900.98,
+      1248.24
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 35.22,
+     "at_real": [
+      602.13,
+      900.98,
+      1248.24
+     ],
+     "kind": "blocked"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 alt: D6 up 44.7 with the posts still in",
+   "moving": [
+    "D6"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 44.7,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D11_D": {
+     "rest_overlap": 0.01,
+     "hit": true,
+     "first": 0.02,
+     "depth": 9.51,
+     "at": [
+      600.68,
+      903.98,
+      1171.56
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      600.68,
+      903.98,
+      1172.36
+     ],
+     "kind": "latch"
+    },
+    "D11_C": {
+     "rest_overlap": 0.01,
+     "hit": true,
+     "first": 0.02,
+     "depth": 9.51,
+     "at": [
+      601.77,
+      904.0,
+      1234.66
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      601.77,
+      904.0,
+      1235.46
+     ],
+     "kind": "latch"
+    },
+    "D11_B": {
+     "rest_overlap": 0.01,
+     "hit": true,
+     "first": 0.02,
+     "depth": 9.51,
+     "at": [
+      674.69,
+      904.0,
+      1173.94
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.02,
+     "at_real": [
+      674.69,
+      904.0,
+      1173.14
+     ],
+     "kind": "latch"
+    },
+    "D11_A": {
+     "rest_overlap": 0.01,
+     "hit": true,
+     "first": 0.0,
+     "depth": 9.51,
+     "at": [
+      676.02,
+      903.98,
+      1247.76
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.0,
+     "at_real": [
+      676.02,
+      903.98,
+      1248.56
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P6/7 alt: the four posts and D6 lifted together, 80 up, once the tabs are out of D1",
+   "moving": [
+    "D11_A",
+    "D11_B",
+    "D11_C",
+    "D11_D",
+    "D6"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 80.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P8 D6 up 44.7",
+   "moving": [
+    "D6"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 44.7,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P9 matrix + D10 up 56.64 to P_HELD",
+   "moving": [
+    "MATRIX",
+    "D10",
+    "J_WHITE_F",
+    "J_GREY_F",
+    "J_PURPLE_F"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 56.64,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {
+    "D9_B": {
+     "rest_overlap": 0.28,
+     "hit": false
+    },
+    "D9_A": {
+     "rest_overlap": 0.28,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P9 matrix + D10 from P_HELD over to P_LIFT (above where D4 was)",
+   "moving": [
+    "MATRIX",
+    "D10",
+    "J_WHITE_F",
+    "J_GREY_F",
+    "J_PURPLE_F"
+   ],
+   "dir": [
+    -0.9628,
+    0.0,
+    0.2702
+   ],
+   "reach": 94.05733198427437,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P9 matrix + D10 down from P_LIFT to P_OUTSIDE",
+   "moving": [
+    "MATRIX",
+    "D10",
+    "J_WHITE_F",
+    "J_GREY_F",
+    "J_PURPLE_F"
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "reach": 50.75,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P9 alt: matrix + D10 from P_HELD to P_OUTSIDE in a straight line",
+   "moving": [
+    "MATRIX",
+    "D10",
+    "J_WHITE_F",
+    "J_GREY_F",
+    "J_PURPLE_F"
+   ],
+   "dir": [
+    -0.8473,
+    -0.4749,
+    0.2378
+   ],
+   "reach": 106.875367601707,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_HELD against wire white (route 59)",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_HELD against wire grey (route 60)",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_HELD against wire purple (route 61)",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_LIFT against wire white (route 56)",
+   "static_overlap": 1.5
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_LIFT against wire grey (route 57)",
+   "static_overlap": 1.11
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_LIFT against wire purple (route 58)",
+   "static_overlap": 1.5
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_OUTSIDE against wire white (route 53)",
+   "static_overlap": 1.5
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_OUTSIDE against wire grey (route 54)",
+   "static_overlap": 1.5
+  },
+  {
+   "label": "P9 static: D10 riding the matrix at P_OUTSIDE against wire purple (route 55)",
+   "static_overlap": 1.5
+  },
+  {
+   "label": "P9 static: MATRIX at P_OUTSIDE against the USB cable",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: MATRIX at P_OUTSIDE against the USB A end",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: D10 at P_OUTSIDE against the USB cable",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P9 static: D10 at P_OUTSIDE against the USB A end",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P10 D9_A up 54.4",
+   "moving": [
+    "D9_A"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 54.4,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D3": {
+     "rest_overlap": 0.31,
+     "hit": true,
+     "first": 0.16,
+     "depth": 9.5,
+     "at": [
+      617.25,
+      900.84,
+      1156.38
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.39,
+     "at_real": [
+      619.99,
+      900.93,
+      1154.68
+     ],
+     "kind": "latch"
+    },
+    "D2": {
+     "rest_overlap": 0.14,
+     "hit": true,
+     "first": 0.28,
+     "depth": 9.5,
+     "at": [
+      619.93,
+      900.93,
+      1253.96
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.34,
+     "at_real": [
+      619.71,
+      900.93,
+      1253.93
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P10 D9_B up 54.4",
+   "moving": [
+    "D9_B"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 54.4,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D3": {
+     "rest_overlap": 0.17,
+     "hit": true,
+     "first": 0.1,
+     "depth": 9.5,
+     "at": [
+      655.99,
+      900.78,
+      1156.48
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.1,
+     "at_real": [
+      655.99,
+      900.78,
+      1155.68
+     ],
+     "kind": "latch"
+    },
+    "D2": {
+     "rest_overlap": 0.17,
+     "hit": true,
+     "first": 0.29,
+     "depth": 9.5,
+     "at": [
+      655.95,
+      900.97,
+      1254.75
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.34,
+     "at_real": [
+      656.83,
+      900.93,
+      1252.46
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P11-13 J_WHITE_M up 30 (USB plug in)",
+   "moving": [
+    "J_WHITE_M"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 30.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P11-13 J_PURPLE_M up 30 (USB plug in)",
+   "moving": [
+    "J_PURPLE_M"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 30.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P11-13 J_GREY_M up 30 (USB plug in)",
+   "moving": [
+    "J_GREY_M"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 30.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P11-13 static: the purple pin against the USB plug",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P11-13 static: the purple wire (route 67, as seated) against the USB plug",
+   "static_overlap": 0.0
+  },
+  {
+   "label": "P14 D10 down 48.4 off the matrix (published)",
+   "moving": [
+    "D10"
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "reach": 48.4,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "MATRIX": {
+     "rest_overlap": 0.07,
+     "hit": true,
+     "first": 0.16,
+     "depth": 3.15,
+     "at": [
+      669.38,
+      954.63,
+      1205.45
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.63,
+     "at_real": [
+      669.56,
+      954.49,
+      1205.56
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P14 alt: the Full Build's Step 31 reversed (+Z 40 along the matrix, then down 22) / stage 1",
+   "moving": [
+    "D10"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 40.0,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "MATRIX": {
+     "rest_overlap": 0.07,
+     "hit": true,
+     "first": 0.01,
+     "depth": 4.98,
+     "at": [
+      669.87,
+      954.18,
+      1205.67
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.39,
+     "at_real": [
+      669.45,
+      954.16,
+      1205.06
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P14 alt: the Full Build's Step 31 reversed (+Z 40 along the matrix, then down 22) / stage 2",
+   "moving": [
+    "D10"
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "reach": 22.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P14 alt: -Z 40 along the matrix, then down 22 / stage 1",
+   "moving": [
+    "D10"
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "reach": 40.0,
+   "verdict": "BLOCKED",
+   "generator_flags": true,
+   "contacts": {
+    "MATRIX": {
+     "rest_overlap": 0.07,
+     "hit": true,
+     "first": 0.46,
+     "depth": 7.98,
+     "at": [
+      669.49,
+      954.26,
+      1202.29
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 1.23,
+     "at_real": [
+      669.59,
+      954.24,
+      1201.43
+     ],
+     "kind": "blocked"
+    },
+    "J_GREY_F": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 11.7,
+     "depth": 7.98,
+     "at": [
+      613.82,
+      951.4,
+      1190.96
+     ],
+     "catch_capped": true,
+     "catch": 0.2,
+     "first_real": 11.7,
+     "at_real": [
+      613.82,
+      951.4,
+      1190.96
+     ],
+     "kind": "blocked"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P14 alt: -Z 40 along the matrix, then down 22 / stage 2",
+   "moving": [
+    "D10"
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "reach": 22.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P15 the three sockets +Z 30.5 off the pins",
+   "moving": [
+    "J_WHITE_F",
+    "J_GREY_F",
+    "J_PURPLE_F"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 30.5,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P16 D3 -Z 38.4",
+   "moving": [
+    "D3"
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "reach": 38.4,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D1": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 0.29,
+     "depth": 2.98,
+     "at": [
+      645.21,
+      859.77,
+      1153.38
+     ],
+     "catch_capped": true,
+     "catch": 1.0,
+     "first_real": 0.29,
+     "at_real": [
+      644.41,
+      859.77,
+      1153.38
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P17 D2 + button +Z 57.1 (USB plug in)",
+   "moving": [
+    "D2",
+    "BUTTON",
+    "NUT"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 57.1,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "D1": {
+     "rest_overlap": 0.0,
+     "hit": true,
+     "first": 0.4,
+     "depth": 2.98,
+     "at": [
+      631.17,
+      862.29,
+      1255.32
+     ],
+     "catch_capped": true,
+     "catch": 0.6,
+     "first_real": 0.5,
+     "at_real": [
+      631.37,
+      861.8,
+      1255.43
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P17 BTN_RED_PIN straight up 12 out of its hole",
+   "moving": [
+    "BTN_RED_PIN"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 12.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P17 BTN_BLACK_PIN straight up 12 out of its hole",
+   "moving": [
+    "BTN_BLACK_PIN"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 12.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P18 the nut -Z 85 off the button, over the pins",
+   "moving": [
+    "NUT"
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "reach": 85.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P19 the button, its pins riding, +Z 94.8 out of D2",
+   "moving": [
+    "BUTTON",
+    "BTN_RED_PIN",
+    "BTN_BLACK_PIN"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 94.8,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P20 the USB plug +Z 25 (the matrix's pins already out)",
+   "moving": [
+    "USB_B",
+    "USB_A"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 25.0,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "NANO": {
+     "rest_overlap": 0.9,
+     "hit": true,
+     "first": 0.01,
+     "depth": 3.87,
+     "at": [
+      640.54,
+      877.79,
+      1209.83
+     ],
+     "catch_capped": true,
+     "catch": 2.5,
+     "first_real": 0.0,
+     "at_real": [
+      635.36,
+      876.29,
+      1209.83
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P20 alt: the USB plug +Z 25 with the purple pin still in b19 (our draft's order)",
+   "moving": [
+    "USB_B",
+    "USB_A"
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "reach": 25.0,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "NANO": {
+     "rest_overlap": 0.9,
+     "hit": true,
+     "first": 0.01,
+     "depth": 3.87,
+     "at": [
+      640.54,
+      877.79,
+      1209.83
+     ],
+     "catch_capped": true,
+     "catch": 2.5,
+     "first_real": 0.0,
+     "at_real": [
+      635.36,
+      876.29,
+      1209.83
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P21-24 R330 up 30.3",
+   "moving": [
+    "R330"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 30.3,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "P21-24 CAP up 29.1",
+   "moving": [
+    "CAP"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 29.1,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {
+    "BREADBOARD": {
+     "rest_overlap": 0.75,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P21-24 R12K up 31.3",
+   "moving": [
+    "R12K"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 31.3,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {
+    "NANO": {
+     "rest_overlap": 0.41,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "P21-24 NANO up 31.0",
+   "moving": [
+    "NANO"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 31.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {
+    "BREADBOARD": {
+     "rest_overlap": 0.12,
+     "hit": false
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "check: the Nano up 31 with the 12 kOhm resistor still in",
+   "moving": [
+    "NANO"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 31.0,
+   "verdict": "LATCH",
+   "generator_flags": true,
+   "contacts": {
+    "BREADBOARD": {
+     "rest_overlap": 0.12,
+     "hit": false
+    },
+    "R12K": {
+     "rest_overlap": 0.4,
+     "hit": true,
+     "first": 0.0,
+     "depth": 3.88,
+     "at": [
+      645.71,
+      876.02,
+      1187.0
+     ],
+     "catch_capped": true,
+     "catch": 1.5,
+     "first_real": 0.0,
+     "at_real": [
+      645.45,
+      875.89,
+      1185.58
+     ],
+     "kind": "latch"
+    }
+   },
+   "note": ""
+  },
+  {
+   "label": "check: the 330 ohm resistor up 30.3 with the USB plug still in",
+   "moving": [
+    "R330"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 30.3,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "wires: D5 +X 54.1 against the matrix wires as seated (routes 65 - 67)",
+   "moving": [
+    "D5"
+   ],
+   "dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "reach": 54.1,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "wires: D4 -X 75.2 against the matrix wires as seated",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "reach": 75.2,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "wires: D4 -X 75.2 along the USB cable (route 41)",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "reach": 75.2,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "wires: D4 up 65 off the USB cable, after -X 8",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 65.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  },
+  {
+   "label": "wires: D4 up 65 off the USB cable, after -X 75.2",
+   "moving": [
+    "D4"
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "reach": 65.0,
+   "verdict": "FREE",
+   "generator_flags": false,
+   "contacts": {},
+   "note": ""
+  }
+ ],
+ "other_ways": {
+  "P4": {
+   "+X": "LATCH",
+   "-X": "BLOCKED",
+   "+Y": "LATCH",
+   "-Y": "LATCH",
+   "+Z": "LATCH",
+   "-Z": "LATCH"
+  },
+  "P5": {
+   "+X": "BLOCKED",
+   "-X": "LATCH",
+   "+Y": "LATCH",
+   "-Y": "LATCH",
+   "+Z": "LATCH",
+   "-Z": "LATCH"
+  },
+  "P6_first_stage": {},
+  "P10_first_stage": {},
+  "P14": {
+   "+X": "LATCH",
+   "-X": "LATCH",
+   "+Y": "LATCH",
+   "-Y": "LATCH",
+   "+Z": "LATCH",
+   "-Z": "BLOCKED"
+  },
+  "P16": {
+   "+X": "LATCH",
+   "-X": "LATCH",
+   "+Y": "LATCH",
+   "-Y": "LATCH",
+   "+Z": "BLOCKED",
+   "-Z": "LATCH"
+  },
+  "P17": {
+   "+X": "LATCH",
+   "-X": "LATCH",
+   "+Y": "LATCH",
+   "-Y": "BLOCKED",
+   "+Z": "LATCH",
+   "-Z": "BLOCKED"
+  }
+ },
+ "joints": [
+  {
+   "label": "D2's end tab in D5 (beyond D5's outer face, x 682.51)",
+   "holder": "D5",
+   "tab": "D2",
+   "hole": [
+    [
+     855.0,
+     856.11
+    ],
+    [
+     859.34,
+     867.15
+    ],
+    [
+     895.86,
+     903.66
+    ],
+    [
+     906.92,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      682.0,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.9,
+       867.29
+      ],
+      [
+       895.97,
+       900.36
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.14,
+      0.0,
+      0.13
+     ]
+    },
+    {
+     "at": [
+      682.7,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       862.95,
+       867.12
+      ],
+      [
+       896.14,
+       900.31
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      0.95,
+      0.0,
+      0.0,
+      1.21
+     ]
+    },
+    {
+     "at": [
+      683.5,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       863.0,
+       866.93
+      ],
+      [
+       896.33,
+       900.26
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      0.95,
+      0.0,
+      0.0,
+      1.21
+     ]
+    },
+    {
+     "at": [
+      685.0,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       859.24,
+       861.78
+      ],
+      [
+       863.1,
+       866.57
+      ],
+      [
+       896.69,
+       900.16
+      ],
+      [
+       901.47,
+       904.01
+      ]
+     ],
+     "overhang": [
+      0.1,
+      0.0,
+      0.0,
+      0.35
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D3's end tab in D5",
+   "holder": "D5",
+   "tab": "D3",
+   "hole": [
+    [
+     855.0,
+     856.1
+    ],
+    [
+     859.34,
+     867.15
+    ],
+    [
+     895.86,
+     903.66
+    ],
+    [
+     906.9,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      682.0,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.9,
+       867.29
+      ],
+      [
+       895.97,
+       900.36
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.14,
+      0.0,
+      0.13
+     ]
+    },
+    {
+     "at": [
+      682.7,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       862.95,
+       867.12
+      ],
+      [
+       896.14,
+       900.31
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      0.95,
+      0.0,
+      0.0,
+      1.21
+     ]
+    },
+    {
+     "at": [
+      683.5,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       863.0,
+       866.93
+      ],
+      [
+       896.33,
+       900.26
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      0.95,
+      0.0,
+      0.0,
+      1.21
+     ]
+    },
+    {
+     "at": [
+      685.0,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       859.24,
+       861.78
+      ],
+      [
+       863.1,
+       866.57
+      ],
+      [
+       896.69,
+       900.16
+      ],
+      [
+       901.47,
+       904.01
+      ]
+     ],
+     "overhang": [
+      0.1,
+      0.0,
+      0.0,
+      0.35
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D2's end tab in D4 (beyond D4's outer face, x 594.41)",
+   "holder": "D4",
+   "tab": "D2",
+   "hole": [
+    [
+     855.0,
+     856.23
+    ],
+    [
+     859.47,
+     867.28
+    ],
+    [
+     895.98,
+     903.79
+    ],
+    [
+     907.04,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      595.0,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.87,
+       867.4
+      ],
+      [
+       895.85,
+       900.39
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.12,
+      0.13,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      594.2,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.92,
+       867.22
+      ],
+      [
+       896.04,
+       900.34
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      593.5,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       862.97,
+       867.05
+      ],
+      [
+       896.2,
+       900.29
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      1.08,
+      0.0,
+      0.0,
+      1.08
+     ]
+    },
+    {
+     "at": [
+      591.5,
+      0,
+      1253.43
+     ],
+     "tab": [
+      [
+       859.22,
+       861.78
+      ],
+      [
+       863.1,
+       866.58
+      ],
+      [
+       896.68,
+       900.16
+      ],
+      [
+       901.47,
+       904.04
+      ]
+     ],
+     "overhang": [
+      0.25,
+      0.0,
+      0.0,
+      0.25
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D3's end tab in D4",
+   "holder": "D4",
+   "tab": "D3",
+   "hole": [
+    [
+     855.0,
+     856.23
+    ],
+    [
+     859.47,
+     867.28
+    ],
+    [
+     895.98,
+     903.79
+    ],
+    [
+     907.03,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      595.0,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.87,
+       867.4
+      ],
+      [
+       895.85,
+       900.39
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.12,
+      0.13,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      594.2,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       859.47,
+       861.78
+      ],
+      [
+       862.92,
+       867.22
+      ],
+      [
+       896.04,
+       900.34
+      ],
+      [
+       901.47,
+       903.79
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      593.5,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       858.39,
+       861.78
+      ],
+      [
+       862.97,
+       867.05
+      ],
+      [
+       896.2,
+       900.29
+      ],
+      [
+       901.47,
+       904.87
+      ]
+     ],
+     "overhang": [
+      1.08,
+      0.0,
+      0.0,
+      1.08
+     ]
+    },
+    {
+     "at": [
+      591.5,
+      0,
+      1155.18
+     ],
+     "tab": [
+      [
+       859.22,
+       861.78
+      ],
+      [
+       863.1,
+       866.58
+      ],
+      [
+       896.68,
+       900.16
+      ],
+      [
+       901.47,
+       904.04
+      ]
+     ],
+     "overhang": [
+      0.25,
+      0.0,
+      0.0,
+      0.25
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D10's end in D4",
+   "holder": "D4",
+   "tab": "D10",
+   "hole": [
+    [
+     855.0,
+     856.23
+    ],
+    [
+     891.17,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      595.0,
+      0,
+      1204.47
+     ],
+     "tab": [
+      [
+       891.15,
+       900.68
+      ]
+     ],
+     "overhang": [
+      0.02
+     ]
+    },
+    {
+     "at": [
+      594.2,
+      0,
+      1204.47
+     ],
+     "tab": [
+      [
+       891.15,
+       900.68
+      ]
+     ],
+     "overhang": [
+      0.02
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D10's end in D5",
+   "holder": "D5",
+   "tab": "D10",
+   "hole": [
+    [
+     855.0,
+     856.11
+    ],
+    [
+     891.04,
+     909.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      682.0,
+      0,
+      1204.47
+     ],
+     "tab": [
+      [
+       891.15,
+       900.68
+      ]
+     ],
+     "overhang": [
+      0.0
+     ]
+    },
+    {
+     "at": [
+      682.7,
+      0,
+      1204.47
+     ],
+     "tab": [
+      [
+       891.15,
+       900.68
+      ]
+     ],
+     "overhang": [
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D1's tab in D2 (beyond D2's outer face, z 1254.93)",
+   "holder": "D2",
+   "tab": "D1",
+   "hole": [
+    [
+     850.0,
+     856.23
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      631.54,
+      0,
+      1254.0
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      631.54,
+      0,
+      1255.2
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      631.54,
+      0,
+      1256.5
+     ],
+     "tab": [
+      [
+       859.4,
+       862.4
+      ]
+     ],
+     "overhang": [
+      6.17
+     ]
+    },
+    {
+     "at": [
+      631.54,
+      0,
+      1258.0
+     ],
+     "tab": [],
+     "overhang": []
+    }
+   ]
+  },
+  {
+   "label": "D1's tab in D3 (beyond D3's outer face, z 1153.68)",
+   "holder": "D3",
+   "tab": "D1",
+   "hole": [
+    [
+     850.0,
+     856.23
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      644.81,
+      0,
+      1155.0
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      644.81,
+      0,
+      1153.4
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      644.81,
+      0,
+      1152.0
+     ],
+     "tab": [
+      [
+       859.4,
+       862.4
+      ]
+     ],
+     "overhang": [
+      6.17
+     ]
+    },
+    {
+     "at": [
+      644.81,
+      0,
+      1150.5
+     ],
+     "tab": [],
+     "overhang": []
+    }
+   ]
+  },
+  {
+   "label": "D1's tab in D4",
+   "holder": "D4",
+   "tab": "D1",
+   "hole": [
+    [
+     850.0,
+     856.23
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      595.9,
+      0,
+      1197.34
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      594.2,
+      0,
+      1197.34
+     ],
+     "tab": [],
+     "overhang": []
+    },
+    {
+     "at": [
+      593.9,
+      0,
+      1197.34
+     ],
+     "tab": [],
+     "overhang": []
+    }
+   ]
+  },
+  {
+   "label": "D9_A's end in its notch in D2 (along X)",
+   "holder": "D2",
+   "tab": "D9_A",
+   "hole": [
+    [
+     617.28,
+     619.2
+    ],
+    [
+     622.29,
+     624.02
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      0,
+      899.0,
+      1253.43
+     ],
+     "tab": [
+      [
+       617.13,
+       620.13
+      ]
+     ],
+     "overhang": [
+      0.93
+     ]
+    },
+    {
+     "at": [
+      0,
+      895.0,
+      1253.43
+     ],
+     "tab": [
+      [
+       617.13,
+       620.13
+      ]
+     ],
+     "overhang": [
+      0.93
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D9_A's end in its notch in D2, at the notch's narrowest",
+   "holder": "D2",
+   "tab": "D9_A",
+   "hole": [
+    [
+     617.28,
+     619.2
+    ],
+    [
+     622.41,
+     624.2
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      0,
+      899.0,
+      1253.43
+     ],
+     "tab": [
+      [
+       617.13,
+       620.13
+      ]
+     ],
+     "overhang": [
+      0.93
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 931.0",
+   "holder": "D8",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1239.62,
+     1245.18
+    ],
+    [
+     1251.92,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      931.0,
+      0
+     ],
+     "tab": [
+      [
+       1238.43,
+       1242.8
+      ],
+      [
+       1243.86,
+       1246.37
+      ]
+     ],
+     "overhang": [
+      1.19,
+      1.19
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 932.5",
+   "holder": "D8",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1239.62,
+     1245.18
+    ],
+    [
+     1251.92,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      932.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.35,
+       1242.8
+      ],
+      [
+       1243.96,
+       1246.1
+      ]
+     ],
+     "overhang": [
+      2.27,
+      0.92
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 933.5",
+   "holder": "D8",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1239.62,
+     1245.18
+    ],
+    [
+     1251.92,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      933.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.4,
+       1242.8
+      ],
+      [
+       1244.02,
+       1245.86
+      ]
+     ],
+     "overhang": [
+      2.22,
+      0.68
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 934.5",
+   "holder": "D8",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1239.62,
+     1245.18
+    ],
+    [
+     1251.92,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      934.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.99,
+       1242.8
+      ],
+      [
+       1244.09,
+       1245.62
+      ]
+     ],
+     "overhang": [
+      1.63,
+      0.44
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 935.5",
+   "holder": "D8",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1239.62,
+     1245.18
+    ],
+    [
+     1251.92,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      935.5,
+      0
+     ],
+     "tab": [
+      [
+       1238.58,
+       1242.8
+      ],
+      [
+       1244.16,
+       1245.38
+      ]
+     ],
+     "overhang": [
+      1.04,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 856.5",
+   "holder": "D1",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      856.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.26,
+       1241.56
+      ],
+      [
+       1243.29,
+       1246.62
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 856.5",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      856.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.26,
+       1241.56
+      ],
+      [
+       1243.29,
+       1246.62
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 858.0",
+   "holder": "D1",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      858.0,
+      0
+     ],
+     "tab": [
+      [
+       1236.37,
+       1241.56
+      ],
+      [
+       1243.19,
+       1246.98
+      ]
+     ],
+     "overhang": [
+      0.87,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 858.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      858.0,
+      0
+     ],
+     "tab": [
+      [
+       1236.37,
+       1241.56
+      ],
+      [
+       1243.19,
+       1246.98
+      ]
+     ],
+     "overhang": [
+      0.87,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 859.0",
+   "holder": "D1",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      859.0,
+      0
+     ],
+     "tab": [
+      [
+       1236.16,
+       1241.56
+      ],
+      [
+       1243.12,
+       1247.22
+      ]
+     ],
+     "overhang": [
+      1.08,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 859.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      859.0,
+      0
+     ],
+     "tab": [
+      [
+       1236.16,
+       1241.56
+      ],
+      [
+       1243.12,
+       1247.22
+      ]
+     ],
+     "overhang": [
+      1.08,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D6's corner slot (along Z): the post at y 902.5",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      902.5,
+      0
+     ],
+     "tab": [
+      [
+       1237.24,
+       1247.56
+      ]
+     ],
+     "overhang": [
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D6's corner slot (along Z): the post at y 905.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      905.0,
+      0
+     ],
+     "tab": [
+      [
+       1234.46,
+       1250.34
+      ]
+     ],
+     "overhang": [
+      2.78
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D6's corner slot (along Z): the post at y 910.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      910.0,
+      0
+     ],
+     "tab": [
+      [
+       1234.46,
+       1250.34
+      ]
+     ],
+     "overhang": [
+      2.78
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D6's corner slot (along Z): the post at y 913.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      913.0,
+      0
+     ],
+     "tab": [
+      [
+       1234.46,
+       1241.8
+      ],
+      [
+       1242.81,
+       1250.34
+      ]
+     ],
+     "overhang": [
+      2.78,
+      2.78
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D11_A in D6's corner slot (along Z): the post at y 915.0",
+   "holder": "D6",
+   "tab": "D11_A",
+   "hole": [
+    [
+     1237.24,
+     1247.56
+    ],
+    [
+     1251.93,
+     1260.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      674.83,
+      915.0,
+      0
+     ],
+     "tab": [
+      [
+       1237.24,
+       1241.8
+      ],
+      [
+       1242.81,
+       1247.56
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "label": "D10's hooks over the matrix's edges (along X): the matrix at y 895",
+   "holder": "MATRIX",
+   "tab": "D10",
+   "hole": [
+    [
+     590.0,
+     690.0
+    ]
+   ],
+   "rows": [
+    {
+     "at": [
+      0,
+      899.0,
+      1204.47
+     ],
+     "tab": [
+      [
+       594.01,
+       607.34
+      ],
+      [
+       669.57,
+       682.91
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      0,
+      898.5,
+      1204.47
+     ],
+     "tab": [
+      [
+       594.01,
+       607.34
+      ],
+      [
+       669.57,
+       682.91
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      0,
+      897.9,
+      1204.47
+     ],
+     "tab": [
+      [
+       594.01,
+       607.34
+      ],
+      [
+       669.57,
+       682.91
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      0,
+      895.0,
+      1204.47
+     ],
+     "tab": [
+      [
+       594.01,
+       605.18
+      ],
+      [
+       612.79,
+       664.13
+      ],
+      [
+       671.73,
+       682.91
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "at": [
+      0,
+      892.0,
+      1204.47
+     ],
+     "tab": [
+      [
+       594.01,
+       605.18
+      ],
+      [
+       612.79,
+       664.13
+      ],
+      [
+       671.73,
+       682.91
+      ]
+     ],
+     "overhang": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   ]
+  }
+ ]
+}

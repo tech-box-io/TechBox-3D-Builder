@@ -761,6 +761,8 @@ class Guide:
     def wire(self, wire_id, colour, radius=0.6, name=None):
         """Declare a flexible wire. colour is a palette name from materials.json or #rrggbb; radius in mm; name is
         what the pointer reads on it. Steps then give it a route (see `wires=` and `wires_done=` on place(), and tools/wires.py)."""
+        if colour not in self.palette and not re.fullmatch(r'#[0-9a-fA-F]{6}', colour):   # (an unknown name would be drawn white)
+            raise ValueError(f'wire({wire_id!r}): colour {colour!r} is neither a palette name in materials.json nor #rrggbb')
         self.wire_defs[wire_id] = dict(colour=self.palette.get(colour, colour), radius=float(radius), **({'name': name} if name else {}))
 
     # -- step kinds

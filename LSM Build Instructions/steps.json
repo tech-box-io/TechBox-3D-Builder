@@ -18,8 +18,8 @@
   "R330": "330 \u03a9 Resistor",
   "J_WHITE_M": "Yellow Breadboard Wire",
   "J_WHITE_F": "Yellow Breadboard Wire",
-  "J_GREY_M": "Grey Breadboard Wire",
-  "J_GREY_F": "Grey Breadboard Wire",
+  "J_GREY_M": "Gray Breadboard Wire",
+  "J_GREY_F": "Gray Breadboard Wire",
   "J_PURPLE_M": "Purple Breadboard Wire",
   "J_PURPLE_F": "Purple Breadboard Wire",
   "MATRIX": "LED Matrix",
@@ -138,7 +138,7 @@
   "wire grey": {
    "colour": "#cad1ee",
    "radius": 0.62,
-   "name": "Grey Breadboard Wire"
+   "name": "Gray Breadboard Wire"
   },
   "wire purple": {
    "colour": "#4e008e",
@@ -52139,8 +52139,8 @@
    ],
    "wires": {},
    "carry": {},
-   "caption": "The capacitor has a negative (-) leg and a positive (+) leg. The grey stripe down its side marks the negative leg, which goes to GND.",
-   "text_key": "TCB841CF6",
+   "caption": "The capacitor has a negative (-) leg and a positive (+) leg. The gray stripe down its side marks the negative leg, which goes to GND.",
+   "text_key": "TD5EFA4AB",
    "review": null,
    "moving": [],
    "path": [
@@ -52182,8 +52182,8 @@
     ],
     "radius": 20.0,
     "hide": [],
-    "alt": "A capacitor: the grey strip down its side is over the GND (-) leg; the other leg is VCC (+)",
-    "caption": "The grey stripe marks the GND (-) leg",
+    "alt": "A capacitor: the gray strip down its side is over the GND (-) leg; the other leg is VCC (+)",
+    "caption": "The gray stripe marks the GND (-) leg",
     "side": "right",
     "image": "capacitor-card.webp",
     "image_aspect": 1.0942
@@ -52268,8 +52268,8 @@
     "12k leg 2": 7
    },
    "carry": {},
-   "caption": "Push the capacitor into j2 and j3, its grey stripe in j3.",
-   "text_key": "TFD90F492",
+   "caption": "Push the capacitor into j2 and j3, its gray stripe in j3.",
+   "text_key": "TAE102D22",
    "review": null,
    "moving": [
     "CAP"
@@ -52299,7 +52299,7 @@
     ],
     "radius": 28.0
    },
-   "caution": "The capacitor's grey stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND)."
+   "caution": "The capacitor's gray stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND)."
   },
   {
    "name": "Step 7c",
@@ -52317,8 +52317,8 @@
     "12k leg 2": 7
    },
    "carry": {},
-   "caption": "Push the capacitor into j2 and j3, its grey stripe in j3.",
-   "text_key": "TFD90F492",
+   "caption": "Push the capacitor into j2 and j3, its gray stripe in j3.",
+   "text_key": "TAE102D22",
    "review": null,
    "moving": [
     "CAP"
@@ -52348,7 +52348,7 @@
     ],
     "radius": 28.0
    },
-   "caution": "The capacitor's grey stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND)."
+   "caution": "The capacitor's gray stripe marks its negative (-) leg, which goes in j3 (the Nano Board's GND)."
   },
   {
    "name": "Step 8",
@@ -53507,8 +53507,8 @@
     "wire purple": 23
    },
    "carry": {},
-   "caption": "Push the grey wire's pin into i3.",
-   "text_key": "T070ED8D2",
+   "caption": "Push the gray wire's pin into i3.",
+   "text_key": "TA57562AB",
    "review": null,
    "moving": [
     "J_GREY_M"
@@ -53627,8 +53627,8 @@
     "wire purple": 23
    },
    "carry": {},
-   "caption": "Push the grey wire's pin into i3.",
-   "text_key": "T070ED8D2",
+   "caption": "Push the gray wire's pin into i3.",
+   "text_key": "TA57562AB",
    "review": null,
    "moving": [
     "J_GREY_M"
@@ -53957,8 +53957,8 @@
    "wires": {},
    "carry": {},
    "cut": true,
-   "caption": "Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. The yellow wire goes on V+, the purple wire on IN and the grey wire on V-.",
-   "text_key": "T70E0B9D3",
+   "caption": "Find the three pins on the back of the LED matrix, at one corner: V+, IN and V-, named on the label beside them. The yellow wire goes on V+, the purple wire on IN and the gray wire on V-.",
+   "text_key": "T027A9B39",
    "review": null,
    "moving": [],
    "path": [
@@ -54864,8 +54864,8 @@
      ]
     }
    },
-   "caption": "Push the grey wire's socket onto the V- pin of the LED matrix.",
-   "text_key": "TFC1188CD",
+   "caption": "Push the gray wire's socket onto the V- pin of the LED matrix.",
+   "text_key": "TFC071EFA",
    "review": null,
    "moving": [],
    "path": [
@@ -55021,8 +55021,8 @@
      ]
     }
    },
-   "caption": "Push the grey wire's socket onto the V- pin of the LED matrix.",
-   "text_key": "TFC1188CD",
+   "caption": "Push the gray wire's socket onto the V- pin of the LED matrix.",
+   "text_key": "TFC071EFA",
    "review": null,
    "moving": [],
    "path": [

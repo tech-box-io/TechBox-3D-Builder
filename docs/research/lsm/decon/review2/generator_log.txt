@@ -1,0 +1,27 @@
+take_apart(): from steps.json as it ends (97 parts, 10 leads)
+Remove all 64 LED Stems from D8, D7, and D6.               remove 64 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove D8 from the latches of the four D11 posts.          remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove D7 from the four D11 posts.                         remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove D5 from the tabs of D1, D2, and D3.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Slide D4 off the tabs of D1, D2, and D3, along the USB Cab remove 1 part(s), by hand, 1 arrow(s)
+Lift the box and push the tabs of the two D11 posts at the remove 2 part(s), by hand, 2 arrow(s)
+Push the tabs of the other two D11 posts up out of D1 the  remove 2 part(s), by hand, 2 arrow(s)
+Remove D6 from the tabs of D2 and D3.                      remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Lift the LED Matrix, with D10 hooked under it, up off the  lift   1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Set the LED Matrix down on the table beside the box. Leave lift   1 part(s), by hand
+Remove both D9 pieces from the slots in D2 and D3.         remove 2 part(s), the Full Build's way, reversed, 2 arrow(s)
+Disconnect the yellow, gray, and purple breadboard wires f unplug 3 part(s), by hand
+Remove D10 from the bottom of the LED Matrix.              remove 1 part(s), by hand, 1 arrow(s)
+Disconnect the three breadboard wires from the pins on the remove 6 part(s), by hand, 1 arrow(s), 3 lead(s) with them
+Remove D3 from the latch on D1.                            remove 1 part(s), by hand, 1 arrow(s)
+Slide D2, with the Push Button, out of the slots in D1. Le lift   1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Disconnect the Push Button's red wire from j5 and its blac unplug 2 part(s), the Full Build's way, reversed
+Unscrew the nut from the Push Button, on the inside of D2. remove 1 part(s), by hand, 1 arrow(s)
+Push the Push Button out through the hole in D2, pulling i remove 3 part(s), by hand, 1 arrow(s), 2 lead(s) with them
+Disconnect the USB Cable from the Nano Board.              remove 2 part(s), the Full Build's way, reversed, 1 arrow(s), 1 lead(s) with them
+Remove the 330 Ω Resistor from a11 and a19.                remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Remove the Capacitor from j2 and j3.                       remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+Remove the 12 kΩ Resistor from h3 and h16.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s), 2 lead(s) with them
+Remove the Nano Board from the breadboard.                 remove 1 part(s), the Full Build's way, reversed, 1 arrow(s)
+27 steps -> 52 views, 23 parts, 10 wires; wrote steps-deconstruction.json
+EXIT 0 peak 1609 MB

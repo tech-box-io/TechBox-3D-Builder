@@ -1,0 +1,485 @@
+Published LSM take-apart (Cadasio 19075), replayed in our terms: our ids, our assembly mm (Y up).
+camera: view_dir (target -> camera), target, radius = distance * sin(22.5 deg) / 1.08 (our cameraPose); "same" = as the step before.
+pose = from our seated part (stepgen turned(): axis, degrees, at, t); move = box-centre displacement since the step before.
+Wire bodies and jumper caps have no seated twin: their boxes are given. See published_steps.json for every number.
+
+[00] Start          start      camera view_dir (0.7086, 0.4804, 0.5168)  target (524.5, 857.7, 1284.1)  radius 132.5  (distance 374, elevation 29, azimuth 54)
+      title image ASS66d01279-62fc-1193-3657-45a3ae19c5f2.png (42.93 % wide, h/w 0.23) at {'x': 1.81, 'y': 61.23}
+      title image ASSd3aeb562-c85c-b108-42b8-13e71f410bd9.svg (37.58 % wide, h/w 0.27) at {'x': 1.81, 'y': 4.97}
+      +  STEM_01 .. STEM_64  pose (-0.4, 0.0, 0.9)
+      +  NANO  pose (0.0, 2.1, 0.0)
+      +  BREADBOARD
+      +  CAP
+      +  D1
+      +  D6
+      +  D7
+      +  D8  pose (0.0, 0.0, 1.0)
+      +  D11_C
+      +  D11_A
+      +  D11_B
+      +  D11_D
+      +  D9_A
+      +  D9_B
+      +  D10
+      +  D3
+      +  D4
+      +  D2
+      +  D5
+      +  BACKING
+      +  lead red [Part10]  box (633.7, 875.8, 1177.3) - (653.4, 884.7, 1234.3)  (seated route to j5 (Start - 17))
+      +  usb cable [Part23]  box (558.7, 835.0, 1216.7) - (619.0, 880.4, 1258.9)  (seated (Start - 20))
+      +  wire white [Part25]  box (606.3, 876.4, 1166.9) - (649.1, 892.5, 1211.4)  (seated route (Start - Step 9))
+      +  wire grey [Part26]  box (610.1, 875.6, 1172.3) - (649.5, 892.6, 1210.2)  (seated route)
+      +  wire purple [Part27]  box (607.4, 876.3, 1186.4) - (628.3, 892.3, 1219.9)  (seated route)
+      +  lead black [Part9]  box (641.1, 875.9, 1205.3) - (653.9, 886.4, 1234.2)  (seated route to j16 (Start - 17))
+      +  NUT
+      +  BUTTON
+      +  R12K
+      +  R330
+      +  USB_A  pose (0.0, 2.1, 0.0)
+      +  USB_B  pose (0.0, 2.1, 0.0)
+      +  J_PURPLE_M [Wire Cap V2-1]  box (626.2, 868.3, 1212.8) - (627.9, 880.3, 1214.5)  pin tip (627.0, 868.3, 1213.6) pointing (0.0, -1.0, 0.0)  (in b19)
+      +  BTN_RED_PIN [Wire Cap V2-3]  box (651.8, 867.8, 1177.2) - (653.5, 879.8, 1179.0)  pin tip (652.6, 867.8, 1178.1) pointing (0.0, -1.0, 0.0)  (in j5)
+      +  J_WHITE_M [Wire Cap V2-4]  box (646.6, 868.7, 1167.4) - (651.2, 880.7, 1171.7)  pin tip (648.9, 868.7, 1169.5) pointing (0.0, -1.0, 0.0)  (in i2)
+      +  J_GREY_M [Wire Cap V2-7]  box (646.9, 868.0, 1172.1) - (651.9, 879.9, 1173.9)  pin tip (649.4, 868.0, 1173.0) pointing (0.0, -1.0, 0.0)  (in i3)
+      +  BTN_BLACK_PIN [Wire Cap V2-9]  box (651.8, 867.9, 1205.1) - (653.5, 879.9, 1206.8)  pin tip (652.6, 867.9, 1206.0) pointing (0.0, -1.0, 0.0)  (in j16)
+      +  J_WHITE_F [Wire Cap-14]
+      +  J_PURPLE_F [Wire Cap-15]
+      +  J_GREY_F [Wire Cap-16]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D3, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white; 64 stems
+[01] Step 1         N          camera view_dir (0.4880, 0.4123, 0.7693)  target (610.0, 890.6, 1163.3)  radius 132.5  (distance 374, elevation 24, azimuth 32)
+      arrow   tail (637.1, 944.4, 1202.8) -> tip (636.9, 1013.8, 1201.1)  L 69.4  w 4.57
+      eye     on STEM_45 (LSM_Stem-115) at (643.6, 966.3, 1218.3); icon at 32 %, 13 % of the view
+      -  D11_C
+      -  D11_B
+      -  D11_D
+      -  D3
+      ~  NANO: 93 -> 153 of 155 solids shown
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D2, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white; 64 stems
+[02] Transition     transition camera same
+      +  D11_C
+      +  D11_B
+      +  D11_D
+      >  STEM_01 .. STEM_64 moves 2 different values; first [0.93, 62.55, 0.31] (62.55 mm)  now 2 different values; first [0.52, 62.55, 1.24]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white; 64 stems
+[03] Step 1c        Nc         camera same
+      -  STEM_01 .. STEM_64
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[04] Step 2         N          camera view_dir (0.6929, 0.5583, -0.4563)  target (643.2, 899.2, 1193.7)  radius 106.4  (distance 300, elevation 34, azimuth 123)
+      arrow   tail (680.4, 929.1, 1200.8) -> tip (676.4, 994.6, 1201.3)  L 65.6  w 3.21
+      eye     on D8 (LSM_Lens_Top-Cut-Extrude1) at (640.8, 929.9, 1200.6); icon at 53 %, 12 % of the view
+      close-up ring on D11_B at (676.5, 934.0, 1164.6); picture ASS74b21cda-0c15-fba5-2aff-4564c1eb2397.png (7.81 % wide, h/w 0.82) at 64 %, 30 %
+      ~  NANO: 153 -> 151 of 155 solids shown
+      ~  R330: 10 -> 8 of 10 solids shown
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[05] Transition     transition camera same
+      >  D8 moves (0.0, 54.1, -1.0) (54.11 mm)  now (0.0, 54.1, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D8, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[06] Step 2c        Nc         camera same
+      -  D8
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[07] Step 3         N          camera same
+      arrow   tail (677.5, 914.9, 1206.6) -> tip (677.2, 974.2, 1206.5)  L 59.3  w 4.20
+      eye     on D7 (LSM_Lens_Middle-Cut-Extrude1) at (640.8, 916.6, 1201.8); icon at 50 %, 18 % of the view
+      close-up ring on D11_A at (676.5, 917.2, 1242.1); picture ASS0f94e6dc-c294-d20f-6f15-c23cdb52deb5.png (9.92 % wide, h/w 1.31) at 25 %, 13 %
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[08] Transition     transition camera same
+      >  D7 moves (0.0, 67.8, 0.0) (67.82 mm)  now (0.0, 67.8, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D7, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[09] Step 3c        Nc         camera same
+      -  D7
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[10] Step 4         N          camera view_dir (0.5240, 0.5985, -0.6061)  target (652.7, 878.9, 1181.7)  radius 106.4  (distance 300, elevation 37, azimuth 139)
+      arrow   tail (681.0, 855.9, 1204.3) -> tip (743.8, 854.5, 1204.1)  L 62.8  w 7.14
+      eye     on D3 (LSM_Side1_r8-Cut-Extrude1) at (684.8, 903.5, 1153.5); icon at 54 %, 60 % of the view (boxed)
+      close-up ring on D2 at (683.4, 861.8, 1252.5); picture ASS2879e9f0-9fba-5c86-f2cb-d7a10c3458dc.png (8.79 % wide, h/w 1.89) at 27 %, 19 %
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[11] Transition     transition camera same
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D5, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[12] Step 4c        Nc         camera same
+      -  D11_C
+      -  D11_A
+      -  D11_B
+      -  D11_D
+      -  D5  (moved as it fades: pose (54.1, 0.0, 0.0))
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D4, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[13] Step 5         N          camera view_dir (-0.4626, 0.5985, -0.6541)  target (626.3, 871.5, 1192.9)  radius 106.4  (distance 300, elevation 37, azimuth -145)
+      arrow   tail (597.8, 855.4, 1204.4) -> tip (517.7, 855.1, 1202.9)  L 80.1  w 6.24
+      eye     on D3 (LSM_Side1_r8-Cut-Extrude1) at (592.2, 861.8, 1154.8); icon at 37 %, 63 % of the view
+      close-up ring on D2 at (592.2, 902.4, 1251.9); picture ASSe6eb3644-b60e-6c40-82ed-d3478c37c2c3.png (9.72 % wide, h/w 1.47) at 64 %, 11 %
+      +  D11_C
+      +  D11_A
+      +  D11_B
+      +  D11_D
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[14] Transition     transition camera same
+      >  D4 moves (-75.2, 0.0, 0.0) (75.22 mm)  now (-75.2, 0.0, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D4, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[15] Step 5c        Nc         camera same
+      -  D4
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[16] Step 6         N          camera view_dir (-0.7815, 0.4213, -0.4601)  target (633.6, 893.7, 1202.5)  radius 124.2  (distance 350, elevation 25, azimuth -120)
+      arrow   tail (599.2, 921.9, 1166.3) -> tip (600.7, 967.5, 1166.3)  L 45.6  w 3.43
+      arrow   tail (599.0, 921.3, 1242.4) -> tip (600.6, 968.3, 1241.9)  L 47.0  w 3.95
+      eye     on D11_D (SM_LensSupport_r2-Cut-Extrude1) at (600.0, 880.0, 1166.6); icon at 34 %, 57 % of the view
+      close-up ring on D11_C at (600.0, 875.3, 1242.5); picture ASS0b85590d-c11d-4a54-fef0-b6652f92a119.png (8.59 % wide, h/w 1.53) at 63 %, 32 %
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[17] Transition     transition camera same
+      >  D11_C moves (0.0, 86.5, 0.0) (86.54 mm)  now (0.0, 86.5, 0.0)
+      >  D11_D moves (0.0, 88.8, 0.0) (88.79 mm)  now (0.0, 88.8, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D11_C, D11_D, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[18] Step 6c        Nc         camera same
+      -  D11_C
+      -  D11_D
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[19] Step 7         N          camera view_dir (0.7699, 0.4124, 0.4871)  target (636.9, 891.6, 1199.1)  radius 124.2  (distance 350, elevation 24, azimuth 58)
+      arrow   tail (676.3, 922.0, 1241.9) -> tip (677.0, 967.0, 1242.6)  L 45.0  w 3.88
+      arrow   tail (677.3, 920.7, 1166.2) -> tip (676.6, 962.4, 1166.0)  L 41.7  w 3.62
+      eye     on D11_A (SM_LensSupport_r2-Cut-Extrude1) at (676.5, 883.5, 1242.8); icon at 36 %, 63 % of the view
+      close-up ring on D11_B at (676.5, 880.6, 1167.2); picture ASS0b85590d-c11d-4a54-fef0-b6652f92a119.png (9.57 % wide, h/w 1.53) at 63 %, 27 %
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[20] Transition     transition camera same
+      >  D11_A moves (0.0, 84.5, 0.0) (84.55 mm)  now (0.0, 84.5, 0.0)
+      >  D11_B moves (0.0, 70.5, 0.0) (70.46 mm)  now (0.0, 70.5, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D11_A, D11_B, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[21] Step 7c        Nc         camera same
+      -  D11_A
+      -  D11_B
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[22] Step 8         N          camera view_dir (0.7699, 0.4124, 0.4871)  target (641.7, 884.4, 1197.6)  radius 106.4  (distance 300, elevation 24, azimuth 58)
+      arrow   tail (640.0, 898.5, 1205.2) -> tip (639.6, 969.1, 1206.0)  L 70.6  w 3.83
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[23] Transition     transition camera same
+      >  NANO moves (0.0, -0.0, -2.3) (2.28 mm)  now (0.0, 2.0, -2.3)
+      >  D6 moves (0.0, 44.7, 0.0) (44.66 mm)  now (0.0, 44.7, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D6, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[24] Step 8c        Nc         camera same
+      -  D6
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[25] Step 9         N          camera view_dir (-0.4752, 0.5698, -0.6705)  target (616.3, 882.2, 1206.5)  radius 91.3  (distance 258, elevation 35, azimuth -145)
+      arrow   tail (640.0, 898.5, 1205.2) -> tip (639.6, 969.1, 1206.0)  L 70.6  w 3.83
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10, D2, D9_A, D9_B, J_GREY_F, J_GREY_M, J_PURPLE_F, J_PURPLE_M, J_WHITE_F, J_WHITE_M, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[26] Transition     transition camera same
+      +  MATRIX copy [8x8 LED-5]  pose (0.0, 56.6, -0.5)
+      +  D10 copy [LSM_MatrixSupportSmall_r2-2]  pose (0.7, 57.1, -0.8)
+      +  wire white [Part28]  box (600.7, 876.3, 1165.8) - (649.1, 949.1, 1259.7)  (with the matrix hovering (Step 9 Transition))
+      +  wire grey [Part29]  box (603.3, 875.6, 1172.2) - (649.5, 949.3, 1260.0)  (hovering)
+      +  wire purple [Part30]  box (604.8, 876.3, 1185.3) - (627.7, 949.3, 1259.8)  (hovering)
+      +  J_WHITE_F copy [Wire Cap-21]  box (607.6, 947.0, 1177.8) - (609.4, 948.8, 1185.8)  (on the matrix hovering / isolated (and a duplicate at the laid-aside matrix, 11c - 13c))
+      +  J_PURPLE_F copy [Wire Cap-22]  box (609.5, 947.0, 1177.8) - (611.2, 948.8, 1185.8)  (hovering / isolated)
+      +  J_GREY_F copy [Wire Cap-23]  box (611.4, 947.0, 1177.8) - (613.1, 948.8, 1185.8)  (hovering / isolated)
+      -  D10
+      -  wire white [Part25]
+      -  wire grey [Part26]
+      -  wire purple [Part27]
+      -  J_PURPLE_M [Wire Cap V2-1]
+      -  J_WHITE_M [Wire Cap V2-4]
+      -  J_GREY_M [Wire Cap V2-7]
+      -  J_WHITE_F [Wire Cap-14]
+      -  J_PURPLE_F [Wire Cap-15]
+      -  J_GREY_F [Wire Cap-16]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D9_A, D9_B, J_GREY_F copy, J_PURPLE_F copy, J_WHITE_F copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[27] Step 9c        Nc         camera same
+      +  MATRIX copy [8x8 LED-6]  pose turned((0.000, 1.000, 0.000), 180.0, at=(638.8, 895.6, 1204.0), t=(-91.0, 5.9, 25.3))
+      +  D10 copy [LSM_MatrixSupportSmall_r2-3]  pose turned((0.000, 1.000, 0.000), 180.0, at=(638.5, 891.9, 1204.5), t=(-90.5, 7.1, 24.1))
+      +  wire white [Part31]  box (577.6, 876.3, 1166.9) - (649.1, 909.0, 1251.8)  (matrix laid aside, still in the breadboard (Step 9c - 11))
+      +  wire grey [Part32]  box (573.7, 875.6, 1172.2) - (649.5, 910.0, 1246.9)  (laid aside, plugged (9c - 13))
+      +  wire purple [Part33]  box (575.7, 876.3, 1210.4) - (627.7, 908.6, 1246.9)  (laid aside, plugged (9c - 12))
+      +  J_PURPLE_M [Wire Cap V2-1]  box (626.2, 868.3, 1212.8) - (627.9, 880.3, 1214.5)  pin tip (627.0, 868.3, 1213.6) pointing (0.0, -1.0, 0.0)  (in b19)
+      +  J_WHITE_M [Wire Cap V2-4]  box (646.6, 868.7, 1167.4) - (651.2, 880.7, 1171.7)  pin tip (648.9, 868.7, 1169.5) pointing (0.0, -1.0, 0.0)  (in i2)
+      +  J_GREY_M [Wire Cap V2-7]  box (646.9, 868.0, 1172.1) - (651.9, 879.9, 1173.9)  pin tip (649.4, 868.0, 1173.0) pointing (0.0, -1.0, 0.0)  (in i3)
+      +  J_WHITE_F copy [Wire Cap-17]  box (577.3, 896.2, 1246.9) - (579.1, 898.0, 1254.9)  (on the matrix laid aside)
+      +  J_GREY_F copy [Wire Cap-18]  box (573.5, 896.2, 1246.9) - (575.3, 898.0, 1254.9)  (laid aside)
+      +  J_PURPLE_F copy [Wire Cap-19]  box (575.4, 896.3, 1246.9) - (577.2, 898.0, 1254.9)  (laid aside)
+      -  MATRIX copy [8x8 LED-5]
+      -  D10 copy [LSM_MatrixSupportSmall_r2-2]
+      -  wire white [Part28]
+      -  wire grey [Part29]
+      -  wire purple [Part30]
+      -  J_WHITE_F copy [Wire Cap-21]
+      -  J_PURPLE_F copy [Wire Cap-22]
+      -  J_GREY_F copy [Wire Cap-23]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D9_A, D9_B, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[28] Step 10        N          camera view_dir (-0.5118, 0.7156, -0.4753)  target (626.0, 878.8, 1205.3)  radius 91.3  (distance 258, elevation 46, azimuth -133)
+      arrow   tail (657.2, 891.5, 1204.8) -> tip (655.2, 960.7, 1204.4)  L 69.2  w 3.45
+      arrow   tail (618.8, 892.1, 1204.7) -> tip (619.9, 953.3, 1203.3)  L 61.2  w 3.45
+      +  D3
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, D9_A, D9_B, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[29] Transition     transition camera same
+      >  D9_A moves (0.0, 54.4, 0.0) (54.4 mm)  now (0.0, 54.4, 0.0)
+      >  D9_B moves (0.0, 54.4, 0.0) (54.4 mm)  now (0.0, 54.4, 0.0)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, D9_A, D9_B, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[30] Step 10c       Nc         camera same
+      -  D9_A
+      -  D9_B
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[31] Step 11        N          camera view_dir (0.5557, 0.7581, -0.3413)  target (625.3, 873.2, 1206.5)  radius 91.3  (distance 258, elevation 49, azimuth 122)
+      eye     on J_WHITE_M (Wire Cap V2-Cut-Extrude1) at (649.0, 878.0, 1168.7); icon at 65 %, 55 % of the view
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[32] Step 11c       Nc         camera same
+      +  wire white [Copy of Part39]  box (577.0, 879.2, 1197.5) - (581.8, 899.1, 1251.7)  (loose, unplugged (11c - 15))
+      +  J_WHITE_M copy [Wire Cap V2-28]  box (579.8, 871.2, 1197.3) - (581.5, 883.2, 1199.1)  pin tip (580.6, 871.2, 1198.2) pointing (0.0, -1.0, 0.0)  (white plug, unplugged)
+      +  J_WHITE_F copy [Wire Cap-21]  box (577.3, 896.3, 1247.0) - (579.1, 898.1, 1255.0)  (on the matrix hovering / isolated (and a duplicate at the laid-aside matrix, 11c - 13c))
+      -  wire white [Part31]
+      -  J_WHITE_M [Wire Cap V2-4]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[33] Step 12        N          camera same
+      eye     on J_PURPLE_M (Wire Cap V2-Cut-Extrude1) at (627.9, 877.5, 1213.6); icon at 31 %, 17 % of the view
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[34] Step 12c       Nc         camera same
+      +  wire purple [Copy of Part40]  box (575.0, 879.2, 1197.5) - (578.0, 899.2, 1251.7)  (loose (12c - 15))
+      +  J_PURPLE_M copy [Wire Cap V2-31]  box (575.9, 871.2, 1197.3) - (577.6, 883.2, 1199.1)  pin tip (576.7, 871.2, 1198.2) pointing (0.0, -1.0, 0.0)  (purple plug, unplugged)
+      -  wire purple [Part33]
+      -  J_PURPLE_M [Wire Cap V2-1]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[35] Step 13        N          camera same
+      eye     on J_GREY_M (Wire Cap V2-Cut-Extrude1) at (648.7, 879.7, 1173.0); icon at 61 %, 24 % of the view
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[36] Step 13c       Nc         camera same
+      +  wire grey [Copy of Part41]  box (571.7, 879.2, 1197.5) - (575.5, 899.1, 1251.8)  (loose (13c - 15))
+      +  J_GREY_M copy [Wire Cap V2-32]  box (571.5, 871.2, 1197.4) - (573.3, 883.2, 1199.1)  pin tip (572.4, 871.2, 1198.2) pointing (0.0, -1.0, 0.0)  (grey plug, unplugged)
+      -  wire grey [Part32]
+      -  J_GREY_M [Wire Cap V2-7]
+      -  J_WHITE_F copy [Wire Cap-17]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D10 copy, D2, D3, J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable, wire grey, wire purple, wire white
+[37] Step 14        N          camera view_dir (-0.5194, 0.5906, -0.6177)  target (645.6, 909.9, 1212.5)  radius 78.2  (distance 221, elevation 36, azimuth -140)
+      arrow   tail (604.1, 945.6, 1204.6) -> tip (603.3, 894.9, 1204.6)  L 50.8  w 4.43
+      eye     on D10 copy (ixSupportSmall_r2-Cut-Extrude1) at (600.5, 954.3, 1202.1); icon at 65 %, 30 % of the view
+      +  MATRIX copy [8x8 LED-5]  pose (0.0, 56.6, -0.5)
+      +  J_PURPLE_F copy [Wire Cap-22]  box (609.5, 947.0, 1177.8) - (611.2, 948.8, 1185.8)  (hovering / isolated)
+      +  J_GREY_F copy [Wire Cap-23]  box (611.4, 947.0, 1177.8) - (613.1, 948.8, 1185.8)  (hovering / isolated)
+      -  MATRIX copy [8x8 LED-6]
+      -  NANO
+      -  BREADBOARD
+      -  CAP
+      -  D1
+      -  D3
+      -  D2
+      -  BACKING
+      -  lead red [Part10]
+      -  usb cable [Part23]
+      -  lead black [Part9]
+      -  NUT
+      -  BUTTON
+      -  R12K
+      -  R330
+      -  USB_A
+      -  USB_B
+      -  BTN_RED_PIN [Wire Cap V2-3]
+      -  BTN_BLACK_PIN [Wire Cap V2-9]
+      -  J_GREY_F copy [Wire Cap-18]
+      -  J_PURPLE_F copy [Wire Cap-19]
+      >  wire white [Copy of Part39] moves (27.6, 50.7, -16.4) (60.01 mm, turn 179.48 deg)
+      >  wire purple [Copy of Part40] moves (33.5, 50.7, -16.4) (62.94 mm, turn 179.48 deg)
+      >  wire grey [Copy of Part41] moves (39.2, 50.7, -16.4) (66.15 mm, turn 179.48 deg)
+      >  D10 copy [LSM_MatrixSupportSmall_r2-3] moves (90.4, 49.9, -25.0) (106.21 mm)  now turned((0.000, 1.000, 0.000), 180.0, at=(638.5, 891.9, 1204.5), t=(-0.2, 57.0, -0.9))
+      >  J_WHITE_M copy [Wire Cap V2-28] moves (24.9, 50.7, 36.4) (67.21 mm, turn 179.48 deg)
+      >  J_PURPLE_M copy [Wire Cap V2-31] moves (32.8, 50.7, 36.4) (70.48 mm, turn 179.48 deg)
+      >  J_GREY_M copy [Wire Cap V2-32] moves (41.4, 50.7, 36.4) (74.89 mm, turn 179.48 deg)
+      >  J_WHITE_F copy [Wire Cap-21] moves (30.2, 50.7, -69.1) (90.9 mm, turn 179.48 deg)
+      shown: D10 copy, J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, wire grey, wire purple, wire white
+[38] Transiton      transition camera same
+      >  D10 copy [LSM_MatrixSupportSmall_r2-3] moves (0.0, -48.4, 0.0) (48.42 mm)  now turned((0.000, 1.000, 0.000), 180.0, at=(638.5, 891.9, 1204.5), t=(-0.2, 8.5, -0.9))
+      shown: D10 copy, J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, wire grey, wire purple, wire white
+[39] Step 14c       Nc         camera same
+      -  D10 copy [LSM_MatrixSupportSmall_r2-3]
+      shown: J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, wire grey, wire purple, wire white
+[40] Step 15        N          camera view_dir (-0.7915, 0.4034, 0.4592)  target (643.3, 915.6, 1202.3)  radius 57.5  (distance 162, elevation 24, azimuth -60)
+      arrow   tail (618.8, 931.4, 1230.7) -> tip (619.4, 929.5, 1262.2)  L 31.6  w 3.45
+      eye     on J_PURPLE_F copy (Wire Cap-22) at (609.7, 948.8, 1182.0); icon at 23 %, 36 % of the view
+      shown: J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, wire grey, wire purple, wire white
+[41] Transition     transition camera same
+      >  wire white [Copy of Part39] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  wire purple [Copy of Part40] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  wire grey [Copy of Part41] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_WHITE_M copy [Wire Cap V2-28] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_PURPLE_M copy [Wire Cap V2-31] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_GREY_M copy [Wire Cap V2-32] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_WHITE_F copy [Wire Cap-21] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_PURPLE_F copy [Wire Cap-22] moves (0.0, 0.0, 30.5) (30.46 mm)
+      >  J_GREY_F copy [Wire Cap-23] moves (0.0, 0.0, 30.5) (30.46 mm)
+      shown: J_GREY_F copy, J_GREY_M copy, J_PURPLE_F copy, J_PURPLE_M copy, J_WHITE_F copy, J_WHITE_M copy, MATRIX copy, wire grey, wire purple, wire white
+[42] Step 15c       Nc         camera same
+      -  wire white [Copy of Part39]
+      -  wire purple [Copy of Part40]
+      -  wire grey [Copy of Part41]
+      -  J_WHITE_M copy [Wire Cap V2-28]
+      -  J_PURPLE_M copy [Wire Cap V2-31]
+      -  J_GREY_M copy [Wire Cap V2-32]
+      -  J_WHITE_F copy [Wire Cap-21]
+      -  J_PURPLE_F copy [Wire Cap-22]
+      -  J_GREY_F copy [Wire Cap-23]
+      shown: MATRIX copy
+[43] Step 16        N          camera view_dir (-0.7081, 0.5126, -0.4855)  target (628.4, 881.5, 1206.8)  radius 91.3  (distance 258, elevation 31, azimuth -124)
+      arrow   tail (638.3, 854.9, 1155.7) -> tip (639.3, 855.3, 1105.1)  L 50.7  w 3.53
+      close-up ring on D1 at (640.2, 859.4, 1153.4); picture ASS660d48ca-dec7-2072-584e-643047509d79.png (24.84 % wide, h/w 0.48) at 46 %, 37 %
+      +  NANO  pose (0.0, 2.0, -2.3)
+      +  BREADBOARD
+      +  CAP
+      +  D1
+      +  D3
+      +  D2
+      +  BACKING
+      +  lead red [Part10]  box (633.7, 875.8, 1177.3) - (653.4, 884.7, 1234.3)  (seated route to j5 (Start - 17))
+      +  usb cable [Part23]  box (558.7, 835.0, 1216.7) - (619.0, 880.4, 1258.9)  (seated (Start - 20))
+      +  lead black [Part9]  box (641.1, 875.9, 1205.3) - (653.9, 886.4, 1234.2)  (seated route to j16 (Start - 17))
+      +  NUT
+      +  BUTTON
+      +  R12K
+      +  R330
+      +  USB_A  pose (0.0, 2.1, 0.0)
+      +  USB_B  pose (0.0, 2.1, 0.0)
+      +  BTN_RED_PIN [Wire Cap V2-3]  box (651.8, 867.8, 1177.2) - (653.5, 879.8, 1179.0)  pin tip (652.6, 867.8, 1178.1) pointing (0.0, -1.0, 0.0)  (in j5)
+      +  BTN_BLACK_PIN [Wire Cap V2-9]  box (651.8, 867.9, 1205.1) - (653.5, 879.9, 1206.8)  pin tip (652.6, 867.9, 1206.0) pointing (0.0, -1.0, 0.0)  (in j16)
+      -  MATRIX copy [8x8 LED-5]
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D2, D3, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable
+[44] Transition     transition camera same
+      >  D3 moves (0.0, 0.0, -38.4) (38.42 mm)  now (0.0, 0.0, -38.4)
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D2, D3, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable
+[45] Step 16c       Nc         camera same
+      -  D3
+      shown: BACKING, BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D2, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable
+[46] Step 17        N          camera view_dir (-0.4635, 0.7743, -0.4309)  target (639.2, 846.2, 1231.6)  radius 106.4  (distance 300, elevation 51, azimuth -133)
+      arrow   tail (637.9, 855.5, 1256.7) -> tip (637.9, 854.8, 1343.2)  L 86.5  w 3.88
+      eye     on BTN_RED_PIN (Wire Cap V2-Cut-Extrude1) at (651.8, 876.6, 1177.8); icon at 28 %, 36 % of the view
+      eye     on BTN_BLACK_PIN (Wire Cap V2-Cut-Extrude1) at (652.7, 874.0, 1205.1); icon at 35 %, 25 % of the view
+      close-up ring on D1 at (640.8, 860.6, 1255.2); picture ASS0cfe35ae-e668-ec85-cb28-f15f1c05c7d4.png (22.46 % wide, h/w 0.57) at 66 %, 18 %
+      -  BACKING
+      shown: BREADBOARD, BTN_BLACK_PIN, BTN_RED_PIN, BUTTON, CAP, D1, D2, NANO, NUT, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable
+[47] Step 17c       Nc         camera same
+      +  D2 copy [LSM_Side3_r2-2]  pose (0.6, -0.6, 57.1)
+      +  lead black [Part39]  box (641.9, 880.3, 1241.2) - (643.2, 881.7, 1290.8)  (straight, unplugged (17c - 19))
+      +  lead red [Part40]  box (634.5, 880.4, 1242.0) - (635.8, 881.8, 1290.8)  (straight, unplugged (17c - 19))
+      +  NUT copy [Push button-2]  pose (0.6, -0.6, 56.7)
+      +  BUTTON copy [Push button-2]  pose (0.6, -0.6, 56.7)
+      +  BTN_RED_PIN copy [Wire Cap V2-10]  box (634.3, 880.3, 1234.0) - (636.0, 882.1, 1246.0)  pin tip (635.2, 881.2, 1234.0) pointing (0.0, 0.0, -1.0)  (red plug, unplugged)
+      +  BTN_BLACK_PIN copy [Wire Cap V2-11]  box (641.7, 880.0, 1234.0) - (643.4, 881.8, 1246.0)  pin tip (642.5, 880.9, 1234.0) pointing (0.0, 0.0, -1.0)  (black plug, unplugged)
+      -  D2
+      -  lead red [Part10]
+      -  lead black [Part9]
+      -  NUT
+      -  BUTTON
+      -  BTN_RED_PIN [Wire Cap V2-3]
+      -  BTN_BLACK_PIN [Wire Cap V2-9]
+      shown: BREADBOARD, BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, CAP, D1, D2 copy, NANO, NUT copy, R12K, R330, USB_A, USB_B, lead black, lead red, usb cable
+[48] Step 18        N          camera view_dir (-0.5059, 0.6728, -0.5399)  target (632.2, 862.6, 1302.9)  radius 67.1  (distance 189, elevation 42, azimuth -137)
+      arrow   tail (652.6, 878.3, 1265.6) -> tip (649.7, 880.4, 1209.4)  L 56.3  w 5.00
+      eye     on NUT copy (Push button-Boss-Extrude6) at (632.5, 886.3, 1306.4); icon at 43 %, 54 % of the view
+      -  NANO
+      -  BREADBOARD
+      -  CAP
+      -  D1
+      -  usb cable [Part23]
+      -  R12K
+      -  R330
+      -  USB_A
+      -  USB_B
+      shown: BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, D2 copy, NUT copy, lead black, lead red
+[49] Transition     transition camera same
+      >  NUT copy [Push button-2] moves (0.0, -0.0, -84.8) (84.79 mm, turn 175.99 deg)  now turned((0.000, 0.000, 1.000), 176.0, at=(638.2, 881.6, 1251.2), t=(0.6, -0.6, -28.1))
+      shown: BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, D2 copy, NUT copy, lead black, lead red
+[50] Step 18c       Nc         camera same
+      -  NUT copy [Push button-2]
+      shown: BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, D2 copy, lead black, lead red
+[51] Step 19        N          camera view_dir (-0.5440, 0.7422, 0.3914)  target (637.6, 857.1, 1311.1)  radius 78.2  (distance 221, elevation 48, azimuth -54)
+      arrow   tail (638.9, 880.2, 1315.5) -> tip (640.6, 876.0, 1353.6)  L 38.4  w 3.66
+      eye     on BUTTON copy (ac-e725-9461-7df3-593fb1b54efe) at (640.2, 877.1, 1315.7); icon at 59 %, 28 % of the view
+      ~  D2 copy: 3 -> 5 of 5 solids shown
+      shown: BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, D2 copy, lead black, lead red
+[52] Transition     transition camera same
+      >  lead black [Part39] moves (0.0, 0.0, 94.8) (94.81 mm)
+      >  lead red [Part40] moves (0.0, 0.0, 94.8) (94.81 mm)
+      >  BUTTON copy [Push button-2] moves (0.0, 0.0, 94.8) (94.81 mm)  now (0.6, -0.6, 151.5)
+      >  BTN_RED_PIN copy [Wire Cap V2-10] moves (0.0, 0.0, 94.8) (94.81 mm)
+      >  BTN_BLACK_PIN copy [Wire Cap V2-11] moves (0.0, 0.0, 94.8) (94.81 mm)
+      shown: BTN_BLACK_PIN copy, BTN_RED_PIN copy, BUTTON copy, D2 copy, lead black, lead red
+[53] Step 19c       Nc         camera same
+      -  lead black [Part39]
+      -  lead red [Part40]
+      -  BUTTON copy [Push button-2]
+      -  BTN_RED_PIN copy [Wire Cap V2-10]
+      -  BTN_BLACK_PIN copy [Wire Cap V2-11]
+      shown: D2 copy
+[54] Step 20        N          camera view_dir (-0.3119, 0.7412, 0.5944)  target (633.5, 832.0, 1239.2)  radius 106.4  (distance 300, elevation 48, azimuth -28)
+      arrow   tail (637.0, 882.2, 1223.6) -> tip (634.5, 881.0, 1286.8)  L 63.3  w 5.02
+      eye     on USB_B (B Right Angle-Boss-Extrude9[1]) at (634.7, 881.9, 1222.7); icon at 27 %, 19 % of the view
+      +  NANO  pose (0.0, 2.0, -2.3)
+      +  BREADBOARD
+      +  CAP
+      +  D1
+      +  usb cable [Part23]  box (558.7, 835.0, 1216.7) - (619.0, 880.4, 1258.9)  (seated (Start - 20))
+      +  R12K
+      +  R330
+      +  USB_A  pose (0.0, 2.1, 0.0)
+      +  USB_B  pose (0.0, 2.1, 0.0)
+      -  D2 copy [LSM_Side3_r2-2]
+      shown: BREADBOARD, CAP, D1, NANO, R12K, R330, USB_A, USB_B, usb cable
+[55] Step 20c       Nc         camera same
+      -  usb cable [Part23]
+      -  USB_A
+      -  USB_B
+      ~  NANO: 151 -> 150 of 155 solids shown
+      shown: BREADBOARD, CAP, D1, NANO, R12K, R330
+[56] Step 21        N          camera view_dir (-0.5761, 0.5320, -0.6206)  target (633.0, 853.8, 1207.4)  radius 67.1  (distance 189, elevation 32, azimuth -137)
+      arrow   tail (624.2, 878.7, 1203.2) -> tip (625.3, 910.7, 1204.0)  L 32.0  w 2.30
+      ~  NANO: 150 -> 151 of 155 solids shown
+      shown: BREADBOARD, CAP, D1, NANO, R12K, R330
+[57] Transition     transition camera same
+      >  R330 moves (0.0, 30.3, 0.0) (30.34 mm)  now (0.0, 30.3, 0.0)
+      shown: BREADBOARD, CAP, D1, NANO, R12K, R330
+[58] Step 21c       Nc         camera same
+      -  R330
+      shown: BREADBOARD, CAP, D1, NANO, R12K
+[59] Step 22        N          camera view_dir (0.6564, 0.6618, 0.3621)  target (640.4, 850.3, 1200.3)  radius 67.1  (distance 189, elevation 41, azimuth 61)
+      arrow   tail (654.0, 882.1, 1171.8) -> tip (655.0, 903.2, 1172.2)  L 21.1  w 2.09
+      shown: BREADBOARD, CAP, D1, NANO, R12K
+[60] Transition     transition camera same
+      >  CAP moves (-0.0, 29.1, 0.0) (29.08 mm)  now (0.0, 29.1, 0.0)
+      shown: BREADBOARD, CAP, D1, NANO, R12K
+[61] Step 22c       Nc         camera same
+      -  CAP
+      shown: BREADBOARD, D1, NANO, R12K
+[62] Step 23        N          camera same
+      arrow   tail (647.6, 875.8, 1190.9) -> tip (647.5, 907.3, 1190.7)  L 31.4  w 1.28
+      shown: BREADBOARD, D1, NANO, R12K
+[63] Transition     transition camera same
+      >  R12K moves (0.0, 31.3, 0.0) (31.3 mm)  now (0.0, 31.3, 0.0)
+      shown: BREADBOARD, D1, NANO, R12K
+[64] Step 23c       Nc         camera same
+      -  R12K
+      shown: BREADBOARD, D1, NANO
+[65] Step 24        N          camera same
+      arrow   tail (637.6, 867.6, 1187.3) -> tip (635.8, 908.1, 1187.4)  L 40.5  w 2.85
+      ~  NANO: 151 -> 109 of 155 solids shown
+      shown: BREADBOARD, D1, NANO
+[66] Transition     transition camera same
+      >  NANO moves (0.0, 30.9, 0.0) (30.95 mm)  now (0.0, 33.0, -2.3)
+      shown: BREADBOARD, D1, NANO
+[67] Step 24c       Nc         camera same
+      -  NANO
+      shown: BREADBOARD, D1
+[68] Completed View end        camera view_dir (0.4098, 0.7518, 0.5166)  target (639.5, 845.2, 1212.5)  radius 67.1  (distance 189, elevation 49, azimuth 38)
+      shown: BREADBOARD, D1
+
+Glitches of the published guide (not to be copied):
+  - Step name 'Transiton' (frame 38, Step 14's transition).
+  - Step 4: its Transition moves nothing; D5 gets its +54.1 mm X offset in Step 4c, the step that hides it (it fades there; no hover frame).
+  - Step 4c also hides the four D11 posts; they are back at Step 5 and really come off at Steps 6 - 7.
+  - D3 is hidden from Step 1 to Step 9c (its plate is back at Step 10, its engraved sheets at Step 16) although it is on until Step 16; the Step 4 and Step 5 eyes are tied to D3 and point at an empty corner.
+  - The seated LED matrix (8x8 LED-4) is never shown: no matrix from Start to Step 9; it appears already hovering in Step 9's Transition (8x8 LED-5, a model swap, not a tween) and is swapped again for one laid aside at 9c (8x8 LED-6).
+  - Step 9 reuses Step 8's arrow unchanged (it starts where D6 was, not on the matrix).
+  - Step 9 Transition: the three male plugs in the breadboard (Wire Cap V2-1/-4/-7) are hidden, though the hovering wires still reach the breadboard; back at 9c. The hovering wires also loop out to z 1259.7, through D2 (outer face z 1254.9).
+  - Wire Cap-21 (white female cap) is shown a second time on the laid-aside matrix from 11c, on top of Wire Cap-17, which is hidden at 13c (when the grey wire is unplugged): duplicate solids, no visible effect.
+  - Step 14's isolated view puts the matrix back at its hovering place (8x8 LED-5: 56.6 mm above its seat, not turned), not where it was laid aside; the D10 copy keeps the laid-aside half turn (D10 is symmetric, so it does not show).
+  - The laid-aside matrix floats at its seated height + 5.9 mm (bottom y 896.5; the base's underside is y 859.4): beside the box only because there is no floor.
+  - Step 19 pushes the button out (+Z) with its wires and plugs passing through D2's button hole.
+  - Step 20 has an arrow and an eye but no motion: the USB cable (both ends and the cable) just fades at 20c.
+  - The matrix wires are unplugged white (i2), purple (b19), grey (i3): neither the build's order nor its reverse.
+  - Arrow sizes vary for no reason (5 of 24 depart from 5 : 20 : 15-17; per-arrow scale makes Step 15's and Step 18's heavy, Step 22's thin).
+  - Step 4's eye has a light-blue box round it (the other 16 have none); Step 16's close-up frame is clipped at the bottom.
+  - The Nano is 2.08 mm above its CAD seat from Start (the USB plug and the A end with it); some of its solids toggle at Steps 1, 2, 8 (a 2.3 mm z shift), 20c, 21 and 24. R330 shows 8 of its 10 solids from Step 2, R12K 8 of 10 throughout, the USB plug 2 of 3.
+  - D11_B / C / D are hidden for Step 1 only; the breadboard's backing sheet (BACKING) is on until Step 16c.
+  - The steps name 578 ids not in the tree (stale copies from an earlier CAD import): no geometry; the Step 19 eye is tied to one (a button solid), so its ring is placed with Push button-2's frame (on the button's front face).
+  - A hidden authoring step 'Step 51' precedes Start; 69 lead lines, 10 labels (hole names i2, i3, b19, j5, j16 ...), 16 arrows and 36 images of the project are never shown.
+
+Checks: 24 arrow showings in arrows/published_arrows.json; frames that differ from this replay: none

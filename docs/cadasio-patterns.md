@@ -282,14 +282,19 @@ around them comes out, as the build plugged them in last (the wheel motors befor
 cable, and none on its far end. Wood that holds a part (the motors' L4 and L5) comes off that part in the hand, and the guide ends
 on the base (L1). Its card is the Full Build's (as the MRA's).
 
-**The LSM's deconstruction (first draft, 21 Oct 2026; Lee's request as for the PMG, "like the 3 breadboard wires, etc."; not yet
-reviewed by Lee):** the Full Build in reverse, with groups (the 64 stems, the four D11 posts, both D9, the button's two wires; the three
-breadboard wires as the PMG's, the device pulled off their connectors, then the wires out of the breadboard together), and Lee's PMG
-rulings of the same day applied by analogy: each arrow the size of the matching one in TechBox's published LSM take-apart, and an arrow
-per stage, in turn. Where the power cable cannot come out first (the LSM's box closes round its plug), Step 1's caution says to
-disconnect it from the computer. A module that must stay wired while the structure round it comes off is carried out the way the Full
-Build brought it in, and back where the order needs it (the LED matrix, over D4 and back, since in the model the b19 pin is under the
-USB plug: LSM README question 20 asks Lee about a shorter order).
+**Lee, 2026-10-21 (the LSM's deconstruction):** on a first draft that walked the Full Build back: "you need to base the deconstruction
+process off of this guide: https://instructions.online/?id=19075-laser_stem_matrix_lsm_-_deconstruction - so there are a lot of edits
+needed." Where TechBox has published a take-apart of the kit, ours follows it: its order and groups, its camera for each step, its arrows
+(size and tail), eyes and close-ups, drawn from our model; departures only where our model or Lee's own groups need them (the three
+breadboard wires in one step), or where ours would hide or lose what the published picture shows, each named in the script. Its model
+swaps (a module set down beside the box, a wire unplugged and left loose) are fades (`reappear=True`), as section 11 says wires are
+unplugged; whether to keep them as fades is put to Lee. A two-stage joint the published guide flattens is still undone in two stages
+inside the step (D10 slid off its hooks, then down: above). "Eyes instead of hole labels are okay for this kit" (the unplugged wires),
+and a Pry Tool the kit has but the model does not show still gets its caution (the Nano Board).
+
+**Lee, 2026-10-21 (the LSM):** "Let's use gray": TechBox writes American English (its MRA take-apart's "center"), so "gray", not
+"grey", in every guide's student-facing words (captions, cautions, close-up captions, hover names); colour and part ids in the code may
+keep their spelling.
 
 **Lee, 2026-10-21 (the PMG's deconstruction, "same principles as you used for the MRA"):** "some things can be removed in groups
 (like the breadboard wires, four buttons, four H9 parts, etc.)": parts the build put in one at a time come off together where they

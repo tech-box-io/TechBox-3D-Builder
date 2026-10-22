@@ -1,0 +1,262 @@
+loading lsm.glb ...
+
+# 1 - 3. the stems, D8, D7 (from the top)
+P1 the 64 stems up 62.5: [0.0, 1.0, 0.0] x 62.5 mm: BLOCKED (D7 blocked, D8 latch); generator's check: passes
+    D7               at rest  0.19  contact 0.07 mm (depth 2.98)  catch >=1.0  blocked  first met after 1.22 mm at [615.41, 913.5, 1200.88]
+    D8               at rest  0.18  contact 0.66 mm (depth 3.15)  catch >=1.25  latch  first met after 0.66 mm at [669.46, 929.19, 1191.8]
+    D6               at rest  0.18  contact None mm (depth None)  catch None  
+P2 D8 up 54.1: [0.0, 1.0, 0.0] x 54.1 mm: LATCH (D11_A latch, D11_B latch, D11_C latch, D11_D latch); generator's check: flags it
+    D11_D            at rest  1.12  contact 0.06 mm (depth 3.15)  catch >=1.0  latch  first met after 0.07 mm at [602.13, 932.43, 1170.19]
+    D11_C            at rest  1.12  contact 0.06 mm (depth 3.15)  catch >=1.0  latch  first met after 0.07 mm at [602.13, 932.43, 1246.39]
+    D11_B            at rest  1.11  contact 0.06 mm (depth 3.15)  catch >=1.0  latch  first met after 0.07 mm at [674.33, 932.43, 1162.21]
+    D11_A            at rest  1.11  contact 0.06 mm (depth 3.15)  catch >=1.0  latch  first met after 0.07 mm at [674.33, 932.43, 1238.41]
+P3 D7 up 67.8: [0.0, 1.0, 0.0] x 67.8 mm: FREE; generator's check: passes
+
+# 4. D5 out +X 54.1 (the D11 posts, D6, the matrix with D10, the D9s, D4, D3 and D2 still on)
+P4 D5 +X 54.1: [1.0, 0.0, 0.0] x 54.1 mm: LATCH (D2 latch, D3 latch); generator's check: flags it
+    D3               at rest  0.15  contact 0.04 mm (depth 2.98)  catch >=1.0  latch  first met after 0.29 mm at [682.51, 904.66, 1155.98]
+    D2               at rest  0.11  contact 0.04 mm (depth 2.98)  catch >=1.0  latch  first met after 0.22 mm at [682.51, 904.66, 1252.0]
+    D1               at rest  0.12  contact 0.04 mm (depth 2.98)  catch 0.2  tight
+    D10              at rest  0.21  contact 0.18 mm (depth 2.98)  catch 0.2  tight
+    -> straight directions: {'+X': 'LATCH', '-X': 'BLOCKED', '+Y': 'LATCH', '-Y': 'LATCH', '+Z': 'LATCH', '-Z': 'LATCH'}
+
+# 5. D4 out -X 75.2 (the USB cable stays in its notch)
+P5 D4 -X 75.2: [-1.0, -0.0, -0.0] x 75.2 mm: LATCH (D10 latch, D2 latch, D3 latch); generator's check: flags it
+    D10              at rest  0.16  contact 0.18 mm (depth 2.98)  catch >=1.0  latch  first met after 0.22 mm at [594.19, 899.68, 1202.98]
+    D2               at rest  0.41  contact 0.43 mm (depth 2.98)  catch >=1.0  latch  first met after 0.43 mm at [593.98, 904.02, 1253.93]
+    D3               at rest  0.43  contact 0.5 mm (depth 2.98)  catch >=1.0  latch  first met after 0.5 mm at [593.91, 904.38, 1154.68]
+    D6               at rest  0.42  contact None mm (depth None)  catch None  
+    D1               at rest  0.42  contact None mm (depth None)  catch None  
+    -> straight directions: {'+X': 'BLOCKED', '-X': 'LATCH', '+Y': 'LATCH', '-Y': 'LATCH', '+Z': 'LATCH', '-Z': 'LATCH'}
+P5 alt: the Full Build's Step 25 reversed / stage 1: [-1.0, -0.0, -0.0] x 8.0 mm: LATCH (D10 latch, D2 latch, D3 latch); generator's check: flags it
+    D10              at rest  0.16  contact 0.18 mm (depth 2.98)  catch >=1.0  latch  first met after 0.22 mm at [594.19, 899.68, 1202.98]
+    D2               at rest  0.41  contact 0.43 mm (depth 2.98)  catch >=1.0  latch  first met after 0.43 mm at [593.98, 904.02, 1253.93]
+    D3               at rest  0.43  contact 0.5 mm (depth 2.98)  catch >=1.0  latch  first met after 0.5 mm at [593.91, 904.38, 1154.68]
+    D6               at rest  0.42  contact None mm (depth None)  catch None  
+    D1               at rest  0.42  contact None mm (depth None)  catch None  
+P5 alt: the Full Build's Step 25 reversed / stage 2: [0.0, 1.0, 0.0] x 65.0 mm: FREE; generator's check: passes
+
+# 6 - 7. the D11 posts up, D6 still on (published: 86.5, 88.8; 84.5, 70.5)
+P6/7 D11_C up 86.5: [0.0, 1.0, 0.0] x 86.5 mm: BLOCKED (D1 latch, D6 blocked); generator's check: passes
+    D1               at rest  0.02  contact 0.02 mm (depth 2.98)  catch >=1.0  latch  first met after 0.02 mm at [602.13, 859.4, 1248.07]
+    D6               at rest   0.0  contact 41.56 mm (depth 2.98)  catch >=1.0  blocked  first met after 41.56 mm at [602.07, 900.98, 1247.64]
+P6/7 D11_D up 88.8: [0.0, 1.0, 0.0] x 88.8 mm: BLOCKED (D1 latch, D6 blocked); generator's check: passes
+    D1               at rest  0.02  contact 0.02 mm (depth 2.98)  catch >=1.0  latch  first met after 0.02 mm at [602.13, 859.4, 1171.87]
+    D6               at rest   0.0  contact 41.56 mm (depth 2.98)  catch >=1.0  blocked  first met after 41.56 mm at [602.07, 900.98, 1171.44]
+P6/7 D11_A up 84.5: [0.0, 1.0, 0.0] x 84.5 mm: BLOCKED (D1 latch, D6 blocked); generator's check: passes
+    D1               at rest  0.02  contact 0.02 mm (depth 2.98)  catch >=1.0  latch  first met after 0.02 mm at [674.33, 859.4, 1236.73]
+    D6               at rest   0.0  contact 41.56 mm (depth 2.98)  catch >=1.0  blocked  first met after 41.56 mm at [674.4, 900.98, 1237.16]
+P6/7 D11_B up 70.5: [0.0, 1.0, 0.0] x 70.5 mm: BLOCKED (D1 latch, D6 blocked); generator's check: passes
+    D1               at rest  0.02  contact 0.02 mm (depth 2.98)  catch >=1.0  latch  first met after 0.02 mm at [674.33, 859.4, 1160.53]
+    D6               at rest   0.0  contact 41.56 mm (depth 2.98)  catch >=1.0  blocked  first met after 41.56 mm at [674.4, 900.98, 1160.96]
+P6/7 alt: all four posts, tabs up out of D1 (6.38), then up 78.62 / stage 1: [0.0, 1.0, 0.0] x 6.4 mm: LATCH (D1 latch); generator's check: passes
+    D1               at rest   0.0  contact 0.02 mm (depth 2.98)  catch >=1.0  latch  first met after 0.02 mm at [602.13, 859.4, 1248.24]
+P6/7 alt: all four posts, tabs up out of D1 (6.38), then up 78.62 / stage 2: [0.0, 1.0, 0.0] x 78.6 mm: BLOCKED (D6 blocked); generator's check: flags it
+    D6               at rest   0.0  contact 35.22 mm (depth 2.98)  catch >=1.0  blocked  first met after 35.22 mm at [602.13, 900.98, 1248.24]
+P6/7 alt: D6 up 44.7 with the posts still in: [0.0, 1.0, 0.0] x 44.7 mm: LATCH (D11_A latch, D11_B latch, D11_C latch, D11_D latch); generator's check: flags it
+    D11_A            at rest  0.01  contact 0.0 mm (depth 9.51)  catch >=1.0  latch  first met after 0.0 mm at [676.02, 903.98, 1248.56]
+    D11_D            at rest  0.01  contact 0.02 mm (depth 9.51)  catch >=1.0  latch  first met after 0.02 mm at [600.68, 903.98, 1172.36]
+    D11_C            at rest  0.01  contact 0.02 mm (depth 9.51)  catch >=1.0  latch  first met after 0.02 mm at [601.77, 904.0, 1235.46]
+    D11_B            at rest  0.01  contact 0.02 mm (depth 9.51)  catch >=1.0  latch  first met after 0.02 mm at [674.69, 904.0, 1173.14]
+P6/7 alt: the four posts and D6 lifted together, 80 up, once the tabs are out of D1: [0.0, 1.0, 0.0] x 80.0 mm: FREE; generator's check: passes
+    -> first stage that frees it: none up to 20 mm
+
+# 8. D6 up 44.7
+P8 D6 up 44.7: [0.0, 1.0, 0.0] x 44.7 mm: FREE; generator's check: passes
+
+# 9. the LED matrix with D10 (and the sockets) up to P_HELD, then laid aside at P_OUTSIDE (the published 9c pose)
+P9 matrix + D10 up 56.64 to P_HELD: [0.0, 1.0, 0.0] x 56.6 mm: FREE; generator's check: passes
+    D9_B             at rest  0.28  contact None mm (depth None)  catch None  
+    D9_A             at rest  0.28  contact None mm (depth None)  catch None  
+P9 matrix + D10 from P_HELD over to P_LIFT (above where D4 was): [-0.963, 0.0, 0.27] x 94.1 mm: FREE; generator's check: passes
+P9 matrix + D10 down from P_LIFT to P_OUTSIDE: [-0.0, -1.0, -0.0] x 50.8 mm: FREE; generator's check: passes
+P9 alt: matrix + D10 from P_HELD to P_OUTSIDE in a straight line: [-0.847, -0.475, 0.238] x 106.9 mm: FREE; generator's check: passes
+P9 static: D10 riding the matrix at P_HELD against wire white (route 59): overlap 0.0 mm
+P9 static: D10 riding the matrix at P_HELD against wire grey (route 60): overlap 0.0 mm
+P9 static: D10 riding the matrix at P_HELD against wire purple (route 61): overlap 0.0 mm
+P9 static: D10 riding the matrix at P_LIFT against wire white (route 56): overlap 1.5 mm
+P9 static: D10 riding the matrix at P_LIFT against wire grey (route 57): overlap 1.11 mm
+P9 static: D10 riding the matrix at P_LIFT against wire purple (route 58): overlap 1.5 mm
+P9 static: D10 riding the matrix at P_OUTSIDE against wire white (route 53): overlap 1.5 mm
+P9 static: D10 riding the matrix at P_OUTSIDE against wire grey (route 54): overlap 1.5 mm
+P9 static: D10 riding the matrix at P_OUTSIDE against wire purple (route 55): overlap 1.5 mm
+P9 static: MATRIX at P_OUTSIDE against the USB cable: overlap 0.0 mm
+P9 static: MATRIX at P_OUTSIDE against the USB A end: overlap 0.0 mm
+P9 static: D10 at P_OUTSIDE against the USB cable: overlap 0.0 mm
+P9 static: D10 at P_OUTSIDE against the USB A end: overlap 0.0 mm
+
+# 10. both D9 up 54.4 (the matrix aside, its wires in the OUTSIDE shape)
+P10 D9_A up 54.4: [0.0, 1.0, 0.0] x 54.4 mm: LATCH (D2 latch, D3 latch); generator's check: flags it
+    D3               at rest  0.31  contact 0.16 mm (depth 9.5)  catch >=1.0  latch  first met after 0.39 mm at [619.99, 900.93, 1154.68]
+    D2               at rest  0.14  contact 0.28 mm (depth 9.5)  catch >=1.0  latch  first met after 0.34 mm at [619.71, 900.93, 1253.93]
+P10 D9_B up 54.4: [0.0, 1.0, 0.0] x 54.4 mm: LATCH (D2 latch, D3 latch); generator's check: flags it
+    D3               at rest  0.17  contact 0.1 mm (depth 9.5)  catch >=1.0  latch  first met after 0.1 mm at [655.99, 900.78, 1155.68]
+    D2               at rest  0.17  contact 0.29 mm (depth 9.5)  catch >=1.0  latch  first met after 0.34 mm at [656.83, 900.93, 1252.46]
+    -> first stage that frees it: none up to 20 mm
+
+# 11 - 13. the three pins out of i2, b19 and i3 (30 up, the Full Build's way reversed), the USB plug still in
+P11-13 J_WHITE_M up 30 (USB plug in): [0.0, 1.0, 0.0] x 30.0 mm: FREE; generator's check: passes
+P11-13 J_PURPLE_M up 30 (USB plug in): [0.0, 1.0, 0.0] x 30.0 mm: FREE; generator's check: passes
+P11-13 J_GREY_M up 30 (USB plug in): [0.0, 1.0, 0.0] x 30.0 mm: FREE; generator's check: passes
+P11-13 static: the purple pin against the USB plug: overlap 0.0 mm
+P11-13 static: the purple wire (route 67, as seated) against the USB plug: overlap 0.0 mm
+
+# 14 - 15. on their own: the matrix as held, with D10 and the sockets
+P14 D10 down 48.4 off the matrix (published): [-0.0, -1.0, -0.0] x 48.4 mm: LATCH (MATRIX latch); generator's check: flags it
+    MATRIX           at rest  0.07  contact 0.16 mm (depth 3.15)  catch >=1.0  latch  first met after 0.63 mm at [669.56, 954.49, 1205.56]
+    -> straight directions: {'+X': 'LATCH', '-X': 'LATCH', '+Y': 'LATCH', '-Y': 'LATCH', '+Z': 'LATCH', '-Z': 'BLOCKED'}
+P14 alt: the Full Build's Step 31 reversed (+Z 40 along the matrix, then down 22) / stage 1: [0.0, 0.0, 1.0] x 40.0 mm: LATCH (MATRIX latch); generator's check: flags it
+    MATRIX           at rest  0.07  contact 0.01 mm (depth 4.98)  catch >=1.0  latch  first met after 0.39 mm at [669.45, 954.16, 1205.06]
+P14 alt: the Full Build's Step 31 reversed (+Z 40 along the matrix, then down 22) / stage 2: [-0.0, -1.0, -0.0] x 22.0 mm: FREE; generator's check: passes
+P14 alt: -Z 40 along the matrix, then down 22 / stage 1: [-0.0, -0.0, -1.0] x 40.0 mm: BLOCKED (J_GREY_F blocked, MATRIX blocked); generator's check: flags it
+    MATRIX           at rest  0.07  contact 0.46 mm (depth 7.98)  catch >=1.0  blocked  first met after 1.23 mm at [669.59, 954.24, 1201.43]
+    J_GREY_F         at rest   0.0  contact 11.7 mm (depth 7.98)  catch >=0.2  blocked  first met after 11.7 mm at [613.82, 951.4, 1190.96]
+P14 alt: -Z 40 along the matrix, then down 22 / stage 2: [-0.0, -1.0, -0.0] x 22.0 mm: FREE; generator's check: passes
+P15 the three sockets +Z 30.5 off the pins: [0.0, 0.0, 1.0] x 30.5 mm: FREE; generator's check: passes
+
+# 16. D3 out -Z 38.4 (D4 and D5 off)
+P16 D3 -Z 38.4: [-0.0, -0.0, -1.0] x 38.4 mm: LATCH (D1 latch); generator's check: flags it
+    D1               at rest   0.0  contact 0.29 mm (depth 2.98)  catch >=1.0  latch  first met after 0.29 mm at [644.41, 859.77, 1153.38]
+    -> straight directions: {'+X': 'LATCH', '-X': 'LATCH', '+Y': 'LATCH', '-Y': 'LATCH', '+Z': 'BLOCKED', '-Z': 'LATCH'}
+
+# 17. D2 with the button +Z (the published 17c pose is D2 57.1 out: our D2_OUT); the button's pins out of j5 and j16
+P17 D2 + button +Z 57.1 (USB plug in): [0.0, 0.0, 1.0] x 57.1 mm: LATCH (D1 latch); generator's check: flags it
+    D1               at rest   0.0  contact 0.4 mm (depth 2.98)  catch >=0.6  latch  first met after 0.5 mm at [631.37, 861.8, 1255.43]
+    -> straight directions: {'+X': 'LATCH', '-X': 'LATCH', '+Y': 'LATCH', '-Y': 'BLOCKED', '+Z': 'LATCH', '-Z': 'BLOCKED'}
+P17 BTN_RED_PIN straight up 12 out of its hole: [0.0, 1.0, 0.0] x 12.0 mm: FREE; generator's check: passes
+P17 BTN_BLACK_PIN straight up 12 out of its hole: [0.0, 1.0, 0.0] x 12.0 mm: FREE; generator's check: passes
+
+# 18 - 19. on their own: D2 57.1 out, the button, its pins riding behind it as the Full Build's Step 19 carries them
+P18 the nut -Z 85 off the button, over the pins: [-0.0, -0.0, -1.0] x 85.0 mm: FREE; generator's check: passes
+P19 the button, its pins riding, +Z 94.8 out of D2: [0.0, 0.0, 1.0] x 94.8 mm: FREE; generator's check: passes
+
+# 20. the USB plug out (our Full Build: +Z 25; the published arrow 63.3, no motion)
+P20 the USB plug +Z 25 (the matrix's pins already out): [0.0, 0.0, 1.0] x 25.0 mm: LATCH (NANO latch); generator's check: flags it
+    NANO             at rest   0.9  contact 0.01 mm (depth 3.87)  catch >=2.5  latch  first met after 0.0 mm at [635.36, 876.29, 1209.83]
+P20 alt: the USB plug +Z 25 with the purple pin still in b19 (our draft's order): [0.0, 0.0, 1.0] x 25.0 mm: LATCH (NANO latch); generator's check: flags it
+    NANO             at rest   0.9  contact 0.01 mm (depth 3.87)  catch >=2.5  latch  first met after 0.0 mm at [635.36, 876.29, 1209.83]
+
+# 21 - 24. the 330 ohm resistor, the capacitor, the 12 kOhm resistor, the Nano Board, each up
+P21-24 R330 up 30.3: [0.0, 1.0, 0.0] x 30.3 mm: FREE; generator's check: passes
+P21-24 CAP up 29.1: [0.0, 1.0, 0.0] x 29.1 mm: FREE; generator's check: passes
+    BREADBOARD       at rest  0.75  contact None mm (depth None)  catch None  
+P21-24 R12K up 31.3: [0.0, 1.0, 0.0] x 31.3 mm: FREE; generator's check: passes
+    NANO             at rest  0.41  contact None mm (depth None)  catch None  
+P21-24 NANO up 31.0: [0.0, 1.0, 0.0] x 31.0 mm: FREE; generator's check: passes
+    BREADBOARD       at rest  0.12  contact None mm (depth None)  catch None  
+check: the Nano up 31 with the 12 kOhm resistor still in: [0.0, 1.0, 0.0] x 31.0 mm: LATCH (R12K latch); generator's check: flags it
+    R12K             at rest   0.4  contact 0.0 mm (depth 3.88)  catch >=1.5  latch  first met after 0.0 mm at [645.45, 875.89, 1185.58]
+    BREADBOARD       at rest  0.12  contact None mm (depth None)  catch None  
+check: the 330 ohm resistor up 30.3 with the USB plug still in: [0.0, 1.0, 0.0] x 30.3 mm: FREE; generator's check: passes
+
+# the wires against the walls' moves
+wires: D5 +X 54.1 against the matrix wires as seated (routes 65 - 67): [1.0, 0.0, 0.0] x 54.1 mm: FREE; generator's check: passes
+wires: D4 -X 75.2 against the matrix wires as seated: [-1.0, -0.0, -0.0] x 75.2 mm: FREE; generator's check: passes
+wires: D4 -X 75.2 along the USB cable (route 41): [-1.0, -0.0, -0.0] x 75.2 mm: FREE; generator's check: passes
+wires: D4 up 65 off the USB cable, after -X 8: [0.0, 1.0, 0.0] x 65.0 mm: FREE; generator's check: passes
+wires: D4 up 65 off the USB cable, after -X 75.2: [0.0, 1.0, 0.0] x 65.0 mm: FREE; generator's check: passes
+
+# the joints
+D2's end tab in D5 (beyond D5's outer face, x 682.51): the hole in D5 along Y through [681.0, 0, 1253.43]: [(855.0, 856.11), (859.34, 867.15), (895.86, 903.66), (906.92, 909.0)]
+    D2 through [682.0, 0, 1253.43]: [(859.47, 861.78), (862.9, 867.29), (895.97, 900.36), (901.47, 903.79)]  reaches past the hole by [0.0, 0.14, 0.0, 0.13] mm
+    D2 through [682.7, 0, 1253.43]: [(858.39, 861.78), (862.95, 867.12), (896.14, 900.31), (901.47, 904.87)]  reaches past the hole by [0.95, 0.0, 0.0, 1.21] mm
+    D2 through [683.5, 0, 1253.43]: [(858.39, 861.78), (863.0, 866.93), (896.33, 900.26), (901.47, 904.87)]  reaches past the hole by [0.95, 0.0, 0.0, 1.21] mm
+    D2 through [685.0, 0, 1253.43]: [(859.24, 861.78), (863.1, 866.57), (896.69, 900.16), (901.47, 904.01)]  reaches past the hole by [0.1, 0.0, 0.0, 0.35] mm
+D3's end tab in D5: the hole in D5 along Y through [681.0, 0, 1155.18]: [(855.0, 856.1), (859.34, 867.15), (895.86, 903.66), (906.9, 909.0)]
+    D3 through [682.0, 0, 1155.18]: [(859.47, 861.78), (862.9, 867.29), (895.97, 900.36), (901.47, 903.79)]  reaches past the hole by [0.0, 0.14, 0.0, 0.13] mm
+    D3 through [682.7, 0, 1155.18]: [(858.39, 861.78), (862.95, 867.12), (896.14, 900.31), (901.47, 904.87)]  reaches past the hole by [0.95, 0.0, 0.0, 1.21] mm
+    D3 through [683.5, 0, 1155.18]: [(858.39, 861.78), (863.0, 866.93), (896.33, 900.26), (901.47, 904.87)]  reaches past the hole by [0.95, 0.0, 0.0, 1.21] mm
+    D3 through [685.0, 0, 1155.18]: [(859.24, 861.78), (863.1, 866.57), (896.69, 900.16), (901.47, 904.01)]  reaches past the hole by [0.1, 0.0, 0.0, 0.35] mm
+D2's end tab in D4 (beyond D4's outer face, x 594.41): the hole in D4 along Y through [595.9, 0, 1253.43]: [(855.0, 856.23), (859.47, 867.28), (895.98, 903.79), (907.04, 909.0)]
+    D2 through [595.0, 0, 1253.43]: [(859.47, 861.78), (862.87, 867.4), (895.85, 900.39), (901.47, 903.79)]  reaches past the hole by [0.0, 0.12, 0.13, 0.0] mm
+    D2 through [594.2, 0, 1253.43]: [(859.47, 861.78), (862.92, 867.22), (896.04, 900.34), (901.47, 903.79)]  reaches past the hole by [0.0, 0.0, 0.0, 0.0] mm
+    D2 through [593.5, 0, 1253.43]: [(858.39, 861.78), (862.97, 867.05), (896.2, 900.29), (901.47, 904.87)]  reaches past the hole by [1.08, 0.0, 0.0, 1.08] mm
+    D2 through [591.5, 0, 1253.43]: [(859.22, 861.78), (863.1, 866.58), (896.68, 900.16), (901.47, 904.04)]  reaches past the hole by [0.25, 0.0, 0.0, 0.25] mm
+D3's end tab in D4: the hole in D4 along Y through [595.9, 0, 1155.18]: [(855.0, 856.23), (859.47, 867.28), (895.98, 903.79), (907.03, 909.0)]
+    D3 through [595.0, 0, 1155.18]: [(859.47, 861.78), (862.87, 867.4), (895.85, 900.39), (901.47, 903.79)]  reaches past the hole by [0.0, 0.12, 0.13, 0.0] mm
+    D3 through [594.2, 0, 1155.18]: [(859.47, 861.78), (862.92, 867.22), (896.04, 900.34), (901.47, 903.79)]  reaches past the hole by [0.0, 0.0, 0.0, 0.0] mm
+    D3 through [593.5, 0, 1155.18]: [(858.39, 861.78), (862.97, 867.05), (896.2, 900.29), (901.47, 904.87)]  reaches past the hole by [1.08, 0.0, 0.0, 1.08] mm
+    D3 through [591.5, 0, 1155.18]: [(859.22, 861.78), (863.1, 866.58), (896.68, 900.16), (901.47, 904.04)]  reaches past the hole by [0.25, 0.0, 0.0, 0.25] mm
+D10's end in D4: the hole in D4 along Y through [595.9, 0, 1204.47]: [(855.0, 856.23), (891.17, 909.0)]
+    D10 through [595.0, 0, 1204.47]: [(891.15, 900.68)]  reaches past the hole by [0.02] mm
+    D10 through [594.2, 0, 1204.47]: [(891.15, 900.68)]  reaches past the hole by [0.02] mm
+D10's end in D5: the hole in D5 along Y through [681.0, 0, 1204.47]: [(855.0, 856.11), (891.04, 909.0)]
+    D10 through [682.0, 0, 1204.47]: [(891.15, 900.68)]  reaches past the hole by [0.0] mm
+    D10 through [682.7, 0, 1204.47]: [(891.15, 900.68)]  reaches past the hole by [0.0] mm
+D1's tab in D2 (beyond D2's outer face, z 1254.93): the hole in D2 along Y through [631.54, 0, 1253.43]: [(850.0, 856.23)]
+    D1 through [631.54, 0, 1254.0]: []  reaches past the hole by [] mm
+    D1 through [631.54, 0, 1255.2]: []  reaches past the hole by [] mm
+    D1 through [631.54, 0, 1256.5]: [(859.4, 862.4)]  reaches past the hole by [6.17] mm
+    D1 through [631.54, 0, 1258.0]: []  reaches past the hole by [] mm
+D1's tab in D3 (beyond D3's outer face, z 1153.68): the hole in D3 along Y through [644.81, 0, 1155.18]: [(850.0, 856.23)]
+    D1 through [644.81, 0, 1155.0]: []  reaches past the hole by [] mm
+    D1 through [644.81, 0, 1153.4]: []  reaches past the hole by [] mm
+    D1 through [644.81, 0, 1152.0]: [(859.4, 862.4)]  reaches past the hole by [6.17] mm
+    D1 through [644.81, 0, 1150.5]: []  reaches past the hole by [] mm
+D1's tab in D4: the hole in D4 along Y through [595.9, 0, 1197.34]: [(850.0, 856.23)]
+    D1 through [595.9, 0, 1197.34]: []  reaches past the hole by [] mm
+    D1 through [594.2, 0, 1197.34]: []  reaches past the hole by [] mm
+    D1 through [593.9, 0, 1197.34]: []  reaches past the hole by [] mm
+D9_A's end in its notch in D2 (along X): the hole in D2 along X through [0, 901.5, 1253.43]: [(617.28, 619.2), (622.29, 624.02)]
+    D9_A through [0, 899.0, 1253.43]: [(617.13, 620.13)]  reaches past the hole by [0.93] mm
+    D9_A through [0, 895.0, 1253.43]: [(617.13, 620.13)]  reaches past the hole by [0.93] mm
+D9_A's end in its notch in D2, at the notch's narrowest: the hole in D2 along X through [0, 901.8, 1253.43]: [(617.28, 619.2), (622.41, 624.2)]
+    D9_A through [0, 899.0, 1253.43]: [(617.13, 620.13)]  reaches past the hole by [0.93] mm
+D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 931.0: the hole in D8 along Z through [674.83, 930.8, 0]: [(1239.62, 1245.18), (1251.92, 1260.0)]
+    D11_A through [674.83, 931.0, 0]: [(1238.43, 1242.8), (1243.86, 1246.37)]  reaches past the hole by [1.19, 1.19] mm
+D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 932.5: the hole in D8 along Z through [674.83, 930.8, 0]: [(1239.62, 1245.18), (1251.92, 1260.0)]
+    D11_A through [674.83, 932.5, 0]: [(1237.35, 1242.8), (1243.96, 1246.1)]  reaches past the hole by [2.27, 0.92] mm
+D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 933.5: the hole in D8 along Z through [674.83, 930.8, 0]: [(1239.62, 1245.18), (1251.92, 1260.0)]
+    D11_A through [674.83, 933.5, 0]: [(1237.4, 1242.8), (1244.02, 1245.86)]  reaches past the hole by [2.22, 0.68] mm
+D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 934.5: the hole in D8 along Z through [674.83, 930.8, 0]: [(1239.62, 1245.18), (1251.92, 1260.0)]
+    D11_A through [674.83, 934.5, 0]: [(1237.99, 1242.8), (1244.09, 1245.62)]  reaches past the hole by [1.63, 0.44] mm
+D11_A in D8's slot (along Z): D8 at y 930.8, the post at y 935.5: the hole in D8 along Z through [674.83, 930.8, 0]: [(1239.62, 1245.18), (1251.92, 1260.0)]
+    D11_A through [674.83, 935.5, 0]: [(1238.58, 1242.8), (1244.16, 1245.38)]  reaches past the hole by [1.04, 0.2] mm
+D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 856.5: the hole in D1 along Z through [674.83, 860.9, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 856.5, 0]: [(1237.26, 1241.56), (1243.29, 1246.62)]  reaches past the hole by [0.0, 0.0] mm
+D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 856.5: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 856.5, 0]: [(1237.26, 1241.56), (1243.29, 1246.62)]  reaches past the hole by [0.0, 0.0] mm
+D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 858.0: the hole in D1 along Z through [674.83, 860.9, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 858.0, 0]: [(1236.37, 1241.56), (1243.19, 1246.98)]  reaches past the hole by [0.87, 0.0] mm
+D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 858.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 858.0, 0]: [(1236.37, 1241.56), (1243.19, 1246.98)]  reaches past the hole by [0.87, 0.0] mm
+D11_A's tab in D1's slot: D1 at y 860.9, the tab at y 859.0: the hole in D1 along Z through [674.83, 860.9, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 859.0, 0]: [(1236.16, 1241.56), (1243.12, 1247.22)]  reaches past the hole by [1.08, 0.0] mm
+D11_A's tab against D6's corner slot: D6 at y 902.5, the tab at y 859.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 859.0, 0]: [(1236.16, 1241.56), (1243.12, 1247.22)]  reaches past the hole by [1.08, 0.0] mm
+D11_A in D6's corner slot (along Z): the post at y 902.5: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 902.5, 0]: [(1237.24, 1247.56)]  reaches past the hole by [0.0] mm
+D11_A in D6's corner slot (along Z): the post at y 905.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 905.0, 0]: [(1234.46, 1250.34)]  reaches past the hole by [2.78] mm
+D11_A in D6's corner slot (along Z): the post at y 910.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 910.0, 0]: [(1234.46, 1250.34)]  reaches past the hole by [2.78] mm
+D11_A in D6's corner slot (along Z): the post at y 913.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 913.0, 0]: [(1234.46, 1241.8), (1242.81, 1250.34)]  reaches past the hole by [2.78, 2.78] mm
+D11_A in D6's corner slot (along Z): the post at y 915.0: the hole in D6 along Z through [674.83, 902.5, 0]: [(1237.24, 1247.56), (1251.93, 1260.0)]
+    D11_A through [674.83, 915.0, 0]: [(1237.24, 1241.8), (1242.81, 1247.56)]  reaches past the hole by [0.0, 0.0] mm
+D10's hooks over the matrix's edges (along X): the matrix at y 895: the hole in MATRIX along X through [0, 895.0, 1204.47]: [(590.0, 690.0)]
+    D10 through [0, 899.0, 1204.47]: [(594.01, 607.34), (669.57, 682.91)]  reaches past the hole by [0.0, 0.0] mm
+    D10 through [0, 898.5, 1204.47]: [(594.01, 607.34), (669.57, 682.91)]  reaches past the hole by [0.0, 0.0] mm
+    D10 through [0, 897.9, 1204.47]: [(594.01, 607.34), (669.57, 682.91)]  reaches past the hole by [0.0, 0.0] mm
+    D10 through [0, 895.0, 1204.47]: [(594.01, 605.18), (612.79, 664.13), (671.73, 682.91)]  reaches past the hole by [0.0, 0.0, 0.0] mm
+    D10 through [0, 892.0, 1204.47]: [(594.01, 605.18), (612.79, 664.13), (671.73, 682.91)]  reaches past the hole by [0.0, 0.0, 0.0] mm
+-> /Users/lee-johnson/Desktop/Claude_Cadasio/docs/research/lsm/decon/published/feasibility.json
+       41.10 real        39.21 user         2.35 sys
+           673972224  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              159273  page reclaims
+                 165  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                1062  voluntary context switches
+               65382  involuntary context switches
+        433185243621  instructions retired
+        129880842050  cycles elapsed
+           673288000  peak memory footprint
+EXIT 0

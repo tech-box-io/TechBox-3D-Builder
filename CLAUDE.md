@@ -377,7 +377,9 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     device pulled off them: the PMG's displays and push buttons, as TechBox's published take-apart does; the wires stay on the
     module until a later step takes them off it).
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
-    the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow.
+    the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow. With `paths=`,
+    `wires=` and `reappear=True`, the plugs fade out of their sockets and in where they are put, their leads in new shapes, as a
+    published take-apart swaps a plugged wire for a loose one (the LSM's three breadboard wires, Step 12).
   - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the
     Full Build's way in, reversed (a group lifted off to be taken apart in the hand). With `ride_on=` each part rides on that part
     again where it ends: a Full Build step that moved only a plug on its lead (into a slot, a hook, a hole), walked back with its
@@ -419,15 +421,16 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
   the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
   Run it after every Full Build change.
-  The LSM's (`deconstruction.py`, 24 steps, first draft 21 Oct 2026, the same request as the PMG's, "like the 3 breadboard wires"): the
-  Full Build in reverse, groups where Lee asked (the 64 stems, the four D11 posts, both D9, the button's two wires, the three breadboard
-  wires); the LED matrix stays wired until Step 19, since in the model the purple wire's pin in b19 is under the USB plug, which the
-  button blocks until D2 is out: so it is carried out over D4 and back, the Full Build's own moves (Steps 32, 30 and 26 walked back,
-  `carried_back()`), the box turned over with it for D5 and D3 as they went on (README question 20 asks Lee about a shorter order);
-  D2 out with the button, the USB cable, the button's wires, the nut and button on their own; the matrix pulled off its connectors
-  (`let_go=`), the three wires out together; the breadboard's parts. Its arrows take the sizes of TechBox's published LSM take-apart
-  (docs/research/lsm/decon/arrows/, as the PMG's), in turn where a part comes off in stages; it ends on D1 with the breadboard, then
-  the Full Build's parts list. Run it after every Full Build change.
+  The LSM's (`deconstruction.py`, 24 steps, 21 Oct 2026): built on TechBox's own published LSM take-apart, at Lee's word ("you need to
+  base the deconstruction process off of this guide": its data replayed in our ids and mm, docs/research/lsm/decon/published/; the
+  numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8, D7, D5 and D4 off the ends, the D11 posts
+  two and two, D6, the LED matrix lifted out with D10 and set down beside the box still wired, both D9, the three breadboard wires, the
+  matrix on its own: D10, then the connectors; D3, D2 with the button, its wires, the button on its own, the USB cable, the breadboard's
+  parts), each step's camera, its arrows (size and tail), eyes and close-ups (each catch, red boxes from our model). The departures are in
+  its docstring (the three wires in one step: Lee's groups; D10 slid off its hooks; cameras or arrows moved where ours hid or lost what
+  the published one showed). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
+  swaps models; their wire shapes (laid aside, loose) are drawn and measured in the kit's `wire_shapes.py`. It ends on D1 with the
+  breadboard, then the Full Build's parts list. Run it after every Full Build change.
 - **Publishing:** `publish.py --kit <kit>` publishes every guide of the kit that has changed since its release (steps, model,
   pictures, card or player) and leaves the rest; publishing one guide alone warns when others of its kit have changed. A Part
   whose steps are not from the run that wrote `chapters.json` is refused; a deconstruction made from an earlier Full Build is
@@ -517,7 +520,8 @@ background) rather than through `.claude/launch.json`, which only attaches to it
                                right-angle surface-mount one, as photographed) and lowered the matrix onto the D9s (assemble.py), and
                                silkscreen.py -> decals.json prints its back and the label V- IN V+ (docs/research/lsm/round2/). D3 is Lee's
                                updated part (LSM_D3.STEP -> lsm-d3.glb, 20 Oct 2026); D8 raised to just under the D11 posts' latches; the
-                               breadboard's tabs moved to the a side and the row 30 end (assemble.py).
+                               breadboard's tabs moved to the a side and the row 30 end (assemble.py). deconstruction.py ->
+                               steps-deconstruction.json (on TechBox's published take-apart: published-takeapart.json, wire_shapes.py).
                                Server on port 8805 ("Open Prototype.command").
     PMG Build Instructions/    the Piano Memory Game (first draft 19 Oct 2026): guide.py, materials.json, colour-atlas-pmg.json, silkscreen.py ->
                                decals.json, wire-paths.json (the CAD's wire shapes guide.py reuses), routing.py (Lee's first round: every set of jumper wires shown together laid as

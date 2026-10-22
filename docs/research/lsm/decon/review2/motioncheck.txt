@@ -1,0 +1,3 @@
+Step 9c   wire grey     and wire purple   centre lines 0.48 mm apart at 0.55, near [609.6, 895.0, 1217.9]
+checked 23 views in motion; 1 problems
+EXIT 0 peak 549 MB
