@@ -6,7 +6,10 @@ ROUND THAT EVENING (docs/research/lsm/lee_notes_2026-10-19b.md, with what was do
 PAGE AS LEE'S PICTURE OF 21 Oct 2026 (docs/research/lsm/lee_notes_2026-10-21.md: the box closer and to the right of the middle); THE
 DECONSTRUCTION 21 Oct 2026, REBUILT THE SAME DAY ON TECHBOX'S PUBLISHED TAKE-APART AT LEE'S WORD (deconstruction.py ->
 steps-deconstruction.json; see THE DECONSTRUCTION below); "gray", not "grey", across the kit (Lee); LEE'S NOTES ON THE
-DECONSTRUCTION OF 22 Oct 2026 DONE, BOTH SETS (docs/research/lsm/lee_notes_2026-10-22.md and lee_notes_2026-10-22b.md). Build
+DECONSTRUCTION OF 22 Oct 2026 DONE, BOTH SETS (docs/research/lsm/lee_notes_2026-10-22.md and lee_notes_2026-10-22b.md); BOTH
+GUIDES PUBLISHED 22 Oct 2026 AT LEE'S WORD, r1 each (https://models.tech-box.io/laser-stem-matrix-full-build/ and
+https://models.tech-box.io/laser-stem-matrix-deconstruction/, live once pushed to the branch live), their step text for editing in
+share/LSM step text 2026-10-22/. Build
 instructions generated from Lee's STEP files and TechBox's published Cadasio guide for the kit
 (instructions.online/?id=19075-laser_stem_matrix_lsm_-_full_build), in the same format and with the same player as the MRA and RCC
 guides. Not for distribution. The open questions are under QUESTIONS FOR LEE below.
