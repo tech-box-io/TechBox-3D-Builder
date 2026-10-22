@@ -50,7 +50,8 @@ docstrings of `Guide.place` and `Guide.seat`):
   step to the next (`wires=`, `wires_done=`); going back from such a step plays it backwards. The CAD's own cable bodies are left out of the model
   (`"omit": true` in `materials.json`); their centre lines are in the kit's `wire-paths.json`.
 - **Riding parts.** A plug on a loose lead, or the cap of a jumper wire, rides with another part
-  (`g.carry(...)`) until a step moves it to its seat. `g.rest_at(...)` parks a part beside the model.
+  (`g.carry(...)`) until a step moves it to its seat. `g.rest_at(...)` parks a part beside the model (in a take-apart, a part lying
+  aside moved between two steps, the next view starting afresh: the LSM's push-button nut, laid just off its wires' ends).
   `paths={id: path}` gives each moving part its own way in (the two ends of a jumper wire).
 - **Cameras.** Chosen from the four diagonal views; the generator prefers one from which the engraved code
   of each wood part coming in can be read (`engraved-codes.json`). `look_from=` picks the diagonal nearest a
@@ -121,7 +122,8 @@ docstrings of `Guide.place` and `Guide.seat`):
   and the rest by distance from the last, each along the route as drawn, so that the run in the box stays put and the run under
   the moving part keeps pace with it whatever the lengths in between (`stretch` matching instead let both slide; the LSM's
   `jumper(..., stretch=False, follow=6.0, tail=point)`). `tools/motioncheck.py <kit> [views]` checks the wires at 19 moments of
-  each move against every part and each other (wirecheck.py checks the views at rest). A part in both `move` and `appear` is on screen where its path starts
+  each move against every part and each other, a take-apart step's leaving parts and their wires included (22 Oct 2026: it had not
+  seen the LSM's D10 slid through the wires) (wirecheck.py checks the views at rest). A part in both `move` and `appear` is on screen where its path starts
   as the step opens (a plug at the end of a lead laid out on the bench) instead of gliding in.
 - **Parts list.** `Guide(parts_list=fn)` puts Parts List pages after the title page, built from the parts the guide
   shows (so a guide for one part of the build lists that part's parts); `fn` groups them (the MRA's is in its guide.py).
@@ -380,7 +382,7 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   - `g.unplug(caption, plugs)`: each plug comes out the way it went in, its lead back on the route it had before, and dangles from
     the part it rode on in the Full Build (or `ride_on=`) until that part is removed. An eye on each plug, no arrow. With `paths=`,
     `wires=` and `reappear=True`, the plugs fade out of their sockets and in where they are put, their leads in new shapes, as a
-    published take-apart swaps a plugged wire for a loose one (the LSM's three breadboard wires, Step 12).
+    published take-apart swaps a plugged wire for a loose one (the LSM's three breadboard wires in its drafts of 21 - 22 Oct 2026).
   - `g.lift(caption, ids, to=pose)`: set aside beside the model, still wired, to be unplugged later; or `path=`; or neither: the
     Full Build's way in, reversed (a group lifted off to be taken apart in the hand). With `ride_on=` each part rides on that part
     again where it ends: a Full Build step that moved only a plug on its lead (into a slot, a hook, a hole), walked back with its
@@ -423,16 +425,19 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
   the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
   Run it after every Full Build change.
-  The LSM's (`deconstruction.py`, 25 steps, 21 Oct 2026; Lee's notes of 22 Oct done): built on TechBox's own published LSM take-apart, at Lee's word ("you need to
-  base the deconstruction process off of this guide": its data replayed in our ids and mm, docs/research/lsm/decon/published/; the
-  numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8, D7, D5 and D4 off the ends, the D11 posts
-  two and two, D6, the LED matrix lifted out with D10 and set down beside the box still wired, both D9, the three breadboard wires, the
-  matrix on its own: D10, then the connectors; D3, D2 with the button, its wires, the button on its own (the nut off, the button out of
-  D2, then the nut screwed back on so the two stay together: Lee, 22 Oct 2026), the USB cable, the breadboard's parts), each step's camera, its arrows (size and tail), eyes and close-ups (each catch, red boxes from our model). The departures are in
-  its docstring (the three wires in one step: Lee's groups; the nut put back on; cameras or arrows moved where ours hid or lost what
-  the published one showed, or where a published tail was inside a part). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
-  swaps models; their wire shapes (laid aside, loose) are drawn and measured in the kit's `wire_shapes.py`. It ends on D1 with the
-  breadboard, then straight to the Full Build's parts list (no Completed View). Run it after every Full Build change.
+  The LSM's (`deconstruction.py`, 24 steps, 21 Oct 2026; Lee's two sets of notes of 22 Oct done): built on TechBox's own published
+  LSM take-apart, at Lee's word ("you need to base the deconstruction process off of this guide": its data replayed in our ids and mm,
+  docs/research/lsm/decon/published/; the numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8,
+  D7, D5 and D4 off the ends, the D11 posts two and two, D6, the LED matrix lifted out with D10; D3, D2 with the button, its wires,
+  the button on its own, the USB cable, the breadboard's parts), each step's camera, its arrows (size and tail), eyes and close-ups
+  (each catch, red boxes from our model). The departures are in its docstring: the matrix stays held over the box while D10 is slid
+  off it, as the Full Build's Step 31 hooked it on there (its wires lie straight through D10's notch all along the slide; laid on the
+  table they had passed into D10), then it is pulled off the three wires' connectors, which stay where they came off, the wires in the
+  breadboard; both D9 (the wires run under one); the three wires out together (Lee, 22 Oct 2026, second note); the nut put back on
+  the button once it is out of D2, starting just off the wires' ends (`rest_at()`); cameras or arrows moved where ours hid or lost
+  what the published one showed, or where a published tail was inside a part. The study of that round: docs/research/lsm/decon/round3/.
+  It ends on D1 with the breadboard, then straight to the Full Build's parts list (no Completed View). Run it after every Full Build
+  change.
   The LAC's (`deconstruction.py`, 50 steps, first draft 21 Oct 2026, Lee's first round 22 Oct: his "convert / remake" of TechBox's
   published take-apart, 19075-lac_deconstruction, 47 steps): one wire per step (for this kit only: Lee); the Full Build walked back where
   Lee did not order otherwise (every lead keeps a route the Full Build drew: `leads()`, `stages_back()`, `ride_back()` read them from

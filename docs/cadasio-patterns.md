@@ -289,7 +289,7 @@ needed." Where TechBox has published a take-apart of the kit, ours follows it: i
 breadboard wires in one step), or where ours would hide or lose what the published picture shows, each named in the script. Its model
 swaps (a module set down beside the box, a wire unplugged and left loose) are fades (`reappear=True`), as section 11 says wires are
 unplugged; whether to keep them as fades is put to Lee. A two-stage joint the published guide flattens is still undone in two stages
-inside the step (D10 slid off its hooks, then down: above; but see Lee's 22 Oct note below, where the slide took D10 into the wires). "Eyes instead of hole labels are okay for this kit" (the unplugged wires),
+inside the step (D10 slid off its hooks, then down: above; and see Lee's two notes of 22 Oct below). "Eyes instead of hole labels are okay for this kit" (the unplugged wires),
 and a Pry Tool the kit has but the model does not show still gets its caution (the Nano Board).
 
 **Lee, 2026-10-21 (the LSM):** "Let's use gray": TechBox writes American English (its MRA take-apart's "center"), so "gray", not
@@ -326,11 +326,20 @@ outer surface or beyond, never inside it or another part (Steps 4, 5, 7 and 24):
 surface. Two catches of one part get an eye each, spaced as the catches are (D3's two tabs: "evenly spaced like the tabs of D3"). An
 eye's leader never crosses an arrow (Step 19). Like parts taken out the same way have arrows of one size (the 12 kOhm resistor's as the
 330 Ohm resistor's), whatever the published sizes. A nut comes off its thread in one smooth move, turning as it goes ("doesn't need a 3
-step animation"). Where our way out takes a part into the wires and the published way does not, take the published way (D10 dropped
-straight off the matrix through its hooks, not slid along first). Hardware that belongs to a part goes back on it once the part is out,
+step animation"). (Where our way out took a part into the wires, D10 was first dropped straight off as published; Lee's second note
+of the day put the slide back: below.) Hardware that belongs to a part goes back on it once the part is out,
 in a step of its own (the push button's nut, screwed back on once the button is out of D2: "we need a step that shows the nut being
 replaced onto the push button"); this is the one exception to a part once off being gone for good. A take-apart may go straight from
 its last step to the parts list, with no Completed View (`take_apart(completed_view=False)`).
+
+**Lee, 2026-10-22, second notes (the LSM's take-apart):** a part that hooked on by sliding comes off by sliding ("Remember, D10 must slide
+off of the LED Matrix"), and it comes off where the build hooked it on, so that the wires lie as they did then (the matrix held over the
+box: the Full Build's Step 31 reversed; laid on the table the wires had other shapes, and D10 passed through them). Wires from a module
+come off it in a group and stay in the breadboard ("left attached to the breadboard"), and come out of the breadboard after, once what
+lies over them is off (the D9s). An eye points at the catch itself, not at the part above it ("at the bottom where the actual latch
+element is": a D11 post's foot, where its tab goes into D1). A latch's red box takes in every tab of the latch ("both tabs of the
+latch"). Hardware put back on a part starts just off where it goes on, in a close view of the two, not after a move through empty space
+("start the nut just off the end of the push button's wires, then animate it back on").
 
 **Lee, 2026-10-22 (the LAC's take-apart, notes on its first draft, remade from the published one):** one wire per step, for this kit only,
 "given the excess number of wires" (the PMG's and LSM's groups stay theirs). The order follows the published where Lee named it: the

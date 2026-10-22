@@ -11,7 +11,10 @@ as the player does (player.js: skinned, drawWires, throughPoses, paced); then ev
 (centre lines closer than 0.9 of their radii added). Adapted from the PMG session's docs/research/pmg/scripts/check_motion.py (19 Oct
 2026), for any kit and every part. Poses are mixed as the player mixes them (player.js mixPose: the turn about the pose's pivot), and a
 way's in-between poses are spaced as the player spaces them (poseGap: the move plus half the turn in degrees; LAC round 2, 21 Oct 2026:
-by the matrices' translations, a pose written as a turn about a far point took most of its beat).
+by the matrices' translations, a pose written as a turn about a far point took most of its beat). A take-apart step's leaving parts
+and their leads (`leaving`, `leaving_wires`) are checked too, along their ways, until they fade (the LSM's D10, 22 Oct 2026: slid off
+the matrix with the wires in it, which this check had not seen); a part taken off in turn (`in_turn`), which rests at the end of its
+own way while the next group moves, has faded by then and is not tested after it.
 """
 import json
 import sys
@@ -137,7 +140,7 @@ def main(argv):
 
     all_names = [v['name'] for v in views]
     if not names:                               # every view whose wires change, or whose wired parts move
-        names = [v['name'] for i, v in enumerate(views) if i and v.get('kind') in ('hover', 'done') and v.get('wires') and not v.get('cut')
+        names = [v['name'] for i, v in enumerate(views) if i and v.get('kind') in ('hover', 'done') and (v.get('wires') or v.get('leaving_wires')) and not v.get('cut')
                  and (v.get('wires') != views[i - 1].get('wires') or v.get('moving') or v.get('carry') != views[i - 1].get('carry'))]
     problems = 0
     for name in names:
@@ -158,7 +161,14 @@ def main(argv):
                 return (b + ease(km * beats - b)) / beats
             return ease(km)
         worst, touching, traced = {}, {}, {}
+        leaving = [q for q in v.get('leaving') or [] if q not in v.get('visible', [])]
+        gone_at = {}                            # (when a leaving part's own way has ended: one taken off in turn has faded by then)
+        for q in leaving:
+            if q in ways:
+                last = _matrix(ways[q][-1])
+                gone_at[q] = next((float(t) for t in np.linspace(0.0, 1.0, 201) if np.allclose(along(ways[q], stops_of(q), t, q), last, atol=1e-6)), 1.0)
         for km in np.linspace(0.0, 1.0, moments + 2)[1:-1]:
+            faded = {q for q, t in gone_at.items() if t < 0.999 and km > t}
             M = {pid: _matrix(pose) for pid, pose in (v.get('offsets') or {}).items()
                  if pid not in (v.get('carry') or {}) and pid not in ways}
             for pid, way in ways.items():
@@ -181,7 +191,9 @@ def main(argv):
             wire_via = v.get('wire_via') or {}
             we = paced(max([len(x) for x in wire_via.values()] or [0]) + 1, km)
             lines, src = {}, {}
-            for w, no in (v.get('wires') or {}).items():
+            for w, no in {**(v.get('wires') or {}), **(v.get('leaving_wires') or {})}.items():   # (and the leads leaving with their parts)
+                if {routes[no].get('a'), routes[no].get('b')} & faded:
+                    continue
                 was = (before.get('wires') or {}).get(w)
                 if was is None or was == no:
                     p = skinned(routes[no], M)
@@ -214,7 +226,7 @@ def main(argv):
                 inner = p[(s > END) & (s < s[-1] - END)]
                 rad = radius[w]
                 r = routes[no]
-                for part in v.get('visible', []):
+                for part in v.get('visible', []) + [q for q in leaving if q not in faded]:   # (and what leaves, until it fades)
                     if part.startswith('STEM_') or part in (r.get('a'), r.get('b')):
                         continue
                     mesh = model.inst[part]

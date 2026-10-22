@@ -1,4 +1,8 @@
-"""The LSM deconstruction's new wire shapes, for the order of TechBox's published take-apart (instructions.online, 19075-laser_stem_
+"""(Since Lee's second note of 22 Oct 2026 the deconstruction keeps the matrix held over the box while D10 and the wires come off it,
+with the Full Build's own wire shapes, and uses only MALE, FEMALE and JUMPERS from here; the laid and loose shapes below are kept as
+measured, for the record.)
+
+The LSM deconstruction's new wire shapes, for the order of TechBox's published take-apart (instructions.online, 19075-laser_stem_
 matrix_lsm_-_deconstruction): the LED matrix, D10 still hooked under it, laid on the table beside the open box (D4 and D5 off) with
 its three wires still in the breadboard; the wires unplugged (a fade, as the published guide swaps models); and, in the view of the
 matrix on its own, the three connectors pulled off its pins.

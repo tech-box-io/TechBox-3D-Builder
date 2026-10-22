@@ -715,7 +715,15 @@ class Guide:
     # -- things declared once
     def rest_at(self, ids, pose):
         """Until a step moves them into place, these parts are shown at `pose` once they appear
-        (for example a board lying beside the model, held only by its wires)."""
+        (for example a board lying beside the model, held only by its wires). In a deconstruction (after take_apart()): parts on
+        screen, lying aside, are moved there between two steps, and the next view starts afresh, nothing gliding over (the LSM's
+        push-button nut, laid just off its wires' ends once D2 is put away, to be screwed back on: Lee, 22 Oct 2026)."""
+        ids = list(ids)
+        if self.taken:
+            wrong = [i for i in ids if i not in self.placed or i in self.riding]
+            if wrong:
+                raise ValueError(f'rest_at(): {wrong} not lying aside on screen (gone, or riding on another part)')
+            self.steps.append(dict(kind='lay', ids=ids, pose=pose))
         for i in ids:
             self.resting[i] = pose
 
@@ -1749,6 +1757,11 @@ class Guide:
                 for wire_id in [w for w, r in wires.items() if r is not None and (r.get('a') in gone or r.get('b') in gone)]:
                     wires.pop(wire_id)
                 cut = True                                                 # the next view starts afresh (the player glides nothing over)
+                continue
+            if s['kind'] == 'lay':                                         # a deconstruction: parts lying aside moved between steps (rest_at())
+                for i in s['ids']:
+                    parked[i] = s['pose']
+                cut = True                                                 # (the next view starts afresh: nothing glides over)
                 continue
             if s['kind'] == 'begin':                                       # a deconstruction: the Full Build as it ends (take_apart())
                 visible[:] = list(s['visible'])
