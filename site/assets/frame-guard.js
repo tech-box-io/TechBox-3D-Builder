@@ -2,7 +2,7 @@
 // this is a second guard (made by tools/site_pages.py from guides.json embed_origins; every published guide loads it).
 (function () {
   if (window.top === window.self) return;
-  var allowed = ["https://edu.tech-box.io"], bad = false, ao = location.ancestorOrigins;
+  var allowed = ["https://edu.tech-box.io", "https://techbox-front.vercel.app"], bad = false, ao = location.ancestorOrigins;
   var local = function (o) { return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(o); };
   if (ao && ao.length) {
     for (var i = 0; i < ao.length; i++) if (ao[i] !== 'null' && allowed.indexOf(ao[i]) < 0 && !local(ao[i])) bad = true;

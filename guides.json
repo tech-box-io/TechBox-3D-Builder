@@ -1,6 +1,6 @@
 {
   "_about": "The kits and guides on the website (https://models.tech-box.io). kits: by the name in their page's address (/kits/<name>/): name and code as shown, folder = the kit folder the guides are generated in. guides: by the name in their web address (https://models.tech-box.io/<name>/: lower-case words joined by hyphens; once an address is in the LMS it must not change): kit, steps = that guide's steps file in the kit folder (a Part or a deconstruction guide gets its own, e.g. steps-part-1.json; all the guides of a kit share the kit's model.glb), label = how its card names it on the kit page (Full Build, Part 1, Deconstruction ...), script = what makes the steps file if not guide.py. The order here is the order on the pages. embed_origins: the only sites that may show a guide in a frame (render.yaml says the same). Publish with: python3 tools/publish.py <name> --note \"...\".",
-  "embed_origins": ["https://edu.tech-box.io"],
+  "embed_origins": ["https://edu.tech-box.io", "https://techbox-front.vercel.app"],
   "kits": {
     "mini-robot-arm": {"name": "Mini Robot Arm", "code": "MRA", "folder": "MRA Build Instructions Prototype"},
     "remote-controlled-car": {"name": "Remote Controlled Car", "code": "RCC", "folder": "RCC Build Instructions"},
