@@ -393,7 +393,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
-  left (the base), closer in. No Parts List unless asked for. Its card picture on the website is its Full Build's card (Lee, 18 Oct
+  left (the base), closer in, then its Completed View, unless `take_apart(completed_view=False)` (the LSM's: Lee, 22 Oct 2026, straight
+  from the last step to the parts list). No Parts List unless asked for. Its card picture on the website is its Full Build's card (Lee, 18 Oct
   2026: `_dev.card()` copies it for a guide made by `take_apart()`); its title page is the Full Build's. Parts taken off slide out, then fade out over a
   beat of their own (800 ms, starting just before the slide comes to rest), leads with them, as Cadasio does (Lee, 18 Oct 2026:
   slower and smoother than the fade inside the slide of 17 Oct), each part once its own way has come to rest; Prev plays the whole
@@ -422,16 +423,16 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
   the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
   Run it after every Full Build change.
-  The LSM's (`deconstruction.py`, 24 steps, 21 Oct 2026): built on TechBox's own published LSM take-apart, at Lee's word ("you need to
+  The LSM's (`deconstruction.py`, 25 steps, 21 Oct 2026; Lee's notes of 22 Oct done): built on TechBox's own published LSM take-apart, at Lee's word ("you need to
   base the deconstruction process off of this guide": its data replayed in our ids and mm, docs/research/lsm/decon/published/; the
   numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8, D7, D5 and D4 off the ends, the D11 posts
   two and two, D6, the LED matrix lifted out with D10 and set down beside the box still wired, both D9, the three breadboard wires, the
-  matrix on its own: D10, then the connectors; D3, D2 with the button, its wires, the button on its own, the USB cable, the breadboard's
-  parts), each step's camera, its arrows (size and tail), eyes and close-ups (each catch, red boxes from our model). The departures are in
-  its docstring (the three wires in one step: Lee's groups; D10 slid off its hooks; cameras or arrows moved where ours hid or lost what
-  the published one showed). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
+  matrix on its own: D10, then the connectors; D3, D2 with the button, its wires, the button on its own (the nut off, the button out of
+  D2, then the nut screwed back on so the two stay together: Lee, 22 Oct 2026), the USB cable, the breadboard's parts), each step's camera, its arrows (size and tail), eyes and close-ups (each catch, red boxes from our model). The departures are in
+  its docstring (the three wires in one step: Lee's groups; the nut put back on; cameras or arrows moved where ours hid or lost what
+  the published one showed, or where a published tail was inside a part). Setting the matrix down and unplugging the three wires are fades (`reappear=True`), as the published guide
   swaps models; their wire shapes (laid aside, loose) are drawn and measured in the kit's `wire_shapes.py`. It ends on D1 with the
-  breadboard, then the Full Build's parts list. Run it after every Full Build change.
+  breadboard, then straight to the Full Build's parts list (no Completed View). Run it after every Full Build change.
   The LAC's (`deconstruction.py`, 47 steps, first draft 21 Oct 2026: Lee's "convert / remake" of TechBox's published take-apart,
   19075-lac_deconstruction, 47 steps): one wire per step, as published; its order where our model allows it, the Full Build walked back
   (every lead keeps a route the Full Build drew: `leads()`, `stages_back()`, `ride_back()` read them from steps.json; `to_hanging()` takes

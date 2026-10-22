@@ -289,7 +289,7 @@ needed." Where TechBox has published a take-apart of the kit, ours follows it: i
 breadboard wires in one step), or where ours would hide or lose what the published picture shows, each named in the script. Its model
 swaps (a module set down beside the box, a wire unplugged and left loose) are fades (`reappear=True`), as section 11 says wires are
 unplugged; whether to keep them as fades is put to Lee. A two-stage joint the published guide flattens is still undone in two stages
-inside the step (D10 slid off its hooks, then down: above). "Eyes instead of hole labels are okay for this kit" (the unplugged wires),
+inside the step (D10 slid off its hooks, then down: above; but see Lee's 22 Oct note below, where the slide took D10 into the wires). "Eyes instead of hole labels are okay for this kit" (the unplugged wires),
 and a Pry Tool the kit has but the model does not show still gets its caution (the Nano Board).
 
 **Lee, 2026-10-21 (the LSM):** "Let's use gray": TechBox writes American English (its MRA take-apart's "center"), so "gray", not
@@ -318,6 +318,19 @@ for part of the animation. Step 11 - Same as Step 10"; "Step 7 needs a wider arr
 before it has finished: the part rests for a beat, its next arrow fades in, then it moves on (for every part that comes off in stages,
 not only H12 and H11). An arrow drawn on a plate that moves along itself is set in front of the plate, towards the camera, so the plate
 never covers it. Step 7's arrow (the I/O module lifted off H4) is the published 6.5 mm thick.
+
+**Lee, 2026-10-22 (the LSM's take-apart, notes on the draft built on the published one):** a close-up stands beside the model on the
+side of the spot it shows, its leader not across the model ("instead of having it cross the model": Steps 3, 5 and 6); its red boxes
+cover the whole catch with room round it ("The squares in many of the breakouts are too small"). An arrow starts at the moving part's
+outer surface or beyond, never inside it or another part (Steps 4, 5, 7 and 24): a published tail that lies inside is moved out to the
+surface. Two catches of one part get an eye each, spaced as the catches are (D3's two tabs: "evenly spaced like the tabs of D3"). An
+eye's leader never crosses an arrow (Step 19). Like parts taken out the same way have arrows of one size (the 12 kOhm resistor's as the
+330 Ohm resistor's), whatever the published sizes. A nut comes off its thread in one smooth move, turning as it goes ("doesn't need a 3
+step animation"). Where our way out takes a part into the wires and the published way does not, take the published way (D10 dropped
+straight off the matrix through its hooks, not slid along first). Hardware that belongs to a part goes back on it once the part is out,
+in a step of its own (the push button's nut, screwed back on once the button is out of D2: "we need a step that shows the nut being
+replaced onto the push button"); this is the one exception to a part once off being gone for good. A take-apart may go straight from
+its last step to the parts list, with no Completed View (`take_apart(completed_view=False)`).
 
 ## 12. Numeric defaults
 

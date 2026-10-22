@@ -20261,7 +20261,7 @@
     ],
     "radius": 7.0,
     "hide": [],
-    "mark": 2.5,
+    "mark": 4.0,
     "alt": "Close-up of D8 under the latch at the top of a D11 post",
     "caption": "The latch on each D11 post"
    },
@@ -20762,9 +20762,10 @@
     ],
     "radius": 7.0,
     "hide": [],
-    "mark": 2.5,
+    "mark": 4.0,
     "alt": "Close-up of D7 in the notch of a D11 post",
-    "caption": "D7 in the notch of each D11 post"
+    "caption": "D7 in the notch of each D11 post",
+    "side": "left"
    },
    "caption": "Remove D7 from the four D11 posts.",
    "text_key": "T5D251B18",
@@ -21114,10 +21115,20 @@
     {
      "id": "D3",
      "anchor": [
-      684.76,
-      903.45,
-      1153.5
-     ]
+      684.59,
+      861.04,
+      1155.18
+     ],
+     "side": "right"
+    },
+    {
+     "id": "D3",
+     "anchor": [
+      684.59,
+      902.21,
+      1155.18
+     ],
+     "side": "right"
     }
    ],
    "wires": {
@@ -21230,14 +21241,14 @@
    "arrows": [
     {
      "tail": [
-      681.04,
-      855.91,
-      1204.32
+      684.0,
+      855.9,
+      1204.3
      ],
      "head": [
-      743.84,
-      855.91,
-      1204.32
+      746.8,
+      855.9,
+      1204.3
      ],
      "normal": [
       0.0,
@@ -21270,7 +21281,7 @@
        861.04,
        1253.43
       ],
-      "half": 4.5
+      "half": 6.5
      },
      {
       "at": [
@@ -21278,7 +21289,7 @@
        902.21,
        1253.43
       ],
-      "half": 4.5
+      "half": 6.5
      }
     ]
    },
@@ -21628,10 +21639,20 @@
     {
      "id": "D3",
      "anchor": [
-      592.23,
-      861.78,
-      1154.79
-     ]
+      591.88,
+      861.04,
+      1155.18
+     ],
+     "side": "left"
+    },
+    {
+     "id": "D3",
+     "anchor": [
+      591.88,
+      902.21,
+      1155.18
+     ],
+     "side": "left"
     }
    ],
    "wires": {
@@ -21744,14 +21765,14 @@
    "arrows": [
     {
      "tail": [
-      597.8,
-      855.41,
-      1204.38
+      593.0,
+      855.4,
+      1204.4
      ],
      "head": [
-      517.7,
-      855.41,
-      1204.38
+      512.9,
+      855.4,
+      1204.4
      ],
      "normal": [
       0.0,
@@ -21778,6 +21799,7 @@
     "hide": [],
     "alt": "Close-up of the corner of D4 and D2: red boxes around the ends of D2's two tabs, which pass through D4",
     "caption": "D2's tabs through D4",
+    "side": "right",
     "marks": [
      {
       "at": [
@@ -21785,7 +21807,7 @@
        861.04,
        1253.43
       ],
-      "half": 4.5
+      "half": 6.5
      },
      {
       "at": [
@@ -21793,7 +21815,7 @@
        902.21,
        1253.43
       ],
-      "half": 4.5
+      "half": 6.5
      }
     ]
    },
@@ -22293,13 +22315,13 @@
    "arrows": [
     {
      "tail": [
-      599.25,
-      921.89,
+      597.43,
+      915.89,
       1166.33
      ],
      "head": [
-      599.25,
-      967.49,
+      597.43,
+      961.49,
       1166.33
      ],
      "normal": [
@@ -22312,13 +22334,13 @@
     },
     {
      "tail": [
-      599.02,
-      921.33,
+      597.43,
+      915.33,
       1242.37
      ],
      "head": [
-      599.02,
-      968.33,
+      597.43,
+      962.33,
       1242.37
      ],
      "normal": [
@@ -22343,9 +22365,10 @@
     ],
     "radius": 6.0,
     "hide": [],
-    "mark": 2.5,
+    "mark": 4.0,
     "alt": "Close-up from below of a D11 tab through its slot in D1",
-    "caption": "The tab through D1"
+    "caption": "The tab through D1",
+    "side": "right"
    },
    "caption": "Lift the box and push the tabs of the two D11 posts nearest the USB Cable up out of the slots in D1 from underneath. Then, push each tab up through its corner slot in D6, and remove the posts.",
    "text_key": "T0CE8763F",
@@ -22782,12 +22805,12 @@
    "arrows": [
     {
      "tail": [
-      676.33,
+      679.03,
       921.98,
       1241.94
      ],
      "head": [
-      676.33,
+      679.03,
       966.98,
       1241.94
      ],
@@ -22801,12 +22824,12 @@
     },
     {
      "tail": [
-      677.29,
+      679.03,
       920.69,
       1166.19
      ],
      "head": [
-      677.29,
+      679.03,
       962.39,
       1166.19
      ],
@@ -22832,7 +22855,7 @@
     ],
     "radius": 6.0,
     "hide": [],
-    "mark": 2.5,
+    "mark": 4.0,
     "alt": "Close-up from below of a D11 tab through its slot in D1",
     "caption": "The tab through D1"
    },
@@ -23561,14 +23584,14 @@
    "arrows": [
     {
      "tail": [
-      638.8,
+      612.8,
       899.0,
-      1204.0
+      1178.0
      ],
      "head": [
-      638.55,
+      612.55,
       969.6,
-      1203.63
+      1177.63
      ],
      "normal": [
       -0.5783,
@@ -25640,27 +25663,26 @@
    "arrows": [
     {
      "tail": [
-      548.23,
-      865.06,
-      1195.79
+      582.62,
+      862.17,
+      1230.66
      ],
      "head": [
-      548.23,
-      865.06,
-      1155.79
+      582.62,
+      811.37,
+      1230.66
      ],
      "normal": [
-      0.6604,
-      0.7509,
-      0.0
+      0.6436,
+      0.0,
+      0.7654
      ],
      "width": 4.4,
-     "part": "D10",
-     "stage": 0
+     "part": "D10"
     }
    ],
-   "caption": "Slide D10 along the bottom of the LED Matrix, away from its pins, until its hooks come free of the edges. Then, remove it.",
-   "text_key": "T797FBE30",
+   "caption": "Unclip D10 from the bottom of the LED Matrix.",
+   "text_key": "TF31AAB13",
    "review": null,
    "camera": {
     "dir": [
@@ -25712,7 +25734,7 @@
      "t": [
       -90.23,
       -66.84,
-      -13.19
+      26.81
      ],
      "r": [
       0.0,
@@ -25967,44 +25989,8 @@
      {
       "t": [
        -90.23,
-       -26.84,
-       -13.19
-      ],
-      "r": [
-       0.0,
-       1.0,
-       0.0,
-       180.0
-      ],
-      "at": [
-       638.46,
-       891.9,
-       1204.47
-      ]
-     },
-     {
-      "t": [
-       -90.23,
-       -26.84,
-       -13.19
-      ],
-      "r": [
-       0.0,
-       1.0,
-       0.0,
-       180.0
-      ],
-      "at": [
-       638.46,
-       891.9,
-       1204.47
-      ]
-     },
-     {
-      "t": [
-       -90.23,
        -66.84,
-       -13.19
+       26.81
       ],
       "r": [
        0.0,
@@ -26023,35 +26009,9 @@
    "leaving": [
     "D10"
    ],
-   "staged_arrows": [
-    {
-     "stage": 2,
-     "arrows": [
-      {
-       "tail": [
-        548.23,
-        826.28,
-        1191.29
-       ],
-       "head": [
-        548.23,
-        775.48,
-        1191.29
-       ],
-       "normal": [
-        0.6436,
-        0.0,
-        0.7654
-       ],
-       "width": 4.4,
-       "part": "D10"
-      }
-     ]
-    }
-   ],
    "away": true,
-   "caption": "Slide D10 along the bottom of the LED Matrix, away from its pins, until its hooks come free of the edges. Then, remove it.",
-   "text_key": "T797FBE30",
+   "caption": "Unclip D10 from the bottom of the LED Matrix.",
+   "text_key": "TF31AAB13",
    "review": null,
    "camera": {
     "dir": [
@@ -26894,7 +26854,7 @@
     ],
     "radius": 20.0,
     "hide": [],
-    "mark": 3.0,
+    "mark": 6.0,
     "alt": "Close-up of the latch on D1 that holds the foot of D3",
     "caption": "The latch on D1 at the foot of D3"
    },
@@ -27135,7 +27095,7 @@
     ],
     "radius": 20.0,
     "hide": [],
-    "mark": 3.0,
+    "mark": 6.0,
     "alt": "Close-up of the latch on D1 that holds the foot of D2",
     "caption": "The latch on D1 at the foot of D2"
    },
@@ -27736,8 +27696,8 @@
      "part": "NUT"
     }
    ],
-   "caption": "Unscrew the nut from the Push Button, on the inside of D2. Then, slide it off over the wires.",
-   "text_key": "T07D238C3",
+   "caption": "Unscrew the nut from the Push Button, on the inside of D2, and slide it off over the wires.",
+   "text_key": "TCD00EB56",
    "review": null,
    "camera": {
     "dir": [
@@ -27761,7 +27721,8 @@
     "BTN_RED_PIN",
     "D2",
     "BTN_BLACK_PIN",
-    "BUTTON"
+    "BUTTON",
+    "NUT"
    ],
    "offsets": {
     "D2": [
@@ -27898,7 +27859,7 @@
       "t": [
        0.0,
        0.0,
-       49.6
+       45.22
       ],
       "r": [
        0.0,
@@ -27916,7 +27877,7 @@
       "t": [
        0.0,
        0.0,
-       42.1
+       33.35
       ],
       "r": [
        0.0,
@@ -27934,7 +27895,7 @@
       "t": [
        0.0,
        0.0,
-       34.6
+       21.48
       ],
       "r": [
        0.0,
@@ -27952,7 +27913,7 @@
       "t": [
        0.0,
        0.0,
-       27.1
+       9.6
       ],
       "r": [
        0.0,
@@ -27970,7 +27931,7 @@
       "t": [
        0.0,
        0.0,
-       19.6
+       -2.28
       ],
       "r": [
        0.0,
@@ -27988,7 +27949,7 @@
       "t": [
        0.0,
        0.0,
-       12.1
+       -14.15
       ],
       "r": [
        0.0,
@@ -28006,7 +27967,7 @@
       "t": [
        0.0,
        0.0,
-       4.6
+       -26.02
       ],
       "r": [
        0.0,
@@ -28023,11 +27984,6 @@
      [
       0.0,
       0.0,
-      -2.9
-     ],
-     [
-      0.0,
-      0.0,
       -37.9
      ]
     ]
@@ -28035,17 +27991,12 @@
    "path_stops": {
     "NUT": [
      0,
-     4,
-     8,
-     9
+     8
     ]
    },
-   "leaving": [
-    "NUT"
-   ],
    "away": true,
-   "caption": "Unscrew the nut from the Push Button, on the inside of D2. Then, slide it off over the wires.",
-   "text_key": "T07D238C3",
+   "caption": "Unscrew the nut from the Push Button, on the inside of D2, and slide it off over the wires.",
+   "text_key": "TCD00EB56",
    "review": null,
    "camera": {
     "dir": [
@@ -28124,6 +28075,7 @@
    "eye": [
     {
      "id": "BUTTON",
+     "side": "near-above",
      "anchor": [
       632.3,
       882.2,
@@ -28243,7 +28195,10 @@
    "name": "Step 19c",
    "kind": "done",
    "visible": [
-    "D2"
+    "BTN_RED_PIN",
+    "D2",
+    "BTN_BLACK_PIN",
+    "BUTTON"
    ],
    "offsets": {
     "D2": [
@@ -28293,7 +28248,10 @@
      ]
     }
    },
-   "wires": {},
+   "wires": {
+    "lead red": 24,
+    "lead black": 25
+   },
    "carry": {
     "BTN_RED_PIN": {
      "by": "BUTTON",
@@ -28367,15 +28325,6 @@
      ]
     ]
    },
-   "leaving": [
-    "BUTTON",
-    "BTN_RED_PIN",
-    "BTN_BLACK_PIN"
-   ],
-   "leaving_wires": {
-    "lead red": 24,
-    "lead black": 25
-   },
    "away": true,
    "caption": "Remove the Push Button from D2, pulling its wires back through the hole.",
    "text_key": "T990B6632",
@@ -28397,6 +28346,472 @@
   },
   {
    "name": "Step 20",
+   "kind": "hover",
+   "visible": [
+    "BTN_RED_PIN",
+    "BTN_BLACK_PIN",
+    "BUTTON",
+    "NUT"
+   ],
+   "offsets": {
+    "NUT": [
+     0.0,
+     0.0,
+     -37.9
+    ],
+    "BUTTON": [
+     0.0,
+     0.0,
+     157.1
+    ],
+    "BTN_RED_PIN": {
+     "t": [
+      -18.08,
+      7.69,
+      156.69
+     ],
+     "r": [
+      1.0,
+      0.0,
+      0.0,
+      90.0
+     ],
+     "at": [
+      652.62,
+      873.92,
+      1178.07
+     ]
+    },
+    "BTN_BLACK_PIN": {
+     "t": [
+      -10.69,
+      7.73,
+      128.75
+     ],
+     "r": [
+      1.0,
+      0.0,
+      0.0,
+      90.0
+     ],
+     "at": [
+      652.62,
+      873.92,
+      1206.01
+     ]
+    }
+   },
+   "guides": [],
+   "labels": [],
+   "eye": [
+    {
+     "id": "NUT",
+     "anchor": [
+      634.8,
+      874.9,
+      1251.4
+     ]
+    }
+   ],
+   "wires": {
+    "lead red": 24,
+    "lead black": 25
+   },
+   "carry": {
+    "BTN_RED_PIN": {
+     "by": "BUTTON",
+     "pose": {
+      "t": [
+       -18.08,
+       7.69,
+       -0.41
+      ],
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       652.62,
+       873.92,
+       1178.07
+      ]
+     }
+    },
+    "BTN_BLACK_PIN": {
+     "by": "BUTTON",
+     "pose": {
+      "t": [
+       -10.69,
+       7.73,
+       -28.35
+      ],
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       652.62,
+       873.92,
+       1206.01
+      ]
+     }
+    }
+   },
+   "moving": [],
+   "path": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "arrows": [
+    {
+     "tail": [
+      638.23,
+      881.63,
+      1216.03
+     ],
+     "head": [
+      638.23,
+      881.63,
+      1272.33
+     ],
+     "normal": [
+      -0.7809,
+      0.6247,
+      0.0
+     ],
+     "width": 5.0,
+     "part": "NUT"
+    }
+   ],
+   "cut": true,
+   "caption": "Slide the nut back over the Push Button's wires and screw it onto the Push Button, so that the two stay together.",
+   "text_key": "T1016EB90",
+   "review": null,
+   "camera": {
+    "dir": [
+     -0.7741,
+     0.6193,
+     0.1316
+    ],
+    "target": [
+     638.2,
+     880.0,
+     1316.0
+    ],
+    "radius": 105.0
+   },
+   "isolated": true
+  },
+  {
+   "name": "Step 20c",
+   "kind": "done",
+   "visible": [
+    "BTN_RED_PIN",
+    "BTN_BLACK_PIN",
+    "BUTTON",
+    "NUT"
+   ],
+   "offsets": {
+    "NUT": [
+     0.0,
+     0.0,
+     160.2
+    ],
+    "BUTTON": [
+     0.0,
+     0.0,
+     157.1
+    ],
+    "BTN_RED_PIN": {
+     "t": [
+      -18.08,
+      7.69,
+      156.69
+     ],
+     "r": [
+      1.0,
+      0.0,
+      0.0,
+      90.0
+     ],
+     "at": [
+      652.62,
+      873.92,
+      1178.07
+     ]
+    },
+    "BTN_BLACK_PIN": {
+     "t": [
+      -10.69,
+      7.73,
+      128.75
+     ],
+     "r": [
+      1.0,
+      0.0,
+      0.0,
+      90.0
+     ],
+     "at": [
+      652.62,
+      873.92,
+      1206.01
+     ]
+    }
+   },
+   "wires": {
+    "lead red": 24,
+    "lead black": 25
+   },
+   "carry": {
+    "BTN_RED_PIN": {
+     "by": "BUTTON",
+     "pose": {
+      "t": [
+       -18.08,
+       7.69,
+       -0.41
+      ],
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       652.62,
+       873.92,
+       1178.07
+      ]
+     }
+    },
+    "BTN_BLACK_PIN": {
+     "by": "BUTTON",
+     "pose": {
+      "t": [
+       -10.69,
+       7.73,
+       -28.35
+      ],
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       90.0
+      ],
+      "at": [
+       652.62,
+       873.92,
+       1206.01
+      ]
+     }
+    }
+   },
+   "moving": [
+    "NUT"
+   ],
+   "path": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "paths": {
+    "NUT": [
+     [
+      0.0,
+      0.0,
+      -37.9
+     ],
+     [
+      0.0,
+      0.0,
+      62.1
+     ],
+     [
+      0.0,
+      0.0,
+      97.1
+     ],
+     {
+      "t": [
+       0.0,
+       0.0,
+       104.99
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       90.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       112.88
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       180.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       120.77
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       270.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       128.66
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       360.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       136.55
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       450.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       144.44
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       540.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     {
+      "t": [
+       0.0,
+       0.0,
+       152.33
+      ],
+      "r": [
+       0.0,
+       0.0,
+       1.0,
+       630.0
+      ],
+      "at": [
+       638.23,
+       881.63,
+       1251.0
+      ]
+     },
+     [
+      0.0,
+      0.0,
+      160.2
+     ]
+    ]
+   },
+   "path_stops": {
+    "NUT": [
+     0,
+     1,
+     10
+    ]
+   },
+   "away": true,
+   "caption": "Slide the nut back over the Push Button's wires and screw it onto the Push Button, so that the two stay together.",
+   "text_key": "T1016EB90",
+   "review": null,
+   "camera": {
+    "dir": [
+     -0.7741,
+     0.6193,
+     0.1316
+    ],
+    "target": [
+     638.2,
+     880.0,
+     1316.0
+    ],
+    "radius": 105.0
+   },
+   "isolated": true
+  },
+  {
+   "name": "Step 21",
    "kind": "hover",
    "visible": [
     "BREADBOARD",
@@ -28482,7 +28897,7 @@
    }
   },
   {
-   "name": "Step 20c",
+   "name": "Step 21c",
    "kind": "done",
    "visible": [
     "BREADBOARD",
@@ -28579,7 +28994,7 @@
    }
   },
   {
-   "name": "Step 21",
+   "name": "Step 22",
    "kind": "hover",
    "visible": [
     "BREADBOARD",
@@ -28652,7 +29067,7 @@
    }
   },
   {
-   "name": "Step 21c",
+   "name": "Step 22c",
    "kind": "done",
    "visible": [
     "BREADBOARD",
@@ -28728,7 +29143,7 @@
    }
   },
   {
-   "name": "Step 22",
+   "name": "Step 23",
    "kind": "hover",
    "visible": [
     "BREADBOARD",
@@ -28798,7 +29213,7 @@
    }
   },
   {
-   "name": "Step 22c",
+   "name": "Step 23c",
    "kind": "done",
    "visible": [
     "BREADBOARD",
@@ -28869,7 +29284,7 @@
    }
   },
   {
-   "name": "Step 23",
+   "name": "Step 24",
    "kind": "hover",
    "visible": [
     "BREADBOARD",
@@ -28908,7 +29323,7 @@
      ],
      "head": [
       647.57,
-      907.22,
+      907.82,
       1190.91
      ],
      "normal": [
@@ -28916,7 +29331,7 @@
       0.0,
       0.483
      ],
-     "width": 1.3,
+     "width": 2.3,
      "part": "R12K"
     }
    ],
@@ -28938,7 +29353,7 @@
    }
   },
   {
-   "name": "Step 23c",
+   "name": "Step 24c",
    "kind": "done",
    "visible": [
     "BREADBOARD",
@@ -29009,7 +29424,7 @@
    }
   },
   {
-   "name": "Step 24",
+   "name": "Step 25",
    "kind": "hover",
    "visible": [
     "BREADBOARD",
@@ -29038,14 +29453,14 @@
    "arrows": [
     {
      "tail": [
-      637.56,
-      867.64,
-      1187.33
+      642.6,
+      879.0,
+      1182.8
      ],
      "head": [
-      637.56,
-      908.14,
-      1187.33
+      642.6,
+      919.5,
+      1182.8
      ],
      "normal": [
       0.8756,
@@ -29075,7 +29490,7 @@
    "caution": "Use the Pry Tool to carefully remove the Nano Board."
   },
   {
-   "name": "Step 24c",
+   "name": "Step 25c",
    "kind": "done",
    "visible": [
     "BREADBOARD",
@@ -29140,30 +29555,6 @@
     "radius": 67.1
    },
    "caution": "Use the Pry Tool to carefully remove the Nano Board."
-  },
-  {
-   "name": "Completed View",
-   "kind": "end",
-   "visible": [
-    "BREADBOARD",
-    "D1"
-   ],
-   "offsets": {},
-   "wires": {},
-   "carry": {},
-   "camera": {
-    "dir": [
-     0.4098,
-     0.7518,
-     0.5166
-    ],
-    "target": [
-     639.5,
-     845.2,
-     1212.5
-    ],
-    "radius": 67.1
-   }
   },
   {
    "name": "Parts List",

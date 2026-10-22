@@ -827,7 +827,7 @@ class Guide:
             own['camera'] = cam
 
     # -- a deconstruction guide: the Full Build taken apart (rulebook section 11)
-    def take_apart(self, full='steps.json', parts_list_at_end=False, leave_out=()):
+    def take_apart(self, full='steps.json', parts_list_at_end=False, leave_out=(), completed_view=True):
         """Begin a deconstruction guide (a guide of its own: Guide(steps_file='steps-deconstruction.json')) with the Full Build as it
         ends: every part where the Full Build leaves it, parts riding on others still riding, the leads as they are routed. Its
         title page is the Full Build's (the same camera; its subtitle is this guide's `part`). remove(), unplug() and lift() then
@@ -837,7 +837,8 @@ class Guide:
         counted back in once the kit is apart: Lee, 19 Oct 2026).
         leave_out=[ids]: parts the Full Build put away for good, which would otherwise come back as its last view of them had them
         (the LSM's breadboard backing, peeled off in its Step 1): left out from the start, so that Step 1 glides from the title page
-        (a put_away() would make it cut in)."""
+        (a put_away() would make it cut in).
+        completed_view=False: no Completed View: the last step leads straight to the parts list pages (the LSM's: Lee, 22 Oct 2026)."""
         from check_site import steps_stamp
         if self.steps_file == 'steps.json':
             raise ValueError('take_apart(): in a guide of its own (Guide(steps_file="steps-deconstruction.json")), not in the Full Build')
@@ -896,7 +897,7 @@ class Guide:
             wires_now = {w: r for w, r in wires_now.items() if r.get('a') not in leave_out and r.get('b') not in leave_out}
         if end is None or end.get('cut'):
             self.log.append(f'  NOTE: take_apart(): {full} has no plain Completed View; each part is taken as the last step that showed it had it')
-        self.taken = dict(file=full, stamp=steps_stamp(data), came=came, start=views[0], routes=routes,
+        self.taken = dict(file=full, stamp=steps_stamp(data), came=came, start=views[0], routes=routes, completed_view=bool(completed_view),
                           parts_pages=[copy.deepcopy(v) for v in views if v['kind'] == 'card' and v.get('parts')] if parts_list_at_end else [])
         if parts_list_at_end and not self.taken['parts_pages']:
             raise SystemExit(f'take_apart(parts_list_at_end=True): {full} has no parts list to show')
@@ -2218,6 +2219,8 @@ class Guide:
         if self.parts_list:                                 # the parts list, on pages of its own after the title page
             for k, page in enumerate(self.parts_list(parts)):
                 views.insert(1 + k, dict(name=page['name'], kind='card', caption=page['name'], parts=page['groups'], visible=[], offsets={}, camera=hero))
+        if self.taken and not self.taken['completed_view']:   # (none: the last step leads straight to the parts list)
+            views = [v for v in views if v['kind'] != 'end']
         if self.taken and self.taken.get('parts_pages'):    # a deconstruction's: the Full Build's pages, after the Completed View (take_apart())
             views.extend(copy.deepcopy(self.taken['parts_pages']))
 

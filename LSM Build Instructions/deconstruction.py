@@ -2,8 +2,8 @@
 the manner of TechBox's own published take-apart (Lee, 21 Oct 2026: "you need to base the deconstruction process off of this guide:
 https://instructions.online/?id=19075-laser_stem_matrix_lsm_-_deconstruction"). A guide of its own (steps-deconstruction.json), made
 from the Full Build as guide.py last wrote it (run that first, and this again after any change to it). It opens on the Full Build's
-title page, ends on what is left (D1 and the breadboard, as the published take-apart ends), followed by the Full Build's parts list,
-and its card on the website is the Full Build's.
+title page, ends on what is left (D1 and the breadboard, as the published take-apart ends), followed straight by the Full Build's parts
+list (no Completed View: Lee, 22 Oct 2026), and its card on the website is the Full Build's.
 
 The published take-apart, step by step (docs/research/guide_19075-laser_stem_matrix_lsm_-_deconstruction.md; its data replayed in our
 part ids and mm: docs/research/lsm/decon/published/), outside in: the stems; D8; D7; D5 and D4 off the ends (which frees D10's ends);
@@ -15,13 +15,14 @@ the published eyes, and a close-up where the published guide has one (each catch
 D5's and D4's corners, the D11 posts' tabs under D1, D3's and D2's latches on D1), drawn from our model with a red box on the catch.
 Where it differs, and why: the three wires come out in one step (Lee: "some things can be removed in groups (like the 3 breadboard
 wires)"); the matrix's lift and its setting down are two steps (the published guide swaps two models in one); D2 comes off before its
-wires are unplugged (one step each); D4, once off its tabs, is lifted off the USB cable (its notch held it); D10 is slid off its hooks
-before it drops (they hold both edges of the matrix: a two-stage joint undone in one step, rulebook section 11; the published guide
-drops it through them); the matrix on its own stays where it was laid (the published guide puts it back over the box), so that view's
+wires are unplugged (one step each); D4, once off its tabs, is lifted off the USB cable (its notch held it); once the button is out of
+D2, the nut is screwed back onto it, so that the two stay together (Lee, 22 Oct 2026: a step of its own); the matrix on its own stays
+where it was laid (the published guide puts it back over the box), so that view's
 camera and arrow are carried there; a few cameras and arrows are moved where ours would hide or lose what the published one showed (Step
 16 from outside D2, whose latch and arrow the published camera saw through D2; Steps 10 and 11 framed to hold the laid matrix in a tall
-window; Step 20 to hold the cable's A end; the arrows of Steps 14 and 18 at the connectors and the nut, not 40 mm away along the
-wires). Two steps on one sub-assembly change camera where the published guide does (Steps 13 - 14, 18 - 19). Setting the matrix down
+window; Step 21 to hold the cable's A end; the arrows of Steps 14 and 18 at the connectors and the nut, not 40 mm away along the
+wires; arrows whose published tail is inside a part, or whose head would go under the instruction boxes in a 1024 x 768 window, moved
+out: Steps 4 - 7, 9 and 25). Two steps on one sub-assembly change camera where the published guide does (Steps 13 - 14, 18 - 19). Setting the matrix down
 and unplugging the wires are fades, as the published guide's model swaps (and the rulebook's unplugging: "by swapping the routed model
 for a loose one"); the wires' new shapes (laid aside, loose) are drawn and measured in wire_shapes.py. No counterpart for the Full
 Build's preparation or its cards. The USB cable cannot come out first (the box closes round its plug), so Step 1's caution says to
@@ -87,7 +88,8 @@ def slid(pose, by):
 
 g = Guide(HERE, title='Laser Stem Matrix (LSM)', part='Deconstruction', names=dict(FULL['names']), steps_file='steps-deconstruction.json',
           source='lsm.glb', hero_azimuth=45, copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
-g.take_apart(parts_list_at_end=True,                                # (the Full Build's parts list, after the Completed View, as the MRA's)
+g.take_apart(parts_list_at_end=True,                                # (the Full Build's parts list at the end, as the MRA's ...
+             completed_view=False,                                  #  straight after the last step: no Completed View, Lee 22 Oct 2026)
              leave_out=[BACKING])                                   # (peeled off in the Full Build's Step 1 and never back)
 
 
@@ -161,6 +163,14 @@ def tab_ends(part, wall):
     return [r1(out[(y >= gr[0]) & (y <= gr[-1])].mean(0)) for gr in groups]
 
 
+def off_face(post, tail):
+    """A D11 post's arrow tail moved out to 2.7 mm off the post's outer face: the published tails are on the face, so that half the
+    shaft was inside the post (Lee, 22 Oct 2026, Step 7)."""
+    lo, hi = g.model.inst[post].bounds
+    x = hi[0] + 2.7 if tail[0] > (lo[0] + hi[0]) / 2 else lo[0] - 2.7
+    return [round(float(x), 2), *tail[1:]]
+
+
 def tab_under_d1(post):
     """The tip of a D11 post's tab under D1 (a close-up's target)."""
     v = np.asarray(g.model.inst[post].vertices)
@@ -174,25 +184,29 @@ POWER = 'Disconnect the USB Cable from the computer or power supply before you b
 g.remove('Remove all 64 LED Stems from D8, D7, and D6.', STEMS, units=[STEMS], caution=POWER,   # (in one step, as published: one arrow)
          arrow_style={STEMS[0]: arrow('Step 1')}, eye=[eye('Step 1', side='up-left')], **cam('Step 1'))   # (the eye clear of the arrow)
 g.remove('Remove D8 from the latches of the four D11 posts.', [D8], arrow_style={D8: arrow('Step 2')}, eye=[eye('Step 2')],
-         inset=dict(target=r1(ring('Step 2')), dir=PUB['Step 2']['camera']['view_dir'], radius=7.0, mark=2.5,
+         inset=dict(target=r1(ring('Step 2')), dir=PUB['Step 2']['camera']['view_dir'], radius=7.0, mark=4.0,
                     caption='The latch on each D11 post', alt='Close-up of D8 under the latch at the top of a D11 post'),
          **cam('Step 2'))
 g.remove('Remove D7 from the four D11 posts.', [D7], arrow_style={D7: arrow('Step 3')}, eye=[eye('Step 3')],
-         inset=dict(target=r1(ring('Step 3')), dir=PUB['Step 3']['camera']['view_dir'], radius=7.0, mark=2.5,
-                    caption='D7 in the notch of each D11 post', alt='Close-up of D7 in the notch of a D11 post'),
+         inset=dict(target=r1(ring('Step 3')), dir=PUB['Step 3']['camera']['view_dir'], radius=7.0, mark=4.0, side='left',   # (on the
+                    caption='D7 in the notch of each D11 post', alt='Close-up of D7 in the notch of a D11 post'),   # left, not across the model: Lee)
          keep_camera=True)                                          # (the published camera of Step 2, kept)
 
 # ================================================================ THE ENDS: D5 AND D4 (D10's ends come free of their slots)
-g.remove('Remove D5 from the tabs of D1, D2, and D3.', [D5], arrow_style={D5: arrow('Step 4')}, eye=[eye('Step 4')],
+# (Lee, 22 Oct 2026: the arrows of D5 and D4 from their outer faces, the published ones started inside them; an eye on each of D3's two
+# tabs through the wall, beside the model, level with its tab)
+g.remove('Remove D5 from the tabs of D1, D2, and D3.', [D5], arrow_style={D5: arrow('Step 4', at=[684.0, 855.9, 1204.3])},
+         eye=[dict(id=D3, anchor=p, side='right') for p in tab_ends(D3, D5)],
          inset=dict(target=r1(np.mean(tab_ends(D2, D5), axis=0)), dir=PUB['Step 4']['camera']['view_dir'], radius=26.0,
-                    marks=[(p, 4.5) for p in tab_ends(D2, D5)], caption="D2's tabs through D5",
+                    marks=[(p, 6.5) for p in tab_ends(D2, D5)], caption="D2's tabs through D5",
                     alt="Close-up of the corner of D5 and D2: red boxes around the ends of D2's two tabs, which pass through D5"),
          **cam('Step 4'))
 g.remove('Slide D4 off the tabs of D1, D2, and D3, along the USB Cable. Then, lift it up off the cable.', [D4],
          path=[[-75.0, 0.0, 0.0], [-75.0, 40.0, 0.0]],              # (straight out, as published, the USB cable in the notch at its foot; then
-         arrow_style={D4: arrow('Step 5', stage=0, then=[dict(dims=(40.0, 6.2), stage=1)])}, eye=[eye('Step 5')],   # up off it: an arrow each)
-         inset=dict(target=r1(np.mean(tab_ends(D2, D4), axis=0)), dir=PUB['Step 5']['camera']['view_dir'], radius=26.0,
-                    marks=[(p, 4.5) for p in tab_ends(D2, D4)], caption="D2's tabs through D4",
+         arrow_style={D4: arrow('Step 5', at=[593.0, 855.4, 1204.4], stage=0, then=[dict(dims=(40.0, 6.2), stage=1)])},   # up off it: an
+         eye=[dict(id=D3, anchor=p, side='left') for p in tab_ends(D3, D4)],                                                 #  arrow each)
+         inset=dict(target=r1(np.mean(tab_ends(D2, D4), axis=0)), dir=PUB['Step 5']['camera']['view_dir'], radius=26.0, side='right',
+                    marks=[(p, 6.5) for p in tab_ends(D2, D4)], caption="D2's tabs through D4",
                     alt="Close-up of the corner of D4 and D2: red boxes around the ends of D2's two tabs, which pass through D4"),
          **cam('Step 5'))
 
@@ -209,10 +223,14 @@ for step, pair, caption in (('Step 6', [D11_D, D11_C], 'Lift the box and push th
                                                        'way, and remove the posts.')):
     tip = tab_under_d1(PUB[step]['insets'][0]['part'])
     out_x, out_z = (1.0 if tip[0] > 640 else -1.0), (1.0 if tip[2] > 1204 else -1.0)
+    tails = {i: off_face(i, PUB[step]['arrows'][k]['tail']) for k, i in enumerate(pair)}
+    if step == 'Step 6':                                            # (6 mm lower, beside the posts: the left one's head was under the
+        tails = {i: [x, round(y - 6.0, 2), z] for i, (x, y, z) in tails.items()}   #  caution box, three lines tall, at 1024 x 768)
     g.remove(caption, pair, paths={i: [D11_SHORT, D11_UP] for i in pair},
-             arrow_style={i: arrow(step, k) for k, i in enumerate(pair)}, eye=[eye(step)],
+             arrow_style={i: arrow(step, k, at=tails[i]) for k, i in enumerate(pair)}, eye=[eye(step)],
              inset=dict(target=[tip[0], 857.0, tip[2]], dir=[round(0.4109 * out_x, 4), -0.8401, round(0.3541 * out_z, 4)],
-                        radius=TAB['radius'], mark=2.5, caption='The tab through D1', alt=TAB['alt']),
+                        radius=TAB['radius'], mark=4.0, caption='The tab through D1', alt=TAB['alt'],
+                        **({'side': 'right'} if step == 'Step 6' else {})),   # (Step 6's on the right, not across the model: Lee)
              caution='Squeeze the two prongs of each tab together to free its barb, under D1 and again under D6.',   # (each tab's barb
              **cam(step))                                           #  catches at both: feasibility, docs/research/lsm/decon/published/)
 g.remove('Remove D6 from the tabs of D2 and D3.', [D6], arrow_style={D6: arrow('Step 8')}, **cam('Step 8'))
@@ -221,9 +239,11 @@ g.remove('Remove D6 from the tabs of D2 and D3.', [D6], arrow_style={D6: arrow('
 # Lifted with D10 under it (D4 and D5 are off, so D10's ends are free) the way the Full Build lowered it in (its Step 32, reversed: its
 # wires through the Full Build's own half-way shape to the held one), then set down on the table beside the box by a fade, as the
 # published guide swaps the model, its wires into the shapes wire_shapes.py draws (out through the open D4 end).
-MATRIX_UP = arrow('Step 9', at=apply_pose(where(MATRIX), [[638.8, 899.0, 1204.0]])[0])   # (the published size; its tail was Step 8's, left
+MATRIX_UP = arrow('Step 9', at=apply_pose(where(MATRIX), [[612.8, 899.0, 1178.0]])[0])   # (the published size; its tail was Step 8's, left
 g.lift('Lift the LED Matrix, with D10 hooked under it, up off the two D9 pieces. Leave its wires connected.', [MATRIX],   # over: on the
-       wire_via={w: [ROUTES[n] for n in nos[::-1]] for w, nos in VIEW['Step 32c']['wire_via'].items()},          # matrix's middle here)
+       wire_via={w: [ROUTES[n] for n in nos[::-1]] for w, nos in VIEW['Step 32c']['wire_via'].items()},          # matrix's corner nearest
+                                                                    # the camera here, so that its head is clear of the caption box in a
+                                                                    # 1024 x 768 window)
        wires=leads('Step 32', 'wire'), arrow_style={MATRIX: MATRIX_UP}, **cam('Step 9'))
 g.lift('Set the LED Matrix down on the table beside the box. Leave its wires connected.', [MATRIX], to=WS.LAID_POSE, reappear=True,
        wires=WS.laid(), arrows=[], eye=[MATRIX],                    # (a fade, as the published guide's swap: an eye on it, no arrow)
@@ -239,15 +259,11 @@ g.unplug('Disconnect the yellow, gray, and purple breadboard wires from i2, i3, 
          eye=[eye('Step 13'), eye('Step 12')], caution=PULL, **cam('Step 11'))   # (an eye on i2 / i3 and one on b19)
 
 # ================================================================ THE LED MATRIX ON ITS OWN
-# D10's hooks hold both edges of the matrix (the Full Build slid it on, its Step 31): slid back along 40 mm, then down, an arrow for each
-# (a two-stage joint undone in one step, rulebook section 11; the published guide drops it straight, through the hooks).
-UNHOOKED, DOWN = VIEW['Step 31c']['carry'][D10]['via'][0], VIEW['Step 31']['carry'][D10]['pose']   # ([0, 0, 40], [0, -22, 40]: on the matrix)
-DOWN = [DOWN[0], DOWN[1] - 18.0, DOWN[2]]                           # (40 mm down in all, as far as the published drop)
+# D10 unclipped straight down, as published (Lee, 22 Oct 2026: slid back along the matrix first, as the Full Build hooked it on, it passed
+# the wires lying in its notch through itself; straight down it clears them: wire_shapes.py).
 LAID_VIEW = lambda step, target: dict(laid_cam(step), frame=(target, laid_cam(step)['frame'][1]))   # (the published camera carried to the
-g.remove('Slide D10 along the bottom of the LED Matrix, away from its pins, until its hooks come free of the edges. Then, remove it.',   # laid
-         [D10], path=[compose(where(MATRIX), UNHOOKED, g._pivot(D10)), compose(where(MATRIX), DOWN, g._pivot(D10))],   # matrix, aimed at it:
-         alone=[MATRIX, D10, *PINS, *SOCKETS], arrow_style={D10: dict(dims=(40.0, 4.4), stage=0,              # the published one aimed under
-                                                                      then=[arrow('Step 14', at=False, stage=1)])},   # the matrix)
+g.remove('Unclip D10 from the bottom of the LED Matrix.', [D10], path=[_shifted(where(D10), [0.0, -40.0, 0.0])],   # laid matrix, aimed at
+         alone=[MATRIX, D10, *PINS, *SOCKETS], arrow_style={D10: arrow('Step 14', at=to_laid(PUB['Step 14']['arrows'][0]['tail']))},   # it)
          eye=[D10], **LAID_VIEW('Step 14', [550.0, 862.0, 1226.0]))
 LAID = where(MATRIX)
 g.remove('Disconnect the three breadboard wires from the V+, IN, and V- pins on the LED Matrix.', PINS + SOCKETS, alone=[MATRIX, *PINS, *SOCKETS],
@@ -261,13 +277,13 @@ g.put_away([MATRIX])                                                # (what is l
 
 # ================================================================ D3, D2 WITH THE PUSH BUTTON
 g.remove('Remove D3 from the latch on D1.', [D3], direction=[0.0, 0.0, -1.0], hover=40.0, arrow_style={D3: arrow('Step 16')},
-         inset=dict(target=r1(ring('Step 16')), dir=[0.0, 0.34, -0.94], radius=20.0, mark=3.0,
+         inset=dict(target=r1(ring('Step 16')), dir=[0.0, 0.34, -0.94], radius=20.0, mark=6.0,
                     caption='The latch on D1 at the foot of D3', alt='Close-up of the latch on D1 that holds the foot of D3'),
          **cam('Step 16'))
 g.lift("Slide D2, with the Push Button, off the latch on D1 and out of its slots. Leave the Push Button's wires connected.", [D2],
        wires=leads('Step 24', 'lead'),                              # (the Full Build's Step 24 reversed: the leads as they lay before it)
        arrow_style={D2: arrow('Step 17')},
-       inset=dict(target=r1(ring('Step 17')), dir=[0.0, 0.34, 0.94], radius=20.0, mark=3.0,
+       inset=dict(target=r1(ring('Step 17')), dir=[0.0, 0.34, 0.94], radius=20.0, mark=6.0,
                   caption='The latch on D1 at the foot of D2', alt='Close-up of the latch on D1 that holds the foot of D2'),
        view_dir=[0.5997, 0.5299, 0.5997], frame=([640.0, 878.0, 1262.0], 95.0))   # (from outside D2, the title page's corner: its foot, the latch
                                                                     #  and the arrow show; the published camera, inside, saw them through D2)
@@ -276,19 +292,31 @@ g.unplug("Disconnect the Push Button's red wire from j5 and its black wire from 
                                                                     #  published camera, inside, where the pins are)
 
 # ================================================================ THE PUSH BUTTON ON ITS OWN
-NUT_WAY = [slid(p, D2_OUT) for p in full_way_back('Step 20', NUT)]  # (the Full Build's eight quarter turns, reversed: unscrewing)
-NUT_WAY[3] = dict(NUT_WAY[3])                                       # (a stop after the first whole turn: a beat a turn; then off over the
-NUT_WAY.append(slid([0.0, 0.0, -95.0], D2_OUT))                     #  wires, past their pins' ends)
-g.remove('Unscrew the nut from the Push Button, on the inside of D2. Then, slide it off over the wires.', [NUT], path=NUT_WAY,
-         alone=[D2, BUTTON, NUT, RED_PIN, BLACK_PIN], arrow_style={NUT: arrow('Step 18', at=[650.0, 890.0, 1303.0])},   # (the published size,
-                                                                    # beside the nut, above the button's axis: the published tail, 40 mm on
-                                                                    # along the wires, read as the wires' and left a tall window)
-         eye=[NUT], **cam('Step 18'))
-g.remove('Remove the Push Button from D2, pulling its wires back through the hole.', [BUTTON],
-         path=[slid(p, D2_OUT) for p in full_way_back('Step 19', BUTTON)], alone=[D2, BUTTON, RED_PIN, BLACK_PIN],
-         arrow_style={BUTTON: arrow('Step 19', at=to_ours(PUB['Step 19']['arrows'][0]['tail']))},
-         eye=[BUTTON], **cam('Step 19'))                            # (from D2's engraved face, as published, where the button comes out)
-g.put_away([D2])
+# The nut comes off in one smooth go (Lee, 22 Oct 2026), turning the way that unscrews it all the way off over the wires and past their
+# pins' ends, and is set aside (lift, not remove: it goes back on the button, below).
+NUT_AT = VIEW['Step 20']['paths'][NUT][1]['at']                     # (the button's axis, as the Full Build turned the nut about it)
+turn = lambda deg, z: dict(t=[0.0, 0.0, round(z, 3)], r=[0.0, 0.0, 1.0, float(deg)], at=NUT_AT)
+OFF_D2 = [via(turn(720 - 90 * k, -95.0 * k / 8)) for k in range(1, 8)] + [[0.0, 0.0, -95.0]]   # (eight quarter turns over 95 mm, one beat)
+g.lift('Unscrew the nut from the Push Button, on the inside of D2, and slide it off over the wires.', [NUT],
+       path=[slid(p, D2_OUT) for p in OFF_D2], alone=[D2, BUTTON, NUT, RED_PIN, BLACK_PIN],
+       arrow_style={NUT: arrow('Step 18', at=[650.0, 890.0, 1303.0])},   # (the published size, beside the nut, above the button's axis: the
+       eye=[NUT], **cam('Step 18'))                                  #  published tail, 40 mm on along the wires, read as the wires')
+BUTTON_OUT = [slid(p, D2_OUT) for p in full_way_back('Step 19', BUTTON)]   # (the Full Build's way through D2, reversed: 100 mm out)
+g.lift('Remove the Push Button from D2, pulling its wires back through the hole.', [BUTTON], path=BUTTON_OUT,   # (set aside: the nut goes
+       alone=[D2, BUTTON, RED_PIN, BLACK_PIN], arrow_style={BUTTON: arrow('Step 19', at=to_ours(PUB['Step 19']['arrows'][0]['tail']))},   # back on)
+       eye=[dict(id=BUTTON, side='near-above')], **cam('Step 19'))  # (from D2's engraved face, as published; the eye above the button,
+g.put_away([D2])                                                    #  its leader clear of the arrow, Lee, and of the wires)
+# After the button is out of D2, the nut goes back on it, over the wires (Lee, 22 Oct 2026: "we need a step that shows the nut being
+# replaced onto the push button"): it lines up past the pins' ends, then slides over them and the wires and screws on, turning, to
+# where the button comes with it, screwed up to its head (the Full Build's g.carry([NUT], by=BUTTON, pose=[0, 0, 3.12])).
+B = shift_of(BUTTON_OUT[-1])[2]                                     # (the button, 100 mm out of where D2 stood: z offset 157.1)
+ON = [[0.0, 0.0, round(B - 95.0, 3)]] + [via(turn(90 * k, B - 60.0 + (63.12 * k / 8))) for k in range(0, 8)] + [[0.0, 0.0, round(B + 3.12, 3)]]
+#     (two beats: lined up past the pins' ends; then over them and the wires and on, two turns over its last 63 mm)
+ON_SET = [BUTTON, NUT, RED_PIN, BLACK_PIN]
+g.lift('Slide the nut back over the Push Button\'s wires and screw it onto the Push Button, so that the two stay together.', [NUT],
+       path=ON, ride_on=BUTTON, alone=ON_SET, arrow_style={NUT: arrow('Step 18', at=False, stage=0)}, eye=[NUT],
+       view_dir=[-0.7741, 0.6193, 0.1316], frame=([638.2, 880.0, 1316.0], 105.0))   # (from the side: the way along the button's axis)
+g.put_away(ON_SET)
 
 # ================================================================ THE USB CABLE AND THE BREADBOARD'S PARTS
 g.remove('Disconnect the USB Cable from the Nano Board.', [USB_B, USB_A], units=[[USB_B]], arrow_style={USB_B: arrow('Step 20')},
@@ -297,10 +325,11 @@ g.remove('Disconnect the USB Cable from the Nano Board.', [USB_B, USB_A], units=
                                                                     #  A end stays in the frame in a narrower window)
 g.remove('Remove the 330 Ω Resistor from a11 and a19.', [R330], arrow_style={R330: arrow('Step 21')}, **cam('Step 21'))
 g.remove('Remove the Capacitor from j2 and j3.', [CAP], arrow_style={CAP: arrow('Step 22')}, **cam('Step 22'))
-g.remove('Remove the 12 kΩ Resistor from h3 and h16.', [R12K], arrow_style={R12K: arrow('Step 23')}, keep_camera=True)
-g.remove('Remove the Nano Board from the Breadboard.', [NANO], arrow_style={NANO: arrow('Step 24')},
+g.remove('Remove the 12 kΩ Resistor from h3 and h16.', [R12K], arrow_style={R12K: dict(arrow('Step 23'), dims=arrow('Step 21')['dims'])},
+         keep_camera=True)                                          # (as big as the 330 ohm resistor's: Lee, 22 Oct 2026)
+g.remove('Remove the Nano Board from the Breadboard.', [NANO], arrow_style={NANO: arrow('Step 24', at=[642.6, 879.0, 1182.8])},   # (above
+                                                                    # the board: the published tail was inside it, Lee; moved 5 mm
+                                                                    # across the board and 4.5 along, its head clear of the caution box)
          caution='Use the Pry Tool to carefully remove the Nano Board.', keep_camera=True)   # (the kit has one, not modelled: Lee)
 
-c = PUB['Completed View']['camera']
-g.end_view = dict(dir=c['view_dir'], target=c['target'], radius=c['radius'])   # (the published take-apart's last view)
 g.build()
