@@ -114,9 +114,9 @@ list (no Completed View: Lee, 22 Oct 2026); its website card is the Full Build's
   31 hooked it on there, reversed (40 mm along, then down: its hooks hold both edges of the matrix, and the wires lie dead straight
   through its notch all along the slide); the matrix pulled 30 mm back along its pins off the three wires' connectors and gone, the
   connectors left where they came off and the wires in the breadboard; the wires, still in the breadboard, laid out of the box over its
-  open end where D4 was and along the table, their connectors side by side on it (Lee's answer of the same day; wire_shapes.py's
-  DRAPED: each keeps its run in the box and is at least as long as it was held, and they turn out in the order they rise, so that none
-  passes another as they move); both D9 (the wires run under one of them); the three wires out of i2, i3 and b19 together, each whole
+  open end where D4 was and onto the table, the connectors just past where they reach it, short of the USB cable beside them (Lee's
+  answer of the same day, then his picture; wire_shapes.py's DRAPED: each keeps its run in the box, they turn out in the order they
+  rise and the connectors are staggered 4 mm in the order the wires run over the box, so that none passes another as they move); both D9 (the wires run under one of them); the three wires out of i2, i3 and b19 together, each whole
   (an eye on i2 / i3 and one on b19). No fades.
 - Steps 15 - 20: D3 off D1's latch (the close-up's red box round both tabs of the latch); D2 with the button off D1's latch and out of its slots, still wired (seen from outside D2); the
   button's two wires unplugged from j5 and j16; the button on its own: the nut unscrewed and slid off over the wires in one smooth turn,
@@ -126,8 +126,8 @@ list (no Completed View: Lee, 22 Oct 2026); its website card is the Full Build's
   which the kit has, not modelled). The 12 kOhm resistor's arrow is the size of the 330 Ohm resistor's (Lee).
 - Where it differs from the published guide, and why: in deconstruction.py's docstring (the three wires in one step; the matrix held
   over the box while D10 and the wires come off it, the wires then laid out of the box, the D9s before the wires; D2 before its wires;
-  D4 lifted off the cable; the nut put back on the button; Steps 11, 14, 16 and 21 framed to show what the published camera hid or lost,
-  and the new Step 12 from D2's side; arrows moved where the published tail was inside a part (Steps 4 - 7, 13 and 25), where a part or
+  D4 lifted off the cable; the nut put back on the button; Step 11 seen from under the matrix (Lee's view, from his picture); Steps 14,
+  16 and 21 framed to show what the published camera hid or lost, and the new Step 12 from the open end's corner by D2; arrows moved where the published tail was inside a part (Steps 4 - 7, 13 and 25), where a part or
   the instruction boxes hid them (Steps 6, 9, 11 and 25), and to the nut (Step 18)).
 - Checked: wires at rest in every view (0 problems) and in every move, the parts taken off and their wires included (one brief touch,
   the Full Build's own Step 32 touch played backwards in Step 9c; the wires laid out checked at 39 moments too); the run-through (53

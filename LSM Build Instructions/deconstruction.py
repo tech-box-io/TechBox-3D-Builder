@@ -21,7 +21,7 @@ over its open end onto the table (Lee, the same day), and the D9s come out befor
 off before its wires are unplugged (one step each); D4, once off its tabs, is lifted off the USB cable (its notch held it); once the
 button is out of D2, the nut is screwed back onto it, so that the two stay together (Lee, 22 Oct 2026: a step of its own). A few
 cameras and arrows are moved where ours would hide or lose what the published one showed (Step 16 from outside D2, whose latch and
-arrow the published camera saw through D2; Step 11 framed on the held matrix; Step 21
+arrow the published camera saw through D2; Step 11 from under the held matrix, Lee's view; Step 21
 to hold the cable's A end; Step 12, new, from the open end's corner by D2, so that the laid wires run across the picture; Step 14 framed
 wider toward the open end, where the wires lie; the nut's arrow at the nut, not 40 mm away along the wires); arrows whose published tail
 is inside a part, or that a part, the instruction boxes or a plug behind would hide or confuse, are moved (Steps 4 - 7, 9, 11, 13 and
@@ -279,16 +279,15 @@ g.remove('Slide D10 along the bottom of the LED Matrix, away from its pins, unti
 # Then the matrix is pulled back along its pins off the three connectors, 30 mm as the published guide pulls them apart, and is gone; the
 # connectors stay where they came off (let_go, as the PMG's displays off their wires' caps), the wires left in the breadboard as they are
 # (Lee: "left attached to the breadboard"). Its pins are 6.8 mm into them; nothing else of it is below its back face there, 0.39 mm over
-# the connectors, so it slides clear. Its arrow is over it, toward the camera, so that the matrix (a plate moving along itself) covers
-# none of it (as Lee had the PMG's), its head clear of the LEDs.
+# the connectors, so it slides clear. Seen from under it (Lee's view, 22 Oct 2026, solved from his picture by the corners of the board's
+# underside: the camera out past the open D4 end, below the matrix, the connectors and the board's printing in view). Its arrow is under
+# it, toward the camera, so that the matrix (a plate moving along itself) covers none of it (as Lee had the PMG's), clear of the header.
 g.remove('Disconnect the three breadboard wires from the V+, IN, and V- pins on the LED Matrix, and remove the LED Matrix. Leave the '
          'wires in the breadboard.', [MATRIX], let_go=SOCKETS, path=[_shifted(HELD, [0.0, 0.0, -30.0])],
-         arrow_style={MATRIX: arrow('Step 15', at=[640.0, 961.5, 1204.0])},   # (the published size)
+         arrow_style={MATRIX: arrow('Step 15', at=[640.0, 941.0, 1204.0])},   # (the published size)
          eye=[dict(id=WS.FEMALE['purple'], side='near-left')],       # (the published eye)
          caution="Hold the three black connectors while you pull the LED Matrix's pins out of them. Do not pull on the wires themselves.",
-         view_dir=cam('Step 15')['view_dir'], frame=([628.0, 942.0, 1196.0], 72.0))   # (the published direction, low, under the matrix's
-                                                                    #  edge to the connectors; framed on the matrix held here, which the
-                                                                    #  published frame, aimed lower, put under the caption)
+         view_dir=[-0.893, -0.4496, -0.0207], frame=([643.5, 942.9, 1196.6], 47.5))   # (Lee's view)
 # The three wires, still in the breadboard, laid out of the way, out over the box's open end where D4 was and onto the table (Lee, 22 Oct
 # 2026: "Add a step that lays the three wires over the side of the box, still in the breadboard, before the D9s come out"): each keeps
 # its run in the box, under D9_A, and turns out over D1's edge, its connector set down on the table (wire_shapes.py: DRAPED; the run in

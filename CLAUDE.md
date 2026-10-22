@@ -440,9 +440,11 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   (each catch, red boxes from our model). The departures are in its docstring: the matrix stays held over the box while D10 is slid
   off it, as the Full Build's Step 31 hooked it on there (its wires lie straight through D10's notch all along the slide; laid on the
   table they had passed into D10), then it is pulled off the three wires' connectors, the wires left in the breadboard; the wires, still
-  in it, laid out of the box over its open end and along the table (the kit's `wire_shapes.py`, `draped()`: each keeps the Full Build's
-  run in the box and is at least as long as its held shape, as a shape changed into must be: shorter, the player's matching squeezes one shape's
-  run onto a point of the other's, and wires run into each other); both D9 (the wires run under one); the three wires out together
+  in it, laid out of the box over its open end onto the table, the connectors just past where they reach it, short of the USB cable
+  beside them (Lee's picture; the kit's `wire_shapes.py`, `draped()`: each keeps the Full Build's run in the box; the connectors are
+  staggered in the order the wires run over the box when held, so that, changing shape, what each held run has beyond its drape is drawn
+  in to its own connector without meeting another: side by side they met); Step 11 seen from under the matrix (Lee's view, solved from
+  his picture by the corners of the board's underside: PnP, the player's fov and canvas); both D9 (the wires run under one); the three wires out together
   (Lee, 22 Oct 2026, second notes); the nut put back on
   the button once it is out of D2, starting just off the wires' ends (`rest_at()`); cameras or arrows moved where ours hid or lost
   what the published one showed, or where a published tail was inside a part. The study of that round: docs/research/lsm/decon/round3/.

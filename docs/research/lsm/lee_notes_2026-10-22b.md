@@ -83,3 +83,25 @@ Checks:
   instruction boxes at 1280 x 800, and at 1024 x 768 only Step 1's (README question 29); in smaller windows the same few as before
   (Steps 1, 6, 7, 9, 11, 25), none of the new steps'.
 - At rest, the drape against every part, the table and the USB cable: `decon/round3/drape_check.py` (its output beside it).
+
+## Lee's third notes (22 Oct 2026), on release 5
+
+With two pictures: Step 11 seen from under the matrix, and Step 12c with a green arrow on the laid wires (the first copy of that
+picture came without its arrow; Lee sent it again). Kept on this Mac in `decon/round3/lee_pictures/`.
+
+> Use this first image's view for Step 11 and adjust the arrow location as needed.
+>
+> For Step 12c - adjust the wire length to where they stop near where the green arrow is in the second image. Should be simple, just shortening them so they don't look as long next to the USB cable.
+
+| Note | Done |
+|---|---|
+| Step 11: this view | **The camera.** Solved from the picture by the four corners of the board's underside: least squares with the player's own field of view and the canvas height fitted, every corner within about 1 px. The camera sits out past the open D4 end, 30 mm above the table, looking up 27° under the matrix: view_dir [-0.893, -0.450, -0.021], frame ([643.5, 942.9, 1196.6], 47.5). (The player's silhouette solver could not be used here: the picture crops the box, and it searches from above unless told otherwise.) **The arrow.** It is under the board now, toward the camera, along the board's middle. With the board between it and the camera, the matrix itself would have hidden it. It stays the published size. The eye's spot on the purple connector is the part of it that this camera sees. |
+| Step 12c: shorter, stopping at the arrow | The arrow, projected with Step 12c's camera, points at the yellow wire 13 mm past where the wires reach the table. **The connectors.** They now lie there: gray's wire end at x 562, purple's 4 mm further on, yellow's 8 mm. The table run was about 96 mm. **The stagger.** Lying side by side, the shorter wires ran into each other as they moved: each wire's run over the box, longer than its new drape, is drawn in to its connector, and gray's and purple's runs over the box are 1.7 mm apart. Staggered in the order the wires run over the box, they stay apart all the way (no contact at 39 moments). **The matching.** The drape is shorter than the held shape, so it no longer matches by the connector's end: every bit keeps its distance from its pin, and the run in the box stays put. |
+
+Checks:
+- motioncheck: the lay-out, the D9s and the wires out, no contact at 39 moments each. The whole guide: only the Full Build's own Step 32 touch in 9c.
+- wirecheck: 0 of 53.
+- The drape at rest (`decon/round3/drape_check.py`): on the table, clear of it; the connectors 18 - 25 mm from the USB cable.
+- The run-through: 53 views, 0 problems.
+- Arrows: all clear at 1280 x 800, and at 1024 x 768 all but Step 1's. Step 11's is 2 px under the caution box at 768 x 560 (was 43).
+- Changed views: Steps 11 (camera, arrow, eye) and 12c - 14 (the connectors' places); no other camera.

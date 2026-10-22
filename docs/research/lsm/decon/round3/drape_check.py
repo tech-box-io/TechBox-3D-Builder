@@ -13,7 +13,7 @@ for w in WS.JUMPERS:
     print(w, 'socket pose', pose, 'wire leaves along', np.round(turn_dir(pose, [0, 0, 1]), 3))
 routes = WS.draped()
 for k, r in routes.items():
-    p = np.asarray(r['pts']); print(k, 'pts', len(p), 'tail_from', round(r['tail_from'], 1), 'b_from', round(r['b_from'], 1), 'ends', p[0].round(2), p[-1].round(2), 'min y', p[:, 1].min().round(2))
+    p = np.asarray(r['pts']); print(k, 'pts', len(p), 'length', round(float(np.linalg.norm(np.diff(p, axis=0), axis=1).sum()), 1), 'b_from', round(r['b_from'], 1), 'ends', p[0].round(2), p[-1].round(2), 'min y', p[:, 1].min().round(2))
 parts = WS.Parts.load(cache=sys.argv[1] if len(sys.argv) > 1 else None, write_cache=None)
 poses = {WS.FEMALE[w]: WS.draped_socket(w) for w in WS.JUMPERS}
 present = WS.BASE + ['D9_A', 'D9_B'] + WS.CAPS
