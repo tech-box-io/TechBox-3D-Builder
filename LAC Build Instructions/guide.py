@@ -1205,22 +1205,23 @@ g.place('Lower the buzzer in between the two F7s, its ears into their slots.', m
 g.place('Let go of the two F7s, so that they close on the buzzer.', ride={F7A: ZERO, F7B: ZERO}, lines=False, eye=[dict(id=F7A, **near('near-right')), dict(id=F7B, **near('down-left'))], **CASE_CAMERA)
 # F9 is hooked in and swung upright, as published (Steps 45 and 46; Lee, 21 Oct 2026: "it does need to hook and rotate in as in the
 # published guide"). Its feet each have a 1 mm barb that goes under F3, the front one forwards (+x), the back one backwards. Held upright
-# 104 mm out in front and 35 mm up, it slides back over its slots, tips 25.8 degrees forwards about its front edge on F3's top, and drops
-# 33 mm, so that its front foot goes down into its slot and its barb hooks under F3 (Step 45, a beat each, as the published's three); then
+# 35 mm over its slots (Lee, 21 Oct 2026: not brought in from out in front, as published, where its lead lines ran through F1 lying there),
+# it tips 25.8 degrees forwards about its front edge, as published, and drops 33 mm, so that its front foot goes down into its slot and its
+# barb hooks under F3 (Step 45, a beat each); then
 # it swings upright about that edge, its back foot going down into its slot (Step 46: the back barb snaps under F3's edge, passing into F3
 # by up to 1.3 mm for a moment, as in the published; no turning point makes it less than 1.2). It rides on F3 (carry) until then; the
 # lead lines run from its feet to where they go into F3. (docs/research/lac/round1/published_motions.md: the published poses.)
 F9_EDGE = [720.13, 887.54, 1355.78]                                  # F9's front edge on F3's top: what it turns about
-F9_OUT = [103.9, 35.3, 0.0]
+F9_OVER = [0.0, 35.3, 0.0]
 F9_TIPPED = turned([0, 0, -1], 25.79, F9_EDGE, t=[-0.45, 32.96, 0.0])
 F9_HOOKED = turned([0, 0, -1], 25.79, F9_EDGE)
 F9_FEET = [[695.93, 881.23, 1355.78], [714.82, 881.23, 1355.78]]     # (the middle of each foot's end: back, front)
 F9_CAMERA = dict(view_dir=[0.529, 0.664, 0.53], frame=([735.0, 920.0, 1340.0], 114.5))   # (the published camera of both steps, its
                                                                     # middle moved over F9's way: Cadasio's frame is wider than ours)
-g.carry([F9], by=F3, pose=F9_OUT, appear=False)
+g.carry([F9], by=F3, pose=F9_OVER, appear=False)
 g.place('Tip F9 towards the front and hook its front foot into its slot in F3 beside the end of the breadboard, its engraved side '
-        'towards that end.', appear=[F9], ride={F9: [[0.0, F9_OUT[1], 0.0], F9_TIPPED, F9_HOOKED]}, ride_beats=True,
-        lines_at=[[np.add(f, F9_OUT).round(2).tolist(), [f[0], 887.61, f[2]]] for f in F9_FEET], labels=[dict(id=F9, text='F9', **near('near-right', 0.06))],
+        'towards that end.', appear=[F9], ride={F9: [F9_TIPPED, F9_HOOKED]}, ride_beats=True,
+        lines_at=[[np.add(f, F9_OVER).round(2).tolist(), [f[0], 887.61, f[2]]] for f in F9_FEET], labels=[dict(id=F9, text='F9', **near('up-left', 0.06))],
         inset=dict(target=[716.0, 885.5, 1355.8], dir=[0.15, 0.2, 0.97], radius=10.0, mark=3.0, ghost={F3: 0.25},   # (along F9's face, F3
                    alt="Close-up, F3 drawn faintly: F9's front foot down through its slot, its barb hooked under F3"), **F9_CAMERA)   # faint: its edge hid the hook)
 g.place('Swing F9 upright, pressing its back foot down into its slot in F3.', ride={F9: ZERO},

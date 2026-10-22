@@ -120,10 +120,11 @@ LEE'S SECOND ROUND (21 Oct 2026; research and the evidence for each change: docs
   tops of the F7s' and F9's tabs to F4's underside (three ran on through F4's slots to 3.3 mm over its top, where the tabs' tops are
   once it is down).
 - F9 (Lee, later the same day: "it does need to hook and rotate in as in the published guide"): two steps, as published. Step 45: held
-  upright out in front, slid back over its slots, tipped 25.8 degrees forwards about its front edge, and lowered until its front foot's
+  upright over its slots (Lee, then: not brought in from out in front, as published, where its lead lines ran through F1 lying there),
+  tipped 25.8 degrees forwards about its front edge, and lowered until its front foot's
   barb hooks under F3 (a beat each; a close-up on Step 45c with F3 drawn faintly, as F3's edge hides the hook). Step 46: swung upright
   about that edge, its back foot down into its slot (an eye and a lead line on it). The published camera of both steps, its middle
-  moved over F9's way. Each foot has a 1 mm barb under F3: the back one passes into F3's edge by up to 1.3 mm for a moment as F9 is
+  moved to the right, where the close-up goes. Each foot has a 1 mm barb under F3: the back one passes into F3's edge by up to 1.3 mm for a moment as F9 is
   swung upright (a snap fit; no turning point makes it less than 1.2), as in the published. Every step from 46 on is one higher.
 - tools/motioncheck.py spaces a way's in-between poses as the player does (poseGap) and takes --moments (39 catches the quarters, where a
   step of two or four beats changes beat).
