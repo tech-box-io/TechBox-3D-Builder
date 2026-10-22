@@ -11,6 +11,16 @@
     "uncommitted_changes": false
    },
    "was": null
+  },
+  {
+   "when": "2026-10-22T12:22:11",
+   "action": "published",
+   "release": "r2",
+   "note": "No Completed View: Step 26c leads straight to the parts list (Lee, 22 Oct 2026)",
+   "source": {
+    "commit": "a119331d60a7477174021e963c58928856e96722",
+    "uncommitted_changes": false
+   }
   }
  ]
 }
