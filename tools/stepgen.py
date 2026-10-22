@@ -923,7 +923,8 @@ class Guide:
         self.log.append(f'take_apart(): from {full} as it ends ({len(self.placed)} parts, {len(self.wire_state)} leads)')
 
     def remove(self, caption, ids, **how):
-        """Take parts off (after take_apart()): they leave and are gone, never to be put back (Lee, 17 Oct 2026). Step N shows them
+        """Take parts off (after take_apart()): they leave and are gone, never to be put back (Lee, 17 Oct 2026; but for hardware put
+        back on its part for storage, bring_back(): the LAC's washer, nut and knob, Lee, 22 Oct 2026). Step N shows them
         where they are, with a red arrow on each unit that leaves (rulebook section 11: never lead lines); Next plays them out and
         they disappear. Several parts may go at once ("in unison"), each its own way. By default a part leaves the way the Full Build
         brought it in, reversed (to where it hovered there, in its stages), seen by that step's camera; one that the Full Build did not
@@ -946,7 +947,9 @@ class Guide:
               in then and going as its own stage plays (Lee, 21 Oct 2026: H12's up arrow came while H12 still slid); the beats are added
               here and every stage= given is renumbered with them, so stage numbers count the stages of the way as given. Not with wire_via=.
           wires={id: route or None}: leads that change route (or go) as the step completes. wires_here={id: route}: how leads are
-              drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown).
+              drawn on this step's two views only (a joystick's wires fading out while it is in the hand, the module not shown), a
+              lead that leaves with its parts included, as it goes (the LAC's LCD wires, tied to their ends with a_whole= / b_whole=
+              so that each slides up out of their twisted bundle: Lee, 22 Oct 2026).
           units=[[ids], ...]: the arrows by hand, one on each group (eight breadboard wires pulled at once: one arrow at each end).
           in_turn=[[ids], [ids], ...]: the parts leave one group after another, each its own way, each fading out once it has
               slid out (a screw, then the part it held: Lee, 18 Oct 2026); Prev brings them back the other way round.
@@ -974,15 +977,22 @@ class Guide:
         remove()'s, and wire_via={id: [route, ...]}: routes a lead passes through on the way, one per stage of the way (its last
         route is given in wires=). reappear=True: nothing moves; what changes place, its riders and its leads fade out where they are
         and fade in where they end, a beat each, as the Full Build's place(..., reappear=True) (the PMG's I/O module back off H4 to the
-        bench with every wire on it: the Full Build's Step 42 undone, Lee's fade kept). let_go=[ids]: as remove()'s."""
+        bench with every wire on it: the Full Build's Step 42 undone, Lee's fade kept). let_go=[ids]: as remove()'s. lines=[(tip, mouth),
+        ...]: lead lines on Step N (assembly mm, where the parts are then), drawn as a build step draws them, and no arrows unless
+        arrows= says: for a part put back on another, as the Full Build put it on (the LAC's washer, nut and knob back on the
+        potentiometer: Lee, 22 Oct 2026, "similar to the Full Build's version"); never for parts taken off (rulebook section 11)."""
         return self._takeoff('lift', caption, ids, to=to, ride_on=ride_on, **how)
 
     def _takeoff(self, how, caption, ids, path=None, paths=None, direction=None, hover=None, to=None, ride_on=None, wires=None, arrows=None,
                  eye=None, labels=(), caution=None, review=None, view_dir=None, frame=None, look_from=None, new_camera=False, inset=None,
                  alone=None, flip=False, wire_via=None, units=None, wires_here=None, in_turn=None, keep_camera=False,
-                 arrow_scale=1.0, arrow_style=None, own_frame=False, reappear=False, let_go=()):
+                 arrow_scale=1.0, arrow_style=None, own_frame=False, reappear=False, let_go=(), lines=None):
         if not self.taken:
             raise ValueError(f'{how}(): only in a deconstruction guide, after take_apart()')
+        if lines and how != 'lift':
+            raise ValueError(f'{how}({caption[:30]!r}): lines= is for lift() (a part put back on another), never for parts taken off (rulebook section 11)')
+        if lines and arrows is None:                  # (lead lines in place of the arrows, as a build step has)
+            arrows = []
         units_given = units
         ids = list(dict.fromkeys(ids))
         missing = [i for i in ids if i not in self.placed]
@@ -1227,7 +1237,9 @@ class Guide:
                                alone=list(alone) if alone is not None else None, wires_here=dict(wires_here or {}), keep_camera=bool(keep_camera),
                                arrow_scale=float(arrow_scale), arrow_style={i: dict(v) for i, v in (arrow_style or {}).items()},
                                **({'own_frame': True} if own_frame else {}), **({'reappear': True} if reappear else {}),
-                               **({'let_go': let_go} if let_go else {})))
+                               **({'let_go': let_go} if let_go else {}),
+                               **({'guides': [dict(tip=np.round(np.asarray(t, float), 1).tolist(), mouth=np.round(np.asarray(m, float), 1).tolist())
+                                              for t, m in lines]} if lines else {})))
         # the guide's state from here on
         for i in leave:
             self.placed.remove(i)
@@ -1284,6 +1296,31 @@ class Guide:
             self.riding.pop(i, None)
             self.resting.pop(i, None)
             self.late.discard(i)
+
+    def bring_back(self, ids, by=None, pose=None):
+        """In a deconstruction (after take_apart()): parts taken off earlier come back on screen from the next step, riding on `by`
+        at `pose` (relative to their seats, as carry()'s) or, with no `by`, lying at `pose`: hardware ready to go back on a part once
+        it is out (the LAC's washer, nut and knob, faded away as they came off, brought back just off the potentiometer's shaft to be
+        put on again: Lee, 22 Oct 2026, "appear as it's ready to be installed ... similar to the Full Build's version"). The step that
+        puts each on is a lift(..., ride_on=): the part is there as that step opens, as a part riding on another is when its Full
+        Build step opens (the Full Build's washer by the potentiometer's shaft); nothing else changes, so the view does not start afresh."""
+        if not self.taken:
+            raise ValueError('bring_back(): only in a deconstruction guide, after take_apart()')
+        ids = list(ids)
+        here = [i for i in ids if i in self.placed]
+        if here:
+            raise ValueError(f'bring_back(): {here} still on screen')
+        if by is not None and by not in self.placed:
+            raise ValueError(f'bring_back(): {by} (by=) not on screen')
+        pose = pose if pose is not None else [0.0, 0.0, 0.0]
+        for i in ids:
+            self.placed.append(i)
+            if by is not None:
+                self.riding[i] = (by, pose)
+            else:
+                self.resting[i] = pose
+            self.parked.add(i)
+        self.steps.append(dict(kind='back', ids=ids, by=by, pose=pose))
 
     def place(self, caption, move=(), show=(), against=None, direction=None, hover=None, path=None, labels=None, review=None,
               appear_after=(), appear=(), staged=False, lines=True, lines_to=None, lines_at=None, axial=False, eye=(),
@@ -1726,6 +1763,7 @@ class Guide:
         poses_out = lambda poses: {i: pose_out(p) for i, p in poses.items()}
         views = [dict(name='Start', kind='start', visible=used, offsets={})]
         visible, camera, n, cut, part_cut = [], None, 0, False, False
+        brought = []                                     # parts brought back (bring_back()), named on the next take-apart step's Step N
         carry_on = None                                  # the camera the next step's choice carries on from (see one_off_camera)
         parked, wires, riding = {}, {}, {}               # poses of parts lying aside; current route of each wire; parts riding with another
 
@@ -1763,6 +1801,17 @@ class Guide:
                     parked[i] = s['pose']
                 cut = True                                                 # (the next view starts afresh: nothing glides over)
                 continue
+            if s['kind'] == 'back':                                        # a deconstruction: parts taken off, back on screen (bring_back())
+                for i in s['ids']:
+                    if i not in visible:
+                        visible.append(i)
+                    if s['by'] is not None:
+                        riding[i] = (s['by'], s['pose'])
+                        parked.pop(i, None)
+                    else:
+                        parked[i] = s['pose']
+                brought += [i for i in s['ids'] if i not in brought]
+                continue                                                   # (no cut: only they are new in the next view)
             if s['kind'] == 'begin':                                       # a deconstruction: the Full Build as it ends (take_apart())
                 visible[:] = list(s['visible'])
                 parked.clear()
@@ -1872,13 +1921,15 @@ class Guide:
                 common = dict(caption=s['caption'], text_key=s['text_key'], review=s['review'], camera=camera, _step=si,
                               **({'caution': s['caution']} if s.get('caution') else {}), **({'isolated': True} if s['alone'] is not None else {}),
                               **({'reappear': True} if s.get('reappear') else {}))
-                views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=[], labels=s['labels'], eye=s['eye'],
+                views.append(dict(name=f'Step {n}', kind='hover', visible=shown, offsets=poses_out(here), guides=s.get('guides', []), labels=s['labels'], eye=s['eye'],
                                   wires=wires_in({**wires, **s['wires_here']}, shown), carry=carry_here, moving=[], path=[ZERO, ZERO], **({'arrows': arrows} if arrows else {}),
                                   **({'inset': inset} if inset else {}), **({'cut': True} if cut else {}), **({'_part_cut': True} if part_cut else {}),
-                                  **common))
+                                  **({'back': brought} if brought else {}), **common))   # (`back`: on screen again, taken off before)
                 cut = part_cut = False
+                brought = []
                 going = [i for i in s['leave'] if i in shown]
-                with_them = {w: wires[w] for w in s['lead_off'] if wires.get(w) is not None}
+                with_them = {w: s['wires_here'].get(w, wires.get(w)) for w in s['lead_off']}   # (as this step draws it: wires_here=)
+                with_them = {w: r for w, r in with_them.items() if r is not None}
                 lead_routes = {w: route_no(r) for w, r in with_them.items() if wires_in({w: r}, shown)}
                 for w in s['lead_off']:
                     wires.pop(w, None)

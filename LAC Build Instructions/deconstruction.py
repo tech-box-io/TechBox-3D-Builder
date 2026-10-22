@@ -18,17 +18,21 @@ reviewers, each finding checked by a fourth): docs/research/lac/decon/review/.
      wired;
   3. F1 moved in front of the breadboard's end; the F7s spread, the alarm buzzer lifted out to lie beside the base, still wired, the
      F7s out (before the potentiometer: the buzzer's black lead lies over its leads);
-  4. the potentiometer, as Lee asked (22 Oct 2026): its three leads, F1 picked up and held upright, the knob, nut and washer off to wait in
-     a row along the shaft, the potentiometer out of F1, then the washer, nut and knob back on it; the LCD's four wires and the LCD; the
+  4. the potentiometer, as Lee asked (22 Oct 2026): its three leads, F1 picked up and held upright, the knob, nut and washer off (they
+     fade), the potentiometer out of F1, then the washer, nut and knob brought back just off the shaft's end and put back on it, a lead
+     line each (bring_back(), lift(lines=)); the LCD's four wires and the LCD; the
      buzzer's two leads and the buzzer; then F9, once all three are out (Lee); the yellow and orange jumper wires; the switch's three
      leads and the switch out of F4, on its own, its clips squeezed; the other six jumper wires;
   5. the real time clock module, each 12 kOhm resistor, the Nano Board; then straight to the Full Build's parts list (no Completed View).
 Lee's first round (22 Oct 2026, docs/research/lac/decon/lee_notes_2026-10-22.md) put the potentiometer first and F9 after it, the LCD and
 the buzzer, the washer, nut and knob back on the potentiometer, the clips and the Pry Tool into the steps, and kept one wire per step.
+His second notes (the same day, the same file) gave Steps 15 - 17 his camera, faded the knob, nut and washer as they come off, brought
+each back ready to go on, as the Full Build shows it, by the Full Build's close camera, and kept the LCD's SDA and SCL leads out of F9
+(each connector 7 mm off its pin, each lead lifted with its breadboard end: slide_out()).
 Where it leaves the published order, our model made it: in the published order the potentiometer's and the LCD's leads pass through the
 seated buzzer's black lead, and the purple, blue and green jumper wires through the orange one. Every lead keeps a shape the Full Build
 drew: each route is one of the Full Build's (but for the buzzer's black lead, eased 1.2 mm clear of F9's back edge, as the two
-were never on screen together there). The steps walk the Full Build back, with two kinds of exception: the USB cable comes out at
+were never on screen together there; the LCD's leads, as they leave, are the same shapes tied to their ends differently). The steps walk the Full Build back, with two kinds of exception: the USB cable comes out at
 Step 4 (power first), though the Full Build plugged it in at its Step 40, so Steps 4 - 15 take the case apart with the cable already
 gone; and, one wire a step, the published order is kept where it clears rather than the Full Build's reversed (the LCD's wires GND
 first, the buzzer's red lead first, white before dark red and purple before blue, the h27 resistor first)."""
@@ -263,7 +267,9 @@ assert same_pose(where(F1), VIEW['Step 47']['carry'][F1]['pose'])  # (face down 
 for k, (colour, hole, step) in enumerate((('black', '(-) blue', 'Step 32'), ('tan', 'a5', 'Step 31'), ('red', '(+) red', 'Step 30'))):
     g.unplug(f"Disconnect the potentiometer's {colour} wire from {hole}.", [POT_CAPS[colour]],   # (the published 9 - 11: black, tan, red)
              **to_hanging({colour: POT_CAPS[colour]}, 'pot', {colour: step}, 'Step 29c', POT),
-             **(dict(camera_of('Step 30', target=[744.0, 910.0, 1335.0], radius=60.0), caution=PULL) if k == 0 else dict(keep_camera=True)))
+             **(dict(view_dir=[0.3967, 0.7377, -0.5463], frame=([727.0, 917.96, 1340.21], 56.77), caution=PULL) if k == 0
+                else dict(keep_camera=True)))                       # (Lee's view, 22 Oct 2026, solved from his screenshot: from above the
+                                                                    #  breadboard's end, F9 behind the leads, not in front of them)
 BUILD = VIEW['Step 29']['carry'][F1]['pose']                       # ([100, 35, 100]: F1 held up, as the Full Build fitted the Potentiometer)
 g.lift('Pick up F1 with the potentiometer and hold it upright, the knob facing out.', [F1], path=[BUILD], wires=leads('Step 29', 'pot'),
        arrows=[], eye=[dict(id=F1, side='down-right', reach=0.065)], **camera_of('Step 29'))   # (Step 29 reversed: the leads hang with it)
@@ -281,51 +287,78 @@ def beside_shaft(part, at_x=None):
     return [round(float(x), 2) for x in apply_pose(where(part), [seated])[0]]
 
 
-# The knob, the nut and the washer slide off and wait in a row along the shaft, each clear of the next (the knob 90 mm out, the nut 60,
-# the washer 40), to go back on once the potentiometer is out of F1 (Lee, 22 Oct 2026: "after the potentiometer is removed from F1, the
-# washer, nut, and knob need to be reinstalled onto the potentiometer before moving on", as published: its Steps 16 - 18).
-g.lift("Pull the knob straight off the end of the potentiometer's shaft.", [KNOB], alone=F1_SET, path=[slid([90.0, 0.0, 0.0], POT_AT)],
-       arrow_style={KNOB: size('knob', at=beside_shaft(KNOB))},    # (the published view of its knob, nut and washer (frame 031), in F1's
-       view_dir=[0.6112, 0.5658, -0.5535], frame=([799.9, 907.0, 1389.3], 98.2))   # seated frame, moved with F1: the nut and washer face on)
+# The knob, the nut and the washer slide off and fade, as everything taken off does (Lee, 22 Oct 2026, second round: "You don't need
+# the removed components to be persistent. Keep them fading away"), each out to where the Full Build held it before putting it on (its
+# Steps 28, 27 and 26: 60 mm off its seat); they come back once the potentiometer is out of F1, to go on again (below: Lee, the first
+# round, "after the potentiometer is removed from F1, the washer, nut, and knob need to be reinstalled onto the potentiometer before
+# moving on", as published: its Steps 16 - 18).
+on_f1 = lambda: [i for i in F1_SET if i in g.placed]               # (alone=: what is still on F1)
+g.remove("Pull the knob straight off the end of the potentiometer's shaft.", [KNOB], alone=on_f1(),
+         path=[slid(VIEW['Step 28']['carry'][KNOB]['pose'], POT_AT)],
+         arrow_style={KNOB: size('knob', at=beside_shaft(KNOB))},  # (the published view of its knob, nut and washer (frame 031), in F1's
+         view_dir=[0.6112, 0.5658, -0.5535], frame=([799.9, 907.0, 1389.3], 98.2))   # seated frame, moved with F1: the nut and washer face on)
 nut = VIEW['Step 27c']['carry'][NUT]
 NUT_OFF = [via(slid(p, POT_AT)) for p in nut['via'][::-1]] + [slid(VIEW['Step 27']['carry'][NUT]['pose'], POT_AT)]   # (the seven quarter
-g.lift('Unscrew the nut and slide it off the shaft.', [NUT], alone=F1_SET, path=NUT_OFF,   # turns back and off, in one smooth move: Lee)
-       arrow_style={NUT: size('nut', at=beside_shaft(NUT))}, keep_camera=True)
-g.lift('Slide the washer off the shaft.', [WASHER], alone=F1_SET, path=[slid([40.0, 0.0, 0.0], POT_AT)],
-       arrow_style={WASHER: size('washer', at=beside_shaft(WASHER))}, keep_camera=True)
+g.remove('Unscrew the nut and slide it off the shaft.', [NUT], alone=on_f1(), path=NUT_OFF,   # turns back and off, in one smooth move: Lee)
+         arrow_style={NUT: size('nut', at=beside_shaft(NUT))}, keep_camera=True)
+g.remove('Slide the washer off the shaft.', [WASHER], alone=on_f1(), path=[slid(VIEW['Step 26']['carry'][WASHER]['pose'], POT_AT)],
+         arrow_style={WASHER: size('washer', at=beside_shaft(WASHER))}, keep_camera=True)
 assert same_pose(where(F1), BUILD)
-g.lift('Push the potentiometer out through the back of F1.', [POT], alone=F1_SET, path=[VIEW['Step 25']['carry'][POT]['pose']],
+g.lift('Push the potentiometer out through the back of F1.', [POT], alone=on_f1(), path=[VIEW['Step 25']['carry'][POT]['pose']],
        wires=leads('Step 25', 'pot'), arrow_style={POT: size('pot')}, **camera_of('Step 25'))   # ([21, 35, 100]: 79 mm behind F1, as the
 g.put_away([F1])                                                   # Full Build held it, by its camera; its leads hang from it as there)
-# Back on, as the Full Build's Steps 24 - 22 took them off the potentiometer as it comes, reversed: each from where it waits to just off
-# the shaft's end (a beat), then on to where the potentiometer came with it (a beat; the nut screwed on, turning); then the potentiometer,
-# whole again, is set aside with its wires.
+# Back on, as the Full Build's Steps 24 - 22 took them off the potentiometer as it comes, reversed, by their camera (the potentiometer is
+# where it was there): each appears just off the shaft's end as its step opens, where the Full Build's step left it (38 mm off its seat),
+# as the Full Build's washer, nut and knob appear by the shaft before they go on F1 (Lee, 22 Oct 2026: "make each replaced component
+# (washer, nut, knob) appear as it's ready to be installed ... similar to the Full Build's version"), and goes on (the nut screwed on,
+# turning); then the potentiometer, whole again, is put away with its wires.
+# A lead line, as the Full Build's Steps 26 - 28 draw them (not an arrow: a part going on), from the middle of the part's inner face to
+# the end of the shaft.
 POT_NOW = shift_of(where(POT))
+assert same_pose(where(POT), VIEW['Step 22']['carry'][POT]['pose']), POT_NOW
 POT_SET = [POT, KNOB, NUT, WASHER]
+SHAFT_END = VIEW['Step 26']['guides'][0]['mouth'][0] - shift_of(VIEW['Step 26']['carry'][POT]['pose'])[0]   # (x, seated: 737.8)
+on_axis = lambda part, x: [round(float(c), 2) for c in apply_pose(where(part), [[x, AXIS_Y, AXIS_Z]])[0]]
 for k, (part, name, step) in enumerate(((WASHER, 'washer', 'Step 24'), (NUT, 'nut', 'Step 23'), (KNOB, 'knob', 'Step 22'))):
     off, home = VIEW[step + 'c']['carry'][part], VIEW[step]['carry'][part]
     assert off['by'] == POT and home['by'] == POT, (part, off, home)
-    way = [slid(off['pose'], POT_NOW), *[via(slid(p, POT_NOW)) for p in (off.get('via') or [])[::-1]], slid(home['pose'], POT_NOW)]
+    g.bring_back([part], by=POT, pose=off['pose'])
+    way = [*[via(slid(p, POT_NOW)) for p in (off.get('via') or [])[::-1]], slid(home['pose'], POT_NOW)]
     verb = {'washer': 'Slide the washer back onto the potentiometer\'s shaft, against its body.',
             'nut': 'Screw the nut back onto the shaft, against the washer.',
             'knob': 'Push the knob back onto the end of the shaft, so that the potentiometer is whole again.'}[name]
-    g.lift(verb, [part], path=way, ride_on=POT, alone=POT_SET,
-           arrow_style={part: size(name, stage=0, at=beside_shaft(part, at_x=g.model.inst[part].bounds[0][0] - 1.0))},   # (from its inner
-           **(dict(view_dir=VIEW['Step 22']['camera']['dir']) if k == 0 else dict(keep_camera=True)))   # face, towards the potentiometer;
-                                                                    # the Full Build's camera of the potentiometer on its own, framed afresh)
+    tip, mouth = on_axis(part, float(g.model.inst[part].bounds[0][0])), on_axis(POT, SHAFT_END)
+    assert tip[0] > mouth[0] + 3.0, (name, tip, mouth)             # (the part waits clear of the shaft's end)
+    g.lift(verb, [part], path=way, ride_on=POT, alone=[i for i in POT_SET if i in g.placed], lines=[(tip, mouth)],
+           **(camera_of('Step 22') if k == 0 else dict(keep_camera=True)))
 g.put_away(POT_SET)
 
 # ================================================================ THE LCD SCREEN AND THE ALARM BUZZER OFF THEIR WIRES (the Full Build's 39 - 33 reversed: the published 19 - 23, 29 - 31)
 # One wire per step, as published (GND first: in that order each clears the ones still in; SCL first passes through purple, yellow and
 # teal). The Full Build's GND / VCC / SDA / SCL labels of Steps 36 - 39, on the LCD's pins (the published guide's only text); an eye on
-# the breadboard end (published: the label on the LCD end, the eye on the breadboard end); each female cap 15 mm back off its pin
-# ([0, 0, 15] on the LCD, where the Full Build held it before pushing it on), each male cap up its Full Build way.
+# the breadboard end (published: the label on the LCD end, the eye on the breadboard end); each female cap 7 mm back off its pin, just
+# clear of it (6.85 mm of the pin is in the cap), each male cap up its Full Build way. (Not the 15 mm where the Full Build held the cap
+# before pushing it on: with the LCD face down its pins point at the case, and the lead, carried with its cap, passed 2 mm into F9:
+# SDA and SCL, Lee, 22 Oct 2026.) As it goes, each lead moves wholly with its male cap (lifted: it slides up along itself, out of the
+# four leads' twisted bundle by the LCD) up to 21 mm from its LCD end, and wholly with its female cap over the last 7 (slid off the
+# pin), the two blended between (slide_out()). Tied by shares of its length, as drawn for lying still, the run in the bundle went
+# partly each way and passed through its neighbours; so tied, each lead stays at least 2.67 mm from F9 (as far as it lies from it)
+# and clear of the others (tools/motioncheck.py, 39 moments).
 PIN_LABELS = {colour: next(dict(l) for l in VIEW[step]['labels'] if l['id'] == LCD) for colour, (_, _, step) in LCD_WIRES.items()}
-OFF_PIN = {fem: compose(where(LCD), VIEW[step]['carry'][fem]['pose'], g._pivot(fem)) for _, fem, step in LCD_WIRES.values()}
+assert all(VIEW[step]['carry'][fem]['pose'] == [0.0, 0.0, 15.0] for _, fem, step in LCD_WIRES.values())
+OFF_PIN = {fem: compose(where(LCD), [0.0, 0.0, 7.0], g._pivot(fem)) for _, fem, _ in LCD_WIRES.values()}
+
+
+def slide_out(route, plug=7.0, blend=14.0):
+    """A lead as it leaves with both its caps (wires_here=): tied wholly to its first end (the male cap) up to plug + blend mm from
+    its last, wholly to its last end (the female cap) over the last `plug` mm, blended between (W.route's a_whole= / b_whole=)."""
+    total = float(np.linalg.norm(np.diff(np.asarray(route['pts'], float), axis=0), axis=1).sum())
+    return dict(route, a_whole=round(total - plug - blend, 1), b_whole=round(total - plug, 1))
 HOLE = {'purple': '(-) blue', 'yellow': '(+) red', 'teal': 'b8', 'blue': 'b9'}
 for k, (colour, (male, fem, step)) in enumerate(LCD_WIRES.items()):
     g.remove(f"Disconnect the {colour} wire from {PIN_LABELS[colour]['text']} on the LCD screen and from {HOLE[colour]}.", [male, fem],
-             paths={fem: [OFF_PIN[fem]]}, arrows=[], eye=[dict(id=male, side='up-right', reach=0.06)] if k < 2 else [male],
+             paths={fem: [OFF_PIN[fem]]}, wires_here={f'lcd {colour}': slide_out(g.wire_state[f'lcd {colour}'])},
+             arrows=[], eye=[dict(id=male, side='up-right', reach=0.06)] if k < 2 else [male],
              labels=[PIN_LABELS[colour]],
              **(dict(caution=PIN) if k == 0 else dict(keep_camera=True)))   # (Step 36's camera, kept for the four: the published held one)
 g.remove('Remove the LCD screen.', [LCD], path=[_shifted(where(LCD), [0.0, 30.0, 0.0])], arrows=[], eye=[LCD],   # (published: an eye,

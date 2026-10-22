@@ -345,7 +345,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   `g.take_apart()`, which starts it from the Full Build as it ends (read from its steps.json: run the Full Build first), with the
   Full Build's title page (`take_apart(leave_out=[ids])`: parts the Full Build put away for good, which would otherwise come back as
   its last view of them had them: the LSM's breadboard backing). Then, as a rule the build in reverse (rulebook section 11 and Lee's
-  conventions there: parts may go in unison, every step has its own wording, a part once off is gone for good):
+  conventions there: parts may go in unison, every step has its own wording, a part once off is gone for good, but for hardware put
+  back on its part, `bring_back()` below):
   - `g.remove(caption, ids)`: the parts leave and disappear. Step N shows them where they are with one red arrow per unit (parts the
     Full Build put on together are one unit; two of a kind get an arrow each); Next plays them out the way the Full Build put them
     in, reversed (to where they hovered, by that step's camera), and they are gone; Prev brings them back. A part the Full Build
@@ -392,6 +393,11 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
     `reappear` (the PMG's I/O module off H4 back to the table with every wire on it: its Full Build Step 42 undone; Prev half-way
     through turns the fade round where it is). Not for remove() (parts taken off fade out anyway) or with `in_turn=`.
   - `g.note(...)` as in a build; `put_away(ids)` for what is left of a sub-assembly taken apart on its own.
+  - Putting a part back on (hardware refitted for storage): `g.bring_back(ids, by=, pose=)` puts parts taken off earlier back on
+    screen, riding on `by` where they wait to go on (they are simply there as the next step opens, as a part riding on another is in
+    a build); then `lift(..., ride_on=by, lines=[(tip, mouth)])` puts each on, with lead lines as the Full Build put it on (no arrows:
+    rulebook section 11 keeps lead lines out of steps that take parts off). The LAC's washer, nut and knob, faded away as they came off
+    F1, back on the potentiometer once it is out (Lee, 22 Oct 2026: "similar to the Full Build's version").
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
@@ -446,9 +452,11 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   forward and laid aside, still wired; the LCD screen out of F9's notches, then out of the case to lie face down, still wired; F8; F4 with
   the switch lifted off and moved out behind the case, still wired; F1 moved in front of the breadboard, the F7s spread, the buzzer out
   to lie beside the base still wired, the F7s out (the buzzer's black lead lies over the potentiometer's leads); the potentiometer, as
-  Lee asked: its leads, F1 picked up, the knob, nut and washer off to wait in a row along the shaft, the potentiometer out of F1, and the
-  washer, nut and knob back on it (`lift()` and `lift(ride_on=)`, as the LSM's nut); the LCD's four wires (the published GND / VCC / SDA /
-  SCL labels) and the LCD; the buzzer's leads and the buzzer; F9 (arrows in turn, an eye on its rear latch, a close-up of its front
+  Lee asked: its leads (Lee's camera, from his screenshot), F1 picked up, the knob, nut and washer off and faded, the potentiometer out of
+  F1, and the washer, nut and knob back on it (`bring_back()`, then `lift(ride_on=, lines=)`, by the Full Build's Step 22 camera: Lee's
+  second round, 22 Oct); the LCD's four wires (the published GND / VCC / SDA / SCL labels; each female connector 7 mm off its pin, not
+  the Full Build's 15: SDA's and SCL's leads, pulled towards F9, passed into it; each lead lifted with its breadboard end, its last 7 mm going with
+  the connector, `slide_out()` as `wires_here=`, which a take-apart step also uses for a lead leaving with its parts) and the LCD; the buzzer's leads and the buzzer; F9 (arrows in turn, an eye on its rear latch, a close-up of its front
   foot); the yellow and orange wires (before the switch's leads; the published takes them last, where purple, blue and green lift through
   orange); the switch's leads; the switch out of F4 on its own, its clips squeezed (a close-up with a red box on each); the other six
   jumper wires; the real time clock module, each resistor, the Nano Board (the Pry Tool caution), from the published guide's one view of

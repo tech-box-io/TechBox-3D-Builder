@@ -93,13 +93,18 @@ published_geometry.md); Lee's notes of 22 Oct: docs/research/lac/decon/lee_notes
   potentiometer's leads were plugged in with it there); the F7s spread, the buzzer lifted out to lie beside the base, still wired, and
   the F7s pulled out (before the potentiometer: the buzzer's black lead lies over the potentiometer's leads by the breadboard).
 - Steps 15 - 25, the potentiometer first, as published (Lee, 22 Oct 2026): its black, tan and red leads (each left hanging from it, as
-  before the Full Build plugged it in); F1 picked up and held upright; on its own: the knob, the nut (unscrewed in one smooth turn) and
-  the washer slid off to wait in a row along the shaft, the potentiometer pushed out of F1's back; then the washer, the nut (screwed on)
-  and the knob back onto the potentiometer (as published: "after the potentiometer is removed from F1, the washer, nut, and knob need to
-  be reinstalled onto the potentiometer before moving on"), and the potentiometer, whole, set aside.
-- Steps 26 - 34: the LCD's four wires, one a step (GND, VCC, SDA, SCL labelled on its pins, as published), the LCD; the buzzer's red and
-  black leads, the buzzer; then F9, once the potentiometer, the LCD and the buzzer are out (Lee): tipped, then lifted, an eye on its lower
-  rear latch (the back foot's barb under F3: Lee) and a close-up of its front foot's barb under F3.
+  before the Full Build plugged it in), seen from above the breadboard's end with F9 behind the leads (Lee's view, from his screenshot);
+  F1 picked up and held upright; on its own: the knob, the nut (unscrewed in one smooth turn) and the washer slid off and faded, as
+  everything taken off does, the potentiometer pushed out of F1's back; then the washer, the nut (screwed on) and the knob back onto the
+  potentiometer (as published, and as Lee asked: "after the potentiometer is removed from F1, the washer, nut, and knob need to be
+  reinstalled onto the potentiometer before moving on"), each appearing just off the shaft's end as its step opens, with a lead line to the shaft, as the Full
+  Build puts them on F1 (its Steps 26 - 28), seen as close as the Full Build's Steps 22 - 24, which take them off the potentiometer
+  there; then the potentiometer, whole, is put away (off the screen) with its leads.
+- Steps 26 - 34: the LCD's four wires, one a step (GND, VCC, SDA, SCL labelled on its pins, as published), each female connector 7 mm
+  off its pin, just clear of it (the LCD lies face down, its pins pointing at the case: pulled further, SDA's and SCL's leads passed
+  into F9), each lead lifted with its breadboard end, so that it slides up out of the four leads' bundle (only its last 7 mm go with
+  the connector off the pin: tied as it lies, it passed through its neighbours), the LCD; the buzzer's red and black leads, the buzzer; then F9, once the potentiometer, the LCD and the buzzer are out (Lee):
+  tipped, then lifted, an eye on its lower rear latch (the back foot's barb under F3: Lee) and a close-up of its front foot's barb under F3.
 - Steps 35 - 50: the yellow and orange jumper wires; the switch's black, tan and red leads; the rocker switch pushed up out of F4 (on its
   own), its two clips squeezed first (Lee: they must be; a close-up of them from below F4, a red box on each); the white, dark red,
   purple, blue, green and black jumper wires; the real time clock module; each 12 kΩ resistor; the Nano Board (the Pry Tool caution, as
@@ -109,14 +114,18 @@ published_geometry.md); Lee's notes of 22 Oct: docs/research/lac/decon/lee_notes
   between copies of a part in two places (here the parts move); its order where it would pass our wires through each other (the
   potentiometer's and the LCD's wires before the buzzer is out of the F7s; the orange jumper last, over purple, blue and green; the
   switch's leads before orange and yellow).
-- Checked (22 Oct 2026): the player's run-through check passes on every view (103 views, forwards, backwards and jumping, 0 problems);
-  at rest every wire is clear of the parts and of the other wires (tools/wirecheck.py, 0 problems: the buzzer's black lead, lying
-  beside the base, is drawn 1.2 mm clear of F9's back edge from Step 13 until it is unplugged, as F9 now stays until Step 34: in the
-  Full Build the two were never on screen together); during the moves (tools/motioncheck.py, 39 moments a move) 19 brief contacts:
-  17 the Full Build's own, played backwards (Steps 6c and 11c are its Steps 53c and 47c; 13c its 43c), and two small ones, the
-  potentiometer's black lead against its tan for a moment as it is unplugged (Step 15c, 0.65 mm) and the switch's black and tan leads
-  (Step 38c, as the Full Build's Step 17). Looked at 1280 x 800, 1024 x 768 (no arrow in the instruction boxes) and 768 x 1024; an
-  independent review of the first draft (docs/research/lac/decon/review/: three reviewers, each finding checked by a fourth).
+- Checked (22 Oct 2026, after Lee's second notes): the player's run-through check passes on every view (103 views, forwards,
+  backwards and jumping, 0 problems; it now lets a part taken off come back where a view says so, `back`: Steps 23 - 25); at rest
+  every wire is clear of the parts and of the other wires (tools/wirecheck.py, 0 problems: the buzzer's black lead, lying beside the
+  base, is drawn 1.2 mm clear of F9's back edge from Step 13 until it is unplugged, as F9 now stays until Step 34: in the Full Build
+  the two were never on screen together); during the moves (tools/motioncheck.py, 39 moments a move, which now also follows parts and
+  leads as they leave) nothing passes into F9, and 21 brief contacts: 17 the Full Build's own, played backwards (Steps 6c and 11c are
+  its Steps 53c and 47c; 13c its 43c); the potentiometer's black lead against its tan for a moment as it is unplugged (Step 15c, 0.65
+  mm between centre lines); the switch's black and tan leads (Step 38c, as the Full Build's Step 17); and two the check has only now
+  seen, as parts and leads leave: the yellow jumper's lead 0.3 mm into the orange's as it is lifted out (Step 35c), and the white
+  jumper's connector 0.2 mm into the dark red lead (Step 41c). Looked at 1280 x 800 and 1024 x 768 (Step 15: the caption and caution
+  boxes clear of the three leads); an independent review of the first draft (docs/research/lac/decon/review/: three reviewers, each
+  finding checked by a fourth).
 
 LEE'S FIRST ROUND (20 Oct 2026)
 - The 12 kΩ resistor is named so everywhere (the parts list, labels, captions; "2x - 12 kΩ Resistor" on Step 4).

@@ -38,13 +38,14 @@ window._runthrough = () => {
   for (const v of P.views) for (const id of [...(v.visible || []), ...(v.leaving || []), ...(v.moving || []), ...Object.keys(v.carry || {}),
                                              ...Object.values(v.carry || {}).map(c => c.by)]) named.add(id);
   for (const id of named) if (!st.parts.has(id)) problems.push(`the steps name ${id}, which is not in the model`);
-  // A deconstruction: a part taken off (`leaving`) was on screen, is gone, and is never shown again (Lee, 17 Oct 2026).
+  // A deconstruction: a part taken off (`leaving`) was on screen, is gone, and is never shown again (Lee, 17 Oct 2026), unless a view
+  // brings it back to go on again (`back`, stepgen's bring_back(): the LAC's washer, nut and knob, Lee, 22 Oct 2026).
   P.views.forEach((v, i) => {
     for (const id of v.leaving || []) {
       if (!(P.views[i - 1] && (P.views[i - 1].visible || []).includes(id))) problems.push(`${v.name}: ${id} is taken off but was not on screen`);
       if (v.visible.includes(id)) problems.push(`${v.name}: ${id} is taken off but still shown`);
       const again = P.views.slice(i + 1).find(w => w.kind !== 'card' && (w.visible || []).includes(id));
-      if (again) problems.push(`${v.name}: ${id} is taken off, and ${again.name} shows it again`);
+      if (again && !(again.back || []).includes(id)) problems.push(`${v.name}: ${id} is taken off, and ${again.name} shows it again`);
     }
   });
   P.go(0, false); check(0, 'fwd');
