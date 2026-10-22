@@ -1,0 +1,16 @@
+{
+ "guide": "laser-stem-matrix-deconstruction",
+ "log": [
+  {
+   "when": "2026-10-22T13:58:43",
+   "action": "published",
+   "release": "r1",
+   "note": "First release of the LSM Full Build (40 steps) and Deconstruction (25 steps, on TechBox's published take-apart, with Lee's notes of 21 - 22 Oct 2026)",
+   "source": {
+    "commit": "f2effb79b42d4647658d73943edb6859a738182b",
+    "uncommitted_changes": false
+   },
+   "was": null
+  }
+ ]
+}
