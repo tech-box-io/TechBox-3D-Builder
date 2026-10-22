@@ -1,6 +1,6 @@
 LAC Build Instructions (LCD Alarm Clock, Full Build: the electronics on the breadboard, wired one wire at a time, then the box)
 
-FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). DECONSTRUCTION, first draft 21 Oct 2026 (THE DECONSTRUCTION below). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
+FIRST DRAFT 19 Oct 2026 (F2, F5 and F6 added the same day, from Lee's STEPs); LEE'S FIRST ROUND 20 Oct 2026 and SECOND ROUND 21 Oct 2026 (below). DECONSTRUCTION, first draft 21 Oct 2026 (THE DECONSTRUCTION below). Both published, r1, 22 Oct 2026 (questions 7 and 25). Build instructions generated from the engineer's STEP (LAC Full Build.STEP) and TechBox's published Cadasio
 guide for the kit (instructions.online/?id=19075-lac_full_build), in the same format and with the same player as the MRA and RCC
 guides (player/ was not changed). Not for distribution. Open questions are under QUESTIONS FOR LEE below.
 
@@ -225,7 +225,8 @@ QUESTIONS FOR LEE
 4. (Answered: F9 is hooked in and swung upright, as published: Steps 45 and 46.)
 5. The right-angle USB plug is the LAC's own (the MRA's and RCC's are straight): is that the cable in the kit?
 6. The jumper wires change length between lying loose and plugged in (the CAD routes them 50 - 90 mm); fine, as for the RCC's leads?
-7. When it is ready for the website: its address would be lcd-alarm-clock-full-build (kit lcd-alarm-clock), added to guides.json then.
+7. (Done, 22 Oct 2026: published on Lee's word as https://models.tech-box.io/lcd-alarm-clock-full-build/, r1, the kit's page
+   /kits/lcd-alarm-clock/; it goes live when main is pushed to live.)
 8. (Done in your first round: see above.)
 10. Steps 36 - 37: the LCD's GND and VCC wires now go into the (-) blue and (+) red rails two and four holes further along than the CAD
    has them (the same connection): where the CAD has them, the green and black jumpers lean right over the holes and the wires cannot go
@@ -262,8 +263,8 @@ QUESTIONS FOR LEE
    draws them before they are plugged in. Droop them onto the table instead (a change in the Full Build, which the take-apart follows)?
 24. (Deconstruction) Two small brushes for a moment: the potentiometer's black lead against its tan as it is unplugged (Step 15) and
    the switch's black and tan leads (Step 38). Fine, or unplug the tan first in each?
-25. (Deconstruction) Its website address: lcd-alarm-clock-deconstruction (with the kit lcd-alarm-clock and lcd-alarm-clock-full-build,
-   question 7)?
+25. (Done, 22 Oct 2026: published with the Full Build as https://models.tech-box.io/lcd-alarm-clock-deconstruction/, r1. Its step
+   text for editing, with the Full Build's: share/LAC step text 2026-10-22/.)
 9. The potentiometer's knob: TechBox's Cadasio project draws a silver ring round the end of the knob (and a silver pointer groove), so
    the guide keeps it and only stops the black showing through. If the real knob is all black, it is a one-line change to make it so.
 
