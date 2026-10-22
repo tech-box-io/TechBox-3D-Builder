@@ -1,6 +1,7 @@
 """Remote Controlled Car (RCC), deconstruction: the finished car and controller taken apart, down to L1. A guide of its own
 (steps-deconstruction.json), made from the Full Build as guide.py last wrote it (run that first, and this again after any change to
-it). It opens on the Full Build's title page and ends on what is left, L1; its card on the website is the Full Build's.
+it). It opens on the Full Build's title page and ends on what is left, L1, then goes straight to the Full Build's parts list pages (no
+Completed View: Lee, 22 Oct 2026); its card on the website is the Full Build's.
 
 First draft (Lee, 18 Oct 2026), the Full Build in reverse (rulebook section 11), in the order Lee gave:
   1. the controller first, on its own (the car hidden): its USB cable unplugged (seen a little wider, so that the cable shows; one
@@ -55,7 +56,8 @@ g = Guide(HERE, title='Remote Controlled Car (RCC)', part='Deconstruction', name
           hover_names={JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick', MOTOR_L: 'Left Wheel Motor', MOTOR_R: 'Right Wheel Motor',
                        PLUG_L: 'Left Wheel Motor', PLUG_R: 'Right Wheel Motor'},
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
-g.take_apart()
+g.take_apart(parts_list_at_end=True, completed_view=False)          # (from Step 20c straight to the Full Build's parts list, as the others: Lee,
+#                                                                     22 Oct 2026; no Completed View)
 
 
 def where(i):

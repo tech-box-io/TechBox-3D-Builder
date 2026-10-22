@@ -157,20 +157,24 @@ the car's Nano would run into the battery).
 
 THE DECONSTRUCTION (first draft 18 Oct 2026, from Lee's notes on the trial version; deconstruction.py -> steps-deconstruction.json)
 Made from the Full Build as guide.py last wrote it: run guide.py first, then deconstruction.py. It opens on the Full Build's title
-page, ends on L1, and its card on the website is the Full Build's. 22 steps:
+page, ends on L1, then goes straight to the Full Build's Parts List pages, with no Completed View (Lee, 22 Oct 2026); its card on the
+website is the Full Build's. 20 steps (Lee's rounds of 18 Oct 2026):
 - Steps 1 - 5, the controller on its own (the car hidden): the USB cable unplugged (seen a little wider than the close-ups, so the
   whole cable shows; one arrow, on the Mini-B plug's body, clear of the cable; none on the A end); the right joystick, the left
-  joystick, the radio module and the Nano Board, by one camera (the Full Build's for the right joystick, turned round with the
-  controller). Each run on a sub-assembly on its own keeps one camera (Lee's rule).
+  joystick (each arrow along the pull back out of its socket), the radio module and the Nano Board, by one camera (the Full Build's
+  for the right joystick, turned round with the controller). Each run on a sub-assembly on its own keeps one camera (Lee's rule).
 - Steps 6 - 8: the barrel plug unplugged; the battery lifted out of L1 with its 9V adapter; the adapter taken off the battery on
-  its own.
-- Steps 9 - 10: the wheel motors unplugged (right, then left), each plug back behind L1 the way it went in (four beats).
-- Steps 11 - 13: L6 and L7 slid out (the car turned over), then the I/O module slid forward out of its grooves.
-- Steps 14 - 16, the I/O module on its own: the radio module, the adapter board, the Nano Board.
-- Steps 17 - 20: L4 and L5 lifted off L1 with the motors (the leads straightened back as they were in the hand, so that L4 can slide
-  off over the plugs); L4 slid off along the wires; the left and then the right motor pulled out of L5. (Lee wrote "R4 and R5":
-  taken as L4 and L5, the RCC's parts that hold the motors.)
-- Steps 21 - 22: L3 off L2, then L2 swung up and unhooked (L1 turned over, as in the build). L1 is left.
+  its own (its arrow on the adapter).
+- Step 9: both wheel motors unplugged in one step, each plug back behind L1 the way it went in (four beats).
+- Steps 10 - 12: L6 and L7 slid out (the car turned over), then the I/O module slid forward out of its grooves.
+- Steps 13 - 15, the I/O module on its own: the radio module, the adapter board, the Nano Board.
+- Steps 16 - 18: L4 and L5 lifted off L1 with the motors (the leads straightened back as they were in the hand, so that L4 can slide
+  off over the plugs); L4 slid off along the wires; both motors pulled out of L5 in one step, the right one's arrow starting where
+  the left one's does on its wheel. (Lee wrote "R4 and R5": taken as L4 and L5, the RCC's parts that hold the motors.)
+- Steps 19 - 20: L3 off L2, then L2 swung up and unhooked (L1 turned over, as in the build). L1 is left.
+- Then the Parts List pages, as the Full Build's.
+Arrows drawn four times the generator's own size on Steps 1 - 5 and 18, twice on the others (Lee's rounds of 18 Oct 2026); Steps 6
+and 9 (unplugging) have an eye on each plug instead.
 
 FILES
   guide.py                      the build, in order (edit here, then run it: see CLAUDE.md "Commands" with this folder's name)

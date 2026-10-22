@@ -139574,29 +139574,6 @@
    }
   },
   {
-   "name": "Completed View",
-   "kind": "end",
-   "visible": [
-    "NAUO10"
-   ],
-   "offsets": {},
-   "wires": {},
-   "carry": {},
-   "camera": {
-    "dir": [
-     0.5792,
-     0.5736,
-     0.5792
-    ],
-    "target": [
-     163.9,
-     101.5,
-     140.6
-    ],
-    "radius": 50.5
-   }
-  },
-  {
    "name": "Parts List",
    "kind": "card",
    "caption": "Parts List",

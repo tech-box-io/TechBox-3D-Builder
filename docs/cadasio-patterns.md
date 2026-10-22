@@ -220,7 +220,8 @@ Section 14 says what the in-house player does today against each rule.
 
 ## 11. Deconstruction guides
 
-- **Same skeleton as a build** (`Start`, numbered pairs from 1, `Completed View`), with no section cards and no text labels. Starts on the finished model, ends showing only what is left assembled.
+- **Same skeleton as a build** (`Start`, numbered pairs from 1, `Completed View`), with no section cards and no text labels. Starts on the finished model, ends showing only what is left assembled. (TechBox's own take-aparts, Lee, 2026-10-22: no
+  `Completed View`; the last step leads straight to the Full Build's parts list pages, below.)
 - **`Step N` changes nothing in the model**: the part is still seated and carries every cue. Pressing Next plays the removal to its end without a further click: the part travels out along the arrow and disappears. The pulled-out state is never a resting frame, and removed parts are not left on screen.
 - **One red arrow per moving unit, never lead lines** (LSM 24, LAC 22, PMG 31 arrow showings; lead lines only where hardware is refitted for storage).
   **In-house (Lee, 2026-10-18):** smaller than the published ones (15 - 40 mm, sized to the part: a screw's is about 17 mm), where
@@ -321,6 +322,11 @@ never covers it. Step 7's arrow (the I/O module lifted off H4) is the published 
 
 **Lee, 2026-10-22 (the PMG's take-apart, once live: "remove the Completed View and progress directly from Step 26c to the Parts
 List"):** as the LSM's, no Completed View: the last step leads straight to the Full Build's parts list pages.
+
+**Lee, 2026-10-22 (the MRA's and the RCC's take-aparts, once live):** the same for both: the MRA's Step 73c leads straight to its
+parts list pages, and the RCC's, which had none, gets the Full Build's parts list pages after Step 20c ("like the others"). So every
+kit's take-apart now ends this way: its last step, then the Full Build's parts list, no Completed View; a new one does too unless Lee
+says otherwise.
 
 **Lee, 2026-10-22 (the LSM's take-apart, notes on the draft built on the published one):** a close-up stands beside the model on the
 side of the spot it shows, its leader not across the model ("instead of having it cross the model": Steps 3, 5 and 6); its red boxes

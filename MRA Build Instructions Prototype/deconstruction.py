@@ -5,7 +5,8 @@ it). First draft (Lee, 18 Oct 2026): the Full Build in reverse (rulebook section
   - no electronics test: each motor is unplugged and taken out once, where the build put it in (the bench test's plugging in and
     unplugging, and its USB cable, have no counterpart).
 It opens on the Full Build's title page and ends on what is left, R1 (Lee's first round, 18 Oct 2026: the electronics come out of
-the controller before the joysticks' walls, so the base is the last to go). Where Lee asked, a screw and the part it held go in one
+the controller before the joysticks' walls, so the base is the last to go), then goes straight to the Full Build's parts list pages
+(no Completed View: Lee, 22 Oct 2026). Where Lee asked, a screw and the part it held go in one
 step, one after the other: the screw out and gone, then the part (in_turn=: A12, A13, A11, A5, the lever); elsewhere, as the build.
 
 Sub-assemblies the Full Build put together in the hand (the T1 / T2 block, the claw, the arm's links, the joysticks in their walls)
@@ -102,7 +103,8 @@ def full_way_back(step, part, then=()):
 g = Guide(HERE, title='Mini Robot Arm (MRA)', part='Deconstruction', names=dict(FULL['names']), steps_file='steps-deconstruction.json',
           hover_names={JOY_LEFT: 'Left Joystick', JOY_RIGHT: 'Right Joystick'},
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
-g.take_apart(parts_list_at_end=True)                                # (the Full Build's parts list, after the Completed View: Lee, 19 Oct 2026)
+g.take_apart(parts_list_at_end=True, completed_view=False)          # (the Full Build's parts list, Lee, 19 Oct 2026; no Completed View: Step 73c
+#                                                                     leads straight to it, Lee, 22 Oct 2026, as the PMG's)
 
 
 def where(i):

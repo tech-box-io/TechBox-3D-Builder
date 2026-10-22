@@ -31618,26 +31618,174 @@
    }
   },
   {
-   "name": "Completed View",
-   "kind": "end",
-   "visible": [
-    "NAUO1"
+   "name": "Parts List",
+   "kind": "card",
+   "caption": "Parts List",
+   "parts": [
+    {
+     "title": "Controller",
+     "icon": "electronics",
+     "colour": "#f9c0c0",
+     "halo": "#ec8d8d",
+     "items": [
+      {
+       "name": "Controller Board",
+       "qty": 1,
+       "picture": "parts/Controller-Board.png"
+      },
+      {
+       "name": "Nano Board",
+       "qty": 1,
+       "picture": "parts/Nano-Board.png"
+      },
+      {
+       "name": "Radio Module",
+       "qty": 1,
+       "picture": "parts/Radio-Module.png"
+      },
+      {
+       "name": "Joystick",
+       "qty": 2,
+       "picture": "parts/Joystick.png"
+      }
+     ]
+    },
+    {
+     "title": "Electronics",
+     "icon": "electronics",
+     "colour": "#f9c0c0",
+     "halo": "#ec8d8d",
+     "items": [
+      {
+       "name": "Nano Board",
+       "qty": 1,
+       "picture": "parts/Nano-Board-car.png"
+      },
+      {
+       "name": "Radio Module",
+       "qty": 1,
+       "picture": "parts/Radio-Module.png"
+      },
+      {
+       "name": "Nano I/O Module",
+       "qty": 1,
+       "picture": "parts/Nano-I-O-Module.png"
+      },
+      {
+       "name": "Adapter Board",
+       "qty": 1,
+       "picture": "parts/Adapter-Board.png"
+      },
+      {
+       "name": "9V Battery",
+       "qty": 1,
+       "picture": "parts/9V-Battery.png"
+      },
+      {
+       "name": "9V Adapter",
+       "qty": 1,
+       "picture": "parts/9V-Adapter.png"
+      },
+      {
+       "name": "USB Cable",
+       "qty": 1,
+       "picture": "parts/USB-Cable.png"
+      }
+     ]
+    },
+    {
+     "title": "Motors",
+     "icon": "motors",
+     "colour": "#d8edc6",
+     "halo": "#a3cf84",
+     "items": [
+      {
+       "name": "Wheel Motor",
+       "qty": 2,
+       "picture": "parts/Wheel-Motor.png"
+      }
+     ]
+    }
    ],
+   "visible": [],
    "offsets": {},
-   "wires": {},
-   "carry": {},
    "camera": {
     "dir": [
-     -0.5997,
+     0.5997,
      0.5299,
      -0.5997
     ],
     "target": [
-     688.5,
-     907.7,
-     1338.5
+     654.9,
+     912.8,
+     1227.7
     ],
-    "radius": 107.8
+    "radius": 223.6
+   }
+  },
+  {
+   "name": "Parts List (Cont.)",
+   "kind": "card",
+   "caption": "Parts List (Cont.)",
+   "parts": [
+    {
+     "title": "Chassis (L1 - L7)",
+     "icon": "wood",
+     "colour": "#dbe4ef",
+     "halo": "#8ea6c4",
+     "items": [
+      {
+       "name": "L1",
+       "qty": 1,
+       "picture": "parts/L1.png"
+      },
+      {
+       "name": "L2",
+       "qty": 1,
+       "picture": "parts/L2.png"
+      },
+      {
+       "name": "L3",
+       "qty": 1,
+       "picture": "parts/L3.png"
+      },
+      {
+       "name": "L4",
+       "qty": 1,
+       "picture": "parts/L4.png"
+      },
+      {
+       "name": "L5",
+       "qty": 1,
+       "picture": "parts/L5.png"
+      },
+      {
+       "name": "L6",
+       "qty": 1,
+       "picture": "parts/L6.png"
+      },
+      {
+       "name": "L7",
+       "qty": 1,
+       "picture": "parts/L7.png"
+      }
+     ]
+    }
+   ],
+   "visible": [],
+   "offsets": {},
+   "camera": {
+    "dir": [
+     0.5997,
+     0.5299,
+     -0.5997
+    ],
+    "target": [
+     654.9,
+     912.8,
+     1227.7
+    ],
+    "radius": 223.6
    }
   }
  ]

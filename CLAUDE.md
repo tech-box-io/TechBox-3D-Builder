@@ -401,8 +401,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   It writes only its steps file (its wording: `step-text-deconstruction.json`), never `parts.json` or the Part files, and it can add
   parts to the model but not take any away. The log warns where a way out passes through a part still there (the order differs
   from the build's reverse), and notes a camera copied from the Full Build that leaves out a part lying aside. It ends on what is
-  left (the base), closer in, then its Completed View, unless `take_apart(completed_view=False)` (the LSM's: Lee, 22 Oct 2026, straight
-  from the last step to the parts list). No Parts List unless asked for. Its card picture on the website is its Full Build's card (Lee, 18 Oct
+  left (the base), closer in, then its Completed View, unless `take_apart(completed_view=False)` (straight from the last step to the
+  parts list: every kit's, Lee, 22 Oct 2026, the LSM's first). No Parts List unless asked for. Its card picture on the website is its Full Build's card (Lee, 18 Oct
   2026: `_dev.card()` copies it for a guide made by `take_apart()`); its title page is the Full Build's. Parts taken off slide out, then fade out over a
   beat of their own (800 ms, starting just before the slide comes to rest), leads with them, as Cadasio does (Lee, 18 Oct 2026:
   slower and smoother than the fade inside the slide of 17 Oct), each part once its own way has come to rest; Prev plays the whole
@@ -412,14 +412,15 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   The MRA's (`deconstruction.py`, 73 steps): the Full Build reversed except where Lee said (the eight breadboard wires at once;
   no electronics test; A12, A13, A11, A5 and the lever each a screw then its part; with B8 off, the breadboard wires, the I/O module and the Nano
   Board come out before the joysticks' walls), and it ends on R1, followed by the Full Build's parts list pages
-  (`take_apart(parts_list_at_end=True)`: Lee, 19 Oct 2026). Its Steps 5 - 7 carry the Full Build's Row and servo labels instead of
+  (`take_apart(parts_list_at_end=True)`: Lee, 19 Oct 2026), straight from Step 73c (no Completed View: Lee, 22 Oct 2026). Its Steps 5 - 7 carry the Full Build's Row and servo labels instead of
   eyes. Run it after every Full Build change.
   The RCC's (`deconstruction.py`, 20 steps, Lee's order of 18 Oct 2026, both wheel motors unplugged in one step and pulled out of L5 in one): the controller first, on its own (its USB cable, one arrow
   on the Mini-B plug clear of the cable; then the joysticks, the radio module and the Nano Board, by the Full Build's camera for
   the right joystick turned round with the controller, one camera for the run); the barrel plug and the battery; the 9V adapter off the battery on its own; the wheel motors unplugged
   (the Full Build's four beats, reversed) before L6, L7 and the I/O module; the module taken apart on its own; L4 and L5 lifted
   off L1 with the motors, the leads straightened back as in the hand so that L4 slides off over the plugs, the motors out of L5;
-  L3 and L2; it ends on L1. Run it after every Full Build change.
+  L3 and L2; it ends on L1, then straight to the Full Build's parts list pages (no Completed View: Lee, 22 Oct 2026). Run it after
+  every Full Build change.
   The PMG's (`deconstruction.py`, 26 steps, first draft 21 Oct 2026: Lee's "same principles as the MRA", with "some things removed in
   groups (like the breadboard wires, four buttons, four H9 parts)"), in the order of TechBox's published PMG take-apart where it has
   one: the USB cable first; H14; the dot matrix display and the 4-digit display each lifted out of the case to the table still wired,
