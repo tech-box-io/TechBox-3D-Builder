@@ -85,7 +85,8 @@ def carried_back(carried, part):
 g = Guide(HERE, title='Piano Memory Game (PMG)', part='Deconstruction', names=dict(FULL['names']), steps_file='steps-deconstruction.json',
           source='pmg-guide.glb', hover_names=HOVER_NAMES, hero_azimuth=315,
           copyright_line='© TechBox. A division of TARIS Industries, LLC. All Rights Reserved.')
-g.take_apart(parts_list_at_end=True)                                # (the Full Build's parts list, after the Completed View, as the MRA's)
+g.take_apart(parts_list_at_end=True, completed_view=False)          # (the Full Build's parts list, as the MRA's; no Completed View: Step 26c
+#                                                                     leads straight to it, Lee, 22 Oct 2026, as the LSM's)
 
 
 def where(i):

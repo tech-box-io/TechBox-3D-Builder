@@ -146427,29 +146427,6 @@
    }
   },
   {
-   "name": "Completed View",
-   "kind": "end",
-   "visible": [
-    "NAUO63"
-   ],
-   "offsets": {},
-   "wires": {},
-   "carry": {},
-   "camera": {
-    "dir": [
-     -0.5792,
-     0.5736,
-     0.5792
-    ],
-    "target": [
-     461.9,
-     898.7,
-     1290.5
-    ],
-    "radius": 73.6
-   }
-  },
-  {
    "name": "Parts List",
    "kind": "card",
    "caption": "Parts List",

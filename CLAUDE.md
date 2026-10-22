@@ -429,8 +429,8 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   H8; turned over, H7, the four push buttons out of their pockets at once, still wired); the electronics on their own (the case
   hidden): each device pulled off the ends of its wires (`let_go=`: the dot matrix display, the 4-digit display, the four push
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
-  the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, followed by the Full Build's parts list pages.
-  Run it after every Full Build change.
+  the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, then straight to the Full Build's parts list pages
+  (no Completed View: Lee, 22 Oct 2026). Run it after every Full Build change.
   The LSM's (`deconstruction.py`, 24 steps, 21 Oct 2026; Lee's two sets of notes of 22 Oct done): built on TechBox's own published
   LSM take-apart, at Lee's word ("you need to base the deconstruction process off of this guide": its data replayed in our ids and mm,
   docs/research/lsm/decon/published/; the numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8,

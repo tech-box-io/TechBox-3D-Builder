@@ -319,6 +319,9 @@ before it has finished: the part rests for a beat, its next arrow fades in, then
 not only H12 and H11). An arrow drawn on a plate that moves along itself is set in front of the plate, towards the camera, so the plate
 never covers it. Step 7's arrow (the I/O module lifted off H4) is the published 6.5 mm thick.
 
+**Lee, 2026-10-22 (the PMG's take-apart, once live: "remove the Completed View and progress directly from Step 26c to the Parts
+List"):** as the LSM's, no Completed View: the last step leads straight to the Full Build's parts list pages.
+
 **Lee, 2026-10-22 (the LSM's take-apart, notes on the draft built on the published one):** a close-up stands beside the model on the
 side of the spot it shows, its leader not across the model ("instead of having it cross the model": Steps 3, 5 and 6); its red boxes
 cover the whole catch with room round it ("The squares in many of the breakouts are too small"). An arrow starts at the moving part's

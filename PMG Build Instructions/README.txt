@@ -422,6 +422,13 @@ animation. / Step 11 - Same as Step 10".
   above the pins' ends (it was 18), its head about 14 mm clear of the top, still from the pin end along the pull. Checked at 1440 and
   760 wide; only Step 17 changed, no camera; the run-through on all 56 views. Published to the test website (release r5).
 
+ON THE WEBSITE (21 Oct 2026, Lee's word): the Full Build r1 and the Deconstruction r1, at models.tech-box.io/piano-memory-game-full-build/
+and /piano-memory-game-deconstruction/ (check_live.py OK). The step text went to the curriculum developer the same evening
+(share/PMG step text 2026-10-21/: both guides' sheets and How to edit.txt).
+- 22 Oct 2026, Lee: "remove the Completed View and progress directly from Step 26c to the Parts List on the Deconstruction".
+  take_apart(completed_view=False), as the LSM's: 55 views, nothing else changed (no other view, no camera); the run-through on all
+  55. Published as the Deconstruction's r2.
+
 HOW IT WAS MADE
 - pmg.glb (167 MB, converted from the STEP) holds the engineer's pose copies of most parts (three I/O modules, eight buttons, three
   displays, four dot matrices, 139 wire caps, 114 wire bodies). make_source.py cuts it down to pmg-guide.glb (17 MB): one copy of each
