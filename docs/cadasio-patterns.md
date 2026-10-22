@@ -348,7 +348,10 @@ come off it in a group and stay in the breadboard ("left attached to the breadbo
 lies over them is off (the D9s). An eye points at the catch itself, not at the part above it ("at the bottom where the actual latch
 element is": a D11 post's foot, where its tab goes into D1). A latch's red box takes in every tab of the latch ("both tabs of the
 latch"). Hardware put back on a part starts just off where it goes on, in a close view of the two, not after a move through empty space
-("start the nut just off the end of the push button's wires, then animate it back on").
+("start the nut just off the end of the push button's wires, then animate it back on"). Asked whether the three wires, left in the
+breadboard when the matrix came off them, should stay where they came off (in the air over the box) or be laid aside: "Add a step that
+lays the three wires over the side of the box, still in the breadboard, before the D9s come out" (laid out over the open end where D4
+was, onto the table).
 
 **Lee, 2026-10-22 (the LAC's take-apart, notes on its first draft, remade from the published one):** one wire per step, for this kit only,
 "given the excess number of wires" (the PMG's and LSM's groups stay theirs). The order follows the published where Lee named it: the

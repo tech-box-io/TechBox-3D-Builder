@@ -432,15 +432,18 @@ steps file in the folder, so no guide ever shrinks it below what another needs).
   buttons at once), all 21 breadboard wires off the module at once, the Nano Board out (the Full Build's Step 1 camera); back to
   the case still upside down: H6, H5; the right way up: H4, H3, H2; it ends on H1, then straight to the Full Build's parts list pages
   (no Completed View: Lee, 22 Oct 2026). Run it after every Full Build change.
-  The LSM's (`deconstruction.py`, 24 steps, 21 Oct 2026; Lee's two sets of notes of 22 Oct done): built on TechBox's own published
+  The LSM's (`deconstruction.py`, 25 steps, 21 Oct 2026; Lee's two sets of notes of 22 Oct done): built on TechBox's own published
   LSM take-apart, at Lee's word ("you need to base the deconstruction process off of this guide": its data replayed in our ids and mm,
   docs/research/lsm/decon/published/; the numbers the script uses in the kit's `published-takeapart.json`): its order (the stems, D8,
   D7, D5 and D4 off the ends, the D11 posts two and two, D6, the LED matrix lifted out with D10; D3, D2 with the button, its wires,
   the button on its own, the USB cable, the breadboard's parts), each step's camera, its arrows (size and tail), eyes and close-ups
   (each catch, red boxes from our model). The departures are in its docstring: the matrix stays held over the box while D10 is slid
   off it, as the Full Build's Step 31 hooked it on there (its wires lie straight through D10's notch all along the slide; laid on the
-  table they had passed into D10), then it is pulled off the three wires' connectors, which stay where they came off, the wires in the
-  breadboard; both D9 (the wires run under one); the three wires out together (Lee, 22 Oct 2026, second note); the nut put back on
+  table they had passed into D10), then it is pulled off the three wires' connectors, the wires left in the breadboard; the wires, still
+  in it, laid out of the box over its open end and along the table (the kit's `wire_shapes.py`, `draped()`: each keeps the Full Build's
+  run in the box and is at least as long as its held shape, as a shape changed into must be: shorter, the player's matching squeezes one shape's
+  run onto a point of the other's, and wires run into each other); both D9 (the wires run under one); the three wires out together
+  (Lee, 22 Oct 2026, second notes); the nut put back on
   the button once it is out of D2, starting just off the wires' ends (`rest_at()`); cameras or arrows moved where ours hid or lost
   what the published one showed, or where a published tail was inside a part. The study of that round: docs/research/lsm/decon/round3/.
   It ends on D1 with the breadboard, then straight to the Full Build's parts list (no Completed View). Run it after every Full Build

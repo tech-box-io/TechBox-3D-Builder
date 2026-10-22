@@ -92,7 +92,7 @@ THE BUILD (40 numbered steps; the published guide's 38 and its order, with the h
   passes into a part. For a moment while they change shape, two wires brush against each other twice in Step 26 (under the matrix)
   and once in Step 32 (low in the box by D4).
 
-THE DECONSTRUCTION (24 numbered steps; www address laser-stem-matrix-deconstruction). Lee, 21 Oct 2026: "take this LSM Full Build
+THE DECONSTRUCTION (25 numbered steps; www address laser-stem-matrix-deconstruction). Lee, 21 Oct 2026: "take this LSM Full Build
 guide and create a Deconstruction Guide based on it. Same principles as you used for the MRA. Remembering some things can be removed in
 groups (like the 3 breadboard wires, etc.)"; then, on the first draft (the Full Build in reverse): "you need to base the deconstruction
 process off of this guide: https://instructions.online/?id=19075-laser_stem_matrix_lsm_-_deconstruction - so there are a lot of edits
@@ -109,27 +109,31 @@ list (no Completed View: Lee, 22 Oct 2026); its website card is the Full Build's
   the posts' latches; D7; D5 and D4 off the ends (D2's tabs boxed in red at each corner, an eye on each of D3's two tabs; D4 slides out
   along the USB cable in the notch at its foot, then lifts off it; each arrow from the wall's outer face); the D11 posts two and two (their tabs pushed up out of D1 from underneath, then up through D6: a
   caution to squeeze each tab's prongs, as its barb catches under both; an eye on a post's foot, where its tab goes into D1); D6.
-- Steps 9 - 13, the LED matrix and its wires (Lee's second note of 22 Oct 2026): lifted out with D10 hooked under it (D4 and D5 off, so
+- Steps 9 - 14, the LED matrix and its wires (Lee's second notes of 22 Oct 2026): lifted out with D10 hooked under it (D4 and D5 off, so
   D10's ends are free), its wires through the Full Build's own shapes, and held over the box; D10 slid off it, as the Full Build's Step
   31 hooked it on there, reversed (40 mm along, then down: its hooks hold both edges of the matrix, and the wires lie dead straight
   through its notch all along the slide); the matrix pulled 30 mm back along its pins off the three wires' connectors and gone, the
-  connectors left where they came off and the wires in the breadboard; both D9 (the wires run under one of them); the three wires out of
-  i2, i3 and b19 together, each whole (an eye on i2 / i3 and one on b19). No fades.
-- Steps 14 - 19: D3 off D1's latch (the close-up's red box round both tabs of the latch); D2 with the button off D1's latch and out of its slots, still wired (seen from outside D2); the
+  connectors left where they came off and the wires in the breadboard; the wires, still in the breadboard, laid out of the box over its
+  open end where D4 was and along the table, their connectors side by side on it (Lee's answer of the same day; wire_shapes.py's
+  DRAPED: each keeps its run in the box and is at least as long as it was held, and they turn out in the order they rise, so that none
+  passes another as they move); both D9 (the wires run under one of them); the three wires out of i2, i3 and b19 together, each whole
+  (an eye on i2 / i3 and one on b19). No fades.
+- Steps 15 - 20: D3 off D1's latch (the close-up's red box round both tabs of the latch); D2 with the button off D1's latch and out of its slots, still wired (seen from outside D2); the
   button's two wires unplugged from j5 and j16; the button on its own: the nut unscrewed and slid off over the wires in one smooth turn,
   the button out of D2, and the nut screwed back onto the button so that the two stay together (Lee, 22 Oct 2026): it starts just off
   the end of the wires, close up, and goes on in one smooth turning move.
-- Steps 20 - 24: the USB cable; the 330 Ohm resistor, the capacitor, the 12 kOhm resistor, the Nano Board (a caution: use the Pry Tool,
+- Steps 21 - 25: the USB cable; the 330 Ohm resistor, the capacitor, the 12 kOhm resistor, the Nano Board (a caution: use the Pry Tool,
   which the kit has, not modelled). The 12 kOhm resistor's arrow is the size of the 330 Ohm resistor's (Lee).
 - Where it differs from the published guide, and why: in deconstruction.py's docstring (the three wires in one step; the matrix held
-  over the box while D10 and the wires come off it, the D9s before the wires; D2 before its wires; D4 lifted off the cable; the nut put
-  back on the button; Steps 11, 13, 15 and 20 framed to show what the published camera hid or lost; arrows moved where the published
-  tail was inside a part (Steps 4 - 7, 12 and 24), where a part or the instruction boxes hid them (Steps 6, 9, 12 and 24), and to the
-  nut (Step 17)).
+  over the box while D10 and the wires come off it, the wires then laid out of the box, the D9s before the wires; D2 before its wires;
+  D4 lifted off the cable; the nut put back on the button; Steps 11, 14, 16 and 21 framed to show what the published camera hid or lost,
+  and the new Step 12 from D2's side; arrows moved where the published tail was inside a part (Steps 4 - 7, 13 and 25), where a part or
+  the instruction boxes hid them (Steps 6, 9, 11 and 25), and to the nut (Step 18)).
 - Checked: wires at rest in every view (0 problems) and in every move, the parts taken off and their wires included (one brief touch,
-  the Full Build's own Step 32 touch played backwards in Step 9c); the run-through (51 views); every arrow on screen and no close-up over an arrow at
-  1280 x 800, 1024 x 768, 1000 x 680, 768 x 560 and 768 x 1024 (22 Oct 2026, after the second notes); no arrow under the instruction
-  boxes at 1280 x 800, nor at 1024 x 768 but Step 1's (question 29; Step 11's too at 768 x 560); an independent review (docs/research/lsm/decon/review2/).
+  the Full Build's own Step 32 touch played backwards in Step 9c; the wires laid out checked at 39 moments too); the run-through (53
+  views); every arrow on screen and no close-up over an arrow at 1280 x 800, 1024 x 768, 1000 x 680, 768 x 560 and 768 x 1024 (22 Oct
+  2026); no arrow under the instruction boxes at 1280 x 800, nor at 1024 x 768 but Step 1's (question 29; in smaller windows a few
+  more, Step 11 among them); independent reviews (docs/research/lsm/decon/review2/ and round3/).
 
 QUESTIONS FOR LEE
 1. The LED stem's CAD (you mentioned the acrylic stem is missing): until it comes, each stem is a plain square rod of Cadasio's size.
@@ -170,10 +174,10 @@ QUESTIONS FOR LEE
 19. (Answered) c16 keeps its ring on the hole, its leader across the red line; the other hole labels are as they were.
 20. (Answered, Lee 21 Oct 2026) The deconstruction follows TechBox's published take-apart (b19 is free: question 2 corrected).
 21. (Answered) Eyes on the unplugged wires' ends, no hole labels.
-22. (Answered) The kit has a Pry Tool (not modelled): Step 24 has the MRA's caution.
+22. (Answered) The kit has a Pry Tool (not modelled): Step 25 has the MRA's caution.
 23. (Deconstruction) The arrows take the published take-apart's sizes, as your PMG note asked of the PMG, with their tails where the
-    published ones are, except where a tail was inside a part, or the arrow would be hidden or far from its part (Steps 4 - 7, 10 - 12,
-    15, 17, 19 and 24), and like parts have one size (the D9s; the 12 kOhm resistor's as the 330 Ohm one's). The D11 posts go two and
+    published ones are, except where a tail was inside a part, or the arrow would be hidden or far from its part (Steps 4 - 7, 10, 11,
+    13, 16, 18, 20 and 25), and like parts have one size (the D9s; the 12 kOhm resistor's as the 330 Ohm one's). The D11 posts go two and
     two, as published. The four D11 arrows keep their published sizes, a little different from each other (41.7 - 47.0 mm long,
     3.4 - 4.0 mm thick): make them one size too?
 24. (Answered) D10 comes off the matrix while it is held over the box, wires still on it (Step 10; question 27).

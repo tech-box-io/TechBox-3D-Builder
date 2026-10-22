@@ -1,0 +1,15 @@
+white socket pose {'t': [-133.15, -37.229, 59.24], 'r': [0.0, 1.0, 0.0, 90.0], 'at': [608.24, 894.334, 1187.26]} wire leaves along [1. 0. 0.]
+grey socket pose {'t': [-138.23, -37.229, 52.24], 'r': [0.0, 1.0, 0.0, 90.0], 'at': [613.32, 894.334, 1187.26]} wire leaves along [1. 0. 0.]
+purple socket pose {'t': [-135.69, -37.229, 55.74], 'r': [0.0, 1.0, 0.0, 90.0], 'at': [610.78, 894.334, 1187.26]} wire leaves along [1. 0. 0.]
+wire white pts 350 tail_from 121.2 b_from 255.2 ends [ 650.08  879.92 1170.45] [ 479.09  857.1  1246.5 ] min y 856.89
+wire grey pts 343 tail_from 110.9 b_from 249.8 ends [ 650.08  879.92 1172.99] [ 479.09  857.1  1239.5 ] min y 856.89
+wire purple pts 257 tail_from 42.5 b_from 185.4 ends [ 627.04  879.92 1213.63] [ 479.09  857.1  1243.  ] min y 856.89
+wire white: least +0.04 (table at [571.09, 856.89, 1246.49])
+    table +0.04, D9_A +0.20, D9_A lifted (at 0.0 mm) +0.20, wire grey +0.82, NANO +1.01, J_GREY_M +1.04
+wire grey: least +0.04 (table at [571.06, 856.89, 1239.5])
+    table +0.04, D9_A +0.24, D9_A lifted (at 0.0 mm) +0.24, wire white +0.82, J_WHITE_M +1.04, CAP +1.19
+wire purple: least +0.04 (table at [571.06, 856.89, 1243.0])
+    table +0.04, D9_A +0.66, D9_A lifted (at 0.0 mm) +0.66, wire grey +1.24, wire white +1.26, J_GREY_F +2.01
+socket white [(-0.0, 'table'), (39.01, 'usb cable')]
+socket grey [(-0.0, 'table'), (34.83, 'usb cable')]
+socket purple [(-0.0, 'table'), (36.82, 'usb cable')]

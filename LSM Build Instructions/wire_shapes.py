@@ -1,6 +1,7 @@
 """(Since Lee's second note of 22 Oct 2026 the deconstruction keeps the matrix held over the box while D10 and the wires come off it,
-with the Full Build's own wire shapes, and uses only MALE, FEMALE and JUMPERS from here; the laid and loose shapes below are kept as
-measured, for the record.)
+with the Full Build's own wire shapes (held()), then lays the wires, still in the breadboard, out of the box onto the table (draped(),
+draped_socket(): DRAPED, below), and uses MALE, FEMALE and JUMPERS from here; the laid and loose shapes are kept as measured, for the
+record. DRAPED is measured at rest by docs/research/lsm/decon/round3/drape_check.py; this file's own check below covers LAID and LOOSE.)
 
 The LSM deconstruction's new wire shapes, for the order of TechBox's published take-apart (instructions.online, 19075-laser_stem_
 matrix_lsm_-_deconstruction): the LED matrix, D10 still hooked under it, laid on the table beside the open box (D4 and D5 off) with
@@ -244,6 +245,95 @@ def loose_one(w, pose=LAID_POSE, off=0.0):
 def loose(pose=LAID_POSE, off=0.0):
     """LOOSE: {wire id: route} for the three."""
     return {k: v for w in JUMPERS for k, v in loose_one(w, pose, off).items()}
+
+
+# ---------------------------------------------------------------- DRAPED (Lee, 22 Oct 2026, after the matrix came off its wires held over
+# the box: "Add a step that lays the three wires over the side of the box, still in the breadboard, before the D9s come out")
+# Each wire keeps the Full Build's own run in the box (its held shape, HELD: from its pin toward D4, under the D9 nearer D4, along the
+# D4 end toward D2), as far as just short of where that shape turns up beside D2; from there it turns out over D1's edge where D4 was
+# (19 - 21 mm over it), and down onto the table outside, where it runs straight out, parallel to the USB cable, as long as the wire is
+# (at least as long as the same wire HELD: 261, 252 and 184 mm), its connector lying on the table with its wire end toward the box,
+# the three side by side. They turn
+# out in the order HELD rises toward D2 (gray, purple, yellow: z 1247.3, 1248.7, 1250.0 there), so that changing from HELD no wire
+# passes another; along the D4 end the yellow one lies nearest the open end, so the gray and purple ones cross over it (2.1 and 2.5 mm
+# from it, centre to centre) as they turn out. The USB cable leaves the box 20 mm nearer D3 (z 1219); D2's tabs past D1's edge are 5 mm further on.
+DRAPE = dict(   # where each leaves HELD (z), its run out over D1's edge (z, y), its connector's middle on the table (z)
+    grey=dict(turn=1238.5, out=1240.0, y=884.5, lie=1239.5),
+    purple=dict(turn=1240.5, out=1242.5, y=884.5, lie=1243.0),
+    white=dict(turn=1244.0, out=1245.5, y=None, lie=1246.5))   # (y None: level from where it leaves HELD, 882.6)
+
+
+def held():
+    """HELD: {wire id: route}, the Full Build's own shapes as its Step 32 begins (the matrix held over the box): the deconstruction's
+    wires from its Step 9c until they are laid out."""
+    S = json.loads((KIT / 'steps.json').read_text(encoding='utf-8'))
+    v = next(x for x in S['views'] if x['name'] == 'Step 32')
+    return {WIRE[w]: S['routes'][v['wires'][WIRE[w]]] for w in JUMPERS}
+
+
+def _length(pts):
+    return float(np.linalg.norm(np.diff(np.asarray(pts, float), axis=0), axis=1).sum())
+
+
+def _draped_line(w, lie_x):
+    """Wire w's DRAPED points with its connector's middle at x `lie_x` on the table, and where it leaves HELD (mm from its pin)."""
+    h, d = held()[WIRE[w]], DRAPE[w]
+    p = np.asarray(h['pts'], float)
+    s = np.r_[0, np.cumsum(np.linalg.norm(np.diff(p, axis=0), axis=1))]
+    k = int(np.argmax(p[:, 2] >= d['turn']))                       # (the first point of the run along the D4 end past its turn)
+    assert k and p[k, 1] < 885.0 and s[k] < (h.get('tail_from') or s[-1]), (w, k, p[k])   # (before HELD turns up)
+    keep, here = p[:k], p[k - 1]
+    y = here[1] if d['y'] is None else d['y']
+    pose = _socket_on_table(w, lie_x)
+    b, bd = apply_pose(pose, [F_EXIT[w]])[0], turn_dir(pose, [0, 0, 1])
+    on_table = [[x, TABLE_Y + 0.95, d['lie']] for x in np.arange(574.0, b[0] + 6.0, -8.0)]   # (straight out along the table)
+    mids = [[here[0] - 1.0, (here[1] + y) / 2, here[2] + 0.7 * (d['out'] - here[2])], [here[0] - 3.5, y, d['out']],
+            [598.0, y, d['out']], [591.0, y - 2.5, d['out']], [585.0, 870.0, (d['out'] + d['lie']) / 2], [580.0, 860.5, d['lie']],
+            *on_table]
+    tail = smooth(here, np.array([0.0, 0.0, 1.0]), b, -bd, mids, lead=0.4)
+    return np.vstack([keep[:-1], tail]), float(s[k - 1]), pose
+
+
+def _socket_on_table(w, lie_x):
+    mid = np.array(F_MID[w], float)
+    there = np.array([lie_x, TABLE_Y + 0.875, DRAPE[w]['lie']])
+    return _clean(turned([0, 1, 0], 90.0, mid.tolist(), (there - mid).round(3).tolist()))
+
+
+def _lie_x():
+    """Where the sockets' middles lie (x): side by side, as far out as the wire that needs it most must lie to be as long as it is HELD
+    (the other two a few mm longer: changing shape the player takes that up between the ends; lined up, they keep their order as they
+    change). Each wire's own place is found by moving it out by what it lacks, until that is under 0.01 mm."""
+    out = []
+    for v in JUMPERS:
+        want, x = _length(held()[WIRE[v]]['pts']), 567.0
+        for _ in range(8):
+            short = want - _length(_draped_line(v, x)[0])
+            x -= short
+            if abs(short) < 0.01:
+                break
+        else:
+            raise SystemExit(f'wire_shapes.py: DRAPED {v}: the length did not settle ({short:.3f} mm short)')
+        out.append(x)
+    return round(min(out), 2)
+
+
+def draped_socket(w):
+    """Where socket w lies on the table (absolute): a quarter turn about Y on its middle, so that its wire end faces the box (+X)."""
+    return _socket_on_table(w, _lie_x())
+
+
+def draped():
+    """DRAPED: {wire id: route}, the three wires out of the box over its open D4 end and onto the table, still in the breadboard, each as
+    long as it is HELD. Each keeps HELD's points up to its turn and says so (`tail_from`), so that changing from HELD the run in the box
+    stays put and the rest is matched from the connector's end."""
+    out, x = {}, _lie_x()
+    for w in JUMPERS:
+        line, keep_to, pose = _draped_line(w, x)
+        L = _length(line)
+        assert L >= _length(held()[WIRE[w]]['pts']) - 0.05, (w, L)       # (never shorter than HELD: see above)
+        out[WIRE[w]] = W.route(line, a=MALE[w], b=FEMALE[w], b_at=pose, b_from=L - 6.0, tail_from=keep_to)
+    return out
 
 
 # ================================================================ the check

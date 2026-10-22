@@ -16,14 +16,17 @@ D5's and D4's corners, the D11 posts' tabs under D1, D3's and D2's latches on D1
 Where it differs, and why: the three wires come out in one step (Lee: "some things can be removed in groups (like the 3 breadboard
 wires)"); the matrix stays held over the box while D10 is slid off it and it is pulled off the three wires' connectors, the wires left
 in the breadboard (Lee, 22 Oct 2026: "D10 must slide off of the LED Matrix"; the published guide set it down beside the box, still
-wired, and took the wires out of the breadboard first), and the D9s come out before the wires, which run under one of them; D2 comes
+wired, and took the wires out of the breadboard first); the wires, still in the breadboard, are then laid out of the way, out of the box
+over its open end onto the table (Lee, the same day), and the D9s come out before the wires, which run under one of them; D2 comes
 off before its wires are unplugged (one step each); D4, once off its tabs, is lifted off the USB cable (its notch held it); once the
 button is out of D2, the nut is screwed back onto it, so that the two stay together (Lee, 22 Oct 2026: a step of its own). A few
-cameras and arrows are moved where ours would hide or lose what the published one showed (Step 15 from outside D2, whose latch and
-arrow the published camera saw through D2; Steps 11 and 13 framed on the held matrix and on the wires up to their connectors; Step 20
-to hold the cable's A end; the nut's arrow at the nut, not 40 mm away along the wires); arrows whose published tail is inside a part,
-or that a part or the instruction boxes would hide, are moved out (Steps 4 - 7, 9, 12 and 24). Two steps on one sub-assembly change
-camera where the published guide does (Steps 17 - 18). No counterpart for the Full
+cameras and arrows are moved where ours would hide or lose what the published one showed (Step 16 from outside D2, whose latch and
+arrow the published camera saw through D2; Step 11 framed on the held matrix; Step 21
+to hold the cable's A end; Step 12, new, from the open end's corner by D2, so that the laid wires run across the picture; Step 14 framed
+wider toward the open end, where the wires lie; the nut's arrow at the nut, not 40 mm away along the wires); arrows whose published tail
+is inside a part, or that a part, the instruction boxes or a plug behind would hide or confuse, are moved (Steps 4 - 7, 9, 11, 13 and
+25). Two steps on one sub-assembly
+change camera where the published guide does (Steps 18 - 19). No counterpart for the Full
 Build's preparation or its cards. The USB cable cannot come out first (the box closes round its plug), so Step 1's caution says to
 disconnect it from the computer first. Its title page is the Full Build's, which leaves the USB cable off (it comes into view at Step
 1). An independent review (docs/research/lsm/decon/review2/) went over it against the published guide."""
@@ -286,12 +289,22 @@ g.remove('Disconnect the three breadboard wires from the V+, IN, and V- pins on 
          view_dir=cam('Step 15')['view_dir'], frame=([628.0, 942.0, 1196.0], 72.0))   # (the published direction, low, under the matrix's
                                                                     #  edge to the connectors; framed on the matrix held here, which the
                                                                     #  published frame, aimed lower, put under the caption)
-# Both D9 (before the wires, as published: they run under D9_A). The published tails were 8.6 mm down inside the D9s: these start just
-# over D3's top edge (which hid them from the D9s' tops), near the D9s' D3 ends, where the wires and connectors left in the air are not
-# in front of them; one size for the two (like parts, Lee 22 Oct 2026: the published sizes differed).
-D9_FOOT = float(g.model.inst[D3].bounds[1][1]) + 1.0
+# The three wires, still in the breadboard, laid out of the way, out over the box's open end where D4 was and onto the table (Lee, 22 Oct
+# 2026: "Add a step that lays the three wires over the side of the box, still in the breadboard, before the D9s come out"): each keeps
+# its run in the box, under D9_A, and turns out over D1's edge, its connector set down on the table (wire_shapes.py: DRAPED; the run in
+# the box stays put as they move). An eye on a connector and no arrow, as a plug moved on its lead (rulebook section 11).
+g.lift('Lay the three breadboard wires out of the box, over the open end where D4 was. Leave them in the breadboard.', SOCKETS,
+       paths={WS.FEMALE[w]: [WS.draped_socket(w)] for w in WS.JUMPERS}, wires=WS.draped(), arrows=[],
+       eye=[dict(id=WS.FEMALE['purple'])], view_dir=[-0.62, 0.58, 0.53], frame=([559.0, 915.0, 1241.0], 92.0))   # (from the open end's
+                                                                    #  corner by D2: the wires turning out over D1's edge, along the
+                                                                    #  table and their connectors in view at every shape of window)
+# Both D9 (before the wires, as published: they run under D9_A). The published tails were 8.6 mm down inside the D9s, and at their place
+# along the D9s D9_A's tail sits in its top edge's notch, over the USB plug, as if lifting it: these start near the D9s' D3 ends, just
+# over D3's top edge (which hid them from the D9s' own tops); one size for the two (like parts, Lee 22 Oct 2026: the published sizes
+# differed).
+D9_TAIL_Y = float(g.model.inst[D3].bounds[1][1]) + 1.0
 g.remove('Remove both D9 pieces from the slots in D2 and D3.', [D9_A, D9_B],
-         arrow_style={D9_B: arrow('Step 10', 0, at=[657.17, D9_FOOT, 1160.0]), D9_A: arrow('Step 10', 0, at=[618.76, D9_FOOT, 1160.0])},
+         arrow_style={D9_B: arrow('Step 10', 0, at=[657.17, D9_TAIL_Y, 1160.0]), D9_A: arrow('Step 10', 0, at=[618.76, D9_TAIL_Y, 1160.0])},
          view_dir=cam('Step 10')['view_dir'], frame=([605.0, 885.0, 1210.0], 106.0))   # (the published direction; framed as before)
 
 # ================================================================ THE THREE WIRES OUT OF THE BREADBOARD (in one step: Lee)
@@ -299,8 +312,8 @@ g.remove('Remove both D9 pieces from the slots in D2 and D3.', [D9_A, D9_B],
 g.remove('Disconnect the yellow, gray, and purple breadboard wires from i2, i3, and b19.', PINS + SOCKETS,
          paths={**{p: [[0.0, 30.0, 0.0]] for p in PINS}, **{c: [_shifted(where(c), [0.0, 30.0, 0.0])] for c in SOCKETS}},
          arrows=[], eye=[eye('Step 13'), eye('Step 12')], caution=PULL,   # (an eye on i2 / i3 and one on b19)
-         view_dir=cam('Step 11')['view_dir'], frame=([625.3, 918.0, 1206.5], 110.0))   # (the published direction, framed higher: the
-                                                                    #  wires now reach up to their connectors, left where they came off)
+         view_dir=cam('Step 11')['view_dir'], frame=([583.0, 883.0, 1200.0], 112.0))   # (the published direction, framed wider toward
+                                                                    #  the open end: the wires reach out to their connectors on the table)
 
 # ================================================================ D3, D2 WITH THE PUSH BUTTON
 g.remove('Remove D3 from the latch on D1.', [D3], direction=[0.0, 0.0, -1.0], hover=40.0, arrow_style={D3: arrow('Step 16')},
@@ -337,7 +350,7 @@ g.put_away([D2])                                                    #  its leade
 # replaced onto the push button"), to where the button comes with it, screwed up to its head (the Full Build's g.carry([NUT], by=BUTTON,
 # pose=[0, 0, 3.12])). It starts just off the end of the wires (Lee, the same day: "The movement through empty space with the spread out
 # view is not needed, start the nut just off the end of the push button's wires, then animate it back on"): laid there once D2 is put
-# away (the view after starts afresh), then on in one smooth go, as Step 17 took it off: eight quarter turns, the screwing way.
+# away (the view after starts afresh), then on in one smooth go, as Step 18 took it off: eight quarter turns, the screwing way.
 B = shift_of(BUTTON_OUT[-1])[2]                                     # (the button, 100 mm out of where D2 stood: z offset 157.1)
 END = B + 3.12
 PIN_TIP = min(float(apply_pose(where(p), np.asarray(g.model.inst[p].vertices))[:, 2].min()) for p in (RED_PIN, BLACK_PIN))
